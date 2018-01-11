@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/********************************************************************
+ map height full
+*********************************************************************/
+html, body, #map {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#dimScreen {
+  	display: none;
+  	position: fixed;
+  	padding: 0;
+  	margin: 0;
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	height: 100%;
+  	background: rgba(255, 255, 255, 0);
+  	z-index: 2000;
+}
+
+#dvIntro {
+  	position: fixed;
+  	padding: 0;
+  	margin: 0;
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+  	height: 100%;
+  	background: rgb(255, 255, 255);
+  	z-index: 1999;
+}

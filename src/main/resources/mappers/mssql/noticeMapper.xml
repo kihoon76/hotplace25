@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.mssql.noticeMapper">
+	
+	<resultMap id="RM_selectNoticeList" type="Notice">
+		<result column="글번호"	property="num" javaType="string"/>
+		<result column="제목"		property="title" javaType="string"/>
+	</resultMap>
+	
+	<select id="selectNoticeList" resultMap="RM_selectNoticeList">
+		select top 5 글번호, 제목
+		  from [웹].[dbo].[공지사항] 
+		 order by 글번호 desc
+	</select>
+	
+	<resultMap id="RM_selectNoticePage" type="NoticePage" >
+		<result column="글수" property="total" javaType="int"/>
+		<result column="페이지수" property="pageSize" javaType="int"/>
+		<result column="페이지_블럭수" property="pageBlock" javaType="int"/>
+		<result column="현재페이지번호" property="currentPageNum" javaType="int"/>
+		<result column="검색타입" property="searchType" javaType="string"/>
+		<result column="검색값" property="searchTxt" javaType="string"/>
+		<collection property="list" column="{pageNum=현재페이지번호, type=검색타입, text=검색값}" 
+					javaType="java.util.ArrayList"
+					ofType="Notice" 
+					select="selectPage"
+					/>
+	</resultMap>
+	
+	
+	<select id="selectNoticePage" parameterType="hashmap" resultMap="RM_selectNoticePage">
+		select (
+				select count(*) 
+				  from [웹].[dbo].[공지사항]
+				  <if test='type != null and text != null'>
+				  	<if test='type.equals("title")'>
+				  	where 제목 like '%' + #{text} + '%' escape '\'
+				  	</if>
+				  	<if test='type.equals("content")'>
+				  	where 내용 like '%' + #{text} + '%' escape '\'
+				  	</if>
+				  </if>
+				) 글수, 10 페이지수, 5 페이지_블럭수, #{pageNum} 현재페이지번호, #{type} 검색타입, #{text} 검색값
+	</select>
+	
+	
+	<select id="selectPage" parameterType="hashmap" resultMap="RM_selectNoticeList">
+		select 글번호, 제목
+		  from (
+		  	select row_number() over(order by 글번호 desc) rownum, *
+		  	  from [웹].[dbo].[공지사항]
+		  	  <if test="type != null and text != null">
+		  	  	<if test="type == 'title'">
+				where 제목 like '%' + #{text} + '%' escape '\'
+				</if>
+				<if test="type == 'content'">
+				  	where 내용 like '%' + #{text} + '%' escape '\'
+				</if>
+		  	  </if>
+		  ) tb1
+		 where rownum between (#{pageNum} - 1) * 10 + 1 and (#{pageNum} - 1) * 10 + 10
+	</select>
+	
+	<select id="selectNoticeContent" parameterType="int" resultType="string">
+		select 내용
+		  from [웹].[dbo].[공지사항]
+		 where 글번호 = #{writeNum}
+	</select>
+</mapper>

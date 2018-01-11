@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.mssql.hotplaceMapper">
+
+	<select id="selectGuGun" resultType="string" parameterType="string">
+		select concat(code, ',"', name, '"') 
+		  from (
+				select distinct [시군구코드] as code,[시군구명] as name 
+				  from [지번주소].[dbo].[PNU10] 
+				 where [시도코드] = #{si}
+				   and [시군구명] != ''
+			   ) t1
+	      order by name
+	</select>
+	
+	<select id="selectRegionName" resultType="string" parameterType="Address">
+		select concat(code, ',"', name, '"') 
+		  from (
+				select distinct [읍면동코드] as code, [읍면동명] as name 
+				  from [지번주소].[dbo].[PNU10] 
+				 where [시도코드] = #{si}
+				   and [시군구코드] = #{gugun}
+				   and [읍면동명] != ''
+			   ) t1
+	      order by name
+	</select>
+	
+	<!-- <select id="selectMulgeonAddress" resultType="string" parameterType="Address">
+		select concat('"',[PNU], '","', [시도명], ' ', [시군구명], ' ', [읍면동명], ' ', [리명], case when [필지구분코드] = '1' then '' else '산' end, case when [부번숫자] <![CDATA[<>]]> '0' then [본번숫자] + '-' + [부번숫자] else [본번숫자] end, '",',  [위도], ',', [경도])  
+		  from [지번주소].[dbo].[전국지번통합]
+		  <where>
+		  	[필지구분코드] = #{san}
+		  	<if test='beonjiF != null'>
+		  	and [본번숫자] = #{beonjiF}
+		  	</if>
+		  	<if test='beonjiS != null'>
+		  	and [부번숫자] = #{beonjiS}
+		  	</if>
+		  	<if test='detail != null'>
+		  	and [읍면동명] like #{detail} + '%'
+		  	</if>
+		  	and 위도 is not null
+		  	and 경도 is not null
+		  </where>
+	</select> -->
+	
+	<select id="selectMulgeonAddress" statementType="CALLABLE" parameterType="Address" resultType="string">
+		{ call  [지번주소].[dbo].[SEL_지번주소](
+			#{detail, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{san, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{beonjiF, mode=IN, jdbcType=SMALLINT, javaType=string},
+			#{beonjiS, mode=IN, jdbcType=SMALLINT, javaType=string}
+		)}
+	</select> 
+	
+	<select id="selectAddress" resultType="string" parameterType="Address">
+		<if test='type == "N"'>
+		select concat('"',[PNU], '","', [시도명], ' ', [시군구명], ' ', [읍면동명], ' ', [리명], <if test="san == '2'">' 산',</if> ' ', [본번숫자], '-', [부번숫자], '",',  [위도], ',', [경도], ',', [극북], ',', [극서]) 
+		</if>
+   		  from (
+   		  		<if test='type == "N"'>
+   		  		select [PNU],[필지구분코드],[본번숫자],[부번숫자],[시도명],[시군구명],[읍면동명],[리명],[위도],[경도],[극서],[극북]
+   		  		</if>
+				  from [지번주소].[dbo].[전국지번통합]  
+			     where [시도코드] = #{si}
+			       and [시군구코드] = #{gugun}
+			       and [읍면동코드] = #{region}
+			       <if test='type == "N"'>
+			       and [필지구분코드] = #{san}
+			       <if test='beonjiF != ""'>
+			       and [본번숫자]= #{beonjiF}
+			       </if>
+			       <if test='beonjiS != ""'>
+			       and [부번숫자]= #{beonjiS}
+			       </if>
+			       </if>
+			       and [위도] is not null
+			    ) tb1
+	</select>
+	
+	<select id="selectLocationBounds" statementType="CALLABLE" resultType="string" parameterType="hashmap">
+		<!-- 
+		select concat(극서 , '|', 극남,  '|', 극동, '|', 극북, '|', '[{"type":0, "value":50, "colorV":', case when PNU존재여부='Y' then round(rand(convert(varbinary, newid()))*100, 2) else 0 end, '}]')
+          from [좌표계].[dbo].[좌표계]
+         where 레벨 = #{level}
+           and 극서  between convert(float, #{swx}) and convert(float, #{nex})
+           and 극동  between convert(float, #{swx}) and convert(float, #{nex}) 
+           and 극남  between convert(float, #{swy}) and convert(float, #{ney})
+           and 극북  between convert(float, #{swy}) and convert(float, #{ney})
+         order by 극서 asc
+        -->
+        <if test="type == 'GONGSI'">
+         <!-- with tmp as
+		(
+		   select 
+		      a.극서, a.극남, a.극동, a.극북, b.공시지가
+		   from 
+		      좌표계.dbo.좌표계13_하위 a with (nolock, INDEX(IX_좌표계13_하위_1))
+		      inner join Ranking.dbo.공시지가 b with (nolock, INDEX(PK_공시지가)) on (b.좌표계13_하위_고유번호=a.고유번호 and b.기준년월=#{year})
+		   where a.레벨=#{level}
+		     and a.극서 >= convert(float, #{swx})
+		     and a.극동 <![CDATA[<=]]> convert(float, #{nex})
+		     and a.극남 >= convert(float, #{swy})
+		     and a.극북 <![CDATA[<=]]> convert(float, #{ney})
+		)
+		select concat(a.극서 , '|', a.극남,  '|', a.극동, '|', a.극북, '|', '[{"type":0, "value":',  공시지가, ', "colorV":',convert(int, case when (공시지가-convert(int, min지가))/convert(int, gbn) > 950 then ((공시지가-convert(int, min지가))/convert(int, gbn)*90/100) + convert(int, rnk * convert(float, 1020)/max(rnk) over ()) *10/100 else ((공시지가-convert(int, min지가))/convert(int, gbn)*10/100) + convert(int, rnk * convert(float, 1020)/max(rnk) over ())*90/100 end), ', "maxV":', max지가, ', "minV":', min지가 , '}]') 
+		  from (
+				select a.*, (max지가-min지가)/1020 [gbn] 
+				  from (
+						select a.*,  max(공시지가) over () [max지가], min(공시지가) over () [min지가], dense_rank() over (order by 공시지가) [rnk]
+						  from tmp a
+						) a
+				) a
+		 order by a.극서 asc-->
+		 { call [Ranking].[dbo].[SEL_공시지가] (
+        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+         )}
+        </if>
+        <if test="type == 'GONGSI_GR'">
+        { call [Ranking].[dbo].[SEL_공시지가_증감률] (
+        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+         )}
+        </if> 
+       
+         
+	</select>
+	
+	<select id="selectGyeongmaeMarker" statementType="CALLABLE" resultType="string" parameterType="hashmap">
+		<!-- select concat(a.PNU, '|$', a.고유번호, '|$', a.등록번호, '|$', a.경도, '|$', a.위도)
+          from [데이터수집].dbo.경매_목록 a with (nolock, index(IX_경매_목록))
+       	 inner join 좌표계.dbo.가로축13 b with (nolock) on (b.PNU=a.PNU)
+       	 inner join 좌표계.dbo.세로축13 c with (nolock) on (c.PNU=a.PNU)
+         inner join (select 등록번호, 위도, 경도  from  [데이터수집].dbo.경매_목록 tb1 where 매각기일 is null or 매각기일 > getdate() group by 등록번호, 위도, 경도 having 위도 is not null and 경도 is not null) d on a.등록번호 = d.등록번호 and a.위도 = d.위도 and a.경도 = d.경도
+         where a.위도 between convert(float, #{swy}) and convert(float, #{ney})
+           and a.경도 between convert(float, #{swx}) and convert(float, #{nex})
+           and a.용도 != '자동차'
+         order by a.경도 asc -->
+         { call [경매].[dbo].[SEL_경매_목록] (
+   		 	#{swy, mode=IN, jdbcType=FLOAT, javaType=string},
+			#{ney, mode=IN, jdbcType=FLOAT, javaType=string},
+			#{swx, mode=IN, jdbcType=FLOAT, javaType=string},
+   		 	#{nex, mode=IN, jdbcType=FLOAT, javaType=string}
+         )}
+	</select>
+	
+	<resultMap id="RM_selectGyeongmaeThumb"  type="Gyeongmae">
+		<result column="고유번호" property="goyubeonho" javaType="string" />
+		<result column="등록번호" property="deunglogbeonho" javaType="string" />
+		<result column="PNU" property="pnu" javaType="string" />
+		<result column="소재지" property="sojaeji" javaType="string" />
+		<result column="용도" property="yongdo" javaType="string" />
+		<result column="유찰회수" property="yuchal" javaType="string" />
+		<result column="매각기일" property="maegaggiil" javaType="string" />
+		<result column="감정평가액" property="gamjeongpyeongga" javaType="string" />
+		<result column="imgThumb" property="imgThumb" javaType="string" />
+		<result column="imgThumbExt" property="imgThumbExt" javaType="string" />
+	</resultMap>
+	
+	<resultMap id="RM_selectGyeongmae"  type="Gyeongmae">
+		<result column="고유번호" property="goyubeonho" javaType="string" />
+		<result column="등록번호" property="deunglogbeonho" javaType="string" />
+		<result column="PNU" property="pnu" javaType="string" />
+		<result column="사건번호" property="sageonbeonho" javaType="string"/>
+		<result column="담당" property="damdang" javaType="string"/>
+		<result column="소재지" property="sojaeji" javaType="string" />
+		<result column="용도" property="yongdo" javaType="string" />
+		<result column="입찰방법" property="ibchalbangbeob" javaType="string" />
+		<result column="감정평가액" property="gamjeongpyeongga" javaType="string" />
+		<result column="최저매각가격" property="minmaegaggagyeog" javaType="string"/>
+		<result column="청구금액" property="cheonggu" javaType="string"/>
+		<result column="유찰회수" property="yuchal" javaType="string" />
+		<result column="매각기일" property="maegaggiil" javaType="string" />
+		<result column="비고" property="bigo" javaType="string"/>
+		<result column="사건접수일" property="sageonjeobsuil" javaType="string"/>
+		<result column="배당요구종기일" property="baedangyogu" javaType="string"/>
+		<result column="imgThumb" property="imgThumb" javaType="string" />
+		<result column="imgThumbExt" property="imgThumbExt" javaType="string" />
+		<collection property="images" column="고유번호" 
+					javaType="java.util.ArrayList"
+					ofType="GyeongmaeImage" 
+					select="selectGyeongmaeImages"
+					/>
+		<collection property="giils" column="고유번호"
+					javaType="java.util.ArrayList"
+					ofType="GyongmaeGiilHistory"
+					select="selectGyeongmaeGiilHistory"
+					/>
+					
+		<collection property="lists" column="고유번호"
+					javaType="java.util.ArrayList"
+					ofType="GyeongmaeListHistory"
+					select="selectGyeongmaeListHistory"
+					/>
+		<collection property="tonggyes" column="고유번호"
+					javaType="java.util.ArrayList"
+					ofType="GyeongmaeMaegagtonggye"
+					select="selectGyeongmaeMaegagtonggye"
+					/>
+					
+		<collection property="maegagmulgeons" column="고유번호"
+					javaType="java.util.ArrayList"
+					ofType="GyeongmaeMaegagmulgeon"
+					select="selectGyeongmaeMaegagmulgeon"
+					/>
+					
+		<collection property="jinhaengmulgeons" column="고유번호"
+					javaType="java.util.ArrayList"
+					ofType="GyeongaeJinhaengmulgeon"
+					select="selectGyeongaeJinhaengmulgeon"
+					/>
+	</resultMap>
+	
+	<select id="selectGyeongmaeThumb" parameterType="string" resultMap="RM_selectGyeongmaeThumb">
+		select  top 1 a.고유번호, a.등록번호, a.PNU, a.소재지, a.용도, a.감정평가액, a.유찰회수, CONVERT(char(19), a.매각기일, 120) as 매각기일, CONVERT(varchar(max), c.이미지 ,2) as imgThumb, c.확장자 as imgThumbExt
+  		  from [경매].[dbo].[경매_목록] a
+  		  left outer join [경매].[dbo].[경매_이미지_목록] b
+  		    on a.고유번호 = b.경매_목록_고유번호
+  		 left outer join [경매].[dbo].[경매_이미지_별도수집] c
+  		 	on b.이미지명 = c.이미지명 and b.확장자 = c.확장자 
+ 		 where a.고유번호 = #{unu}
+	</select>
+	
+	<select id="selectGyeongmaeDetail" parameterType="map" resultMap="RM_selectGyeongmae">
+		select a.고유번호, a.등록번호, a.PNU, a.사건번호, concat(a.법원명, ' | ', a.담당계) as 담당, a.소재지, a.용도, a.감정평가액, a.유찰회수,
+			   CONVERT(char(19), a.매각기일, 120) as 매각기일, CONVERT(char(10), a.사건접수일, 23) as 사건접수일, CONVERT(char(10), a.배당요구종기일, 23) as 배당요구종기일,
+			   a.입찰방법, a.최저매각가격, a.청구금액, a.비고
+  		  from [경매].[dbo].[경매_목록] a
+ 		 where a.고유번호 = #{goyubeonho}
+	</select>
+	
+	<!-- 경매이미지 -->
+	<select id="selectGyeongmaeImages" resultType="GyeongmaeImage">
+		select a.이미지구분 as gubun, a.이미지명 as name, a.확장자 as ext, CONVERT(varchar(max), b.이미지 ,2) as image
+  		  from [경매].[dbo].[경매_이미지_목록] a
+  		 inner join [경매].[dbo].[경매_이미지_별도수집] b
+  		 	on a.이미지명 = b.이미지명 and a.확장자 = b.확장자
+  		 where a.경매_목록_고유번호 = #{goyubeonho}
+	</select>
+	
+	<!-- 경매기일내역 -->
+	<select id="selectGyeongmaeGiilHistory" resultType="GyongmaeGiilHistory">
+		select CONVERT(char(19), 기일, 120) as giil, 기일종류 as giiljonglyu, 기일장소 as giiljangso, 최저매각가격 as minmaegaggagyeog, 기일결과 as giilresult
+		  from [경매].[dbo].[경매_기일내역]
+		 where 경매_목록_고유번호 = #{goyubeonho}
+	</select>
+	
+	<!-- 경매목록내역 -->
+	<select id="selectGyeongmaeListHistory" resultType="GyeongmaeListHistory">
+		select 목록번호 as listnum, 목록구분 as listgubun, 상세내역 as detailhistory
+		  from [경매].[dbo].[경매_목록내역]
+		 where 경매_목록_고유번호 = #{goyubeonho}
+	</select>
+	
+	<!-- 경매인근매각통계 -->
+	<select id="selectGyeongmaeMaegagtonggye" resultType="GyeongmaeMaegagtonggye">
+		select 기간 as gigan, Round(매각건수, 0) as maegaggeonsu, 
+			   LTRIM(STR(Round(평균감정가, 0), 25, 0)) as avggamjeongga,
+		       LTRIM(STR(Round(평균매각가, 0), 25, 0)) as avgmaegagga,
+		       Round(매각가율, 1) as maegaggaratio,
+		       Round(평균유찰회수,1) as avgyuchal
+		  from [경매].[dbo].[경매_인근매각통계]
+		 where 경매_목록_고유번호 = #{goyubeonho}
+		 order by 평균감정가 asc
+	</select>
+	
+	<!-- 경매인근매각물건 -->
+	<select id="selectGyeongmaeMaegagmulgeon" resultType="GyeongmaeMaegagmulgeon">
+		select 사건번호 as sageonbeonho, 용도 as yongdo, 소재지 as sojaeji, 
+			      감정평가액 as gamjeongpyeongga, 매각월 as maegagmonth, 매각대금 as maegagdaegeum
+		  from [경매].[dbo].[경매_인근매각물건] 
+		 where 경매_목록_고유번호 = #{goyubeonho}
+	</select>
+	
+	<!-- 경매인근진행물건 -->
+	<select id="selectGyeongaeJinhaengmulgeon" resultType="GyeongaeJinhaengmulgeon">
+		select 사건번호 as sageonbeonho, 물건번호용도 as numyongdo, 소재지및내역 as sojaejinaeyeog,
+			      비고 as bigo, 감정평가액 as gamjeongpyeongga, 최저매각가격 as minmaegaggagyeog,
+			     담당계매각기일 as damdangmaegaggiil, 진행상태 as status
+		  from [경매].[dbo].[경매_인근진행물건]
+		 where 경매_목록_고유번호 = #{goyubeonho}
+	</select>
+	
+	<!-- 공매 -->
+	<select id="selectGongmaeMarker" resultType="string" parameterType="hashmap">
+		select concat(PNU, '|$', 고유번호, '|$', 물건코드, '|$', 경도, '|$', 위도) 
+       	  from (
+             	select a.PNU, a.고유번호, a.물건코드, b.극서 + (b.극동 - b.극서)/2 as 경도,c.극남 + (c.극북 - c.극남)/2 as 위도
+                  from [온비드].[dbo].[토지매각원장] a with (nolock, index(IX_토지매각원장))
+              	 inner join 좌표계.dbo.가로축13 b with (nolock) on (b.PNU=a.PNU)
+              	 inner join 좌표계.dbo.세로축13 c with (nolock) on (c.PNU=a.PNU)
+           		 where a.입찰시작일시 >= convert(varchar(19), getdate(), 121)
+       ) t
+       where t.위도 between convert(float, #{swy}) and convert(float, #{ney})
+         and t.경도 between convert(float, #{swx}) and convert(float, #{nex})
+       order by t.경도 asc
+	</select>
+
+	<resultMap id="RM_selectGongmaeThumb" type="Gongmae">
+		<result column="고유번호" property="goyubeonho" javaType="string" />
+		<result column="물건코드" property="mulgeonCode" javaType="string" />
+		<result column="PNU" property="pnu" javaType="string" />
+		<result column="물건주소지" property="mulgeonAddress" javaType="string" />
+		<result column="용도" property="yongdo" javaType="string" />
+		<result column="지목" property="jimok" javaType="string" />
+		<result column="면적구분" property="areaGubun" javaType="string" />
+		<result column="물건상태" property="mulgeonStatus" javaType="string"/>
+		<result column="유찰횟수" property="yuchal" javaType="string" />
+	</resultMap>
+	
+	<select id="selectGongmaeThumb" parameterType="string" resultMap="RM_selectGongmaeThumb">
+		select PNU, 고유번호, 물건코드, 물건주소지, 용도, 지목, 면적구분, 물건상태, 유찰횟수
+		  from [온비드].[dbo].[토지매각원장]
+		 where [고유번호] = #{goyubeonho}
+	</select>
+	
+	<!-- 보상편입물건 -->
+	<!-- <select id="selectBosangPyeonibMarker" resultType="string" parameterType="hashmap">
+       	select concat(PNU, '|$', 고유번호, '|$', 경도, '|$', 위도) 
+          from [수작업].[dbo].[보상물건]
+         where 편입보상구분 = #{gubun}
+           and 위도 between convert(float, #{swy}) and convert(float, #{ney})
+   		   and 경도 between convert(float, #{swx}) and convert(float, #{nex})
+   		 order by 경도 asc
+	</select> -->
+	
+	<select id="selectBosangPyeonibMarker" statementType="CALLABLE" parameterType="hashmap" resultType="string">
+		<if test='stopGrouping == "N"'>
+   		 { call [수작업].[dbo].[SEL_보상물건_맵2](
+   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+   		 	#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+   		 	#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{level, mode=IN, jdbcType=	TINYINT, javaType=string},
+			#{gubun, mode=IN, jdbcType=	NVARCHAR, javaType=string}
+   		 	
+   		 ) }
+   		 </if>
+   		 <if test='stopGrouping == "Y"'>
+   		 { call [수작업].[dbo].[SEL_보상물건_맵_noGroup](
+   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+   		 	#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+   		 	#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{level, mode=IN, jdbcType=	TINYINT, javaType=string},
+			#{gubun, mode=IN, jdbcType=	NVARCHAR, javaType=string}
+   		 	
+   		 ) }
+   		 </if>
+	</select>
+	
+	<resultMap id="RM_selectBosangPyeonibThumb" type="BosangPyeonib">
+		<result column="고유번호" property="goyubeonho" javaType="string" />
+		<result column="물건소재지" property="mulgeonsojaeji" javaType="string" />
+		<result column="PNU" property="pnu" javaType="string" />
+		<result column="공고기관" property="gonggogigwan" javaType="string" />
+		<result column="사업명" property="saeobname" javaType="string" />
+		<result column="공고일" property="gonggoil" javaType="string" />
+		<result column="공고번호" property="gonggobeonho" javaType="string" />
+		<result column="사업시행자" property="saeobsihaengja" javaType="string"/>
+		<result column="시설종류" property="siseolkind" javaType="string" />
+	</resultMap>
+	
+	<select id="selectBosangPyeonibThumb" parameterType="string" resultMap="RM_selectBosangPyeonibThumb">
+		select 고유번호, 물건소재지, PNU, 공고기관, 사업명, 공고일, 공고번호, 사업시행자, 시설종류
+		  from [수작업].[dbo].[보상물건]
+		 where 고유번호 = #{unu}
+	</select>
+	
+	<select id="selectBosangPyeonibGroupList" parameterType="hashmap" resultType="string">
+		select concat(고유번호, '`', 물건소재지)
+		  from [수작업].[dbo].[보상물건]
+		 where 고유번호 IN 
+		 <foreach collection="gunus" item="item" index="index" separator="," open="(" close=")">
+		 	#{item}
+		 </foreach>
+	     order by 물건소재지
+	</select>
+	
+	<!-- 실거래가 -->
+	<!-- <select id="selectSilgeolaeMarker" resultType="string" parameterType="hashmap">
+		select concat(PNU, '|$', 경도, '|$', 위도)
+		  from
+		select concat(PNU, '|$', 경도, '|$', 위도) 
+          from [데이터수집].[dbo].[실거래가]
+         where 위도 between convert(float, #{swy}) and convert(float, #{ney})
+   		   and 경도 between convert(float, #{swx}) and convert(float, #{nex})
+   		   and 경도 is not null
+   		   and 위도 is not null
+   		 order by 경도 asc
+	</select>-->
+	
+	<select id="selectSilgeolaeMarker" statementType="CALLABLE" parameterType="hashmap" resultType="string">
+		{call [데이터수집].[dbo].[SEL_실거래가_범위]( 
+			#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{ney, mode=IN, jdbcType=DECIMAL, javaType=string}
+		)}
+	</select>
+	
+	<resultMap id="RM_selectSilgeolaeThumb" type="Silgeolae">
+		<result column="PNU" property="pnu" javaType="string" />
+		<result column="계약년월" property="gyeyagnyeonwol" javaType="string" />
+		<result column="계약일" property="gyeyagil" javaType="string" />
+		<result column="계약면적" property="gyeyagarea" javaType="string" />
+		<result column="거래금액" property="geolaegeumaeg" javaType="string" />
+		<result column="용도" property="yongdo" javaType="string" />
+		<result column="지목" property="jimok" javaType="string" />
+	</resultMap>
+	
+	<select id="selectSilgeolaeThumb" parameterType="string" resultMap="RM_selectSilgeolaeThumb">
+		select PNU, 계약년월, 계약일, 계약면적, 거래금액, 용도, 지목
+		  from [데이터수집].[dbo].[실거래가]
+		 where PNU = #{pnu}
+	</select>
+	
+	<!-- 건축허가 -->
+	<select id="selectAcceptBuildingMarker" statementType="CALLABLE" parameterType="hashmap" resultType="string">
+		{call [수작업입력].[dbo].[SEL_건축허가정보]( 
+			#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{ney, mode=IN, jdbcType=DECIMAL, javaType=string}
+		)}
+	</select>
+	
+	<resultMap id="RM_selectAcceptbuildingThumb" type="AcceptBuilding">
+		<result column="고유번호" property="goyubeonho" javaType="string"/>
+		<result column="허가구분" property="acceptgubun" javaType="string"/>
+		<result column="대지위치" property="daejiwichi" javaType="string"/>
+		<result column="허가신고일" property="acceptsingoil" javaType="string"/>
+	</resultMap>
+	
+	<select id="selectAcceptbuildingThumb" parameterType="string" resultMap="RM_selectAcceptbuildingThumb">
+		select 고유번호, 허가구분, 대지위치, 허가신고일
+		  from [수작업입력].[dbo].[건축허가정보]
+		 where 고유번호 = #{unu}
+	</select>
+	
+	<!-- 약관 -->
+	<select id="selectYaggwanList" resultType="Yaggwan">
+		select 카테고리명 as categoryName, 내용 as content
+		  from [웹].[dbo].[약관]
+		 order by 순서 asc
+	</select>
+</mapper>
+<!-- 
+		select 
+   a.극서, a.극동, a.극남, a.극북, b.공시지가
+   from 
+   좌표계.dbo.좌표계13_하위 a
+   inner join Ranking.dbo.공시지가 b on (b.좌표계13_하위_고유번호=a.고유번호 and b.기준년월='201701')
+   where 
+   a.레벨=10 and 
+   a.극서 >= 129.1 and 
+   a.극동 <= 129.2 and 
+   a.극남 >= 35.9 and 
+   a.극북 <= 36.0
+   OPTION (TABLE HINT(a, INDEX(IX_좌표계13_하위_1)), TABLE HINT(b, INDEX(PK_공시지가)))
+   
+   
+   
+   		select concat(PNU, '|$', 경도, '|$', 위도) 
+          from [데이터수집].[dbo].[실거래가]
+         where 위도 between convert(float, #{swy}) and convert(float, #{ney})
+   		   and 경도 between convert(float, #{swx}) and convert(float, #{nex})
+   		   and 경도 is not null
+   		   and 위도 is not null
+   		 order by 경도 asc
+
+
+
+ -->
