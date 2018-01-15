@@ -49,6 +49,15 @@
 <c:if test="${debug eq 'on'}">
 <script type="text/javascript" src="/resources/js/src/map/hotplace.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.maps.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.minimaps.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.panomaps.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.report.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.validation.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.calc.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.chart.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.database.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.dom.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.search.js"></script>
 </c:if>
 <c:if test="${debug eq 'off'}">
 <script type="text/javascript" src="/resources/js/dist/hotplace-all.min.js"></script>

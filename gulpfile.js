@@ -26,7 +26,16 @@ var exVendorsDir  = '!' + resourceDir + '/vendors/**';
 gulp.task('js_min', function() {
 	return gulp.src([
 	       srcJsDir + '/map/hotplace.js',
-	       srcJsDir + '/map/hotplace.maps.js'])
+	       srcJsDir + '/map/hotplace.maps.js',
+	       srcJsDir + '/map/hotplace.minimaps.js',
+	       srcJsDir + '/map/hotplace.panomaps.js',
+	       srcJsDir + '/map/hotplace.report.js',
+	       srcJsDir + '/map/hotplace.validation.js',
+	       srcJsDir + '/map/hotplace.calc.js',
+	       srcJsDir + '/map/hotplace.chart.js',
+	       srcJsDir + '/map/hotplace.database.js',
+	       srcJsDir + '/map/hotplace.dom.js',
+	       srcJsDir + '/map/hotplace.search.js'])
 		   .pipe(stripDebug())
 		   .pipe(uglify().on('error', function(uglify) {
 				console.log(uglify.message);
@@ -38,9 +47,17 @@ gulp.task('js_min', function() {
 
 gulp.task('js_concat_min', function() {
 	return gulp.src([
-	       srcJsDir + '/min/hotplace.min.js',
-	       srcJsDir + '/min/hotplace.maps.min.js'
-	       ])
+           srcJsDir + '/min/hotplace.min.js',
+  	       srcJsDir + '/min/hotplace.maps.min.js',
+  	       srcJsDir + '/min/hotplace.minimaps.min.js',
+  	       srcJsDir + '/min/hotplace.panomaps.min.js',
+  	       srcJsDir + '/min/hotplace.report.min.js',
+  	       srcJsDir + '/min/hotplace.validation.min.js',
+  	       srcJsDir + '/min/hotplace.calc.min.js',
+  	       srcJsDir + '/min/hotplace.chart.min.js',
+  	       srcJsDir + '/min/hotplace.database.min.js',
+  	       srcJsDir + '/min/hotplace.dom.min.js',
+  	       srcJsDir + '/min/hotplace.search.min.js'])
 	       .pipe(concat('hotplace-all.min.js'))
 	       .pipe(gulp.dest(distJsDir));
 });
