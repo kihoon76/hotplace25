@@ -24,9 +24,6 @@ public class HotplaceListener {
 	
 	@EventListener
 	public void initApp(ContextRefreshedEvent event) {
-		/*System.err.println("sdfsdfsdfsdfsdfsdf");
-		ApplicationContext context = ((ContextRefreshedEvent)event).getApplicationContext();*/
-		
 		List<SystemConfig> config = systemService.getSystemConfigs();
 		int cnt = config.size();
 		

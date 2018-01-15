@@ -59,6 +59,7 @@ public class HotplaceController {
 		
 		request.setAttribute("notices", notices);
 		request.setAttribute("jangeagongji", applicationConfig.getValue("C1"));
+		request.setAttribute("debug", applicationConfig.getValue("C2"));
 		return "main";
 	}
 	

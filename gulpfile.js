@@ -8,9 +8,13 @@ var gulp = require('gulp'),
 	del = require('del'),
 	gutil = require('gulp-util'),
 	sass = require('gulp-sass'),
-	stripDebug = require('gulp-strip-debug');
+	stripDebug = require('gulp-strip-debug'),
+	concat = require('gulp-concat'),
+	runSequence = require('gulp-run-sequence');
 
 var resourceDir   = 'src/main/resources/META-INF/resources';
+var srcJsDir	  = resourceDir + '/js/src';
+var distJsDir	  = resourceDir + '/js/dist';
 var exVendorsDir  = '!' + resourceDir + '/vendors/**';
 
 /*gulp.task('sass', function() {
@@ -20,14 +24,25 @@ var exVendorsDir  = '!' + resourceDir + '/vendors/**';
 });*/
 
 gulp.task('js_min', function() {
-	return gulp.src([resourceDir + '/**/*.js', exVendorsDir])
+	return gulp.src([
+	       srcJsDir + '/map/hotplace.js',
+	       srcJsDir + '/map/hotplace.maps.js'])
 		   .pipe(stripDebug())
 		   .pipe(uglify().on('error', function(uglify) {
 				console.log(uglify.message);
 				this.emit('end');
 		   }))
 		   .pipe(rename({suffix: '.min'}))
-		   .pipe(gulp.dest(resourceDir));
+		   .pipe(gulp.dest(srcJsDir + '/min'));
+});
+
+gulp.task('js_concat_min', function() {
+	return gulp.src([
+	       srcJsDir + '/min/hotplace.min.js',
+	       srcJsDir + '/min/hotplace.maps.min.js'
+	       ])
+	       .pipe(concat('hotplace-all.min.js'))
+	       .pipe(gulp.dest(distJsDir));
 });
 
 gulp.task('css_min', function() {
@@ -44,12 +59,12 @@ gulp.task('img_min', function() {
 		   .pipe(gulp.dest(resourceDir + '/img'));
 });
 
-gulp.task('clean', function() {
+gulp.task('clean-all', function() {
 	return del.sync([resourceDir + '/**/*.min.js', resourceDir + '/**/*.min.css', resourceDir + '/img/**/*.m.*', exVendorsDir]);
 });
 
-gulp.task('clean_js', function() {
-	return del.sync([resourceDir + '/**/*.min.js', exVendorsDir]);
+gulp.task('clean-js', function() {
+	return del.sync([srcJsDir + '/min']);
 });
 
 gulp.task('clean_css', function() {
@@ -82,5 +97,8 @@ gulp.task('reload', function() {
 			.pipe(livereload());
 });
 
-gulp.task('default', ['clean', 'js_min', 'css_min', 'img_min', 'watch', 'reload']);
+//gulp.task('default', ['clean', 'js_min', 'css_min', 'img_min', 'watch', 'reload']);
+gulp.task('default', function() {
+	runSequence('clean-all', 'js_min', 'js_concat_min', 'clean-js');
+});
 

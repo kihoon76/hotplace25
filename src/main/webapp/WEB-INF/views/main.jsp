@@ -21,7 +21,7 @@
 <script type="text/javascript" src="/resources/jquery-ui/1.12.0/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/jQRangeSlider-5.7.2/jQAllRangeSliders-min.js"></script>
 <script type="text/javascript" src="/resources/vendors/tabulator/js/tabulator.min.js"></script>
-<script type="text/javascript" src="/resources/js/main.js"></script>
+<script type="text/javascript" src="/resources/js/src/main.js"></script>
 
 <!-- ECharts -->
 <script type="text/javascript" src="/resources/vendors/echarts/echarts.min.js"></script>

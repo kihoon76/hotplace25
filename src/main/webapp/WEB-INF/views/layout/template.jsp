@@ -46,8 +46,13 @@
 <script type="text/javascript" src="/resources/vendors/waitMe/waitMe.min.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=SgnlyXnzstmDsYDhele7&submodules=panorama"></script>
 
-<script type="text/javascript" src="/resources/js/map/hotplace.js"></script>
-<script type="text/javascript" src="/resources/js/map/hotplace.maps.js"></script>
+<c:if test="${debug eq 'on'}">
+<script type="text/javascript" src="/resources/js/src/map/hotplace.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.maps.js"></script>
+</c:if>
+<c:if test="${debug eq 'off'}">
+<script type="text/javascript" src="/resources/js/dist/hotplace-all.min.js"></script>
+</c:if>
 <sitemesh:write property="page.script" />
 <script type="text/javascript">
 	window.onload = function() {
