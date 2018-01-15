@@ -11,6 +11,13 @@ $(document).ready(function() {
 		return _prevLevel != _currLevel;
 	}
 	
+	/***************** 지적도 버튼 ************************/
+	$('#btnJijeok').on('click', function() {
+		var onOff = $(this).data('switch');
+		hotplace.maps.showJijeokLayer(onOff, $(this));
+	});	
+	
+	
 	hotplace.maps.init('naver', {
 		X: hotplace.config.mapDefaultX,
 		Y: hotplace.config.mapDefaultY, 

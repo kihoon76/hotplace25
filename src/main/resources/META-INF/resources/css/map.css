@@ -8,7 +8,6 @@ html, body, #map {
   margin: 0;
   padding: 0;
 }
-
 #dimScreen {
   	display: none;
   	position: fixed;
@@ -21,7 +20,6 @@ html, body, #map {
   	background: rgba(255, 255, 255, 0);
   	z-index: 2000;
 }
-
 #dvIntro {
   	position: fixed;
   	padding: 0;
@@ -32,4 +30,65 @@ html, body, #map {
   	height: 100%;
   	background: rgb(255, 255, 255);
   	z-index: 1999;
+}
+/**************************************************
+	buttons
+**************************************************/
+.jijeok {
+	width:54px;
+	height:30px;
+	position:absolute; 
+	top:10px; 
+	right:140px;
+	z-index:1; 
+	padding:5px; 
+	background-color:#fff; 
+	color:#333; 
+	border:1px solid #333;
+	font-family: Helvetica, AppleSDGothicNeo-Light, nanumgothic, NanumGothic, 나눔고딕, Dotum, 돋움, sans-serif;
+	font-size:0.8em;
+}
+.jijeok:hover { cursor: pointer; }
+.jijeok-on {
+	background-color:rgb(42, 124, 221);
+	color:#fff;
+	border:1px solid #333;
+	opacity:1;
+}
+/* 면적재기 */
+.area {
+	height:30px;
+	width:66px;
+	position:absolute; 
+	top:130px; 
+	right:15px;
+	z-index:1; 
+	padding:5px; 
+	background-color:#fff; 
+	color:#333; 
+	border:1px solid #333;
+	font-family: Helvetica, AppleSDGothicNeo-Light, nanumgothic, NanumGothic, 나눔고딕, Dotum, 돋움, sans-serif;
+	font-size:0.8em;
+}
+/* 거리재기 */
+.distance {
+	height:30px;
+	width:66px;
+	position:absolute; 
+	top:159px; 
+	right:15px;
+	z-index:1; 
+	padding:5px; 
+	background-color:#fff; 
+	color:#333; 
+	border:1px solid #333;
+	font-family: Helvetica, AppleSDGothicNeo-Light, nanumgothic, NanumGothic, 나눔고딕, Dotum, 돋움, sans-serif;
+	font-size:0.8em;
+}
+.area:hover, .distance:hover { cursor: pointer; }
+.calc-on {
+	background-color:rgb(42, 124, 221);
+ 	color:#fff;
+ 	border:1px solid #333;
+ 	opacity:1;
 }

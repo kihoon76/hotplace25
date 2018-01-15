@@ -106,4 +106,8 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<mime-mapping>
+		<extension>manifest</extension>
+		<mime-type>text/cache-manifest</mime-type>
+	</mime-mapping>
 </web-app>

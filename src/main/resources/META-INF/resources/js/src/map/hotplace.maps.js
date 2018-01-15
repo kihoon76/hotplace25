@@ -911,7 +911,7 @@
 		            _venderEvent.addListener(_venderMap, 'click', this._onClickDistance.bind(this))
 		        ];
 
-		        _venderMap.setCursor("url('"+ hotplace.getContextUrl() +"resources/img/rule.cur'), default");
+		        _venderMap.setCursor("url('"+ hotplace.getContextUrl() +"resources/img/icon/rule.cur'), default");
 		    },
 
 		    _startArea: function() {
@@ -924,7 +924,7 @@
 
 		        $(document).on('mousemove.measure', this._onMouseMoveArea.bind(this));
 
-		        _venderMap.setCursor("url('"+ hotplace.getContextUrl() +"resources/img/area.cur'), default");
+		        _venderMap.setCursor("url('"+ hotplace.getContextUrl() +"resources/img/icon/area.cur'), default");
 		    },
 
 		    _finishDistance: function() {
@@ -1047,7 +1047,7 @@
 		        var ms = new naver.maps.Marker({
 		            position: coord,
 		            icon: {
-		                content: '<a href="#" class="calc-link" data-uuid="' + uuid + '"><img src="' + hotplace.getContextUrl() + 'resources/img/close_icon.png" /></a>&nbsp;<div class="naver-area-div"><span>'+ text +'</span></div>',
+		                content: '<a href="#" class="calc-link" data-uuid="' + uuid + '"><img src="' + hotplace.getContextUrl() + 'resources/img/icon/close_icon.png" /></a>&nbsp;<div class="naver-area-div"><span>'+ text +'</span></div>',
 		                anchor: new naver.maps.Point(-5, -5)
 		            },
 		            map: _venderMap
@@ -1552,8 +1552,8 @@
 			}
 			
 			_setCurrentBounds();
-			/*_initJiJeokDoLayer();
-			_initCalcArea();*/
+			_initJiJeokDoLayer();
+			_initCalcArea();
 			
 			if(listeners) {
 				for(var eventName in listeners) {
