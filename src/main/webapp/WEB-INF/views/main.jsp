@@ -17,11 +17,32 @@
 <c:if test="${jangeagongji == 'on'}">
 <div class="jangea">장애공지!!</div>
 </c:if>
+<div id="test" style="position:absolute; top:50px; left:50px; width:500px; height:500px; display:none; z-index:1; background-color:white;"></div>
 <content tag="script">
 <script type="text/javascript" src="/resources/jquery-ui/1.12.0/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/jQRangeSlider-5.7.2/jQAllRangeSliders-min.js"></script>
 <script type="text/javascript" src="/resources/vendors/tabulator/js/tabulator.min.js"></script>
+<script type="text/javascript" src="/resources/vendors/dom-to-image/dom-to-image.min.js"></script>
+<c:if test="${debug eq 'on'}">
+<script type="text/javascript" src="/resources/js/src/info/gyeongmae.js"></script>
+<script type="text/javascript" src="/resources/js/src/info/gongmae.js"></script>
+<script type="text/javascript" src="/resources/js/src/info/bosangpyeonib.js"></script>
+<script type="text/javascript" src="/resources/js/src/info/silgeolae.js"></script>
+<script type="text/javascript" src="/resources/js/src/info/sujibunseog.js"></script>
+<script type="text/javascript" src="/resources/js/src/info/acceptbuilding.js"></script>
 <script type="text/javascript" src="/resources/js/src/main.js"></script>
+<script type="text/javascript" src="/resources/js/src/notice.js"></script>
+<script type="text/javascript" src="/resources/js/src/login.js"></script>
+<script type="text/javascript" src="/resources/js/src/location.js"></script>
+</c:if>
+<c:if test="${debug eq 'off'}">
+<script type="text/javascript" src="/resources/js/dist/info-all.min.js"></script>
+<script type="text/javascript" src="/resources/js/dist/main.min.js"></script>
+<script type="text/javascript" src="/resources/js/dist/notice.min.js"></script>
+<script type="text/javascript" src="/resources/js/dist/login.min.js"></script>
+<script type="text/javascript" src="/resources/js/dist/location.min.js"></script>
+</c:if>
+
 
 <!-- ECharts -->
 <script type="text/javascript" src="/resources/vendors/echarts/echarts.min.js"></script>

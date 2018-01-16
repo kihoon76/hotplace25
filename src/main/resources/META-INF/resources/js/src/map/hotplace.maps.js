@@ -886,6 +886,7 @@
 		    this.$btnDistance = buttons.distance;
 		    this.$btnArea = buttons.area;
 		    this._mode = null;
+		    this._arrDistance = [];
 		    this._objStorage = {};
 		    this._bindDOMEvents();
 		};
@@ -951,7 +952,7 @@
 		                    'font-size': '14px',
 		                    'font-weight': 'bold',
 		                    'color': '#f00'
-		                });
+		                }, this._polyline, true);
 		            }
 		            
 		            
@@ -1040,16 +1041,33 @@
 		        return text;
 		    },
 
-		    _addMileStone: function(coord, text, css, obj) {
-		        if (!this._ms) this._ms = [];
+		    _addMileStone: function(coord, text, css, obj, isLast) {
+		        if (!this._msArr) this._msArr = {};
 		        var uuid = hotplace.createUuid();
+		        var icon = null;
+		        if(this._mode == 'distance') {
+		        	icon = { anchor: new naver.maps.Point(0, 0) };
+		        	if(isLast) {
+		        		this._arrDistance.push(uuid);
+		        		var uuids = this._arrDistance.join(',');
+		        		icon.content = '<a href="#" class="calc-distance-link" data-uuid="' + uuids + '"><img src="' + hotplace.getContextUrl() + 'resources/img/icon/close_icon.png" /></a><div class="naver-distance-vertex-total-text"><span>'+ text +'</span></div>';
+		        		this._arrDistance.length = 0;
+		        	}
+		        	else {
+		        		this._arrDistance.push(uuid);
+		        		icon.content = '<div class="naver-distance-vertex"><div class="naver-distance-vertex-text"><span>'+ text +'</span></div></div>';
+		        	}
+		        }
+		        else {
+		        	icon = {
+		        		content: '<a href="#" class="calc-link" data-uuid="' + uuid + '"><img src="' + hotplace.getContextUrl() + 'resources/img/icon/close_icon.png" /></a>&nbsp;<div class="naver-area-div"><span>'+ text +'</span></div>',
+			            anchor: new naver.maps.Point(-5, -5)
+		        	};
+		        }
 		        
 		        var ms = new naver.maps.Marker({
 		            position: coord,
-		            icon: {
-		                content: '<a href="#" class="calc-link" data-uuid="' + uuid + '"><img src="' + hotplace.getContextUrl() + 'resources/img/icon/close_icon.png" /></a>&nbsp;<div class="naver-area-div"><span>'+ text +'</span></div>',
-		                anchor: new naver.maps.Point(-5, -5)
-		            },
+		            icon: icon,
 		            map: _venderMap
 		        });
 
@@ -1057,12 +1075,14 @@
 
 		        if (css) {
 		            msElement.css(css);
-		        } else {
+		        } 
+		        else {
 		            msElement.css('font-size', '11px');
 		        }
 
-		        this._ms.push(ms);
-		        this._objStorage[uuid] = obj;
+		        this._msArr[uuid] = ms;
+		        //this._ms.push(ms);
+	        	this._objStorage[uuid] = obj;
 		    },
 
 		    _onClickDistance: function(e) {
@@ -1169,7 +1189,25 @@
 		        	var uuid = $(this).data('uuid');
 		        	that._objStorage[uuid].setMap(null);
 		        	delete that._objStorage[uuid];
-		        	$(this).parent().remove();
+		        	that._msArr[uuid].setMap(null);
+		        	delete that._msArr[uuid];
+		        	
+		        });
+		        
+		        $(document).on('click', 'a.calc-distance-link', function() {
+		        	var uuid = $(this).data('uuid');
+		        	var arr = uuid.split(',');
+		        	var len = arr.length;
+		        	
+		        	for(var i=0; i<len; i++) {
+		        		if(i != len - 1) {
+		        			that._objStorage[arr[i]].setMap(null);
+		        			delete that._objStorage[arr[i]];
+		        		}
+		        		
+		        		that._msArr[arr[i]].setMap(null);
+		        		delete that._msArr[arr[i]];
+		        	}
 		        });
 		    },
 
@@ -1490,6 +1528,52 @@
 		},
 	};
 	
+	$('#ttt').on('click', function() {
+		//_venderMap.setMapTypeId(naver.maps.MapTypeId.HYBRID);
+		//maps.createTimeView();
+		maps.showMapType('HYBRID');
+	});
+	
+	maps.showMapType = function(type) {
+		if(_venderMap) {
+			switch(type) {
+			case 'HYBRID' :
+				_venderMap.setMapTypeId(naver.maps.MapTypeId.HYBRID);
+				break;
+			case 'SATELLITE' :
+				_venderMap.setMapTypeId(naver.maps.MapTypeId.SATELLITE);
+				break;
+			case 'TERRAIN' :
+				_venderMap.setMapTypeId(naver.maps.MapTypeId.TERRAIN);
+				break;
+			default :
+				_venderMap.setMapTypeId(naver.maps.MapTypeId.NORMAL);
+				break;
+			}
+		}
+	}
+	/** 
+	 * @memberof hotplace.maps
+	 * @name createTimeView 
+	 * @type {function}
+	 * @desc  연도별 히트맵을 이미지로 캡쳐해서 보여준다 
+	 * {@link https://github.com/tsayen/dom-to-image dom-to-image}
+	 */
+	maps.createTimeView = function() {
+		domtoimage.toPng($('#map')[0])
+	    .then(function (dataUrl) {
+	        var img = new Image();
+	        img.src = dataUrl;
+	        img.style.width = '500px';
+	        img.style.height = '500px';
+	        document.getElementById('test').appendChild(img);
+	        $('#test').show();
+	    })
+	    .catch(function (error) {
+	        console.error('oops, something went wrong!', error);
+	    });
+	}
+	
 	/** 
 	 * @memberof hotplace.maps 
 	 * @function init 
@@ -1518,13 +1602,13 @@
 				_venderMap = new _vender.Map(_container, {
 				 	center: new _vender.LatLng(mapOptions.Y, mapOptions.X), //지도의 초기 중심 좌표(36.0207091, 127.9204629)
 			        zoom: mapOptions.level, //지도의 초기 줌 레벨
-			        mapTypes: registry,
+			        /*mapTypes: registry,
 			        mapTypeControl: true,
 			        mapTypeControlOptions: {
 			        	//style: _vender.MapTypeControlStyle.DROPDOWN
 			        	style: _vender.MapTypeControlStyle.BUTTON,
 			        	position: _vender.Position.TOP_RIGHT
-			        },
+			        },*/
 			        minZoom: mapOptions.minZoom || 3,
 			        logoControl: false,
 			        disableDoubleClickZoom: true
@@ -1535,8 +1619,8 @@
 				//_venderMap.mapTypes.set(naver.maps.MapTypeId.TERRAIN, naver.maps.NaverMapTypeOption. getTerrainMap());
 				//_venderMap.mapTypes.set(naver.maps.MapTypeId.HYBRID, naver.maps.NaverMapTypeOption.getHybridMap());
 				
-				_venderMap.mapTypes.set(naver.maps.MapTypeId.NORMAL, naver.maps.NaverMapTypeOption.getNormalMap());
-				_venderMap.mapTypes.set(naver.maps.MapTypeId.HYBRID, naver.maps.NaverMapTypeOption.getHybridMap());
+				//_venderMap.mapTypes.set(naver.maps.MapTypeId.NORMAL, naver.maps.NaverMapTypeOption.getNormalMap());
+				//_venderMap.mapTypes.set(naver.maps.MapTypeId.SATELLITE, naver.maps.NaverMapTypeOption.getHybridMap());
 				
 				
 				break;

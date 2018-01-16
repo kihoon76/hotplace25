@@ -35,8 +35,9 @@
 		<button class="btn-timeview" data-switch="off">타임뷰</button>
 	</div>
 	<button id="btnJijeok" class="jijeok" data-switch="off">지적도</button>
+	<button id="ttt">test</button>
 	<button id="btnCalcArea" class="area">면적재기</button>
-	<button id="btnCalcDistance" class="distance" disabled>거리재기</button>
+	<button id="btnCalcDistance" class="distance">거리재기</button>
 </div>
 <div id="dimScreen"></div>
 <div id="dvIntro"></div>
@@ -45,7 +46,6 @@
 <script type="text/javascript" src="/resources/handlebars/4.0.5/handlebars.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/waitMe/waitMe.min.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=SgnlyXnzstmDsYDhele7&submodules=panorama"></script>
-
 <c:if test="${debug eq 'on'}">
 <script type="text/javascript" src="/resources/js/src/map/hotplace.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.maps.js"></script>
