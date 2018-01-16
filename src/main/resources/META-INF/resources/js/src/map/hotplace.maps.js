@@ -958,8 +958,7 @@
 		            
 		        }
 
-		        this.$btnDistance.removeClass('control-on').blur();
-
+		        this.$btnDistance.removeClass('calc-on').blur();
 		        _venderMap.setCursor('auto');
 
 		        delete this._lastDistance;
@@ -967,7 +966,6 @@
 		    },
 
 		    _finishArea: function() {
-		    	console.log('pp');
 		    	_venderEvent.removeListener(this._areaListeners);
 		        delete this._areaListeners;
 
@@ -993,7 +991,6 @@
 		        }
 
 		        this.$btnArea.removeClass('calc-on').blur();
-
 		        _venderMap.setCursor('auto');
 
 		        this._mode = null;
