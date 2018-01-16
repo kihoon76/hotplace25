@@ -34,12 +34,11 @@ html, body, #map {
 /**************************************************
 	buttons
 **************************************************/
-.jijeok {
+.map-button {
 	width:54px;
 	height:30px;
 	position:absolute; 
-	top:10px; 
-	right:140px;
+	right:15px;
 	z-index:1; 
 	padding:5px; 
 	background-color:#fff; 
@@ -48,64 +47,20 @@ html, body, #map {
 	font-family: Helvetica, AppleSDGothicNeo-Light, nanumgothic, NanumGothic, 나눔고딕, Dotum, 돋움, sans-serif;
 	font-size:0.8em;
 }
-#ttt {
-	width:54px;
-	height:30px;
-	position:absolute; 
-	top:10px; 
-	right:190px;
-	z-index:1; 
-	padding:5px; 
-	background-color:#fff; 
-	color:#333; 
-	border:1px solid #333;
-	font-family: Helvetica, AppleSDGothicNeo-Light, nanumgothic, NanumGothic, 나눔고딕, Dotum, 돋움, sans-serif;
-	font-size:0.8em;
-}
-.jijeok:hover { cursor: pointer; }
-.jijeok-on {
+.map-button:hover { cursor: pointer; }
+.map-button-on {
 	background-color:rgb(42, 124, 221);
 	color:#fff;
 	border:1px solid #333;
 	opacity:1;
 }
+.map-button.jijeok { top:68px; }
+.map-button.map-normal { top:10px; }
+.map-button.map-satellite { top:39px; }
 /* 면적재기 */
-.area {
-	height:30px;
-	width:66px;
-	position:absolute; 
-	top:130px; 
-	right:15px;
-	z-index:1; 
-	padding:5px; 
-	background-color:#fff; 
-	color:#333; 
-	border:1px solid #333;
-	font-family: Helvetica, AppleSDGothicNeo-Light, nanumgothic, NanumGothic, 나눔고딕, Dotum, 돋움, sans-serif;
-	font-size:0.8em;
-}
+.map-button.area { top:130px; }
 /* 거리재기 */
-.distance {
-	height:30px;
-	width:66px;
-	position:absolute; 
-	top:159px; 
-	right:15px;
-	z-index:1; 
-	padding:5px; 
-	background-color:#fff; 
-	color:#333; 
-	border:1px solid #333;
-	font-family: Helvetica, AppleSDGothicNeo-Light, nanumgothic, NanumGothic, 나눔고딕, Dotum, 돋움, sans-serif;
-	font-size:0.8em;
-}
-.area:hover, .distance:hover { cursor: pointer; }
-.calc-on {
-	background-color:rgb(42, 124, 221);
- 	color:#fff;
- 	border:1px solid #333;
- 	opacity:1;
-}
+.map-button.distance { top:159px; }
 .naver-distance-vertex {
 	position: absolute; 
 	z-index: 1;

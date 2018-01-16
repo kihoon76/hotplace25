@@ -34,10 +34,11 @@
 		<div id="dvYearRange"  class="layer-year-range"></div>
 		<button class="btn-timeview" data-switch="off">타임뷰</button>
 	</div>
-	<button id="btnJijeok" class="jijeok" data-switch="off">지적도</button>
-	<button id="ttt">test</button>
-	<button id="btnCalcArea" class="area">면적재기</button>
-	<button id="btnCalcDistance" class="distance">거리재기</button>
+	<button id="btnJijeok" class="map-button jijeok" data-switch="off">지적도</button>
+	<button id="btnMapNormal" class="map-button map-normal">일반</button>
+	<button id="btnMapSatellite" class="map-button map-satellite">위성</button>
+	<button id="btnCalcArea" class="map-button area">면적</button>
+	<button id="btnCalcDistance" class="map-button distance">거리</button>
 </div>
 <div id="dimScreen"></div>
 <div id="dvIntro"></div>

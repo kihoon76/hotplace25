@@ -15,7 +15,17 @@ $(document).ready(function() {
 	$('#btnJijeok').on('click', function() {
 		var onOff = $(this).data('switch');
 		hotplace.maps.showJijeokLayer(onOff, $(this));
-	});	
+	});
+	
+	/***************** 지도일반 버튼 ************************/
+	$('#btnMapNormal').on('click', function() {
+		hotplace.maps.showMapType('NORMAL');
+	});
+	
+	/***************** 지도위성 버튼 ************************/
+	$('#btnMapSatellite').on('click', function() {
+		hotplace.maps.showMapType('HYBRID');
+	});
 	
 	
 	hotplace.maps.init('naver', {

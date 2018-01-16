@@ -958,7 +958,7 @@
 		            
 		        }
 
-		        this.$btnDistance.removeClass('calc-on').blur();
+		        this.$btnDistance.removeClass('map-button-on').blur();
 		        _venderMap.setCursor('auto');
 
 		        delete this._lastDistance;
@@ -990,7 +990,7 @@
 		            delete this._polygon;
 		        }
 
-		        this.$btnArea.removeClass('calc-on').blur();
+		        this.$btnArea.removeClass('map-button-on').blur();
 		        _venderMap.setCursor('auto');
 
 		        this._mode = null;
@@ -1214,10 +1214,11 @@
 		        var btn = $(e.target),
 		            mode = this._mode;
 
-		        if (btn.hasClass('calc-on')) {
-		            btn.removeClass('calc-on');
-		        } else {
-		            btn.addClass('calc-on');
+		        if (btn.hasClass('map-button-on')) {
+		            btn.removeClass('map-button-on');
+		        } 
+		        else {
+		            btn.addClass('map-button-on');
 		        }
 
 		        this._clearMode(mode);
@@ -1525,11 +1526,6 @@
 		},
 	};
 	
-	$('#ttt').on('click', function() {
-		//_venderMap.setMapTypeId(naver.maps.MapTypeId.HYBRID);
-		//maps.createTimeView();
-		maps.showMapType('HYBRID');
-	});
 	
 	maps.showMapType = function(type) {
 		if(_venderMap) {
@@ -2077,7 +2073,7 @@
 			}
 			
 			$btn.data('switch', 'off');
-			$btn.removeClass('jijeok-on');
+			$btn.removeClass('map-button-on');
 		}
 		else if(onOff == 'off') {
 			if(_venderStr == 'naver') {
@@ -2088,7 +2084,7 @@
 			}
 			
 			$btn.data('switch', 'on');
-			$btn.addClass('jijeok-on');
+			$btn.addClass('map-button-on');
 		}
 	}
 }(
