@@ -39,9 +39,34 @@
 	<button id="btnMapSatellite" class="map-button map-satellite">위성</button>
 	<button id="btnCalcArea" class="map-button area">면적</button>
 	<button id="btnCalcDistance" class="map-button distance">거리</button>
+	<button id="btnTimeView" class="map-button timeview">타임뷰</button>
 </div>
 <div id="dimScreen"></div>
 <div id="dvIntro"></div>
+<div id="dvTimeView" class="timeview-canvas">
+	<table border="1">
+		<colgroup>
+			<col width="50%" />
+			<col width="50%" />
+		</colgroup>
+		<tr>
+			<td>2014년</td>
+			<td>2015년</td>
+		</tr>
+		<tr>
+			<td id="2014Map" class="map-capture"></td>
+			<td id="2015Map" class="map-capture"></td>
+		</tr>
+		<tr>
+			<td>2016년</td>
+			<td>2017년</td>
+		</tr>
+		<tr>
+			<td id="2016Map" class="map-capture"></td>
+			<td id="2017Map" class="map-capture"></td>
+		</tr>
+	</table>
+</div>
 <sitemesh:write property="body" />
 <script type="text/javascript" src="/resources/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/handlebars/4.0.5/handlebars.min.js"></script>
@@ -66,7 +91,7 @@
 <sitemesh:write property="page.script" />
 <script type="text/javascript">
 	window.onload = function() {
-		$('#dvIntro').hide();
+		 $('#dvIntro').hide();
 	}
 </script>
 </body>

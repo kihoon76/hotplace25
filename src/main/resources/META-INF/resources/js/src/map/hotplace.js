@@ -13,19 +13,63 @@
 	var _version = '1.0';
 	var _ROOT_CONTEXT = $('body').data('url');
 	
-	$.browser = {}; 
+	/*$.browser = {
+		msie: false,
+		chrome: false,
+		firefox: false,
+		safari: false,
+		opera: false
+	}; */
 	/*jQuery.browser() removed
 
 	The jQuery.browser() method has been deprecated since jQuery 1.3 and is removed in 1.9.
 	If needed, it is available as part of the jQuery Migrate plugin.
 	We recommend using feature detection with a library such as Modernizr.
 	*/
-    $.browser.msie = false;
-    $.browser.version = 0;
-    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
-        $.browser.msie = true;
-        $.browser.version = RegExp.$1;
-    }      
+    //$.browser.version = 0;
+    
+    hotplace.browser = function() {
+    	var b = {
+			msie: false,
+			msedge: false,
+			msie_ver: '',
+			chrome: false,
+			firefox: false,
+			safari: false,
+			opera: false
+    	};
+    	var ua = navigator.userAgent;
+    	
+    	if(ua.search('Chrome') >= 0 && ua.search('Edge') < 0) {
+    		b.chrome = true;
+    	}
+    	else if(ua.search('Firefox') >= 0) {
+    		b.firefox = true;
+    	}
+    	else if(ua.search('Safari') >= 0 && ua.search('Chrome') < 0) {
+    		b.safari = true;
+    	}
+    	else if(ua.search('Opera') >= 0) {
+    		b.opera = true;
+    	}
+    	else if(ua.search('Trident') >=0) {
+    		b.msie = true;
+    		if(ua.search('Trident/7.0') >=0) {
+    			b.msie_ver = '11';
+    		}
+    		else if(ua.search('Trident/6.0') >=0) {
+    			b.msie_ver = '10';
+    		}
+    		else if(ua.search('Trident/5.0') >=0) {
+    			b.msie_ver = '9';
+    		}
+    	}
+    	else if(ua.search('Edge') >=0) {
+    		b.msedge = true;
+    	}
+    	
+    	return b;
+    }();
     
     String.prototype.format = function() {
         var s = this,
@@ -400,8 +444,6 @@
 	hotplace.getContextUrl = function() {
 		return _ROOT_CONTEXT;
 	} 
-	
-	
 }(
 	window.hotplace = window.hotplace || {},
 	jQuery	

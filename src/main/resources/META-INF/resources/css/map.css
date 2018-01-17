@@ -57,10 +57,11 @@ html, body, #map {
 .map-button.jijeok { top:68px; }
 .map-button.map-normal { top:10px; }
 .map-button.map-satellite { top:39px; }
+.map-button.timeview { top:97px}
 /* 면적재기 */
-.map-button.area { top:130px; }
+.map-button.area { top:150px; }
 /* 거리재기 */
-.map-button.distance { top:159px; }
+.map-button.distance { top:179px; }
 .naver-distance-vertex {
 	position: absolute; 
 	z-index: 1;
@@ -108,3 +109,17 @@ html, body, #map {
     top:30px;
     left:-15px;
 }
+.timeview-canvas {
+	position:absolute;
+	top:20px;
+	left:200px;
+	width:1000px;
+	height:875px;
+	background-color: #000;
+	display:none;
+	padding:2px;
+}
+.timeview-canvas table {
+	color: #fff;
+}
+.map-capture { height: 400px; }

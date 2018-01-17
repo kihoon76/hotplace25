@@ -236,7 +236,7 @@
 	 * @returns {hotplace.maps.CellTypes} 
 	 */
 	var _getActiveCellType = function() {
-		
+		return 'GONGSI';
 		for(var t in _cellTypes) {
 			if(_cellLayerOnOff[t] == 1/* || _cellLayerOnOff[t] == -1/*toggle*/) {
 				return _cellTypes[t];
@@ -245,6 +245,7 @@
 	}
 	
 	var _isOffCell = function(isWrite) {
+		return false;
 		for(var t in _cellLayerOnOff) {
 			if(_cellLayerOnOff[t] == 1) {
 				//if(isWrite) _cellLayerOnOff[t] = -1;
@@ -715,7 +716,7 @@
 			colorFn = _getColorByGongsiWeight;
 			break;
 		default :
-			colorFn = _getColorByHpWeight;
+			colorFn = _getColorByGongsiWeight;/*_getColorByHpWeight;*/
 			break;
 		}
 		  
@@ -1545,26 +1546,50 @@
 			}
 		}
 	}
+	
+	$('#dvTimeView').on('click', function() {
+		$(this)[0].webkitRequestFullscreen();
+	});
 	/** 
 	 * @memberof hotplace.maps
 	 * @name createTimeView 
 	 * @type {function}
-	 * @desc  연도별 히트맵을 이미지로 캡쳐해서 보여준다 
+	 * @desc  연도별 히트맵을 이미지로 캡쳐해서 보여준다 (ie 지원안됨)
 	 * {@link https://github.com/tsayen/dom-to-image dom-to-image}
 	 */
 	maps.createTimeView = function() {
-		domtoimage.toPng($('#map')[0])
-	    .then(function (dataUrl) {
-	        var img = new Image();
-	        img.src = dataUrl;
-	        img.style.width = '500px';
-	        img.style.height = '500px';
-	        document.getElementById('test').appendChild(img);
-	        $('#test').show();
-	    })
-	    .catch(function (error) {
-	        console.error('oops, something went wrong!', error);
-	    });
+		if(hotplace.browser.msie || hotplace.browser.msedge) {
+			alert('인터넷 익스플로러에서는 지원되지 않습니다');
+			return;
+		}
+		
+		function a(r) {
+			if(r == 2018) {
+				$('#dvTimeView').show();
+			}
+			else {
+				maps.showCellLayer(function() {
+					domtoimage.toPng($('body')[0])
+				    .then(function (dataUrl) {
+				        var img = new Image();
+				        var _$ = null;
+				        
+				        img.src = dataUrl;
+				        img.style.width = '100%';
+				        img.style.height = '100%';
+				        
+				        $('#' + r + 'Map').append(img);
+				        a(++r);
+				    })
+				    .catch(function (error) {
+				        console.error('oops, something went wrong!', error);
+				    });
+				}, false, r);
+			}
+		
+		}
+		
+		a(2014);
 	}
 	
 	/** 
@@ -1898,7 +1923,7 @@
 	 * @param {boolean} isMaskTran multi ajax사용여부 
 	 * @desc celltype의 cell layer를 보여준다  
 	 */
-	maps.showCellLayer = function(callback, isMaskTran) {
+	maps.showCellLayer = function(callback, isMaskTran, year) {
 		
 		if(_isOffCell()) return;
 		
@@ -1925,7 +1950,7 @@
 					 nex  : _locationBounds.nex,
 					 swy  : _locationBounds.swy,
 					 ney  : _locationBounds.ney,
-					 year : hotplace.dom.getShowCellYear() + '01',
+					 year : (year) ? year + '01' : hotplace.dom.getShowCellYear() + '01',
 					 type : _getActiveCellType()
 				}, function(json) {
 					try {

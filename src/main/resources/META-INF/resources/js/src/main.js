@@ -15,6 +15,8 @@ $(document).ready(function() {
 	$('#btnJijeok').on('click', function() {
 		var onOff = $(this).data('switch');
 		hotplace.maps.showJijeokLayer(onOff, $(this));
+		
+		//document.documentElement.webkitRequestFullscreen();
 	});
 	
 	/***************** 지도일반 버튼 ************************/
@@ -25,6 +27,11 @@ $(document).ready(function() {
 	/***************** 지도위성 버튼 ************************/
 	$('#btnMapSatellite').on('click', function() {
 		hotplace.maps.showMapType('HYBRID');
+	});
+	
+	/***************** 타임뷰 버튼 ************************/
+	$('#btnTimeView').on('click', function() {
+		hotplace.maps.createTimeView();
 	});
 	
 	
