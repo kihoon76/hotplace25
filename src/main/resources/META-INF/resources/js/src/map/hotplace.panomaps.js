@@ -5,7 +5,7 @@
 	var pano = null;
 	var marker = null;
 	
-	panomaps.createPanomaps = function(container, x, y, hasMarker, callback) {
+	panomaps.createPanomaps = function(container, x, y, hasMarker, callback, pano_changed, pov_changed) {
 		if(hasMarker) {
 			marker = new naver.maps.Marker({
 			    position: new naver.maps.LatLng(x, y)
@@ -16,7 +16,7 @@
 	        position: new naver.maps.LatLng(x, y),
 	        pov: {
 	            pan: -135,
-	            tilt: 29,
+	            tilt: -29, //상하
 	            fov: 100
 	        },
 	        zoomControl: true,
@@ -45,9 +45,21 @@
 	        	callback(location, msg);
 	        }
 	    });
+		
+		if(pano_changed) {
+			naver.maps.Event.addListener(pano, 'pano_changed', function() {
+				pano_changed(pano);
+			});
+		}
+		
 	}
 	
-	
+	panomaps.clear = function() {
+		if(pano) {
+			naver.maps.Event.clearInstanceListeners(pano);
+			pano = null;
+		}
+	}
 }(
 	hotplace.panomaps = hotplace.panomaps || {},
 	jQuery

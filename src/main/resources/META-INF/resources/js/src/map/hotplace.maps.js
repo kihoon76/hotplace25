@@ -30,7 +30,7 @@
 	 * @private 
 	 * @desc 지원하는 hotplace map 이벤트 목록
 	 */
-	var _events = ['zoom_changed', 'bounds_changed', 'dragend', 'zoom_start', 'click', 'tilesloaded', 'idle', 'panning'];
+	var _events = ['zoom_changed', 'bounds_changed', 'dragend', 'zoom_start', 'click', 'tilesloaded', 'idle', 'panning', 'mouseover', 'mousemove'];
 	
 	/**
 	 * @private
@@ -859,6 +859,12 @@
 		case 'panning' :
 			returnObj = {};
 			break;
+		case 'mouseover' :
+			returnObj = {coord: obj.coord, offset: obj.offset};
+			break;
+		case 'mousemove':
+			returnObj = {coord: obj.coord, offset: obj.offset};
+			break;
 		}
 		
 		return returnObj;
@@ -874,6 +880,13 @@
 		//지적편집도
 		if(_venderStr == 'naver') {
 			_vender._cadastralLayer = new _vender.CadastralLayer();
+		}
+	}
+	
+	function _initStreetLayer() {
+		//지적편집도
+		if(_venderStr == 'naver') {
+			_vender._streetLayer = new _vender.StreetLayer();
 		}
 	}
 	
@@ -1629,6 +1642,7 @@
 			        },*/
 			        minZoom: mapOptions.minZoom || 3,
 			        logoControl: false,
+			        mapDataControl: false,
 			        disableDoubleClickZoom: true
 			        //maxZoom: mapOptions.maxZoom || 13
 				});
@@ -1655,6 +1669,7 @@
 			
 			_setCurrentBounds();
 			_initJiJeokDoLayer();
+			_initStreetLayer();
 			_initCalcArea();
 			
 			if(listeners) {
@@ -1670,6 +1685,14 @@
 		}
 	}
 
+	maps.getCenter = function() {
+		return _venderMap.getCenter();
+	}
+	
+	maps.showStreetLayer = function() {
+		
+	}
+	
 	/** 
 	 * @memberof hotplace.maps 
 	 * @function panToBounds 
@@ -2106,6 +2129,25 @@
 			}
 			else if(_venderStr == 'daum') {
 				_venderMap.addOverlayMapTypeId(_vender.MapTypeId.USE_DISTRICT);
+			}
+			
+			$btn.data('switch', 'on');
+			$btn.addClass('map-button-on');
+		}
+	}
+	
+	maps.showStreetLayer = function(onOff, $btn) {
+		if(onOff == 'on') {
+			if(_venderStr == 'naver') {
+				_vender._streetLayer.setMap(null);
+			}
+						
+			$btn.data('switch', 'off');
+			$btn.removeClass('map-button-on');
+		}
+		else if(onOff == 'off') {
+			if(_venderStr == 'naver') {
+				_vender._streetLayer.setMap(_venderMap);
 			}
 			
 			$btn.data('switch', 'on');

@@ -3,6 +3,9 @@
  * */
 (function(minimaps, $) {
 	var mmaps = [];
+	var panoMimimap = null;
+	var streetLayer = null;
+	var streetMarker = null;
 	
 	function _createMinimap(map, cnt) {
 		
@@ -25,6 +28,47 @@
 			$('#' + id + 'Lbl').text(year.toString().substring(0,4) + '년');
 			
 			mmaps.push(minimap);
+		}
+	}
+	
+	minimaps.create = function(map, container, coord) {
+		console.log(map.getZoom());
+		map.controls[naver.maps.Position.BOTTOM_RIGHT].push($('#' + container).get(0));
+		var minimap = new naver.maps.Map(container, { //미니맵 지도를 생성합니다.
+		    bounds: map.getBounds(),
+		    minZoom: 3,
+		    zoom: map.getZoom(),
+		    draggable: true,
+		    scrollWheel: true,
+		    scaleControl: false,
+		    mapDataControl: false,
+		    logoControl: false
+		});
+		
+		streetLayer = new naver.maps.StreetLayer();
+		streetLayer.setMap(minimap);
+		panoMimimap = minimap;
+		
+		minimap.setCenter(coord);
+		streetMarker = new naver.maps.Marker({
+			position: new naver.maps.LatLng(coord.y, coord.x),
+			map: minimap 
+		});
+	}
+	
+	minimaps.panoClear = function(map) {
+		if(panoMimimap) {
+			panoMimimap = null;
+		}
+		
+		if(streetLayer) streetLayer = null;
+		if(streetMarker) streetMarker = null; 
+	}
+	
+	minimaps.setPanoMarkerPosition = function(coord) {
+		if(streetMarker) {
+			streetMarker.setPosition(coord);
+			panoMimimap.setCenter(coord);
 		}
 	}
 	

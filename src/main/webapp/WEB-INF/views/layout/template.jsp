@@ -40,9 +40,18 @@
 	<button id="btnCalcArea" class="map-button area">면적</button>
 	<button id="btnCalcDistance" class="map-button distance">거리</button>
 	<button id="btnTimeView" class="map-button timeview">타임뷰</button>
+	<button id="btnStreetView" class="map-button streetview" data-switch="off">거리뷰</button>
 </div>
 <div id="dimScreen"></div>
 <div id="dvIntro"></div>
+<div id="dvStreetView">
+	<div id="dvStreetViewHeader"><a href="#" style="text-decoration:none;" class="pano-close"><span style="color:#fff; font-size:1.5em;position:relative; top:-5px; left:98%;">&times;</span></a></div>
+	<div id="dvStreetViewContent">
+		<div id="dvStreet"></div>
+		<div id="dvStreetMini"></div>
+	</div>
+</div>
+
 <div id="dvTimeView" class="timeview-canvas">
 	<table border="1">
 		<colgroup>
@@ -84,6 +93,7 @@
 <script type="text/javascript" src="/resources/js/src/map/hotplace.database.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.dom.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.search.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.streetview.js"></script>
 </c:if>
 <c:if test="${debug eq 'off'}">
 <script type="text/javascript" src="/resources/js/dist/hotplace-all.min.js"></script>

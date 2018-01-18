@@ -11,6 +11,7 @@ $(document).ready(function() {
 		return _prevLevel != _currLevel;
 	}
 	
+	
 	/***************** 지적도 버튼 ************************/
 	$('#btnJijeok').on('click', function() {
 		var onOff = $(this).data('switch');
@@ -34,6 +35,14 @@ $(document).ready(function() {
 		hotplace.maps.createTimeView();
 	});
 	
+	$('#btnStreetView').on('click', function(e) {
+		var onOff = $(this).data('switch');
+		if(onOff == 'on') {
+			hotplace.streetview.stop();
+		}
+		
+		hotplace.maps.showStreetLayer(onOff, $(this));
+	});
 	
 	hotplace.maps.init('naver', {
 		X: hotplace.config.mapDefaultX,
@@ -92,11 +101,25 @@ $(document).ready(function() {
 		'click' : function(map, latlng) {
 			console.log(latlng)
 			//hotplace.maps.getClickedCell(latlng);
+			if($('#btnStreetView').data('switch') == 'on') {
+				hotplace.streetview.startPanorama(map, latlng);
+			}
+			
 		},
 		'panning' : function() {
 			console.log('panning');
 			//
 			//hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.MULGEON_SEARCH);
+		},
+		'mouseover' : function(map, pe) {
+			if($('#btnStreetView').data('switch') == 'on') {
+				hotplace.streetview.start(map, pe.coord);
+			}
+		},
+		'mousemove' : function(map, pe) {
+			if($('#btnStreetView').data('switch') == 'on') {
+				hotplace.streetview.moveMarker(pe.coord);
+			}
 		}
 	}, function(map) {
 		
