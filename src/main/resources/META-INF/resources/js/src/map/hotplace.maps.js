@@ -972,7 +972,7 @@
 		            
 		        }
 
-		        this.$btnDistance.removeClass('map-button-on').blur();
+		        this.$btnDistance.removeClass('active').blur();
 		        _venderMap.setCursor('auto');
 
 		        delete this._lastDistance;
@@ -1004,7 +1004,7 @@
 		            delete this._polygon;
 		        }
 
-		        this.$btnArea.removeClass('map-button-on').blur();
+		        this.$btnArea.removeClass('active').blur();
 		        _venderMap.setCursor('auto');
 
 		        this._mode = null;
@@ -1228,11 +1228,11 @@
 		        var btn = $(e.target),
 		            mode = this._mode;
 
-		        if (btn.hasClass('map-button-on')) {
-		            btn.removeClass('map-button-on');
+		        if (btn.hasClass('active')) {
+		            btn.removeClass('active');
 		        } 
 		        else {
-		            btn.addClass('map-button-on');
+		            btn.addClass('active');
 		        }
 
 		        this._clearMode(mode);
@@ -2119,21 +2119,17 @@
 			else if(_venderStr == 'daum') {
 				_venderMap.removeOverlayMapTypeId(_vender.MapTypeId.USE_DISTRICT);
 			}
-			
-			$btn.data('switch', 'off');
-			$btn.removeClass('map-button-on');
 		}
-		else if(onOff == 'off') {
+		else {
 			if(_venderStr == 'naver') {
 				_vender._cadastralLayer.setMap(_venderMap);
 			}
 			else if(_venderStr == 'daum') {
 				_venderMap.addOverlayMapTypeId(_vender.MapTypeId.USE_DISTRICT);
 			}
-			
-			$btn.data('switch', 'on');
-			$btn.addClass('map-button-on');
 		}
+		
+		hotplace.dom.activeButton(onOff, $btn);
 	}
 	
 	maps.showStreetLayer = function(onOff, $btn) {

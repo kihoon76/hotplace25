@@ -5,13 +5,16 @@
 	<!-- uploadify -->
 	<link href="/resources/vendors/jQuery-Upload-File/4.0.11/uploadfile.css" rel="stylesheet">
 	<!-- jQRangeSlider -->
-	<!-- slider -->
     <!-- http://ghusse.github.io/jQRangeSlider/documentation.html -->
 	<link rel="stylesheet" href="/resources/vendors/jQRangeSlider-5.7.2/css/classic.css" />
     <!-- tabulator -->
     <link rel="stylesheet" href="/resources/vendors/tabulator/css/tabulator_simple.min.css" />
     <!-- waitMe -->
     <link rel="stylesheet" href="/resources/vendors/waitMe/waitMe.min.css" />
+    
+    <!-- 모든 디자인을 재선언하는 css -->
+	<link rel="stylesheet" href="/resources/css/style.css" />
+    
 </head>
 <body>
 <c:if test="${jangeagongji == 'on'}">
@@ -19,7 +22,6 @@
 </c:if>
 <div id="test" style="position:absolute; top:50px; left:50px; width:500px; height:500px; display:none; z-index:1; background-color:white;"></div>
 <content tag="script">
-<script type="text/javascript" src="/resources/jquery-ui/1.12.0/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/jQRangeSlider-5.7.2/jQAllRangeSliders-min.js"></script>
 <script type="text/javascript" src="/resources/vendors/tabulator/js/tabulator.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/dom-to-image/dom-to-image.min.js"></script>

@@ -1209,8 +1209,8 @@
 		_toggleMinimap('on');
 	}
 	
-	dom.initTimeline = function() {
-		$('.btn-timeview').click(function(){
+	/*dom.initTimeline = function() {
+		$('.btnTimeview').click(function(){
 			var $this = $(this);
 			
 			var sw = $this.data('switch');
@@ -1235,7 +1235,7 @@
 				$('#dvAutoYearRange').hide();
 			}
 		});
-	}
+	}*/
 	
 
 	
@@ -1287,6 +1287,40 @@
 		$('#dvCenterModalContent').html(tForm({path: hotplace.getContextUrl()}));
 		
 		dom.openCenterModal('', {width: '800px', height: '800px'}, closeFn);
+	}
+	
+	dom.showLnbContents = function($element) {
+		var $parent   = $element.parent('li');		
+		var data      = $element.data('name');
+
+		$parent.addClass('active');
+		$parent.siblings('li').removeClass('active');
+
+		$('#lnbCont > .lnbContWrap').hide();
+		$('#lnbCont > #' + data).show();
+		
+		//map area position
+		var contWidth  = $('#lnbCont > #' + data).outerWidth();
+		var lnbWidth   = $('#lnbArea').outerWidth();
+		var totalWidth = lnbWidth + contWidth
+
+		$('.mapArea').animate({
+			'left': totalWidth - 1
+		},100);
+
+		var minWidth = 964 - contWidth
+		$('.mapArea').css({'min-width':minWidth});
+	}
+	
+	dom.activeButton = function(onOff, $btn) {
+		if(onOff == 'on') {
+			$btn.data('switch', 'off');
+			$btn.removeClass('active');
+		}
+		else if(onOff == 'off') {
+			$btn.data('switch', 'on');
+			$btn.addClass('active');
+		}
 	}
 	
 }(
