@@ -71,6 +71,10 @@
 		});
 		hotplace.minimaps.create(map, _streetviewMinimapAreaId, coord);
 	}
+	
+	streetview.resize = function() {
+		hotplace.panomaps.resize(_$dvStreetViewContainer);
+	}
 }(
 	hotplace.streetview = hotplace.streetview || {},
 	jQuery

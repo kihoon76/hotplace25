@@ -340,11 +340,15 @@ body	 {min-height:600px;}
 #dimScreen {position:fixed; padding:0; margin:0; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0); z-index: 10; display:none; }
 /* dvIntro */
 #dvIntro   {position:fixed; padding:0; margin:0; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0); z-index: 11;}
-#dvStreetView {position:fixed; padding:0; margin:0;	top:0; left:0; width:100%; height:100%;	background: rgb(255, 255, 255);	z-index:5; display:none;}
+#dvStreetView {position:fixed; padding:0; margin:0;	top:50px; left:0; width:100%; height:100%;	background: rgb(255, 255, 255);	z-index:9; display:none;}
 #dvStreetViewHeader {padding:0;	margin:0; width:100%; height:30px; background-color:#000;}
 #dvStreetViewContent, #dvStreet {padding:0;	margin:0; width:100%; height:100%; background-color:#000;}
-#dvStreetMini { width:300px; height:300px; }
+#dvStreetMini {width:300px; height:300px;}
 /*************************************/
+
+/* 파노라마 div */
+.pano-close {text-decoration:none;}
+.pano-close span {color:#fff; font-size:1.5em; position:relative; top:2px; left:98%;}
 
 /* 지도 우측 버튼 */
 .rightArea {font-size:13px; letter-spacing:-0.05em;}
@@ -360,7 +364,7 @@ body	 {min-height:600px;}
 /*거리뷰*/
 .btnStreetView {width:62px; top:73px; right:10px;}
 
-.naver-distance-vertex {position:absolute; z-index:1; font-size:1px; line-height:1px; background-color:rgb(255, 255, 255); border:2px solid rgb(252, 26, 26); width:6px; height:6px; left:-6px; top:-4px;}
+.naver-distance-vertex {position:absolute; z-index:1; font-size:1px; line-height:1px; background-color:rgb(255, 255, 255); border:2px solid rgb(252, 26, 26); width:10px; height:10px; left:-3px; top:-5px;}
 .naver-distance-vertex-text {color:#ff1009;	position:absolute; z-index:1; padding:2px 3px 0; border:1px solid; background:#fff; font-size:11px; letter-spacing:-1px; line-height:14px; white-space: nowrap; top:5px; left:10px;}
 .naver-distance-vertex-total-text {color:#330066; position:absolute; z-index:1; padding:2px 3px 0; border:1px solid; background:#fff; font-size:12px; letter-spacing:-1px; line-height:19px; white-space:nowrap; top:30px; left:10px;}
 .calc-distance-link {position:absolute; z-index:1; padding:2px 3px 0; top:30px; left:-15px;}

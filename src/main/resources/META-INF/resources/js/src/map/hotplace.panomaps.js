@@ -60,6 +60,14 @@
 			pano = null;
 		}
 	}
+	
+	panomaps.resize = function($element) {
+		if(pano) {
+			var width = $element.width();
+			var height = $element.height();
+			pano.setSize({width: width, height: height});
+		}
+	}
 }(
 	hotplace.panomaps = hotplace.panomaps || {},
 	jQuery

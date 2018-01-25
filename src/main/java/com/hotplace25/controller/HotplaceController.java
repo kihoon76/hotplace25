@@ -55,9 +55,9 @@ public class HotplaceController {
 	
 	@GetMapping("main")
 	public String layout(HttpServletRequest request) {
-		List<Notice> notices = noticeService.getNoticeList();
+		//List<Notice> notices = noticeService.getNoticeList();
 		
-		request.setAttribute("notices", notices);
+		//request.setAttribute("notices", notices);
 		request.setAttribute("jangeagongji", applicationConfig.getValue("C1"));
 		request.setAttribute("debug", applicationConfig.getValue("C2"));
 		return "main";

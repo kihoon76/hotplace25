@@ -6,6 +6,7 @@
 	var _loadEl;
 	var _loadTxt = '';//'로딩 중입니다';
 	var _loadEndCount = 0;
+	var _yearRangeMode = 'manual'; //타임뷰 모드  manual(수동) auto(자동)
 	
 	/**
 	 * @private
@@ -375,6 +376,14 @@
 	 * @desc 모달창 open
 	 */
 	dom.openModal = function(title, modalSize, closeFn, openFn) {
+		$('#modalPopup').modal().find('.modal-dialog').css({
+			'width': modalSize.width
+		});
+		_bindModalCloseEvent(closeFn  || function() {});
+		_bindModalOpenEvent(openFn || function() {});
+	}
+	
+	dom.openModal2 = function(title, modalSize, closeFn, openFn) {
 		$('#spModalTitle').text(title);
 		
 		if(!modalSize) modalSize = 'fullsize';
@@ -911,7 +920,7 @@
 		
 	}
 	
-	var _yearRangeMode = 'manual';
+	
 	
 	/**
 	 * @memberof hotplace.dom
@@ -959,7 +968,8 @@
 			else {
 				i = 0;
 				_yearRangeMode = 'manual';
-				$('#btnAutoYear').bootstrapToggle('off');
+				//$('#btnAutoYear').bootstrapToggle('off');
+				//$('#btnAutoYear').trigger('change');
 				dom.removeBodyAllMask();
 			}
 		};
@@ -996,8 +1006,6 @@
 				}
 			}, 100);
 		});
-		
-		//el.show();
 	}
 	
 	/**
@@ -1008,13 +1016,6 @@
 	 * @desc 타임시리얼 자동재생 button DIV
 	 */
 	dom.showAutoYearRangeDiv = function() {
-		
-		var el = $('#dvAutoYearRange');
-		
-		$('#btnAutoYear').bootstrapToggle({
-			size:'mini'
-		});
-		
 		$('#btnAutoYear').on('change', function() {
 			if($(this).prop('checked')) {
 				_yearRangeMode = 'auto';
@@ -1024,8 +1025,6 @@
 				_yearRangeMode == 'auto';
 			}
 		});
-		
-		//el.show();
 	}
 	
 	/**
@@ -1084,11 +1083,11 @@
 	
 	dom.showAuthMsg = function(fn, msg) {
 		var tForm = dom.getTemplate('authmsgForm');
-		$('#dvCenterModalContent').html(tForm());
-		
+		$('#modalPopup').html(tForm());
 		$('#authMsg').html(msg || '로그인후 이용하세요 <button class="btn btn-success" id="btnDirectLogin">로그인하기</button>');
 		
-		dom.openCenterModal('', {width: '50%', height:'30%'}, fn);
+		//dom.openCenterModal('', {width: '50%', height:'30%'}, fn);
+		dom.openModal('', {width: '50%', height: '50%'}, fn);
 	}
 	
 	dom.showNotice = function() {
@@ -1239,11 +1238,33 @@
 	
 
 	
-	$(document).on('hidden.bs.modal', '#containerModal,#centerModal', function() {
+	/*$(document).on('hidden.bs.modal', '#containerModal,#centerModal', function() {
 		_modalCloseAfterFn();
 	});
 	
 	$(document).on('shown.bs.modal', '#containerModal,#centerModal', function() {
+		_modalOpenAfterFn();
+	});*/
+	
+	function _setModalMaxHeight($element) {
+		$content = $element.find('.modal-content');
+		var borderWidth   = $content.outerHeight() - $content.innerHeight();
+	    var dialogMargin  = $(window).width() < 768 ? 20 : 60;
+	    var contentHeight = $(window).height() - (dialogMargin + borderWidth);
+	    var headerHeight  = $element.find('.modal-header').outerHeight() || 0;
+	    var footerHeight  = $element.find('.modal-footer').outerHeight() || 0;
+	    var maxHeight     = contentHeight - (headerHeight + footerHeight);
+
+		$content.css({'overflow':'hidden'});
+	  
+		$element
+		.find('.modal-body')
+		.css({'max-height': maxHeight, 'overflow-y': 'auto'});
+	}
+	
+	$('#modalPopup').on('shown.bs.modal', function(e) {
+		_setModalMaxHeight($('#modalPopup'));
+		$('.modal-backdrop').remove();
 		_modalOpenAfterFn();
 	});
 	
@@ -1317,11 +1338,18 @@
 			$btn.data('switch', 'off');
 			$btn.removeClass('active');
 		}
-		else if(onOff == 'off') {
+		else {
 			$btn.data('switch', 'on');
 			$btn.addClass('active');
 		}
 	}
+	
+	$(window).resize(function() {
+		/*if ($('.modal.in').length != 0) {
+			setModalMaxHeight($('.modal.in'));
+		}*/
+		hotplace.streetview.resize();
+	});
 	
 }(
 	hotplace.dom = hotplace.dom || {},

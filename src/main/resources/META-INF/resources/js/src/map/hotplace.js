@@ -314,8 +314,10 @@
 				}
 			},
 			error: function(jqXHR, textStatus, e) {
+				
 				if(!params.error || typeof params.error !== 'function') {
 					//Default 동작
+					jqXHR.errCode = ($.parseJSON(jqXHR.responseText)).errCode;
 				}
 				else {
 					params.error(jqXHR, textStatus, e);
@@ -336,8 +338,24 @@
 					params.complete(jqXHR);
 				}
 				else {
+					var errCode = jqXHR.errCode;
+					switch(errCode) {
+					case '100' :
+						hotplace.dom.showAuthMsg(completeFn);
+						break;
+					case '202' :
+						hotplace.dom.showAuthMsg(function() {
+							window.location.reload();
+						},'중복 로그인');
+					case '900' :	//장애공지걸림
+						window.location.reload();
+						break;
+					case '500' :
+						hotplace.dom.showAuthMsg();
+						break;
+					}
 					//장애공지
-					console.log(jqXHR);
+					//console.log(jqXHR);
 				}
 			},
 			timeout: params.timeout || 300000
@@ -375,9 +393,9 @@
 				}
 				//console.log('data count : ' + jo.datas.length);
 				
-			},
-			error:function() {
-				
+			}/*,
+			error:function(jqXHR, textStatus, e) {
+				console.log(jqXHR)
 			},
 			complete: function(jqXHR) {
 				var errCode = jqXHR.errCode || ($.parseJSON(jqXHR.responseText)).errCode;
@@ -389,11 +407,14 @@
 					hotplace.dom.showAuthMsg(function() {
 						window.location.reload();
 					},'중복 로그인');
-				case '900' :
+				case '900' :	//장애공지걸림
 					window.location.reload();
 					break;
+				case '500' :
+					hotplace.dom.showAuthMsg();
+					break;
 				}
-			}
+			}*/
 		});
 		
 	}

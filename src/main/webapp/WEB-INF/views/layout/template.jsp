@@ -120,43 +120,27 @@
 			<!-- 거리뷰 버튼 -->
 			<button id="btnStreetView" class="mapBtn btnStreetView"  data-switch="off" title="거리뷰">거리뷰</button>				
 		</div>
+		
+		<div id="dvStreetView">
+			<div id="dvStreetViewHeader"><a href="#" class="pano-close"><span>&times;</span></a></div>
+			<div id="dvStreetViewContent">
+				<div id="dvStreet"></div>
+				<div id="dvStreetMini"></div>
+			</div>
+		</div>
 	</div>
 	
-<!-- <div id="map" data-vender="naver">
-	<div id="dvTimeview">
-		<div id="dvAutoYearRange" class="layer-year-range-auto">
-	        <input type="checkbox" id="btnAutoYear" data-toggle="toggle" data-on="<i class='fa fa-play'></i>" data-off="<i class='fa fa-pause'></i>">
-		</div>
-		<div id="dvYearRange"  class="layer-year-range"></div>
-		<button class="btn-timeview" data-switch="off">타임뷰</button>
-	</div>
-	<button id="btnJijeok" class="map-button jijeok" data-switch="off">지적도</button>
-	<button id="btnMapNormal" class="map-button map-normal">일반</button>
-	<button id="btnMapSatellite" class="map-button map-satellite">위성</button>
-	<button id="btnCalcArea" class="map-button area">면적</button>
-	<button id="btnCalcDistance" class="map-button distance">거리</button>
-	<button id="btnTimeView" class="map-button timeview">타임뷰</button>
-	<button id="btnStreetView" class="map-button streetview" data-switch="off">거리뷰</button>
-</div>-->
 	<div id="dimScreen"></div>
 	<div id="dvIntro"></div>
-	<div id="dvStreetView">
-		<div id="dvStreetViewHeader"><a href="#" style="text-decoration:none;" class="pano-close"><span style="color:#fff; font-size:1.5em;position:relative; top:-5px; left:98%;">&times;</span></a></div>
-		<div id="dvStreetViewContent">
-			<div id="dvStreet"></div>
-			<div id="dvStreetMini"></div>
-		</div>
-	</div>
-
-<!-- bootstrap modal 영역 -->
-	<div class="modal" id="modalPopup" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
-		
-	</div>
 
 	<!-- bootstrap modal 영역 -->
-	<div class="modal" id="modalPopup2" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
-		
-	</div>
+	<div class="modal" id="modalPopup" tabindex="-1" role="dialog" aria-labelledby="modalTitle"></div>
+
+	<!-- bootstrap modal 영역 -->
+	<div class="modal" id="modalPopup2" tabindex="-1" role="dialog" aria-labelledby="modalTitle"></div>
+	
+	
+	
 <!-- <div id="dvTimeView" class="timeview-canvas">
 	<table border="1">
 		<colgroup>
