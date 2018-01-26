@@ -27,7 +27,8 @@
 	function _createMarker(map, coord) {
 		_streetMarker = new naver.maps.Marker({
 			position: new naver.maps.LatLng(coord.y, coord.x),
-			map: map 
+			map: map ,
+			clickable: false
 		});
 	}
 	
