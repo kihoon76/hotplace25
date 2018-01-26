@@ -71,6 +71,11 @@ $(document).ready(function() {
 		hotplace.dom.showLnbContents($(this)); 
 	});
 	
+	/***************** 로그인 버튼 ************************/
+	$('#loginBtn').on('click', function(e) {	
+		$('#btnAutoYear').trigger('change', ['refresh']);
+	});
+	
 	hotplace.maps.init('naver', {
 		X: hotplace.config.mapDefaultX,
 		Y: hotplace.config.mapDefaultY, 

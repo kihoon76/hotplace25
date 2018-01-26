@@ -314,10 +314,9 @@
 				}
 			},
 			error: function(jqXHR, textStatus, e) {
-				
+				jqXHR.errCode = ($.parseJSON(jqXHR.responseText)).errCode;
 				if(!params.error || typeof params.error !== 'function') {
 					//Default 동작
-					jqXHR.errCode = ($.parseJSON(jqXHR.responseText)).errCode;
 				}
 				else {
 					params.error(jqXHR, textStatus, e);
@@ -338,10 +337,16 @@
 					params.complete(jqXHR);
 				}
 				else {
+					
+					//에러 처리전 실행할 함수
+					if($.isFunction(params.completeBeforeFn)) {
+						params.completeBeforeFn();
+					}
+					
 					var errCode = jqXHR.errCode;
 					switch(errCode) {
 					case '100' :
-						hotplace.dom.showAuthMsg(completeFn);
+						hotplace.dom.showAuthMsg();
 						break;
 					case '202' :
 						hotplace.dom.showAuthMsg(function() {
@@ -352,6 +357,8 @@
 						break;
 					case '500' :
 						hotplace.dom.showAuthMsg();
+						break;
+					case '000' :
 						break;
 					}
 					//장애공지
@@ -372,7 +379,7 @@
      * @param {boolean}    		isMaskTran - multi ajax 마스크 사용여부 (default 'false')
      * @param {function}		completeFn - ajax 통신이 완전히 종료된 후 실행될 함수
      */
-	hotplace.getPlainText = function(url, param, cbSucc, isActiveMask, isMaskTran, completeFn, loadEl) {
+	hotplace.getPlainText = function(url, param, cbSucc, cbErr, isActiveMask, isMaskTran, completeFn, loadEl) {
 			
 		hotplace.ajax({
 			url: url,
@@ -393,28 +400,11 @@
 				}
 				//console.log('data count : ' + jo.datas.length);
 				
-			}/*,
-			error:function(jqXHR, textStatus, e) {
-				console.log(jqXHR)
 			},
-			complete: function(jqXHR) {
-				var errCode = jqXHR.errCode || ($.parseJSON(jqXHR.responseText)).errCode;
-				switch(errCode) {
-				case '100' :
-					hotplace.dom.showAuthMsg(completeFn);
-					break;
-				case '202' :
-					hotplace.dom.showAuthMsg(function() {
-						window.location.reload();
-					},'중복 로그인');
-				case '900' :	//장애공지걸림
-					window.location.reload();
-					break;
-				case '500' :
-					hotplace.dom.showAuthMsg();
-					break;
-				}
-			}*/
+			error: function(jqXHR, textStatus, e) {
+				if(cbErr) cbErr();
+			},
+			completeBeforeFn: completeFn
 		});
 		
 	}
@@ -441,9 +431,6 @@
 			success: function(data, textStatus, jqXHR) {
 				var jo = $.parseJSON(data);
 				cbSucc(jo);
-			},
-			error:function() {
-				
 			}
 		});
 	}

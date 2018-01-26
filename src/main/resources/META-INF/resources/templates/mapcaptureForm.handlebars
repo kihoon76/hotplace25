@@ -1,14 +1,35 @@
 <div class="modal-dialog" role="document">
 	<div class="modal-content">
 		<div class="modal-header">
-			<h5 class="modal-title">Modal title</h5>
+			<h5 class="modal-title">Heatmap Capture</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<i class="ambicon-015_mark_times"></i><span class="hidden">닫기</span>
 			</button>
 		</div>
 		<div class="modal-body">
-			<div style="height:300px;">
-			서버 오류가 발생했습니다.
+			<div >
+				<table border="1">
+					<colgroup>
+						<col width="50%" />
+						<col width="50%" />
+					</colgroup>
+					<tr>
+						<td>2014년</td>
+						<td>2015년</td>
+					</tr>
+					<tr>
+						<td id="2014Map" class="map-capture"></td>
+						<td id="2015Map" class="map-capture"></td>
+					</tr>
+					<tr>
+						<td>2016년</td>
+						<td>2017년</td>
+					</tr>
+					<tr>
+						<td id="2016Map" class="map-capture"></td>
+						<td id="2017Map" class="map-capture"></td>
+					</tr>
+				</table>
 			</div>
 		</div>
 		<div class="modal-footer">

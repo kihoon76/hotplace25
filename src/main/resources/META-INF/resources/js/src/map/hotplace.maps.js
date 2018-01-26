@@ -1588,8 +1588,8 @@
 				        var _$ = null;
 				        
 				        img.src = dataUrl;
-				        img.style.width = '100%';
-				        img.style.height = '100%';
+				        img.style.width = '150%';
+				        img.style.height = '150%';
 				        
 				        $('#' + r + 'Map').append(img);
 				        a(++r);
@@ -1985,7 +1985,12 @@
 					catch(e) {
 						throw e;
 					}
-				}, 
+				},
+				function() {
+					hotplace.dom.initYearRangeDiv();
+					//dimscreen이 켜져있을 경우 제거한다.
+					hotplace.dom.removeBodyAllMask();
+				},
 				true,
 				isMaskTran,
 				function() {
@@ -1993,8 +1998,10 @@
 					//hotplace.maps.cellToggle();
 					
 					//heatmap 보기 선택을 끄기로 재설정한다.
-					$('input[name=rdoHeatmap]').trigger('change', true);
-					hotplace.dom.offMenuListButton('menu-cell-list');
+					//$('input[name=rdoHeatmap]').trigger('change', true);
+					//hotplace.dom.offMenuListButton('menu-cell-list');
+					
+					
 				});
 			}
 		}
@@ -2083,6 +2090,7 @@
 								throw e;
 							}
 						},
+						null,
 						true,
 						isMaskTran,
 						function() {

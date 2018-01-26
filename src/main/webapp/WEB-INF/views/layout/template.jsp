@@ -14,7 +14,7 @@
     <title><sitemesh:write property="title" /></title>
     <link rel="icon" href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/resources/img/favicon.png" type="image/png" />
     <!-- bootstrap -->
-	<link rel="stylesheet" href="/resources/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/resources/bootstrap/3.3.7-1/css/bootstrap.min.css" />
 
 	<sitemesh:write property="head" />
 </head>
@@ -170,7 +170,7 @@
 <script type="text/javascript" src="/resources/handlebars/4.0.5/handlebars.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/waitMe/waitMe.min.js"></script>
 <script type="text/javascript" src="/resources/jquery-ui/1.12.0/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/resources/bootstrap/bootstrap.min.js" ></script>
+<script type="text/javascript" src="/resources/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=SgnlyXnzstmDsYDhele7&submodules=panorama"></script>
 <c:if test="${debug eq 'on'}">
 <script type="text/javascript" src="/resources/js/src/map/hotplace.js"></script>

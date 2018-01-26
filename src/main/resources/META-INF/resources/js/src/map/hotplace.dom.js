@@ -7,7 +7,8 @@
 	var _loadTxt = '';//'로딩 중입니다';
 	var _loadEndCount = 0;
 	var _yearRangeMode = 'manual'; //타임뷰 모드  manual(수동) auto(자동)
-	
+	var _$yearRange = $('#dvYearRange');
+	var _$btnAutoYear = $('#btnAutoYear');
 	/**
 	 * @private
 	 * @typedef {object} loadEffects
@@ -203,6 +204,7 @@
 	 */
 	function _bindModalOpenEvent(openFn) {
 		_modalOpenAfterFn = openFn;
+		console.log(_modalOpenAfterFn)
 	}
 	
 	function _toggleMinimap(sw) {
@@ -361,11 +363,11 @@
 	 * @param {string} CLASS  tooltip을 close할 jquery class selector
 	 * @desc 해당 셀렉터의 모든 tooltipster close
 	 */
-	dom.closeAllTooltip = function(CLASS) {
+	/*dom.closeAllTooltip = function(CLASS) {
 		$(CLASS).each(function(index) {
 			$(this).tooltipster('close');
 		})
-	}
+	}*/
 	
 	/**
 	 * @memberof hotplace.dom
@@ -376,11 +378,11 @@
 	 * @desc 모달창 open
 	 */
 	dom.openModal = function(title, modalSize, closeFn, openFn) {
+		_bindModalCloseEvent(closeFn  || function() {});
+		_bindModalOpenEvent(openFn || function() {});
 		$('#modalPopup').modal().find('.modal-dialog').css({
 			'width': modalSize.width
 		});
-		_bindModalCloseEvent(closeFn  || function() {});
-		_bindModalOpenEvent(openFn || function() {});
 	}
 	
 	dom.openModal2 = function(title, modalSize, closeFn, openFn) {
@@ -929,16 +931,64 @@
 	 * @desc 타임시리얼 DIV 활성화 여부
 	 */
 	dom.enableYearRangeDiv = function(enabled) {
-		var dv = $('#dvYearRange');
-		var autoBtn = $('#btnAutoYear');
-		dv.rangeSlider({enabled:enabled});
+		_$yearRange.rangeSlider({enabled:enabled});
 		
 		if(enabled) {
-			autoBtn.removeAttr('disabled');
+			_$btnAutoYear.removeAttr('disabled');
 		}
 		else {
-			autoBtn.prop('disabled', true);
+			_$btnAutoYear.prop('disabled', true);
 		}
+	}
+	
+	/** 
+	 * @memberof hotplace.dom
+	 * @name captureImage 
+	 * @type {function}
+	 * @param {object} $element - 캡쳐할 요소
+	 * @param {object} $target - 캡쳐한 이미지를 넣을 요소 혹은 캡쳐한 이미지를 저장한 배열
+	 * @param {function} completeFn - 캡쳐이후 실행할 함수
+	 * @desc  히트맵을 이미지로 캡쳐해서 보여준다 (ie 지원안됨)
+	 * {@link https://github.com/tsayen/dom-to-image dom-to-image}
+	 */
+	dom.captureImage = function($element, $target, completeFn) {
+		domtoimage.toPng($element[0])
+	    .then(function(dataUrl) {
+	        var img = new Image();
+	        var _$ = null;
+	        
+	        img.src = dataUrl;
+	        img.style.width = '100%';
+	        img.style.height = '100%';
+	        
+	        if($.isArray($target)) {
+	        	$target.push(img);
+	        }
+	        else {
+	        	$target.append(img);
+	        }
+	        
+	        if(completeFn) completeFn();
+	    })
+	    .catch(function (error) {
+	        throw error;
+	    });
+	}
+	
+	
+	dom.showHeatmapCapturedImages = function(arr) {
+		var tForm = dom.getTemplate('mapcaptureForm');
+		$('#modalPopup').html(tForm());
+		
+		var len = arr.length;
+		
+		dom.openModal('', {width: 800}, null, function() {
+			for(var i = 0; i < len; i++) {
+				$('#' + (2014+i) + 'Map').append(arr[i]);
+			}
+			
+			arr.length = 0;
+		});
 	}
 	
 	/**
@@ -952,8 +1002,7 @@
 	dom.showYearRangeDiv = function(mx, mn) {
 		var max = 2017, min = 2011, i = 0, step = 1;
 		var range = max - min - 1;
-		var el = $('#dvYearRange');
-		
+		var capturedImgs = [];
 		/*
 		 * Auto
 		 * */
@@ -961,20 +1010,33 @@
 		var callback = function() {
 			i++;
 			if(i<=range) {
-				setTimeout(function() {
-					el.rangeSlider('scrollRight', step);
-				}, 2000);
+				//ms 브라우저는 캡쳐하지 않는다.
+				if(hotplace.browser.msie || hotplace.browser.msedge) {
+					setTimeout(function() {
+						_$yearRange.rangeSlider('scrollRight', step);
+					}, 2000);
+				}
+				else {
+					dom.captureImage($('body'), capturedImgs, function() {
+						_$yearRange.rangeSlider('scrollRight', step);
+					});
+				}
 			}
 			else {
 				i = 0;
-				_yearRangeMode = 'manual';
-				//$('#btnAutoYear').bootstrapToggle('off');
-				//$('#btnAutoYear').trigger('change');
+				_triggerAutoYearRangeDiv();
+				if(hotplace.browser.msie || hotplace.browser.msedge) {
+					alert('크롬브라우저를 사용하시면 캡쳐된 이미지를 제공합니다.')
+				}
+				else {
+					dom.showHeatmapCapturedImages(capturedImgs);
+				}
+				
 				dom.removeBodyAllMask();
 			}
 		};
 		
-		el.rangeSlider({
+		_$yearRange.rangeSlider({
 			arrows: false,
 			//enabled: false,
 			bounds: {min: min, max: max},
@@ -992,7 +1054,7 @@
 			}
 		});
 		
-		el.on('userValuesChanged', function(e, data){
+		_$yearRange.on('userValuesChanged', function(e, data){
 			_showCellYear = data.values.max;
 			
 			dom.addBodyAllMask();
@@ -1016,15 +1078,32 @@
 	 * @desc 타임시리얼 자동재생 button DIV
 	 */
 	dom.showAutoYearRangeDiv = function() {
-		$('#btnAutoYear').on('change', function() {
+		_$btnAutoYear.on('change', function(e, p) {
+			if(p) {
+				var b = $(this).prop('checked');
+				$(this).prop('checked', !b);
+			}
+			
 			if($(this).prop('checked')) {
 				_yearRangeMode = 'auto';
-				$('#dvYearRange').rangeSlider('scrollLeft', 100);
+				_$yearRange.rangeSlider('scrollLeft', 100);
 			}
 			else {
-				_yearRangeMode == 'auto';
+				_yearRangeMode = 'manual';
 			}
 		});
+	}
+	
+	function _triggerAutoYearRangeDiv() {
+		_$btnAutoYear.trigger('change', ['refresh']);
+	}
+	
+	dom.initYearRangeDiv = function() {
+		if(_yearRangeMode == 'auto') {
+			_triggerAutoYearRangeDiv();
+		}
+		
+		_$yearRange.rangeSlider('values', 2016, 2017);
 	}
 	
 	/**
@@ -1043,9 +1122,8 @@
 	 * @desc 타임시리얼 bar DIV 를 감춘다.
 	 */
 	dom.hideYearRangeDiv = function() {
-		var el = $('#dvYearRange');
-		el.hide();
-		el.rangeSlider('destroy');
+		_$yearRange.hide();
+		_$yearRange.rangeSlider('destroy');
 	}
 	
 	/**
@@ -1238,14 +1316,6 @@
 	
 
 	
-	/*$(document).on('hidden.bs.modal', '#containerModal,#centerModal', function() {
-		_modalCloseAfterFn();
-	});
-	
-	$(document).on('shown.bs.modal', '#containerModal,#centerModal', function() {
-		_modalOpenAfterFn();
-	});*/
-	
 	function _setModalMaxHeight($element) {
 		$content = $element.find('.modal-content');
 		var borderWidth   = $content.outerHeight() - $content.innerHeight();
@@ -1262,10 +1332,20 @@
 		.css({'max-height': maxHeight, 'overflow-y': 'auto'});
 	}
 	
+	/*************************************************************
+	 * 모달창 열린후 발생하는 이벤트 핸들러
+	 ************************************************************/
 	$('#modalPopup').on('shown.bs.modal', function(e) {
 		_setModalMaxHeight($('#modalPopup'));
 		$('.modal-backdrop').remove();
 		_modalOpenAfterFn();
+	});
+	
+	/*************************************************************
+	 * 모달창 닫힌후 발생하는 이벤트 핸들러
+	 ************************************************************/
+	$('#modalPopup').on('hidden.bs.modal', function(e) {
+		_modalCloseAfterFn();
 	});
 	
 	//user menu tab
@@ -1333,6 +1413,13 @@
 		$('.mapArea').css({'min-width':minWidth});
 	}
 	
+	/**
+	 * @memberof hotplace.dom
+	 * @function activeButton
+	 * @param {string} onOff - 버튼 active or inactive 여부('on'|'off')
+	 * @param {object} $btn - 버튼객체
+	 * @desc 버튼
+	 */
 	dom.activeButton = function(onOff, $btn) {
 		if(onOff == 'on') {
 			$btn.data('switch', 'off');
@@ -1344,6 +1431,10 @@
 		}
 	}
 	
+	/*************************************************************
+	 * 브라우저창 사이즈가 변할때 발생하는 이벤트 핸들러
+	 * hotplace.streetview.resize : 거리뷰의 파노라마 사이즈를 변경함
+	 ************************************************************/
 	$(window).resize(function() {
 		/*if ($('.modal.in').length != 0) {
 			setModalMaxHeight($('.modal.in'));
