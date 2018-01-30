@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="required" value="" />
 <div class="modal-dialog" role="document">
 	<div class="modal-content">
 		
@@ -12,99 +16,30 @@
 
 			<!-- 회원가입 step01 //////////////////// 동의부분 -->
 			<div id="joinStep01" class="rowBox joinBox joinStep01" style="display:;">			
-				
-				<div class="unit">
-					<div class="unit_tit">
-						<span class="sTit">개인정보 취급방침</span>
-
-						<div class="etcText fr mgT5">
-							<span class="rdchBox">
-								<input type="checkbox" id="checkbox01" name="" />
-								<label for="checkbox01" class="labelCh"><em class="text">동의합니다</em></label>
-							</span>
+				<c:forEach var="item" items="${yaggwan}" varStatus="status">
+					<c:if test="${status.index == 0}">
+					<div class="unit">
+					</c:if>
+					<c:if test="${status.index > 0}">
+					<div class="unit mgT5">
+					</c:if>
+						<div class="unit_tit">
+							<span class="sTit">${item.categoryName}</span>
+							<div class="etcText fr mgT5">
+								<span class="rdchBox">
+									<input type="checkbox"  id="checkbox0${status.index}" name="" data-required="${item.required}"/>
+									<label for="checkbox0${status.index}" class="labelCh"><em class="text">동의합니다</em></label>
+								</span>
+							</div>
+						</div>
+						<div class="unit_cont">
+							<div class="termBox">${item.content}</div>
 						</div>
 					</div>
-					<div class="unit_cont">
-						<div class="termBox">							
-							제1조 개인정보 처리목적<br><br>
-							NICE신용정보는 다음의 목적을 위하여 개인정보를 처리합니다. 처리한 개인정보는 다음의 목적 외의 용도로는 사용되지 않으며 이용 목적이 변경되는 경우에는 개인정보보호법에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.<br>
-							가. 채권추심, 신용조사 등 고객 자산관리 업무 수행<br>
-							나. 고객센터 업무 수행<br>
-							다. 서류 수령 대행업무 수행<br>
-							라. 그 밖의 고객이 위탁하는 업무 수행<br>제2조 개인정보의 처리 및 보유 기간<br><br>
-								NICE신용정보는 법령에 따른 개인정보 보유?이용기간 <br>
-								또는 정보 주체로부터 개인정보를 수집시에 동의 받은 개인정보 보유?이용기간 내에서만 개인정보를 처리?보유하고 정해진 기간 경과 시 즉시 폐기합니다.<br>
-								구체적인 개인정보 처리 및 보유기간은 다음과 같습니다.<br>
-							가. 신용정보 업무처리에 관한 기록 : 3년<br>
-							나. 의뢰 또는 계약철회 등에 관한 기록 : 5년<br>
-							다. 이용자의 불만 또는 분쟁처리에 관한 기록 : 3년	
-						</div>
-
-						
-					</div>
-				</div>
-
-				<div class="unit mgT5">
-					<div class="unit_tit">
-						<span class="sTit">이용약관</span>
-
-						<div class="etcText fr mgT5">
-							<span class="rdchBox">
-								<input type="checkbox" id="checkbox02" name="" />
-								<label for="checkbox02" class="labelCh"><em class="text">동의합니다</em></label>
-							</span>
-						</div>
-					</div>
-					<div class="unit_cont">
-						<div class="termBox">
-							제1조 개인정보 처리목적<br><br>
-							NICE신용정보는 다음의 목적을 위하여 개인정보를 처리합니다. 처리한 개인정보는 다음의 목적 외의 용도로는 사용되지 않으며 이용 목적이 변경되는 경우에는 개인정보보호법에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.<br>
-							가. 채권추심, 신용조사 등 고객 자산관리 업무 수행<br>
-							나. 고객센터 업무 수행<br>
-							다. 서류 수령 대행업무 수행<br>
-							라. 그 밖의 고객이 위탁하는 업무 수행<br>제2조 개인정보의 처리 및 보유 기간<br><br>
-								NICE신용정보는 법령에 따른 개인정보 보유?이용기간 <br>
-								또는 정보 주체로부터 개인정보를 수집시에 동의 받은 개인정보 보유?이용기간 내에서만 개인정보를 처리?보유하고 정해진 기간 경과 시 즉시 폐기합니다.<br>
-								구체적인 개인정보 처리 및 보유기간은 다음과 같습니다.<br>
-							가. 신용정보 업무처리에 관한 기록 : 3년<br>
-							나. 의뢰 또는 계약철회 등에 관한 기록 : 5년<br>
-							다. 이용자의 불만 또는 분쟁처리에 관한 기록 : 3년	
-						</div>
-					</div>
-				</div>
-
-				<div class="unit mgT5">
-					<div class="unit_tit">
-						<span class="sTit">책임한계와 법적고지</span>
-
-						<div class="etcText fr mgT5">
-							<span class="rdchBox">
-								<input type="checkbox" id="checkbox03" name="" />
-								<label for="checkbox03" class="labelCh"><em class="text">동의합니다</em></label>
-							</span>
-						</div>
-					</div>
-					<div class="unit_cont">
-						<div class="termBox">
-							제1조 개인정보 처리목적<br><br>
-							NICE신용정보는 다음의 목적을 위하여 개인정보를 처리합니다. 처리한 개인정보는 다음의 목적 외의 용도로는 사용되지 않으며 이용 목적이 변경되는 경우에는 개인정보보호법에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.<br>
-							가. 채권추심, 신용조사 등 고객 자산관리 업무 수행<br>
-							나. 고객센터 업무 수행<br>
-							다. 서류 수령 대행업무 수행<br>
-							라. 그 밖의 고객이 위탁하는 업무 수행<br>제2조 개인정보의 처리 및 보유 기간<br><br>
-								NICE신용정보는 법령에 따른 개인정보 보유?이용기간 <br>
-								또는 정보 주체로부터 개인정보를 수집시에 동의 받은 개인정보 보유?이용기간 내에서만 개인정보를 처리?보유하고 정해진 기간 경과 시 즉시 폐기합니다.<br>
-								구체적인 개인정보 처리 및 보유기간은 다음과 같습니다.<br>
-							가. 신용정보 업무처리에 관한 기록 : 3년<br>
-							나. 의뢰 또는 계약철회 등에 관한 기록 : 5년<br>
-							다. 이용자의 불만 또는 분쟁처리에 관한 기록 : 3년	
-						</div>
-					</div>
-				</div>
-
-
+					<c:set var="required" value="${required}${item.required}" />
+				</c:forEach>
 				<div class="btnArea center mgT20">
-					<button type="button" id="btnStep01_next" class="btnstyle middle blue" style="width:80px;">다음</button>
+					<button type="button" id="btnStep01_next" class="btnstyle middle blue" style="width:80px;" <c:if test="${fn:indexOf(required, 'Y') >= 0}">disabled</c:if>>다음</button>
 				</div>
 
 			</div>
@@ -265,10 +200,5 @@
 			<!-- //회원가입 step04 // 회원가입 완료 -->
 
 		</div>
-
-		<!--<div class="modal-footer">
-			<button type="button" class="btnstyle middle blue" data-dismiss="modal" onclick="javescript:alert('test');">Save changes</button>
-			<button type="button" class="btnstyle middle gray" data-dismiss="modal">Close</button>
-		</div>-->
 	</div>
 </div>

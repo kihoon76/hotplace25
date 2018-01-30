@@ -17,11 +17,11 @@ public class HandlebarController {
 	@Resource(name="hotplaceService")
 	HotplaceService hotplaceService;
 	
-	@GetMapping("login")
+	@GetMapping("join")
 	public String getJoinTos(ModelMap m) {
 		
 		m.addAttribute("yaggwan", hotplaceService.getYaggwanList());
 		
-		return "loginForm";
+		return "joinForm";
 	}
 }

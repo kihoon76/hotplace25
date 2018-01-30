@@ -1227,6 +1227,23 @@
 	}
 	
 	dom.showJoinForm = function(modalSize, fn) {
+		var tForm = '';
+		if(_templates['joinForm'] == undefined) {
+			hotplace.ajax({
+				async: false,
+				url: 'handlebar/join',
+				dataType : 'html',
+				method : 'GET',
+				activeMask : false,
+				success : function(data, textStatus, jqXHR) {
+					_templates['joinForm'] = Handlebars.compile(data);
+				},
+				error: function() {
+					throw new Error('html template error')
+				}
+			});
+		}
+		
 		_appendModalPopup('joinForm');
 		dom.openModal('', modalSize, fn);
 	}

@@ -7,7 +7,14 @@ public class Yaggwan {
 
 	private String categoryName;
 	private String content;
+	private String required;
 	
+	public String getRequired() {
+		return required;
+	}
+	public void setRequired(String required) {
+		this.required = required;
+	}
 	public String getCategoryName() {
 		return categoryName;
 	}

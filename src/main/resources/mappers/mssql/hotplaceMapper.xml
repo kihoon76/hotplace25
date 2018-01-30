@@ -449,7 +449,7 @@
 	
 	<!-- 약관 -->
 	<select id="selectYaggwanList" resultType="Yaggwan">
-		select 카테고리명 as categoryName, 내용 as content
+		select 카테고리명 as categoryName, 내용 as content, 필수여부 as required
 		  from [웹].[dbo].[약관]
 		 order by 순서 asc
 	</select>
