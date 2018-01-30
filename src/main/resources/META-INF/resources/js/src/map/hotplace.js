@@ -346,17 +346,20 @@
 					var errCode = jqXHR.errCode;
 					switch(errCode) {
 					case '100' :
-						hotplace.dom.showAuthMsg();
+						hotplace.dom.showAlertMsg();
 						break;
 					case '202' :
-						hotplace.dom.showAuthMsg(function() {
+						hotplace.dom.showAlertMsg(function() {
 							window.location.reload();
 						},'중복 로그인');
 					case '900' :	//장애공지걸림
 						window.location.reload();
 						break;
 					case '500' :
-						hotplace.dom.showAuthMsg();
+						hotplace.dom.showAlertMsg();
+						break;
+					case '102' :
+						hotplace.dom.showAlertMsg(function() {console.log('ooooo')}, '아이디 및 비밀번호가 틀립니다.', {width:'30%'});
 						break;
 					case '000' :
 						break;

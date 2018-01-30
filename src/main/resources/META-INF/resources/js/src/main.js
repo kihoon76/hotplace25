@@ -72,8 +72,8 @@ $(document).ready(function() {
 	});
 	
 	/***************** 로그인 버튼 ************************/
-	$('#loginBtn').on('click', function(e) {	
-		$('#btnAutoYear').trigger('change', ['refresh']);
+	$('#gnbLogin').on('click', function(e) {	
+		hotplace.dom.showLoginForm('IN');
 	});
 	
 	hotplace.maps.init('naver', {

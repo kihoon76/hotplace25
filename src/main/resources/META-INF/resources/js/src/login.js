@@ -2,7 +2,8 @@
  * @namespace hotplace.login
  */
 (function(login, $) {
-	var _btnId = '#btnLogin',
+	var _btnLoginId = '#btnLogin',
+		_btnJoinId = '#joinBtn', //로그인 폼에서 회원가입링크 id
 		_btnLogoutYes = '#btnLogoutYes',
 		_btnJoinPrev = '#dvJoinBtnPrev',
 		_btnJoinNext = '#btnJoinNext',
@@ -187,7 +188,8 @@
 		});;
 	}
 	
-	$(document).on('click', _btnId, function() {
+	//로그인 버튼
+	$(document).on('click', _btnLoginId, function() {
 		var id = $('#id').val(),
 			pw = $('#pw').val();
 		
@@ -200,12 +202,15 @@
 				var jo = $.parseJSON(data);
 				if(jo.success) {
 					//var r = (hotplace.dom.getCurrentFnAfterModalClose())(true);
-					var $menuBtn = $('#' + hotplace.dom.getMenuBtn().USER_LOGIN);
+					//var $menuBtn = $('#' + hotplace.dom.getMenuBtn().USER_LOGIN);
 					
-					_changeLoginMenu($menuBtn);
+					//_changeLoginMenu($menuBtn);
 					hotplace.dom.closeModal();
 					
-					hotplace.minimaps.bindData(hotplace.maps.getMap(), 3);
+					//hotplace.minimaps.bindData(hotplace.maps.getMap(), 3);
+				}
+				else {
+					jqXHR.errCode = jo.errCode;
 				}
 			},
 			error: function(data, textStatus, jqXHR) {
@@ -214,6 +219,10 @@
 		});
 	});
 	
+	//회원가입 버튼 (로그인폼이 회원가입 모달로 교체)
+	$(document).on('click', _btnJoinId, function() {
+		hotplace.dom.showJoinForm({width: 600});
+	});
 
 	//로그아웃 YES버튼
 	$(document).on('click', _btnLogoutYes, function() {
@@ -233,13 +242,13 @@
 	$(document).on('keydown', '#pw', function(e) {
 		if (e.which == 13) {
 			var txt = e.target.value;
-			$(_btnId).trigger('click'); 
+			$(_btnLoginId).trigger('click'); 
 	    }
 	});
 	
 	
 	
-	$(document).on('click', '#btnJoinIdCheck', function() {
+	/*$(document).on('click', '#btnJoinIdCheck', function() {
 		hotplace.ajax({
 			url: 'user/checkId?id=' + $('#joinUserId').val(),
 			method: 'GET',
@@ -258,7 +267,7 @@
 			}
 			
 		});
-	});
+	});*/
 	
 	$(document).on('click', _btnJoinNext, function() {
 		_checkYaggwanAgree(function(v) {

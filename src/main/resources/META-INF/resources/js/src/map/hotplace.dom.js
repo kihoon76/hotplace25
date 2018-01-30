@@ -3,12 +3,15 @@
  * */
 (function(dom, $) {
 	
-	var _loadEl;
-	var _loadTxt = '';//'로딩 중입니다';
-	var _loadEndCount = 0;
-	var _yearRangeMode = 'manual'; //타임뷰 모드  manual(수동) auto(자동)
-	var _$yearRange = $('#dvYearRange');
-	var _$btnAutoYear = $('#btnAutoYear');
+	var _loadEl,
+		_loadTxt = '',//'로딩 중입니다';
+		_loadEndCount = 0,
+		_yearRangeMode = 'manual', //타임뷰 모드  manual(수동) auto(자동)
+		_$yearRange = $('#dvYearRange'),
+		_$btnAutoYear = $('#btnAutoYear'),
+		_$modalPopup = $('#modalPopup'),
+		_$momPopup = $('#momPopup'), //모달 위 모달
+		_$alrtPopup = $('#alrtPopup');
 	/**
 	 * @private
 	 * @typedef {object} loadEffects
@@ -68,6 +71,13 @@
 	 * @desc 모달창이 닫힌후 실행되는 함수 
 	 */
 	var _modalCloseAfterFn = function() {};
+	
+	/**
+	 * @private
+	 * @type {function}
+	 * @desc alert창이 닫힌후 실행되는 함수 
+	 */
+	var _alertCloseAfterFn = function() {};
 	
 	/**
 	 * @private
@@ -194,6 +204,11 @@
 	 */
 	function _bindModalCloseEvent(closeFn) {
 		_modalCloseAfterFn = closeFn;
+	}
+	
+	
+	function _bindAlertCloseEvent(closeFn) {
+		_alertCloseAfterFn = closeFn;
 	}
 	
 	/**
@@ -380,8 +395,29 @@
 	dom.openModal = function(title, modalSize, closeFn, openFn) {
 		_bindModalCloseEvent(closeFn  || function() {});
 		_bindModalOpenEvent(openFn || function() {});
-		$('#modalPopup').modal().find('.modal-dialog').css({
-			'width': modalSize.width
+		
+		_commonModal(_$modalPopup, modalSize);
+	}
+	
+	dom.openModalOnModal = function(title, modalSize, closeFn, openFn) {
+		_commonModal(_$momPopup, modalSize);
+	}
+	
+	dom.openAlrtModal = function(modalSize, closeFn) {
+		_bindAlertCloseEvent(closeFn  || function() {});
+		_commonModal(_$alrtPopup, modalSize);
+	} 
+	
+	function _commonModal($element, modalSize) {
+		$element.removeClass('in').data('bs.modal', null);
+		$element
+		.modal({
+			backdrop: 'static', 
+			keyboard: false
+		})
+		.find('.modal-dialog')
+		.css({
+			width: modalSize ? modalSize.width : '96%'
 		});
 	}
 	
@@ -977,9 +1013,7 @@
 	
 	
 	dom.showHeatmapCapturedImages = function(arr) {
-		var tForm = dom.getTemplate('mapcaptureForm');
-		$('#modalPopup').html(tForm());
-		
+		_appendModalPopup('mapcaptureForm');
 		var len = arr.length;
 		
 		dom.openModal('', {width: 800}, null, function() {
@@ -1159,13 +1193,15 @@
 		document.body.appendChild(script);
 	}
 	
-	dom.showAuthMsg = function(fn, msg) {
-		var tForm = dom.getTemplate('authmsgForm');
-		$('#modalPopup').html(tForm());
-		$('#authMsg').html(msg || '로그인후 이용하세요 <button class="btn btn-success" id="btnDirectLogin">로그인하기</button>');
-		
-		//dom.openCenterModal('', {width: '50%', height:'30%'}, fn);
-		dom.openModal('', {width: '50%', height: '50%'}, fn);
+	dom.showAlertMsg = function(fn, msg, modalSize) {
+		_appendModalPopup('alertForm', _$alrtPopup);
+		_$alrtPopup.find('p.alertText').html(msg || '');
+		dom.openAlrtModal(modalSize, fn);
+	}
+	
+	function _appendModalPopup(formName, $element) {
+		var tForm = dom.getTemplate(formName);
+		($element || _$modalPopup).html(tForm());
 	}
 	
 	dom.showNotice = function() {
@@ -1176,6 +1212,26 @@
 	}
 	
 	dom.showLoginForm = function(gubun, fn) {
+		var tForm = ''; //(gubun == 'IN') ? dom.getTemplate('loginForm') : dom.getTemplate('logoutForm');
+		
+		if(gubun == 'IN') {
+			_appendModalPopup('loginForm');
+		}
+		else {
+			_appendModalPopup('logoutForm');
+		}
+		
+		//hotplace.login.init();
+		
+		dom.openModal('', {width: '410'}, fn);
+	}
+	
+	dom.showJoinForm = function(modalSize, fn) {
+		_appendModalPopup('joinForm');
+		dom.openModal('', modalSize, fn);
+	}
+	
+	/*dom.showLoginForm = function(gubun, fn) {
 		var tForm = ''; //(gubun == 'IN') ? dom.getTemplate('loginForm') : dom.getTemplate('logoutForm');
 		
 		if(gubun == 'IN') {
@@ -1205,7 +1261,7 @@
 		hotplace.login.init();
 		
 		dom.openCenterModal('', {width: '700px', height:'800px'}, fn);
-	}
+	}*/
 	
 	dom.toggleOnlyMenuButton = function(btnId) {
 		var $btn = $('#' + btnId);
@@ -1255,8 +1311,9 @@
 	}
 	
 	dom.closeModal = function() {
-		$('#containerModal').modal('hide');
-		$('#centerModal').modal('hide');
+		/*$('#containerModal').modal('hide');
+		$('#centerModal').modal('hide');*/
+		_$modalPopup.modal('hide');
 	}
 	
 	dom.hideMenuList = function(targetId) {
@@ -1335,7 +1392,7 @@
 	/*************************************************************
 	 * 모달창 열린후 발생하는 이벤트 핸들러
 	 ************************************************************/
-	$('#modalPopup').on('shown.bs.modal', function(e) {
+	_$modalPopup.on('shown.bs.modal', function(e) {
 		_setModalMaxHeight($('#modalPopup'));
 		$('.modal-backdrop').remove();
 		_modalOpenAfterFn();
@@ -1344,9 +1401,17 @@
 	/*************************************************************
 	 * 모달창 닫힌후 발생하는 이벤트 핸들러
 	 ************************************************************/
-	$('#modalPopup').on('hidden.bs.modal', function(e) {
+	_$modalPopup.on('hidden.bs.modal', function(e) {
 		_modalCloseAfterFn();
 	});
+	
+	/*************************************************************
+	 * alert창 닫힌후 발생하는 이벤트 핸들러
+	 ************************************************************/
+	_$alrtPopup.on('hidden.bs.modal', function(e) {
+		_alertCloseAfterFn();
+	});
+	
 	
 	//user menu tab
 	$(document).on('click', '.btn-pref .btn', function() {

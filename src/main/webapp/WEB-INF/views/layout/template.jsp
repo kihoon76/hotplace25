@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="req" value="${pageContext.request}" />
 <c:set var="url">${req.requestURL}</c:set>
 <c:set var="uri" value="${req.requestURI}" />
@@ -14,7 +14,7 @@
     <title><sitemesh:write property="title" /></title>
     <link rel="icon" href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/resources/img/favicon.png" type="image/png" />
     <!-- bootstrap -->
-    <link rel="stylesheet" href="/resources/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/resources/vendors/bootstrap/bootstrap.css" />
 
 	<sitemesh:write property="head" />
 </head>
@@ -52,7 +52,7 @@
 
 		<div class="dvEtc">
 			<button type="button" class="unit contact" id="modalTest" title="contact us"><span class="hidden">contact us</span></button>
-			<button type="button" class="unit login"  id="loginBtn"   title="로그인"><span class="hidden">로그인</span></button>
+			<button type="button" class="unit login"  id="gnbLogin"   title="로그인"><span class="hidden">로그인</span></button>
 		</div>
 	</div>
 	
@@ -134,43 +134,20 @@
 	<div id="dvIntro"></div>
 
 	<!-- bootstrap modal 영역 -->
-	<div class="modal" id="modalPopup" tabindex="-1" role="dialog" aria-labelledby="modalTitle"></div>
+	<div class="modal" id="modalPopup" tabindex="-1" role="dialog"></div>
 
-	<!-- bootstrap modal 영역 -->
-	<div class="modal" id="modalPopup2" tabindex="-1" role="dialog" aria-labelledby="modalTitle"></div>
+	<!-- bootstrap modal에서 modal을 띄울때만 사용 영역 -->
+	<div class="modal" id="momPopup" tabindex="-1" role="dialog"></div>
 	
-	
-	
-<!-- <div id="dvTimeView" class="timeview-canvas">
-	<table border="1">
-		<colgroup>
-			<col width="50%" />
-			<col width="50%" />
-		</colgroup>
-		<tr>
-			<td>2014년</td>
-			<td>2015년</td>
-		</tr>
-		<tr>
-			<td id="2014Map" class="map-capture"></td>
-			<td id="2015Map" class="map-capture"></td>
-		</tr>
-		<tr>
-			<td>2016년</td>
-			<td>2017년</td>
-		</tr>
-		<tr>
-			<td id="2016Map" class="map-capture"></td>
-			<td id="2017Map" class="map-capture"></td>
-		</tr>
-	</table>
-</div>-->
+	<!-- alert modal을 띄울때만 사용 영역 -->
+	<div class="modal" id="alrtPopup" tabindex="-1" role="dialog"></div>
+
 <sitemesh:write property="body" />
 <script type="text/javascript" src="/resources/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/handlebars/4.0.5/handlebars.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/waitMe/waitMe.min.js"></script>
 <script type="text/javascript" src="/resources/jquery-ui/1.12.0/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/resources/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/resources/vendors/bootstrap/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=SgnlyXnzstmDsYDhele7&submodules=panorama"></script>
 <c:if test="${debug eq 'on'}">
 <script type="text/javascript" src="/resources/js/src/map/hotplace.js"></script>
