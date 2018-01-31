@@ -81,6 +81,10 @@
 		_digitKeyLimit(selector, /[^0-9]/gi, true, blurFn);
 	}
 	
+	validation.phoneMiddle = function(selector) {
+		_digitKeyLimit(selector, /[^0-9]/gi, false);
+	}
+	
 	/**
 	 * @memberof hotplace.validation
 	 * @function numberNdot

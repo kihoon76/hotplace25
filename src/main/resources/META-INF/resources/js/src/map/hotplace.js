@@ -348,18 +348,23 @@
 					case '100' :
 						hotplace.dom.showAlertMsg();
 						break;
-					case '202' :
+					case _err.DUP_LOGIN :
 						hotplace.dom.showAlertMsg(function() {
 							window.location.reload();
 						},'중복 로그인');
-					case '900' :	//장애공지걸림
+					case _err.JANGAE_GONGJI :	//장애공지걸림
 						window.location.reload();
 						break;
 					case '500' :
 						hotplace.dom.showAlertMsg();
 						break;
-					case '102' :
-						hotplace.dom.showAlertMsg(function() {console.log('ooooo')}, '아이디 및 비밀번호가 틀립니다.', {width:'30%'});
+					case _err.WRONG_ACCOUNT :
+						hotplace.dom.showAlertMsg(function() {console.log('ooooo')}, '아이디 또는 비밀번호가 틀립니다.', {width:'30%'});
+						break;
+					case _err.DUP_ID :
+						hotplace.dom.showAlertMsg(function() {
+							hotplace.user.removeDuplicatedID();
+						}, '중복된 아이디입니다.', {width:'30%'});
 						break;
 					case '000' :
 						break;
@@ -371,6 +376,17 @@
 			timeout: params.timeout || 300000
 		});
 	}
+	
+	var _err = {
+		DUP_LOGIN: '202', //중복 로그인
+		WRONG_ACCOUNT: '102', //아이디 및 비밀번호
+		JANGAE_GONGJI: '900', //장애공지
+		DUP_ID: '300',//중복된 아이디
+	};
+	
+	hotplace.error = _err;
+	
+	
 	
 	/**
 	 * @memberof hotplace

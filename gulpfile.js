@@ -66,7 +66,7 @@ gulp.task('info_min', function() {
 gulp.task('js_min', function() {
 	return gulp.src([
 	       srcJsDir + '/location.js',
-	       srcJsDir + '/login.js',
+	       srcJsDir + '/user.js',
 	       srcJsDir + '/notice.js',
 	       srcJsDir + '/main.js'])
 		   .pipe(stripDebug())

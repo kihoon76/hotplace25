@@ -27,7 +27,7 @@
 							<span class="sTit">${item.categoryName}</span>
 							<div class="etcText fr mgT5">
 								<span class="rdchBox">
-									<input type="checkbox"  id="checkbox0${status.index}" name="" data-required="${item.required}"/>
+									<input type="checkbox"  id="checkbox0${status.index}" name="" data-required="${item.required}" class="YAGGWAN_AGREE"/>
 									<label for="checkbox0${status.index}" class="labelCh"><em class="text">동의합니다</em></label>
 								</span>
 							</div>
@@ -39,7 +39,7 @@
 					<c:set var="required" value="${required}${item.required}" />
 				</c:forEach>
 				<div class="btnArea center mgT20">
-					<button type="button" id="btnStep01_next" class="btnstyle middle blue" style="width:80px;" <c:if test="${fn:indexOf(required, 'Y') >= 0}">disabled</c:if>>다음</button>
+					<button type="button" id="btnJoinStep01Next" class="btnstyle middle blue" style="width:80px;" <c:if test="${fn:indexOf(required, 'Y') >= 0}">disabled</c:if>>다음</button>
 				</div>
 
 			</div>
@@ -62,62 +62,68 @@
 								<tr>
 									<th>아이디</th>
 									<td>
-										<input type="text" id="input01" class="inp" style="width:60%;" />
-										<button type="button" class="btnstyle middle white">중복검색</button>
+										<input type="text" id="joinUserId" class="inp" style="width:60%;" />
+										<button type="button" class="btnstyle middle white" id="btnJoinIdCheck">중복검색</button>
 
-										<span class="helpCont">아이디값을 입력하세요</span>
-										<span class="helpCont">아이디 중복체크를 하세요</span>
+										<span class="helpCont EMPTY">아이디값을 입력하세요</span>
+										<span class="helpCont DUP">아이디 중복체크를 하세요</span>
 									</td>
 								</tr>
 								<tr>
 									<th>비밀번호</th>
 									<td>
-										<input type="text" id="input02" class="inp" style="width:100%;" />
-										<span class="helpCont">비밀번호를 입력하세요</span>
+										<input type="password" id="joinPw" class="inp" style="width:100%;" />
+										<span class="helpCont EMPTY">비밀번호를 입력하세요</span>
 									</td>
 								</tr>
 								<tr>
 									<th>비밀번호확인</th>
 									<td>
-										<input type="text" id="input03" class="inp" style="width:100%;" />
-										<span class="helpCont">비밀번호를 입력하세요</span>
+										<input type="password" id="joinPwConfirm" class="inp" style="width:100%;" />
+										<span class="helpCont EMPTY">비밀번호를 입력하세요</span>
+										<span class="helpCont CONFIRM">비밀번호가 일치하지 않습니다</span>
 									</td>
 								</tr>
 								<tr>
 									<th>이름</th>
 									<td>
-										<input type="text" id="input04" class="inp" style="width:100%;" />
-										<span class="helpCont">이름을 입력하세요</span>
+										<input type="text" id="joinUserName" class="inp" style="width:100%;" />
+										<span class="helpCont EMPTY">이름을 입력하세요</span>
 									</td>
 								</tr>
 								<tr>
 									<th>이메일 주소</th>
 									<td>
 										<div class="inputGroup">
-											<input type="text" id="input05" class="inp fl" style="width:50%;" />
+											<input type="text" id="joinUserEmail" class="inp fl" style="width:50%;" />
 											<span class="inline center fl" style="width:5%;" >@</span>
-											<select class="inp fl" style="width:45%;">
-												<option>== 선택하세요 ==</option>
-												<option>naver.com</option>
-												<option>daum.net</option>
-												<option>nate.com</option>
-												<option>직접입력</option>
+											<select class="inp fl" style="width:45%;" id="joinUserEmail2">
+												<option value="X">== 선택하세요 ==</option>
+												<option value="naver.com">naver.com</option>
+												<option value="daum.net">daum.net</option>
+												<option value="nate.com">nate.com</option>
+												<option value="D">직접입력</option>
 											<select>											
 										</div>
-										<span class="helpCont">email을 입력하세요</span>
+										<span class="helpCont EMPTY">email을 입력하세요</span>
+										<span class="helpCont SELECT">email을 선택하세요</span>
 									</td>
 								</tr>
 								<tr>
 									<th>연락처</th>
 									<td>
 										<div class="inputGroup">
-											<input type="text" id="input06" class="inp fl" style="width:30%;" />
+<!-- 											<input type="text" id="joinUserPhoneF" class="inp fl" style="width:30%;" /> -->
+											<select class="inp fl" style="width:30%;" id="joinUserPhoneF">
+												<option value="010">010</option>
+												<option value="02">02</option>
+											<select>		
 											<span class="inline center fl"  style="width:5%;">-</span>
-											<input type="text" id="input07" class="inp fl" style="width:30%;" />
+											<input type="text" id="joinUserPhoneM" class="inp fl NUMBER_ONLY" style="width:30%;" maxLength="4"/>
 											<span class="inline center fl"  style="width:5%;">-</span>
-											<input type="text" id="input08" class="inp fl" style="width:30%;" />
+											<input type="text" id="joinUserPhoneL" class="inp fl NUMBER_ONLY" style="width:30%;" maxLength="4"/>
 										</div>
-										<span class="helpCont">숫자를 입력해 주세요</span>
+										<span class="helpCont EMPTY">숫자를 입력해 주세요</span>
 									</td>
 								</tr>
 							</tbody>
@@ -126,8 +132,8 @@
 				</div>
 
 				<div class="btnArea center mgT20">
-					<button type="button" id="btnStep02_prev" class="btnstyle middle white" style="width:80px;">이전</button>
-					<button type="button" id="btnStep02_next" class="btnstyle middle blue" style="width:80px;">다음</button>
+					<button type="button" id="btnJoinStep02Prev" class="btnstyle middle white" style="width:80px;">이전</button>
+					<button type="button" id="btnJoinStep02Next" class="btnstyle middle blue" style="width:80px;">다음</button>
 				</div>
 
 			</div>
@@ -176,8 +182,9 @@
 				<div class="joinOkText">위 입력정보로 가입하겠습니다</div>
 
 				<div class="btnArea center mgT20">
-					<button type="button" id="btnStep03_cencel" class="btnstyle middle white" style="width:80px;" data-dismiss="modal">취소</button>
-					<button type="button" id="btnStep03_ok" class="btnstyle middle blue" style="width:80px;">확인</button>
+<!-- 					<button type="button" id="btnStep03Cancel" class="btnstyle middle white" style="width:80px;" data-dismiss="modal">취소</button> -->
+					<button type="button" id="btnStep03Cancel" class="btnstyle middle white" style="width:80px;">취소</button>
+					<button type="button" id="btnStep03Ok" class="btnstyle middle blue" style="width:80px;">확인</button>
 				</div>
 
 			</div>

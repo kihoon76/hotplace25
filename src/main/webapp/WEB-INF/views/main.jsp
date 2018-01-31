@@ -37,14 +37,14 @@
 <script type="text/javascript" src="/resources/js/src/info/acceptbuilding.js"></script>
 <script type="text/javascript" src="/resources/js/src/main.js"></script>
 <script type="text/javascript" src="/resources/js/src/notice.js"></script>
-<script type="text/javascript" src="/resources/js/src/login.js"></script>
+<script type="text/javascript" src="/resources/js/src/user.js"></script>
 <script type="text/javascript" src="/resources/js/src/location.js"></script>
 </c:if>
 <c:if test="${debug eq 'off'}">
 <script type="text/javascript" src="/resources/js/dist/info-all.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/main.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/notice.min.js"></script>
-<script type="text/javascript" src="/resources/js/dist/login.min.js"></script>
+<script type="text/javascript" src="/resources/js/dist/user.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/location.min.js"></script>
 </c:if>
 
