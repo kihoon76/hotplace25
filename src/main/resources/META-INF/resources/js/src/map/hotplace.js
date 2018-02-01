@@ -114,7 +114,14 @@
     	addrSearchPanLevel: 10,
     	yangdoseStepPercent: 5,
     	gyeongmaeDetailImgInterval: 2000,
-    	markerGrpCount: 2
+    	markerGrpCount: 2,
+    	menus: {
+    		ADDRESS_SEARCH: 'addrSearchMenu',
+    		TOOJA_SEARCH: 'toojaRegionSearchMenu',
+    		GYEONGGONG_SEARCH: 'gyeonggongSearchMenu',
+    		MULGEON_SEARCH: 'mulgeonSearchMenu',
+    		HEATMAP_SEARCH: 'heatmapViewMenu'
+    	}
     }
     
     Handlebars.registerHelper('json', function(context) {

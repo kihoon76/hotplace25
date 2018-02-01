@@ -1,0 +1,26 @@
+<table class="tableStyle left">
+	<colgroup>
+		<col style="width:80%;">
+		<col style="width:20%;">
+	</colgroup>
+	<tbody>
+		{{#each addresses as |addr|}}
+		<tr>
+			<td class="">{{addr.[1]}}</td>
+			<td class="right">
+				<span class="rdchBox block">
+					<input type="radio" 
+						   id="{{../rdoId}}{{@index}}"
+						   name="{{../rdoId}}" 
+						   data-lat="{{addr.[2]}}"
+						   data-lng="{{addr.[3]}}"
+						   data-address="{{addr.[1]}}" 
+						   data-pnu="{{addr.[0]}}"
+						   class="ADDR_RDO">
+					<label for="{{../rdoId}}{{@index}}" class="labelCh"><em class="text">선택</em></label>
+				</span>
+			</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
