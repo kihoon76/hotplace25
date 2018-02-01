@@ -268,9 +268,23 @@ body	 {min-height:600px;}
 
 /*************************************/
 /* mapInnerBox // naverMap custom overlay */
-.mapInnerBox {position:relative; overflow:auto; width:300px;}
-.mibHeader {display:block; border:1px solid #000;}
-.mibBody {display:block; border:1px solid #000;}
+.mapInnerBox {position:relative; overflow:; width:350px; animation:bounceIn 0.25s linear 0s 1 alternate; box-shadow:0 5px 2px rgba(0,0,0,0.5); background:transparent;}
+.mapInnerBox:after {display:block; content:''; width:0; height:0; border-top:12px solid #333336; border-left:8px solid transparent; border-right:8px solid transparent; position:absolute; bottom:-12px; left:50%; margin-left:-8px;}
+.mibHeader {display:block; border:none; padding:15px 15px; background:#f5f6f7; font-weight:500;  border:1px solid rgba(0,0,0,0.4); border-radius:4px 4px 0 0;}
+.mibBody {display:block; overflow:auto; max-height:;  background:#333; border-radius:0 0 0 0;} 
+.mibBody .munuType {overflow:auto; clear:both;}
+.mibBody .munuType .link {display:inline-block;  float:left; width:50%; border-bottom:1px solid #222; position:relative; }
+.mibBody .munuType .link button {display:block; width:100%; padding:0 30px 0 50px; height:60px; text-align:left; color:rgba(255,255,255,0.8); position:relative; line-height:1.2em; font-size:12px; font-weight:500; border-right:1px solid #222;}
+
+.mibBody .munuType .link:last-child {border-bottom:none;}
+.mibBody .munuType .link:hover button {animation:ani_down 0.2s ease-out 0s 1 alternate; color:rgba(255,255,255,1.0); background:#222;}
+
+.mibBody .munuType .link button:before {display:inline-block; content:''; width:30px; height:30px; border-radius:50%; position:absolute; left:13px; top:15px; border:1px solid rgba(255,255,255,0.3);}
+.mibBody .munuType .link button:before {background:url('../img/infoWindow_icon.png') no-repeat;}
+.mibBody .munuType .link button.mibIcon_01:before {background-position:0 0;}
+.mibBody .munuType .link button.mibIcon_02:before {background-position:0 -30px;}
+.mibBody .munuType .link button.mibIcon_03:before {background-position:0 -60px;}
+.mibBody .munuType .link button.mibIcon_04:before {background-position:0 -90px;}
 
 /*************************************/
 /* GNB  Area */

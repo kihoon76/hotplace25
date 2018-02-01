@@ -1221,8 +1221,6 @@
 			_appendModalPopup('logoutForm');
 		}
 		
-		//hotplace.login.init();
-		
 		dom.openModal('', {width: '410'}, fn);
 	}
 	
@@ -1247,38 +1245,6 @@
 		_appendModalPopup('joinForm');
 		dom.openModal('', modalSize, fn);
 	}
-	
-	/*dom.showLoginForm = function(gubun, fn) {
-		var tForm = ''; //(gubun == 'IN') ? dom.getTemplate('loginForm') : dom.getTemplate('logoutForm');
-		
-		if(gubun == 'IN') {
-			if(_templates['loginForm'] == undefined) {
-				hotplace.ajax({
-					async: false,
-					url: 'handlebar/login',
-					dataType : 'html',
-					method : 'GET',
-					activeMask : false,
-					success : function(data, textStatus, jqXHR) {
-						_templates['loginForm'] = Handlebars.compile(data);
-					},
-					error: function() {
-						throw new Error('html template error')
-					}
-				});
-			}
-			
-			tForm = _templates['loginForm'];
-		}
-		else {
-			tForm = dom.getTemplate('logoutForm');
-		}
-		
-		$('#dvCenterModalContent').html(tForm({path: hotplace.getContextUrl()}));
-		hotplace.login.init();
-		
-		dom.openCenterModal('', {width: '700px', height:'800px'}, fn);
-	}*/
 	
 	dom.toggleOnlyMenuButton = function(btnId) {
 		var $btn = $('#' + btnId);
@@ -1472,7 +1438,7 @@
 		dom.openCenterModal('', {width: '800px', height: '800px'}, closeFn);
 	}
 	
-	dom.showLnbContents = function($element) {
+	dom.showLnbContent = function($element) {
 		var $parent   = $element.parent('li');		
 		var data      = $element.data('name');
 
@@ -1493,6 +1459,30 @@
 
 		var minWidth = 964 - contWidth
 		$('.mapArea').css({'min-width':minWidth});
+	}
+	
+	dom.hideLnbContent = function(obj) {
+		var divObj = null;
+		var parents = $(obj).parents();
+		
+		for (var i=0;i<parents.length;i++) {
+			var parent = parents[i];
+			if ($(parent).hasClass('lnbContWrap')) {
+				divObj = parent;
+				break;
+			}
+		}
+
+		var thisPopId = divObj.id; 
+		$('#' + thisPopId).hide();
+		$('#memuList > li').removeClass('active');
+
+		
+		var lnbWidth   = $('#lnbArea').outerWidth();
+		$('.mapArea').animate({
+			'left': lnbWidth 
+		},100);
+		$('.mapArea').css({'min-width':'964px'});
 	}
 	
 	/**
