@@ -4,6 +4,7 @@
 (function(user, $) {
 	var _login_BTN = '#btnLogin',
 		_login_BTN_Join = '#joinBtn', //로그인 폼에서 회원가입링크 id
+		_join_BTN_Login = '#btnStep04Login',
 		_joinStep01 = '#joinStep01',
 		_joinStep02 = '#joinStep02',
 		_joinStep03 = '#joinStep03',
@@ -399,6 +400,11 @@
 		hotplace.dom.showJoinForm({width: 600}, function() {
 			_reset();
 		});
+	});
+	
+	//로그인버튼 (회원가입폼이  로그인 모달로 교체)
+	$(document).on('click', _join_BTN_Login, function() {
+		hotplace.dom.showLoginForm('IN');
 	});
 
 	$(document).on('keydown', '#pw', function(e) {

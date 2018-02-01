@@ -202,7 +202,7 @@
 				</div>
 
 				<div class="btnArea center mgT20">
-					<button type="button" id="btnStep04_login" class="btnstyle middle black" style="">로그인페이지로 이동</button>
+					<button type="button" id="btnStep04Login" class="btnstyle middle black" style="">로그인페이지로 이동</button>
 				</div>
 
 			</div>
