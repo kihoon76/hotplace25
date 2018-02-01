@@ -1,0 +1,67 @@
+<div class="headArea">
+	<h2>HeatMap 보기</h2>
+	<button type="button" class="close" onClick="javascript:hideLnbCont(this);">
+		<i class="ambicon-015_mark_times"></i><span class="hidden">닫기</span>
+	</button>
+</div>
+<div class="bodyArea">
+	<ul class="heatmapList" style="">
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="hitmap2" name="hitmap" />
+				<label for="hitmap2" class="labelCh"><em class="text">공시지가</em></label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="hitmap3" name="hitmap" />
+				<label for="hitmap3" class="labelCh"><em class="text">공시지가 증가율</em></label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="hitmap4" name="hitmap" disabled />
+				<label for="hitmap4" class="labelCh"><em class="text">건축허가면적</em></label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="hitmap5" name="hitmap" disabled />
+				<label for="hitmap5" class="labelCh"><em class="text">건축허가면적 증가율</em></label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="hitmap6" name="hitmap" disabled />
+				<label for="hitmap6" class="labelCh"><em class="text">영업허가면적</em></label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="hitmap7" name="hitmap" disabled />
+				<label for="hitmap7" class="labelCh"><em class="text">영업허가면적 증가율</em></label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="hitmap8" name="hitmap" disabled />
+				<label for="hitmap8" class="labelCh"><em class="text">보상편입물건면적</em></label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="hitmap9" name="hitmap" disabled />
+				<label for="hitmap9" class="labelCh"><em class="text">보상편입물건면적 증가율</em></label>
+			</span>
+		</li>
+
+	</ul>
+</div>
+<div class="footerEtcText">
+	<div class="tit">[알림]</div>
+	<div class="cont">HeatMap은 전국 3800만여 필지에 대한 데이터를 실시간 분석하기 때문에 다소 시간이 소요됩니다.(컴퓨터 사용 환경에 따라 차이가 있으며, 5~20초 가량이 소요됩니다.)</div>
+</div>
+<div class="footArea">
+	<button type="button" id="heatMapBtn_show" class="btnstyle middle blue" onClick="">HeatMap보기</button>
+	<button type="button" id="heatMapBtn_hide" class="btnstyle middle gray" style="display:none;" onClick="">HeatMap끄기</button>
+</div>

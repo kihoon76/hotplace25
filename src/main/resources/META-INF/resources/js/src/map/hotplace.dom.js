@@ -1439,6 +1439,8 @@
 	}
 	
 	dom.showLnbContent = function($element) {
+		_bindLnbMenu($element.data('name'));
+		
 		var $parent   = $element.parent('li');		
 		var data      = $element.data('name');
 
@@ -1461,9 +1463,14 @@
 		$('.mapArea').css({'min-width':minWidth});
 	}
 	
-	dom.hideLnbContent = function(obj) {
-		var divObj = null;
-		var parents = $(obj).parents();
+	function _bindLnbMenu(menuName) {
+		var tForm = dom.getTemplate(menuName);
+		$('#' + menuName).html(tForm());
+	}
+	
+	dom.hideLnbContent = function($obj) {
+		/*var divObj = null;
+		var parents = $obj.parents();
 		
 		for (var i=0;i<parents.length;i++) {
 			var parent = parents[i];
@@ -1471,10 +1478,12 @@
 				divObj = parent;
 				break;
 			}
-		}
+		}*/
 
-		var thisPopId = divObj.id; 
-		$('#' + thisPopId).hide();
+		var $menu = $obj.parent().parent();
+		//var thisPopId = divObj.id; 
+		//$('#' + thisPopId).hide();
+		$menu.hide();
 		$('#memuList > li').removeClass('active');
 
 		

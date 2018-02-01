@@ -62,49 +62,30 @@
 
 		<ul id="memuList" class="memuList">
 			<li class="active">
-				<a href="#" class="menu01" data-name="menuCont01"><i class="icon"></i><span>주소 검색</span></a>
+				<a href="#" class="menu01" data-name="addrSearchMenu"><i class="icon"></i><span>주소 검색</span></a>
 			</li>
 			<li>
-				<a href="#" class="menu02" data-name="menuCont02"><i class="icon"></i><span>투자 유망 지역 검색</span></a>
+				<a href="#" class="menu02" data-name="toojaRegionSearchMenu"><i class="icon"></i><span>투자 유망 지역 검색</span></a>
 			</li>
 			<li>
-				<a href="#" class="menu03" data-name="menuCont03"><i class="icon"></i><span>경•공매 물건 검색</span></a>
+				<a href="#" class="menu03" data-name="gyeonggongSearchMenu"><i class="icon"></i><span>경•공매 물건 검색</span></a>
 			</li>
-			<li class="disabled">
-				<a href="#" class="menu04" data-name="menuCont04"><i class="icon"></i><span>물건보기</span></a>
+			<li >
+				<a href="#" class="menu04" data-name="mulgeonSearchMenu"><i class="icon"></i><span>물건보기</span></a>
 			</li>
 			<li>
-				<a href="#" class="menu05" data-name="menuCont05"><i class="icon"></i><span>히트맵보기</span></a>
+				<a href="#" class="menu05" data-name="heatmapViewMenu"><i class="icon"></i><span>히트맵보기</span></a>
 			</li>
 		</ul>
 	</div>
 
 	<!-- menu 컨텐츠 노출영역 -->
 	<div id="lnbCont" class="lnbCont">
-		<div id="menuCont01" class="lnbContWrap" style="display:; width:500px;">
-			<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
-			<!--#include virtual="lnbCont_01.html" -->
-		</div>
-
-		<div id="menuCont02" class="lnbContWrap">
-			<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
-			<!--#include virtual="lnbCont_02.html" -->
-		</div>
-
-		<div id="menuCont03" class="lnbContWrap">
-			<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
-			<!--#include virtual="lnbCont_03.html" -->
-		</div>
-
-		<div id="menuCont04" class="lnbContWrap">
-			<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
-			<!--#include virtual="lnbCont_04.html" -->
-		</div>
-
-		<div id="menuCont05" class="lnbContWrap">
-			<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
-			<!--#include virtual="lnbCont_05.html" -->
-		</div>
+		<div id="addrSearchMenu" class="lnbContWrap" style="display:; width:500px;"></div>
+		<div id="toojaRegionSearchMenu" class="lnbContWrap"></div>
+		<div id="gyeonggongSearchMenu" class="lnbContWrap"></div>
+		<div id="mulgeonSearchMenu" class="lnbContWrap"></div>
+		<div id="heatmapViewMenu" class="lnbContWrap"></div>
 	</div>
 	
 	<!-- map 영역 -->

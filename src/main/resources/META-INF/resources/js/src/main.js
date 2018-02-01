@@ -68,7 +68,12 @@ $(document).ready(function() {
 	
 	/***************** 왼쪽메뉴 ************************/
 	$('#memuList > li > a').on('click', function() {
-		hotplace.dom.showLnbContents($(this)); 
+		hotplace.dom.showLnbContent($(this)); 
+	});
+	
+	/***************** 왼쪽메뉴 닫기버튼 ************************/
+	$(document).on('click', '#lnbCont .close', function() {
+		hotplace.dom.hideLnbContent($(this));
 	});
 	
 	/***************** 로그인 버튼 ************************/
