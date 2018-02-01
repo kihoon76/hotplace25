@@ -7,7 +7,9 @@
 		_joinStep01 = '#joinStep01',
 		_joinStep02 = '#joinStep02',
 		_joinStep03 = '#joinStep03',
+		_joinStep04 = '#joinStep04',
 		_joinStep01_CHK_YaggwanAgree = '.YAGGWAN_AGREE',
+		
 		_joinStep02_TXT_UserId = '#joinUserId',
 		_joinStep02_TXT_Pw = '#joinPw',
 		_joinStep02_TXT_PwConfirm = '#joinPwConfirm',
@@ -18,11 +20,19 @@
 		_joinStep02_TXT_UserPhoneM = '#joinUserPhoneM',
 		_joinStep02_TXT_UserPhoneL = '#joinUserPhoneL',
 		_joinStep02_BTN_IdCheck = '#btnJoinIdCheck',
+		
+		_joinStep03_SPN_UserId = '#joinStep03Id',
+		_joinStep03_SPN_Pw = '#joinStep03Pw',
+		_joinStep03_SPN_UserName = '#joinStep03Name',
+		_joinStep03_SPN_UserEmail = '#joinStep03Email',
+		_joinStep03_SPN_UserPhone = '#joinStep03Phone',
+		
 		_joinBox = '.joinBox',
 		_joinStep01_BTN_Next = '#btnJoinStep01Next',
 		_joinStep02_BTN_Prev = '#btnJoinStep02Prev',
 		_joinStep02_BTN_Next = '#btnJoinStep02Next',
-		_joinStep03_BTN_Cancel = '#btnStep03Cancel';
+		_joinStep03_BTN_Cancel = '#btnStep03Cancel',
+		_joinStep03_BTN_Ok = '#btnStep03Ok';
 
 	var _doCheckJoinID = false;
 	var _checkedJoinID = '';
@@ -33,7 +43,8 @@
 	    _joinStep02_TXT_UserName,
 	    _joinStep02_TXT_UserEmail,
 	    _joinStep02_TXT_UserPhoneM,
-	    _joinStep02_TXT_UserPhoneL];
+	    _joinStep02_TXT_UserPhoneL],
+	    _joinData = null;
 	
 	function _checkYaggwanAgree(fn) {
 		var v = true;
@@ -52,7 +63,12 @@
 	}
 	
 	function _isValidJoinForm() {
-		if(/*_checkEmpty() && _checkDupId() && _checkPwConfirm() &&*/ _checkSelectMail()) {
+		if(_checkEmpty()
+			&& _checkDupId()
+			&& _checkPwConfirm()
+			&& _checkSelectMail()
+			&& _checkPhoneM()
+			&& _checkPhoneL()) {
 			return true;
 		}
 		return false;
@@ -112,6 +128,7 @@
 		
 		if($joinStep02_SEL_UserEmail.val() != 'X') {
 			_ctrlValidMsg($joinStep02_SEL_UserEmail, false, '.SELECT');
+			v = _checkMailFormat($joinStep02_SEL_UserEmail.val());
 		}
 		else {
 			_ctrlValidMsg($joinStep02_SEL_UserEmail, true, '.SELECT');
@@ -122,6 +139,69 @@
 		
 	}
 	
+	function _checkMailFormat(selV, mailV) {
+		var v = true;
+		var $joinStep02_TXT_UserEmail = $(_joinStep02_TXT_UserEmail);
+		var re = (selV == 'D') ? /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ : /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))$/; 
+		
+		v = re.test($joinStep02_TXT_UserEmail.val());
+		if(v) {
+			_ctrlValidMsg($joinStep02_TXT_UserEmail, false, '.FORMAT');
+		}
+		else {
+			_ctrlValidMsg($joinStep02_TXT_UserEmail, true, '.FORMAT');
+		}
+		
+		return v;
+	}
+	
+	function _checkPhoneM() {
+		var v = true;
+		var $joinStep02_TXT_UserPhoneM = $(_joinStep02_TXT_UserPhoneM);
+		var phoneM = $.trim($joinStep02_TXT_UserPhoneM.val());
+		var phoneM_len = phoneM.length;
+		try {
+			if(phoneM_len >=3 && phoneM_len <=4) {
+				phoneM = parseInt(phoneM);
+				_ctrlValidMsg($joinStep02_TXT_UserPhoneM, false, '.PHONE_M');
+			}
+			else {
+				v = false;
+				_ctrlValidMsg($joinStep02_TXT_UserPhoneM, true, '.PHONE_M');
+			}
+		}
+		catch(e) {
+			v = false;
+			_ctrlValidMsg($joinStep02_TXT_UserPhoneM, true, '.PHONE_M');
+		}
+		
+		return v;
+	}
+	
+	function _checkPhoneL() {
+		var v = true;
+		var $joinStep02_TXT_UserPhoneL = $(_joinStep02_TXT_UserPhoneL);
+		var phoneL = $.trim($joinStep02_TXT_UserPhoneL.val());
+		var phoneL_len = phoneL.length;
+		try {
+			if(phoneL_len == 4) {
+				phoneL = parseInt(phoneL);
+				_ctrlValidMsg($joinStep02_TXT_UserPhoneL, false, '.PHONE_L');
+			}
+			else {
+				v = false;
+				_ctrlValidMsg($joinStep02_TXT_UserPhoneL, true, '.PHONE_L');
+			}
+		}
+		catch(e) {
+			v = false;
+			_ctrlValidMsg($joinStep02_TXT_UserPhoneL, true, '.PHONE_L');
+		}
+		
+		return v;
+	}
+	
+		
 	function _ctrlValidMsg($el, visible, type) {
 		var value = visible ? 'block' : 'none';
 		type = type || '.EMPTY';
@@ -141,12 +221,55 @@
 	
 	
 	function _initJoinStep03() {
+		$(_joinStep03_SPN_UserId).text($(_joinStep02_TXT_UserId).val());
+		$(_joinStep03_SPN_Pw).text(hotplace.util.maskAll($(_joinStep02_TXT_Pw).val()));
+		$(_joinStep03_SPN_UserName).text($(_joinStep02_TXT_UserName).val());
+		$(_joinStep03_SPN_UserEmail).text(hotplace.util.getEmail($(_joinStep02_TXT_UserEmail), $(_joinStep02_SEL_UserEmail)));
+		$(_joinStep03_SPN_UserPhone).text(
+			$(_joinStep02_SEL_UserPhoneF).val() + '-' + $(_joinStep02_TXT_UserPhoneM).val() + '-' + $(_joinStep02_TXT_UserPhoneL).val()
+		);
 		
+		_joinData = {
+			id: $(_joinStep02_TXT_UserId).val(),
+			userName: $(_joinStep02_TXT_UserName).val(),
+			password: $(_joinStep02_TXT_Pw).val(),
+			phone: $(_joinStep03_SPN_UserPhone).text(),
+			email: $(_joinStep03_SPN_UserPhone).text()
+		}
 	}
 	
 	function _reset() {
+		_resetJoinStep01();
+		_resetJoinStep02();
+		_resetJoinStep03();
+	}
+	
+	function _resetJoinStep01() {
+		$(_joinStep01_CHK_YaggwanAgree).each(function() {
+			this.checked = false;
+		});
+	}
+	
+	function _resetJoinStep02() {
 		_doCheckJoinID = false;
 		_checkedJoinID = '';
+		
+		for(var i=_joinStep02TxtElements.length-1; i>=0; i--) {
+			$(_joinStep02TxtElements[i]).val('');
+		}
+		
+		$(_joinStep02_SEL_UserEmail).val('X');
+		$(_joinStep02_SEL_UserPhoneF).val('010');
+		
+		$('#joinStep02 .helpCont').css('display', 'none');
+	}
+	
+	function _resetJoinStep03() {
+		$(_joinStep03_SPN_UserId).text('');
+		$(_joinStep03_SPN_Pw).text('');
+		$(_joinStep03_SPN_UserName).text('');
+		$(_joinStep03_SPN_UserEmail).text('');
+		$(_joinStep03_SPN_UserPhone).text('');
 	}
 	
 	user.removeDuplicatedID = function() {
@@ -183,6 +306,7 @@
 	//회원가입 Step02(정보입력) 다음버튼
 	$(document).on('click', _joinStep02_BTN_Next, function() {
 		if(_isValidJoinForm()) {
+			_initJoinStep03();
 			$(_joinBox).hide();
 			$(_joinStep03).show();
 		}
@@ -193,6 +317,28 @@
 		_reset();
 		$(_joinBox).hide();
 		$(_joinStep02).show();
+	});
+	
+	//회원가입 Step03(가입 정보확인) 확인버튼버튼
+	$(document).on('click', _joinStep03_BTN_Ok, function() {
+		hotplace.ajax({
+			url: 'user/join',
+			data: JSON.stringify(_joinData),
+			contentType: 'application/json; charset=UTF-8',
+			success: function(data, textStatus, jqXHR) {
+				if(data.success) {
+					_reset();
+					$(_joinBox).hide();
+					$(_joinStep04).show();
+				}
+				else {
+					jqXHR.errCode = hotplace.error.JOIN;
+				}
+			},
+			error: function(jqXHR, textStatus, e) {
+				jqXHR.errCode = hotplace.error.JOIN;
+			}
+		})
 	});
 	
 	//아이디 중복체크
@@ -250,7 +396,9 @@
 	
 	//회원가입 버튼 (로그인폼이 회원가입 모달로 교체)
 	$(document).on('click', _login_BTN_Join, function() {
-		hotplace.dom.showJoinForm({width: 600});
+		hotplace.dom.showJoinForm({width: 600}, function() {
+			_reset();
+		});
 	});
 
 	$(document).on('keydown', '#pw', function(e) {

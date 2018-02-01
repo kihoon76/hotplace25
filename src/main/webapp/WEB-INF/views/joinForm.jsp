@@ -107,6 +107,7 @@
 										</div>
 										<span class="helpCont EMPTY">email을 입력하세요</span>
 										<span class="helpCont SELECT">email을 선택하세요</span>
+										<span class="helpCont FORMAT">email 형식이 올바르지 않습니다</span>
 									</td>
 								</tr>
 								<tr>
@@ -124,6 +125,8 @@
 											<input type="text" id="joinUserPhoneL" class="inp fl NUMBER_ONLY" style="width:30%;" maxLength="4"/>
 										</div>
 										<span class="helpCont EMPTY">숫자를 입력해 주세요</span>
+										<span class="helpCont PHONE_M">가운데자리 3자리~4자리를 입력해 주세요</span>
+										<span class="helpCont PHONE_L">끝자리 4자리를 입력해 주세요</span>
 									</td>
 								</tr>
 							</tbody>
@@ -156,23 +159,23 @@
 							<tbody>
 								<tr>
 									<th>아이디</th>
-									<td>aaaaaaaaa</td>
+									<td><span id="joinStep03Id"></span></td>
 								</tr>
 								<tr>
 									<th>비밀번호</th>
-									<td>**********</td>
+									<td><span id="joinStep03Pw"></span></td>
 								</tr>
 								<tr>
 									<th>이름</th>
-									<td>핫플레이스</td>
+									<td><span id="joinStep03Name"></span></td>
 								</tr>
 								<tr>
 									<th>이메일 주소</th>
-									<td>hotplace@hotplace.com</td>
+									<td><span id="joinStep03Email"></span></td>
 								</tr>
 								<tr>
 									<th>연락처</th>
-									<td>000-0000-0000</td>
+									<td><span id="joinStep03Phone"></span></td>
 								</tr>
 							</tbody>
 						</table>
@@ -182,7 +185,6 @@
 				<div class="joinOkText">위 입력정보로 가입하겠습니다</div>
 
 				<div class="btnArea center mgT20">
-<!-- 					<button type="button" id="btnStep03Cancel" class="btnstyle middle white" style="width:80px;" data-dismiss="modal">취소</button> -->
 					<button type="button" id="btnStep03Cancel" class="btnstyle middle white" style="width:80px;">취소</button>
 					<button type="button" id="btnStep03Ok" class="btnstyle middle blue" style="width:80px;">확인</button>
 				</div>

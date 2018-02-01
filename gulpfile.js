@@ -36,7 +36,8 @@ gulp.task('map_min', function() {
 	       srcJsDir + '/map/hotplace.database.js',
 	       srcJsDir + '/map/hotplace.dom.js',
 	       srcJsDir + '/map/hotplace.search.js',
-	       srcJsDir + '/map/hotplace.streetview.js'])
+	       srcJsDir + '/map/hotplace.streetview.js',
+	       srcJsDir + '/map/hotplace.util.js'])
 		   .pipe(stripDebug())
 		   .pipe(uglify().on('error', function(uglify) {
 				console.log(uglify.message);
@@ -92,7 +93,8 @@ gulp.task('map_concat_min', function() {
   	       srcJsDir + '/min/hotplace.database.min.js',
   	       srcJsDir + '/min/hotplace.dom.min.js',
   	       srcJsDir + '/min/hotplace.search.min.js',
-  	       srcJsDir + '/min/hotplace.streetview.min.js'])
+  	       srcJsDir + '/min/hotplace.streetview.min.js',
+  	       srcJsDir + '/min/hotplace.util.min.js'])
 	       .pipe(concat('hotplace-all.min.js'))
 	       .pipe(gulp.dest(distJsDir));
 });

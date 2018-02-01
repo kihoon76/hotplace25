@@ -366,6 +366,9 @@
 							hotplace.user.removeDuplicatedID();
 						}, '중복된 아이디입니다.', {width:'30%'});
 						break;
+					case _err.JOIN :
+						hotplace.dom.showAlertMsg(null, '회원가입도중 오류가 발생했습니다.', {width:'40%'});
+						break;
 					case '000' :
 						break;
 					}
@@ -382,6 +385,7 @@
 		WRONG_ACCOUNT: '102', //아이디 및 비밀번호
 		JANGAE_GONGJI: '900', //장애공지
 		DUP_ID: '300',//중복된 아이디
+		JOIN: '600', //회원가입 오류
 	};
 	
 	hotplace.error = _err;
