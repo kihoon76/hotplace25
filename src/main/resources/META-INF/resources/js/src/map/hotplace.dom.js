@@ -222,17 +222,6 @@
 		console.log(_modalOpenAfterFn)
 	}
 	
-	function _toggleMinimap(sw) {
-		$('.minimap').each(function() {
-			if(sw == 'on') {
-				$(this).show();
-			}
-			else {
-				$(this).hide();
-			}
-		});
-	}
-	
 	/**
 	 * @memberof hotplace.dom
 	 * @function getCurrentFnAfterModalClose
@@ -332,60 +321,6 @@
 	
 	/**
 	 * @memberof hotplace.dom
-	 * @function initTooltip
-	 * @param {string} selectorClass tootip을 적용할 class 값
-	 * @desc open source tooltipster 설정
-	 * {@link https://github.com/louisameline/tooltipster-follower tooltipster}
-	 */
-	dom.initTooltip = function(selectorClass, options) {
-		var target = {
-			theme: 'tooltipster-borderless',
-			trigger: 'custom',
-			side: 'top',
-			functionBefore: function(instance, helper) {
-				return true;
-			}
-		};
-		
-		$.extend(target, options);
-		// first on page load, initialize all tooltips
-		$('.' + selectorClass).tooltipster(target);
-	}
-	
-	/**
-	 * @memberof hotplace.dom
-	 * @function openTooltip
-	 * @param {string} selector  tooltip을 open할 jquery selector
-	 * @desc 해당 셀렉터의 tooltipster open
-	 */
-	dom.openTooltip = function(selector) {
-		$(selector).tooltipster('open');
-	}
-	
-	/**
-	 * @memberof hotplace.dom
-	 * @function closeTooltip
-	 * @param {string} selector  tooltip을 close할 jquery selector
-	 * @desc 해당 셀렉터의 tooltipster close
-	 */
-	dom.closeTooltip = function(selector) {
-		$(selector).tooltipster('close');
-	}
-	
-	/**
-	 * @memberof hotplace.dom
-	 * @function closeAllTooltip
-	 * @param {string} CLASS  tooltip을 close할 jquery class selector
-	 * @desc 해당 셀렉터의 모든 tooltipster close
-	 */
-	/*dom.closeAllTooltip = function(CLASS) {
-		$(CLASS).each(function(index) {
-			$(this).tooltipster('close');
-		})
-	}*/
-	
-	/**
-	 * @memberof hotplace.dom
 	 * @function openModal
 	 * @param {string} title  modal창 헤더부분에 표시할 title
 	 * @param {string} modalSize modal창 사이즈('bigsize'|'fullsize') 
@@ -419,36 +354,6 @@
 		.css({
 			width: modalSize ? modalSize.width : '96%'
 		});
-	}
-	
-	dom.openModal2 = function(title, modalSize, closeFn, openFn) {
-		$('#spModalTitle').text(title);
-		
-		if(!modalSize) modalSize = 'fullsize';
-		
-		$('#containerModal > .modal-dialog').removeClass('modal-fullsize modal-bigsize modal-center');
-		$('#containerModal > .modal-dialog > .modal-content').removeClass('modal-fullsize modal-bigsize modal-center'); 
-		
-		$('#containerModal > .modal-dialog').addClass('modal-' + modalSize);
-		$('#containerModal > .modal-dialog > .modal-content').addClass('modal-' + modalSize);
-		
-		
-		$('#containerModal').modal('show');
-		_bindModalCloseEvent(closeFn  || function() {});
-		_bindModalOpenEvent(openFn || function() {});
-	}
-	
-	dom.openCenterModal = function(title, size, closeFn, openFn) {
-		$('#spCenterModalTitle').text(title);
-		
-		if(size) {
-			var $modal = $('#centerModal .modal-content');
-			$modal.css({'width':size.width, 'height': size.height});
-		}
-		
-		$('#centerModal').modal('show');
-		_bindModalCloseEvent(closeFn || function() {});
-		_bindModalOpenEvent(openFn  || function() {});
 	}
 	
 	/**
@@ -582,138 +487,6 @@
 		return html;
 	}
 	
-	/**
-	 * @memberof hotplace.dom
-	 * @function addButtonInMap
-	 * @param {object} params 
-	 * @param {string} params.id 생성할 button id
-	 * @param {string} params.glyphicon bootstrap glyphicon name 
-	 * @param {string} params.attr 추가할 버튼 속성
-	 * @param {string} params.clazz 추가할 버튼 class
-	 * @param {function} params.callback 버튼 클릭이벤트 리스너
-	 * @desc 지도에 메뉴 버튼을 생성함
-	 */
-	/*dom.addButtonInMap = function(params) {
-		
-		var template = function(disabled){
-			
-			return disabled ? '<button id="{0}" type="button" disabled class="button button-disabled {3} {4} {5}" {1}>{2}</button>' :
-				              '<button id="{0}" type="button" class="button {3} {4} {5}" {1}>{2}</button>';
-		}
-		
-		if(params) {
-			var len = params.length;
-			var btns = '';
-			
-			for(var i=0; i<len; i++) {
-				if(params[i].glyphicon){
-					btns += template(params[i].disabled).format(params[i].id, params[i].attr || '', params[i].title || '', 'glyphicon', 'glyphicon-' + params[i].glyphicon, params[i].clazz || '');
-				}
-				else {
-					btns += template(params[i].disabled).format(params[i].id, params[i].attr || '', params[i].title || '', params[i].clazz || '');
-				}
-			}
-			
-			if(btns) {
-				_btnMapDiv.html(btns);
-				
-				//event handler
-				for(var i=0; i<len; i++) {
-					$('#' + params[i].id).on('click', params[i].callback);
-				}
-			}
-		}
-	}*/
-	
-	var _exceptPreventBubblingDivs = ['dvGyeonggongSearch', 'dvAddressSearch', 'dvSalesView', 'dvHeatmap', 'dvTooja'];
-	
-	function _isExceptPreventBubbingDiv(id) {
-		var len = _exceptPreventBubblingDivs.length;
-		
-		for(var i=0; i<len; i++) {
-			if(id == _exceptPreventBubblingDivs[i]) return true;
-		}
-		
-		return false;
-	}
-	
-	function _checkElementPreventBubbing(target) {
-		var len = _exceptPreventBubblingDivs.length;
-		for(var i=0; i<len; i++) {
-			if($(target).closest($('#' + _exceptPreventBubblingDivs[i])).length > 0) return true;
-		}
-		
-		return false;
-	}
-	
-	var _doPreventBubbling = function(e) {
-		var target = e.target;
-		var id = target.id;
-		if(target.tagName === 'LABEL') return true;
-		
-		if(_isExceptPreventBubbingDiv(id)) return false;
-		
-		return _checkElementPreventBubbing(target);
-	}
-	
-	dom.addRightMenuInMap = function(params) {
-		var template = function(){
-			var tmp  = '<p id="{0}" {1} >';
-				tmp += '<img src="' + hotplace.getContextUrl() + 'resources/img/menu/{2}.png" />';
-				tmp += '</p>';
-			
-			return tmp;
-		}
-		
-		if(params) {
-			var len = params.length;
-			var rMenus = '';
-			
-			for(var i=0; i<len; i++) {
-				rMenus += template()
-					  	 .format(
-							  params[i].menu, params[i].datas || '',  params[i].menu
-					  	 );
-			}
-			
-			if(rMenus) {
-				_rightMenu.html(rMenus);
-				
-				for(var i=0; i<len; i++) {
-					(function(ii) {
-						$('#' + params[ii].menu).on('click', function() {
-							var toggle = $(this).data('toggle');
-							var $img = $(this).children('img');
-							
-							if(toggle == 'off') {
-								$img.prop('src', $img.prop('src').replace('.png', '_on.png'));
-								$(this).data('toggle', 'on');
-								
-								if(params[ii].callbackAll) {
-									params[ii].callbackAll($(this));
-								} 
-								else if(params[ii].callbackOn) {
-									params[ii].callbackOn($(this));
-								} 
-							}
-							else {
-								$img.prop('src', $img.prop('src').replace('_on.png', '.png'));
-								$(this).data('toggle', 'off');
-								if(params[ii].callbackAll) {
-									params[ii].callbackAll($(this));
-								} 
-								else if(params[ii].callbackOff) {
-									params[ii].callbackOff($(this));
-								}
-							}
-							
-						})
-					})(i);
-				}
-			}
-		}
-	}
-	
 	dom.checkSession = function(cb) {
 		hotplace.ajax({
 			url: 'checkSession',
@@ -725,85 +498,6 @@
 				cb(jo.success);
 			}
 		});
-	}
-	
-	
-	dom.addMenuInMap = function(params) {
-		var template = function(listDv, disabled, titleOff){
-			var tmp  = '<li id="li_{0}" data-switch="{1}" {2} class="' + (disabled ? 'disabled' : 'enabled') + '">';
-				tmp += (disabled) ? '<img src="' + hotplace.getContextUrl() + 'resources/img/menu/{3}_disabled.png" class="menu-disabled"/>' : '<img src="' + hotplace.getContextUrl() + 'resources/img/menu/{3}.png" />';
-				tmp += (titleOff) ? '{4}' : '<p class="desc"><img src="' + hotplace.getContextUrl() + 'resources/img/menu/{4}_title.png" class="menu-title"/></p>';
-				tmp += '<p class="over"><img src="' + hotplace.getContextUrl() + 'resources/img/menu/{5}_on.png" /></p>';
-				tmp += (listDv) ? '<div id="{6}" class="{7}"></div></li>' : '{6}{7}</li>';
-			
-			return tmp;
-		}
-		
-		if(params) {
-			var len = params.length;
-			var lis = '';
-			
-			for(var i=0; i<len; i++) {
-				lis += template(params[i].listDv, params[i].disabled, params[i].titleOff)
-					  .format(
-							  params[i].menu,
-							  params[i].sw ? params[i].sw : 'off',
-							  params[i].datas || '',
-							  params[i].menu,
-							  params[i].titleOff ? '' : params[i].menu,
-							  params[i].menu,
-							  params[i].listDv ? params[i].listDv : '',
-							  params[i].clazz ? params[i].clazz : '');
-			}
-			
-			if(lis) {
-				_lisMapUl.html(lis);
-				
-				//event handler
-				for(var i=0; i<len; i++) {
-					(function(ii) {
-						$('#li_' + params[ii].menu).on('click', function(e) {
-							console.log(e.target);
-							if($(this).hasClass('disabled')) return;
-							if(_doPreventBubbling(e)) return;
-							
-							
-							var $p = $(this).find('p.over');
-							var $img = $(this).find('p.desc img');
-							var $list = $(this).children('div');
-							var sw = $(this).data('switch');
-							$(this).data('switch', ((sw == 'on') ? 'off' : 'on'));
-							
-							if(sw == 'off') {
-								if($list.get(0)) $list.show();
-								$p.css('opacity', '1');
-								$img.css('opacity', '0');
-								
-								if(params[ii].callbackAll) {
-									params[ii].callbackAll($(this));
-								}
-								else if(params[ii].callbackOn) {
-									params[ii].callbackOn($(this));
-								}
-							}
-							else {
-								if($list.get(0)) $list.hide();
-								$p.css('opacity', '0');
-								$img.css('opacity', '1');
-								
-								if(params[ii].callbackAll) {
-									params[ii].callbackAll($(this));
-								}
-								else if(params[ii].callbackOff) {
-									params[ii].callbackOff($(this));
-								}
-								
-							}
-						})
-					}(i));
-				}
-			}
-		}
 	}
 	
 	dom.captureToCanvas = function() {
@@ -1245,35 +939,6 @@
 		_appendModalPopup('joinForm');
 		dom.openModal('', modalSize, fn);
 	}
-	
-	dom.toggleOnlyMenuButton = function(btnId) {
-		var $btn = $('#' + btnId);
-		var sw = $btn.data('switch');
-		$btn.data('switch', ((sw == 'on') ? 'off' : 'on'));
-		$btn.toggleClass('button-on');
-	}
-	
-	dom.offMenuButton = function(/*btnId*/liId) {
-		/*var $btn = $('#' + btnId);
-		$btn.data('switch', 'off');
-		$btn.removeClass('button-on');*/
-		var $li = $('#' + liId);
-		
-		var $p = $li.find('p.over');
-		var $img = $li.find('p.desc img');
-		var $list = $li.find('div > img');
-		if($list.get(0)) $list.hide();
-		$p.css('opacity', '0');
-		$img.css('opacity', '1');
-		
-		
-		$li.data('switch', 'off');
-	}
-	
-	dom.offMenuListButton = function(listId) {
-		$('#' + listId).trigger('click');
-	}
-	
 		
 	dom.logout = function(fn) {
 		hotplace.ajax({
@@ -1298,15 +963,6 @@
 		$('#centerModal').modal('hide');*/
 		_$modalPopup.modal('hide');
 	}
-	
-	dom.hideMenuList = function(targetId) {
-		var $list = $('#' + targetId);
-		
-		if($list.is(':visible')) {
-			$list.hide();
-			$list.parent().trigger('click');
-		}
-	};
 	
 	dom.uncheckAll = function(dv) {
 		//view 변경
@@ -1395,7 +1051,6 @@
 		_alertCloseAfterFn();
 	});
 	
-	
 	//user menu tab
 	$(document).on('click', '.btn-pref .btn', function() {
 		 $('.btn-pref .btn').removeClass('btn-primary').addClass('btn-default');
@@ -1469,20 +1124,7 @@
 	}
 	
 	dom.hideLnbContent = function($obj) {
-		/*var divObj = null;
-		var parents = $obj.parents();
-		
-		for (var i=0;i<parents.length;i++) {
-			var parent = parents[i];
-			if ($(parent).hasClass('lnbContWrap')) {
-				divObj = parent;
-				break;
-			}
-		}*/
-
 		var $menu = $obj.parent().parent();
-		//var thisPopId = divObj.id; 
-		//$('#' + thisPopId).hide();
 		$menu.hide();
 		$('#memuList > li').removeClass('active');
 

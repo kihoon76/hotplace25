@@ -1,16 +1,26 @@
 $(document).ready(function() {
+	var _currLevel = hotplace.config.minZoomLevel,
+		_menusThreshold = {},//menu 특정레벨에서 비활성화
+		$_lnbMulgeon = $('#lnbArea .MULGEON');   
 	
-	var _dom = hotplace.dom;
-	
-	/*****************************************************************************************************/
-	
-	var _prevLevel = 3;
-	var _currLevel = 3;
-	
-	var _isLevelChanged = function() {
-		return _prevLevel != _currLevel;
+	function _enableMenu(level, standardLevel, $targetLi, $btnClose) {
+		var key = $targetLi.data('key');
+		
+		if(level >= standardLevel) {
+			if(_menusThreshold[key]) return;
+			$targetLi.removeClass('disabled');
+			_menusThreshold[key] = true;
+		}
+		else {
+			if(_menusThreshold[key] && !$targetLi.hasClass('disabled')) {
+				$targetLi.addClass('disabled');
+				_menusThreshold[key] = false;
+				
+				//메뉴가 열려있으면 닫는다.
+				hotplace.dom.hideLnbContent($btnClose);
+			}
+		}
 	}
-	
 	
 	/***************** 지적도 버튼 ************************/
 	$('#btnJijeok').on('click', function() {
@@ -87,22 +97,15 @@ $(document).ready(function() {
 		level: hotplace.config.minZoomLevel
 	}, {
 		'zoom_changed' : function(map, level) {
-			/*_currLevel = level;
+			_currLevel = level;
 			hotplace.dom.addBodyAllMask();
 			
 			setTimeout(function() {
-				hotplace.maps.showMarkers();
-				hotplace.maps.showCellLayer();
+				//hotplace.maps.showMarkers();
+				//hotplace.maps.showCellLayer();
 				hotplace.dom.removeBodyAllMask();
-				//_enableMenu(level, 'li_menu_mulgeon');
+				_enableMenu(level, hotplace.config.salesViewLevel, $_lnbMulgeon, $('#mulgeonSearchMenu .close'));
 			},500);
-			
-			if(_currLevel == 3) {
-				hotplace.dom.showMinimaps();
-			}
-			else {
-				hotplace.dom.hideMinimaps();
-			}*/
 		},
 		'zoom_start' : function(map, level) {
 			////hotplace.test.initMarker(level);

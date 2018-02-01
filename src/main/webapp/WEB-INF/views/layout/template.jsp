@@ -70,7 +70,7 @@
 			<li>
 				<a href="#" class="menu03" data-name="gyeonggongSearchMenu"><i class="icon"></i><span>경•공매 물건 검색</span></a>
 			</li>
-			<li >
+			<li class="disabled MULGEON" data-key="MULGEON">
 				<a href="#" class="menu04" data-name="mulgeonSearchMenu"><i class="icon"></i><span>물건보기</span></a>
 			</li>
 			<li>
