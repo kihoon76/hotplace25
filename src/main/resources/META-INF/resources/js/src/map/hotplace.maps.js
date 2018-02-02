@@ -294,7 +294,7 @@
 		PYEONIB: 'PYEONIB',
 		SILGEOLAE: 'SILGEOLAE',
 		ACCEPT_BUILDING: 'ACCEPT_BUILDING',
-		MULGEON_SEARCH: 'MULGEON_SEARCH'
+		ADDRESS_SEARCH: 'ADDRESS_SEARCH'
 	};
 	
 	/** 
@@ -307,7 +307,7 @@
 	 * @property {string} BOSANG - 보상물건 마커들
 	 * @property {string} PYEONIB - 편입물건 마커들
 	 * @property {string} ACCEPT_BUILDING - 건축허가 마커들
-	 * @property {string} MULGEON_SEARCH - 물건검색후 마커
+	 * @property {string} ADDRESS_SEARCH - 물건검색후 마커
 	 */
 	maps.MarkerTypes = _markerTypes;
 	
@@ -345,7 +345,7 @@
 		PYEONIB: { m: [], url: 'pyeonibmarker', icon: 'pyeonib.png', clusterIcon:'pyeonibC.png', clustering: true },
 		SILGEOLAE: { m: [], url: 'silgeolaemarker', icon: 'silgeolae.png' },
 		ACCEPT_BUILDING: { m: [], url: 'acceptbuildingmarker', icon: 'acceptbuilding.png', level:13 },
-		MULGEON_SEARCH: { m: [], icon: 'search.png' }
+		ADDRESS_SEARCH: { m: [], icon: 'search.png' }
 	};
 	
 	
@@ -377,7 +377,7 @@
 		PYEONIB : [],
 		SILGEOLAE : [],
 		ACCEPT_BUILDING : [],
-		MULGEON_SEARCH: []
+		ADDRESS_SEARCH: []
 	};
 	
 	
@@ -769,7 +769,7 @@
 	
 	function _destroyMarkers(isRadiusExcept) {
 		for(var type in _markers) {
-			if((type == 'RADIUS_SEARCH' || type == 'MULGEON_SEARCH') && isRadiusExcept) continue;
+			if((type == 'RADIUS_SEARCH' || type == 'ADDRESS_SEARCH') && isRadiusExcept) continue;
 			_destroyMarkerType(type);
 		}
 	}

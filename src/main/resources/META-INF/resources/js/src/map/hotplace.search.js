@@ -2,11 +2,14 @@
  * @namespace hotplace.search
  * */
 (function(search, $) {
+	var _selectedAddressObj = null; 
+	
 	
 	search.initMenuDom = function(menuId) {
 		var m = hotplace.config.menus;
 		switch(menuId) {
 		case m.ADDRESS_SEARCH: 
+			_initAddressDom();
 			break;
 		case m.TOOJA_SEARCH:
 			break;
@@ -19,9 +22,54 @@
 		}
 	}
 	
-	function _initAddressDom() {
+	/*****************************************************************************
+	 * 주소검색
+	 ****************************************************************************/
+	//주소검색 후 라디오버튼 선택
+	function _eventHandlerAddrRdo() {
+		_selectedAddressObj.pnu = $(this).data('pnu');
+		_selectedAddressObj.address = $(this).data('address');
+		_selectedAddressObj.lng =  $(this).data('lng');
+		_selectedAddressObj.lat =  $(this).data('lat');
+	}
+	
+	//주소검색후 결과가 없는 메시지를 뿌림
+	function _emptyAddressSearchResultForm() {
+		var emptyHtml = [];
+		emptyHtml.push('<table class="tableStyle left">');
+		emptyHtml.push('<colgroup>');
+		emptyHtml.push('	<col style="width:100%;">');
+		emptyHtml.push('</colgroup>');
+		emptyHtml.push('<tbody>');
+		emptyHtml.push('	<tr>');
+		emptyHtml.push('		<td class="">검색결과가 없습니다</td>');
+		emptyHtml.push('	</tr>');
+		emptyHtml.push('</tbody>');
+		emptyHtml.push('</table>');
 		
-		$(document).on('change', )
+		return emptyHtml.join('');
+	}
+	
+	function _bindAddressSearchResult(html) {
+		var output = $('#addrSearchMenu .adressSAreaResult');
+		output.html(html);
+	}
+	
+	function _ctrlMoveMapInAddressSearch(show) {
+		if(show) {
+			$('#btnMoveAddressToMap').removeAttr('disabled');
+		}
+		else {
+			$('#btnMoveAddressToMap').prop('disabled', true);
+		}
+	}
+	
+	function _initAddressDom() {
+		_selectedAddressObj = {};
+		
+		$(document).off('change', '.ADDR_RDO', _eventHandlerAddrRdo)
+				   .on('change', '.ADDR_RDO', _eventHandlerAddrRdo);
+		
 		$('#txtAddressSearch').on('keydown', function(e) {
 			if (e.which == 13) {
 				var txt = e.target.value;
@@ -75,7 +123,6 @@
 				}
 				
 				hotplace.getPlainTextFromJson('mulgeon/search', JSON.stringify(param), function(data) {
-					var output = $('#addrSearchMenu .adressSAreaResult');
 					var dataForm = {
 						'addresses': data,
 						'rdoId': 'addr'
@@ -83,11 +130,14 @@
 					
 					if(data.length > 1) {
 						var result = (hotplace.dom.getTemplate('addrSearchResult'))(dataForm);
-						output.html(result);
+						_bindAddressSearchResult(result);
+						_ctrlMoveMapInAddressSearch(true);
 					}
 					else {
 						if(data.length == 1) {
-							console.log(data);
+							_bindAddressSearchResult('');
+							_ctrlMoveMapInAddressSearch(false);
+							
 							$('#btnMoveAddressToMap').trigger('click', {
 								pnu: data[0][0],
 								address: data[0][1],
@@ -95,9 +145,15 @@
 								lat: data[0][2],
 							});
 						}
+						else {
+							//검색 결과가 없을때 
+							console.log(data.length)
+							_bindAddressSearchResult(_emptyAddressSearchResultForm());
+							_ctrlMoveMapInAddressSearch(false);
+						}
 					}
 					
-				}, true, '#dvMulgeon');
+				}, true);
 			}
 			else {
 				console.log('b');
@@ -105,15 +161,17 @@
 		});
 		
 		$('#btnMoveAddressToMap').on('click', function(e, arg) {
-			//이미 열려있는 물건검색 마커  윈도우 삭제
-			hotplace.maps.destroyMarkerType(hotplace.maps.MarkerTypes.MULGEON_SEARCH);
-			hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.MULGEON_SEARCH);
 			
-			var $sel = $('input:radio[name="' + /*addrObj.rdoId*/'addr' + '"]:checked');
-			var lng = arg ? arg.lng : $sel.data('lng');
-			var lat = arg ? arg.lat : $sel.data('lat');
-			var address = arg ? arg.address : $sel.data('address');
-			var pnu = arg ? arg.pnu : $sel.data('pnu');
+			if(!arg && !_selectedAddressObj.pnu) return;
+			
+			//이미 열려있는 물건검색 마커  윈도우 삭제
+			hotplace.maps.destroyMarkerType(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
+			hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
+			
+			var lng = arg ? arg.lng : _selectedAddressObj.lng;
+			var lat = arg ? arg.lat : _selectedAddressObj.lat;
+			var address = arg ? arg.address : _selectedAddressObj.address;
+			var pnu = arg ? arg.pnu : _selectedAddressObj.pnu;
 			var datas = {
 				params : $.extend({address:address, pnu:pnu}, {defaultValue:hotplace.calc.profit.defaultValue}, {
 					jimok: '전',
@@ -127,11 +185,14 @@
 			if(lng == undefined || lat == undefined) return;
 			//$('#btnNews').trigger('click');
 			
-			hotplace.maps.destroyMarkerType(hotplace.maps.MarkerTypes.MULGEON_SEARCH);
-			hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.MULGEON_SEARCH);
+			hotplace.maps.destroyMarkerType(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
+			hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
 			
 			hotplace.maps.panToBounds(lat, lng, function() {
-				hotplace.maps.getMarker(hotplace.maps.MarkerTypes.MULGEON_SEARCH, {location:[lng, lat]}, {
+				
+				//menu를 닫는다.
+				hotplace.dom.hideLnbContent($('#' + hotplace.config.menus.ADDRESS_SEARCH + ' .close'));
+				hotplace.maps.getMarker(hotplace.maps.MarkerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
 					'click' : function(map, newMarker, newInfoWindow) {
 						 if(newInfoWindow.getMap()) {
 							 newInfoWindow.close();
@@ -148,7 +209,7 @@
 					datas: {
 						params : {address:address}
 					},
-					icon: hotplace.maps.getMarkerIcon(hotplace.maps.MarkerTypes.MULGEON_SEARCH),
+					icon: hotplace.maps.getMarkerIcon(hotplace.maps.MarkerTypes.ADDRESS_SEARCH),
 					size: {
 						x: 26,
 						y: 36

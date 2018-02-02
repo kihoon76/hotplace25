@@ -61,7 +61,7 @@
 		<button type="button" class="menuToogle"><span class="hidden">메뉴열기/닫기</span></button>
 
 		<ul id="memuList" class="memuList">
-			<li class="active">
+			<li>
 				<a href="#" class="menu01" data-name="addrSearchMenu"><i class="icon"></i><span>주소 검색</span></a>
 			</li>
 			<li>

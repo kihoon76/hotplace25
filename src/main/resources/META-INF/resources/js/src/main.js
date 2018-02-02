@@ -104,7 +104,7 @@ $(document).ready(function() {
 				//hotplace.maps.showMarkers();
 				//hotplace.maps.showCellLayer();
 				hotplace.dom.removeBodyAllMask();
-				_enableMenu(level, hotplace.config.salesViewLevel, $_lnbMulgeon, $('#mulgeonSearchMenu .close'));
+				_enableMenu(level, hotplace.config.salesViewLevel, $_lnbMulgeon, $('#' + hotplace.config.menus.MULGEON_SEARCH + ' .close'));
 			},500);
 		},
 		'zoom_start' : function(map, level) {

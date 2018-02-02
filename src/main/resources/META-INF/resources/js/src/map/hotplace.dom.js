@@ -1094,11 +1094,12 @@
 	}
 	
 	dom.showLnbContent = function($element) {
-		_bindLnbMenu($element.data('name'));
-		
 		var $parent   = $element.parent('li');		
 		var data      = $element.data('name');
 
+		_bindLnbMenu(data);
+		hotplace.search.initMenuDom(data);
+		
 		$parent.addClass('active');
 		$parent.siblings('li').removeClass('active');
 
