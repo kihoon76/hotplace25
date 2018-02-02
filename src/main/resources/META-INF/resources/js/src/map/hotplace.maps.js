@@ -236,7 +236,6 @@
 	 * @returns {hotplace.maps.CellTypes} 
 	 */
 	var _getActiveCellType = function() {
-		return 'GONGSI';
 		for(var t in _cellTypes) {
 			if(_cellLayerOnOff[t] == 1/* || _cellLayerOnOff[t] == -1/*toggle*/) {
 				return _cellTypes[t];
@@ -245,7 +244,6 @@
 	}
 	
 	var _isOffCell = function(isWrite) {
-		return false;
 		for(var t in _cellLayerOnOff) {
 			if(_cellLayerOnOff[t] == 1) {
 				//if(isWrite) _cellLayerOnOff[t] = -1;
@@ -345,7 +343,7 @@
 		PYEONIB: { m: [], url: 'pyeonibmarker', icon: 'pyeonib.png', clusterIcon:'pyeonibC.png', clustering: true },
 		SILGEOLAE: { m: [], url: 'silgeolaemarker', icon: 'silgeolae.png' },
 		ACCEPT_BUILDING: { m: [], url: 'acceptbuildingmarker', icon: 'acceptbuilding.png', level:13 },
-		ADDRESS_SEARCH: { m: [], icon: 'search.png' }
+		ADDRESS_SEARCH: { m: [], icon: 'marker_search.png' }
 	};
 	
 	
@@ -1751,7 +1749,8 @@
 		newMarker._data = data;
 		
 		if(options.icon) {
-			var x = 22, y = 33, cx = 22, cy = 33;
+			//원본이미지 50X68 기본
+			var x = 25, y = 34;/*, cx = 22, cy = 33*/
 			if(options.size) {
 				x = options.size.x;
 				y = options.size.y;
@@ -1770,14 +1769,16 @@
 			newMarker.setOptions('icon', {
 		        content: content,
                 size: new _vender.Size(x, y),
-                anchor: new _vender.Point(x/2, y)
+                scaledSize: new _vender.Size(x, y),
+                anchor: new _vender.Point(x/2, y),
+                origin: new _vender.Point(0,0)
 			});
 		}
 		
 		_markers[markerType].m.push(newMarker);
 		
 		if(options.hasInfoWindow) {
-			var winContent = {anchorSkew: true};
+			var winContent = options.winContent || {};
 			
 			//로컬정보로 윈도우 창 정보를 설정할 지 여부
 			if(!options.isAjaxContent) {
@@ -2107,7 +2108,7 @@
 		}
 		else if(!maps.isActiveSalesView()) {
 			//활성화 레벨이 아닌데 열려있는 경우 
-			hotplace.dom.hideMenuList('menu-mulgeon-list');
+			//hotplace.dom.hideMenuList('menu-mulgeon-list');
 		}
 	}
 	

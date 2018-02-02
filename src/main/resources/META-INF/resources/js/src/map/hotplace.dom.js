@@ -51,6 +51,9 @@
 	 * @desc javascript template engine handlebar를 통해 서버에서 가져온 html을 저장
 	 */
 	var _templates = {};
+	function _hasTemplates(name) {
+		return !(_templates[name] === undefined);
+	}
 	
 	/**
 	 * @private
@@ -766,7 +769,7 @@
 		
 		_$yearRange.rangeSlider({
 			arrows: false,
-			//enabled: false,
+			enabled: false,
 			bounds: {min: min, max: max},
 			defaultValues: {min: max-1, max: max},
 			step: 1,
@@ -1096,8 +1099,9 @@
 	dom.showLnbContent = function($element) {
 		var $parent   = $element.parent('li');		
 		var data      = $element.data('name');
-
-		_bindLnbMenu(data);
+		var isNewDom  = $element.data('new');
+		
+		_bindLnbMenu(data, isNewDom);
 		hotplace.search.initMenuDom(data);
 		
 		$parent.addClass('active');
@@ -1119,7 +1123,13 @@
 		$('.mapArea').css({'min-width':minWidth});
 	}
 	
-	function _bindLnbMenu(menuName) {
+	function _bindLnbMenu(menuName, isNew) {
+		//기존폼(dom에서 detach을 안하고 재사용)
+		if(!isNew) {
+			//로딩된 폼이 있는지 검사
+			if(_hasTemplates(menuName)) return;
+		}
+		
 		var tForm = dom.getTemplate(menuName);
 		$('#' + menuName).html(tForm());
 	}

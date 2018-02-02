@@ -102,23 +102,20 @@ $(document).ready(function() {
 			
 			setTimeout(function() {
 				//hotplace.maps.showMarkers();
-				//hotplace.maps.showCellLayer();
+				hotplace.maps.showCellLayer();
 				hotplace.dom.removeBodyAllMask();
 				_enableMenu(level, hotplace.config.salesViewLevel, $_lnbMulgeon, $('#' + hotplace.config.menus.MULGEON_SEARCH + ' .close'));
 			},500);
 		},
 		'zoom_start' : function(map, level) {
-			////hotplace.test.initMarker(level);
-			/*_prevLevel = level;
-			
 			hotplace.maps.destroyMarkers(true);
 			//hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.RADIUS_SEARCH);
 			hotplace.maps.destroyAllMarkerWindow();
-			hotplace.database.initLevel(level);*/
+			hotplace.database.initLevel(level);
 		},
 		'dragend' : function(map, bnds) {
 			//cell과 marker가 동시에 켜져있을 경우 
-			/*if(!hotplace.maps.isOffCell()) {
+			if(!hotplace.maps.isOffCell()) {
 				if(hotplace.maps.isInLocationBounds(bnds)) {
 					hotplace.maps.appendCell();
 					hotplace.maps.appendMarker();
@@ -136,7 +133,7 @@ $(document).ready(function() {
 				else {
 					hotplace.maps.showMarkers();
 				}
-			}*/
+			}
 			
 		},
 		'click' : function(map, latlng) {
@@ -166,6 +163,6 @@ $(document).ready(function() {
 		//hotplace.maps.showCellLayer();
 		hotplace.dom.showYearRangeDiv();
 		hotplace.dom.showAutoYearRangeDiv();
-		hotplace.dom.enableYearRangeDiv(true);
+		hotplace.dom.enableYearRangeDiv(false);
 	});
 });

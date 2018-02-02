@@ -18,8 +18,14 @@
 		case m.MULGEON_SEARCH:
 			break;
 		case m.HEATMAP_SEARCH:
+			_initHeatmapDom();
 			break;
 		}
+	}
+	
+	//메뉴창 닫기
+	function _closeMenu(menuName) {
+		hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
 	}
 	
 	/*****************************************************************************
@@ -191,7 +197,8 @@
 			hotplace.maps.panToBounds(lat, lng, function() {
 				
 				//menu를 닫는다.
-				hotplace.dom.hideLnbContent($('#' + hotplace.config.menus.ADDRESS_SEARCH + ' .close'));
+				//hotplace.dom.hideLnbContent($('#' + hotplace.config.menus.ADDRESS_SEARCH + ' .close'));
+				_closeMenu(hotplace.config.menus.ADDRESS_SEARCH);
 				hotplace.maps.getMarker(hotplace.maps.MarkerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
 					'click' : function(map, newMarker, newInfoWindow) {
 						 if(newInfoWindow.getMap()) {
@@ -204,7 +211,15 @@
 					}
 				}, {
 					hasInfoWindow: true,
-					infoWinFormName: 'mulgeonInfosForm',
+					infoWinFormName: 'win/addrSearchWin',
+					winContent: {
+						backgroundColor: 'transparent',
+						borderColor: '#666',
+						borderWidth: 0,
+						anchorSize: new naver.maps.Size(0, 0),
+						anchorSkew: false,  
+						pixelOffset: new naver.maps.Point(0, -12)
+					},
 					radius: 0,
 					datas: {
 						params : {address:address}
@@ -217,6 +232,82 @@
 				});
 			});
 		});
+	}
+	
+	/*****************************************************************************
+	 * 히트맵
+	 ****************************************************************************/
+	
+	function _heatmapOn(b_on) {
+		
+		$('#heatmapViewMenu input[name=hitmap]').each(function() {
+			var $this = $(this);
+			var valid = $this.data('valid');
+			if(valid) {
+				if(b_on) {
+					$this.removeAttr('disabled');
+				}
+				else {
+					$this.prop('disabled', true);
+					this.checked = false;
+				}
+			}
+		})
+		
+	}
+	
+	function _startHeatmap(type) {
+		type = type || 'OFF';
+		hotplace.maps.setActiveCell(type);
+		hotplace.maps.cellStart();
+	}
+	
+	function _initHeatmapDom() {
+		//히트맵보기
+		$('#btnHeatmapShow').on('click', function() {
+			_heatmapOn(true);
+			$(this).hide();
+			$('#btnHeatmapHide').show();
+		});
+		
+		//히트맵끄기
+		$('#btnHeatmapHide').on('click', function() {
+			_heatmapOn(false);
+			_startHeatmap('OFF');
+			$(this).hide();
+			$('#btnHeatmapShow').show();
+		});
+		
+		$('#heatmapViewMenu input[name=hitmap]').on('change', function(e, isTrigger) {
+			//var cellType = 'OFF';
+			_closeMenu(hotplace.config.menus.HEATMAP_SEARCH);
+			//setTimeout(function() {}, 500);
+			if(isTrigger) {
+				//$('#heatmapOff').prop('checked', true);
+				//hotplace.maps.setActiveCell(cellType);
+			}
+			else {
+				_startHeatmap($(this).data('value'));
+			}
+		});
+	}
+	
+	
+	
+	
+	//주소검색후 해당지점에 대한 정보선택
+	search.selectCategory = function(el) {
+		var category = $(el).data('category');
+		switch(category) {
+		case 'SUJI_BOONSEOK':
+			break;
+		case 'GWANSIM_MULGEON' :
+			break;
+		case 'CONSULTING':
+			break;
+		case 'LIMIT_USE_STATE' :
+			break;
+		}
 	}
 }(
 	hotplace.search = hotplace.search || {},

@@ -62,19 +62,19 @@
 
 		<ul id="memuList" class="memuList">
 			<li>
-				<a href="#" class="menu01" data-name="addrSearchMenu"><i class="icon"></i><span>주소 검색</span></a>
+				<a href="#" class="menu01" data-name="addrSearchMenu" data-new="true"><i class="icon"></i><span>주소 검색</span></a>
 			</li>
 			<li>
-				<a href="#" class="menu02" data-name="toojaRegionSearchMenu"><i class="icon"></i><span>투자 유망 지역 검색</span></a>
+				<a href="#" class="menu02" data-name="toojaRegionSearchMenu" data-new="true"><i class="icon"></i><span>투자 유망 지역 검색</span></a>
 			</li>
 			<li>
-				<a href="#" class="menu03" data-name="gyeonggongSearchMenu"><i class="icon"></i><span>경•공매 물건 검색</span></a>
+				<a href="#" class="menu03" data-name="gyeonggongSearchMenu" data-new="true"><i class="icon"></i><span>경•공매 물건 검색</span></a>
 			</li>
 			<li class="disabled MULGEON" data-key="MULGEON">
-				<a href="#" class="menu04" data-name="mulgeonSearchMenu"><i class="icon"></i><span>물건보기</span></a>
+				<a href="#" class="menu04" data-name="mulgeonSearchMenu" data-new="true"><i class="icon"></i><span>물건보기</span></a>
 			</li>
 			<li>
-				<a href="#" class="menu05" data-name="heatmapViewMenu"><i class="icon"></i><span>히트맵보기</span></a>
+				<a href="#" class="menu05" data-name="heatmapViewMenu" data-new="false"><i class="icon"></i><span>히트맵보기</span></a>
 			</li>
 		</ul>
 	</div>
@@ -84,8 +84,8 @@
 		<div id="addrSearchMenu" class="lnbContWrap" style="display:; width:500px;"></div>
 		<div id="toojaRegionSearchMenu" class="lnbContWrap"></div>
 		<div id="gyeonggongSearchMenu" class="lnbContWrap"></div>
-		<div id="mulgeonSearchMenu" class="lnbContWrap"></div>
-		<div id="heatmapViewMenu" class="lnbContWrap"></div>
+		<div id="mulgeonSearchMenu" class="lnbContWrap" style="width:280px;"></div>
+		<div id="heatmapViewMenu" class="lnbContWrap" style="width:280px;"></div>
 	</div>
 	
 	<!-- map 영역 -->
