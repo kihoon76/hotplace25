@@ -350,37 +350,8 @@
 						params.completeBeforeFn();
 					}
 					
-					var errCode = jqXHR.errCode;
-					switch(errCode) {
-					case '100' :
-						hotplace.dom.showAlertMsg();
-						break;
-					case _err.DUP_LOGIN :
-						hotplace.dom.showAlertMsg(function() {
-							window.location.reload();
-						},'중복 로그인');
-					case _err.JANGAE_GONGJI :	//장애공지걸림
-						window.location.reload();
-						break;
-					case '500' :
-						hotplace.dom.showAlertMsg();
-						break;
-					case _err.WRONG_ACCOUNT :
-						hotplace.dom.showAlertMsg(function() {console.log('ooooo')}, '아이디 또는 비밀번호가 틀립니다.', {width:'30%'});
-						break;
-					case _err.DUP_ID :
-						hotplace.dom.showAlertMsg(function() {
-							hotplace.user.removeDuplicatedID();
-						}, '중복된 아이디입니다.', {width:'30%'});
-						break;
-					case _err.JOIN :
-						hotplace.dom.showAlertMsg(null, '회원가입도중 오류가 발생했습니다.', {width:'40%'});
-						break;
-					case '000' :
-						break;
-					}
-					//장애공지
-					//console.log(jqXHR);
+					hotplace.processAjaxError(jqXHR.errCode);
+					
 				}
 			},
 			timeout: params.timeout || 300000
@@ -393,10 +364,44 @@
 		JANGAE_GONGJI: '900', //장애공지
 		DUP_ID: '300',//중복된 아이디
 		JOIN: '600', //회원가입 오류
+		UPLOAD: '601',
 	};
 	
 	hotplace.error = _err;
 	
+	hotplace.processAjaxError = function(errCode) {
+		switch(errCode) {
+		case '100' :
+			hotplace.dom.showAlertMsg();
+			break;
+		case _err.DUP_LOGIN :
+			hotplace.dom.showAlertMsg(function() {
+				window.location.reload();
+			},'중복 로그인');
+		case _err.JANGAE_GONGJI :	//장애공지걸림
+			window.location.reload();
+			break;
+		case '500' :
+			hotplace.dom.showAlertMsg();
+			break;
+		case _err.WRONG_ACCOUNT :
+			hotplace.dom.showAlertMsg(function() {console.log('ooooo')}, '아이디 또는 비밀번호가 틀립니다.', {width:'30%'});
+			break;
+		case _err.DUP_ID :
+			hotplace.dom.showAlertMsg(function() {
+				hotplace.user.removeDuplicatedID();
+			}, '중복된 아이디입니다.', {width:'30%'});
+			break;
+		case _err.JOIN :
+			hotplace.dom.showAlertMsg(null, '회원가입도중 오류가 발생했습니다.', {width:'40%'});
+			break;
+		case _err.UPLOAD:
+			hotplace.dom.showAlertMsg(null, '파일업로드중 에러가 발생했습니다.', {width:'40%'});
+			break;
+		case '000' :
+			break;
+		}
+	}
 	
 	
 	/**

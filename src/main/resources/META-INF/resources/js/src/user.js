@@ -377,13 +377,8 @@
 			success: function(data, textStatus, jqXHR) {
 				var jo = $.parseJSON(data);
 				if(jo.success) {
-					//var r = (hotplace.dom.getCurrentFnAfterModalClose())(true);
-					//var $menuBtn = $('#' + hotplace.dom.getMenuBtn().USER_LOGIN);
-					
-					//_changeLoginMenu($menuBtn);
 					hotplace.dom.closeModal();
-					
-					//hotplace.minimaps.bindData(hotplace.maps.getMap(), 3);
+					hotplace.dom.toggleLogin();
 				}
 				else {
 					jqXHR.errCode = jo.errCode;

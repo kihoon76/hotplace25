@@ -1,11 +1,11 @@
 /**
- * @namespace hotplace.search
+ * @namespace hotplace.menu
  * */
-(function(search, $) {
+(function(menu, $) {
 	var _selectedAddressObj = null; 
 	
 	
-	search.initMenuDom = function(menuId) {
+	menu.initMenuDom = function(menuId) {
 		var m = hotplace.config.menus;
 		switch(menuId) {
 		case m.ADDRESS_SEARCH: 
@@ -170,7 +170,7 @@
 			
 			if(!arg && !_selectedAddressObj.pnu) return;
 			
-			//이미 열려있는 물건검색 마커  윈도우 삭제
+			//이미 열려있는 주소검색 마커  윈도우 삭제
 			hotplace.maps.destroyMarkerType(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
 			hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
 			
@@ -222,7 +222,7 @@
 					},
 					radius: 0,
 					datas: {
-						params : {address:address}
+						params : {address:address, pnu:pnu}
 					},
 					icon: hotplace.maps.getMarkerIcon(hotplace.maps.MarkerTypes.ADDRESS_SEARCH),
 					size: {
@@ -291,25 +291,7 @@
 			}
 		});
 	}
-	
-	
-	
-	
-	//주소검색후 해당지점에 대한 정보선택
-	search.selectCategory = function(el) {
-		var category = $(el).data('category');
-		switch(category) {
-		case 'SUJI_BOONSEOK':
-			break;
-		case 'GWANSIM_MULGEON' :
-			break;
-		case 'CONSULTING':
-			break;
-		case 'LIMIT_USE_STATE' :
-			break;
-		}
-	}
 }(
-	hotplace.search = hotplace.search || {},
+	hotplace.menu = hotplace.menu || {},
 	jQuery
 ));

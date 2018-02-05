@@ -35,9 +35,10 @@ gulp.task('map_min', function() {
 	       srcJsDir + '/map/hotplace.chart.js',
 	       srcJsDir + '/map/hotplace.database.js',
 	       srcJsDir + '/map/hotplace.dom.js',
-	       srcJsDir + '/map/hotplace.search.js',
+	       srcJsDir + '/map/hotplace.menu.js',
 	       srcJsDir + '/map/hotplace.streetview.js',
-	       srcJsDir + '/map/hotplace.util.js'])
+	       srcJsDir + '/map/hotplace.util.js',
+	       srcJsDir + '/map/hotplace.spot.js'])
 		   .pipe(stripDebug())
 		   .pipe(uglify().on('error', function(uglify) {
 				console.log(uglify.message);
@@ -66,7 +67,6 @@ gulp.task('info_min', function() {
 
 gulp.task('js_min', function() {
 	return gulp.src([
-	       srcJsDir + '/location.js',
 	       srcJsDir + '/user.js',
 	       srcJsDir + '/notice.js',
 	       srcJsDir + '/main.js'])
@@ -92,9 +92,10 @@ gulp.task('map_concat_min', function() {
   	       srcJsDir + '/min/hotplace.chart.min.js',
   	       srcJsDir + '/min/hotplace.database.min.js',
   	       srcJsDir + '/min/hotplace.dom.min.js',
-  	       srcJsDir + '/min/hotplace.search.min.js',
+  	       srcJsDir + '/min/hotplace.menu.min.js',
   	       srcJsDir + '/min/hotplace.streetview.min.js',
-  	       srcJsDir + '/min/hotplace.util.min.js'])
+  	       srcJsDir + '/min/hotplace.util.min.js',
+  	       srcJsDir + '/min/hotplace.spot.min.js'])
 	       .pipe(concat('hotplace-all.min.js'))
 	       .pipe(gulp.dest(distJsDir));
 });

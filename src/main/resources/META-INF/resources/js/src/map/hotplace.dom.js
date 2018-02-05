@@ -11,7 +11,11 @@
 		_$btnAutoYear = $('#btnAutoYear'),
 		_$modalPopup = $('#modalPopup'),
 		_$momPopup = $('#momPopup'), //모달 위 모달
-		_$alrtPopup = $('#alrtPopup');
+		_$alrtPopup = $('#alrtPopup'),
+		_$gnbLogin = $('#gnbLogin'),
+		_$gnbLogout = $('#gnbLogout'),
+		_btnAlrt = '#btnAlrt'; //alert 창버튼
+	
 	/**
 	 * @private
 	 * @typedef {object} loadEffects
@@ -890,15 +894,17 @@
 		document.body.appendChild(script);
 	}
 	
-	dom.showAlertMsg = function(fn, msg, modalSize) {
+	dom.showAlertMsg = function(fn, msg, modalSize, btnText) {
 		_appendModalPopup('alertForm', _$alrtPopup);
 		_$alrtPopup.find('p.alertText').html(msg || '');
+		
+		if(btnText) $(btnAlrt).text(btnText);
 		dom.openAlrtModal(modalSize, fn);
 	}
 	
-	function _appendModalPopup(formName, $element) {
+	function _appendModalPopup(formName, $element, param) {
 		var tForm = dom.getTemplate(formName);
-		($element || _$modalPopup).html(tForm());
+		($element || _$modalPopup).html(tForm(param));
 	}
 	
 	dom.showNotice = function() {
@@ -908,17 +914,41 @@
 		dom.openCenterModal('공지사항', {width: '80%', height:'70%'});
 	}
 	
-	dom.showLoginForm = function(gubun, fn) {
-		var tForm = ''; //(gubun == 'IN') ? dom.getTemplate('loginForm') : dom.getTemplate('logoutForm');
-		
-		if(gubun == 'IN') {
-			_appendModalPopup('loginForm');
+	dom.showLoginForm = function(fn) {
+		_appendModalPopup('loginForm');
+		dom.openModal('', {width: '410'}, fn);
+	}
+	
+	dom.showSpotGwansimRegForm = function(fn) {
+		_appendModalPopup('spotGwansimRegForm');
+		dom.openModal('', {width: '500'}, fn);
+	}
+	
+	dom.showSpotMaemulRegForm = function(fn, param) {
+		_appendModalPopup('spotMaemulRegForm', null, param);
+		dom.openModal('', {width: '500'}, fn);
+	}
+	
+	dom.showSpotConsultingForm = function(fn, param) {
+		_appendModalPopup('spotConsultingForm', null, param);
+		dom.openModal('', {width: '500'}, fn);
+	}
+	
+	dom.showLogoutForm = function(fn) {
+		hotplace.dom.showAlertMsg(function() {
+			dom.logout(fn);
+		},'로그아웃 하시겠습니까?', {width: '410'}, '확인');
+	}
+	
+	dom.toggleLogin = function() {
+		if(_$gnbLogin.is(':visible')) {
+			_$gnbLogin.hide();
+			_$gnbLogout.show();
 		}
 		else {
-			_appendModalPopup('logoutForm');
+			_$gnbLogout.hide();
+			_$gnbLogin.show();
 		}
-		
-		dom.openModal('', {width: '410'}, fn);
 	}
 	
 	dom.showJoinForm = function(modalSize, fn) {
@@ -962,8 +992,6 @@
 	}
 	
 	dom.closeModal = function() {
-		/*$('#containerModal').modal('hide');
-		$('#centerModal').modal('hide');*/
 		_$modalPopup.modal('hide');
 	}
 	
@@ -1102,7 +1130,7 @@
 		var isNewDom  = $element.data('new');
 		
 		_bindLnbMenu(data, isNewDom);
-		hotplace.search.initMenuDom(data);
+		hotplace.menu.initMenuDom(data);
 		
 		$parent.addClass('active');
 		$parent.siblings('li').removeClass('active');
@@ -1123,14 +1151,28 @@
 		$('.mapArea').css({'min-width':minWidth});
 	}
 	
+	// 좌메뉴 컨텐츠 하단 footerEtcText 있을시 해당 bodyArea의 bottom재설정
+	dom.setLnbContentBodyArea = function() {
+		if ($('.footerEtcText').length != 0){
+			$('.footerEtcText').each(function() {
+				var thisBody = $(this).parents('.lnbContWrap').find('.bodyArea');
+				var footerH = $(this).parents('.lnbContWrap').find('.footArea').outerHeight();;
+				var thisH = $(this).outerHeight();
+
+				thisBody.css({'bottom': thisH + footerH});
+			});
+		}
+	}
+	
 	function _bindLnbMenu(menuName, isNew) {
+		var dir = 'menu/';
 		//기존폼(dom에서 detach을 안하고 재사용)
 		if(!isNew) {
 			//로딩된 폼이 있는지 검사
-			if(_hasTemplates(menuName)) return;
+			if(_hasTemplates(dir + menuName)) return;
 		}
 		
-		var tForm = dom.getTemplate(menuName);
+		var tForm = dom.getTemplate(dir + menuName);
 		$('#' + menuName).html(tForm());
 	}
 	

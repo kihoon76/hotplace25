@@ -1,0 +1,60 @@
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h2 class="modal-title">
+				매물 등록
+				<span class="sText">( 소재지 : {{address}} )</span>
+			</h2>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<i class="ambicon-015_mark_times"></i><span class="hidden">닫기</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="unit dvCateGwansim">
+				<div class="unit_cont bgWhite">
+					<table class="tableStyle borderStyle left">
+						<colgroup>
+							<col style="width:100px;">
+							<col style="width:*;">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>등록물건지번</th>
+								<td colspan="2">{{address}}</td>
+							</tr>
+							<tr>
+								<th>물건특징</th>
+								<td colspan="2">
+									<textarea class="inp" style="width:100%; height:200px;" placeholder="물건특징"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<th>사진등록</th>
+								<td colspan="2">
+									<div id="maemulFileUp" style="width: 250px;">등록</div>
+								</td>
+							</tr>
+							<tr>
+                				<th rowspan="2">연락처</th>
+                				<td class="">소속/성명</td>
+                				<td>
+                    				<input type="text" class="inp">
+                				</td>
+            				</tr>
+            				<tr>
+                				<td class="">연락처</td>
+                				<td>
+                    				<input type="text" class="inp">
+                				</td>
+            				</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btnstyle middle blue" id="btnGwansimReg">등록</button>
+			<button type="button" class="btnstyle middle gray" data-dismiss="modal">취소</button>
+		</div>
+	</div>
+</div>

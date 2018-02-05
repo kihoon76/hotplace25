@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="/resources/vendors/tabulator/css/tabulator_simple.min.css" />
     <!-- waitMe -->
     <link rel="stylesheet" href="/resources/vendors/waitMe/waitMe.min.css" />
-    
+    <!-- uploadify -->
+	<link rel="stylesheet" href="/resources/vendors/jQuery-Upload-File/4.0.11/uploadfile.css">
+	
     <!-- 모든 디자인을 재선언하는 css -->
 	<link rel="stylesheet" href="/resources/css/style.css" />
 	
@@ -38,14 +40,12 @@
 <script type="text/javascript" src="/resources/js/src/main.js"></script>
 <script type="text/javascript" src="/resources/js/src/notice.js"></script>
 <script type="text/javascript" src="/resources/js/src/user.js"></script>
-<script type="text/javascript" src="/resources/js/src/location.js"></script>
 </c:if>
 <c:if test="${debug eq 'off'}">
 <script type="text/javascript" src="/resources/js/dist/info-all.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/main.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/notice.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/user.min.js"></script>
-<script type="text/javascript" src="/resources/js/dist/location.min.js"></script>
 </c:if>
 
 

@@ -52,7 +52,8 @@
 
 		<div class="dvEtc">
 			<button type="button" class="unit contact" id="modalTest" title="contact us"><span class="hidden">contact us</span></button>
-			<button type="button" class="unit login"  id="gnbLogin"   title="로그인"><span class="hidden">로그인</span></button>
+			<button type="button" class="unit login" id="gnbLogin" title="로그인" style=""><span class="hidden">로그인</span></button>
+			<button type="button" class="unit logout" id="gnbLogout" title="로그아웃" style="display: none;"><span class="hidden">로그아웃</span></button>
 		</div>
 	</div>
 	
@@ -141,9 +142,10 @@
 <script type="text/javascript" src="/resources/js/src/map/hotplace.chart.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.database.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.dom.js"></script>
-<script type="text/javascript" src="/resources/js/src/map/hotplace.search.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.menu.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.streetview.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.util.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.spot.js"></script>
 </c:if>
 <c:if test="${debug eq 'off'}">
 <script type="text/javascript" src="/resources/js/dist/hotplace-all.min.js"></script>

@@ -88,7 +88,14 @@ $(document).ready(function() {
 	
 	/***************** 로그인 버튼 ************************/
 	$('#gnbLogin').on('click', function(e) {	
-		hotplace.dom.showLoginForm('IN');
+		hotplace.dom.showLoginForm();
+	});
+	
+	/***************** 로그아웃 버튼 ************************/
+	$('#gnbLogout').on('click', function(e) {	
+		hotplace.dom.showLogoutForm(function() {
+			window.location.reload();
+		});
 	});
 	
 	hotplace.maps.init('naver', {
