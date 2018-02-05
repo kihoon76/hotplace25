@@ -146,6 +146,7 @@
 <script type="text/javascript" src="/resources/js/src/map/hotplace.streetview.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.util.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.spot.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.upload.js"></script>
 </c:if>
 <c:if test="${debug eq 'off'}">
 <script type="text/javascript" src="/resources/js/dist/hotplace-all.min.js"></script>

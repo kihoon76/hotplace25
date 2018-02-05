@@ -1,7 +1,4 @@
-/**
- * @namespace hotplace.login
- */
-(function(user, $) {
+$(document).ready(function() {
 	var _login_BTN = '#btnLogin',
 		_login_BTN_Join = '#joinBtn', //로그인 폼에서 회원가입링크 id
 		_join_BTN_Login = '#btnStep04Login',
@@ -410,7 +407,4 @@
 	});
 	
 	hotplace.validation.phoneMiddle('#joinStep02 .NUMBER_ONLY')
-}(
-		hotplace.user = hotplace.user || {},
-		jQuery
-));
+});

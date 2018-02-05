@@ -3,8 +3,11 @@
  */
 (function(spot, $) {
 	var _dom = hotplace.dom;
-	var _maemulFileUp = null;
+	var _upload = hotplace.upload;
+	var _maemulSelectedFiles = {};
 	var _btnGwansimReg = '#btnGwansimReg';
+	var _pnu;
+	var _address;
 	
 	//주소검색후 해당지점에 대한 정보선택
 	spot.selectCategory = function(el) {
@@ -26,48 +29,56 @@
 		}
 	} 
 	
+	function _spotAddrPnu(el) {
+		var $el = $(el).closest('.munuType');
+		_pnu = $el.data('pnu');
+		_address = $el.data('address');
+	}
+	
 	/*
 	 * 매물등록
 	 * */
-	function _maemulOnSuccess(files, data, xhr) {
-		console.log(errMsg)
-	}
+	function _hasFileInMaemul() {
+        for(var k in _maemulSelectedFiles) {
+            if(_maemulSelectedFiles[k]) return true;
+        }
+
+        return false;
+    }
 	
-	function _maemulOnError(files, status, errMsg) {
-		console.log(errMsg)
+	function _getMaemulRegParams() {
+		return {
+			pnu: ''
+		};
 	}
 	
 	function _viewMaemulReg(el) {
-		var $el = $(el).closest('.munuType');
-		console.log($el.data('address'));
-		_dom.showSpotMaemulRegForm(null, {address: $el.data('address'), pnu:$el.data('pnu')});
+		_spotAddrPnu(el);
+		_dom.showSpotMaemulRegForm(null, {address: _address, pnu:_pnu});
 		
 		$(_btnGwansimReg).on('click', function() {
-			var formData = {
-				pnu: ''
-			}
-			
-			_saveMaemulReg(formData);
+			_saveMaemulReg(_getMaemulRegParams());
 		});
 		
-		_maemulFileUp = $('#maemulFileUp').uploadFile({
+		_upload.init('#maemulFileUp', {
 			url: hotplace.getContextUrl() + 'upload/maemul',
-			fileName: 'file',
-			showCancel: true,
-			showDone: true,
-			autoSubmit: false,
-			showPreview: true,
-			dragdropWidth: '250px',
-			previewWidth: '200px',
+			dragdropWidth: '300px',
 			previewHeight: '100px',
 			statusBarWidth: '200px',
 			allowedTypes: 'jpg,png,gif',
-			returnType: 'json',
-			//dragDropStr: '끌어다 놓기',
+			dynamicFormData: function() {
+	            var data = {
+	                pnu: _pnu,
+	                address:  _address,
+	                content: $('#txtMaemulContent').val(),
+	                reqName: $('#txtMaemulReqName').val(),
+	                reqPhone: $('#txtMaemulReqPhone').val()
+	            };
+	            
+	            return data;   
+	        },
 			maxFileCount: 3,
 			onSuccess: function(files, data, xhr) {
-				console.log(xhr);
-				console.log(data);
 				if(data.success) {
 					
 				}
@@ -75,21 +86,44 @@
 					hotplace.processAjaxError(hotplace.error.UPLOAD);
 				}
 			},
-			onError: _maemulOnError,
-			onSelect: function() {
+			onError: function(files, status, errMsg, pd) {
+				 hotplace.dom.showAlertMsg(null, errMsg, {width:'40%'});
+			},
+			onSelect: function(files) {
+				if(_maemulSelectedFiles[files[0].name]) {
+		            hotplace.dom.showAlertMsg(null, '같은 이름의 파일이 있습니다.', {width:'200px'});
+		            return false;
+		        }
 				
+				_maemulSelectedFiles[files[0].name] = files[0];
+				return true;
+			},
+			onCancel: function(files) {
+				 delete _maemulSelectedFiles[files[0].name];
 			}
 		});
+		
 	}
 	
 	function _saveMaemulReg(data) {
-		if(_maemulFileUp) {
-			_maemulFileUp.update({
-				formData: data
-			});
-			
-			_maemulFileUp.startUpload();
-		}
+		
+		if( _hasFileInMaemul()) {
+			_upload.getFileupEl('#maemulFileUp').startUpload();
+	    }
+        else {
+        	hotplace.ajax({
+        		url: '',
+        		contentType: 'application/json',
+                data: JSON.stringify(_getParam()),
+                success: function(data) {
+                    console.log(data)
+                    
+               },
+               error: function() {
+
+               }
+        	});
+        }
 	}
 	
 	
