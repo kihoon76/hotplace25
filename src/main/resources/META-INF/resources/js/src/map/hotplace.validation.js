@@ -81,7 +81,7 @@
 		_digitKeyLimit(selector, /[^0-9]/gi, true, blurFn);
 	}
 	
-	validation.phoneMiddle = function(selector) {
+	validation.phone = function(selector) {
 		_digitKeyLimit(selector, /[^0-9]/gi, false);
 	}
 	

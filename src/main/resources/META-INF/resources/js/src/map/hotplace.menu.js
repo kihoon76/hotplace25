@@ -222,7 +222,7 @@
 					},
 					radius: 0,
 					datas: {
-						params : {address:address, pnu:pnu}
+						params : {address:address, pnu:pnu, lng:lng, lat:lat}
 					},
 					icon: hotplace.maps.getMarkerIcon(hotplace.maps.MarkerTypes.ADDRESS_SEARCH),
 					size: {

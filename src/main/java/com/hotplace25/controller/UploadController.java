@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -16,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hotplace25.domain.AjaxVO;
+import com.hotplace25.domain.Maemul;
+import com.hotplace25.service.UploadService;
 
 @RequestMapping("/upload")
 @Controller
@@ -23,6 +30,9 @@ public class UploadController {
 
 	@Value("#{pathCfg['upload']}")
 	private String UPLOAD_LOCATION;
+	
+	@Resource(name="uploadService")
+	UploadService uploadService;
 	
 	@PostMapping("maemul")
 	@ResponseBody
@@ -50,13 +60,15 @@ public class UploadController {
 	
 	@PostMapping("maemulNoPic")
 	@ResponseBody
-	public AjaxVO uploadRegMaemulNoPic(@RequestBody Object param) {
+	public AjaxVO uploadRegMaemulNoPic(@RequestBody Maemul maemul) throws JsonGenerationException, JsonMappingException, IOException {
 		
 		AjaxVO vo = new AjaxVO();
 		
+		uploadService.uploadMaemulNoPic(maemul);
 		vo.setSuccess(true);
 		
-		
+		ObjectMapper m = new ObjectMapper();
+		System.err.println(m.writeValueAsString("=================" + maemul.getLat()));
 		
 		return vo;
 	}

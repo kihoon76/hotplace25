@@ -270,9 +270,9 @@ $(document).ready(function() {
 		$(_joinStep03_SPN_UserPhone).text('');
 	}
 	
-	user.removeDuplicatedID = function() {
+	/*user.removeDuplicatedID = function() {
 		$(_joinStep02_TXT_UserId).val('').focus();
-	}
+	}*/
 	
 	//회원가입 약관 동의체크
 	$(document).on('change', _joinStep01_CHK_YaggwanAgree, function() {
@@ -406,5 +406,5 @@ $(document).ready(function() {
 	    }
 	});
 	
-	hotplace.validation.phoneMiddle('#joinStep02 .NUMBER_ONLY')
+	hotplace.validation.phone('#joinStep02 .NUMBER_ONLY')
 });

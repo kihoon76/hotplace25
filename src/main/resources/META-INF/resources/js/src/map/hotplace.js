@@ -365,6 +365,8 @@
 		DUP_ID: '300',//중복된 아이디
 		JOIN: '600', //회원가입 오류
 		UPLOAD: '601',
+		MAEMUL_REG: '602', //매물등록 오류
+		MAEMUL_DUP: '603', //매물중복등록 오류
 	};
 	
 	hotplace.error = _err;
@@ -388,15 +390,21 @@
 			hotplace.dom.showAlertMsg(function() {console.log('ooooo')}, '아이디 또는 비밀번호가 틀립니다.', {width:'30%'});
 			break;
 		case _err.DUP_ID :
-			hotplace.dom.showAlertMsg(function() {
-				hotplace.user.removeDuplicatedID();
-			}, '중복된 아이디입니다.', {width:'30%'});
+			hotplace.dom.showAlertMsg(null, '중복된 아이디입니다.', {width:'30%'});
 			break;
 		case _err.JOIN :
 			hotplace.dom.showAlertMsg(null, '회원가입도중 오류가 발생했습니다.', {width:'40%'});
 			break;
 		case _err.UPLOAD:
 			hotplace.dom.showAlertMsg(null, '파일업로드중 에러가 발생했습니다.', {width:'40%'});
+			break;
+		case _err.MAEMUL_REG:
+			hotplace.dom.showAlertMsg(null, '매물등록중 에러가 발생했습니다.', {width:'40%'});
+			break;
+		case _err.MAEMUL_DUP:
+			hotplace.dom.showAlertMsg(function() {
+				hotplace.dom.closeModal();
+			}, '이미 등록된 매물입니다.', {width:'40%'});
 			break;
 		case '000' :
 			break;

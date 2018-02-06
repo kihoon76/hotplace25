@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.mssql.spotMapper">
+
+	<sql id="sqlInsertMaemul">
+		insert into [웹].[dbo].[매물등록] (계정아이디, PNU, 등록물건지번주소, 물건특징, 연락처, 이름, 경도, 위도)
+		values (#{accountId}, #{pnu}, #{addressJibeon}, #{description}, #{phone}, #{register}, #{lat}, #{lng})
+	</sql>
+	
+	<insert id="insertMaemulNoPic" parameterType="Maemul">
+		<include refid="sqlInsertMaemul" />
+	</insert>
+	
+	<insert id="insertMaemul" parameterType="Maemul">
+		<include refid="sqlInsertMaemul" />
+		<selectKey keyProperty="maemulBeonho"  resultType="int" order="AFTER">
+			select ident_current('[웹].[dbo].[매물등록]')
+		</selectKey>
+	</insert>
+	
+	<insert id="insertMaemulImages" parameterType="Maemul">
+		insert into [웹].[dbo].[매물등록_이미지](매물번호, 이미지명, 확장자, 이미지1)
+		values (
+			<foreach collection="files" item="item" separator=",">
+			#{maemulBeonho}, #{item.imageName}, #{item.ext}, #{item.image, typeHandler=org.apache.ibatis.type.ByteArrayTypeHandler}
+			</foreach>
+		)
+	</insert>
+	
+	<select id="selectRegistedMaemul" parameterType="Maemul" resultType="int">
+		select count(매물번호)
+		  from [웹].[dbo].[매물등록]
+		 where 계정아이디 = #{accountId}
+		   and PNU = #{pnu}
+	</select>
+</mapper>
+<!-- 
+
+ -->
