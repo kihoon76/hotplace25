@@ -3,7 +3,20 @@
  */
 (function(spot, $) {
 	var _maemulSelectedFiles = {};
-	var _btnGwansimReg = '#btnGwansimReg';
+	var _btnGwansimReg = '#btnGwansimReg',
+		_btnConsultingReg = '#btnConsultingReg',
+		_selConsultingPhineF = '#selConsultingPhineF',
+		_selConsultingEmail = '#selConsultingEmail',
+		_txtConsultingName = '#txtConsultingName',
+		_txtConsultingPhoneM = '#txtConsultingPhoneM',
+		_txtConsultingPhoneL = '#txtConsultingPhoneL',
+		_txtConsultingEmail = '#txtConsultingEmail',
+		_txtConsultingQuestion = '#txtConsultingQuestion',
+		
+		_txtMaemulContent = '#txtMaemulContent',
+		_txtMaemulReqName = '#txtMaemulReqName',
+		_txtMaemulReqPhone = '#txtMaemulReqPhone';
+	
 	var _pnu, _address, _lng, _lat;
 	
 	//주소검색후 해당지점에 대한 정보선택
@@ -21,7 +34,8 @@
 		case 'CONSULTING':
 			_viewConsulting(el);
 			break;
-		case 'LIMIT_USE_STATE' :
+		case 'TOJI_USE_LIMT' :
+			_viewTojiUseLimit(el);
 			break;
 		}
 	} 
@@ -154,44 +168,61 @@
 	}
 	
 	function _validateMaemul() {
-		if($.trim($('#txtMaemulContent').val()) == '') {
-			hotplace.dom.showAlertMsg(function() {
-				$('#txtMaemulContent').focus();
-			}, '물건특징을 입력해 주세요', {width:'300px'});
+		var isNotEmpty = hotplace.validation.isFormNotEmpty(
+				[_txtMaemulContent,
+				 _txtMaemulReqName,
+				 _txtMaemulReqPhone]
+			);
 			
-			return false;
-		}
-		
-		if($.trim($('#txtMaemulReqName').val()) == '') {
-			hotplace.dom.showAlertMsg(function() {
-				$('#txtMaemulReqName').focus();
-			}, '소속/성명을 입력해 주세요', {width:'300px'});
-			
-			return false;
-		}
-		
-		if($.trim($('#txtMaemulReqPhone').val()) == '') {
-			hotplace.dom.showAlertMsg(function() {
-				$('#txtMaemulReqPhone').focus();
-			}, '연락처를 입력해 주세요', {width:'300px'});
-			
-			return false;
-		}
-		
-		return true;
+			return isNotEmpty;
 	}
 	
 	
 	/*************************************************************
 	 * 컨설팅 요청
 	 ************************************************************/
+	function _validateConsulting() {
+		
+		var isNotEmpty = hotplace.validation.isFormNotEmpty(
+			[_txtConsultingName,
+			 _txtConsultingPhoneM,
+			 _txtConsultingPhoneL,
+			 _txtConsultingEmail,
+			 _selConsultingEmail,
+			 _txtConsultingQuestion]
+		);
+		
+		return isNotEmpty;
+	}
+	
 	function _viewConsulting(el) {
 		var $el = $(el).closest('.munuType');
-		hotplace.dom.showSpotConsultingForm(null, {address: $el.data('address'), pnu:$el.data('pnu')});
+		hotplace.dom.showSpotConsultingForm(null, function() {
+			$(_selConsultingPhineF).html(hotplace.util.getPhoneOptions());
+			$(_selConsultingEmail).html(hotplace.util.getEmailOptions());
+		}, {address: $el.data('address'), pnu:$el.data('pnu')});
+		
+		$(_btnConsultingReg).on('click', function() {
+			_saveConsultingReg();
+		});
+	}
+	
+	function _saveConsultingReg() {
+		if(!_validateConsulting()) return;
+	}
+	
+	/*************************************************************
+	 * 토지이용 규제 현황보기
+	 ************************************************************/
+	function _viewTojiUseLimit(el) {
+		var $el = $(el).closest('.munuType');
+		hotplace.dom.showSpotTojiUseLimitForm(null, function() {
+			
+		}, {address: $el.data('address'), pnu:$el.data('pnu')});
 	}
 	
 	//매물등록 연락처
-	hotplace.validation.phone('#txtMaemulReqPhone');
+	hotplace.validation.phone(_txtMaemulReqPhone);
 	
 }(
 	hotplace.spot = hotplace.spot || {},

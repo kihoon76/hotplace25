@@ -97,13 +97,7 @@
 										<div class="inputGroup">
 											<input type="text" id="joinUserEmail" class="inp fl" style="width:50%;" />
 											<span class="inline center fl" style="width:5%;" >@</span>
-											<select class="inp fl" style="width:45%;" id="joinUserEmail2">
-												<option value="X">== 선택하세요 ==</option>
-												<option value="naver.com">naver.com</option>
-												<option value="daum.net">daum.net</option>
-												<option value="nate.com">nate.com</option>
-												<option value="D">직접입력</option>
-											<select>											
+											<select class="inp fl" style="width:45%;" id="joinUserEmail2"><select>											
 										</div>
 										<span class="helpCont EMPTY">email을 입력하세요</span>
 										<span class="helpCont SELECT">email을 선택하세요</span>
@@ -114,11 +108,7 @@
 									<th>연락처</th>
 									<td>
 										<div class="inputGroup">
-<!-- 											<input type="text" id="joinUserPhoneF" class="inp fl" style="width:30%;" /> -->
-											<select class="inp fl" style="width:30%;" id="joinUserPhoneF">
-												<option value="010">010</option>
-												<option value="02">02</option>
-											<select>		
+											<select class="inp fl" style="width:30%;" id="joinUserPhoneF"><select>		
 											<span class="inline center fl"  style="width:5%;">-</span>
 											<input type="text" id="joinUserPhoneM" class="inp fl NUMBER_ONLY" style="width:30%;" maxLength="4"/>
 											<span class="inline center fl"  style="width:5%;">-</span>

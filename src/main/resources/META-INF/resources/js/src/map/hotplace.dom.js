@@ -929,9 +929,14 @@
 		dom.openModal('', {width: '500'}, fn);
 	}
 	
-	dom.showSpotConsultingForm = function(fn, param) {
+	dom.showSpotConsultingForm = function(closeFn, openFn, param) {
 		_appendModalPopup('spotConsultingForm', null, param);
-		dom.openModal('', {width: '500'}, fn);
+		dom.openModal('', {width: '500'}, closeFn, openFn);
+	}
+	
+	dom.showSpotTojiUseLimitForm = function(closeFn, openFn, param) {
+		_appendModalPopup('spotTojiUseLimitForm', null, param);
+		dom.openModal('', {width: '1000'}, closeFn, openFn);
 	}
 	
 	dom.showLogoutForm = function(fn) {
@@ -952,7 +957,6 @@
 	}
 	
 	dom.showJoinForm = function(modalSize, fn) {
-		var tForm = '';
 		if(_templates['joinForm'] == undefined) {
 			hotplace.ajax({
 				async: false,
@@ -970,6 +974,10 @@
 		}
 		
 		_appendModalPopup('joinForm');
+		
+		//이메일 && 연락처 dom 생성
+		$('#joinUserPhoneF').html(hotplace.util.getPhoneOptions());
+		$('#joinUserEmail2').html(hotplace.util.getEmailOptions());
 		dom.openModal('', modalSize, fn);
 	}
 		

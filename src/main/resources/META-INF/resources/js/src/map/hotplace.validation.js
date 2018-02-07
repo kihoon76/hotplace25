@@ -3,9 +3,9 @@
  * */
 (function(validation, $) {
 	
-	$(document).on('focus', '.readonly', function() {
+	/*$(document).on('focus', '.readonly', function() {
 		$(this).trigger('blur')
-	});
+	});*/
 	
 	//숫자관련 제한 공통함수
 	function _digitKeyLimit(selector, regEx, isComma, blurFn) {
@@ -94,6 +94,103 @@
 	validation.numberNdot = function(selector, blurFn) {
 		_digitKeyLimit(selector, /[^0-9|\.]/gi, true, blurFn);
 	}
+	
+	
+	
+	function _ctrlValidMsg($el, visible, type) {
+		var value = visible ? 'block' : 'none';
+		type = type || '.EMPTY';
+		//GROUP인지 검사
+		if($el.parent().hasClass('inputGroup')) {
+			$el.parent().siblings(type).css('display', value);
+		}
+		else {
+			$el.siblings(type).css('display', value);
+		}
+	}
+	
+	function _isValidPhoneDigit(type, len) {
+		if(type == 'M') {
+			return len >=3 && len <=4;
+		}
+		else if(type == 'L'){
+			return len == 4;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	function _isValidPhone($phone, type) {
+		var v = true;
+		var phone = $.trim($phone.val());
+		var phone_len = phone.length;
+		try {
+			if(_isValidPhoneDigit(type, phone_len)) {
+				phone = parseInt(phone);
+				_ctrlValidMsg($phone, false, '.PHONE_' + type);
+			}
+			else {
+				v = false;
+				_ctrlValidMsg($phone, true, '.PHONE_' + type);
+			}
+		}
+		catch(e) {
+			v = false;
+			_ctrlValidMsg($phone, true, '.PHONE_' + type);
+		}
+		
+		return v;
+	}
+	
+	validation.ctrlValidMsg = _ctrlValidMsg;
+	
+	validation.isValidPhoneM = function($phoneM) {
+		return _isValidPhone($phoneM, 'M');
+	}
+	
+	validation.isValidPhoneL = function($phoneL) {
+		return _isValidPhone($phoneL, 'L');
+	}
+	
+	validation.isValidEmail = function($txtMail, selV) {
+		var v = true;
+		var re = (selV == 'D') ? /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ : /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))$/; 
+		
+		v = re.test($txtMail.val());
+		if(v) {
+			_ctrlValidMsg($txtMail, false, '.FORMAT');
+		}
+		else {
+			_ctrlValidMsg($txtMail, true, '.FORMAT');
+		}
+		
+		return v;
+	}
+	
+	validation.isFormNotEmpty = function(arr) {
+		if(!arr) return false;
+		
+		var v = true;
+		var arrVal;
+		var isInput = false;
+		
+		for(var i=arr.length-1; i>=0; i--) {
+			arrVal = $(arr[i]).val();
+			isInput = $(arr[i])[0].nodeName.toLowerCase() == 'input' || $(arr[i])[0].nodeName.toLowerCase() == 'textarea';
+			if($.trim(arrVal) == '' || arrVal == 'X') {
+				_ctrlValidMsg($(arr[i]), true, isInput ? '.EMPTY' : '.SELECT');
+				v = false;
+			}
+			else {
+				_ctrlValidMsg($(arr[i]), false, isInput ? '.EMPTY' : '.SELECT');
+			}
+		}
+		
+		return v;
+	}
+	
+	
 }(
 	hotplace.validation = hotplace.validation || {},
 	jQuery

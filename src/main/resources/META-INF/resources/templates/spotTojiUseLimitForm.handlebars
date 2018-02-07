@@ -1,0 +1,578 @@
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h2 class="modal-title">
+				토지 이용 규제 현황 보기
+				<span class="sText">( 소재지 : {{address}} )</span>
+			</h2>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<i class="ambicon-015_mark_times"></i><span class="hidden">닫기</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="tabWrap dvTojiUseRegul">
+				
+				<div class="tab-head">
+					<ul class="nav-tabs">
+						<li class="tabLink active">
+							<button href="#tabBox01" data-toggle="tab"><span class="text">기본정보</span></button>
+						</li>
+						<li class="tabLink">
+							<button href="#tabBox02" data-toggle="tab"><span class="text">토지대장</span></button>
+						</li>
+						<li class="tabLink">
+							<button href="#tabBox03" data-toggle="tab"><span class="text">건축물대장</span></button>
+						</li>
+						<li class="tabLink">
+							<button href="#tabBox04" data-toggle="tab"><span class="text">토지이용계획</span></button>
+						</li>
+						<li class="tabLink">
+							<button href="#tabBox05" data-toggle="tab"><span class="text">개별공시지가</span></button>
+						</li>
+					</ul>
+				</div>
+
+				<div class="tab-content" style="min-height:740px;"> <!-- 해당 부분은 실제ㅔ 컨텐츠를 넣어보고 수정보완함 -->
+
+					<!-- ----------------------- -->
+					<!-- 기본정보 -->
+					<div id="tabBox01" class="tab-pane active">	
+						<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
+						<!-- 토지 -->
+<div class="unit">							
+	<div class="unit_tit">
+		<span class="sTit color_black noBullt">토지</span>
+	</div>
+	<div class="unit_cont bgWhite">
+		<table class="tableStyle borderStyle topBold left">
+			<colgroup>
+				<col style="width:11%;">
+				<col style="width:20.333%;">
+				<col style="width:11%;">
+				<col style="width:20.333%;">
+				<col style="width:13%;">
+				<col style="width:24.333%;">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>지목</td>
+					<td>대</td>
+
+					<th>면적</td>
+					<td>122,682㎡</td>
+
+					<th>공시지가</td>
+					<td>2017-01 → 9,850,000원 / ㎡</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- 건축물 -->
+<div class="unit">							
+	<div class="unit_tit">
+		<span class="sTit color_black noBullt">건축물</span>
+	</div>
+	<div class="unit_cont bgWhite">
+		<table class="tableStyle borderStyle topBold left">
+			<colgroup>
+				<col style="width:11%;">
+				<col style="width:20.333%;">
+				<col style="width:11%;">
+				<col style="width:20.333%;">
+				<col style="width:13%;">
+				<col style="width:24.333%;">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>건물명칭</th>
+					<td>레이크팰리스</td>
+					<th>주용도</th>
+					<td colspan="3">공공주택(아파트), 제1.2종근린생활시설</td>
+				</tr>
+				<tr>
+					<th>대지면적</th>
+					<td>126,628.8㎡</td>
+
+					<th>연면적</th>
+					<td>506,900.68㎡</td>
+
+					<th>건축물수</th>
+					<td>49동</td>
+				</tr>
+				<tr>
+					<th>건축면적</th>
+					<td>17,841.76㎡</td>
+
+					<th>건폐율</th>
+					<td>14.09%</td>
+
+					<th>용적률</th>
+					<td>273.27%</td>
+				</tr>
+				<tr>
+					<th>특이사항</th>
+					<td colspan="5">17,841.76㎡</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
+<!-- 건축물 -->
+<div class="unit">							
+	<div class="unit_tit">
+		<span class="sTit color_black noBullt">토지이용계획</span>
+	</div>
+	<div class="unit_cont bgWhite">
+		<table class="tableStyle borderStyle topBold left">
+			<colgroup>
+				<col style="">
+			</colgroup>
+			<tbody>
+				<tr>
+					<td>도시지역, 제3종일반주거지역, 아파트지구, 중심지미관지구, 도로(접합), 가축사육제한구역(가축분뇨의 관리 및 이용에 관한 법률), 교육환경보호구역(교육환경 보호에 관한 법률), 상대보호구역(2016-07-21)(교육환경 보호에 관한 법률), 대공방어협조구역(위탁고도:77-257m)(군사기지 및 군사시설 보호법), 과밀억제권역(수도권정비계획법), 3m 건축선 지정구역(세부사항은 건축과에 문의)</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- 도면 -->
+<div class="unit">
+	<div class="unit_cont bgWhite">
+		<table class="tableStyle borderStyle topBold center">
+			<colgroup>
+				<col style="">
+				<col style="">
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center">도면</th>
+					<th class="center">범례</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<img src="img/map_drawing_sample.png" alt="확인도면으로 자세한 사항은 상기 지역지구등 지정여부의 내용 확인" width="419" height="326">
+					</td>
+					<td class="left">
+						<ul class="drawingLegend">
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">도시지역</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">제1종일반주거지역</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">제2종일반주거지역</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">제3종일반주거지역</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">아파트지구</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">공원</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">학교</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">법정동</span>
+							</li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>						
+					</div>
+
+					
+					<!-- ----------------------- -->
+					<!-- 토지대장 -->
+					<div id="tabBox02" class="tab-pane">
+						<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
+						<!-- 토지대장 테이블리스트 -->
+<div class="unit">
+	<div class="unit_cont bgWhite">
+		<table id="" class="tableStyle gridStyle center">
+			<colgroup>
+				<col style="width:15%;">
+				<col style="width:15%;">
+				<col style="width:25%;">
+				<col style="width:20%;">
+				<col style="width:25%;">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>지목</th>
+					<th>면적(㎡)</th>
+					<th>토지이동(변동)사유</th>
+					<th>토지이동일</th>
+					<th>토지이동사유</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>대</td>
+					<td>122,682</td>
+					<td>구획정리완료</td>
+					<td>2007-01-08</td>
+					<td>구획정리완료</td>
+				</tr>
+				<tr>
+					<td colspan="5" class="center">해당사항없음</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+					</div>
+
+
+					<!-- ----------------------- -->
+					<!-- 건축물대장 -->
+					<div id="tabBox03" class="tab-pane">
+						<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
+						<!-- 건축물대장 테이블리스트 -->
+<div class="unit">
+	<div class="unit_cont bgWhite">
+		<table id="" class="tableStyle gridStyle center">
+			<colgroup>
+				<col style="width:14.28%;">
+				<col style="width:14.28%;">
+				<col style="width:14.28%;">
+				<col style="width:14.28%;">
+				<col style="width:14.28%;">
+				<col style="width:14.28%;">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>대장종류</th>
+					<th>대지위치</th>
+					<th>건축물명칭</th>
+					<th>동명칭 및 번호</th>
+					<th>주용도</th>
+					<th>연면적(㎡)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>총괄표제부</td>
+					<td>서울특별시 송파구 잠실동 44</td>
+					<td>레이크팰리스</td>
+					<td>-</td>
+					<td>공동주택(아파트),제1.2종근린생활시설</td>
+					<td>506,900.68</td>
+				</tr>
+				<tr>
+					<td>집합건축물(주건축물)</td>
+					<td>서울특별시 송파구 잠실동 44</td>
+					<td>레이크팰리스</td>
+					<td>101동</td>
+					<td>공동주택(아파트),제1.2종근린생활시설</td>
+					<td>506,900.68</td>
+				</tr>
+				<tr>
+					<td>집합건축물(주건축물)</td>
+					<td>서울특별시 송파구 잠실동 44</td>
+					<td>레이크팰리스</td>
+					<td>101동</td>
+					<td>공동주택(아파트),제1.2종근린생활시설</td>
+					<td>506,900.68</td>
+				</tr>
+				<tr>
+					<td>집합건축물(주건축물)</td>
+					<td>서울특별시 송파구 잠실동 44</td>
+					<td>레이크팰리스</td>
+					<td>101동</td>
+					<td>공동주택(아파트),제1.2종근린생활시설</td>
+					<td>506,900.68</td>
+				</tr>
+				<tr>
+					<td>집합건축물(주건축물)</td>
+					<td>서울특별시 송파구 잠실동 44</td>
+					<td>레이크팰리스</td>
+					<td>101동</td>
+					<td>공동주택(아파트),제1.2종근린생활시설</td>
+					<td>506,900.68</td>
+				</tr>
+				<tr>
+					<td>집합건축물(주건축물)</td>
+					<td>서울특별시 송파구 잠실동 44</td>
+					<td>레이크팰리스</td>
+					<td>101동</td>
+					<td>공동주택(아파트),제1.2종근린생활시설</td>
+					<td>506,900.68</td>
+				</tr>
+
+				<tr>
+					<td colspan="6" class="center">해당사항없음</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>						
+					</div>
+
+					
+					<!-- ----------------------- -->
+					<!-- 토지이용계획 -->
+					<div id="tabBox04" class="tab-pane">
+						<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
+						<!-- 토지 이용계획 스트 -->
+<!-- 토지 -->
+<div class="unit">
+	<div class="unit_cont bgWhite">
+		<table class="tableStyle borderStyle topBold left">
+			<colgroup>
+				<col style="width:10%;">
+				<col style="width:20%;">
+				<col style="width:10%;">
+				<col style="width:10%;">
+				<col style="width:10%;">
+				<col style="width:15%;">
+				<col style="width:10%;">
+				<col style="width:15%;">
+
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>토지소재지</th>
+					<td>서울특별시 송파구 잠실동</td>
+
+					<th>지번</th>
+					<td>44번지</td>
+
+					<th>지목</th>
+					<td>대</td>
+
+					<th>면적(㎡)</th>
+					<td>122,682</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<table class="tableStyle borderStyle topBold left mgT5">
+			<colgroup>
+				<col style="width:10%;">
+				<col style="width:20%;">
+				<col style="width:30%;">
+				<col style="width:40%;">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th rowspan="6">지역·지구등 지정 여부</th>
+					<th>「국토의 계획 및 이용에 관한 법률」에 따른 지역·지구등</th>
+
+					<td colspan="2">도시지역, 제3종일반주거지역, 아파트지구, 중심미관지구, 도로(접함)</td>
+				</tr>
+				<tr>
+					<th rowspan="5">다른 법령 등에 따른 지역·지구 등</th>
+
+					<td>가축분뇨의 관리 및 이용에 관한 법률</td>
+					<td>가축사육제한구역</td>
+				</tr>
+				<tr>
+					<td rowspan="2">교육환경 보호에 관한 법률</td>
+					<td>교육환경보호구역</td>
+				</tr>
+				<tr>
+					<td>상대보호구역(2016-07-21)</td>
+				</tr>
+				<tr>
+					<td>군사기지 및 군사시설 보호법</td>
+					<td>대공방어협조구역(위탁고도:77-257m)</td>
+				</tr>
+				<tr>
+					<td>시행령 부칙 제 3조에 따른 추가기재 확인내용</td>
+					<td>3m 건축선 지정구역(세부사항은 건축과에 문의)</td>
+				</tr>
+
+				<tr>
+					<th colspan="2">「토지이용규제 기본법 시행령」제9조제4항 각 호에 해당되는 사항</th>
+					<td colspan="2">중점경관관리구역(2016-11-24)(역사도심) [추가기재] 건축법 제2조제1항제11호나목에 따른 도로(도로일부포함)</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- 도면 -->
+<div class="unit">
+	<div class="unit_cont bgWhite">
+		<table class="tableStyle borderStyle topBold center">
+			<colgroup>
+				<col style="">
+				<col style="">
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="center">도면</th>
+					<th class="center">범례</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<img src="img/map_drawing_sample.png" alt="확인도면으로 자세한 사항은 상기 지역지구등 지정여부의 내용 확인" width="419" height="326">
+					</td>
+					<td class="left">
+						<ul class="drawingLegend">
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">도시지역</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">제1종일반주거지역</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">제2종일반주거지역</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">제3종일반주거지역</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">아파트지구</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">공원</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">학교</span>
+							</li>
+							<li>
+								<img src="img/map_drawing_legend_sample.png" />
+								<span class="text">법정동</span>
+							</li>
+						</ul>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>						
+					</div>
+
+					
+					<!-- ----------------------- -->
+					<!-- 개별공시지가 -->
+					<div id="tabBox05" class="tab-pane">
+						<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
+						<!-- 개별공시지가 -->
+<div class="unit">
+	<div class="unit_cont bgWhite">
+		<table id="" class="tableStyle gridStyle center">
+			<colgroup>
+				<col style="width:100px;">
+				<col style="width:;">
+				<col style="width:100px;">
+				<col style="width:120px;">
+				<col style="width:100px;">
+				<col style="width:100px;">
+				<col style="width:15%;">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>가격기준년도</th>
+					<th>토지소재지</th>
+					<th>지번</th>
+					<th>개별공시지가(원)</th>
+					<th>기준일자</th>
+					<th>공시일자</th>
+					<th>비고</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>2017</td>
+					<td>서울특별시 송파구 잠실동</td>
+					<td>0044-0000	</td>
+					<td>9,850,000</td>
+					<td>2017-01</td>
+					<td>2017-05-31</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>2017</td>
+					<td>서울특별시 송파구 잠실동</td>
+					<td>0044-0000	</td>
+					<td>9,850,000</td>
+					<td>2017-01</td>
+					<td>2017-05-31</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>2017</td>
+					<td>서울특별시 송파구 잠실동</td>
+					<td>0044-0000	</td>
+					<td>9,850,000</td>
+					<td>2017-01</td>
+					<td>2017-05-31</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>2017</td>
+					<td>서울특별시 송파구 잠실동</td>
+					<td>0044-0000	</td>
+					<td>9,850,000</td>
+					<td>2017-01</td>
+					<td>2017-05-31</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>2017</td>
+					<td>서울특별시 송파구 잠실동</td>
+					<td>0044-0000	</td>
+					<td>9,850,000</td>
+					<td>2017-01</td>
+					<td>2017-05-31</td>
+					<td></td>
+				</tr>
+
+				<tr>
+					<td colspan="7" class="center">해당사항없음</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>	
+					</div>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+
+
+		<!--
+		<div class="modal-footer">
+			<button type="button" class="btnstyle middle blue" data-dismiss="modal">등록</button>
+			<button type="button" class="btnstyle middle gray" data-dismiss="modal">취소</button>
+		</div>
+		-->
+	</div>
+</div>
