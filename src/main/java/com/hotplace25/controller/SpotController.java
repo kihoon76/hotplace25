@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hotplace25.domain.AjaxVO;
+import com.hotplace25.domain.Consulting;
 import com.hotplace25.domain.FileBucket;
 import com.hotplace25.domain.Maemul;
 import com.hotplace25.service.SpotService;
@@ -136,4 +137,37 @@ public class SpotController {
 		return vo;
 	}
 	
+	@PostMapping("/reg/consulting")
+	@ResponseBody
+	public AjaxVO regConsulting(@RequestBody Consulting consulting) {
+		boolean doRegisted = false;
+		AjaxVO vo = new AjaxVO();
+		
+		//consulting.setAccountId(SessionUtil.getSessionUserId());
+		consulting.setAccountId("khnam");
+		try {
+			doRegisted = spotService.doRegistedConsulting(consulting);
+			if(doRegisted) {
+				vo.setSuccess(false);
+				vo.setErrCode("DUP");
+			}
+		}
+		catch(Exception e) {
+			vo.setSuccess(false);
+			vo.setErrMsg(e.getMessage());
+		}
+		
+		if(!doRegisted) {
+			vo.setSuccess(true);
+			try {
+				spotService.regConsulting(consulting);
+			}
+			catch(Exception e) {
+				vo.setSuccess(false);
+				vo.setErrMsg(e.getMessage());
+			}
+		}
+		
+		return vo;
+	}
 }

@@ -321,7 +321,14 @@
 				}
 			},
 			error: function(jqXHR, textStatus, e) {
-				jqXHR.errCode = ($.parseJSON(jqXHR.responseText)).errCode;
+				//리턴이 html인 요청에서 오류가 발생한 경우
+				if(params.dataType == 'html') {
+					jqXHR.errCode = _err.PAGE_NOT_FOUND;
+				}
+				else {
+					jqXHR.errCode = ($.parseJSON(jqXHR.responseText)).errCode;
+				}
+				
 				if(!params.error || typeof params.error !== 'function') {
 					//Default 동작
 				}
@@ -359,6 +366,7 @@
 	}
 	
 	var _err = {
+		PAGE_NOT_FOUND: '404',
 		DUP_LOGIN: '202', //중복 로그인
 		WRONG_ACCOUNT: '102', //아이디 및 비밀번호
 		JANGAE_GONGJI: '900', //장애공지
@@ -366,7 +374,9 @@
 		JOIN: '600', //회원가입 오류
 		UPLOAD: '601',
 		MAEMUL_REG: '602', //매물등록 오류
-		MAEMUL_DUP: '603', //매물중복등록 오류
+		MAEMUL_DUP: '603', //매물중복등록 오류,
+		CONSULTING_REG: '604', //컨설팅 등록오류
+		CONSULTING_DUP: '605'  //컨설팅 중복오류
 	};
 	
 	hotplace.error = _err;
@@ -405,6 +415,17 @@
 			hotplace.dom.showAlertMsg(function() {
 				hotplace.dom.closeModal();
 			}, '이미 등록된 매물입니다.', {width:'40%'});
+			break;
+		case _err.CONSULTING_REG:
+			hotplace.dom.showAlertMsg(null, '컨설팅요청 등록중 에러가 발생했습니다.', {width:'40%'});
+			break;
+		case _err.CONSULTING_DUP:
+			hotplace.dom.showAlertMsg(function() {
+				hotplace.dom.closeModal();
+			}, '이미 요청된 컨설팅입니다.', {width:'40%'});
+			break;
+		case _err.PAGE_NOT_FOUND:
+			hotplace.dom.showAlertMsg(null, '해당요청이 서버에 존재하지 않습니다.', {width:'50%'});
 			break;
 		case '000' :
 			break;

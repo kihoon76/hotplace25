@@ -19,7 +19,7 @@
 	</insert>
 	
 	<insert id="insertMaemulImages" parameterType="Maemul">
-		insert into [웹].[dbo].[매물등록_이미지](매물번호, 이미지명, 확장자, 이미지1)
+		insert into [웹].[dbo].[매물등록_이미지](매물번호, 이미지명, 확장자, 이미지)
 		values (
 			<foreach collection="files" item="item" separator=",">
 			#{maemulBeonho}, #{item.imageName}, #{item.ext}, #{item.image, typeHandler=org.apache.ibatis.type.ByteArrayTypeHandler}
@@ -33,6 +33,18 @@
 		 where 계정아이디 = #{accountId}
 		   and PNU = #{pnu}
 	</select>
+	
+	<select id="selectRegistedConsulting" parameterType="Consulting" resultType="int">
+		select count(요청번호)
+		  from [웹].[dbo].[컨설팅요청]
+		 where 계정아이디 = #{accountId}
+		   and PNU = #{pnu}
+	</select>
+	
+	<insert id="insertConsulting" parameterType="Consulting">
+		insert into [웹].[dbo].[컨설팅요청](계정아이디, PNU, 이름, 연락처, 이메일, 문의사항, 경도, 위도, 지번주소)
+		values (#{accountId}, #{pnu}, #{name}, #{phone}, #{email}, #{question}, #{lat}, #{lng}, #{address})
+	</insert>
 </mapper>
 <!-- 
 

@@ -432,24 +432,32 @@
 	 * @param {string} name 저장할 template의 키값
 	 * @returns {object} - Handlebars.compile() 결과값
 	 */
-	dom.getTemplate = function(name) {
-		if(_templates[name] === undefined) {
-			var url = 'resources/templates/';
-			
-			hotplace.ajax({
-				url : url + name + '.handlebars',
-				async : false,
-				dataType : 'html',
-				method : 'GET',
-				activeMask : false,
-				success : function(data, textStatus, jqXHR) {
-					_templates[name] = Handlebars.compile(data);
-				},
-				error: function() {
-					throw new Error('html template error')
+	dom.getTemplate = function(name, notUseCache, fn) {
+		if(_templates[name] === undefined || notUseCache) {
+			if(fn) {
+				//fn은 반드시 동기로 처리
+				try {
+					_templates[name] = fn();
 				}
-			});
-			
+				catch(e) {}
+			}
+			else {
+				var url = 'resources/templates/';
+				
+				hotplace.ajax({
+					url : url + name + '.handlebars',
+					async : false,
+					dataType : 'html',
+					method : 'GET',
+					activeMask : false,
+					success : function(data, textStatus, jqXHR) {
+						_templates[name] = Handlebars.compile(data);
+					},
+					error: function() {
+						throw new Error('html template error')
+					}
+				});
+			}
 		}
 		
 		return _templates[name];

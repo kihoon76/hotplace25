@@ -15,12 +15,16 @@
 		
 		_txtMaemulContent = '#txtMaemulContent',
 		_txtMaemulReqName = '#txtMaemulReqName',
-		_txtMaemulReqPhone = '#txtMaemulReqPhone';
+		_txtMaemulReqPhone = '#txtMaemulReqPhone',
+		_fileMaemul = '#maemulFileUp',
+		_dvSpotTojiUseLimit = '#dvSpotTojiUseLimit',
+		_tabTojiUseLimit01 = '#tabTojiUseLimit01';
 	
 	var _pnu, _address, _lng, _lat;
 	
 	//주소검색후 해당지점에 대한 정보선택
 	spot.selectCategory = function(el) {
+		_spotInfo(el);
 		var category = $(el).data('category');
 		switch(category) {
 		case 'SUJI_BOONSEOK':
@@ -29,13 +33,13 @@
 			hotplace.dom.showSpotGwansimRegForm();
 			break;
 		case 'MAEMUL' :
-			_viewMaemulReg(el);
+			_viewMaemulReg();
 			break;
 		case 'CONSULTING':
-			_viewConsulting(el);
+			_viewConsulting();
 			break;
 		case 'TOJI_USE_LIMT' :
-			_viewTojiUseLimit(el);
+			_viewTojiUseLimit();
 			break;
 		}
 	} 
@@ -63,24 +67,23 @@
 		return {
 			pnu: _pnu,
 			addressJibeon: _address,
-			description: $('#txtMaemulContent').val(),
-			phone: $('#txtMaemulReqPhone').val(),
-			register: $('#txtMaemulReqName').val(),
+			description: $(_txtMaemulContent).val(),
+			phone: $(_txtMaemulReqPhone).val(),
+			register: $(_txtMaemulReqName).val(),
 			lng: _lng,
 			lat: _lat
 		};
 	}
 	
-	function _viewMaemulReg(el) {
+	function _viewMaemulReg() {
 		_maemulSelectedFiles = {};
-		_spotInfo(el);
 		hotplace.dom.showSpotMaemulRegForm(null, {address: _address, pnu:_pnu});
 		
 		$(_btnGwansimReg).on('click', function() {
 			_saveMaemulReg(_getMaemulRegParams());
 		});
 		
-		hotplace.upload.init('#maemulFileUp', {
+		hotplace.upload.init(_fileMaemul, {
 			url: hotplace.getContextUrl() + 'spot/reg/maemul',
 			dragdropWidth: '300px',
 			previewHeight: '100px',
@@ -106,13 +109,13 @@
                 	}
 					
 					//이미지
-					hotplace.upload.getFileupEl('#maemulFileUp').reset();
+					hotplace.upload.getFileupEl(_fileMaemul).reset();
 					_maemulSelectedFiles = {};
 					hotplace.processAjaxError(errCode);
 				}
 			},
 			onError: function(files, status, errMsg, pd) {
-				hotplace.upload.getFileupEl('#maemulFileUp').reset();
+				hotplace.upload.getFileupEl(_fileMaemul).reset();
 				_maemulSelectedFiles = {};
 				 hotplace.dom.showAlertMsg(null, errMsg, {width:'40%'});
 			},
@@ -142,7 +145,7 @@
 		if(!_validateMaemul()) return;
 		
 		if( _hasFileInMaemul()) {
-			hotplace.upload.getFileupEl('#maemulFileUp').startUpload();
+			hotplace.upload.getFileupEl(_fileMaemul).startUpload();
 	    }
         else {
         	hotplace.ajax({
@@ -192,37 +195,136 @@
 			 _txtConsultingQuestion]
 		);
 		
-		return isNotEmpty;
+		if(isNotEmpty) {
+			if(hotplace.validation.isValidPhoneM($(_txtConsultingPhoneM))) {
+				if(hotplace.validation.isValidPhoneL($(_txtConsultingPhoneL))) {
+					if(hotplace.validation.isValidEmail($(_txtConsultingEmail), $(_selConsultingEmail).val())) {
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
 	}
 	
-	function _viewConsulting(el) {
-		var $el = $(el).closest('.munuType');
+	function _viewConsulting() {
 		hotplace.dom.showSpotConsultingForm(null, function() {
 			$(_selConsultingPhineF).html(hotplace.util.getPhoneOptions());
 			$(_selConsultingEmail).html(hotplace.util.getEmailOptions());
-		}, {address: $el.data('address'), pnu:$el.data('pnu')});
+		}, {address: _address, pnu:_pnu});
 		
 		$(_btnConsultingReg).on('click', function() {
 			_saveConsultingReg();
 		});
 	}
 	
+	function _getConsultingRegParams() {
+		return {
+			pnu: _pnu,
+			name:$(_txtConsultingName).val(),
+			phone:$(_selConsultingPhineF).val() + '-' + $(_txtConsultingPhoneM).val() + '-' + $(_txtConsultingPhoneL).val(),
+			email:hotplace.util.getEmail($(_txtConsultingEmail), $(_selConsultingEmail)),
+			question:$(_txtConsultingQuestion).val(),
+			lat:_lat,
+			lng:_lng,
+			address:_address
+		}
+	}
+	
 	function _saveConsultingReg() {
 		if(!_validateConsulting()) return;
+		
+		hotplace.ajax({
+    		url: 'spot/reg/consulting',
+    		contentType: 'application/json',
+            data: JSON.stringify(_getConsultingRegParams()),
+            success: function(data, textStatus, jqXHR) {
+                if(!data.success) {
+                	if(data.errCode == 'DUP') {
+                		jqXHR.errCode = hotplace.error.CONSULTING_DUP;
+                	}
+                	else {
+                		jqXHR.errCode = hotplace.error.CONSULTING_REG;
+                	}
+                }
+                else {
+            		hotplace.dom.showAlertMsg(function() {
+                		hotplace.dom.closeModal();
+                	}, '컨설팅 요청이 등록되었습니다.', {width:'40%'});
+                }
+            }
+    	});
 	}
 	
 	/*************************************************************
 	 * 토지이용 규제 현황보기
 	 ************************************************************/
-	function _viewTojiUseLimit(el) {
-		var $el = $(el).closest('.munuType');
+	function _viewTojiUseLimit() {
 		hotplace.dom.showSpotTojiUseLimitForm(null, function() {
+			_getTojiUseLimitTabHtml($(_tabTojiUseLimit01), 1);
+		}, {address: _address, pnu:_pnu});
+		
+		//tab click event handler
+		$(_dvSpotTojiUseLimit + ' .nav-tabs button').on('click', function() {
+			var $tabContentDv = $($(this).attr('href'));
 			
-		}, {address: $el.data('address'), pnu:$el.data('pnu')});
+			if($tabContentDv.hasClass('active')) return;
+			
+			_getTojiUseLimitTabHtml($tabContentDv, $(this).data('tabNum'));
+		});
+	}
+	
+	function _getTojiUseLimitTabHtml($target, tabNum) {
+		var cate;
+		switch(tabNum) {
+		case 1:
+			cate = 'default';
+			break;
+		case 2:
+			cate = 'tojidaejang';
+			break;
+		case 3:
+			cate = 'geonchugdaejang';
+			break;
+		case 4:
+			cate = 'tojiuseplan';
+			break;
+		case 5:
+			cate = 'privategongsi';
+			break;
+		default:
+			throw new Error('올바른 탭정보를 입력하세요..');
+		}
+		
+		var tForm = hotplace.dom.getTemplate('tojiuselimit_tab_' + cate, false, function() {
+			var resultForm = '';
+			
+			hotplace.ajax({
+				url : 'handlebar/tab/tojiuselimit/' + cate,
+				dataType : 'html',
+				async: false,
+				method : 'GET',
+				success : function(data, textStatus, jqXHR) {
+					resultForm = data;
+				},
+				error: function() {
+					throw new Error('html template error')
+				}
+			});
+			
+			return resultForm;
+		});
+		
+		$($target).html(tForm);
 	}
 	
 	//매물등록 연락처
 	hotplace.validation.phone(_txtMaemulReqPhone);
+	
+	//컨설팅 연락처
+	hotplace.validation.phone(_txtConsultingPhoneM);
+	hotplace.validation.phone(_txtConsultingPhoneL);
 	
 }(
 	hotplace.spot = hotplace.spot || {},

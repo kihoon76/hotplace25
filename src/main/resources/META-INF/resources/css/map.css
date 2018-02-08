@@ -329,6 +329,7 @@ body	 {min-height:600px;}
 .mibBody .munuType .link button.mibIcon_02:before {background-position:0 -30px;}
 .mibBody .munuType .link button.mibIcon_03:before {background-position:0 -60px;}
 .mibBody .munuType .link button.mibIcon_04:before {background-position:0 -90px;}
+.mibBody .munuType .link button.mibIcon_05:before {background-position:0 -120px;}
 
 /**/
 .mapInnerBox.type2 {width:400px; box-shadow:0 5px 0px rgba(0,0,0,0.2); background:transparent;}
@@ -394,8 +395,8 @@ body	 {min-height:600px;}
 /*************************************/
 /* GNB  Area */
 .gnbArea {clear:both; text-align:right;}
-.gnbArea h1{display:inline-block; height:100%; width:auto; margin:0 30px 0 10px; vertical-align:middle; float:left; border:0px solid #fff;}
-.gnbArea h1 .logo {display:none; width:150px; height:100%; background:url('../img/gnb_logo.png') no-repeat;}
+.gnbArea h1{display:inline-block; height:100%; width:auto; margin:0 30px 0 7px; vertical-align:middle; float:left; border:0px solid #fff;}
+.gnbArea h1 .logo {display:block; width:150px; height:100%; background:url('../img/gnb_logo.png') no-repeat;}
 
 .gnbArea .dvNoticeTicker {display:inline-block; display:none; width:400px; overflow:hidden; position:relative; vertical-align:middle;}
 .gnbArea .dvNoticeTicker:before {display:inline-block; content:''; position:absolute; left:0; top:0; width:30px; height:30px;
@@ -627,6 +628,30 @@ body	 {min-height:600px;}
 .slideShow-cont {display:none;}
 
 /*************************************/
+/* ajax-upload-dragdrop */
+.ajax-upload-dragdrop {border:1px dashed #999; color:#666; display:block; padding:15px 10px; background:#f5f5f5;}
+
+.ajax-file-upload {font-family:inherit; font-size:14px; padding:0px 20px; line-height:28px; height:30px; margin:0 0 0 0; background:#fff; border:1px solid #666; color:#333; border-radius:2px;  box-shadow:none !important; margin-right:10px;}
+.ajax-file-upload:hover {background:#333; color:#fff; box-shadow:none !important;}
+
+.ajax-file-upload-container {margin:0px 0 0 0;}
+.ajax-file-upload-statusbar {border:1px solid #318de7; margin-top:10px; width:100%; margin:0; border-radius:0px; padding:10px 10px 10px 10px; margin-top:10px;}
+
+.ajax-file-upload-filename {width:auto; height:auto; margin:0 5px 5px 0px; font-weight:500;}
+.ajax-file-upload-filesize {width:50px; height:auto; margin: 0 5px 5px 0px; display: inline-block; vertical-align:middle;}
+
+.ajax-file-upload-progress {margin:5px 0px 5px 0px; position:relative; width:100%; border:1px solid #ddd; background:#f7f7f7; height:8px; padding:0px; border-radius:5px; display:block; color:#fff; overflow:hidden;}
+.ajax-file-upload-bar	   {background-color:#0ba1b5; width:0; height:100%; border-radius:0px; color:#fff; }
+.ajax-file-upload-percent  {display:none; position:absolute; display:inline-block; top:3px; left:48%;}
+
+.ajax-file-upload-red,
+.ajax-file-upload-green {box-shadow:none !important; border-radius:0px; color:#fff; font-family:inherit; font-size:13px; padding:4px 10px; text-shadow:none !important; margin:5px 0px 5px 0px;}
+.ajax-file-upload-red	{background-color:#f54750;}
+.ajax-file-upload-green {background-color:#333;}
+.ajax-file-upload-error {display:block; color:#f54750;}
+.state-hover{border:2px solid #A5A5C7;}
+
+/*************************************/
 /* loginBox */
 .loginBox {border:0px solid #ccc; overflow:hidden; text-align:center; padding:50px 55px 60px;}
 .loginBox .title     {display:block; font-size:24px !important; font-weight:400; color:#000; margin-bottom:30px;}
@@ -705,7 +730,7 @@ body	 {min-height:600px;}
 .dvTooja table td .rdchBox + .rdchBox {margin:0;}
 .dvTooja table td .rdchBox label {font-weight:normal;}
 
-.dvTooja.tabWrap .tab-pane > .unit:nth-of-type(1) > .unit_tit:nth-of-type(1) {margin-top:0;}
+.dvTooja.tabWrap .tab-pane > .unit:nth-of-type(1) > .unit_tit:nth-of-type(1) {}
 .dvTooja.tabWrap .tab-pane .unit {margin-bottom:10px;}
 
 .jangmiToojaHpGrade {}
@@ -764,3 +789,8 @@ body	 {min-height:600px;}
 .drawingLegend {}
 .drawingLegend li {padding:2px 0;}
 .drawingLegend li * {vertical-align:middle;}
+
+
+/*************************************/
+/* dvCateMaemul // 매물등록 */
+.dvCateMaemul {}
