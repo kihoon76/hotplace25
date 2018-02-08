@@ -39,10 +39,14 @@
 		.off('click')
 		.on('click', function() {
 			var menuName = $(this).data('menu');
-			hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
+			_closeMenu(menuName);
 		});
 		
 		return showAfterFn;
+	}
+	
+	function _closeMenu(menuName) {
+		hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
 	}
 	
 	/*****************************************************************************
@@ -222,7 +226,7 @@
 				
 				//menu를 닫는다.
 				//hotplace.dom.hideLnbContent($('#' + hotplace.config.menus.ADDRESS_SEARCH + ' .close'));
-				//_closeMenu(hotplace.config.menus.ADDRESS_SEARCH);
+				_closeMenu(hotplace.config.menus.ADDRESS_SEARCH);
 				hotplace.maps.getMarker(hotplace.maps.MarkerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
 					'click' : function(map, newMarker, newInfoWindow) {
 						 if(newInfoWindow.getMap()) {
