@@ -5,7 +5,690 @@
 	</button>
 </div>
 <div class="bodyArea">
-	<div class="" style="height:800px;">
+	<div class="tabWrap dvTooja">
+		<div class="tab-head">
+			<ul class="nav-tabs">
+				<li class="tabLink active">
+					<button href="#toojaTabBox01" data-toggle="tab" data-othertab="#toojaTabBox01_footer"><span class="text">장기 미집행 도시계획시설</span></button>
+				</li>
+				<li class="tabLink">
+					<button href="#toojaTabBox02" data-toggle="tab" data-othertab="#toojaTabBox02_footer"><span class="text">토지이용규제 해소물건</span></button>
+				</li>
+				<li class="tabLink">
+					<button href="#toojaTabBox03" data-toggle="tab"><span class="text">개발적성 필지 검색</span></button>
+				</li>
+			</ul>
+		</div>
+
+		<div id="dvToojaBox" class="tab-content"> <!-- 해당 부분은 실제ㅔ 컨텐츠를 넣어보고 수정보완함 -->
+
+			<!-- ----------------------- -->
+			<!-- 기본정보 -->
+			<div id="toojaTabBox01" class="tab-pane active">	
+				<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
+				<!-- 장기미집행도시계획시설물건조건 -->
+<div class="unit">							
+	<div class="unit_tit">
+		<span class="sTit color_black">장기미집행도시계획시설물건조건</span>
+		<button href="#slideToggle01" class="slideShow fr stateOn" data-role="slideShow">
+			<em class="on">펼침</em>
+			<em class="off">닫힘</em>
+		</button>
+	</div>
+	<div id="slideToggle01" class="unit_cont bgWhite slideShow-cont" style="display:block;">
+		<table class="tableStyle borderStyle topBold left">
+			<colgroup>
+				<col style="width:15%;">
+				<col style="width:;">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>도시계획<br/>시설
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi0" name="">
+							<label for="chkJagMi0" class="labelCh"><em class="text">도로</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi1" name="">
+							<label for="chkJagMi1" class="labelCh"><em class="text">철도</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi2" name="">
+							<label for="chkJagMi2" class="labelCh"><em class="text">기타교통</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi3" name="">
+							<label for="chkJagMi3" class="labelCh"><em class="text">공원</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi4" name="">
+							<label for="chkJagMi4" class="labelCh"><em class="text">기타공간시설</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi5" name="">
+							<label for="chkJagMi5" class="labelCh"><em class="text">공공문화체육시설</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi6" name="">
+							<label for="chkJagMi6" class="labelCh"><em class="text">방재시설</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi7" name="">
+							<label for="chkJagMi7" class="labelCh"><em class="text">보건위생시설</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi8" name="">
+							<label for="chkJagMi8" class="labelCh"><em class="text">유통공급시설</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi9" name="">
+							<label for="chkJagMi9" class="labelCh"><em class="text">환경기초시설</em></label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>도시계획시설저촉상태
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi10" name="">
+							<label for="chkJagMi10" class="labelCh"><em class="text">전필</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi11" name="">
+							<label for="chkJagMi11" class="labelCh"><em class="text">저촉</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi12" name="">
+							<label for="chkJagMi12" class="labelCh"><em class="text">접함</em></label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>보상편입여부
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi13" name="">
+							<label for="chkJagMi13" class="labelCh"><em class="text">보상</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi14" name="">
+							<label for="chkJagMi14" class="labelCh"><em class="text">편입</em></label>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- 일반조건 -->
+<div class="unit">							
+	<div class="unit_tit">
+		<span class="sTit color_black">일반조건</span>
+		<button href="#slideToggle02" class="slideShow fr" data-role="slideShow">
+			<em class="on">펼침</em>
+			<em class="off">닫힘</em>
+		</button>
+	</div>
+	<div id="slideToggle02" class="unit_cont bgWhite slideShow-cont">
+		<table class="tableStyle borderStyle topBold left">
+			<colgroup>
+				<col style="width:15%;">
+				<col style="width:;">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>지역
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi15" name="">
+							<label for="chkJagMi15" class="labelCh"><em class="text">서울특별시</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi16" name="">
+							<label for="chkJagMi16" class="labelCh"><em class="text">부산광역시</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi17" name="">
+							<label for="chkJagMi17" class="labelCh"><em class="text">대구광역시</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi18" name="">
+							<label for="chkJagMi18" class="labelCh"><em class="text">인천광역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi19" name="">
+							<label for="chkJagMi19" class="labelCh"><em class="text">광주광역시</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi20" name="">
+							<label for="chkJagMi20" class="labelCh"><em class="text">대전광역시</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi21" name="">
+							<label for="chkJagMi21" class="labelCh"><em class="text">울산광역시</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi22" name="">
+							<label for="chkJagMi22" class="labelCh"><em class="text">세종특별자치시</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi23" name="">
+							<label for="chkJagMi23" class="labelCh"><em class="text">경기도</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi24" name="">
+							<label for="chkJagMi24" class="labelCh"><em class="text">강원도</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi25" name="">
+							<label for="chkJagMi25" class="labelCh"><em class="text">충청북도</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi26" name="">
+							<label for="chkJagMi26" class="labelCh"><em class="text">충청남도</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi27" name="">
+							<label for="chkJagMi27" class="labelCh"><em class="text">전라북도</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi28" name="">
+							<label for="chkJagMi28" class="labelCh"><em class="text">전라남도</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi29" name="">
+							<label for="chkJagMi29" class="labelCh"><em class="text">경상북도</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi30" name="">
+							<label for="chkJagMi30" class="labelCh"><em class="text">경상남도</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi31" name="">
+							<label for="chkJagMi31" class="labelCh"><em class="text">제주도</em></label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>지목
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi32" name="">
+							<label for="chkJagMi32" class="labelCh"><em class="text">전</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi33" name="">
+							<label for="chkJagMi33" class="labelCh"><em class="text">임야</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi34" name="">
+							<label for="chkJagMi34" class="labelCh"><em class="text">공장</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi35" name="">
+							<label for="chkJagMi35" class="labelCh"><em class="text">도로</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi36" name="">
+							<label for="chkJagMi36" class="labelCh"><em class="text">구거</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi37" name="">
+							<label for="chkJagMi37" class="labelCh"><em class="text">공원</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi38" name="">
+							<label for="chkJagMi38" class="labelCh"><em class="text">사적지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi39" name="">
+							<label for="chkJagMi39" class="labelCh"><em class="text">답</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi40" name="">
+							<label for="chkJagMi40" class="labelCh"><em class="text">광천지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi41" name="">
+							<label for="chkJagMi41" class="labelCh"><em class="text">학교</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi42" name="">
+							<label for="chkJagMi42" class="labelCh"><em class="text">유지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi43" name="">
+							<label for="chkJagMi43" class="labelCh"><em class="text">체육용지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi44" name="">
+							<label for="chkJagMi44" class="labelCh"><em class="text">묘지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi45" name="">
+							<label for="chkJagMi45" class="labelCh"><em class="text">과수원</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi46" name="">
+							<label for="chkJagMi46" class="labelCh"><em class="text">염전</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi47" name="">
+							<label for="chkJagMi47" class="labelCh"><em class="text">주차장</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi48" name="">
+							<label for="chkJagMi48" class="labelCh"><em class="text">제방</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi49" name="">
+							<label for="chkJagMi49" class="labelCh"><em class="text">양어장</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi50" name="">
+							<label for="chkJagMi50" class="labelCh"><em class="text">유원지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi51" name="">
+							<label for="chkJagMi51" class="labelCh"><em class="text">잡종지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi52" name="">
+							<label for="chkJagMi52" class="labelCh"><em class="text">목장</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi53" name="">
+							<label for="chkJagMi53" class="labelCh"><em class="text">대</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi54" name="">
+							<label for="chkJagMi54" class="labelCh"><em class="text">주유소</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi55" name="">
+							<label for="chkJagMi55" class="labelCh"><em class="text">하천</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi56" name="">
+							<label for="chkJagMi56" class="labelCh"><em class="text">수도용지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi57" name="">
+							<label for="chkJagMi57" class="labelCh"><em class="text">종교용지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi58" name="">
+							<label for="chkJagMi58" class="labelCh"><em class="text">창고</em></label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>공시지가
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi59" name="">
+							<label for="chkJagMi59" class="labelCh"><em class="text">1,000원 미만</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi60" name="">
+							<label for="chkJagMi60" class="labelCh"><em class="text">1,000원~10,000원</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi61" name="">
+							<label for="chkJagMi61" class="labelCh"><em class="text">10,000원~100,000원</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi62" name="">
+							<label for="chkJagMi62" class="labelCh"><em class="text">100,000원~1,000,000원</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi63" name="">
+							<label for="chkJagMi63" class="labelCh"><em class="text">1천만원 이상</em></label>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+
+<!-- 토지이용규제 -->
+<div class="unit">							
+	<div class="unit_tit">
+		<span class="sTit color_black">토지이용규제</span>
+		<button href="#slideToggle03" class="slideShow fr" data-role="slideShow">
+			<em class="on">펼침</em>
+			<em class="off">닫힘</em>
+		</button>
+	</div>
+	<div id="slideToggle03" class="unit_cont bgWhite slideShow-cont">
+		<table class="tableStyle borderStyle topBold left">
+			<colgroup>
+				<col style="width:15%;">
+				<col style="width:;">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>용도지역
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi64" name="">
+							<label for="chkJagMi64" class="labelCh"><em class="text">주거지역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi65" name="">
+							<label for="chkJagMi65" class="labelCh"><em class="text">상업지역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi66" name="">
+							<label for="chkJagMi66" class="labelCh"><em class="text">공업지역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi67" name="">
+							<label for="chkJagMi67" class="labelCh"><em class="text">녹지지역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi68" name="">
+							<label for="chkJagMi68" class="labelCh"><em class="text">관리지역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi69" name="">
+							<label for="chkJagMi69" class="labelCh"><em class="text">농림지역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi70" name="">
+							<label for="chkJagMi70" class="labelCh"><em class="text">자연환경보전지역</em></label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>용도지구
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi71" name="">
+							<label for="chkJagMi71" class="labelCh"><em class="text">경관지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi72" name="">
+							<label for="chkJagMi72" class="labelCh"><em class="text">미관지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi73" name="">
+							<label for="chkJagMi73" class="labelCh"><em class="text">고도지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi74" name="">
+							<label for="chkJagMi74" class="labelCh"><em class="text">방화지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi75" name="">
+							<label for="chkJagMi75" class="labelCh"><em class="text">방재지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi76" name="">
+							<label for="chkJagMi76" class="labelCh"><em class="text">보존지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi77" name="">
+							<label for="chkJagMi77" class="labelCh"><em class="text">시설보호지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi78" name="">
+							<label for="chkJagMi78" class="labelCh"><em class="text">취락지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi79" name="">
+							<label for="chkJagMi79" class="labelCh"><em class="text">개발진흥지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi80" name="">
+							<label for="chkJagMi80" class="labelCh"><em class="text">특정용도제한지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi81" name="">
+							<label for="chkJagMi81" class="labelCh"><em class="text">위락지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi82" name="">
+							<label for="chkJagMi82" class="labelCh"><em class="text">리모델링지구</em></label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>용도구역
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi83" name="">
+							<label for="chkJagMi83" class="labelCh"><em class="text">시가화조정구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi84" name="">
+							<label for="chkJagMi84" class="labelCh"><em class="text">개발제한구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi85" name="">
+							<label for="chkJagMi85" class="labelCh"><em class="text">도시자연공원구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi86" name="">
+							<label for="chkJagMi86" class="labelCh"><em class="text">수산자원보호구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi87" name="">
+							<label for="chkJagMi87" class="labelCh"><em class="text">입지규제최소구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi88" name="">
+							<label for="chkJagMi88" class="labelCh"><em class="text">지구단위계획구역</em></label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>기타법률상규제
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi89" name="">
+							<label for="chkJagMi89" class="labelCh"><em class="text">보전산지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi90" name="">
+							<label for="chkJagMi90" class="labelCh"><em class="text">준보전산지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi91" name="">
+							<label for="chkJagMi91" class="labelCh"><em class="text">공익용산지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi92" name="">
+							<label for="chkJagMi92" class="labelCh"><em class="text">임업용산지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi93" name="">
+							<label for="chkJagMi93" class="labelCh"><em class="text">농업보호지역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi94" name="">
+							<label for="chkJagMi94" class="labelCh"><em class="text">농업진흥구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi95" name="">
+							<label for="chkJagMi95" class="labelCh"><em class="text">상수원보호구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi96" name="">
+							<label for="chkJagMi96" class="labelCh"><em class="text">배출시설설치제한지역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi97" name="">
+							<label for="chkJagMi97" class="labelCh"><em class="text">수질보전대책지역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi98" name="">
+							<label for="chkJagMi98" class="labelCh"><em class="text">접도구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi99" name="">
+							<label for="chkJagMi99" class="labelCh"><em class="text">공장설립제한구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi100" name="">
+							<label for="chkJagMi100" class="labelCh"><em class="text">비오톱</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi101" name="">
+							<label for="chkJagMi101" class="labelCh"><em class="text">개발행위허가제한지역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi102" name="">
+							<label for="chkJagMi102" class="labelCh"><em class="text">정비구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi103" name="">
+							<label for="chkJagMi103" class="labelCh"><em class="text">재개발구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi104" name="">
+							<label for="chkJagMi104" class="labelCh"><em class="text">뉴타운지구</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi105" name="">
+							<label for="chkJagMi105" class="labelCh"><em class="text">제한보호구역</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi106" name="">
+							<label for="chkJagMi106" class="labelCh"><em class="text">문화재보존영향검토대상구역</em></label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>기타참고사항
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi107" name="">
+							<label for="chkJagMi107" class="labelCh"><em class="text">영농여건불리농지</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi108" name="">
+							<label for="chkJagMi108" class="labelCh"><em class="text">토지거래허가구역</em></label>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- 개발적성필지조건 -->
+<div class="unit">							
+	<div class="unit_tit">
+		<span class="sTit color_black">개발적성필지조건</span>
+		<button href="#slideToggle04" class="slideShow fr" data-role="slideShow">
+			<em class="on">펼침</em>
+			<em class="off">닫힘</em>
+		</button>
+	</div>
+	<div id="slideToggle04" class="unit_cont bgWhite slideShow-cont">
+		<table class="tableStyle borderStyle topBold left">
+			<colgroup>
+				<col style="width:15%;">
+				<col style="width:;">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>HP등급
+					</th><td>
+						<!-- HP등급 Range -->
+						<div id="jangmiToojaHpGrade" class="jangmiToojaHpGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;">
+					</td>
+				</tr>
+				<tr>
+					<th>경사도
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi109" name="">
+							<label for="chkJagMi109" class="labelCh"><em class="text">25도 미만</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi110" name="">
+							<label for="chkJagMi110" class="labelCh"><em class="text">25도 이상</em></label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>접도현황
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi111" name="">
+							<label for="chkJagMi111" class="labelCh"><em class="text">도로접함</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi112" name="">
+							<label for="chkJagMi112" class="labelCh"><em class="text">맹지</em></label>
+						</span>
+
+					</td>
+				</tr>
+				<tr>
+					<th>환경평가등급
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi113" name="">
+							<label for="chkJagMi113" class="labelCh"><em class="text">1등급(투자유의)</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi114" name="">
+							<label for="chkJagMi114" class="labelCh"><em class="text">2등급</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi115" name="">
+							<label for="chkJagMi115" class="labelCh"><em class="text">3등급</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi116" name="">
+							<label for="chkJagMi116" class="labelCh"><em class="text">4등급</em></label>
+						</span>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi117" name="">
+							<label for="chkJagMi117" class="labelCh"><em class="text">5등급(투자유망)</em></label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<th>토지이용규제해소물건
+					</th><td>
+						<span class="rdchBox">
+							<input type="checkbox" id="chkJagMi118" name="">
+							<label for="chkJagMi118" class="labelCh"><em class="text">토지이용규제 해소 필지</em></label>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>						
+			</div>
+
+			
+			<!-- ----------------------- -->
+			<!-- 토지대장 -->
+			<div id="toojaTabBox02" class="tab-pane">
+				<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
+				작업중
+			</div>
+
+
+			<!-- ----------------------- -->
+			<!-- 건축물대장 -->
+			<div id="toojaTabBox03" class="tab-pane">
+				<!-- ssi(Server Side Includes) 가 설정된 웹서버에서만 실행됨// 필요한 방식으로 호출하삼 -->
+				작업중						
+			</div>
+
+		</div>
 	</div>
 </div>
 <div class="footArea">

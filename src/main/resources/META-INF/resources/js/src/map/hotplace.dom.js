@@ -14,7 +14,8 @@
 		_$alrtPopup = $('#alrtPopup'),
 		_$gnbLogin = $('#gnbLogin'),
 		_$gnbLogout = $('#gnbLogout'),
-		_btnAlrt = '#btnAlrt'; //alert 창버튼
+		_btnAlrt = '#btnAlrt',//alert 창버튼
+		_sliderGrp = {}; //slider 관리객체
 	
 	/**
 	 * @private
@@ -38,16 +39,6 @@
 		progressBar: 'progressBar',
 		bouncePulse: 'bouncePulse'
 	};
-	
-	/**
-	 * @private
-	 * @desc 맵 메인화면의 메뉴버튼을 모아놓은 DIV
-	 */
-	var _btnMapDiv = $('#mapButtons');
-	
-	var _lisMapUl = $('#menu > ul');
-	
-	var _rightMenu = $('#rightMenu');
 	
 	/**
 	 * @private
@@ -93,28 +84,6 @@
 	 */
 	var _modalOpenAfterFn = function() {};
 	
-	/**
-	 * @private
-	 * @type {function}
-	 * @desc 메인화면 버튼메뉴 id값 설정 
-	 */
-	var _menuBtnIdCfg = function() {
-		return {
-			'USER_LOGIN' : /*'btnUserLogin'*/'li_menu_login',
-			'HEAT_MAP': 'btnLayerView',
-			'CELL': 'li_menu_cell'
-		};
-	};
-	
-	var _layer = {};
-	
-	/**
-	 * @memberof hotplace.dom
-	 * @function getMenuBtn
-	 * @returns {object} 
-	 * @desc 메인화면 메뉴버튼 아이디값
-	 */
-	dom.getMenuBtn = _menuBtnIdCfg;
 	/**
 	 * @private
 	 * @function _runWaitMe
@@ -239,55 +208,7 @@
 		return _modalCloseAfterFn;
 	}
 	
-	/**
-	 * @memberof hotplace.dom
-	 * @function openLayer
-	 * @param {string} targetId 해당레이어를 나오게 할 버튼 id값
-	 * @param {object} options 맵 벤더이벤트객체
-	 * @param {number} options.top 레이어의 top위치
-	 * @desc 맵의 메뉴버튼을 눌렀을때 보여질 레이어를 생성함
-	 *       생성후 전역변수 _infoWindowForCell에 저장
-	 */
-	dom.openLayer = function(targetId, options) {
-		
-		if(!_layer[targetId]) _layer[targetId] = $('#'+targetId);
-		
-		//var $close = $layer.find('.close');
-		var width = _layer[targetId].outerWidth();
-		var ypos = options.top;
-		var xpos = options.left;
-		var marginLeft = 0;
-		
-		if(xpos==undefined){
-			xpos = '50%';
-			marginLeft = -(width/2);
-		}
-		
-		if(!_layer[targetId].is(':visible')){
-			_layer[targetId].css({'top':ypos+'px','left':xpos,'margin-left':marginLeft})
-		    	  .show();
-		}
-		
-		/*$close.bind('click',function(){
-			if($layer.is(':visible')){
-				$layer.hide();
-			}
-			
-			return false;
-		});*/
-	}
 	
-	/**
-	 * @memberof hotplace.dom
-	 * @function closeLayer
-	 * @param {string} targetId 해당레이어를 사라지게 할 버튼 id값
-	 * @desc 맵의 메뉴버튼을 눌렀을때 보이고 있는 레이어를 감춤
-	 */
-	dom.closeLayer = function(targetId) {
-		if(_layer[targetId].is(':visible')){
-			_layer[targetId].hide();
-		}
-	}
 	
 	/**
 	 * @memberof hotplace.dom
@@ -463,44 +384,6 @@
 		return _templates[name];
 	}
 	
-	/**
-	 * @memberof hotplace.dom
-	 * @function insertFormInmodal
-	 * @param {string} name 서버에서 가져올 handlebars 파일명, 태그(<)로 시작하면 jquery로 dom에 붙인다 
-	 * @returns {object} - Handlebars.compile() 결과값
-	 * @desc 모달창 body부분에 html을 삽입한다
-	 */
-	dom.insertFormInmodal = function(name) {
-		
-		var elContent = $('#dvModalContent');
-		if(($.trim(name)).indexOf('<') == 0) {/*html 직접입력*/
-			elContent.html(name);
-		}
-		else {
-			var tForm = dom.getTemplate(name);
-			elContent.html(tForm());
-		}
-	}
-	
-	
-	
-	/**
-	 * @memberof hotplace.dom
-	 * @function getSelectOptions
-	 * @param {Array.<string[]>} data htnl select option value,text 
-	 * @param {string} title 서버에서 가져올 handlebars 파일명, 태그(<)로 시작하면 jquery로 dom에 붙인다 
-	 * @returns {string} - html select option string
-	 * @desc select box의 option string을 구한다
-	 */
-	dom.getSelectOptions = function(data, title) {
-		var len = data.length;
-		var html = '<option value="">- ' + title + '  -</option>';
-		for(var i=0; i < len; i++) {
-			html += '<option value="' + data[i][0] + '">' + data[i][1] + '</option>'; 
-		}
-		
-		return html;
-	}
 	
 	dom.checkSession = function(cb) {
 		hotplace.ajax({
@@ -514,75 +397,6 @@
 			}
 		});
 	}
-	
-	dom.captureToCanvas = function() {
-	    var nodesToRecover = [];
-	    var nodesToRemove = [];
-	    var targetElem = $('#map');
-	    //var els =  document.getElementsByTagName('svg')[0]
-		//var elsLen = els.length;
-	    var svgElem = targetElem.find('svg\\:svg');
-
-	    svgElem.each(function(index, node) {
-	        var parentNode = node.parentNode;
-	        var svg = parentNode.innerHTML;
-
-	        var canvas = document.createElement('canvas');
-
-	        canvg(canvas, svg);
-
-	        nodesToRecover.push({
-	            parent: parentNode,
-	            child: node
-	        });
-	        parentNode.removeChild(node);
-
-	        nodesToRemove.push({
-	            parent: parentNode,
-	            child: canvas
-	        });
-
-	        parentNode.appendChild(canvas);
-	    });
-	    
-	    hotplace.ajax({
-	    	url: 'sample/naverForm',
-	    	method: 'GET',
-	    	dataType: 'html',
-	    	success: function(data) {
-	    		console.log(data);
-	    		var d = $('#test2');
-	    		d.html(data)
-	    		console.log(d);
-	    		html2canvas(d, {
-	    			allowTaint: true,
-	    			taintTest: false,
-	    			useCORS: true,
-	    			profile: true,
-	    			onrendered: function(canvas) {
-	    				//$('body').append(canvas);
-	    				console.log(canvas)
-	    				var img = canvas.toDataURL('image/png');
-	    				d.html('');
-	    				$('#ii').attr('src', img)
-	    			}
-	    		});
-	    	}
-	    });
-	    
-		/*html2canvas(targetElem, {
-			allowTaint: true,
-			taintTest: false,
-			useCORS: true,
-			profile: true,
-			onrendered: function(canvas) {
-				$('body').append(canvas);
-			}
-		});*/
-		
-	}
-	
-	
 	
 	/**
 	 * @memberof hotplace.dom
@@ -1011,54 +825,9 @@
 		_$modalPopup.modal('hide');
 	}
 	
-	dom.uncheckAll = function(dv) {
-		//view 변경
-		$('#' + dv + ' .checkbox input[type=checkbox]').each(function() {
-			$(this).prop('checked', false);
-		});
+	
+	
 		
-		//상태변경
-		hotplace.maps.setAllOffMarkers();
-	};
-	
-	dom.hideMinimaps = function() {
-		_toggleMinimap('off');
-	}
-	
-	dom.showMinimaps = function() {
-		_toggleMinimap('on');
-	}
-	
-	/*dom.initTimeline = function() {
-		$('.btnTimeview').click(function(){
-			var $this = $(this);
-			
-			var sw = $this.data('switch');
-			
-			if(sw == 'off'){
-				
-				$this.css('backgroundColor','rgb(42, 124, 221)')
-				     .css('color','#fff');
-				$('#dvTimeview').css('width','360px');
-				$this.data('switch', 'on');
-				
-				$('#dvYearRange').show();
-				$('#dvAutoYearRange').show();
-				$('#dvYearRange').rangeSlider('resize');
-			}
-			else{
-				$this.css('backgroundColor','#fff')
-					 .css('color','#333');
-				$('#dvTimeview').css('width','60px');
-				$this.data('switch', 'off');
-				$('#dvYearRange').hide();
-				$('#dvAutoYearRange').hide();
-			}
-		});
-	}*/
-	
-
-	
 	function _setModalMaxHeight($element) {
 		$content = $element.find('.modal-content');
 		var borderWidth   = $content.outerHeight() - $content.innerHeight();
@@ -1098,12 +867,6 @@
 		_alertCloseAfterFn();
 	});
 	
-	//user menu tab
-	$(document).on('click', '.btn-pref .btn', function() {
-		 $('.btn-pref .btn').removeClass('btn-primary').addClass('btn-default');
-		 $(this).removeClass('btn-default').addClass('btn-primary');
-	});
-	
 	//로그인 메시지에서 로그인 화면으로 전환
 	$(document).on('click', '#btnDirectLogin', function() {
 		//이전에 설정된 동작은 마무리한다.
@@ -1118,35 +881,13 @@
 		dom.closeModal();
 	});
 
-	dom.rightMenuUserCallback = function($this) {
-		dom.checkSession(function(hasSession) {
-			dom.showLoginForm((hasSession) ? 'OUT' : 'IN', function() {
-				$this.trigger('click');
-			});
-		});
-	}
-	
-	dom.showEventAlarm = function() {
-		var tForm = dom.getTemplate('alarmForm');
-		$('#dvCenterModalContent').html(tForm({path: hotplace.getContextUrl()}));
-		
-		dom.openCenterModal('', {width: '580px', height: '750px'});
-	}
-	
-	dom.showContactUs = function(closeFn) {
-		var tForm = dom.getTemplate('contactusForm');
-		$('#dvCenterModalContent').html(tForm({path: hotplace.getContextUrl()}));
-		
-		dom.openCenterModal('', {width: '800px', height: '800px'}, closeFn);
-	}
-	
 	dom.showLnbContent = function($element) {
 		var $parent   = $element.parent('li');		
 		var data      = $element.data('name');
 		var isNewDom  = $element.data('new');
 		
 		_bindLnbMenu(data, isNewDom);
-		hotplace.menu.initMenuDom(data);
+		var showAfterFn = hotplace.menu.initMenuDom(data);
 		
 		$parent.addClass('active');
 		$parent.siblings('li').removeClass('active');
@@ -1165,6 +906,8 @@
 
 		var minWidth = 964 - contWidth
 		$('.mapArea').css({'min-width':minWidth});
+		
+		if(showAfterFn) showAfterFn();
 	}
 	
 	// 좌메뉴 컨텐츠 하단 footerEtcText 있을시 해당 bodyArea의 bottom재설정
@@ -1222,6 +965,87 @@
 			$btn.addClass('active');
 		}
 	}
+	
+	dom.listExpandCollapse = function(parentId) {
+		$(parentId + ' button[data-role="slideShow"], a[data-role="slideShow"]').on('click', function() {
+			var $this = $(this);
+			var $target = $($this.attr('href'));
+			
+			if($this.hasClass('stateOn')){
+				$this.removeClass('stateOn');
+				$target.slideUp(100);
+			} 
+			else {
+				$this.addClass('stateOn');
+				$target.slideDown(100);
+
+				_rangeSliderResize($target); // rangeSlider Resize 스크립트
+			}
+		});
+	}
+	
+	dom.initSlider = function(gName, isNew, targetIds, bounds, defaultValues) {
+		if(!isNew && _sliderGrp[gName]) return;
+		_sliderGrp[gName] = [];
+		var len = targetIds.length;
+		
+		for(var i=0; i<len; i++) {
+			_sliderGrp[gName].push($(targetIds[i]));
+			
+			var t = $(targetIds[i]);
+			
+			_sliderGrp[gName][_sliderGrp[gName].length - 1].rangeSlider({
+				  bounds: bounds || {min: -10, max: -1},
+				  step: 1,
+				  defaultValues: defaultValues || {min:-4, max:-1},
+				  formatter: function(val) {
+					  //console.log(val)
+					  return Math.abs(val) + '등급';
+				  }
+			});
+			
+			_sliderGrp[gName][_sliderGrp[gName].length - 1].bind('valuesChanged', function(e, data) {
+				var id = e.currentTarget.id;
+				var values = data.values;
+				
+				/*_hpGradeParam[id].min = Math.abs(values.max);
+				_hpGradeParam[id].max = Math.abs(values.min);*/
+			});
+			
+			/*t.bind('valuesChanged', function(e, data) {
+				var id = e.currentTarget.id;
+				var values = data.values;
+				
+				_hpGradeParam[id].min = Math.abs(values.max);
+				_hpGradeParam[id].max = Math.abs(values.min);
+			});*/
+		}
+		
+		//_sliderGrpInit[gName] = true;
+	}
+	
+	dom.resizeSliderGrp = function(gName) {
+		if(_sliderGrp[gName]) {
+			
+			for(var i=_sliderGrp[gName].length-1; i>=0; i--) {
+				_sliderGrp[gName][i].rangeSlider('resize');
+			}
+		}
+	}
+	
+	function _rangeSliderResize($target) {
+		var length = $target.find('.rangeSlider').length;
+	   
+		if (!length == '0')	{
+			//alert(length + tId);
+			$target.find('.rangeSlider').each(function(index) {
+				var id = $(this).attr('id');
+				$('#' + id).rangeSlider('resize');
+			});
+		}
+	}
+	
+	
 	
 	/*************************************************************
 	 * 브라우저창 사이즈가 변할때 발생하는 이벤트 핸들러
