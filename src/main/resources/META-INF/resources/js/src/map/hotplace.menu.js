@@ -2,10 +2,10 @@
  * @namespace hotplace.menu
  * */
 (function(menu, $) {
-	
-	var _addrSearchMenu = '#addrSearchMenu',
-		_toojaRegionSearchMenu = '#toojaRegionSearchMenu',
-		_heatmapViewMenu = '#heatmapViewMenu',
+	var _menus = hotplace.config.menus;
+	var _addrSearchMenu = '#' + _menus.ADDRESS_SEARCH,
+		_toojaRegionSearchMenu = '#' + _menus.TOOJA_SEARCH,
+		_heatmapViewMenu = '#' + _menus.HEATMAP_SEARCH,
 		_btnMoveAddressToMap = '#btnMoveAddressToMap',
 		_txtAddressSearch = '#txtAddressSearch',
 		_btnAddressSearch = '#btnAddressSearch',
@@ -16,31 +16,33 @@
 	var _selectedAddressObj = null;
 	
 	menu.initMenuDom = function(menuId) {
-		var m = hotplace.config.menus;
 		var showAfterFn;
 		
 		switch(menuId) {
-		case m.ADDRESS_SEARCH: 
+		case _menus.ADDRESS_SEARCH: 
 			showAfterFn = _initAddressDom();
 			break;
-		case m.TOOJA_SEARCH:
+		case _menus.TOOJA_SEARCH:
 			showAfterFn = _initToojaDom();
 			break;
-		case m.GYEONGGONG_SEARCH:
+		case _menus.GYEONGGONG_SEARCH:
 			break;
-		case m.MULGEON_SEARCH:
+		case _menus.MULGEON_SEARCH:
 			break;
-		case m.HEATMAP_SEARCH:
+		case _menus.HEATMAP_SEARCH:
 			showAfterFn = _initHeatmapDom();
 			break;
 		}
 		
+		//메뉴창 닫기버튼(bottom)
+		$('.MENU_CLOSE')
+		.off('click')
+		.on('click', function() {
+			var menuName = $(this).data('menu');
+			hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
+		});
+		
 		return showAfterFn;
-	}
-	
-	//메뉴창 닫기
-	function _closeMenu(menuName) {
-		hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
 	}
 	
 	/*****************************************************************************
@@ -88,17 +90,22 @@
 	function _initAddressDom() {
 		_selectedAddressObj = {};
 		
-		$(document).off('change', '.ADDR_RDO', _eventHandlerAddrRdo)
-				   .on('change', '.ADDR_RDO', _eventHandlerAddrRdo);
+		$(document)
+		.off('change', '.ADDR_RDO', _eventHandlerAddrRdo)
+		.on('change', '.ADDR_RDO', _eventHandlerAddrRdo);
 		
-		$(_txtAddressSearch).on('keydown', function(e) {
+		$(_txtAddressSearch)
+		.off('keydown')
+		.on('keydown', function(e) {
 			if (e.which == 13) {
 				var txt = e.target.value;
 				$(_btnAddressSearch).trigger('click', $.trim(txt)); 
 		    }
 		});
 		
-		$(_btnAddressSearch).on('click', function(e, arg) {
+		$(_btnAddressSearch)
+		.off('click')
+		.on('click', function(e, arg) {
 			if(arg == undefined) {
 				arg = $.trim($(_txtAddressSearch).val());
 			}
@@ -181,7 +188,9 @@
 			}
 		});
 		
-		$(_btnMoveAddressToMap).on('click', function(e, arg) {
+		$(_btnMoveAddressToMap)
+		.off('click')
+		.on('click', function(e, arg) {
 			
 			if(!arg && !_selectedAddressObj.pnu) return;
 			
@@ -213,7 +222,7 @@
 				
 				//menu를 닫는다.
 				//hotplace.dom.hideLnbContent($('#' + hotplace.config.menus.ADDRESS_SEARCH + ' .close'));
-				_closeMenu(hotplace.config.menus.ADDRESS_SEARCH);
+				//_closeMenu(hotplace.config.menus.ADDRESS_SEARCH);
 				hotplace.maps.getMarker(hotplace.maps.MarkerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
 					'click' : function(map, newMarker, newInfoWindow) {
 						 if(newInfoWindow.getMap()) {
@@ -252,13 +261,32 @@
 	/*****************************************************************************
 	 * 투자유망지역 검색
 	 ****************************************************************************/
-	//_sliderInit('gyeonggong', ['hopefulToojaHpGrade', 'environmentPyeonggaGrade']);
 	var _jangmiToojaHpGrade = '#jangmiToojaHpGrade';
 	
 	//함수리턴 
 	function _initToojaDom() {
 		hotplace.dom.listExpandCollapse(_toojaRegionSearchMenu);
 		hotplace.dom.initSlider(_toojaRegionSearchMenu, false, [_jangmiToojaHpGrade]);
+		
+		/************************************
+		 * 탭 클릭 이벤트
+		 * 다른매뉴로 갔다왔을때 jQuery range slider 사라지는것 방지
+		 * [재연]
+		 * 0. 브라우저 새로고침
+		 * 1. 투자유망 지역 검색메뉴 open
+		 * 2. 개발적성필지 조건을 펼침
+		 * 3. 토지이용규제 해소물건탭 활성화
+		 * 4. 주소검색 메뉴 오픈
+		 * 5. 다시 투자유망 지역검색 메뉴 오픈
+		 * 6. 장기 미집행 도시계획시설 탭 활성화
+		 * [결과] jQuery range slider 사라짐
+		 ***********************************/
+		$(_toojaRegionSearchMenu + ' button[data-toggle="tab"]')
+		.off('shown.bs.tab')
+		.on('shown.bs.tab', function (e) {
+			hotplace.dom.resizeSliderGrp(_toojaRegionSearchMenu);
+		});
+		
 		return function() {
 			//반드시 메뉴 content가 show된후에 호출되어 져야 함
 			hotplace.dom.resizeSliderGrp(_toojaRegionSearchMenu);
@@ -296,21 +324,27 @@
 	
 	function _initHeatmapDom() {
 		//히트맵보기
-		$(_btnHeatmapShow).on('click', function() {
+		$(_btnHeatmapShow)
+		.off('click')
+		.on('click', function() {
 			_heatmapOn(true);
 			$(this).hide();
 			$(_btnHeatmapHide).show();
 		});
 		
 		//히트맵끄기
-		$(_btnHeatmapHide).on('click', function() {
+		$(_btnHeatmapHide)
+		.off('click')
+		.on('click', function() {
 			_heatmapOn(false);
 			_startHeatmap('OFF');
 			$(this).hide();
 			$(_btnHeatmapShow).show();
 		});
 		
-		$(_heatmapViewMenu + ' input[name=hitmap]').on('change', function(e, isTrigger) {
+		$(_heatmapViewMenu + ' input[name=hitmap]')
+		.off('change')
+		.on('change', function(e, isTrigger) {
 			//var cellType = 'OFF';
 			_closeMenu(hotplace.config.menus.HEATMAP_SEARCH);
 			//setTimeout(function() {}, 500);

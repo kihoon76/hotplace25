@@ -932,7 +932,7 @@
 		}
 		
 		var tForm = dom.getTemplate(dir + menuName);
-		$('#' + menuName).html(tForm());
+		$('#' + menuName).html(tForm({menuName: menuName}));
 	}
 	
 	dom.hideLnbContent = function($obj) {
@@ -967,7 +967,9 @@
 	}
 	
 	dom.listExpandCollapse = function(parentId) {
-		$(parentId + ' button[data-role="slideShow"], a[data-role="slideShow"]').on('click', function() {
+		$(parentId + ' button[data-role="slideShow"], a[data-role="slideShow"]')
+		.off('click')
+		.on('click', function() {
 			var $this = $(this);
 			var $target = $($this.attr('href'));
 			
