@@ -15,6 +15,7 @@
 		_$gnbLogin = $('#gnbLogin'),
 		_$gnbLogout = $('#gnbLogout'),
 		_btnAlrt = '#btnAlrt',//alert 창버튼
+		_dvContextMenu = '#dvContextMenu',
 		_sliderGrp = {}; //slider 관리객체
 	
 	/**
@@ -1035,6 +1036,10 @@
 		}
 	}
 	
+	dom.hideContextMenu = function() {
+		$(_dvContextMenu).hide();
+	}
+	
 	function _rangeSliderResize($target) {
 		var length = $target.find('.rangeSlider').length;
 	   
@@ -1048,7 +1053,6 @@
 	}
 	
 	
-	
 	/*************************************************************
 	 * 브라우저창 사이즈가 변할때 발생하는 이벤트 핸들러
 	 * hotplace.streetview.resize : 거리뷰의 파노라마 사이즈를 변경함
@@ -1058,6 +1062,10 @@
 			setModalMaxHeight($('.modal.in'));
 		}*/
 		hotplace.streetview.resize();
+	});
+	
+	$(window).contextmenu(function(e) {
+		return false;
 	});
 	
 }(

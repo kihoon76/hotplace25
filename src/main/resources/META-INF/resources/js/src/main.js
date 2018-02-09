@@ -108,10 +108,10 @@ $(document).ready(function() {
 			hotplace.dom.addBodyAllMask();
 			
 			setTimeout(function() {
-				//hotplace.maps.showMarkers();
+				hotplace.maps.showMarkers();
 				hotplace.maps.showCellLayer();
 				hotplace.dom.removeBodyAllMask();
-				_enableMenu(level, hotplace.config.salesViewLevel, $_lnbMulgeon, $('#' + hotplace.config.menus.MULGEON_SEARCH + ' .close'));
+				_enableMenu(level, hotplace.config.mulgeonViewLevel, $_lnbMulgeon, $('#' + hotplace.config.menus.MULGEON_SEARCH + ' .close'));
 			},500);
 		},
 		'zoom_start' : function(map, level) {
@@ -119,6 +119,7 @@ $(document).ready(function() {
 			//hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.RADIUS_SEARCH);
 			hotplace.maps.destroyAllMarkerWindow();
 			hotplace.database.initLevel(level);
+			hotplace.dom.hideContextMenu();
 		},
 		'dragend' : function(map, bnds) {
 			//cell과 marker가 동시에 켜져있을 경우 
@@ -150,6 +151,21 @@ $(document).ready(function() {
 				hotplace.streetview.startPanorama(map, latlng);
 			}
 			
+			
+		},
+		'mousedown': function() {
+			hotplace.dom.hideContextMenu();
+		},
+		'rightclick': function(map, pe) {
+			
+			map.getPanes().overlayLayer.appendChild($('#dvContextMenu')[0]);
+			
+			$('#dvContextMenu')
+			.css('left', pe.offset.x)
+			.css('top', pe.offset.y)
+			.show();
+		
+
 		},
 		'panning' : function() {
 			console.log('panning');

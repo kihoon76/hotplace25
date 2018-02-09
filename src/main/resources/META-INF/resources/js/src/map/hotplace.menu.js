@@ -5,13 +5,8 @@
 	var _menus = hotplace.config.menus;
 	var _addrSearchMenu = '#' + _menus.ADDRESS_SEARCH,
 		_toojaRegionSearchMenu = '#' + _menus.TOOJA_SEARCH,
-		_heatmapViewMenu = '#' + _menus.HEATMAP_SEARCH,
-		_btnMoveAddressToMap = '#btnMoveAddressToMap',
-		_txtAddressSearch = '#txtAddressSearch',
-		_btnAddressSearch = '#btnAddressSearch',
-		_btnHeatmapShow = '#btnHeatmapShow',
-		_btnHeatmapHide = '#btnHeatmapHide';
-		
+		_mulgeonViewMenu = '#' + _menus.MULGEON_VIEW,
+		_heatmapViewMenu = '#' + _menus.HEATMAP_VIEW;
 		
 	var _selectedAddressObj = null;
 	
@@ -27,9 +22,10 @@
 			break;
 		case _menus.GYEONGGONG_SEARCH:
 			break;
-		case _menus.MULGEON_SEARCH:
+		case _menus.MULGEON_VIEW:
+			showAfterFn = _initMulgeonDom();
 			break;
-		case _menus.HEATMAP_SEARCH:
+		case _menus.HEATMAP_VIEW:
 			showAfterFn = _initHeatmapDom();
 			break;
 		}
@@ -52,6 +48,10 @@
 	/*****************************************************************************
 	 * 주소검색
 	 ****************************************************************************/
+	var _btnMoveAddressToMap = '#btnMoveAddressToMap',
+		_txtAddressSearch = '#txtAddressSearch',
+		_btnAddressSearch = '#btnAddressSearch';
+	
 	//주소검색 후 라디오버튼 선택
 	function _eventHandlerAddrRdo() {
 		_selectedAddressObj.pnu = $(this).data('pnu');
@@ -226,7 +226,7 @@
 				
 				//menu를 닫는다.
 				//hotplace.dom.hideLnbContent($('#' + hotplace.config.menus.ADDRESS_SEARCH + ' .close'));
-				_closeMenu(hotplace.config.menus.ADDRESS_SEARCH);
+				_closeMenu(_menus.ADDRESS_SEARCH);
 				hotplace.maps.getMarker(hotplace.maps.MarkerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
 					'click' : function(map, newMarker, newInfoWindow) {
 						 if(newInfoWindow.getMap()) {
@@ -292,15 +292,76 @@
 		});
 		
 		return function() {
-			//반드시 메뉴 content가 show된후에 호출되어 져야 함
+			//반드시 메뉴 content가 show된후에 호출되어져야 함
 			hotplace.dom.resizeSliderGrp(_toojaRegionSearchMenu);
 		}
 	}
+	/*****************************************************************************
+	 * 물건보기 검색
+	 ****************************************************************************/
+	var _btnViewMulgeon = '#btnViewMulgeon';
 	
+	function _initMulgeonDom() {
+		$(_btnViewMulgeon)
+		.off('click')
+		.on('click', function() {
+			var obj = {}
+			$(_mulgeonViewMenu + ' input[type="checkbox"]:not(:disabled)').each(function() {
+				var type = $(this).data('value');
+				obj[type] = $(this).prop('checked') ? 1 : 0;
+			})
+			.promise()
+			.done(function() {
+				hotplace.maps.setMarkers(obj);
+				
+				//선택해지된 마커를 지운다.
+				for(var m in obj) {
+					if(obj[m] == 0) {
+						hotplace.maps.destroyMarkerType(m);
+					}
+				}
+				
+				hotplace.maps.showMarkers();
+				
+				_closeMenu(_menus.MULGEON_VIEW);
+			});
+		});
+	}
+	
+	menu.eachMulgeonViewChk = function(fn, excludeDisabled) {
+		var obj;
+		if(fn && $.isFunction(fn)) {
+			var chk = ' input[type="checkbox"]';
+			if(excludeDisabled) chk += ':not(:disabled)';
+			
+			obj = $(_mulgeonViewMenu + chk).each(function() {
+				var $this = $(this);
+				fn($this, $this.prop('checked'), $this.data('value'));
+			});
+		}
+	
+		return obj;
+	}
+	
+	menu.initMulgeonView = function() {
+		menu.eachMulgeonViewChk(function($chk) {
+			$chk.prop('checked', false);
+		});
+		
+		//상태변경
+		hotplace.maps.setAllOffMarkers();
+		
+		//메뉴닫기
+		if($(_mulgeonViewMenu).is(':visible')) {
+			_closeMenu(_menus.MULGEON_VIEW);
+		}
+	};
 	
 	/*****************************************************************************
 	 * 히트맵
 	 ****************************************************************************/
+	var _btnHeatmapShow = '#btnHeatmapShow',
+		_btnHeatmapHide = '#btnHeatmapHide';
 	
 	function _heatmapOn(b_on) {
 		
@@ -350,7 +411,7 @@
 		.off('change')
 		.on('change', function(e, isTrigger) {
 			//var cellType = 'OFF';
-			_closeMenu(hotplace.config.menus.HEATMAP_SEARCH);
+			_closeMenu(hotplace.config.menus.HEATMAP_VIEW);
 			//setTimeout(function() {}, 500);
 			if(isTrigger) {
 				//$('#heatmapOff').prop('checked', true);
@@ -361,6 +422,8 @@
 			}
 		});
 	}
+	
+
 }(
 	hotplace.menu = hotplace.menu || {},
 	jQuery

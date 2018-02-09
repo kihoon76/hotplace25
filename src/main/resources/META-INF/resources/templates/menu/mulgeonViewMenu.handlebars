@@ -1,0 +1,92 @@
+<div class="headArea">
+	<h2>물건 보기</h2>
+	<button type="button" class="close">
+		<i class="ambicon-015_mark_times"></i><span class="hidden">닫기</span>
+	</button>
+</div>
+<div class="bodyArea">
+	<ul class="mulgunList">
+		<li>
+			<span class="rdchBox block">
+				<input type="checkbox" id="mulgeonGyeongmae" data-value="GYEONGMAE">
+				<label for="mulgeonGyeongmae" class="labelCh"><em class="text">경매</em>  [<i class="icon"><img src="resources/img/marker/gyeongmae.png"></i>]</label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="checkbox" id="mulgeonGongmae" data-value="GONGMAE">
+				<label for="mulgeonGongmae" class="labelCh"><em class="text">공매</em> [<i class="icon"><img src="resources/img/marker/gongmae.png"></i>]</label>
+			</span>
+		</li>
+		<!--<li>
+			<span class="rdchBox block">
+				<input type="checkbox" id="mulgun3">
+				<label for="mulgun3" class="labelCh"><em class="text">등록매물</em> [<i class="icon"><img src="resources/img/marker/deunglog.png"></i>]</label>
+			</span>
+		</li>-->
+		<li>
+			<span class="rdchBox block">
+				<input type="checkbox" id="mulgeonBosang" data-value="BOSANG">
+				<label for="mulgeonBosang" class="labelCh"><em class="text">보상물건</em> [<i class="icon"><img src="resources/img/marker/bosang.png"></i>]</label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="checkbox" id="mulgeonPyeonib" data-value="PYEONIB">
+				<label for="mulgeonPyeonib" class="labelCh"><em class="text">편입물건</em> [<i class="icon"><img src="resources/img/marker/pyeonib.png"></i>]</label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="checkbox" id="mulgeonSilgeolae" data-value="SILGEOLAE">
+				<label for="mulgeonSilgeolae" class="labelCh"><em class="text">실거래가</em> [<i class="icon"><img src="resources/img/marker/silgeolae.png"></i>]</label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="checkbox" id="mulgeonAcceptBuilding" data-value="ACCEPT_BUILDING" disabled>
+				<label for="mulgeonAcceptBuilding" class="labelCh"><em class="text">건축허가</em> [<i class="icon"><img src="resources/img/marker/acceptbuilding.png"></i>] [<i class="icon level"><img src="resources/img/level/25m.png"></i>]</label>
+			</span>
+		</li>
+		<li>
+			<span class="rdchBox block">
+				<input type="checkbox" id="mulgun8" disabled>
+				<label for="mulgun8" class="labelCh"><em class="text">영업허가</em></label>
+			</span>
+		</li>
+	</ul>
+	<div class="mulgunListTerm">
+		<span class="tit">[ 기간선택 ]</span>
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="mulgeonPeriod6" name="mulgeon_period" value="6"/>
+				<label for="mulgeonPeriod6" class="labelCh"><em class="text">최근 6개월내</em></label>
+			</span>
+		</li>
+		
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="mulgeonPeriod12" name="mulgeon_period" checked value="12"/>
+				<label for="mulgeonPeriod12" class="labelCh"><em class="text">최근 1년내</em></label>
+			</span>
+		</li>
+		
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="mulgeonPeriod36" name="mulgeon_period" value="36"/>
+				<label for="mulgeonPeriod36" class="labelCh"><em class="text">최근 3년내</em></label>
+			</span>
+		</li>
+		
+		<li>
+			<span class="rdchBox block">
+				<input type="radio" id="mulgeonPeriod60" name="mulgeon_period" value="60"/>
+				<label for="mulgeonPeriod60" class="labelCh"><em class="text">최근 5년내</em></label>
+			</span>
+		</li>
+	</div>
+</div>
+<div class="footArea">
+	<button type="button" class="btnstyle middle blue" id="btnViewMulgeon">물건보기</button>
+	<button type="button" class="btnstyle middle gray MENU_CLOSE" data-menu="{{menuName}}">닫기</button>
+</div>

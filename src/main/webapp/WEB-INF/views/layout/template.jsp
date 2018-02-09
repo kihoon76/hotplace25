@@ -72,7 +72,7 @@
 				<a href="#" class="menu03" data-name="gyeonggongSearchMenu" data-new="true"><i class="icon"></i><span>경•공매 물건 검색</span></a>
 			</li>
 			<li class="disabled MULGEON" data-key="MULGEON">
-				<a href="#" class="menu04" data-name="mulgeonSearchMenu" data-new="true"><i class="icon"></i><span>물건보기</span></a>
+				<a href="#" class="menu04" data-name="mulgeonViewMenu" data-new="false"><i class="icon"></i><span>물건보기</span></a>
 			</li>
 			<li>
 				<a href="#" class="menu05" data-name="heatmapViewMenu" data-new="false"><i class="icon"></i><span>히트맵보기</span></a>
@@ -85,7 +85,7 @@
 		<div id="addrSearchMenu" class="lnbContWrap" style="display:; width:500px;"></div>
 		<div id="toojaRegionSearchMenu" class="lnbContWrap" style="width:600px;"></div>
 		<div id="gyeonggongSearchMenu" class="lnbContWrap"></div>
-		<div id="mulgeonSearchMenu" class="lnbContWrap" style="width:280px;"></div>
+		<div id="mulgeonViewMenu" class="lnbContWrap" style="width:280px;"></div>
 		<div id="heatmapViewMenu" class="lnbContWrap" style="width:280px;"></div>
 	</div>
 	
@@ -110,10 +110,13 @@
 				<div id="dvStreetMini"></div>
 			</div>
 		</div>
+		
+		<div id="dvContextMenu" class="context-menu">
+			<div class="context-menu-head">sdfgsdfgsdfgsfgs</div>
+		</div>
 	</div>
 	
 	<div id="dimScreen"></div>
-	<div id="dvIntro"></div>
 
 	<!-- bootstrap modal 영역 -->
 	<div class="modal" id="modalPopup" tabindex="-1" role="dialog"></div>
@@ -152,10 +155,5 @@
 <script type="text/javascript" src="/resources/js/dist/hotplace-all.min.js"></script>
 </c:if>
 <sitemesh:write property="page.script" />
-<script type="text/javascript">
-	window.onload = function() {
-		 $('#dvIntro').hide();
-	}
-</script>
 </body>
 </html>

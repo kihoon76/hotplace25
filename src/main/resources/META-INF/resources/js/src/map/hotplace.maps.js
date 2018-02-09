@@ -30,7 +30,7 @@
 	 * @private 
 	 * @desc 지원하는 hotplace map 이벤트 목록
 	 */
-	var _events = ['zoom_changed', 'bounds_changed', 'dragend', 'zoom_start', 'click', 'tilesloaded', 'idle', 'panning', 'mouseover', 'mousemove'];
+	var _events = ['zoom_changed', 'bounds_changed', 'dragend', 'zoom_start', 'click', 'tilesloaded', 'idle', 'panning', 'mouseover', 'mousemove', 'mousedown', 'rightclick'];
 	
 	/**
 	 * @private
@@ -863,6 +863,13 @@
 		case 'mousemove':
 			returnObj = {coord: obj.coord, offset: obj.offset};
 			break;
+		case 'rightclick':
+			console.log(obj)
+			returnObj = {coord: obj.coord, offset: obj.offset, e:obj.pointerEvent};
+			break;
+		case 'mousedown':
+			returnObj = {coord: obj.coord, offset: obj.offset};
+			break;
 		}
 		
 		return returnObj;
@@ -1371,12 +1378,12 @@
 	
 	/** 
 	 * @memberof hotplace.maps 
-	 * @function isActiveSalesView 
+	 * @function isActiveMulgeonView 
 	 * @returns {boolean}
 	 * @desc  현재 레벨이 물건보기 활성화 레벨인지 여부
 	 */
-	maps.isActiveSalesView = function() {
-		return _getCurrentLevel() >= hotplace.config.salesViewLevel;
+	maps.isActiveMulgeonView = function() {
+		return _getCurrentLevel() >= hotplace.config.mulgeonViewLevel;
 	}
 	
 	/** 
@@ -2009,7 +2016,43 @@
 	}
 	
 	function _markerLevelLimit() {
-		if(maps.isActiveSalesView()) {
+		if(maps.isActiveMulgeonView()) {
+			hotplace.menu.eachMulgeonViewChk(function($chk, checked, type) {
+				var minLevel = null;
+				var currentLevel = _getCurrentLevel();
+				var prevState = $chk.data('prev');
+				
+				if(type) {
+					minLevel = _markers[type].level;
+					if(minLevel) {
+						if(currentLevel >= minLevel) {
+							$chk.prop('disabled', false);
+							
+							/*if(!checked && prevState == 'on') {
+								$this.prop('checked', true);
+								_markerGroupOnOff[type] = 1;
+							}*/
+						}
+						else {
+							$chk.prop('disabled', true);
+							if(checked) {
+								$chk.prop('checked', false);
+								//$this.data('prev', 'on');
+								_markerGroupOnOff[type] = 0;
+								
+							}
+							else {
+								$chk.data('prev', 'off');
+							}
+						}
+					}
+				} 
+			});
+		}
+	}
+	
+	function _markerLevelLimit2() {
+		if(maps.isActiveMulgeonView()) {
 			$('#dvSalesView input[type="checkbox"]').each(function() {
 				var $this = $(this);
 				var type = $this.data('value');
@@ -2063,7 +2106,7 @@
 		    url = '', stopGrouping = 'Y';
 		
 		//active level 비교
-		if(maps.isActiveSalesView() && activeMarkerCnt > 0) {
+		if(maps.isActiveMulgeonView() && activeMarkerCnt > 0) {
 			//_destroyMarkerType(_markerTypes.GYEONGMAE);
 			_destroyMarkers(true);
 			_setLocationBounds();
@@ -2096,19 +2139,15 @@
 						isMaskTran,
 						function() {
 							//$('#dvSalesView')
-							hotplace.dom.uncheckAll('dvSalesView');
+							//hotplace.menu.uncheckAllMulgeonView();
 						});
 					}(k));
-					
-					
 				}
-				
-				
 			}
 		}
-		else if(!maps.isActiveSalesView()) {
+		else if(!maps.isActiveMulgeonView()) {
 			//활성화 레벨이 아닌데 열려있는 경우 
-			//hotplace.dom.hideMenuList('menu-mulgeon-list');
+			hotplace.menu.initMulgeonView();
 		}
 	}
 	

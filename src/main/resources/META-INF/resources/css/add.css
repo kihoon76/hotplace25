@@ -1,1 +1,3 @@
 .ajax-file-upload-statusbar {margin:10px 0px 0px 0px;}
+.context-menu {width:200px; height:200px; position:absolute; z-index:1; display:none;}
+.context-menu .context-menu-head {background-color:red;}

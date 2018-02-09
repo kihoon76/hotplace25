@@ -100,14 +100,14 @@
     /**
 	 * @memberof hotplace
      * @property {object} config
-     * @property {number} config.salesViewLevel  	물건보기 레벨
+     * @property {number} config.mulgeonViewLevel  	물건보기 레벨
      * @property {number} config.minZoomLevel    	지도 최소 줌레벨
      * @property {number} config.mapDefaultX     	지도 초기 경도
      * @property {number} config.mapDefaultY     	지도 초기 위도
      * @property {number} config.addrSearchPanLevel 주소검색 후 panto 이동시 레벨설정
      */
     hotplace.config = {
-    	salesViewLevel: 8,
+    	mulgeonViewLevel: 8,
     	minZoomLevel: 3,
     	mapDefaultX: 127.9204629,
     	mapDefaultY: 36.0207091,
@@ -119,8 +119,8 @@
     		ADDRESS_SEARCH: 'addrSearchMenu',
     		TOOJA_SEARCH: 'toojaRegionSearchMenu',
     		GYEONGGONG_SEARCH: 'gyeonggongSearchMenu',
-    		MULGEON_SEARCH: 'mulgeonSearchMenu',
-    		HEATMAP_SEARCH: 'heatmapViewMenu'
+    		MULGEON_VIEW: 'mulgeonViewMenu',
+    		HEATMAP_VIEW: 'heatmapViewMenu'
     	}
     }
     
