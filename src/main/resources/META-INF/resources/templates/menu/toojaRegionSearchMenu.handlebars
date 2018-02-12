@@ -15,7 +15,7 @@
 					<button href="#tabTojiUseLimitCancel" data-toggle="tab" data-othertab="#toojaTabBox02_footer"><span class="text">토지이용규제 해소물건</span></button>
 				</li>
 				<li class="tabLink">
-					<button href="#toojaTabBox03" data-toggle="tab"><span class="text">개발적성 필지 검색</span></button>
+					<button href="#tabDevPilji" data-toggle="tab"><span class="text">개발적성 필지 검색</span></button>
 				</li>
 			</ul>
 		</div>
@@ -45,77 +45,35 @@
 							<tr id="itemCityPlanTab01">
 								<th>도시계획<br/>시설</th>
 								<td>
+									{{#each codes.cityPlan as |cityPlan|}}
 									<span class="rdchBox">
-										<input type="checkbox" id="chkJangMi0" name="">
-										<label for="chkJangMi0" class="labelCh"><em class="text">도로</em></label>
+										<input type="checkbox" id="chkJangMiCityPlan{{@index}}" value="{{cityPlan.value}}">
+										<label for="chkJangMiCityPlan{{@index}}" class="labelCh"><em class="text">{{cityPlan.name}}</em></label>
 									</span>
-									<span class="rdchBox">
-										<input type="checkbox" id="chkJangMi1" name="">
-										<label for="chkJangMi1" class="labelCh"><em class="text">철도</em></label>
-									</span>
-									<span class="rdchBox">
-										<input type="checkbox" id="chkJangMi2" name="">
-										<label for="chkJangMi2" class="labelCh"><em class="text">기타교통</em></label>
-									</span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi3" name="">
-                                        <label for="chkJangMi3" class="labelCh"><em class="text">공원</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi4" name="">
-                                        <label for="chkJangMi4" class="labelCh"><em class="text">기타공간시설</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi5" name="">
-                                        <label for="chkJangMi5" class="labelCh"><em class="text">공공문화체육시설</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi6" name="">
-                                        <label for="chkJangMi6" class="labelCh"><em class="text">방재시설</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi7" name="">
-                                        <label for="chkJangMi7" class="labelCh"><em class="text">보건위생시설</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi8" name="">
-                                        <label for="chkJangMi8" class="labelCh"><em class="text">유통공급시설</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi9" name="">
-                                        <label for="chkJangMi9" class="labelCh"><em class="text">환경기초시설</em></label>
-                                    </span>
+									{{/each}}
                                 </td>
                             </tr>
                             <tr id="itemCityPlanStateTab01">
                                 <th>도시계획시설저촉상태</th>
                                 <td>
+                                	{{#each codes.cityPlanState as |cityPlanState|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi10" name="">
-                                        <label for="chkJangMi10" class="labelCh"><em class="text">전필</em></label>
+                                        <input type="checkbox" id="chkJangMiCityPlanState{{@index}}" value="{{cityPlanState.value}}">
+                                        <label for="chkJangMiCityPlanState{{@index}}" class="labelCh"><em class="text">{{cityPlanState.name}}</em></label>
                                     </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi11" name="">
-                                        <label for="chkJangMi11" class="labelCh"><em class="text">저촉</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi12" name="">
-                                        <label for="chkJangMi12" class="labelCh"><em class="text">접함</em></label>
-                                    </span>
+                                    {{/each}}
                                 </td>
                             </tr>
                             <tr id="itemBosangPyeonibTab01">
-                                <th>보상편입여부
-                                </th><td>
+                                <th>보상편입<br/>여부 </th>
+                                <td>
+                                {{#each codes.bosangPyeonib as |bosangPyeonib|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi13" name="">
-                                        <label for="chkJangMi13" class="labelCh"><em class="text">보상</em></label>
+                                        <input type="checkbox" id="chkJangMiBosangPyeonib{{@index}}" value="{{bosangPyeonib.value}}">
+                                        <label for="chkJangMiBosangPyeonib{{@index}}" class="labelCh"><em class="text">{{bosangPyeonib.name}}</em></label>
                                     </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi14" name="">
-                                        <label for="chkJangMi14" class="labelCh"><em class="text">편입</em></label>
-                                    </span>
-                                </td>
+                                 {{/each}}
+                                 </td>   
                             </tr>
                             </tbody>
                         </table>
@@ -141,211 +99,47 @@
                             <tr id="itemJiyeogTab01">
                                 <th>지역</th>
                                 <td>
+                                	{{#each codes.jiyeok as |jiyeok|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi15" name="">
-                                        <label for="chkJangMi15" class="labelCh"><em class="text">서울특별시</em></label>
+                                        <input type="checkbox" id="chkJangMiJiyeok{{@index}}" value="{{jiyeok.value}}">
+                                        <label for="chkJangMiJiyeok{{@index}}" class="labelCh"><em class="text">{{jiyeok.name}}</em></label>
                                     </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi16" name="">
-                                        <label for="chkJangMi16" class="labelCh"><em class="text">부산광역시</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi17" name="">
-                                        <label for="chkJangMi17" class="labelCh"><em class="text">대구광역시</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi18" name="">
-                                        <label for="chkJangMi18" class="labelCh"><em class="text">인천광역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi19" name="">
-                                        <label for="chkJangMi19" class="labelCh"><em class="text">광주광역시</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi20" name="">
-                                        <label for="chkJangMi20" class="labelCh"><em class="text">대전광역시</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi21" name="">
-                                        <label for="chkJangMi21" class="labelCh"><em class="text">울산광역시</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi22" name="">
-                                        <label for="chkJangMi22" class="labelCh"><em class="text">세종특별자치시</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi23" name="">
-                                        <label for="chkJangMi23" class="labelCh"><em class="text">경기도</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi24" name="">
-                                        <label for="chkJangMi24" class="labelCh"><em class="text">강원도</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi25" name="">
-                                        <label for="chkJangMi25" class="labelCh"><em class="text">충청북도</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi26" name="">
-                                        <label for="chkJangMi26" class="labelCh"><em class="text">충청남도</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi27" name="">
-                                        <label for="chkJangMi27" class="labelCh"><em class="text">전라북도</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi28" name="">
-                                        <label for="chkJangMi28" class="labelCh"><em class="text">전라남도</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi29" name="">
-                                        <label for="chkJangMi29" class="labelCh"><em class="text">경상북도</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi30" name="">
-                                        <label for="chkJangMi30" class="labelCh"><em class="text">경상남도</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi31" name="">
-                                        <label for="chkJangMi31" class="labelCh"><em class="text">제주도</em></label>
-                                    </span>
+                                    {{/each}}
                                 </td>
                             </tr>
                             <tr id="itemJimokTab01">
                                 <th>지목</th>
                                 <td>
+                                	{{#each codes.jimok as |jimok|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi32" name="">
-                                        <label for="chkJangMi32" class="labelCh"><em class="text">전</em></label>
+                                        <input type="checkbox" id="chkJangMiJimok{{@index}}" value="{{jimok.value}}">
+                                        <label for="chkJangMiJimok{{@index}}" class="labelCh"><em class="text">{{jimok.name}}</em></label>
                                     </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi33" name="">
-                                        <label for="chkJangMi33" class="labelCh"><em class="text">임야</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi34" name="">
-                                        <label for="chkJangMi34" class="labelCh"><em class="text">공장</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi35" name="">
-                                        <label for="chkJangMi35" class="labelCh"><em class="text">도로</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi36" name="">
-                                        <label for="chkJangMi36" class="labelCh"><em class="text">구거</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi37" name="">
-                                        <label for="chkJangMi37" class="labelCh"><em class="text">공원</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi38" name="">
-                                        <label for="chkJangMi38" class="labelCh"><em class="text">사적지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi39" name="">
-                                        <label for="chkJangMi39" class="labelCh"><em class="text">답</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi40" name="">
-                                        <label for="chkJangMi40" class="labelCh"><em class="text">광천지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi41" name="">
-                                        <label for="chkJangMi41" class="labelCh"><em class="text">학교</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi42" name="">
-                                        <label for="chkJangMi42" class="labelCh"><em class="text">유지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi43" name="">
-                                        <label for="chkJangMi43" class="labelCh"><em class="text">체육용지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi44" name="">
-                                        <label for="chkJangMi44" class="labelCh"><em class="text">묘지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi45" name="">
-                                        <label for="chkJangMi45" class="labelCh"><em class="text">과수원</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi46" name="">
-                                        <label for="chkJangMi46" class="labelCh"><em class="text">염전</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi47" name="">
-                                        <label for="chkJangMi47" class="labelCh"><em class="text">주차장</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi48" name="">
-                                        <label for="chkJangMi48" class="labelCh"><em class="text">제방</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi49" name="">
-                                        <label for="chkJangMi49" class="labelCh"><em class="text">양어장</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi50" name="">
-                                        <label for="chkJangMi50" class="labelCh"><em class="text">유원지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi51" name="">
-                                        <label for="chkJangMi51" class="labelCh"><em class="text">잡종지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi52" name="">
-                                        <label for="chkJangMi52" class="labelCh"><em class="text">목장</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi53" name="">
-                                        <label for="chkJangMi53" class="labelCh"><em class="text">대</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi54" name="">
-                                        <label for="chkJangMi54" class="labelCh"><em class="text">주유소</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi55" name="">
-                                        <label for="chkJangMi55" class="labelCh"><em class="text">하천</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi56" name="">
-                                        <label for="chkJangMi56" class="labelCh"><em class="text">수도용지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi57" name="">
-                                        <label for="chkJangMi57" class="labelCh"><em class="text">종교용지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi58" name="">
-                                        <label for="chkJangMi58" class="labelCh"><em class="text">창고</em></label>
-                                    </span>
+                                 	{{/each}}
                                 </td>
                             </tr>
                             <tr id="itemGongsiTab01">
                                 <th>공시지가</th>
                                 <td>
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi59" name="">
-                                        <label for="chkJangMi59" class="labelCh"><em class="text">1,000원 미만</em></label>
+                                        <input type="checkbox" id="chkJangGongsi0" value="m1000">
+                                        <label for="chkJangGongsi0" class="labelCh"><em class="text">1,000원 미만</em></label>
                                     </span>
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi60" name="">
-                                        <label for="chkJangMi60" class="labelCh"><em class="text">1,000원~10,000원</em></label>
+                                        <input type="checkbox" id="chkJangGongsi1" value="1000|9999">
+                                        <label for="chkJangGongsi1" class="labelCh"><em class="text">1,000원~10,000원</em></label>
                                     </span>
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi61" name="">
-                                        <label for="chkJangMi61" class="labelCh"><em class="text">10,000원~100,000원</em></label>
+                                        <input type="checkbox" id="chkJangGongsi2" value="10000|99999">
+                                        <label for="chkJangGongsi2" class="labelCh"><em class="text">10,000원~100,000원</em></label>
                                     </span>
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi62" name="">
-                                        <label for="chkJangMi62" class="labelCh"><em class="text">100,000원~1,000,000원</em></label>
+                                        <input type="checkbox" id="chkJangGongsi3" value="100000|999999">
+                                        <label for="chkJangGongsi3" class="labelCh"><em class="text">100,000원~1,000,000원</em></label>
                                     </span>
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi63" name="">
-                                        <label for="chkJangMi63" class="labelCh"><em class="text">1천만원 이상</em></label>
+                                        <input type="checkbox" id="chkJangGongsi4" value="M10000000">
+                                        <label for="chkJangGongsi4" class="labelCh"><em class="text">1천만원 이상</em></label>
                                     </span>
                                 </td>
                             </tr>
@@ -373,206 +167,56 @@
                             <tr id="itemYongdoJiyeogTab01">
                                 <th>용도지역</th>
                                 <td>
+                                	{{#each codes.yongdojiyeog as |yongdojiyeog|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi64" name="">
-                                        <label for="chkJangMi64" class="labelCh"><em class="text">주거지역</em></label>
+                                        <input type="checkbox" id="chkJangMiYongdoJiyeog{{@index}}" value="{{yongdojiyeog.value}}">
+                                        <label for="chkJangMiYongdoJiyeog{{@index}}" class="labelCh"><em class="text">{{yongdojiyeog.name}}</em></label>
                                     </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi65" name="">
-                                        <label for="chkJangMi65" class="labelCh"><em class="text">상업지역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi66" name="">
-                                        <label for="chkJangMi66" class="labelCh"><em class="text">공업지역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi67" name="">
-                                        <label for="chkJangMi67" class="labelCh"><em class="text">녹지지역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi68" name="">
-                                        <label for="chkJangMi68" class="labelCh"><em class="text">관리지역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi69" name="">
-                                        <label for="chkJangMi69" class="labelCh"><em class="text">농림지역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi70" name="">
-                                        <label for="chkJangMi70" class="labelCh"><em class="text">자연환경보전지역</em></label>
-                                    </span>
+                                	{{/each}}
                                 </td>
                             </tr>
                             <tr id="itemYongdoJiguTab01">
                                 <th>용도지구</th>
                                 <td>
+                                	{{#each codes.yongdojigu as |yongdojigu|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi71" name="">
-                                        <label for="chkJangMi71" class="labelCh"><em class="text">경관지구</em></label>
+                                        <input type="checkbox" id="chkJangMiYongdoJigu{{@index}}" value="{{yongdojigu.value}}">
+                                        <label for="chkJangMiYongdoJigu{{@index}}" class="labelCh"><em class="text">{{yongdojigu.name}}</em></label>
                                     </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi72" name="">
-                                        <label for="chkJangMi72" class="labelCh"><em class="text">미관지구</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi73" name="">
-                                        <label for="chkJangMi73" class="labelCh"><em class="text">고도지구</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi74" name="">
-                                        <label for="chkJangMi74" class="labelCh"><em class="text">방화지구</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi75" name="">
-                                        <label for="chkJangMi75" class="labelCh"><em class="text">방재지구</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi76" name="">
-                                        <label for="chkJangMi76" class="labelCh"><em class="text">보존지구</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi77" name="">
-                                        <label for="chkJangMi77" class="labelCh"><em class="text">시설보호지구</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi78" name="">
-                                        <label for="chkJangMi78" class="labelCh"><em class="text">취락지구</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi79" name="">
-                                        <label for="chkJangMi79" class="labelCh"><em class="text">개발진흥지구</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi80" name="">
-                                        <label for="chkJangMi80" class="labelCh"><em class="text">특정용도제한지구</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi81" name="">
-                                        <label for="chkJangMi81" class="labelCh"><em class="text">위락지구</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi82" name="">
-                                        <label for="chkJangMi82" class="labelCh"><em class="text">리모델링지구</em></label>
-                                    </span>
+                                   	{{/each}}
                                 </td>
                             </tr>
                             <tr id="itemYongdoGuyeogTab01">
                                 <th>용도구역</th>
                                 <td>
+                                	{{#each codes.yongdoguyeog as |yongdoguyeog|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi83" name="">
-                                        <label for="chkJangMi83" class="labelCh"><em class="text">시가화조정구역</em></label>
+                                        <input type="checkbox" id="chkJangMiYongdoGuyeog{{@index}}" value="{{yongdoguyeog.value}}">
+                                        <label for="chkJangMiYongdoGuyeog{{@index}}" class="labelCh"><em class="text">{{yongdoguyeog.name}}</em></label>
                                     </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi84" name="">
-                                        <label for="chkJangMi84" class="labelCh"><em class="text">개발제한구역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi85" name="">
-                                        <label for="chkJangMi85" class="labelCh"><em class="text">도시자연공원구역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi86" name="">
-                                        <label for="chkJangMi86" class="labelCh"><em class="text">수산자원보호구역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi87" name="">
-                                        <label for="chkJangMi87" class="labelCh"><em class="text">입지규제최소구역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi88" name="">
-                                        <label for="chkJangMi88" class="labelCh"><em class="text">지구단위계획구역</em></label>
-                                    </span>
+                                  	{{/each}}
                                 </td>
                             </tr>
                             <tr id="itemEtcLawLimitTab01">
                                 <th>기타법률상규제</th>
                                 <td>
+                                	{{#each codes.etclawlimit as |etclawlimit|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi89" name="">
-                                        <label for="chkJangMi89" class="labelCh"><em class="text">보전산지</em></label>
+                                        <input type="checkbox" id="chkJangMiEtcLawLimit{{@index}}" value="{{etclawlimit.value}}">
+                                        <label for="chkJangMiEtcLawLimit{{@index}}" class="labelCh"><em class="text">{{etclawlimit.name}}</em></label>
                                     </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi90" name="">
-                                        <label for="chkJangMi90" class="labelCh"><em class="text">준보전산지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi91" name="">
-                                        <label for="chkJangMi91" class="labelCh"><em class="text">공익용산지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi92" name="">
-                                        <label for="chkJangMi92" class="labelCh"><em class="text">임업용산지</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi93" name="">
-                                        <label for="chkJangMi93" class="labelCh"><em class="text">농업보호지역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi94" name="">
-                                        <label for="chkJangMi94" class="labelCh"><em class="text">농업진흥구역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi95" name="">
-                                        <label for="chkJangMi95" class="labelCh"><em class="text">상수원보호구역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi96" name="">
-                                        <label for="chkJangMi96" class="labelCh"><em class="text">배출시설설치제한지역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi97" name="">
-                                        <label for="chkJangMi97" class="labelCh"><em class="text">수질보전대책지역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi98" name="">
-                                        <label for="chkJangMi98" class="labelCh"><em class="text">접도구역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi99" name="">
-                                        <label for="chkJangMi99" class="labelCh"><em class="text">공장설립제한구역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi100" name="">
-                                        <label for="chkJangMi100" class="labelCh"><em class="text">비오톱</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi101" name="">
-                                        <label for="chkJangMi101" class="labelCh"><em class="text">개발행위허가제한지역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi102" name="">
-                                        <label for="chkJangMi102" class="labelCh"><em class="text">정비구역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi103" name="">
-                                        <label for="chkJangMi103" class="labelCh"><em class="text">재개발구역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi104" name="">
-                                        <label for="chkJangMi104" class="labelCh"><em class="text">뉴타운지구</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi105" name="">
-                                        <label for="chkJangMi105" class="labelCh"><em class="text">제한보호구역</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi106" name="">
-                                        <label for="chkJangMi106" class="labelCh"><em class="text">문화재보존영향검토대상구역</em></label>
-                                    </span>
+                                  	{{/each}}
                                 </td>
                             </tr>
                             <tr id="itemEtcChamgoTab01">
-                                <th>기타참고사항
-                                </th><td>
+                                <th>기타참고<br/>사항 </th>
+                                <td>
+                                	{{#each codes.etcchamgo as |etcchamgo|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi107" name="">
-                                        <label for="chkJangMi107" class="labelCh"><em class="text">영농여건불리농지</em></label>
+                                        <input type="checkbox" id="chkJangMiEtcChamgo{{@index}}" values="{{etcchamgo.value}}">
+                                        <label for="chkJangMiEtcChamgo{{@index}}" class="labelCh"><em class="text">{{etcchamgo.name}}</em></label>
                                     </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi108" name="">
-                                        <label for="chkJangMi108" class="labelCh"><em class="text">토지거래허가구역</em></label>
-                                    </span>
+                                   	{{/each}}
                                 </td>
                             </tr>
                             </tbody>
@@ -606,62 +250,59 @@
                             <tr id="itemGyeongsadoTab01">
                                 <th>경사도</th>
                                 <td>
+                                	{{#each codes.gyeongsado as |gyeongsado|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi109" name="">
-                                        <label for="chkJangMi109" class="labelCh"><em class="text">25도 미만</em></label>
+                                        <input type="checkbox" id="chkJangMiGyeongsado{{@index}}" value="{{gyeongsado.value}}">
+                                        <label for="chkJangMiGyeongsado{{@index}}" class="labelCh"><em class="text">{{gyeongsado.name}}</em></label>
                                     </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi110" name="">
-                                        <label for="chkJangMi110" class="labelCh"><em class="text">25도 이상</em></label>
-                                    </span>
+                                    {{/each}}
                                 </td>
                             </tr>
                             <tr id="itemJyeobdoTab01">
                                 <th>접도현황</th>
                                 <td>
+                                	{{#each codes.jyeobdostate as |jyeobdostate|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi111" name="">
-                                        <label for="chkJangMi111" class="labelCh"><em class="text">도로접함</em></label>
+                                        <input type="checkbox" id="chkJangMiJyeobdo{{@index}}" value="{{jyeobdostate.value}}">
+                                        <label for="chkJangMiJyeobdo{{@index}}" class="labelCh"><em class="text">{{jyeobdostate.name}}</em></label>
                                     </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi112" name="">
-                                        <label for="chkJangMi112" class="labelCh"><em class="text">맹지</em></label>
-                                    </span>
-
-                                </td>
+                                    {{/each}}
+                            	</td>
                             </tr>
                             <tr id="itemEnvGradeTab01">
                                 <th>환경평가등급</th>
                                 <td>
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi113" name="">
-                                        <label for="chkJangMi113" class="labelCh"><em class="text">1등급(투자유의)</em></label>
+                                        <input type="checkbox" id="chkJangMi1EnvGrade1" value="1">
+                                        <label for="chkJangMi1EnvGrade1" class="labelCh"><em class="text">1등급(투자유의)</em></label>
                                     </span>
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi114" name="">
-                                        <label for="chkJangMi114" class="labelCh"><em class="text">2등급</em></label>
+                                        <input type="checkbox" id="chkJangMi1EnvGrade2" value="2">
+                                        <label for="chkJangMi1EnvGrade2" class="labelCh"><em class="text">2등급</em></label>
                                     </span>
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi115" name="">
-                                        <label for="chkJangMi115" class="labelCh"><em class="text">3등급</em></label>
+                                        <input type="checkbox" id="chkJangMi1EnvGrade3" value="3">
+                                        <label for="chkJangMi1EnvGrade3" class="labelCh"><em class="text">3등급</em></label>
                                     </span>
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi116" name="">
-                                        <label for="chkJangMi116" class="labelCh"><em class="text">4등급</em></label>
+                                        <input type="checkbox" id="chkJangMi1EnvGrade4" value="4">
+                                        <label for="chkJangMi1EnvGrade4" class="labelCh"><em class="text">4등급</em></label>
                                     </span>
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi117" name="">
-                                        <label for="chkJangMi117" class="labelCh"><em class="text">5등급(투자유망)</em></label>
+                                        <input type="checkbox" id="chkJangMi1EnvGrade5" value="5">
+                                        <label for="chkJangMi1EnvGrade5" class="labelCh"><em class="text">5등급(투자유망)</em></label>
                                     </span>
                                 </td>
                             </tr>
                             <tr id="itemTojiUseLimitCancelTab01">
                                 <th>토지이용규제해소물건</th>
                                 <td>
+                                	{{#each codes.tojiuselimitcancel as |tojiuselimitcancel|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi118" name="">
-                                        <label for="chkJangMi118" class="labelCh"><em class="text">토지이용규제 해소 필지</em></label>
+                                        <input type="checkbox" id="chkJangMiTojiUseLimitCancel0" value="{{tojiuselimitcancel.value}}">
+                                        <label for="chkJangMiTojiUseLimitCancel0" class="labelCh"><em class="text">{{tojiuselimitcancel.name}}</em></label>
                                     </span>
+                                    {{/each}}
                                 </td>
                             </tr>
                             </tbody>
@@ -676,7 +317,7 @@
 			</div>
 
 			<!-- 개발적성 필지검색 -->
-			<div id="toojaTabBox03" class="tab-pane">
+			<div id="tabDevPilji" class="tab-pane">
 				작업중						
 			</div>
 		</div>

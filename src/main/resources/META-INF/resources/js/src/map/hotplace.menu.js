@@ -45,6 +45,28 @@
 		hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
 	}
 	
+	function _getToojaParam(cate) {
+		var param = null;
+		
+		switch(cate) {
+		case _toojaTab.JangmiCityPlan :
+			param = {
+				'cityPlan': [],
+				'cityPlanState' : [],
+				'':[],
+			};
+			break;
+		case _toojaTab.TojiUseLimitCancel :
+			param = {};
+			break;
+		case _toojaTab.DevPilji :
+			param = {};
+			break;
+		}
+		
+		return param;
+	}
+	
 	/*****************************************************************************
 	 * 주소검색
 	 ****************************************************************************/
@@ -265,7 +287,12 @@
 	/*****************************************************************************
 	 * 투자유망지역 검색
 	 ****************************************************************************/
-	var _jangmiToojaHpGrade = '#jangmiToojaHpGrade';
+	var _jangmiToojaHpGrade = '#jangmiToojaHpGrade',
+		_toojaTab = {
+			JangmiCityPlan: 'JANGMI_CITY_PLAN',
+			TojiUseLimitCancel: 'TOJI_USE_LIMIT_CANCEL',
+			DevPilji: 'DEV_PILJI'
+		}
 	
 	//함수리턴 
 	function _initToojaDom() {

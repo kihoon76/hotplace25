@@ -928,6 +928,10 @@
 	
 	function _bindLnbMenu(menuName, isNew) {
 		var dir = 'menu/';
+		var menus = hotplace.config.menus;
+		var param = {
+			menuName: menuName	
+		}
 		//기존폼(dom에서 detach을 안하고 재사용)
 		if(!isNew) {
 			//로딩된 폼이 있는지 검사
@@ -935,7 +939,14 @@
 		}
 		
 		var tForm = dom.getTemplate(dir + menuName);
-		$('#' + menuName).html(tForm({menuName: menuName}));
+		
+		switch(menuName) {
+		case menus.TOOJA_SEARCH:
+			param.codes = hotplace.config.codes;
+			break;
+		}
+		
+		$('#' + menuName).html(tForm(param));
 	}
 	
 	dom.hideLnbContent = function($obj) {
