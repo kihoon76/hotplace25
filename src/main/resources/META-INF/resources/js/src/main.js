@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	var _currLevel = hotplace.config.minZoomLevel,
 		_menusThreshold = {},//menu 특정레벨에서 비활성화
+		_contextCoord = null, //마우스 우클릭시 coord
 		$_lnbMulgeon = $('#lnbArea .MULGEON');   
 	
 	function _enableMenu(level, standardLevel, $targetLi, $btnClose) {
@@ -98,6 +99,13 @@ $(document).ready(function() {
 		});
 	});
 	
+	/***************** context 버튼 (위치 주소보기) ************************/
+	$('#btnContextLocAddress').on('click', function() {
+		var tm128 = naver.maps.TransCoord.fromLatLngToTM128(_contextCoord);
+		hotplace.dom.searchCoordToAddress(_contextCoord, tm128);
+		hotplace.dom.hideContextMenu();
+	});
+	
 	hotplace.maps.init('naver', {
 		X: hotplace.config.mapDefaultX,
 		Y: hotplace.config.mapDefaultY, 
@@ -157,15 +165,13 @@ $(document).ready(function() {
 			hotplace.dom.hideContextMenu();
 		},
 		'rightclick': function(map, pe) {
-			
+			_contextCoord = pe.coord;
 			map.getPanes().overlayLayer.appendChild($('#dvContextMenu')[0]);
 			
 			$('#dvContextMenu')
 			.css('left', pe.offset.x)
 			.css('top', pe.offset.y)
 			.show();
-		
-
 		},
 		'panning' : function() {
 			console.log('panning');

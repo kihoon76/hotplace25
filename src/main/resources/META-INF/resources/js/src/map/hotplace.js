@@ -376,7 +376,9 @@
 		MAEMUL_REG: '602', //매물등록 오류
 		MAEMUL_DUP: '603', //매물중복등록 오류,
 		CONSULTING_REG: '604', //컨설팅 등록오류
-		CONSULTING_DUP: '605'  //컨설팅 중복오류
+		CONSULTING_DUP: '605',  //컨설팅 중복오류
+		COORD: '606' //주소검색 오류
+			
 	};
 	
 	hotplace.error = _err;
@@ -426,6 +428,9 @@
 			break;
 		case _err.PAGE_NOT_FOUND:
 			hotplace.dom.showAlertMsg(null, '해당요청이 서버에 존재하지 않습니다.', {width:'50%'});
+			break;
+		case _err.COORD:
+			hotplace.dom.showAlertMsg(null, '주소찾아오는중 오류가 발생했습니다.', {width:'50%'});
 			break;
 		case '000' :
 			break;

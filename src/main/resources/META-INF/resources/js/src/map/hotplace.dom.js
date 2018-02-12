@@ -16,6 +16,8 @@
 		_$gnbLogout = $('#gnbLogout'),
 		_btnAlrt = '#btnAlrt',//alert 창버튼
 		_dvContextMenu = '#dvContextMenu',
+		_infoWinCoordAddr = null, //context address infowin
+		_markerCoord = null,
 		_sliderGrp = {}; //slider 관리객체
 	
 	/**
@@ -1052,6 +1054,59 @@
 		}
 	}
 	
+	dom.closeCoordWindow = function() {
+		if(_infoWinCoordAddr) _infoWinCoordAddr.close();
+	}
+	
+
+	dom.searchCoordToAddress = function(coord, tm128) {
+		/*if(!_markerCoord) {
+			_markerCoord = new naver.maps.Marker({
+			    position: coord,
+			    map: hotplace.maps.getMap()
+			});
+			
+			var content = '<img src="'+ hotplace.getContextUrl() +'resources/img/marker/' + options.icon + '" alt="" ' +
+	 			  		  'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; ' +
+	 			  		  '-webkit-user-select: none; position: absolute; width: ' + x + 'px; height: ' + y + 'px; left: 0px; top: 0px;">';
+		}*/
+		
+		if(!_infoWinCoordAddr) {
+			_infoWinCoordAddr = new naver.maps.InfoWindow({
+			    anchorSkew: true
+			})
+		}
+		
+		naver.maps.Service.reverseGeocode({
+	        location: tm128,
+	        coordType: naver.maps.Service.CoordType.TM128
+	    }, function(status, response) {
+	        if (status === naver.maps.Service.Status.ERROR) {
+	            return hotplace.processAjaxError(hotplace.error.COORD);
+	        }
+
+	        var items = response.result.items,
+	            htmlAddresses = [];
+
+	        for (var i=0, ii=items.length, item, addrType; i<ii; i++) {
+	            item = items[i];
+	            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]';
+
+	            if(item.isRoadAddress) continue;
+	            
+	            htmlAddresses.push(/*(i+1) +'. '+ */addrType +' '+ item.address + ' <button onclick="hotplace.dom.closeCoordWindow()">X</button>');
+	            //htmlAddresses.push('&nbsp&nbsp&nbsp -> '+ item.point.x +','+ item.point.y);
+	        }
+
+	        _infoWinCoordAddr.setContent([
+	                '<div style="padding:10px;min-width:200px;line-height:150%;">',
+	                htmlAddresses.join('<br />'),
+	                '</div>'
+	            ].join('\n'));
+
+	        _infoWinCoordAddr.open(hotplace.maps.getMap(), coord);
+	    });
+	}
 	
 	/*************************************************************
 	 * 브라우저창 사이즈가 변할때 발생하는 이벤트 핸들러

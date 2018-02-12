@@ -112,7 +112,10 @@
 		</div>
 		
 		<div id="dvContextMenu" class="context-menu">
-			<div class="context-menu-head">sdfgsdfgsdfgsfgs</div>
+			<div class="context-menu-head">div header</div>
+			<div class="context-menu-body">
+				<button id="btnContextLocAddress" class="context-btn">위치 주소보기</button>
+			</div>
 		</div>
 	</div>
 	
@@ -133,7 +136,7 @@
 <script type="text/javascript" src="/resources/vendors/waitMe/waitMe.min.js"></script>
 <script type="text/javascript" src="/resources/jquery-ui/1.12.0/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/bootstrap/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=SgnlyXnzstmDsYDhele7&submodules=panorama"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=SgnlyXnzstmDsYDhele7&submodules=panorama,geocoder"></script>
 <c:if test="${debug eq 'on'}">
 <script type="text/javascript" src="/resources/js/src/map/hotplace.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.maps.js"></script>
