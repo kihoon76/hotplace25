@@ -51,9 +51,21 @@
 		switch(cate) {
 		case _toojaTab.JangmiCityPlan :
 			param = {
-				'cityPlan': [],
-				'cityPlanState' : [],
-				'':[],
+				'cityPlan': _getCheckboxesData('itemCityPlanTab01'),
+				'cityPlanState' : _getCheckboxesData('itemCityPlanStateTab01'),
+				'bosangPyeonib': _getCheckboxesData('itemBosangPyeonibTab01'),
+				'jiyeog':_getCheckboxesData('itemJiyeogTab01'),
+				'jimok':_getCheckboxesData('itemJimokTab01'),
+				'gongsi':_getCheckboxesData('itemGongsiTab01'),
+				'yongdojiyeog':_getCheckboxesData('itemYongdoJiyeogTab01'),
+				'yongdojigu':_getCheckboxesData('itemYongdoJiguTab01'),
+				'yongdoguyeog':_getCheckboxesData('itemYongdoGuyeogTab01'),
+				'etclawlimit':_getCheckboxesData('itemEtcLawLimitTab01'),
+				'etcchamgo':_getCheckboxesData('itemEtcChamgoTab01'),
+				'hpgrade':hotplace.dom.getSliderValues(_toojaRegionSearchMenu, _jangmiHpGrade.substring(1)),
+				'gyeongsado': _getCheckboxesData('itemGyeongsadoTab01'),
+				'jyeobdostate': _getCheckboxesData('itemJyeobdoTab01'),
+				'envgrade':hotplace.dom.getSliderValues(_toojaRegionSearchMenu, _jangmiEnvGrade.substring(1)),
 			};
 			break;
 		case _toojaTab.TojiUseLimitCancel :
@@ -65,6 +77,19 @@
 		}
 		
 		return param;
+	}
+	
+	function _getCheckboxesData(tr) {
+		var r = [];
+		$('#' + tr + ' input[type="checkbox"]:not(:disabled)').each(function() {
+			var $this = $(this);
+			if($this.is(':checked')) {
+				r.push($this.val());
+			}
+			
+		});
+		
+		return r;
 	}
 	
 	/*****************************************************************************
@@ -287,7 +312,10 @@
 	/*****************************************************************************
 	 * 투자유망지역 검색
 	 ****************************************************************************/
-	var _jangmiToojaHpGrade = '#jangmiToojaHpGrade',
+	var _jangmiHpGrade = '#jangmiHpGrade',
+		_jangmiEnvGrade = '#jangmiEnvGrade',
+		_btnToojaSearch = '#btnToojaSearch',
+		_btnToojaSearchPrev = '#btnToojaSearchPrev',
 		_toojaTab = {
 			JangmiCityPlan: 'JANGMI_CITY_PLAN',
 			TojiUseLimitCancel: 'TOJI_USE_LIMIT_CANCEL',
@@ -297,7 +325,13 @@
 	//함수리턴 
 	function _initToojaDom() {
 		hotplace.dom.listExpandCollapse(_toojaRegionSearchMenu);
-		hotplace.dom.initSlider(_toojaRegionSearchMenu, false, [_jangmiToojaHpGrade]);
+		hotplace.dom.initSlider(_toojaRegionSearchMenu, false, [{
+			targetId:_jangmiHpGrade
+		},{
+			targetId: _jangmiEnvGrade,
+			bounds:{min: -5, max: -1},
+			defaultValues:{min: -2, max: -1}
+		}]);
 		
 		/************************************
 		 * 탭 클릭 이벤트
@@ -317,6 +351,21 @@
 		.on('shown.bs.tab', function (e) {
 			hotplace.dom.resizeSliderGrp(_toojaRegionSearchMenu);
 		});
+		
+		$(_btnToojaSearch)
+		.off('click')
+		.on('click', function() {
+			$(this).hide();
+			$(_btnToojaSearchPrev).show();
+		});
+		
+		$(_btnToojaSearchPrev)
+		.off('click')
+		.on('click', function() {
+			$(this).hide();
+			$(_btnToojaSearch).show();
+		});
+		
 		
 		return function() {
 			//반드시 메뉴 content가 show된후에 호출되어져야 함

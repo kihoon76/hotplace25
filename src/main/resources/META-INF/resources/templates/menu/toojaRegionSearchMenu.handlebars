@@ -244,7 +244,7 @@
                                 <th>HP등급</th>
                                 <td>
                                     <!-- HP등급 Range -->
-                                    <div id="jangmiToojaHpGrade" class="jangmiToojaHpGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;">
+                                    <div id="jangmiHpGrade" class="jangmiHpGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;">
                                 </td>
                             </tr>
                             <tr id="itemGyeongsadoTab01">
@@ -270,28 +270,9 @@
                             	</td>
                             </tr>
                             <tr id="itemEnvGradeTab01">
-                                <th>환경평가등급</th>
+                                <th>환경평가<br/>등급<br/><span class="subTh">(1등급:투자유의)</span></th>
                                 <td>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi1EnvGrade1" value="1">
-                                        <label for="chkJangMi1EnvGrade1" class="labelCh"><em class="text">1등급(투자유의)</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi1EnvGrade2" value="2">
-                                        <label for="chkJangMi1EnvGrade2" class="labelCh"><em class="text">2등급</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi1EnvGrade3" value="3">
-                                        <label for="chkJangMi1EnvGrade3" class="labelCh"><em class="text">3등급</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi1EnvGrade4" value="4">
-                                        <label for="chkJangMi1EnvGrade4" class="labelCh"><em class="text">4등급</em></label>
-                                    </span>
-                                    <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMi1EnvGrade5" value="5">
-                                        <label for="chkJangMi1EnvGrade5" class="labelCh"><em class="text">5등급(투자유망)</em></label>
-                                    </span>
+                                	<div id="jangmiEnvGrade" class="jangmiEnvGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;">
                                 </td>
                             </tr>
                             <tr id="itemTojiUseLimitCancelTab01">
@@ -324,6 +305,7 @@
 	</div>
 </div>
 <div class="footArea">
-	<button type="button" class="btnstyle middle blue">검색</button>
+	<button type="button" class="btnstyle middle blue" id="btnToojaSearch">검색</button>
+	<button type="button" class="btnstyle middle blue" id="btnToojaSearchPrev" style="display:none;">이전</button>
 	<button type="button" class="btnstyle middle gray MENU_CLOSE" data-menu="{{menuName}}">닫기</button>
 </div>

@@ -1000,20 +1000,36 @@
 		});
 	}
 	
-	dom.initSlider = function(gName, isNew, targetIds, bounds, defaultValues) {
+	
+	dom.getSliderValues = function(gName, targetId) {
+		if(_sliderGrp[gName]) {
+			var len = _sliderGrp[gName].length;
+			if(len>0) {
+				for(var i=0; i<len; i++) {
+					if(_sliderGrp[gName][i].attr('id') == targetId) {
+						return _sliderGrp[gName][i].rangeSlider("values");
+					}
+				}
+			}
+		}
+		
+		throw new Error('slider가 존재하지 않습니다.');
+	}
+	
+	dom.initSlider = function(gName, isNew, obj) {
 		if(!isNew && _sliderGrp[gName]) return;
 		_sliderGrp[gName] = [];
-		var len = targetIds.length;
+		var len = obj.length;
 		
 		for(var i=0; i<len; i++) {
-			_sliderGrp[gName].push($(targetIds[i]));
+			_sliderGrp[gName].push($(obj[i].targetId));
 			
-			var t = $(targetIds[i]);
+			var t = $(obj[i].targetId);
 			
 			_sliderGrp[gName][_sliderGrp[gName].length - 1].rangeSlider({
-				  bounds: bounds || {min: -10, max: -1},
+				  bounds: obj[i].bounds || {min: -10, max: -1},
 				  step: 1,
-				  defaultValues: defaultValues || {min:-4, max:-1},
+				  defaultValues: obj[i].defaultValues || {min:-4, max:-1},
 				  formatter: function(val) {
 					  //console.log(val)
 					  return Math.abs(val) + '등급';
@@ -1027,17 +1043,7 @@
 				/*_hpGradeParam[id].min = Math.abs(values.max);
 				_hpGradeParam[id].max = Math.abs(values.min);*/
 			});
-			
-			/*t.bind('valuesChanged', function(e, data) {
-				var id = e.currentTarget.id;
-				var values = data.values;
-				
-				_hpGradeParam[id].min = Math.abs(values.max);
-				_hpGradeParam[id].max = Math.abs(values.min);
-			});*/
 		}
-		
-		//_sliderGrpInit[gName] = true;
 	}
 	
 	dom.resizeSliderGrp = function(gName) {
@@ -1053,6 +1059,83 @@
 		$(_dvContextMenu).hide();
 	}
 	
+	dom.createTabulator = function(tableId, param) {
+		var $table = $('#' + tableId);
+		
+		
+		
+		$table.tabulator({
+		    height:826, // set height of table
+		    fitColumns:true, //fit columns to width of table (optional)
+		    columns:_tabulatorColumns.gyeonggong,
+		    rowClick:function(e, row){ //trigger an alert message when the row is clicked
+		       var data = row.getData();
+		       console.log(data)
+		       
+		       if(data.lng == 0) {
+		    	   alert('위경도 정보가 존재하지 않습니다.')
+		    	   return;
+		       }
+		       
+		       var formName, icon = '', callbak = null;
+		       
+		       if(data.gubun == 'G') {
+		    	   formName = 'gyeongmaeForm';
+		    	   icon = hotplace.maps.MarkerTypes.GYEONGMAE;
+		    	   callback = function(map, marker, win) {
+			    	   marker._data = {info:{unu:data.unu}};
+			    	   hotplace.gyeongmae.markerClick(map, marker, win);
+			       }
+		       }
+		       else {
+		    	   formName = 'gongmaeForm';
+		    	   icon = hotplace.maps.MarkerTypes.GONGMAE;
+		       }
+		       
+		       _moveMulgeon(data.lng, data.lat, data.address, formName, callback, icon);
+		    },
+		});
+		
+		$table.tabulator('setData', tbData);
+	}
+	
+	function _tabulatorSelectFilter(arr) {
+		return function(cell, onRendered, success, cancel) {
+			var len = arr.length;
+			
+			var htmlStr = '';
+				
+			for(var i=0; i<len; i++) {
+				htmlStr += '<option value="' + arr[i] + '">' + arr[i] + '</option>';
+				console.log(htmlStr);
+			}
+				
+			var editor = $('<select><option value=""></option>' + htmlStr + '</select>');
+			editor.css({
+				'padding':'3px',
+		        'width':'100%',
+		        'box-sizing':'border-box',
+		    });
+			 
+			//Set value of editor to the current value of the cell
+			editor.val(cell.getValue());
+			  
+			//set focus on the select box when the editor is selected (timeout allows for editor to be added to DOM)
+			onRendered(function(){
+				editor.focus();
+				editor.css('height','100%');
+			});
+			 
+			//when the value has been set, trigger the cell to update
+			editor.on('change blur', function(e){
+				success(editor.val());
+			});
+	
+			//return the editor element
+			return editor;
+		}
+	}
+	
 	function _rangeSliderResize($target) {
 		var length = $target.find('.rangeSlider').length;
 	   
@@ -1060,7 +1143,7 @@
 			//alert(length + tId);
 			$target.find('.rangeSlider').each(function(index) {
 				var id = $(this).attr('id');
-				$('#' + id).rangeSlider('resize');
+				$('#' + id).rangeSlider().resize();
 			});
 		}
 	}
