@@ -9,6 +9,39 @@
 		_heatmapViewMenu = '#' + _menus.HEATMAP_VIEW;
 		
 	var _selectedAddressObj = null;
+	var _tabulatorColumns = {
+		jangmi:[
+		    {title:'연번', field:'num', align:'center', width:70},
+		    {title:'지번주소', field:'jibeon', align:'left', width:170, headerFilter:'input', headerFilterPlaceholder:'주소검색'},
+		    {title:'도시계획시설', field:'cityPlan', align:'center', width:100, headerFilter:true,
+		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.cityPlan)
+		    },
+			{title:'용도지역', field:'yongdoJiyeog', align:'center', width:80, headerFilter:true,
+		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.yongdoJiyeog)
+			},
+			{title:'HP등급', field:'hpGrade', align:'center', width:80},
+//			{title:'경공매 진행 여부', field:'gong', align:'center', width:120},
+			{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter:true,
+				editor:_makeTabulatorFilterFromCode(hotplace.config.codes.bosangPyeonib)
+			},
+//			{title:'등기사건', field:'deunggi', align:'center', width:80},
+			{title:'위도', field:'lat', visible:false},
+			{title:'경도', field:'lng', visible: false}
+		]
+	}
+	
+	function _makeTabulatorFilterFromCode(code) {
+		if(code) {
+			var a = [];
+			for(var k in code) {
+				a.push(code[k]);
+			}
+			
+			return hotplace.dom.getTabulatorSelectFilter(a);
+		}
+		
+		return null;
+	}
 	
 	menu.initMenuDom = function(menuId) {
 		var showAfterFn;
@@ -269,43 +302,8 @@
 			hotplace.maps.destroyMarkerType(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
 			hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
 			
-			hotplace.maps.panToBounds(lat, lng, function() {
-				
-				//menu를 닫는다.
-				//hotplace.dom.hideLnbContent($('#' + hotplace.config.menus.ADDRESS_SEARCH + ' .close'));
-				_closeMenu(_menus.ADDRESS_SEARCH);
-				hotplace.maps.getMarker(hotplace.maps.MarkerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
-					'click' : function(map, newMarker, newInfoWindow) {
-						 if(newInfoWindow.getMap()) {
-							 newInfoWindow.close();
-					     }
-						 else {
-							 newInfoWindow.open(map, newMarker);
-							 hotplace.chart.infoCate('chartInfoCate', datas.params);
-					     }
-					}
-				}, {
-					hasInfoWindow: true,
-					infoWinFormName: 'win/addrSearchWin',
-					winContent: {
-						backgroundColor: 'transparent',
-						borderColor: '#666',
-						borderWidth: 0,
-						anchorSize: new naver.maps.Size(0, 0),
-						anchorSkew: false,  
-						pixelOffset: new naver.maps.Point(0, -12)
-					},
-					radius: 0,
-					datas: {
-						params : {address:address, pnu:pnu, lng:lng, lat:lat}
-					},
-					icon: hotplace.maps.getMarkerIcon(hotplace.maps.MarkerTypes.ADDRESS_SEARCH),
-					size: {
-						x: 26,
-						y: 36
-					}
-				});
-			});
+			
+			hotplace.maps.panToLikeAddressSearch(lat, lng, _menus.ADDRESS_SEARCH, {address:address, pnu:pnu, lng:lng, lat:lat});
 		});
 	}
 	
@@ -316,6 +314,7 @@
 		_jangmiEnvGrade = '#jangmiEnvGrade',
 		_btnToojaSearch = '#btnToojaSearch',
 		_btnToojaSearchPrev = '#btnToojaSearchPrev',
+		_dvToojaTab01Result = '#dvToojaTab01Result',
 		_toojaTab = {
 			JangmiCityPlan: 'JANGMI_CITY_PLAN',
 			TojiUseLimitCancel: 'TOJI_USE_LIMIT_CANCEL',
@@ -355,15 +354,15 @@
 		$(_btnToojaSearch)
 		.off('click')
 		.on('click', function() {
-			$(this).hide();
-			$(_btnToojaSearchPrev).show();
+			/*$(this).hide();
+			$(_btnToojaSearchPrev).show();*/
+			_searchJangmiTab(_dvToojaTab01Result);
 		});
 		
 		$(_btnToojaSearchPrev)
 		.off('click')
 		.on('click', function() {
-			$(this).hide();
-			$(_btnToojaSearch).show();
+			_toggleToojaTab1();
 		});
 		
 		
@@ -371,6 +370,70 @@
 			//반드시 메뉴 content가 show된후에 호출되어져야 함
 			hotplace.dom.resizeSliderGrp(_toojaRegionSearchMenu);
 		}
+	}
+	
+	function _toojaDvToogle($elArr) {
+		if($elArr && $elArr.length == 2) {
+			for(var i=1; i>=0; i--) {
+				$elArr[i]
+				$elArr[i].is(':visible') ? $elArr[i].hide() : $elArr[i].show();
+			}
+		}
+	}
+	
+	function _toggleToojaTab1() {
+		_toojaDvToogle([$(_btnToojaSearch), $(_btnToojaSearchPrev)]);
+		_toojaDvToogle([$('.searchArea'), $('.searchResultArea')]);
+	}
+	
+	function _searchJangmiTab(tableId, fn) {
+		hotplace.ajax({
+			url: 'search/jangmi',
+			data: JSON.stringify(_getToojaParam(_toojaTab.JangmiCityPlan)),
+			contentType: 'application/json; charset=UTF-8',
+			success: function(data, textStatus, jqXHR) {
+				console.log(data);
+				
+				_toggleToojaTab1();
+				hotplace.dom.createTabulator(tableId, {
+				    height:700, // set height of table
+				    fitColumns:true, //fit columns to width of table (optional)
+				    columns:_tabulatorColumns.jangmi,
+				    movableColumns:true,
+				    rowClick:function(e, row){ //trigger an alert message when the row is clicked
+				       var data = row.getData();
+				       console.log(data)
+				       
+				       if(data.lng == 0) {
+				    	   hotplace.processAjaxError(hotplace.error.MISS_LATLNG);
+				    	   return;
+				       }
+				       
+				       
+				       hotplace.maps.panToLikeAddressSearch(data.lat, data.lng, _menus.TOOJA_SEARCH, {address:data.jibeon});
+				       
+				       /*var formName, icon = '', callbak = null;
+				       
+				       if(data.gubun == 'G') {
+				    	   formName = 'gyeongmaeForm';
+				    	   icon = hotplace.maps.MarkerTypes.GYEONGMAE;
+				    	   callback = function(map, marker, win) {
+					    	   marker._data = {info:{unu:data.unu}};
+					    	   hotplace.gyeongmae.markerClick(map, marker, win);
+					       }
+				       }
+				       else {
+				    	   formName = 'gongmaeForm';
+				    	   icon = hotplace.maps.MarkerTypes.GONGMAE;
+				       }
+				       
+				       _moveMulgeon(data.lng, data.lat, data.address, formName, callback, icon);
+				       */
+				    },
+				}, data);
+				if($.isFunction(fn)) fn();
+			}
+		});
 	}
 	/*****************************************************************************
 	 * 물건보기 검색

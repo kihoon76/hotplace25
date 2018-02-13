@@ -83,7 +83,7 @@
 	<!-- menu 컨텐츠 노출영역 -->
 	<div id="lnbCont" class="lnbCont">
 		<div id="addrSearchMenu" class="lnbContWrap" style="display:; width:500px;"></div>
-		<div id="toojaRegionSearchMenu" class="lnbContWrap" style="width:600px;"></div>
+		<div id="toojaRegionSearchMenu" class="lnbContWrap" style="width:750px;"></div>
 		<div id="gyeonggongSearchMenu" class="lnbContWrap"></div>
 		<div id="mulgeonViewMenu" class="lnbContWrap" style="width:280px;"></div>
 		<div id="heatmapViewMenu" class="lnbContWrap" style="width:280px;"></div>
@@ -112,9 +112,10 @@
 		</div>
 		
 		<div id="dvContextMenu" class="context-menu">
-			<div class="context-menu-head">div header</div>
 			<div class="context-menu-body">
-				<button id="btnContextLocAddress" class="context-btn">위치 주소보기</button>
+				<button id="btnContextLocAddress" class="context-btn"><span class="text">위치 주소보기</span></button>
+				<button id="" class="context-btn"><span class="text">내용2</span></button>
+				<button id="" class="context-btn"><span class="text">내용3</span></button>
 			</div>
 		</div>
 	</div>

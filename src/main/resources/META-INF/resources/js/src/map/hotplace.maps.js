@@ -2198,6 +2198,43 @@
 			$btn.addClass('map-button-on');
 		}
 	}
+	
+	maps.panToLikeAddressSearch = function(lat, lng, menuName, winDatas) {
+		maps.panToBounds(lat, lng, function() {
+			if(menuName) hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
+		       
+			hotplace.maps.getMarker(_markerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
+				'click' : function(map, newMarker, newInfoWindow) {
+					 if(newInfoWindow.getMap()) {
+						 newInfoWindow.close();
+				     }
+					 else {
+						 newInfoWindow.open(map, newMarker);
+				     }
+				}
+			}, {
+				hasInfoWindow: true,
+				infoWinFormName: 'win/addrSearchWin',
+				winContent: {
+					backgroundColor: 'transparent',
+					borderColor: '#666',
+					borderWidth: 0,
+					anchorSize: new naver.maps.Size(0, 0),
+					anchorSkew: false,  
+					pixelOffset: new naver.maps.Point(0, -12)
+				},
+				radius: 0,
+				datas: {
+					params : winDatas || {}
+				},
+				icon: hotplace.maps.getMarkerIcon(_markerTypes.ADDRESS_SEARCH),
+				size: {
+					x: 26,
+					y: 36
+				}
+			})
+		});
+	}
 }(
 	hotplace.maps = hotplace.maps || {},
 	jQuery	

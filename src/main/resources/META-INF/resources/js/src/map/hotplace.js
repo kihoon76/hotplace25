@@ -136,13 +136,13 @@
     			'environment':{name:'환경기초시설', value:'환경기초시설'}
     		},
     		cityPlanState: {
-    			'jeonphil':{name:'전필', value:''},
-    			'jeochok':{name:'저촉', value:''},
-    			'jeobham':{name:'접함', value:''}
+    			'jeonphil':{name:'전필', value:'전필'},
+    			'jeochok':{name:'저촉', value:'저촉'},
+    			'jeobham':{name:'접함', value:'접함'}
     		},
     		bosangPyeonib: {
-    			'bosang':{name:'보상', value:''},
-    			'pyeonib':{name:'편입', value:''},
+    			'bosang':{name:'보상', value:'보상'},
+    			'pyeonib':{name:'편입', value:'편입'},
     		},
     		jiyeok: {
     			'seoul':{name:'서울', value:'11'},
@@ -192,7 +192,7 @@
     			'jonggyoyongji':{name:'종교용지', value:'종교용지'},
     			'changgo':{name:'창고', value:'창고'}
     		},
-    		yongdojiyeog: {
+    		yongdoJiyeog: {
     			'jugeo':{name:'주거지역', value:'주거지역'},
     			'sangeob':{name:'상업지역', value:'상업지역'},
     			'gongeob':{name:'공업지역', value:'공업지역'},
@@ -201,7 +201,7 @@
     			'nonglim':{name:'농림지역', value:'농림지역'},
     			'natureBoho':{name:'자연환경보전지역', value:'자연환경보전지역'},
     		},
-    		yongdojigu: {
+    		yongdoJigu: {
     			'gyeonggwan':{name:'경관지구', value:'경관지구'},
     			'migwan':{name:'미관지구', value:'미관지구'},
     			'godo':{name:'고도지구', value:'고도지구'},
@@ -215,7 +215,7 @@
     			'wilag':{name:'위락지구', value:'위락지구'},
     			'remodeling':{name:'리모델링지구', value:'리모델링지구'},
     		},
-    		yongdoguyeog: {
+    		yongdoGuyeog: {
     			'sigahwa':{name:'시가화조정구역', value:'시가화조정구역'},
     			'gaeballimit':{name:'개발제한구역', value:'개발제한구역'},
     			'citynature':{name:'도시자연공원구역', value:'도시자연공원구역'},
@@ -223,7 +223,7 @@
     			'minibji':{name:'입지규제최소구역', value:'입지규제최소구역'},
     			'planbyjigu':{name:'지구단위계획구역', value:'지구단위계획구역'},
     		},
-    		etclawlimit: {
+    		etcLawLimit: {
     			'bojeonsanji':{name:'보전산지', value:'보전산지'},
     			'junbojeonsanji':{name:'준보전산지', value:'준보전산지'},
     			'gongig':{name:'공익용산지', value:'공익용산지'},
@@ -243,7 +243,7 @@
     			'limitboho':{name:'제한보호구역', value:'제한보호구역'},
     			'munhwajae':{name:'문화재보존영향검토대상구역', value:'문화재보존영향검토대상구역'},
     		},
-    		etcchamgo: {
+    		etcChamgo: {
     			'yeongnongnegative':{name:'영농여건불리농지', value:'영농여건불리농지'},
     			'accepttojigeolae':{name:'토지거래허가구역', value:'토지거래허가구역'},
     		},
@@ -251,11 +251,11 @@
     			'm25':{name:'25도 미만', value:'m25'},
     			'M25':{name:'25도 이상', value:'M25'},
     		},
-    		jyeobdostate: {
+    		jyeobdoState: {
     			'dorojeobham':{name:'도로접함', value:'도로접함'},
     			'maengji':{name:'맹지', value:'맹지'},
     		},
-    		tojiuselimitcancel: {
+    		tojiUseLimitCancel: {
     			'philji':{name:'토지이용규제 해소 필지', value:'토지이용규제 해소 필지'}
     		}
     	}
@@ -514,8 +514,8 @@
 		MAEMUL_DUP: '603', //매물중복등록 오류,
 		CONSULTING_REG: '604', //컨설팅 등록오류
 		CONSULTING_DUP: '605',  //컨설팅 중복오류
-		COORD: '606' //주소검색 오류
-			
+		COORD: '606', //주소검색 오류
+		MISS_LATLNG: '607' //위경도 정보 오류
 	};
 	
 	hotplace.error = _err;
@@ -568,6 +568,9 @@
 			break;
 		case _err.COORD:
 			hotplace.dom.showAlertMsg(null, '주소찾아오는중 오류가 발생했습니다.', {width:'50%'});
+			break;
+		case _err.MISS_LATLNG:
+			hotplace.dom.showAlertMsg(null, '위경도 정보가 존재하지 않습니다.', {width:'50%'});
 			break;
 		case '000' :
 			break;

@@ -1059,25 +1059,19 @@
 		$(_dvContextMenu).hide();
 	}
 	
-	dom.createTabulator = function(tableId, param) {
-		var $table = $('#' + tableId);
+	dom.createTabulator = function(tableId, param, tbData) {
+		var $table = $(tableId);
+		param = param || {};
 		
-		
-		
-		$table.tabulator({
+		$table.tabulator($.extend({
 		    height:826, // set height of table
 		    fitColumns:true, //fit columns to width of table (optional)
-		    columns:_tabulatorColumns.gyeonggong,
 		    rowClick:function(e, row){ //trigger an alert message when the row is clicked
 		       var data = row.getData();
 		       console.log(data)
+		       hotplace.dom.showAlertMsg();
 		       
-		       if(data.lng == 0) {
-		    	   alert('위경도 정보가 존재하지 않습니다.')
-		    	   return;
-		       }
-		       
-		       var formName, icon = '', callbak = null;
+		       /*var formName, icon = '', callbak = null;
 		       
 		       if(data.gubun == 'G') {
 		    	   formName = 'gyeongmaeForm';
@@ -1093,20 +1087,21 @@
 		       }
 		       
 		       _moveMulgeon(data.lng, data.lat, data.address, formName, callback, icon);
+		       */
 		    },
-		});
+		}, param));
 		
 		$table.tabulator('setData', tbData);
 	}
 	
-	function _tabulatorSelectFilter(arr) {
+	dom.getTabulatorSelectFilter = function(arr) {
 		return function(cell, onRendered, success, cancel) {
 			var len = arr.length;
 			
 			var htmlStr = '';
 				
 			for(var i=0; i<len; i++) {
-				htmlStr += '<option value="' + arr[i] + '">' + arr[i] + '</option>';
+				htmlStr += '<option value="' + arr[i].value + '">' + arr[i].name + '</option>';
 				console.log(htmlStr);
 			}
 				
@@ -1134,7 +1129,7 @@
 			//return the editor element
 			return editor;
 		}
-	}
+	};
 	
 	function _rangeSliderResize($target) {
 		var length = $target.find('.rangeSlider').length;
@@ -1167,7 +1162,12 @@
 		
 		if(!_infoWinCoordAddr) {
 			_infoWinCoordAddr = new naver.maps.InfoWindow({
-			    anchorSkew: true
+				backgroundColor: 'transparent',
+				borderColor: '#666',
+				borderWidth: 0,
+				anchorSize: new naver.maps.Size(0, 0),
+				anchorSkew: false,  
+				pixelOffset: new naver.maps.Point(0, -12)
 			})
 		}
 		
@@ -1188,15 +1188,17 @@
 
 	            if(item.isRoadAddress) continue;
 	            
-	            htmlAddresses.push(/*(i+1) +'. '+ */addrType +' '+ item.address + ' <button onclick="hotplace.dom.closeCoordWindow()">X</button>');
-	            //htmlAddresses.push('&nbsp&nbsp&nbsp -> '+ item.point.x +','+ item.point.y);
+	            htmlAddresses.push(/*(i+1) +'. '+ */addrType +' '+ item.address);
 	        }
 
 	        _infoWinCoordAddr.setContent([
-	                '<div style="padding:10px;min-width:200px;line-height:150%;">',
-	                htmlAddresses.join('<br />'),
-	                '</div>'
-	            ].join('\n'));
+	            '<div class="mapInnerBox onlyText">',
+	            '   <div class="mibBody">',
+	            		htmlAddresses[0],
+	            ' 		<button class="closeBtn" onclick="hotplace.dom.closeCoordWindow()"><span class="hidden">닫기</span></button>',
+	            '   </div>',
+	            '</div>'
+	            ].join(''));
 
 	        _infoWinCoordAddr.open(hotplace.maps.getMap(), coord);
 	    });

@@ -1,6 +1,1 @@
 .ajax-file-upload-statusbar {margin:10px 0px 0px 0px;}
-.context-menu {width:180px; height:180px; position:absolute; z-index:1; display:none; background-color:#545759; border:1px solid #6c6e71;}
-.context-menu .context-menu-head {height:30px; color: white;}
-.context-menu .context-menu-body {height:130px; color: white; border-top: 1px solid #6c6e71;}
-.context-btn {width:100%; height:30px; text-align: center; padding: 5px; background-color:#000;}
-.subTh {color:#ff0000; font-size:.5em;}

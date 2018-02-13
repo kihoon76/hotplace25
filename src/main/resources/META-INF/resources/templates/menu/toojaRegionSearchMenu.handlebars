@@ -25,6 +25,9 @@
 			<!-- 장기미집행도시계획시설 탭-->
 			<div id="tabJangmiCityPlan" class="tab-pane active">	
 
+				<div class="searchArea">
+				
+				
 				<!-- 장기미집행도시계획시설물건조건 -->
 				<div class="unit">							
 					<div class="unit_tit">
@@ -43,7 +46,7 @@
 							</colgroup>
 							<tbody>
 							<tr id="itemCityPlanTab01">
-								<th>도시계획<br/>시설</th>
+								<th>도시계획시설</th>
 								<td>
 									{{#each codes.cityPlan as |cityPlan|}}
 									<span class="rdchBox">
@@ -65,7 +68,7 @@
                                 </td>
                             </tr>
                             <tr id="itemBosangPyeonibTab01">
-                                <th>보상편입<br/>여부 </th>
+                                <th>보상편입여부 </th>
                                 <td>
                                 {{#each codes.bosangPyeonib as |bosangPyeonib|}}
                                     <span class="rdchBox">
@@ -167,10 +170,10 @@
                             <tr id="itemYongdoJiyeogTab01">
                                 <th>용도지역</th>
                                 <td>
-                                	{{#each codes.yongdojiyeog as |yongdojiyeog|}}
+                                	{{#each codes.yongdoJiyeog as |yongdoJiyeog|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMiYongdoJiyeog{{@index}}" value="{{yongdojiyeog.value}}">
-                                        <label for="chkJangMiYongdoJiyeog{{@index}}" class="labelCh"><em class="text">{{yongdojiyeog.name}}</em></label>
+                                        <input type="checkbox" id="chkJangMiYongdoJiyeog{{@index}}" value="{{yongdoJiyeog.value}}">
+                                        <label for="chkJangMiYongdoJiyeog{{@index}}" class="labelCh"><em class="text">{{yongdoJiyeog.name}}</em></label>
                                     </span>
                                 	{{/each}}
                                 </td>
@@ -178,10 +181,10 @@
                             <tr id="itemYongdoJiguTab01">
                                 <th>용도지구</th>
                                 <td>
-                                	{{#each codes.yongdojigu as |yongdojigu|}}
+                                	{{#each codes.yongdoJigu as |yongdoJigu|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMiYongdoJigu{{@index}}" value="{{yongdojigu.value}}">
-                                        <label for="chkJangMiYongdoJigu{{@index}}" class="labelCh"><em class="text">{{yongdojigu.name}}</em></label>
+                                        <input type="checkbox" id="chkJangMiYongdoJigu{{@index}}" value="{{yongdoJigu.value}}">
+                                        <label for="chkJangMiYongdoJigu{{@index}}" class="labelCh"><em class="text">{{yongdoJigu.name}}</em></label>
                                     </span>
                                    	{{/each}}
                                 </td>
@@ -189,10 +192,10 @@
                             <tr id="itemYongdoGuyeogTab01">
                                 <th>용도구역</th>
                                 <td>
-                                	{{#each codes.yongdoguyeog as |yongdoguyeog|}}
+                                	{{#each codes.yongdoGuyeog as |yongdoGuyeog|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMiYongdoGuyeog{{@index}}" value="{{yongdoguyeog.value}}">
-                                        <label for="chkJangMiYongdoGuyeog{{@index}}" class="labelCh"><em class="text">{{yongdoguyeog.name}}</em></label>
+                                        <input type="checkbox" id="chkJangMiYongdoGuyeog{{@index}}" value="{{yongdoGuyeog.value}}">
+                                        <label for="chkJangMiYongdoGuyeog{{@index}}" class="labelCh"><em class="text">{{yongdoGuyeog.name}}</em></label>
                                     </span>
                                   	{{/each}}
                                 </td>
@@ -200,21 +203,21 @@
                             <tr id="itemEtcLawLimitTab01">
                                 <th>기타법률상규제</th>
                                 <td>
-                                	{{#each codes.etclawlimit as |etclawlimit|}}
+                                	{{#each codes.etcLawLimit as |etcLawLimit|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMiEtcLawLimit{{@index}}" value="{{etclawlimit.value}}">
-                                        <label for="chkJangMiEtcLawLimit{{@index}}" class="labelCh"><em class="text">{{etclawlimit.name}}</em></label>
+                                        <input type="checkbox" id="chkJangMiEtcLawLimit{{@index}}" value="{{etcLawLimit.value}}">
+                                        <label for="chkJangMiEtcLawLimit{{@index}}" class="labelCh"><em class="text">{{etcLawLimit.name}}</em></label>
                                     </span>
                                   	{{/each}}
                                 </td>
                             </tr>
                             <tr id="itemEtcChamgoTab01">
-                                <th>기타참고<br/>사항 </th>
+                                <th>기타참고사항 </th>
                                 <td>
-                                	{{#each codes.etcchamgo as |etcchamgo|}}
+                                	{{#each codes.etcChamgo as |etcChamgo|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMiEtcChamgo{{@index}}" values="{{etcchamgo.value}}">
-                                        <label for="chkJangMiEtcChamgo{{@index}}" class="labelCh"><em class="text">{{etcchamgo.name}}</em></label>
+                                        <input type="checkbox" id="chkJangMiEtcChamgo{{@index}}" value="{{etcChamgo.value}}">
+                                        <label for="chkJangMiEtcChamgo{{@index}}" class="labelCh"><em class="text">{{etcChamgo.name}}</em></label>
                                     </span>
                                    	{{/each}}
                                 </td>
@@ -244,7 +247,9 @@
                                 <th>HP등급</th>
                                 <td>
                                     <!-- HP등급 Range -->
-                                    <div id="jangmiHpGrade" class="jangmiHpGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;">
+                                    <div class="rangeSliderWrap">
+                                    	<div id="jangmiHpGrade" class="jangmiHpGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;">
+                                    </div>
                                 </td>
                             </tr>
                             <tr id="itemGyeongsadoTab01">
@@ -261,27 +266,30 @@
                             <tr id="itemJyeobdoTab01">
                                 <th>접도현황</th>
                                 <td>
-                                	{{#each codes.jyeobdostate as |jyeobdostate|}}
+                                	{{#each codes.jyeobdoState as |jyeobdoState|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMiJyeobdo{{@index}}" value="{{jyeobdostate.value}}">
-                                        <label for="chkJangMiJyeobdo{{@index}}" class="labelCh"><em class="text">{{jyeobdostate.name}}</em></label>
+                                        <input type="checkbox" id="chkJangMiJyeobdo{{@index}}" value="{{jyeobdoState.value}}">
+                                        <label for="chkJangMiJyeobdo{{@index}}" class="labelCh"><em class="text">{{jyeobdoState.name}}</em></label>
                                     </span>
                                     {{/each}}
                             	</td>
                             </tr>
                             <tr id="itemEnvGradeTab01">
-                                <th>환경평가<br/>등급<br/><span class="subTh">(1등급:투자유의)</span></th>
+                                <th>환경평가등급<span class="subTh block">(1등급:투자유의)</span><span class="subTh block">(5등급:투자유망)</span></th>
                                 <td>
-                                	<div id="jangmiEnvGrade" class="jangmiEnvGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;">
+                                	<!-- 환경등급 Range -->
+                                	<div class="rangeSliderWrap">
+                                		<div id="jangmiEnvGrade" class="jangmiEnvGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;">
+                                	</div>
                                 </td>
                             </tr>
                             <tr id="itemTojiUseLimitCancelTab01">
                                 <th>토지이용규제해소물건</th>
                                 <td>
-                                	{{#each codes.tojiuselimitcancel as |tojiuselimitcancel|}}
+                                	{{#each codes.tojiUseLimitCancel as |tojiUseLimitCancel|}}
                                     <span class="rdchBox">
-                                        <input type="checkbox" id="chkJangMiTojiUseLimitCancel0" value="{{tojiuselimitcancel.value}}">
-                                        <label for="chkJangMiTojiUseLimitCancel0" class="labelCh"><em class="text">{{tojiuselimitcancel.name}}</em></label>
+                                        <input type="checkbox" id="chkJangMiTojiUseLimitCancel{{@index}}" value="{{tojiUseLimitCancel.value}}">
+                                        <label for="chkJangMiTojiUseLimitCancel{{@index}}" class="labelCh"><em class="text">{{tojiUseLimitCancel.name}}</em></label>
                                     </span>
                                     {{/each}}
                                 </td>
@@ -289,7 +297,19 @@
                             </tbody>
                         </table>
                     </div>
-                </div>						
+                </div>
+                
+                </div><!-- // end search area-->
+                
+                <div class="searchResultArea">
+					<div class="unit">	
+						<div class="unit_cont tabulatorWrap">
+							<!-- tabulator로 그리는 table 부분-->
+							<div id="dvToojaTab01Result" class="tableStyle gridStyle center"></div>
+						</div>
+					</div>
+				</div>
+                						
 			</div>
 
 			<!-- 토지이용규제 해소물건탭 -->
