@@ -54,10 +54,7 @@ $(document).ready(function() {
 	$('#btnStreetView').on('click', function(e, t) {
 		console.log(t)
 		//heatmap이 켜져있으면 동작 안함
-		if(t) {
-			
-		}
-		else {
+		if(!t) {
 			if(!hotplace.maps.isOffCell()) {
 				hotplace.dom.showAlertMsg(null, '히트맵을 끄신후에 이용하세요', {width:'50%'});
 				return;
