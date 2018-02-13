@@ -947,7 +947,7 @@
 		        _venderMap.setCursor("url('"+ hotplace.getContextUrl() +"resources/img/icon/area.cur'), default");
 		    },
 
-		    _finishDistance: function() {
+		    _finishDistance: function(e) {
 		    	_venderEvent.removeListener(this._distanceListeners);
 		        delete this._distanceListeners;
 
@@ -1957,6 +1957,11 @@
 	maps.showCellLayer = function(callback, isMaskTran, year) {
 		
 		if(_isOffCell()) return;
+		
+		//거리뷰가 켜져있으면 끈다
+		if(hotplace.dom.isActiveStreetview()) {
+			hotplace.dom.triggerStreetview();
+		}
 		
 		var db = hotplace.database;
 		var _currentLevel = _getCurrentLevel();

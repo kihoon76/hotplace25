@@ -51,7 +51,19 @@ $(document).ready(function() {
 	});*/
 	
 	/***************** 거리뷰 버튼 ************************/
-	$('#btnStreetView').on('click', function(e) {
+	$('#btnStreetView').on('click', function(e, t) {
+		console.log(t)
+		//heatmap이 켜져있으면 동작 안함
+		if(t) {
+			
+		}
+		else {
+			if(!hotplace.maps.isOffCell()) {
+				hotplace.dom.showAlertMsg(null, '히트맵을 끄신후에 이용하세요', {width:'50%'});
+				return;
+			}
+		}
+		
 		var onOff = $(this).data('switch');
 		if(onOff == 'on') {
 			hotplace.streetview.stop();
@@ -165,6 +177,9 @@ $(document).ready(function() {
 			hotplace.dom.hideContextMenu();
 		},
 		'rightclick': function(map, pe) {
+			//거리재기, 면적재기가 활성화되어 있으면 context 동작안함
+			if(hotplace.dom.isActiveCalcArea() || hotplace.dom.isActiveCalcDistance()) return;
+			
 			_contextCoord = pe.coord;
 			map.getPanes().overlayLayer.appendChild($('#dvContextMenu')[0]);
 			

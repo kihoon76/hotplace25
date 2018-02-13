@@ -18,7 +18,26 @@
 		_dvContextMenu = '#dvContextMenu',
 		_infoWinCoordAddr = null, //context address infowin
 		_markerCoord = null,
+		_$btnCalcArea = $('#btnCalcArea'), //면적재기 버튼
+		_$btnCalcDistance = $('#btnCalcDistance'), //거리재기 버튼
+		_$btnStreetView = $('#btnStreetView'),
 		_sliderGrp = {}; //slider 관리객체
+	
+	dom.isActiveCalcArea = function() {
+		return _$btnCalcArea.hasClass('active');
+	}
+	
+	dom.isActiveCalcDistance = function() {
+		return _$btnCalcDistance.hasClass('active');
+	}
+	
+	dom.isActiveStreetview = function() {
+		return _$btnStreetView.hasClass('active');
+	}
+	
+	dom.triggerStreetview = function() {
+		_$btnStreetView.trigger('click', true);
+	}
 	
 	/**
 	 * @private
