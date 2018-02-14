@@ -28,7 +28,6 @@ $(document).ready(function() {
 		var onOff = $(this).data('switch');
 		hotplace.maps.showJijeokLayer(onOff, $(this));
 		
-		//document.documentElement.webkitRequestFullscreen();
 	});
 	
 	/***************** 지도일반 버튼 ************************/
@@ -44,11 +43,6 @@ $(document).ready(function() {
 		$('#btnMapNormal').removeClass('active');
 		hotplace.maps.showMapType('HYBRID');
 	});
-	
-	/***************** 타임뷰 버튼 ************************/
-	/*$('#btnTimeView').on('click', function() {
-		hotplace.maps.createTimeView();
-	});*/
 	
 	/***************** 거리뷰 버튼 ************************/
 	$('#btnStreetView').on('click', function(e, t) {
@@ -108,6 +102,11 @@ $(document).ready(function() {
 		});
 	});
 	
+	/***************** 전체화면 버튼 ************************/
+	$('#gnbFullScreen').on('click', function() {
+		hotplace.dom.toggleFullScreen();
+	});
+	
 	/***************** context 버튼 (위치 주소보기) ************************/
 	$('#btnContextLocAddress').on('click', function() {
 		var tm128 = naver.maps.TransCoord.fromLatLngToTM128(_contextCoord);
@@ -146,7 +145,7 @@ $(document).ready(function() {
 					hotplace.maps.appendMarker();
 				}
 				else {
-					hotplace.dom.showMaskTransaction((hotplace.maps.isActiveSalesView()) ? (1 + hotplace.maps.getActiveMarkers().length) : 1);
+					hotplace.dom.showMaskTransaction((hotplace.maps.isActiveMulgeonView()) ? (1 + hotplace.maps.getActiveMarkers().length) : 1);
 					hotplace.maps.showCellLayer(null, true);
 					hotplace.maps.showMarkers(null, true);
 				}

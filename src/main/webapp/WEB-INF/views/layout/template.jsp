@@ -51,6 +51,7 @@
 		</div>
 
 		<div class="dvEtc">
+			<button type="button" class="unit contact" id="gnbFullScreen" title="전체화면" data-active="false"><span class="hidden">전체화면</span></button>
 			<button type="button" class="unit contact" id="modalTest" title="contact us"><span class="hidden">contact us</span></button>
 			<button type="button" class="unit login" id="gnbLogin" title="로그인" style=""><span class="hidden">로그인</span></button>
 			<button type="button" class="unit logout" id="gnbLogout" title="로그아웃" style="display: none;"><span class="hidden">로그아웃</span></button>

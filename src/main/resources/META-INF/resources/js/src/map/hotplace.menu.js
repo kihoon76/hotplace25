@@ -312,14 +312,26 @@
 	 ****************************************************************************/
 	var _jangmiHpGrade = '#jangmiHpGrade',
 		_jangmiEnvGrade = '#jangmiEnvGrade',
+		_tojiUseLimitHpGrade = '#tojiUseLimitHpGrade',
+		_tojiUseLimitEnvGrade = '#tojiUseLimitEnvGrade',
+		_devPiljiHpGrade = '#devPiljiHpGrade',
+		_devPiljiEnvGrade = '#devPiljiEnvGrade',
 		_btnToojaSearch = '#btnToojaSearch',
 		_btnToojaSearchPrev = '#btnToojaSearchPrev',
-		_dvToojaTab01Result = '#dvToojaTab01Result',
+		_dvToojaTab01Result = '#dvToojaTab01Result', //tabulator로 결과 테이블 영역 div
+		_dvToojaTab02Result = '#dvToojaTab02Result', //tabulator로 결과 테이블 영역 div
+		_dvToojaTab03Result = '#dvToojaTab03Result', //tabulator로 결과 테이블 영역 div
 		_toojaTab = {
-			JangmiCityPlan: 'JANGMI_CITY_PLAN',
-			TojiUseLimitCancel: 'TOJI_USE_LIMIT_CANCEL',
-			DevPilji: 'DEV_PILJI'
-		}
+			JangmiCityPlan: '#tabJangmiCityPlan',
+			TojiUseLimitCancel: '#tabTojiUseLimitCancel',
+			DevPilji: '#tabDevPilji'
+		},
+		_activeToojaTab = _toojaTab.JangmiCityPlan,
+		_toojaBtnStateObj = {
+			'#tabJangmiCityPlan':true,
+			'#tabTojiUseLimitCancel':true,
+			'#tabDevPilji':true
+		}; //검색버튼이 활성화되면 true 아니면 false
 	
 	//함수리턴 
 	function _initToojaDom() {
@@ -327,7 +339,19 @@
 		hotplace.dom.initSlider(_toojaRegionSearchMenu, false, [{
 			targetId:_jangmiHpGrade
 		},{
-			targetId: _jangmiEnvGrade,
+			targetId:_jangmiEnvGrade,
+			bounds:{min: -5, max: -1},
+			defaultValues:{min: -2, max: -1}
+		},{
+			targetId:_tojiUseLimitHpGrade
+		}, {
+			targetId:_tojiUseLimitEnvGrade,
+			bounds:{min: -5, max: -1},
+			defaultValues:{min: -2, max: -1}
+		},{
+			targetId:_devPiljiHpGrade
+		},{
+			targetId:_devPiljiEnvGrade,
 			bounds:{min: -5, max: -1},
 			defaultValues:{min: -2, max: -1}
 		}]);
@@ -349,22 +373,36 @@
 		.off('shown.bs.tab')
 		.on('shown.bs.tab', function (e) {
 			hotplace.dom.resizeSliderGrp(_toojaRegionSearchMenu);
+			
+			var tabStr = $(this).attr('href');
+			var k = tabStr.substring(4);
+			_activeToojaTab = _toojaTab[k];
+			
+			//버튼정보 설정
+			_restoreBtn();
 		});
 		
 		$(_btnToojaSearch)
 		.off('click')
 		.on('click', function() {
-			/*$(this).hide();
-			$(_btnToojaSearchPrev).show();*/
-			_searchJangmiTab(_dvToojaTab01Result);
+			switch(_activeToojaTab) {
+			case _toojaTab.JangmiCityPlan:
+				_searchJangmiTab(_dvToojaTab01Result);
+				break;
+			case _toojaTab.TojiUseLimitCancel:
+				break;
+			case _toojaTab.DevPilji:
+				break;
+			}
+			
 		});
 		
 		$(_btnToojaSearchPrev)
 		.off('click')
 		.on('click', function() {
-			_toggleToojaTab1();
+			_toojaDvToogle();
+			_saveBtnInfo(true);
 		});
-		
 		
 		return function() {
 			//반드시 메뉴 content가 show된후에 호출되어져야 함
@@ -372,18 +410,47 @@
 		}
 	}
 	
-	function _toojaDvToogle($elArr) {
-		if($elArr && $elArr.length == 2) {
-			for(var i=1; i>=0; i--) {
-				$elArr[i]
-				$elArr[i].is(':visible') ? $elArr[i].hide() : $elArr[i].show();
-			}
+	function _toojaDvToogle() {
+		var $searchArea = $(_activeToojaTab  + ' .searchArea'),
+			$searchResultArea = $(_activeToojaTab  + ' .searchResultArea'),
+			$btnToojaSearch = $(_btnToojaSearch),
+			$btnToojaSearchPrev = $(_btnToojaSearchPrev);
+		
+		if($btnToojaSearch.is(':visible')) {
+			$btnToojaSearch.hide();
+			$btnToojaSearchPrev.show();
+		}
+		else {
+			$btnToojaSearch.show();
+			$btnToojaSearchPrev.hide();
+		}
+		
+		if($searchArea.is(':visible')) {
+			$searchArea.hide();
+			$searchResultArea.show();
+		}
+		else {
+			$searchArea.show();
+			$searchResultArea.hide();
 		}
 	}
 	
-	function _toggleToojaTab1() {
-		_toojaDvToogle([$(_btnToojaSearch), $(_btnToojaSearchPrev)]);
-		_toojaDvToogle([$('.searchArea'), $('.searchResultArea')]);
+	//각탭의 검색,이전버튼 상태저장
+	function _saveBtnInfo(isVisibleSearch) {
+		_toojaBtnStateObj[_activeToojaTab] = isVisibleSearch;
+	}
+	
+	//메뉴가 다시 열릴때 각탭의 검색,이전버튼 복원
+	function _restoreBtn() {
+		var isVisibleSearch = _toojaBtnStateObj[_activeToojaTab];
+		if(isVisibleSearch) {
+			$(_btnToojaSearch).show();
+			$(_btnToojaSearchPrev).hide();
+		}
+		else {
+			$(_btnToojaSearch).hide();
+			$(_btnToojaSearchPrev).show();
+		}
 	}
 	
 	function _searchJangmiTab(tableId, fn) {
@@ -394,7 +461,9 @@
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
 				
-				_toggleToojaTab1();
+				_toojaDvToogle();
+				_saveBtnInfo(false);
+				
 				hotplace.dom.createTabulator(tableId, {
 				    height:700, // set height of table
 				    fitColumns:true, //fit columns to width of table (optional)

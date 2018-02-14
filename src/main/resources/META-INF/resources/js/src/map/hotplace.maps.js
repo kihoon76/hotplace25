@@ -18,6 +18,8 @@
 	var _venderMap = null;
 	var _venderEvent = null;
 	var _markerClustering = null;
+	var _$btnCalcDistance = $('#btnCalcDistance');
+	var _$btnCalcArea = $('#btnCalcArea');
 	
 	
 	/** 
@@ -543,7 +545,7 @@
 			    strokeOpacity: (css && css.strokeOpacity != undefined) ? css.strokeOpacity : 0.5,
 			    fillColor: (css && css.fillColor != undefined) ? css.fillColor : 'rgb(255,051,000)',
 			    fillOpacity: (css && css.fillOpacity != undefined) ? css.fillOpacity : 0.1,
-			    clickable: true
+			    clickable: false//true
 			});
 			
 			rec.data = cellData;
@@ -953,12 +955,12 @@
 
 		        $(document).off('mousemove.measure');
 
-		        if (this._guideline) {
+		        if(this._guideline) {
 		            this._guideline.setMap(null);
 		            delete this._guideline;
 		        }
 
-		        if (this._polyline) {
+		        if(this._polyline) {
 		            var path = this._polyline.getPath(),
 		                lastCoord = path.getAt(path.getLength() - 1),
 		                distance = this._polyline.getDistance();
@@ -966,15 +968,13 @@
 
 		            delete this._polyline;
 
-		            if (lastCoord) {
+		            if(lastCoord) {
 		                this._addMileStone(lastCoord, this._fromMetersToText(distance), {
 		                    'font-size': '14px',
 		                    'font-weight': 'bold',
 		                    'color': '#f00'
 		                }, this._polyline, true);
 		            }
-		            
-		            
 		        }
 
 		        this.$btnDistance.removeClass('active').blur();
@@ -990,7 +990,7 @@
 
 		        $(document).off('mousemove.measure');
 
-		        if (this._polygon) {
+		        if(this._polygon) {
 		            var path = this._polygon.getPath();
 		            path.pop();
 
@@ -998,7 +998,7 @@
 		            var squarMeters = this._polygon.getAreaSize(),
 		                lastCoord = path.getAt(path.getLength() - 1);
 
-		            if (lastCoord) {
+		            if(lastCoord) {
 		                this._addMileStone(lastCoord, this._fromSquareMetersToText(squarMeters), {
 		                    'font-size': '14px',
 		                    'font-weight': 'bold',
@@ -1018,11 +1018,13 @@
 		    },
 
 		    finishMode: function(mode) {
-		        if (!mode) return;
+		        if(!mode) return;
 
-		        if (mode === 'distance') {
+		        if(mode === 'distance') {
 		            this._finishDistance();
-		        } if (mode === 'area') {
+		        } 
+		        
+		        if(mode === 'area') {
 		            this._finishArea();
 		        }
 		    },
@@ -1033,9 +1035,10 @@
 		        var km = 1000,
 		            text = meters;
 
-		        if (meters >= km) {
+		        if(meters >= km) {
 		            text = parseFloat((meters / km).toFixed(1)) +'km';
-		        } else {
+		        }
+		        else {
 		            text = parseFloat(meters.toFixed(1)) +'m';
 		        }
 
@@ -1048,9 +1051,10 @@
 		        var squarKm = 1000 * 1000,
 		            text = squarMeters;
 
-		        if (squarMeters >= squarKm) {
+		        if(squarMeters >= squarKm) {
 		            text = parseFloat((squarMeters / squarKm).toFixed(1)) + 'km<sup>2</sup>';
-		        } else {
+		        }
+		        else {
 		            text = parseFloat(squarMeters.toFixed(1)) + 'm<sup>2</sup>';
 		        }
 
@@ -1058,7 +1062,7 @@
 		    },
 
 		    _addMileStone: function(coord, text, css, obj, isLast) {
-		        if (!this._msArr) this._msArr = {};
+		        if(!this._msArr) this._msArr = {};
 		        var uuid = hotplace.createUuid();
 		        var icon = null;
 		        if(this._mode == 'distance') {
@@ -1089,7 +1093,7 @@
 
 		        var msElement = $(ms.getElement());
 
-		        if (css) {
+		        if(css) {
 		            msElement.css(css);
 		        } 
 		        else {
@@ -1103,9 +1107,9 @@
 
 		    _onClickDistance: function(e) {
 		        //var map = this.map,
-		            coord = e.coord;
+		        coord = e.coord;
 
-		        if (!this._polyline) {
+		        if(!this._polyline) {
 		            // 임시로 보여줄 점선 폴리라인을 생성합니다.
 		            this._guideline = new naver.maps.Polyline({
 		                strokeColor: '#f00',
@@ -1130,7 +1134,8 @@
 
 		            // 폴리라인의 거리를 미터 단위로 반환합니다.
 		            this._lastDistance = this._polyline.getDistance();
-		        } else {
+		        }
+		        else {
 		            this._guideline.setPath([e.coord]);
 		            this._polyline.getPath().push(coord);
 
@@ -1148,7 +1153,7 @@
 		            coord = proj.fromPageXYToCoord(new naver.maps.Point(e.pageX, e.pageY));
 		            path = this._guideline.getPath();
 
-		        if (path.getLength() === 2) {
+		        if(path.getLength() === 2) {
 		            path.pop();
 		        }
 
@@ -1158,7 +1163,7 @@
 		    _onClickArea: function(e) {
 		        var coord = e.coord;
 
-		        if (!this._polygon) {
+		        if(!this._polygon) {
 		            this._polygon = new naver.maps.Polygon({
 		                strokeColor: '#00f',
 		                strokeOpacity: 0.6,
@@ -1227,8 +1232,17 @@
 		        });
 		    },
 
-		    _onClickButton: function(newMode, e) {
+		    _onClickButton: function(newMode, e, opt) {
 		        e.preventDefault();
+		        
+		        //거리/면적이 먼저 켜져있는 상황에서 히트맵 실행시 opt => true값이 넘어온다
+		        if(!opt) {
+		        	//히트맵이 켜져 있으면 중지한다.
+			    	if(!_isOffCell()) {
+						hotplace.dom.showAlertMsg(null, '히트맵을 끄신후에 이용하세요', {width:'50%'});
+						return;
+					}
+		        }
 
 		        var btn = $(e.target),
 		            mode = this._mode;
@@ -1253,25 +1267,26 @@
 		    },
 
 		    _clearMode: function(mode) {
-		        if (!mode) return;
+		        if(!mode) return;
 
-		        if (mode === 'distance') {
-		            if (this._polyline) {
+		        if(mode === 'distance') {
+		            if(this._polyline) {
 		                this._polyline.setMap(null);
 		                delete this._polyline;
 		            }
 
 		            this._finishDistance();
 
-		            if (this._ms) {
-		                for (var i=0, ii=this._ms.length; i<ii; i++) {
+		            if(this._ms) {
+		                for(var i=0, ii=this._ms.length; i<ii; i++) {
 		                    this._ms[i].setMap(null);
 		                }
 
 		                delete this._ms;
 		            }
-		        } else if (mode === 'area') {
-		            if (this._polygon) {
+		        } 
+		        else if(mode === 'area') {
+		            if(this._polygon) {
 		                this._polygon.setMap(null);
 		                delete this._polygon;
 		            }
@@ -1282,8 +1297,8 @@
 		});
 
 		var measures = new Measure({
-		    distance: $('#btnCalcDistance'),
-		    area: $('#btnCalcArea')
+		    distance: _$btnCalcDistance,
+		    area: _$btnCalcArea
 		});
 	}
 	
@@ -1962,6 +1977,11 @@
 		if(hotplace.dom.isActiveStreetview()) {
 			hotplace.dom.triggerStreetview();
 		}
+		
+		//거리재기 비활성화
+		if(_$btnCalcDistance.hasClass('active')) _$btnCalcDistance.trigger('click', true);
+		//면적재기 비활성화
+		if(_$btnCalcArea.hasClass('active')) _$btnCalcArea.trigger('click', true);
 		
 		var db = hotplace.database;
 		var _currentLevel = _getCurrentLevel();
