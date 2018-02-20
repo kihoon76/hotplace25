@@ -921,13 +921,43 @@
 		.css({'max-height': maxHeight, 'overflow-y': 'auto'});
 	}
 	
+	function _setModalMarginTop($element) {
+		var $dialog      = $element.find('.modal-dialog');
+		var dialogHeight  = $dialog.height();
+		
+		$dialog.css({
+			'margin-top' : -dialogHeight/2
+		});
+	}
+
+	function _initModalSize($modal) {
+		_setModalMaxHeight($modal);
+		_setModalMarginTop($modal);
+	}
+	
 	/*************************************************************
 	 * 모달창 열린후 발생하는 이벤트 핸들러
 	 ************************************************************/
 	_$modalPopup.on('shown.bs.modal', function(e) {
-		_setModalMaxHeight($('#modalPopup'));
+		_initModalSize($(this));
 		$('.modal-backdrop').remove();
 		_modalOpenAfterFn();
+	});
+	
+	/*************************************************************
+	 * 이미지 모달창 열린후 발생하는 이벤트 핸들러
+	 ************************************************************/
+	_$imagePopup.on('shown.bs.modal', function(e) {
+		_initModalSize($(this));
+		$('.modal-backdrop').remove();
+	});
+	
+	/*************************************************************
+	 * 모달의 모달창 열린후 발생하는 이벤트 핸들러
+	 ************************************************************/
+	_$momPopup.on('shown.bs.modal', function(e) {
+		_initModalSize($(this));
+		$('.modal-backdrop').remove();
 	});
 	
 	/*************************************************************
@@ -938,11 +968,21 @@
 	});
 	
 	/*************************************************************
+	 * alert창 열린후 발생하는 이벤트 핸들러
+	 ************************************************************/
+	_$alrtPopup.on('shown.bs.modal', function(e) {
+		_initModalSize($(this));
+		$('.modal-backdrop').remove();
+	});
+	
+	/*************************************************************
 	 * alert창 닫힌후 발생하는 이벤트 핸들러
 	 ************************************************************/
 	_$alrtPopup.on('hidden.bs.modal', function(e) {
 		_alertCloseAfterFn();
 	});
+	
+
 	
 	//로그인 메시지에서 로그인 화면으로 전환
 	$(document).on('click', '#btnDirectLogin', function() {
@@ -1284,9 +1324,9 @@
 	 * hotplace.streetview.resize : 거리뷰의 파노라마 사이즈를 변경함
 	 ************************************************************/
 	$(window).resize(function() {
-		/*if ($('.modal.in').length != 0) {
-			setModalMaxHeight($('.modal.in'));
-		}*/
+		if ($('.modal.in').length != 0) {
+			_initModalSize($('.modal.in'));
+		}
 		hotplace.streetview.resize();
 	});
 	

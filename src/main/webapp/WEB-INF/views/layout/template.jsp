@@ -52,7 +52,7 @@
 
 		<div class="dvEtc">
 			<span class="boxUnit"> 
-				<button type="button" class="unit contact" id="gnbFullScreen" title="전체화면" data-active="false"><span class="hidden">전체화면</span></button>
+				<button type="button" class="unit fullScreen" id="gnbFullScreen" title="전체화면" data-active="false"><span class="hidden">전체화면</span></button>
 			</span>
 			<span class="boxUnit">
 				<button type="button" class="unit contact" id="modalTest" title="contact us"><span class="hidden">contact us</span></button>

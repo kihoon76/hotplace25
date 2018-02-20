@@ -619,12 +619,13 @@
      * @param {boolean}    		isMaskTran - multi ajax 마스크 사용여부 (default 'false')
      * @param {function}		completeFn - ajax 통신이 완전히 종료된 후 실행될 함수
      */
-	hotplace.getPlainText = function(url, param, cbSucc, cbErr, isActiveMask, isMaskTran, completeFn, loadEl) {
+	hotplace.getPlainText = function(url, param, cbSucc, cbErr, isActiveMask, isMaskTran, completeFn, loadEl, async) {
 			
 		hotplace.ajax({
 			url: url,
 			method: 'GET',
 			dataType: 'text',
+			async: (async == undefined) ? true : async,
 			data: param || {},
 			activeMask: (isActiveMask != undefined) ? isActiveMask : true,
 			isMaskTran: isMaskTran,

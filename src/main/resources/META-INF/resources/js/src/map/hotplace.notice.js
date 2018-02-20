@@ -87,12 +87,22 @@
 			param = searchParam;
 		}
 		
-		hotplace.getPlainText('notice/page/' + pageNum, param, function(jo) {
-			console.log(jo.datas)
-			_makeList(jo.datas);
-			_makePagination(jo.datas.total, pageNum);
-			//_makeTotalLabel(jo.datas.total);
-		},null, true, false);
+		//비동기로 흐르게 되면  모달에 내용이 채워지기 전에 모달 사이즈가 설정되어  모달이 center에 오지 않는다.
+		hotplace.getPlainText(
+			'notice/page/' + pageNum, //url
+			param, 
+			function(jo) {
+				console.log(jo.datas)
+				_makeList(jo.datas);
+				_makePagination(jo.datas.total, pageNum);
+			}, //cbSucc
+			null, //cbErr
+			true, //isActiveMask
+			false, //isMaskTran
+			null, //completeFn
+			hotplace.dom.getModalPopId(), //loadEl
+			false //async
+		);
 	}
 	
 	function _makeList(data) {

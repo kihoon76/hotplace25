@@ -105,6 +105,7 @@ $(document).ready(function() {
 	/***************** 전체화면 버튼 ************************/
 	$('#gnbFullScreen').on('click', function() {
 		hotplace.dom.toggleFullScreen();
+		$(this).toggleClass('off');
 	});
 	
 	/***************** context 버튼 (위치 주소보기) ************************/
