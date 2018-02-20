@@ -38,9 +38,8 @@ public class NoticeController {
 	
 	@GetMapping(value="page/content/{writeNum}", produces="application/text; charset=utf8")
 	@ResponseBody
-	public String getNoticeContent(@PathVariable(name="writeNum") int writeNum) throws InterruptedException {
+	public String getNoticeContent(@PathVariable(name="writeNum") int writeNum) {
 		
-		Thread.sleep(5000);
 		return noticeService.getNoticeContent(writeNum);
 	}
 }

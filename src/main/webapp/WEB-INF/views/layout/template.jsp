@@ -144,6 +144,9 @@
 	
 	<!-- alert modal을 띄울때만 사용 영역 -->
 	<div class="modal" id="alrtPopup" tabindex="-1" role="dialog"></div>
+	
+	<!-- bootstrap modal에서 image popup을 띄울때만 사용 영역 -->
+	<div class="modal" id="imagePopup" tabindex="-1" role="dialog"></div>
 
 <sitemesh:write property="body" />
 <script type="text/javascript" src="/resources/jquery/3.2.1/jquery.min.js"></script>
@@ -169,6 +172,7 @@
 <script type="text/javascript" src="/resources/js/src/map/hotplace.spot.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.upload.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.notice.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.gyeongmae.js"></script>
 </c:if>
 <c:if test="${debug eq 'off'}">
 <script type="text/javascript" src="/resources/js/dist/hotplace-all.min.js"></script>

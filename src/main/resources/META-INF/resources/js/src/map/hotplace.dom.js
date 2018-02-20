@@ -7,11 +7,13 @@
 		_loadTxt = '',//'로딩 중입니다';
 		_loadEndCount = 0,
 		_yearRangeMode = 'manual', //타임뷰 모드  manual(수동) auto(자동)
+		_modalPopup = '#modalPopup',
 		_$yearRange = $('#dvYearRange'),
 		_$btnAutoYear = $('#btnAutoYear'),
-		_$modalPopup = $('#modalPopup'),
+		_$modalPopup = $(_modalPopup),
 		_$momPopup = $('#momPopup'), //모달 위 모달
 		_$alrtPopup = $('#alrtPopup'),
+		_$imagePopup = $('#imagePopup'), //이미지 팝업
 		_$gnbLogin = $('#gnbLogin'),
 		_$gnbLogout = $('#gnbLogout'),
 		_btnAlrt = '#btnAlrt',//alert 창버튼
@@ -22,6 +24,10 @@
 		_$btnCalcDistance = $('#btnCalcDistance'), //거리재기 버튼
 		_$btnStreetView = $('#btnStreetView'),
 		_sliderGrp = {}; //slider 관리객체
+	
+	dom.getModalPopId = function() {
+		return _modalPopup;
+	}
 	
 	dom.isActiveCalcArea = function() {
 		return _$btnCalcArea.hasClass('active');
@@ -315,6 +321,10 @@
 		_commonModal(_$momPopup, modalSize);
 	}
 	
+	dom.openImageModalOnModal = function(modalSize, closeFn, openFn) {
+		_commonModal(_$imagePopup, modalSize);
+	}
+	
 	dom.openAlrtModal = function(modalSize, closeFn) {
 		_bindAlertCloseEvent(closeFn  || function() {});
 		_commonModal(_$alrtPopup, modalSize);
@@ -604,6 +614,17 @@
 		dom.openModal('', {width: 1000}, null);
 	}
 	
+	dom.showGyeongmaeDetail = function(fn) {
+		_appendModalPopup('gyeongmaeDetailForm');
+		
+		dom.openModal('', null, null, fn);
+	}
+	
+	dom.showGyeongmaeImage = function(modalSize, param) {
+		_appendModalPopup('gyeongmaeImageForm', _$imagePopup, param);
+		dom.openImageModalOnModal(modalSize);
+	}
+	
 	/**
 	 * @memberof hotplace.dom
 	 * @function showYearRangeDiv
@@ -785,12 +806,12 @@
 		($element || _$modalPopup).html(tForm(param));
 	}
 	
-	dom.showNotice = function() {
+	/*dom.showNotice = function() {
 		var tForm = dom.getTemplate('noticeForm');
 		$('#dvCenterModalContent').html(tForm());
 		hotplace.notice.showPage();
 		dom.openCenterModal('공지사항', {width: '80%', height:'70%'});
-	}
+	}*/
 	
 	dom.showLoginForm = function(fn) {
 		_appendModalPopup('loginForm');

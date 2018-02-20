@@ -79,39 +79,7 @@
 	</select>
 	
 	<select id="selectLocationBounds" statementType="CALLABLE" resultType="string" parameterType="hashmap">
-		<!-- 
-		select concat(극서 , '|', 극남,  '|', 극동, '|', 극북, '|', '[{"type":0, "value":50, "colorV":', case when PNU존재여부='Y' then round(rand(convert(varbinary, newid()))*100, 2) else 0 end, '}]')
-          from [좌표계].[dbo].[좌표계]
-         where 레벨 = #{level}
-           and 극서  between convert(float, #{swx}) and convert(float, #{nex})
-           and 극동  between convert(float, #{swx}) and convert(float, #{nex}) 
-           and 극남  between convert(float, #{swy}) and convert(float, #{ney})
-           and 극북  between convert(float, #{swy}) and convert(float, #{ney})
-         order by 극서 asc
-        -->
         <if test="type == 'GONGSI'">
-         <!-- with tmp as
-		(
-		   select 
-		      a.극서, a.극남, a.극동, a.극북, b.공시지가
-		   from 
-		      좌표계.dbo.좌표계13_하위 a with (nolock, INDEX(IX_좌표계13_하위_1))
-		      inner join Ranking.dbo.공시지가 b with (nolock, INDEX(PK_공시지가)) on (b.좌표계13_하위_고유번호=a.고유번호 and b.기준년월=#{year})
-		   where a.레벨=#{level}
-		     and a.극서 >= convert(float, #{swx})
-		     and a.극동 <![CDATA[<=]]> convert(float, #{nex})
-		     and a.극남 >= convert(float, #{swy})
-		     and a.극북 <![CDATA[<=]]> convert(float, #{ney})
-		)
-		select concat(a.극서 , '|', a.극남,  '|', a.극동, '|', a.극북, '|', '[{"type":0, "value":',  공시지가, ', "colorV":',convert(int, case when (공시지가-convert(int, min지가))/convert(int, gbn) > 950 then ((공시지가-convert(int, min지가))/convert(int, gbn)*90/100) + convert(int, rnk * convert(float, 1020)/max(rnk) over ()) *10/100 else ((공시지가-convert(int, min지가))/convert(int, gbn)*10/100) + convert(int, rnk * convert(float, 1020)/max(rnk) over ())*90/100 end), ', "maxV":', max지가, ', "minV":', min지가 , '}]') 
-		  from (
-				select a.*, (max지가-min지가)/1020 [gbn] 
-				  from (
-						select a.*,  max(공시지가) over () [max지가], min(공시지가) over () [min지가], dense_rank() over (order by 공시지가) [rnk]
-						  from tmp a
-						) a
-				) a
-		 order by a.극서 asc-->
 		 { call [Ranking].[dbo].[SEL_공시지가] (
         	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
    		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
@@ -131,8 +99,16 @@
    		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
          )}
         </if> 
-       
-         
+       <if test="type == 'ACCEPT_BUILDING'">
+        { call [Ranking].[dbo].[SEL_PNU10_건축허가면적] (
+        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+         )}
+        </if> 
 	</select>
 	
 	<select id="selectGyeongmaeMarker" statementType="CALLABLE" resultType="string" parameterType="hashmap">

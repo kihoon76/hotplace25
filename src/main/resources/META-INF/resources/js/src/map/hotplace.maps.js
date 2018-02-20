@@ -73,7 +73,7 @@
 	 */
 	var _locationBounds = {'swy' : 0, 'swx' : 0, 'ney' : 0,	'nex' : 0};	  
 	
-	var _cellTypes = {DEFAULT:'HP', GONGSI:'GONGSI', GONGSI_GR: 'GONGSI_GR'};
+	var _cellTypes = {DEFAULT:'HP', GONGSI:'GONGSI', GONGSI_GR: 'GONGSI_GR', ACCEPT_BUILDING: 'ACCEPT_BUILDING'};
 	
 	/** 
 	 * @private 
@@ -83,7 +83,7 @@
 	 * @property {string} GONGSI  - 공시지가
 	 * @property {string} GONGSI_GR  - 공시지가 증가율
 	 */
-	var _cellLayerOnOff = {DEFAULT:0, GONGSI:0, GONGSI_GR:0};
+	var _cellLayerOnOff = {DEFAULT:0, GONGSI:0, GONGSI_GR:0, ACCEPT_BUILDING:0};
 	
 	/** 
 	 * @private 
@@ -1800,7 +1800,14 @@
 		_markers[markerType].m.push(newMarker);
 		
 		if(options.hasInfoWindow) {
-			var winContent = options.winContent || {};
+			var winContent = $.extend({
+				backgroundColor: 'transparent',
+				borderColor: '#666',
+				borderWidth: 0,
+				anchorSize: new naver.maps.Size(0, 0),
+				anchorSkew: false,  
+				pixelOffset: new naver.maps.Point(0, -12)
+			}, options.winContent || {});
 			
 			//로컬정보로 윈도우 창 정보를 설정할 지 여부
 			if(!options.isAjaxContent) {
@@ -2240,14 +2247,14 @@
 			}, {
 				hasInfoWindow: true,
 				infoWinFormName: 'win/addrSearchWin',
-				winContent: {
+				/*winContent: {
 					backgroundColor: 'transparent',
 					borderColor: '#666',
 					borderWidth: 0,
 					anchorSize: new naver.maps.Size(0, 0),
 					anchorSkew: false,  
 					pixelOffset: new naver.maps.Point(0, -12)
-				},
+				},*/
 				radius: 0,
 				datas: {
 					params : winDatas || {}

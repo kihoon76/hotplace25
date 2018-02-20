@@ -31,7 +31,6 @@
 <script type="text/javascript" src="/resources/vendors/tabulator/js/tabulator.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/dom-to-image/dom-to-image.js"></script>
 <c:if test="${debug eq 'on'}">
-<script type="text/javascript" src="/resources/js/src/info/gyeongmae.js"></script>
 <script type="text/javascript" src="/resources/js/src/info/gongmae.js"></script>
 <script type="text/javascript" src="/resources/js/src/info/bosangpyeonib.js"></script>
 <script type="text/javascript" src="/resources/js/src/info/silgeolae.js"></script>
@@ -53,6 +52,8 @@
 <!-- uploadify -->
 <script type="text/javascript" src="/resources/vendors/jQuery-Upload-File/4.0.11/jquery.uploadfile.js"></script>
 
+<!-- touchSlider (이미지 슬라이더) -->
+<script type="text/javascript" src="/resources/vendors/touchSlider/jquery.touchSlider.js"></script>
 </content>
 
 </body>
