@@ -51,10 +51,23 @@
 		</div>
 
 		<div class="dvEtc">
-			<button type="button" class="unit contact" id="gnbFullScreen" title="전체화면" data-active="false"><span class="hidden">전체화면</span></button>
-			<button type="button" class="unit contact" id="modalTest" title="contact us"><span class="hidden">contact us</span></button>
-			<button type="button" class="unit login" id="gnbLogin" title="로그인" style=""><span class="hidden">로그인</span></button>
-			<button type="button" class="unit logout" id="gnbLogout" title="로그아웃" style="display: none;"><span class="hidden">로그아웃</span></button>
+			<span class="boxUnit"> 
+				<button type="button" class="unit contact" id="gnbFullScreen" title="전체화면" data-active="false"><span class="hidden">전체화면</span></button>
+			</span>
+			<span class="boxUnit">
+				<button type="button" class="unit contact" id="modalTest" title="contact us"><span class="hidden">contact us</span></button>
+				<div class="dropMenu">
+					<ul class="dropMenuBox">
+						<li><a href="#" class="link" id="modalMypage">My Page</a></li>
+						<li><a href="#" class="link" id="modalNotice">공지사항</a></li>
+						<li><a href="#" class="link" id="modalCompany">회사소개</a></li>
+					</ul>
+				</div>
+			</span>
+			<span class="boxUnit">
+				<button type="button" class="unit login" id="gnbLogin" title="로그인" style=""><span class="hidden">로그인</span></button>
+				<button type="button" class="unit logout" id="gnbLogout" title="로그아웃" style="display: none;"><span class="hidden">로그아웃</span></button>
+			</span>
 		</div>
 	</div>
 	
@@ -70,7 +83,7 @@
 				<a href="#" class="menu02" data-name="toojaRegionSearchMenu" data-new="false"><i class="icon"></i><span>투자 유망 지역 검색</span></a>
 			</li>
 			<li>
-				<a href="#" class="menu03" data-name="gyeonggongSearchMenu" data-new="true"><i class="icon"></i><span>경•공매 물건 검색</span></a>
+				<a href="#" class="menu03" data-name="gyeonggongSearchMenu" data-new="false"><i class="icon"></i><span>경•공매 물건 검색</span></a>
 			</li>
 			<li class="disabled MULGEON" data-key="MULGEON">
 				<a href="#" class="menu04" data-name="mulgeonViewMenu" data-new="false"><i class="icon"></i><span>물건보기</span></a>
@@ -85,7 +98,7 @@
 	<div id="lnbCont" class="lnbCont">
 		<div id="addrSearchMenu" class="lnbContWrap" style="display:; width:500px;"></div>
 		<div id="toojaRegionSearchMenu" class="lnbContWrap" style="width:750px;"></div>
-		<div id="gyeonggongSearchMenu" class="lnbContWrap"></div>
+		<div id="gyeonggongSearchMenu" class="lnbContWrap" style="width:750px;"></div>
 		<div id="mulgeonViewMenu" class="lnbContWrap" style="width:280px;"></div>
 		<div id="heatmapViewMenu" class="lnbContWrap" style="width:280px;"></div>
 	</div>
@@ -155,6 +168,7 @@
 <script type="text/javascript" src="/resources/js/src/map/hotplace.util.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.spot.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.upload.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.notice.js"></script>
 </c:if>
 <c:if test="${debug eq 'off'}">
 <script type="text/javascript" src="/resources/js/dist/hotplace-all.min.js"></script>

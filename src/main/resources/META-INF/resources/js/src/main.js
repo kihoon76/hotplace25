@@ -114,6 +114,13 @@ $(document).ready(function() {
 		hotplace.dom.hideContextMenu();
 	});
 	
+	/***************** 공지사항 버튼 ************************/
+	$('#modalNotice').on('click', function() {
+		hotplace.dom.showNoticeList();
+	});
+	
+	
+	
 	hotplace.maps.init('naver', {
 		X: hotplace.config.mapDefaultX,
 		Y: hotplace.config.mapDefaultY, 

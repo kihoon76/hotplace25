@@ -567,7 +567,7 @@
 	        
 	        img.src = dataUrl;
 	        img.style.width = '100%';
-	        img.style.height = '100%';
+	        img.style.height = '500px';
 	        
 	        if($.isArray($target)) {
 	        	$target.push(img);
@@ -595,6 +595,13 @@
 			
 			arr.length = 0;
 		});
+	}
+	
+	dom.showNoticeList = function() {
+		_appendModalPopup('noticeListForm');
+		hotplace.notice.showPage();
+		
+		dom.openModal('', {width: 1000}, null);
 	}
 	
 	/**
@@ -988,6 +995,7 @@
 		
 		switch(menuName) {
 		case menus.TOOJA_SEARCH:
+		case menus.GYEONGGONG_SEARCH:
 			param.codes = hotplace.config.codes;
 			break;
 		}

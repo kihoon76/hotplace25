@@ -1,14 +1,317 @@
 <div class="headArea">
-	<h2>메뉴제목이 들어가는곳 menuCont03</h2>
+	<h2>경•공매 물건 검색</h2>
 	<button type="button" class="close">
 		<i class="ambicon-015_mark_times"></i><span class="hidden">닫기</span>
 	</button>
 </div>
 <div class="bodyArea">
-	<div class="" style="height:800px;">
+	<div id="dvGyeonggongSearch" class="dvGyeonggongSearch">
+		<div class="searchArea">
+			
+			<!-- 일반사항 -->
+			<div class="unit">							
+				<div class="unit_tit">
+					<span class="sTit color_black">일반사항</span>
+					<button href="#gyeonggongToggle01" class="slideShow fr stateOn" data-role="slideShow">
+						<em class="on">펼침</em>
+						<em class="off">닫힘</em>
+					</button>
+				</div>
+				<div id="gyeonggongToggle01" class="unit_cont bgWhite slideShow-cont" style="display:block;">
+					<table class="tableStyle borderStyle topBold left">
+						<colgroup>
+							<col style="width:15%;">
+							<col style="width:;">
+						</colgroup>
+						<tbody>
+							<tr id="itemGyeonggongJiyeog">
+								<th>지역</th>
+								<td>
+									{{#each codes.jiyeok as |jiyeok|}}
+                                    <span class="rdchBox">
+                                    	<input type="checkbox" id="chkGyeonggongJiyeog{{@index}}" value="{{jiyeok.value}}">
+                                        <label for="chkGyeonggongJiyeog{{@index}}" class="labelCh"><em class="text">{{jiyeok.name}}</em></label>
+                                    </span>
+                                    {{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongMulgeonKind">
+								<th>물건종류</th>
+								<td>
+									{{#each codes.mulgeonKind as |mulgeonKind|}}
+                                    <span class="rdchBox">
+                                    	<input type="checkbox" id="chkGyeonggongMulgeonKind{{@index}}" value="{{mulgeonKind.value}}">
+                                        <label for="chkGyeonggongMulgeonKind{{@index}}" class="labelCh"><em class="text">{{mulgeonKind.name}}</em></label>
+                                    </span>
+                                    {{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongJimok">
+                            	<th>지목</th>
+                                <td>
+                                	{{#each codes.jimok as |jimok|}}
+                                    <span class="rdchBox">
+                                    	<input type="checkbox" id="chkGyeonggongJimok{{@index}}" value="{{jimok.value}}">
+                                        <label for="chkGyeonggongJimok{{@index}}" class="labelCh"><em class="text">{{jimok.name}}</em></label>
+                                    </span>
+                                    {{/each}}
+                                </td>
+                            </tr>
+							<tr id="itemGyeonggongJiboon">
+								<th>지분여부</th>
+								<td>
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongJiboon" value="">
+										<label for="chkGyeonggongJiboon" class="labelCh"><em class="text">지분물건 제외</em></label>
+									</span>
+								</td>
+							</tr>
+							<tr id="itemGyeonggongGamjeongga">
+								<th>감정가</th>
+								<td>
+									{{#each codes.jiga as |jiga|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongGamjeongga{{@index}}" value="{{jiga.value}}">
+										<label for="chkGyeonggongGamjeongga{{@index}}" class="labelCh"><em class="text">{{jiga.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongMinIbchalga">
+								<th>최소입찰가</th>
+								<td>
+									{{#each codes.jiga as |jiga|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongMinIbchalga{{@index}}" value="{{jiga.value}}">
+										<label for="chkGyeonggongMinIbchalga{{@index}}" class="labelCh"><em class="text">{{jiga.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongGongsiStandard">
+								<th>공시지가기준가격</th>
+								<td>
+									{{#each codes.jiga as |jiga|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongGongsiStandard{{@index}}" value="{{jiga.value}}">
+										<label for="chkGyeonggongGongsiStandard{{@index}}" class="labelCh"><em class="text">{{jiga.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							
+							<tr id="itemGyeonggongMinIbchalgaR">
+								<th>최소입찰가율</th>
+								<td>
+									{{#each codes.minibchalratio as |minibchalratio|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongMinIbchalgaR{{@index}}" value="{{minibchalratio.value}}">
+										<label for="chkGyeonggongMinIbchalgaR{{@index}}" class="labelCh"><em class="text">{{minibchalratio.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+			
+			<!-- 토지이용규제조건 -->
+			<div class="unit">							
+				<div class="unit_tit">
+					<span class="sTit color_black">토지이용규제조건</span>
+					<button href="#gyeonggongToggle02" class="slideShow fr" data-role="slideShow">
+						<em class="on">펼침</em>
+						<em class="off">닫힘</em>
+					</button>
+				</div>
+				<div id="gyeonggongToggle02" class="unit_cont bgWhite slideShow-cont">
+					<table class="tableStyle borderStyle topBold left">
+						<colgroup>
+							<col style="width:15%;">
+							<col style="width:;">
+						</colgroup>
+						<tbody>
+							<tr id="itemGyeonggongYongdoJiyeog">
+								<th>용도지역</th>
+								<td>
+									{{#each codes.yongdoJiyeog as |yongdoJiyeog|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongYongdoJiyeog{{@index}}" value="{{yongdoJiyeog.value}}">
+										<label for="chkGyeonggongYongdoJiyeog{{@index}}" class="labelCh"><em class="text">{{yongdoJiyeog.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongYongdoJigu">
+								<th>용도지구</th>
+								<td>
+									{{#each codes.yongdoJigu as |yongdoJigu|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongYongdoJigu{{@index}}" value="{{yongdoJigu.value}}">
+										<label for="chkGyeonggongYongdoJigu{{@index}}" class="labelCh"><em class="text">{{yongdoJigu.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongYongdoGuyeog">
+								<th>용도구역</th>
+								<td>
+									{{#each codes.yongdoGuyeog as |yongdoGuyeog|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongYongdoGuyeog{{@index}}" value="{{yongdoGuyeog.value}}">
+										<label for="chkGyeonggongYongdoGuyeog{{@index}}" class="labelCh"><em class="text">{{yongdoGuyeog.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongEtcLawLimit">
+								<th>기타법률상규제</th>
+								<td>
+									{{#each codes.etcLawLimit as |etcLawLimit|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongEtcLawLimit{{@index}}" value="{{etcLawLimit.value}}">
+										<label for="chkGyeonggongEtcLawLimit{{@index}}" class="labelCh"><em class="text">{{etcLawLimit.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongEtcChamgo">
+								<th>기타참고사항</th>
+								<td>
+									{{#each codes.etcChamgo as |etcChamgo|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongEtcChamgo{{@index}}" value="{{etcChamgo.value}}">
+										<label for="chkGyeonggongEtcChamgo{{@index}}" class="labelCh"><em class="text">{{etcChamgo.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongCityPlan">
+								<th>도시계획시설</th>
+								<td>
+									{{#each codes.cityPlan as |cityPlan|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongCityPlan{{@index}}" value="{{cityPlan.value}}">
+										<label for="chkGyeonggongCityPlan{{@index}}" class="labelCh"><em class="text">{{cityPlan.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongCityPlanState">
+								<th>도시계획시설저촉상태</th>
+								<td>
+									{{#each codes.cityPlanState as |cityPlanState|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongCityPlanState{{@index}}" value="{{cityPlanState.value}}">
+										<label for="chkGyeonggongCityPlanState{{@index}}" class="labelCh"><em class="text">{{cityPlanState.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongBosangPyeonib">
+								<th>보상편입여부</th>
+								<td>
+									{{#each codes.bosangPyeonib as |bosangPyeonib|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongBosangPyeonib{{@index}}" value="{{bosangPyeonib.value}}">
+										<label for="chkGyeonggongBosangPyeonib{{@index}}" class="labelCh"><em class="text">{{bosangPyeonib.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+							
+				</div>
+			</div>
+			
+			<!-- 투자유망물건조건 -->
+			<div class="unit">							
+				<div class="unit_tit">
+					<span class="sTit color_black">투자유망물건조건</span>
+					<button href="#gyeonggongToggle03" class="slideShow fr" data-role="slideShow">
+						<em class="on">펼침</em>
+						<em class="off">닫힘</em>
+					</button>
+				</div>
+				<div id="gyeonggongToggle03" class="unit_cont bgWhite slideShow-cont">
+					<table class="tableStyle borderStyle topBold left">
+						<colgroup>
+							<col style="width:15%;">
+							<col style="width:;">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>HP등급</th>
+								<td>							
+									<!-- HP등급 Range -->
+									<div class="rangeSliderWrap">
+										<div id="gyeonggongHpGrade" class="gyeonggongHpGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;"></div>
+									</div>
+								</td>
+							</tr>
+							<tr id="itemGyeonggongGyeongsado">
+								<th>경사도</th>
+								<td>
+									{{#each codes.gyeongsado as |gyeongsado|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongGyeongsado{{@index}}" value="{{gyeongsado.value}}">
+										<label for="chkGyeonggongGyeongsado{{@index}}" class="labelCh"><em class="text">{{gyeongsado.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							<tr id="itemGyeonggongJyeobdo">
+								<th>접도현황</th>
+								<td>
+									{{#each codes.jyeobdoState as |jyeobdoState|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongJyeobdo{{@index}}" value="{{jyeobdoState.value}}">
+										<label for="chkGyeonggongJyeobdo{{@index}}" class="labelCh"><em class="text">{{jyeobdoState.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+							<tr>
+								<th>환경평가등급</th>
+								<td>
+									<!-- 환경평가등급 Range -->
+									<div class="rangeSliderWrap">
+										<div id="gyeonggongEnvGrade" class="gyeonggongEnvGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;"></div>
+									</div>
+								</td>
+							</tr>
+							<tr id="itemGyeonggongTojiUseLimitCancel">
+								<th>토지이용규제해소물건</th>
+								<td>
+									{{#each codes.tojiUseLimitCancel as |tojiUseLimitCancel|}}
+									<span class="rdchBox">
+										<input type="checkbox" id="chkGyeonggongTojiUseLimitCancel{{@index}}" value="{{tojiUseLimitCancel.value}}">
+										<label for="chkGyeonggongTojiUseLimitCancel{{@index}}" class="labelCh"><em class="text">{{tojiUseLimitCancel.name}}</em></label>
+									</span>
+									{{/each}}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div><!-- end search area -->
+		
+		<div class="searchResultArea">
+			<div class="unit">	
+				<div class="unit_cont tabulatorWrap">
+					<!-- tabulator로 그리는 table 부분-->
+					<div id="dvGyeonggongResult" class="tableStyle gridStyle center"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <div class="footArea">
-	<button type="button" class="btnstyle middle blue">검색</button>
+	<button type="button" class="btnstyle middle blue" id="btnGyeonggongSearch">검색</button>
+	<button type="button" class="btnstyle middle blue" id="btnGyeonggongSearchPrev" style="display:none;">이전</button>
 	<button type="button" class="btnstyle middle gray MENU_CLOSE" data-menu="{{menuName}}">닫기</button>
 </div>

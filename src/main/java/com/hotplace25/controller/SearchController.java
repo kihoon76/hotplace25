@@ -38,18 +38,21 @@ public class SearchController {
 			ObjectMapper o = new ObjectMapper();
 			System.err.println(o.writeValueAsString(gyeongGongIn));
 			vo.setSuccess(true);
-//			GyeongGongmaeOut gg = new GyeongGongmaeOut();
-//			gg.setGubun("G");
-//			gg.setType("대");
-//			gg.setAddress("서울시 강남구 도곡동 963");
-//			gg.setLat(127.152615967f);
-//			gg.setLng(37.539648921f);
+			GyeongGongmaeOut gg = new GyeongGongmaeOut();
+			gg.setGubun("G");
+			gg.setType("대");
+			gg.setAddress("서울시 강남구 도곡동 963");
+			gg.setLat(37.50838492780f);
+			gg.setLng(127.09740818600f);
 			
-			List<GyeongGongmaeOut> list = searchService.getGyeongGongSearch(gyeongGongIn);
+			
+			/*List<GyeongGongmaeOut> list = searchService.getGyeongGongSearch(gyeongGongIn);
 			int size = list.size();
 			for(int i=0; i<size; i++) {
 				vo.addObject(list.get(i));
-			}
+			}*/
+			
+			vo.addObject(gg);
 		}
 		catch(Exception e) {
 			vo.setSuccess(false);
@@ -83,5 +86,55 @@ public class SearchController {
 		
 		return list;
 		
+	}
+	
+	@PostMapping("tojiuselimitcancel")
+	@ResponseBody
+	public List<Jangmi> getTojiUseLimitCancelList(@RequestBody Map<String, Object>  param) {
+		
+		System.err.println(param.toString());
+		
+		List<Jangmi> list = new ArrayList<>();
+		Jangmi j = null;
+		
+		for(int i=0; i<20; i++) {
+			j = new Jangmi();
+			j.setNum(i + 1);
+			j.setCityPlan("도로");
+			j.setJibeon("서울시 송파구 잠실본동 40");
+			j.setYongdoJiyeog("녹지지역");
+			j.setHpGrade("2등급");
+			j.setBosangPyeonib("편입");
+			j.setLat(37.50838492780f);
+			j.setLng(127.09740818600f);
+			list.add(j);
+		}
+		
+		return list;
+	}
+	
+	@PostMapping("devpilji")
+	@ResponseBody
+	public List<Jangmi> getDevPiljiList(@RequestBody Map<String, Object>  param) {
+		
+		System.err.println(param.toString());
+		
+		List<Jangmi> list = new ArrayList<>();
+		Jangmi j = null;
+		
+		for(int i=0; i<20; i++) {
+			j = new Jangmi();
+			j.setNum(i + 1);
+			j.setCityPlan("도로");
+			j.setJibeon("서울시 송파구 잠실본동 40");
+			j.setYongdoJiyeog("녹지지역");
+			j.setHpGrade("2등급");
+			j.setBosangPyeonib("편입");
+			j.setLat(37.50838492780f);
+			j.setLng(127.09740818600f);
+			list.add(j);
+		}
+		
+		return list;
 	}
 }

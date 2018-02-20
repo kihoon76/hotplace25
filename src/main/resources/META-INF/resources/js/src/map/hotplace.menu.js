@@ -5,6 +5,7 @@
 	var _menus = hotplace.config.menus;
 	var _addrSearchMenu = '#' + _menus.ADDRESS_SEARCH,
 		_toojaRegionSearchMenu = '#' + _menus.TOOJA_SEARCH,
+		_gyeonggongSearchMenu = '#' + _menus.GYEONGGONG_SEARCH,
 		_mulgeonViewMenu = '#' + _menus.MULGEON_VIEW,
 		_heatmapViewMenu = '#' + _menus.HEATMAP_VIEW;
 		
@@ -27,7 +28,54 @@
 //			{title:'등기사건', field:'deunggi', align:'center', width:80},
 			{title:'위도', field:'lat', visible:false},
 			{title:'경도', field:'lng', visible: false}
-		]
+		],
+		tojiuselimitcancel:[
+		    {title:'연번', field:'num', align:'center', width:70},
+		    {title:'지번주소', field:'jibeon', align:'left', width:170, headerFilter:'input', headerFilterPlaceholder:'주소검색'},
+		    {title:'도시계획시설', field:'cityPlan', align:'center', width:100, headerFilter:true,
+		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.cityPlan)
+		    },
+			{title:'용도지역', field:'yongdoJiyeog', align:'center', width:80, headerFilter:true,
+		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.yongdoJiyeog)
+			},
+			{title:'HP등급', field:'hpGrade', align:'center', width:80},
+//			{title:'경공매 진행 여부', field:'gong', align:'center', width:120},
+			{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter:true,
+				editor:_makeTabulatorFilterFromCode(hotplace.config.codes.bosangPyeonib)
+			},
+//			{title:'등기사건', field:'deunggi', align:'center', width:80},
+			{title:'위도', field:'lat', visible:false},
+			{title:'경도', field:'lng', visible: false}
+		],
+		devpilji:[
+		    {title:'연번', field:'num', align:'center', width:70},
+		    {title:'지번주소', field:'jibeon', align:'left', width:170, headerFilter:'input', headerFilterPlaceholder:'주소검색'},
+		    {title:'도시계획시설', field:'cityPlan', align:'center', width:100, headerFilter:true,
+		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.cityPlan)
+		    },
+			{title:'용도지역', field:'yongdoJiyeog', align:'center', width:80, headerFilter:true,
+		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.yongdoJiyeog)
+			},
+			{title:'HP등급', field:'hpGrade', align:'center', width:80},
+//		        			{title:'경공매 진행 여부', field:'gong', align:'center', width:120},
+			{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter:true,
+				editor:_makeTabulatorFilterFromCode(hotplace.config.codes.bosangPyeonib)
+			},
+//		        			{title:'등기사건', field:'deunggi', align:'center', width:80},
+			{title:'위도', field:'lat', visible:false},
+			{title:'경도', field:'lng', visible: false}
+		],
+		gyeonggong:[
+		    { title:'고유번호', field:'unu', width:100 },
+			{ title:'구분', field:'gubun', width:100, headerFilter:true, 
+		    	editor:_makeTabulatorFilterFromCode({'gongmae': {name:'공매', value: 'G'}, 'gyeongmae':{name:'경매', value: 'K'}}) 
+		    },
+			{ title:'물건유형', field:'type', width:150,  headerFilter:true, editor:_makeTabulatorFilterFromCode(hotplace.config.codes.jimok)},
+			{ title:'감정평가액', field:'gamjeongga', width:150, formatter:'money', formatterParams: {thousand: ',', decimal: ''}},
+			{ title:'주소', field:'address',   headerFilter:'input', headerFilterPlaceholder:'주소검색' },
+			{ title:'위도', field:'lat', visible: false },
+			{ title:'경도', field:'lng', visible: false },
+		],
 	}
 	
 	function _makeTabulatorFilterFromCode(code) {
@@ -43,6 +91,26 @@
 		return null;
 	}
 	
+	function _getMinMax(item) {
+		var minmax = [];
+		var dataArr = _getCheckboxesData(item);
+		var len = dataArr.length;
+		for(var i=0; i<len; i++) {
+			if(dataArr[i].startsWith('m')) {
+				minmax.push({min:0, max:parseInt(dataArr[i].substring(1), 10)});
+			}
+			else if(dataArr[i].startsWith('M')) {
+				minmax.push({min:parseInt(dataArr[i].substring(1), 10), max:0});
+			}
+			else if(dataArr[i].indexOf('|')) {
+				var sp = dataArr[i].split('|');
+				minmax.push({min:parseInt(sp[0], 10), max:parseInt(sp[1], 10)});
+			}
+		}
+		
+		return minmax;
+	}
+	
 	menu.initMenuDom = function(menuId) {
 		var showAfterFn;
 		
@@ -54,6 +122,7 @@
 			showAfterFn = _initToojaDom();
 			break;
 		case _menus.GYEONGGONG_SEARCH:
+			showAfterFn = _initGyeonggongDom();
 			break;
 		case _menus.MULGEON_VIEW:
 			showAfterFn = _initMulgeonDom();
@@ -84,28 +153,60 @@
 		switch(cate) {
 		case _toojaTab.JangmiCityPlan :
 			param = {
-				'cityPlan': _getCheckboxesData('itemCityPlanTab01'),
-				'cityPlanState' : _getCheckboxesData('itemCityPlanStateTab01'),
-				'bosangPyeonib': _getCheckboxesData('itemBosangPyeonibTab01'),
+				'cityPlan':_getCheckboxesData('itemCityPlanTab01'),
+				'cityPlanState':_getCheckboxesData('itemCityPlanStateTab01'),
+				'bosangPyeonib':_getCheckboxesData('itemBosangPyeonibTab01'),
 				'jiyeog':_getCheckboxesData('itemJiyeogTab01'),
 				'jimok':_getCheckboxesData('itemJimokTab01'),
 				'gongsi':_getCheckboxesData('itemGongsiTab01'),
-				'yongdojiyeog':_getCheckboxesData('itemYongdoJiyeogTab01'),
-				'yongdojigu':_getCheckboxesData('itemYongdoJiguTab01'),
-				'yongdoguyeog':_getCheckboxesData('itemYongdoGuyeogTab01'),
-				'etclawlimit':_getCheckboxesData('itemEtcLawLimitTab01'),
-				'etcchamgo':_getCheckboxesData('itemEtcChamgoTab01'),
-				'hpgrade':hotplace.dom.getSliderValues(_toojaRegionSearchMenu, _jangmiHpGrade.substring(1)),
+				'yongdoJiyeog':_getCheckboxesData('itemYongdoJiyeogTab01'),
+				'yongdoJigu':_getCheckboxesData('itemYongdoJiguTab01'),
+				'yongdoGuyeog':_getCheckboxesData('itemYongdoGuyeogTab01'),
+				'etcLawLimit':_getCheckboxesData('itemEtcLawLimitTab01'),
+				'etcChamgo':_getCheckboxesData('itemEtcChamgoTab01'),
+				'hpGrade':hotplace.dom.getSliderValues(_toojaRegionSearchMenu, _jangmiHpGrade.substring(1)),
 				'gyeongsado': _getCheckboxesData('itemGyeongsadoTab01'),
-				'jyeobdostate': _getCheckboxesData('itemJyeobdoTab01'),
-				'envgrade':hotplace.dom.getSliderValues(_toojaRegionSearchMenu, _jangmiEnvGrade.substring(1)),
+				'jyeobdoState': _getCheckboxesData('itemJyeobdoTab01'),
+				'envGrade':hotplace.dom.getSliderValues(_toojaRegionSearchMenu, _jangmiEnvGrade.substring(1)),
+				'tojiUseLimitCancel':_getCheckboxesData('itemTojiUseLimitCancelTab01'),
 			};
 			break;
 		case _toojaTab.TojiUseLimitCancel :
-			param = {};
+			param = {
+				'yongdoJiyeog':_getCheckboxesData('itemYongdoJiyeogTab02'),
+				'yongdoJigu':_getCheckboxesData('itemYongdoJiguTab02'),
+				'yongdoGuyeog':_getCheckboxesData('itemYongdoGuyeogTab02'),
+				'etcLawLimit':_getCheckboxesData('itemEtcLawLimitTab02'),
+				'cityPlan': _getCheckboxesData('itemCityPlanTab02'),
+				'jiyeog':_getCheckboxesData('itemJiyeogTab02'),
+				'jimok':_getCheckboxesData('itemJimokTab02'),
+				'gongsi':_getCheckboxesData('itemGongsiTab02'),
+				'hpGrade':hotplace.dom.getSliderValues(_toojaRegionSearchMenu, _tojiUseLimitHpGrade.substring(1)),
+				'gyeongsado': _getCheckboxesData('itemGyeongsadoTab02'),
+				'jyeobdoState': _getCheckboxesData('itemJyeobdoTab02'),
+				'envGrade':hotplace.dom.getSliderValues(_toojaRegionSearchMenu, _tojiUseLimitEnvGrade.substring(1)),
+				'tojiUseLimitCancel':_getCheckboxesData('itemTojiUseLimitCancelTab02'),
+			};
 			break;
 		case _toojaTab.DevPilji :
-			param = {};
+			param = {
+				'hpGrade':hotplace.dom.getSliderValues(_toojaRegionSearchMenu, _devPiljiHpGrade.substring(1)),
+				'gyeongsado':_getCheckboxesData('itemGyeongsadoTab03'),
+				'jyeobdoState':_getCheckboxesData('itemJyeobdoTab03'),
+				'envGrade':hotplace.dom.getSliderValues(_toojaRegionSearchMenu, _devPiljiEnvGrade.substring(1)),
+				'tojiUseLimitCancel':_getCheckboxesData('itemTojiUseLimitCancelTab03'),
+				'cityPlan':_getCheckboxesData('itemCityPlanTab03'),
+				'cityPlanState':_getCheckboxesData('itemCityPlanStateTab03'),
+				'bosangPyeonib':_getCheckboxesData('itemBosangPyeonibTab03'),
+				'jiyeog':_getCheckboxesData('itemJiyeogTab03'),
+				'jimok':_getCheckboxesData('itemJimokTab03'),
+				'gongsi':_getCheckboxesData('itemGongsiTab03'),
+				'yongdoJiyeog':_getCheckboxesData('itemYongdoJiyeogTab03'),
+				'yongdoJigu':_getCheckboxesData('itemYongdoJiguTab03'),
+				'yongdoGuyeog':_getCheckboxesData('itemYongdoGuyeogTab03'),
+				'etcLawLimit':_getCheckboxesData('itemEtcLawLimitTab03'),
+				'etcChamgo':_getCheckboxesData('itemEtcChamgoTab03'),
+			};
 			break;
 		}
 		
@@ -378,7 +479,7 @@
 			var k = tabStr.substring(4);
 			_activeToojaTab = _toojaTab[k];
 			
-			//버튼정보 설정
+			//버튼정보 복원
 			_restoreBtn();
 		});
 		
@@ -387,14 +488,27 @@
 		.on('click', function() {
 			switch(_activeToojaTab) {
 			case _toojaTab.JangmiCityPlan:
-				_searchJangmiTab(_dvToojaTab01Result);
+				_searchTooja(_dvToojaTab01Result, {
+					url:'search/jangmi',
+					data:_getToojaParam(_toojaTab.JangmiCityPlan),
+					columns:_tabulatorColumns.jangmi
+				});
 				break;
 			case _toojaTab.TojiUseLimitCancel:
+				_searchTooja(_dvToojaTab02Result, {
+					url:'search/tojiuselimitcancel',
+					data:_getToojaParam(_toojaTab.TojiUseLimitCancel),
+					columns:_tabulatorColumns.tojiuselimitcancel
+				});
 				break;
 			case _toojaTab.DevPilji:
+				_searchTooja(_dvToojaTab03Result, {
+					url:'search/devpilji',
+					data:_getToojaParam(_toojaTab.DevPilji),
+					columns:_tabulatorColumns.devpilji
+				});
 				break;
 			}
-			
 		});
 		
 		$(_btnToojaSearchPrev)
@@ -453,10 +567,10 @@
 		}
 	}
 	
-	function _searchJangmiTab(tableId, fn) {
+	function _searchTooja(tableId, param, fn) {
 		hotplace.ajax({
-			url: 'search/jangmi',
-			data: JSON.stringify(_getToojaParam(_toojaTab.JangmiCityPlan)),
+			url: param.url, //'search/jangmi',
+			data: JSON.stringify(param.data/*_getToojaParam(_toojaTab.JangmiCityPlan)*/),
 			contentType: 'application/json; charset=UTF-8',
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
@@ -467,7 +581,7 @@
 				hotplace.dom.createTabulator(tableId, {
 				    height:700, // set height of table
 				    fitColumns:true, //fit columns to width of table (optional)
-				    columns:_tabulatorColumns.jangmi,
+				    columns:param.columns,/*_tabulatorColumns.jangmi,*/
 				    movableColumns:true,
 				    rowClick:function(e, row){ //trigger an alert message when the row is clicked
 				       var data = row.getData();
@@ -481,29 +595,164 @@
 				       
 				       hotplace.maps.panToLikeAddressSearch(data.lat, data.lng, _menus.TOOJA_SEARCH, {address:data.jibeon});
 				       
-				       /*var formName, icon = '', callbak = null;
-				       
-				       if(data.gubun == 'G') {
-				    	   formName = 'gyeongmaeForm';
-				    	   icon = hotplace.maps.MarkerTypes.GYEONGMAE;
-				    	   callback = function(map, marker, win) {
-					    	   marker._data = {info:{unu:data.unu}};
-					    	   hotplace.gyeongmae.markerClick(map, marker, win);
-					       }
-				       }
-				       else {
-				    	   formName = 'gongmaeForm';
-				    	   icon = hotplace.maps.MarkerTypes.GONGMAE;
-				       }
-				       
-				       _moveMulgeon(data.lng, data.lat, data.address, formName, callback, icon);
-				       */
 				    },
 				}, data);
 				if($.isFunction(fn)) fn();
 			}
 		});
 	}
+	
+	
+	/*****************************************************************************
+	 * 경공매 검색
+	 ****************************************************************************/
+	var _gyeonggongHpGrade = '#gyeonggongHpGrade',
+		_gyeonggongEnvGrade = '#gyeonggongEnvGrade',
+		_btnGyeonggongSearch = '#btnGyeonggongSearch',
+		_btnGyeonggongSearchPrev = '#btnGyeonggongSearchPrev',
+		_dvGyeonggongResult = '#dvGyeonggongResult';
+	
+	function _gyeonggongDvToogle() {
+		var $searchArea = $(_gyeonggongSearchMenu  + ' .searchArea'),
+			$searchResultArea = $(_gyeonggongSearchMenu  + ' .searchResultArea'),
+			$btnGyeonggongSearch = $(_btnGyeonggongSearch),
+			$btnGyeonggongSearchPrev = $(_btnGyeonggongSearchPrev);
+		
+		if($btnGyeonggongSearch.is(':visible')) {
+			$btnGyeonggongSearch.hide();
+			$btnGyeonggongSearchPrev.show();
+		}
+		else {
+			$btnGyeonggongSearch.show();
+			$btnGyeonggongSearchPrev.hide();
+		}
+		
+		if($searchArea.is(':visible')) {
+			$searchArea.hide();
+			$searchResultArea.show();
+		}
+		else {
+			$searchArea.show();
+			$searchResultArea.hide();
+		}
+	}
+	
+	function _initGyeonggongDom() {
+		hotplace.dom.listExpandCollapse(_gyeonggongSearchMenu);
+		hotplace.dom.initSlider(_gyeonggongSearchMenu, false, [{
+			targetId:_gyeonggongHpGrade
+		},{
+			targetId:_gyeonggongEnvGrade,
+			bounds:{min: -5, max: -1},
+			defaultValues:{min: -2, max: -1}
+		}]);
+		
+		$(_btnGyeonggongSearch)
+		.off('click')
+		.on('click', function() {
+			_searchGyeonggong()
+		});
+		
+		$(_btnGyeonggongSearchPrev)
+		.off('click')
+		.on('click', function() {
+			_gyeonggongDvToogle();
+		});
+	}
+	
+	function _getReverseMinMax(obj) {
+		if(obj) {
+			var originMax = obj.max;
+			var originMin = obj.min;
+			
+			obj.max = Math.abs(originMin);
+			obj.min = Math.abs(originMax);
+		}
+		
+		return obj;
+	}
+	
+	function _searchGyeonggong() {
+		/*console.log({
+			'jiyeog':_getCheckboxesData('itemGyeonggongJiyeog'),
+			'mulgeonKind':_getCheckboxesData('itemGyeonggongMulgeonKind'),
+			'jimok':_getCheckboxesData('itemGyeonggongJimok'),
+			'jiboon':_getCheckboxesData('itemGyeonggongJiboon'),
+			'gamjeongga':_getMinMax('itemGyeonggongGamjeongga'),
+			'minIbchalga':_getMinMax('itemGyeonggongMinIbchalga'),
+			'gongsi':_getMinMax('itemGyeonggongGongsiStandard'),
+			'minIbchalgaR':_getMinMax('itemGyeonggongMinIbchalgaR'),
+			'yongdoJiyeog':_getCheckboxesData('itemGyeonggongYongdoJiyeog'),
+			'yongdoJigu':_getCheckboxesData('itemGyeonggongYongdoJigu'),
+			'yongdoGuyeog':_getCheckboxesData('itemGyeonggongYongdoGuyeog'),
+			'etcLawLimit':_getCheckboxesData('itemGyeonggongEtcLawLimit'),
+			'etcChamgo':_getCheckboxesData('itemGyeonggongEtcChamgo'),
+			'cityPlan':_getCheckboxesData('itemGyeonggongCityPlan'),
+			'cityPlanState':_getCheckboxesData('itemGyeonggongCityPlanState'),
+			'bosangPyeonib':_getCheckboxesData('itemGyeonggongBosangPyeonib'),
+			'hpGrade':hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongHpGrade.substring(1)),
+			'envGrade':hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongEnvGrade.substring(1))
+		});
+		
+		return;*/
+		
+		//min max 값을 교환해야 한다
+		var hpGrade = hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongHpGrade.substring(1));
+		
+		hotplace.ajax({
+			url: 'search/gyeonggong',
+			data: JSON.stringify({
+				'jiyeog':_getCheckboxesData('itemGyeonggongJiyeog'),
+				'mulgeonKind':_getCheckboxesData('itemGyeonggongMulgeonKind'),
+				'jimok':_getCheckboxesData('itemGyeonggongJimok'),
+				'jiboon':_getCheckboxesData('itemGyeonggongJiboon'),
+				'gamjeongga':_getMinMax('itemGyeonggongGamjeongga'),
+				'minIbchalga':_getMinMax('itemGyeonggongMinIbchalga'),
+				'gongsi':_getMinMax('itemGyeonggongGongsiStandard'),
+				'minIbchalgaR':_getMinMax('itemGyeonggongMinIbchalgaR'),
+				'yongdoJiyeog':_getCheckboxesData('itemGyeonggongYongdoJiyeog'),
+				'yongdoJigu':_getCheckboxesData('itemGyeonggongYongdoJigu'),
+				'yongdoGuyeog':_getCheckboxesData('itemGyeonggongYongdoGuyeog'),
+				'etcLawLimit':_getCheckboxesData('itemGyeonggongEtcLawLimit'),
+				'etcChamgo':_getCheckboxesData('itemGyeonggongEtcChamgo'),
+				'cityPlan':_getCheckboxesData('itemGyeonggongCityPlan'),
+				'cityPlanState':_getCheckboxesData('itemGyeonggongCityPlanState'),
+				'bosangPyeonib':_getCheckboxesData('itemGyeonggongBosangPyeonib'),
+				'hpGrade':_getReverseMinMax(hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongHpGrade.substring(1))),
+				'envGrade':_getReverseMinMax(hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongEnvGrade.substring(1))),
+				'tojiUseLimitCancel':_getCheckboxesData('itemGyeonggongTojiUseLimitCancel')
+			}),
+			contentType: 'application/json; charset=UTF-8',
+			success: function(data, textStatus, jqXHR) {
+				console.log(data);
+				
+				if(data.success) {
+					_gyeonggongDvToogle();
+					
+					hotplace.dom.createTabulator(_dvGyeonggongResult, {
+					    height:700, // set height of table
+					    fitColumns:true, //fit columns to width of table (optional)
+					    columns:_tabulatorColumns.gyeonggong,
+					    movableColumns:true,
+					    rowClick:function(e, row){ //trigger an alert message when the row is clicked
+					       var data = row.getData();
+					       console.log(data)
+					       
+					       if(data.lng == 0) {
+					    	   hotplace.processAjaxError(hotplace.error.MISS_LATLNG);
+					    	   return;
+					       }
+					       
+					       
+					       hotplace.maps.panToLikeAddressSearch(data.lat, data.lng, _menus.GYEONGGONG_SEARCH, {address:data.jibeon});
+					       
+					    },
+					}, data.datas);
+				}
+			}
+		});
+	}
+	
 	/*****************************************************************************
 	 * 물건보기 검색
 	 ****************************************************************************/
