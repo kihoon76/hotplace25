@@ -611,7 +611,9 @@
 		_appendModalPopup('noticeListForm');
 		hotplace.notice.showPage();
 		
-		dom.openModal('', {width: 1000}, null);
+		dom.openModal('', {width: 1000}, function() {
+			hotplace.notice.clear();
+		});
 	}
 	
 	dom.showGyeongmaeDetail = function(fn) {
@@ -934,6 +936,8 @@
 		_setModalMaxHeight($modal);
 		_setModalMarginTop($modal);
 	}
+	
+	dom.initModalPosition = _initModalSize;
 	
 	/*************************************************************
 	 * 모달창 열린후 발생하는 이벤트 핸들러

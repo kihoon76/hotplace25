@@ -103,6 +103,8 @@
 			hotplace.dom.getModalPopId(), //loadEl
 			false //async
 		);
+		
+		hotplace.dom.initModalPosition($(hotplace.dom.getModalPopId()));
 	}
 	
 	function _makeList(data) {
@@ -135,6 +137,17 @@
 		_getNoticeList(pgNum || 1);
 	}
 	
+	notice.clear = function() {
+		searchCondition = 'all',
+		searchMode = false,
+		searchParam = {
+			type: '',
+			text: ''
+		};
+		
+		$(_dvNoticeSearchItem + ' input[type=text]').val();
+	}
+	
 	function _showHideNoticeCont($link){
 		var $tbody = $link.parents('tbody');
 		var $cont  = $link.parents('tr').next('tr.contentViewBox');
@@ -157,6 +170,7 @@
 	$(document).on('click', _noticeTable + ' .contView', function(e) {	
 		_makeContentDetail($(this));
 		_showHideNoticeCont($(this));
+		hotplace.dom.initModalPosition($(hotplace.dom.getModalPopId()));
 	});
 	
 	
