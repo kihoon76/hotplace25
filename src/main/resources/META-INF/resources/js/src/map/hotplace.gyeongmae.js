@@ -241,7 +241,7 @@
 				deunglogbeonho: $(this).data('deunglogbeonho')
 			}
 			
-			hotplace.dom.showGyeongmaeDetail();
+			hotplace.dom.showGyeongmaeDetail(null, {path: hotplace.getContextUrl() + 'resources/'});
 			
 			hotplace.ajax({
 				url: 'gyeongmae/detail',

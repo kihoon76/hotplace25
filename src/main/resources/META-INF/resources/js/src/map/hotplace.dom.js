@@ -616,8 +616,8 @@
 		});
 	}
 	
-	dom.showGyeongmaeDetail = function(fn) {
-		_appendModalPopup('gyeongmaeDetailForm');
+	dom.showGyeongmaeDetail = function(fn, param) {
+		_appendModalPopup('gyeongmaeDetailForm', null ,param);
 		
 		dom.openModal('', null, null, fn);
 	}
