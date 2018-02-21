@@ -934,6 +934,7 @@
 		        ];
 
 		        _venderMap.setCursor("url('"+ hotplace.getContextUrl() +"resources/img/icon/rule.cur'), default");
+		        this._distanceStartClicked = false;
 		    },
 
 		    _startArea: function() {
@@ -1070,12 +1071,19 @@
 		        	if(isLast) {
 		        		this._arrDistance.push(uuid);
 		        		var uuids = this._arrDistance.join(',');
-		        		icon.content = '<a href="#" class="calc-distance-link" data-uuid="' + uuids + '"><img src="' + hotplace.getContextUrl() + 'resources/img/icon/close_icon.png" /></a><div class="naver-distance-vertex-total-text"><span>'+ text +'</span></div>';
+		        		icon.content = '<a href="#" class="calc-distance-link" data-uuid="' + uuids + '"><div class="naver-distance-vertex-total-text"><span>총거리 : ('+ text +')</span></div><img src="' + hotplace.getContextUrl() + 'resources/img/icon/close_icon.png" /></a>';
 		        		this._arrDistance.length = 0;
 		        	}
 		        	else {
 		        		this._arrDistance.push(uuid);
-		        		icon.content = '<div class="naver-distance-vertex"><div class="naver-distance-vertex-text"><span>'+ text +'</span></div></div>';
+		        		
+		        		if(!this._distanceStartClicked) {
+		        			icon.content = '<div class="naver-distance-vertex-start"><div class="naver-distance-vertex-start-text"><span>시작점</span></div></div>';
+		        			this._distanceStartClicked = true;
+		        		}
+		        		else {
+		        			icon.content = '<div class="naver-distance-vertex"><div class="naver-distance-vertex-text"><span>'+ text +'</span></div></div>';
+		        		}
 		        	}
 		        }
 		        else {
@@ -1134,6 +1142,7 @@
 
 		            // 폴리라인의 거리를 미터 단위로 반환합니다.
 		            this._lastDistance = this._polyline.getDistance();
+		            this._addMileStone(coord);
 		        }
 		        else {
 		            this._guideline.setPath([e.coord]);

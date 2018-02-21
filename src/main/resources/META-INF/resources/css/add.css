@@ -1,1 +1,8 @@
 .ajax-file-upload-statusbar {margin:10px 0px 0px 0px;}
+.naver-distance-vertex {position: absolute; z-index: 1; font-size: 1px; line-height: 1px; background-color: rgb(255, 255, 255); border: 2px solid rgb(252, 26, 26); width: 10px; height: 10px; left: -4px; top: -5px;}
+.naver-distance-vertex-text {position:absolute; z-index:2; padding:2px 3px 0; border:1px solid; background:#fff; font-size:11px; letter-spacing:-1px; white-space:nowrap; line-height:14px; left:6px; top:6px; color:#ff0000;}
+.calc-distance-link {position:absolute; z-index:2; left:95px; top:30px;}
+.naver-distance-vertex-total-text {position:absolute; z-index:2; left:-100px; top:0px; padding:2px 3px 0; border:2px solid blue; background:#fff; font-size:11px; letter-spacing:-1px; white-space:nowrap; line-height:30px;}
+.naver-distance-vertex-start {position: absolute; z-index: 1; font-size: 1px; line-height: 1px; background-color: rgb(255, 255, 255); border: 2px solid rgb(252, 26, 26); width: 10px; height: 10px; left: -4px; top: -5px;}
+.naver-distance-vertex-start-text {position:absolute; z-index:2; padding:2px 3px 0; border:1px solid; background:#ff0000; font-size:13px; letter-spacing:-1px; white-space:nowrap; line-height:20px; left:0px; top:-25px; color:#fff; font-weight:bold;}
+.naver-area-div {padding: 2px 3px 0; border:2px solid blue; background:#fff; font-size:12px; letter-spacing: -1px; line-height: 30px;}
