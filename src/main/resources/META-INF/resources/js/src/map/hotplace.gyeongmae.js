@@ -28,7 +28,7 @@
 				html.push('<td>' + num + '<br/>' + yongdo + '</td>');
 				html.push('<td>' + jinhaengmulgeons[i].sojaejinaeyeog + '</td>');
 				html.push('<td>' + jinhaengmulgeons[i].bigo + '</td>');
-				html.push('<td>' + jinhaengmulgeons[i].gamjeongpyeongga.money() + '원<hr/>' + jinhaengmulgeons[i].minmaegaggagyeog.money() + '원</td>');
+				html.push('<td>' + jinhaengmulgeons[i].gamjeongpyeongga.money() + '원<br/>' + jinhaengmulgeons[i].minmaegaggagyeog.money() + '원</td>');
 				html.push('<td>' + damdang + '<br/>' + maegaggiil + '</td>');
 				html.push('<td>' + jinhaengmulgeons[i].status + '</td>');
 				html.push('</tr>');

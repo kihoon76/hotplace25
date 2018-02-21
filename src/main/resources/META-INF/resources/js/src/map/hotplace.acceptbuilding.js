@@ -2,6 +2,14 @@
  * @namespace hotplace.acceptbuilding
  */
 (function(acceptbuilding, $) {
+	var _dvAcceptBuildingInfoWin = '#dvAcceptBuildingInfoWin',
+		_btnAcceptBuildingThumbClose = '#btnAcceptBuildingThumbClose',
+		_btnAcceptBuildingPano = '#btnAcceptBuildingPano',
+		_dvAcceptbuildingPano = '#dvAcceptbuildingPano',
+		_dvAcceptbuildingPanoInfo = '#dvAcceptbuildingPanoInfo',
+		_tbAcceptBuildingData = '#tbAcceptBuildingData',
+		_tbAcceptBuildingPano = '#tbAcceptBuildingPano';
+	
 	
 	function _getThumb(data) {
 		hotplace.ajax({
@@ -9,7 +17,7 @@
 			method: 'GET',
 			dataType: 'json',
 			data: {unu: data.info.unu},
-			loadEl: '#dvAcceptbuilding',
+			loadEl: _dvAcceptBuildingInfoWin,
 			success: function(data, textStatus, jqXHR) {
 				$('#aDaejiwichi').text(data.daejiwichi);
 				$('#aAcceptgubun').text(data.acceptgubun);
@@ -36,11 +44,13 @@
 	}
 	
 	function _bindGeoClickHandler(x, y) {
-		$('#btnAcceptbuildingPano').on('click', function() {
-			$('#tbAcceptbuildingThumb').hide();
-			$('#tbAcceptbuildingPano').show();
-			hotplace.panomaps.createPanomaps('dvAcceptbuildingPano', x, y, true, function(location, msg) {
-				$('#dvAcceptbuildingPanoInfo').html(msg);
+		$(_btnAcceptBuildingPano)
+		.off('click')
+		.on('click', function() {
+			$(_tbAcceptBuildingData).hide();
+			$(_tbAcceptBuildingPano).show();
+			hotplace.panomaps.createPanomaps(_dvAcceptbuildingPano.substring(1), x, y, true, function(location, msg) {
+				$(_dvAcceptbuildingPanoInfo).html(msg);
 			});
 		});
 	}
@@ -57,17 +67,18 @@
 		win.open(map, marker);
 		var tForm = hotplace.dom.getTemplate('acceptbuildingForm');
 		
-		//win.setOptions('anchorSkew', true);
-		win.setOptions('maxWidth', 300);
 		win.setOptions('content', tForm());
 		
-		$('#btnAcceptbuildingClose').on('click', function() {
+		$(_btnAcceptBuildingThumbClose)
+		.off('click')
+		.on('click', function() {
 			win.close();
 		});
 		
-		_bindDetailClickHandler(win);
+		/*_bindDetailClickHandler(win);
 		_bindGeoClickHandler(data.location[1], data.location[0]);
-		_bindThumbClickHandler();
+		_bindThumbClickHandler();*/
+		_bindGeoClickHandler(data.location[1], data.location[0]);
 		_getThumb(data);
 	}
 }(

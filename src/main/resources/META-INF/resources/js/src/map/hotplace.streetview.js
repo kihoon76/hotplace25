@@ -63,6 +63,7 @@
 	
 	streetview.startPanorama = function(map, coord) {
 		map.setOptions('scaleControl', false);
+		_$dvStreetViewContainer.css({width:($(window).width()) + 'px'});
 		_$dvStreetViewContainer.show();
 		_$dvStreetViewMinimap.show();
 		

@@ -40,7 +40,8 @@ gulp.task('map_min', function() {
 	       srcJsDir + '/map/hotplace.util.js',
 	       srcJsDir + '/map/hotplace.spot.js',
 	       srcJsDir + '/map/hotplace.notice.js',
-	       srcJsDir + '/map/hotplace.gyeongmae.js'])
+	       srcJsDir + '/map/hotplace.gyeongmae.js',
+	       srcJsDir + '/map/hotplace.acceptbuilding.js'])
 		   .pipe(stripDebug())
 		   .pipe(uglify().on('error', function(uglify) {
 				console.log(uglify.message);
@@ -52,7 +53,6 @@ gulp.task('map_min', function() {
 
 gulp.task('info_min', function() {
 	return gulp.src([
-	       srcJsDir + '/info/acceptbuilding.js',
 	       srcJsDir + '/info/bosangpyeonib.js',
 	       srcJsDir + '/info/gongmae.js',
 	       srcJsDir + '/info/silgeolae.js',
@@ -97,7 +97,8 @@ gulp.task('map_concat_min', function() {
   	       srcJsDir + '/min/hotplace.util.min.js',
   	       srcJsDir + '/min/hotplace.spot.min.js',
   	       srcJsDir + '/min/hotplace.notice.min.js',
-  	       srcJsDir + '/min/hotplace.gyeongmae.min.js'])
+  	       srcJsDir + '/min/hotplace.gyeongmae.min.js',
+  	       srcJsDir + '/min/hotplace.acceptbuilding.min.js'])
 	       .pipe(concat('hotplace-all.min.js'))
 	       .pipe(gulp.dest(distJsDir));
 });
@@ -105,10 +106,8 @@ gulp.task('map_concat_min', function() {
 
 gulp.task('info_concat_min', function() {
 	return gulp.src([
-           srcJsDir + '/min/acceptbuilding.min.js',
   	       srcJsDir + '/min/bosangpyeonib.min.js',
   	       srcJsDir + '/min/gongmae.min.js',
-  	       srcJsDir + '/min/gyeongmae.min.js',
   	       srcJsDir + '/min/silgeolae.min.js',
   	       srcJsDir + '/min/sujibunseog.min.js'])
 	       .pipe(concat('info-all.min.js'))

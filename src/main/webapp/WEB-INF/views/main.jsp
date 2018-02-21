@@ -35,7 +35,6 @@
 <script type="text/javascript" src="/resources/js/src/info/bosangpyeonib.js"></script>
 <script type="text/javascript" src="/resources/js/src/info/silgeolae.js"></script>
 <script type="text/javascript" src="/resources/js/src/info/sujibunseog.js"></script>
-<script type="text/javascript" src="/resources/js/src/info/acceptbuilding.js"></script>
 <script type="text/javascript" src="/resources/js/src/main.js"></script>
 <script type="text/javascript" src="/resources/js/src/user.js"></script>
 </c:if>
