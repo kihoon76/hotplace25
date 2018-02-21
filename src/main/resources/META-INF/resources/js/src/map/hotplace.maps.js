@@ -1142,7 +1142,7 @@
 
 		            // 폴리라인의 거리를 미터 단위로 반환합니다.
 		            this._lastDistance = this._polyline.getDistance();
-		            this._addMileStone(coord);
+		            this._addMileStone(coord, null, null, this._polyline);
 		        }
 		        else {
 		            this._guideline.setPath([e.coord]);
