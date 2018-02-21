@@ -2,17 +2,26 @@
  * @namespace hotplace.panomaps
  * */
 (function(panomaps, $) {
-	var pano = null;
-	var marker = null;
+	var _pano = null;
+	var _marker = null;
+	var _mode = null;
+	var _streetMode = 'S';
+	var _mulgeonMode = 'M';
 	
-	panomaps.createPanomaps = function(container, x, y, hasMarker, callback, pano_changed, pov_changed) {
+	panomaps.STREET_MODE = _streetMode;    //streetview에서 사용할 시
+	panomaps.MULGEON_MODE = _mulgeonMode;
+	
+	
+	panomaps.createPanomaps = function(mode, container, x, y, hasMarker, callback, pano_changed, pov_changed) {
+		_mode = mode || _streetMode;
+		
 		if(hasMarker) {
-			marker = new naver.maps.Marker({
+			_marker = new naver.maps.Marker({
 			    position: new naver.maps.LatLng(x, y)
 			});
 		}
 		
-		pano = new naver.maps.Panorama(container, {
+		_pano = new naver.maps.Panorama(container, {
 	        position: new naver.maps.LatLng(x, y),
 	        pov: {
 	            pan: -135,
@@ -26,28 +35,28 @@
 	        }
 	    });
 		
-		pano.zoomIn();
+		_pano.zoomIn();
 		//pano.setVisible(false);
 		
-		naver.maps.Event.addListener(pano, 'init', function() {
+		naver.maps.Event.addListener(_pano, 'init', function() {
 	        if(hasMarker) {
-	        	marker.setMap(pano);
-	        	 var proj = pano.getProjection();
-	 	        var lookAtPov = proj.fromCoordToPov(marker.getPosition());
+	        	_marker.setMap(_pano);
+	        	 var proj = _pano.getProjection();
+	 	        var lookAtPov = proj.fromCoordToPov(_marker.getPosition());
 	 	        if (lookAtPov) {
-	 	            pano.setPov(lookAtPov);
+	 	            _pano.setPov(lookAtPov);
 	 	        }
 	        }
 	        
 	        if(callback) {
-	        	var location = pano.getLocation();
+	        	var location = _pano.getLocation();
 	        	var msg = '<div>[출처: naver]</div><div>사진촬영일은  ' + location.photodate.substring(0,10) + ' 입니다.</div>';
-	        	callback(location, msg);
+	        	callback(location, msg, _pano);
 	        }
 	    });
 		
 		if(pano_changed) {
-			naver.maps.Event.addListener(pano, 'pano_changed', function() {
+			naver.maps.Event.addListener(_pano, 'pano_changed', function() {
 				pano_changed(pano);
 			});
 		}
@@ -55,17 +64,17 @@
 	}
 	
 	panomaps.clear = function() {
-		if(pano) {
-			naver.maps.Event.clearInstanceListeners(pano);
-			pano = null;
+		if(_pano) {
+			naver.maps.Event.clearInstanceListeners(_pano);
+			_pano = null;
 		}
 	}
 	
 	panomaps.resize = function($element) {
-		if(pano) {
+		if(_pano  && _mode == _streetMode) {
 			var width = $element.width();
 			var height = $element.height();
-			pano.setSize({width: width, height: height});
+			_pano.setSize({width: width, height: height});
 		}
 	}
 }(

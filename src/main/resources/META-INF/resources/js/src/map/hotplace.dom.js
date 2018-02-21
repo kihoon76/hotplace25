@@ -23,6 +23,8 @@
 		_$btnCalcArea = $('#btnCalcArea'), //면적재기 버튼
 		_$btnCalcDistance = $('#btnCalcDistance'), //거리재기 버튼
 		_$btnStreetView = $('#btnStreetView'),
+		_dvCommonPano = '#dvCommonPano', //물건보기에서 파노라마 컨테이너
+		_dvCommonPanoInfo = '#dvCommonPanoInfo', //물건보기에서 파노라마 정보 컨테이너
 		_sliderGrp = {}; //slider 관리객체
 	
 	dom.getModalPopId = function() {
@@ -840,6 +842,17 @@
 		dom.openModal('', {width: '1000'}, closeFn, openFn);
 	}
 	
+	dom.showMulgeonPanoramaForm = function(closeFn, openFn, param) {
+		_appendModalPopup('mulgeonPanoForm', null, {address:param.address});
+		
+		hotplace.panomaps.createPanomaps(hotplace.panomaps.MULGEON_MODE, _dvCommonPano.substring(1), param.x, param.y, true, function(location, msg, pano) {
+			pano.zoomIn();
+			$(_dvCommonPanoInfo).html(msg);
+		});
+		
+		dom.openModal('', {width:'500'});
+	}
+	
 	dom.showLogoutForm = function(fn) {
 		hotplace.dom.showAlertMsg(function() {
 			dom.logout(fn);
@@ -1331,6 +1344,7 @@
 		if ($('.modal.in').length != 0) {
 			_initModalSize($('.modal.in'));
 		}
+		
 		hotplace.streetview.resize();
 	});
 	

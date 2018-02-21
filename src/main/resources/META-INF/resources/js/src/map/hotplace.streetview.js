@@ -67,7 +67,7 @@
 		_$dvStreetViewContainer.show();
 		_$dvStreetViewMinimap.show();
 		
-		hotplace.panomaps.createPanomaps(_streetviewPanoramaAreaId, coord.y, coord.x, false, null, function(pano) {
+		hotplace.panomaps.createPanomaps(hotplace.panomaps.STREET_MODE, _streetviewPanoramaAreaId, coord.y, coord.x, false, null, function(pano) {
 			console.log(pano.getPosition())
 			hotplace.minimaps.setPanoMarkerPosition(pano.getPosition());
 		});

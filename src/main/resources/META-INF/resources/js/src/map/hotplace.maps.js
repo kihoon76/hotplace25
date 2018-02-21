@@ -349,7 +349,6 @@
 	};
 	
 	
-	
 	/** 
 	 * @memberof hotplace.maps 
 	 * @function getMarkerIcon 
@@ -2092,7 +2091,9 @@
 		}
 	}
 	
-	function _markerLevelLimit2() {
+	maps.checkMarkerLevelLimit = _markerLevelLimit;
+	
+	/*function _markerLevelLimit2() {
 		if(maps.isActiveMulgeonView()) {
 			$('#dvSalesView input[type="checkbox"]').each(function() {
 				var $this = $(this);
@@ -2108,10 +2109,10 @@
 						if(currentLevel >= minLevel) {
 							$this.prop('disabled', false);
 							
-							/*if(!checked && prevState == 'on') {
-								$this.prop('checked', true);
-								_markerGroupOnOff[type] = 1;
-							}*/
+							//if(!checked && prevState == 'on') {
+							//	$this.prop('checked', true);
+							//	_markerGroupOnOff[type] = 1;
+							//}
 						}
 						else {
 							$this.prop('disabled', true);
@@ -2129,7 +2130,7 @@
 				} 
 			})
 		}
-	}
+	}*/
 	
 	
 	/**

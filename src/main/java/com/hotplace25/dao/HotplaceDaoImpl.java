@@ -69,7 +69,7 @@ public class HotplaceDaoImpl implements HotplaceDao {
 
 	@Override
 	public List<String> selectGongmaeMarker(Map<String, String> param) {
-		return msSqlSessionAgent.selectList(namespace + ".selectGongmaeMarker", param);
+		return msSqlSessionAgent2.selectList(namespace + ".selectGongmaeMarker", param);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class HotplaceDaoImpl implements HotplaceDao {
 
 	@Override
 	public Gongmae selectGongmaeThumb(String unu) {
-		return msSqlSessionAgent.selectOne(namespace + ".selectGongmaeThumb", unu);
+		return msSqlSessionAgent2.selectOne(namespace + ".selectGongmaeThumb", unu);
 	}
 
 	@Override

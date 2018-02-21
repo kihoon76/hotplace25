@@ -5,12 +5,9 @@
 	var _dvAcceptBuildingInfoWin = '#dvAcceptBuildingInfoWin',
 		_btnAcceptBuildingThumbClose = '#btnAcceptBuildingThumbClose',
 		_btnAcceptBuildingPano = '#btnAcceptBuildingPano',
-		_dvAcceptbuildingPano = '#dvAcceptbuildingPano',
-		_dvAcceptbuildingPanoInfo = '#dvAcceptbuildingPanoInfo',
-		_tbAcceptBuildingData = '#tbAcceptBuildingData',
-		_tbAcceptBuildingPano = '#tbAcceptBuildingPano';
-	
-	
+		_btnAcceptBuildingDetail = '#btnAcceptBuildingDetail',
+		_address = null;
+		
 	function _getThumb(data) {
 		hotplace.ajax({
 			url: 'acceptbuilding/thumb',
@@ -19,7 +16,7 @@
 			data: {unu: data.info.unu},
 			loadEl: _dvAcceptBuildingInfoWin,
 			success: function(data, textStatus, jqXHR) {
-				$('#aDaejiwichi').text(data.daejiwichi);
+				$('#aDaejiwichi').text(_address = data.daejiwichi);
 				$('#aAcceptgubun').text(data.acceptgubun);
 				$('#aAcceptsingoil').text(data.acceptsingoil);
 			},
@@ -31,27 +28,19 @@
 	
 	function _bindDetailClickHandler() {
 		
-		$('#dvAcceptbuilding .acceptbuilding-detail').on('click', function() {
+		$(_btnAcceptBuildingDetail)
+		.off('click')
+		.on('click', function() {
 			
 		});
 	}
 	
-	function _bindThumbClickHandler() {
-		$('#btnAcceptbuildingThumb').on('click', function() {
-			$('#tbAcceptbuildingThumb').show();
-			$('#tbAcceptbuildingPano').hide();
-		});
-	}
 	
 	function _bindGeoClickHandler(x, y) {
 		$(_btnAcceptBuildingPano)
 		.off('click')
 		.on('click', function() {
-			$(_tbAcceptBuildingData).hide();
-			$(_tbAcceptBuildingPano).show();
-			hotplace.panomaps.createPanomaps(_dvAcceptbuildingPano.substring(1), x, y, true, function(location, msg) {
-				$(_dvAcceptbuildingPanoInfo).html(msg);
-			});
+			hotplace.dom.showMulgeonPanoramaForm(null, null, {x:x, y:y, address:_address});
 		});
 	}
 	
@@ -75,9 +64,7 @@
 			win.close();
 		});
 		
-		/*_bindDetailClickHandler(win);
-		_bindGeoClickHandler(data.location[1], data.location[0]);
-		_bindThumbClickHandler();*/
+		_bindDetailClickHandler();
 		_bindGeoClickHandler(data.location[1], data.location[0]);
 		_getThumb(data);
 	}

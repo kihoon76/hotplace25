@@ -174,6 +174,7 @@
 <script type="text/javascript" src="/resources/js/src/map/hotplace.notice.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.gyeongmae.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.acceptbuilding.js"></script>
+<script type="text/javascript" src="/resources/js/src/map/hotplace.gongmae.js"></script>
 </c:if>
 <c:if test="${debug eq 'off'}">
 <script type="text/javascript" src="/resources/js/dist/hotplace-all.min.js"></script>

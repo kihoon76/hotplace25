@@ -4,8 +4,10 @@
 (function(gyeongmae, $) {
 	var _btnGyeongmaeDetail = '#btnGyeongmaeDetail',
 		_btnGyeongmaeThumbClose = '#btnGyeongmaeThumbClose',
+		_btnGyeongmaePano = '#btnGyeongmaePano',
 		_dvGyeongmaeInfoWin = '#dvGyeongmaeInfoWin',
 		_enlargeImageModalTitle = '#enlargeImageModalTitle',
+		_address = null,
 		_gDimages = '#gDimages';
 	
 	//인근진행물건
@@ -160,6 +162,14 @@
 		});
 	}
 	
+	function _bindGeoClickHandler(x, y) {
+		$(_btnGyeongmaePano)
+		.off('click')
+		.on('click', function() {
+			hotplace.dom.showMulgeonPanoramaForm(null, null, {x:x, y:y, address:_address});
+		});
+	}
+	
 	function _makeGyeongmaeImages(images) {
 		var $gDimages = $(_gDimages);
 		var cnt = images.length;
@@ -279,30 +289,18 @@
 		});
 	}
 	
-	function _getThumb(data) {
+	function _getThumb(data, cbSucc) {
 		hotplace.ajax({
 			url: 'gyeongmae/thumb',
 			method: 'GET',
 			dataType: 'json',
 			data: {unu: data.info.unu},
-			loadEl: _dvGyeongmaeInfoWin,
+			//loadEl: _dvGyeongmaeInfoWin,
 			success: function(data, textStatus, jqXHR) {
 				//hotplace.dom.createChart('canvas');
 				console.log(data);
-				$('#gSojaeji').text(data.sojaeji || '');
-				$('#gYongdo').text((data.yongdo || '').replace(/\|/gm, ','));
-				$('#gGamjeongpyeongga').text((data.gamjeongpyeongga || '').money());
-				$('#gYuchal').text(data.yuchal || '');
-				$('#gMaegaggiil').text(data.maegaggiil || '');
+				cbSucc(data);
 				
-				if(data.imgThumb) {
-					$('#gImgThumb').prop('src', data.imgThumb);
-				}
-				
-				$(_btnGyeongmaeDetail)
-				.data('goyubeonho', data.goyubeonho)
-				.data('pnu', data.pnu)
-				.data('deunglogbeonho', data.deunglogbeonho);
 			},
 			error:function() {
 				
@@ -320,19 +318,39 @@
 	 */
 	gyeongmae.markerClick = function(map, marker, win) {
 		var data = marker._data;
-		win.open(map, marker);
+		
 		var tForm = hotplace.dom.getTemplate('gyeongmaeForm');
-		
-		win.setOptions('content', tForm({path: hotplace.getContextUrl() + 'resources/'}));
-		
-		$(_btnGyeongmaeThumbClose)
-		.off('click')
-		.on('click', function() {
-			win.close();
+		_getThumb(data, function(d) {
+			_address = d.sojaeji || '';
+			win.open(map, marker);
+			win.setOptions('content', tForm($.extend(
+				{path: hotplace.getContextUrl() + 'resources/'},
+				d,
+				{
+					yongdo:(d.yongdo || '').replace(/\|/gm, ','),
+					gamjeongpyeongga:(d.gamjeongpyeongga || '').money(),
+					
+				})
+			));
+			
+			if(d.imgThumb) {
+				$('#gImgThumb').prop('src', d.imgThumb);
+			}
+			
+			$(_btnGyeongmaeDetail)
+			.data('goyubeonho', d.goyubeonho)
+			.data('pnu', d.pnu)
+			.data('deunglogbeonho', d.deunglogbeonho);
+			
+			$(_btnGyeongmaeThumbClose)
+			.off('click')
+			.on('click', function() {
+				win.close();
+			});
+			
+			_bindDetailClickHandler(win);
+			_bindGeoClickHandler(data.location[1], data.location[0]);
 		});
-		
-		_bindDetailClickHandler(win);
-		_getThumb(data);
 	}
 }(
 	hotplace.gyeongmae = hotplace.gyeongmae || {},
