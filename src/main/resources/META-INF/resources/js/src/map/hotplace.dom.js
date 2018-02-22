@@ -459,90 +459,6 @@
 		});
 	}
 	
-	/**
-	 * @memberof hotplace.dom
-	 * @function viewProfit
-	 * @param {string} addr 주소
-	 * @desc 수지분석 폼 보기
-	 * {@link https://github.com/simeydotme/jQuery-ui-Slider-Pips jQuery-ui-slider-pips} 
-	 */
-	dom.viewProfit = function(params) {
-		var tForm = dom.getTemplate('profitForm');
-		
-		console.log(params)
-		$('#dvModalContent').html(tForm(params));
-		
-		//txt tooltip 
-		hotplace.dom.initTooltip('txtProfitTooltip',{trigger: 'hover'});
-		hotplace.sujibunseog.init();
-		hotplace.calc.profit.initCalc(params);
-		
-		dom.openModal('수지 분석(소재지: ' + params.address + ')', 'fullsize', function() {
-			try {
-				//닫힐때 토지 이용규제 tooltip이 열려있으면 tooltip을 닫는다.
-				dom.closeTooltip('.profitTooltip');
-			}
-			catch(e) {} //툴팁을 한번도 open 하지 않은 상태에서 close하면 error 발생
-		});
-	}
-	
-	dom.viewHpGrade = function(params) {
-		var tForm = dom.getTemplate('cate_fn/hpgradeForm');
-		
-		console.log(params)
-		$('#dvModalContent').html(tForm(params));
-		
-		dom.openModal('HP등급보기 (소재지: ' + params.address + ')', 'fullsize', function() {
-			
-		}, function() {
-			hotplace.chart.drawLineChart('dvHpGradeDefault', [
-			    //["2000-06-05",116],["2000-06-06",129],["2000-06-07",135],["2000-06-08",86],["2000-06-09",73],["2000-06-10",85],["2000-06-11",73],["2000-06-12",68],["2000-06-13",92],["2000-06-14",130],["2000-06-15",245],["2000-06-16",139],["2000-06-17",115],["2000-06-18",111],["2000-06-19",309],["2000-06-20",206],["2000-06-21",137],["2000-06-22",128],["2000-06-23",85],["2000-06-24",94],["2000-06-25",71],["2000-06-26",106],["2000-06-27",84],["2000-06-28",93],["2000-06-29",85],["2000-06-30",73],["2000-07-01",83],["2000-07-02",125],["2000-07-03",107],["2000-07-04",82],["2000-07-05",44],["2000-07-06",72],["2000-07-07",106],["2000-07-08",107],["2000-07-09",66],["2000-07-10",91],["2000-07-11",92],["2000-07-12",113],["2000-07-13",107],["2000-07-14",131],["2000-07-15",111],["2000-07-16",64],["2000-07-17",69],["2000-07-18",88],["2000-07-19",77],["2000-07-20",83],["2000-07-21",111],["2000-07-22",57],["2000-07-23",55],["2000-07-24",60]
-			    ["5년전",2],["4년전",3],["3년전",6],["2년전",8],["1년전",9],["오늘",10]
-			]);
-		});
-		
-	}
-	
-	dom.viewLimitLandUse = function(params) {
-		var tForm = dom.getTemplate('cate_fn/lluForm');
-		
-		console.log(params)
-		$('#dvCenterModalContent').html(tForm(params));
-		
-		dom.openCenterModal('토지이용규제현황보기 (소재지: ' + params.address + ')', {width: '1000px', height: '800px'}, function() {
-			
-		});
-	}
-	
-	dom.viewRegGwansim = function(params) {
-		var tForm = dom.getTemplate('cate_fn/gwansimForm');
-		
-		console.log(params)
-		$('#dvCenterModalContent').html(tForm(params));
-		
-		dom.openCenterModal('관심물건등록 (소재지: ' + params.address + ')', {width: '450px', height: '450px'}, function() {
-			
-		});
-		
-		hotplace.location.viewGwansim.init();
-	}
-	
-	dom.viewRegMaemul = function(params) {
-		var tForm = dom.getTemplate('cate_fn/maemulForm');
-		
-		console.log(params)
-		$('#dvCenterModalContent').html(tForm(params));
-		
-		dom.openCenterModal('매물등록 (소재지: ' + params.address + ')', {width: '450px', height: '500px'}, function() {
-			
-		}, function() {
-			hotplace.location.viewMaemul.init();
-		});
-		
-		
-	}
-	
-	
 	
 	/**
 	 * @memberof hotplace.dom
@@ -810,16 +726,14 @@
 		($element || _$modalPopup).html(tForm(param));
 	}
 	
-	/*dom.showNotice = function() {
-		var tForm = dom.getTemplate('noticeForm');
-		$('#dvCenterModalContent').html(tForm());
-		hotplace.notice.showPage();
-		dom.openCenterModal('공지사항', {width: '80%', height:'70%'});
-	}*/
-	
 	dom.showLoginForm = function(fn) {
 		_appendModalPopup('loginForm');
 		dom.openModal('', {width: '410'}, fn);
+	}
+	
+	dom.showSpotSujibunseogForm = function(fn, param) {
+		_appendModalPopup('spotSujibunseogForm', null, param);
+		dom.openModal('', null, null, fn);
 	}
 	
 	dom.showSpotGwansimRegForm = function(fn) {

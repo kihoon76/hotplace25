@@ -149,13 +149,19 @@ button:disabled,
 /* input */
 input:focus {outline:none;}
 input:disabled {opacity:0.5; cursor:not-allowed;}
-.inp {border:1px solid #ccc; background:#fff; height:30px; line-height:30px; padding:0 5px;}
+.inp {border:1px solid #ccc; background:#fff; height:30px; line-height:30px; padding:0 5px; max-width:100%;}
 input[type="text"],
 input[type="search"] {border:1px solid #ccc; background:#fff; height:30px; line-height:30px; padding:0 5px;}
+
+input:read-only,
+input[readonly]{background:#f1f1f1;}
 
 input.inp:focus,
 select.inp:focus,
 textarea.inp:focus{border:1px solid #666;}
+
+input.inp:read-only:focus,
+input.inp[readonly]:focus {border:1px solid #ccc;}
 
 textarea,
 textarea.inp {height:auto; padding:6px 5px; line-height:1.5em;}
@@ -194,7 +200,7 @@ input[type='checkbox']:checked + label.labelCh:before {background-position:0 top
 table {table-layout:fixed; width:100%; text-align:center;}
 table.tableStyle tr {height:34px;}
 table.tableStyle th,
-table.tableStyle td {padding:8px 10px;line-height:1.4em;word-break:keep-all;word-wrap:break-word;}
+table.tableStyle td {padding:8px 10px; line-height:1.4em; word-break:keep-all; word-wrap:break-word;}
 table.tableStyle th {color:#333;}
 
 /* 라인 스타일 */
@@ -246,7 +252,7 @@ table.tableStyle.borderStyle tbody tr:hover td {font-weight:normal;}
 table.tableStyle.gridStyle thead th {background:#f5f6f7; text-align:center; border-top:1px solid #888;}
 table.tableStyle.gridStyle tbody td {text-align:;}
 table.tableStyle.gridStyle tbody tr:hover td {font-weight:normal;}
-table.tableStyle.gridStyle tbody th {background:#f5f6f7;border-right:1px solid #ccc;}
+table.tableStyle.gridStyle tbody th {background:#f5f6f7; border-right:1px solid #ccc;}
 
 /* table topBold */
 table.tableStyle.topBold  {border-top-width:1px; border-top-style:solid; border-top-color:#888;}
@@ -273,7 +279,7 @@ table.tableStyle td img {max-width:100%;}
 /*************************************/
 /* layout */
 .mapArea {position:absolute; z-index:0; top:50px; bottom:0; left:60px; right:0;  padding-top:0px; overflow:auto; }
-#map     {width:100%; height:100%; margin:0 0; padding:0; /*display:none;*/}
+#map     {width:100%; height:100%; margin:0 0; padding:0; display:;}
 .gnbArea {position:absolute; z-index:2; top:0; left:0; width:100%; height:50px;  border-bottom:1px solid rgba(255,255,255,0.2); box-shadow:0 2px 2px rgba(0,0,0,0.05); background:#333336;}
 .lnbArea {position:absolute; z-index:4; top:50px; left:0; bottom:0; width:60px; border-bottom:1px solid #aaa; background:#333336; box-shadow:1px 0px 2px rgba(0,0,0,0.2);}
 .lnbCont {position:absolute; z-index:3; top:50px; left:60px; bottom:0; display:none;}
@@ -398,8 +404,19 @@ body	 {min-height:600px;}
 	display:inline-block; width:30px; height:30px; color:; font-size:16px; line-height:30px;
 	content:'\e915'; position:absolute; top:0; left:0;
 }
+.mapInnerBox.type2 .mibfooter button.goList {}
+.mapInnerBox.type2 .mibfooter button.goList:after {
+	display:inline-block; width:30px; height:30px; color:; font-size:16px; line-height:30px;
+	content:'\e910'; position:absolute; top:0; left:0;
+}
 .mapInnerBox.type2 .mibfooter button:hover {animation:ani_down2 0.2s ease-out 0s 1 alternate; color:#2a7cdd;}
 
+/* 편입등 그룹 리스트 부분  */
+.mapInnerBox.type2 .mibBody .listType {overflow:auto; clear:both; height:97%; margin:1px 1px 0px 0px; padding:20px 20px 20px;}
+.mapInnerBox.type2 .mibBody .listType .listBox {overflow:hidden; clear:both;}
+.mapInnerBox.type2 .mibBody .listType .listBox li {padding:10px 5px; border-bottom:1px solid #555; overflow:hidden; clear:both; color:#fff; color:rgba(255,255,255,0.8); cursor:pointer;}
+.mapInnerBox.type2 .mibBody .listType .listBox li span {}
+.mapInnerBox.type2 .mibBody .listType .listBox li:hover span {animation:ani_down2 0.2s ease-out 0s 1 alternate;}
 
 /* onlyText 스타일 */
 .mapInnerBox.onlyText {width:auto; max-width:400px;}
@@ -639,7 +656,7 @@ body	 {min-height:600px;}
 
 .btnArea {display:block; margin:10px 0;}
 
-.inputGroup {display:block; clear:;}
+.inputGroup {display:block; clear:; margin:0 auto;}
 .inputGroup:after {display:block; content:''; height:0; line-height:0; clear:both;}
 .inputGroup span.inline {line-height:30px;}
 
@@ -898,6 +915,30 @@ body	 {min-height:600px;}
 .tabulator .tablulator-loader .tabulator-loader-msg.tabulator-error   {border:1px solid #D00;  color: #590000;}
 
 /*************************************/
+/* spinner  */
+.spinner {display:inline-block; border:1px solid #ccc; background:#fff; overflow:auto; padding-right:18px; position:relative; overflow:hidden;}
+.spinner input.inp {}
+.spinner input.inp {border:none !important; display:block; text-align:right; padding:0 10px 0 5px; width:100%;}
+.spinner .btn-vertical {display:inline-block; width:20px; height:30px; position:absolute; top:0; right:0; vertical-align:middle;}
+.spinner button.btn {display:block;  width:100%; height:15px; overflow:hidden; border-radius:0; position:absolute; padding:0; border-left:1px solid #ccc; text-align:center; background:#f5f5f5;}
+.spinner input.inp,
+.spinner button.btn:focus {outline:none;}
+.spinner button.btn:hover {background:#e1e1e1;}
+
+.spinner button.btn:first-of-type {top:0; border-bottom:1px solid #ccc;}
+.spinner button.btn:last-of-type  {bottom:0;}
+
+.spinner button.btn:after {display:block; content:''; width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent; position:absolute; right:5px;}
+.spinner button.btn:first-of-type:after {border-bottom:5px solid #333; top:4px;}
+.spinner button.btn:last-of-type:after  {border-top:5px solid #333; bottom:4px;}
+
+/*************************************/
+/* tooltip */
+.tooltip {}
+.tooltip .tooltip-inner {background-color:; padding:5px 10px; font-size:14px;}
+.tooltip .tooltip-arrow {border-top-color:;}
+
+/*************************************/
 /* LNB  lnbCont - 공통부분  */
 .topInfoBox {padding:0px 10px 0px 28px; margin-bottom:20px; font-size:13px; line-height:1.6em; letter-spacing:-0.05em; position:relative;}
 .topInfoBox:before {
@@ -980,6 +1021,11 @@ input.searchInp {display:block; width:100%; border:2px solid #ddd; height:50px; 
 
 /*  dvProfit // 수지분석 */
 .dvProfit {}
+.dvProfit input.inp {font-weight:bold;}
+.dvProfit td .inputGroup > input,
+.dvProfit td .inputGroup > span.inline,
+.dvProfit td .inputGroup > .spinner {float:left;}
+.dvProfitDetail .slideShow {margin-left:10px;}
 
 
 /*************************************/
@@ -1005,7 +1051,11 @@ input.searchInp {display:block; width:100%; border:2px solid #ddd; height:50px; 
 
 /*************************************/
 /*************************************/
-/* dvGyeongmaeDetail // 경.공매 상세보기 */
+/* dvGyeongmaeDetail // 경매 상세보기 */
+.detailWrap .unit .unit_tit .sTit {}
+.detailWrap .unit .unit_tit .sTit {font-size:16px; padding:0 0 0 16px; color:#000; font-weight:bold;}
+.detailWrap .unit .unit_tit .sTit:before {display:none;}
+.detailWrap .unit .unit_tit .sTit:after {display:inline-block; content:''; width:11px; height:11px; position:absolute; left:0; top:50%; margin-top:-6px; background:url('img/') no-repeat center center; background-size:100%; 100%;}
 .dvGyeongmaeDetail {}
 .imageViewBox {overflow:hidden; min-width:400px; height:; text-align:center;}
 .imageViewBox img {max-width:100%; max-height:600px;}
@@ -1015,6 +1065,10 @@ input.searchInp {display:block; width:100%; border:2px solid #ddd; height:50px; 
 .dvMaegagmulgeon.tabWrap .nav-tabs .tabLink {height:32px;}
 .dvMaegagmulgeon.tabWrap .nav-tabs .tabLink > a, 
 .dvMaegagmulgeon.tabWrap .nav-tabs .tabLink > button {padding:0px 25px 2px;}
+
+/*************************************/
+/* dvGongmaeDetail // 공매 상세보기 */
+.dvGongmaeDetail {}
 
 
 /*************************************/

@@ -31,12 +31,10 @@
 <script type="text/javascript" src="/resources/vendors/tabulator/js/tabulator.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/dom-to-image/dom-to-image.js"></script>
 <c:if test="${debug eq 'on'}">
-<script type="text/javascript" src="/resources/js/src/info/sujibunseog.js"></script>
 <script type="text/javascript" src="/resources/js/src/main.js"></script>
 <script type="text/javascript" src="/resources/js/src/user.js"></script>
 </c:if>
 <c:if test="${debug eq 'off'}">
-<script type="text/javascript" src="/resources/js/dist/info-all.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/main.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/user.min.js"></script>
 </c:if>

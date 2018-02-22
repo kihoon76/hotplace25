@@ -53,7 +53,7 @@
 		 */
 		var defaultValue = {
 			own: 'gaein',
-			ownTerm:2,
+			ownTerm:3,
 			otherAssetRatio:70,
 			myeongdobi:0,
 			acceptLandUse:0,

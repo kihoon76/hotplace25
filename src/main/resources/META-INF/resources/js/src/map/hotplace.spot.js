@@ -28,6 +28,7 @@
 		var category = $(el).data('category');
 		switch(category) {
 		case 'SUJI_BOONSEOK':
+			_viewSujibunseog();
 			break;
 		case 'GWANSIM_MULGEON' :
 			hotplace.dom.showSpotGwansimRegForm();
@@ -51,6 +52,25 @@
 		_lng = $el.data('lng');
 		_lat = $el.data('lat');
 	}
+	
+	/*************************************************************
+	 * 수지분석
+	 ************************************************************/
+	function _viewSujibunseog() {
+		
+		var param = $.extend({address: _address, pnu:_pnu}, {defaultValue:hotplace.calc.profit.defaultValue}, {
+			jimok: '전',
+			valPerPyeung:21000000,
+			area: 132,
+			gongsi: 4040000,
+			limitChange:'Y'
+		})
+		
+		hotplace.dom.showSpotSujibunseogForm(function() {
+			hotplace.sujibunseog.init();
+		}, param);
+	}
+	
 	
 	/*************************************************************
 	 * 매물등록

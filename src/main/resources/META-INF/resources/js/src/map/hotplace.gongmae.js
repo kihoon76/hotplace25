@@ -30,7 +30,27 @@
 		$(_btnGongmaeDetail)
 		.off('click')
 		.on('click', function() {
+			var param = {
+				goyubeonho: $(this).data('goyubeonho'),
+				pnu: $(this).data('pnu'),
+				deunglogbeonho: $(this).data('deunglogbeonho')
+			}
 			
+			hotplace.dom.showGyeongmaeDetail(null, {path: hotplace.getContextUrl() + 'resources/'});
+			
+			hotplace.ajax({
+				url: 'gyeongmae/detail',
+				method: 'GET',
+				dataType: 'json',
+				data: param,
+				loadEl: hotplace.dom.getModalPopId(),
+				success: function(data, textStatus, jqXHR) {
+				
+				},
+				error:function() {
+					
+				}
+			});
 		});
 	}
 	

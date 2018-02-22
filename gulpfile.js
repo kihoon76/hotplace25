@@ -44,19 +44,8 @@ gulp.task('map_min', function() {
 	       srcJsDir + '/map/hotplace.acceptbuilding.js',
 	       srcJsDir + '/map/hotplace.gongmae.js',
 	       srcJsDir + '/map/hotplace.silgeolae.js',
-	       srcJsDir + '/map/hotplace.bosangpyeonib.js'])
-		   .pipe(stripDebug())
-		   .pipe(uglify().on('error', function(uglify) {
-				console.log(uglify.message);
-				this.emit('end');
-		   }))
-		   .pipe(rename({suffix: '.min'}))
-		   .pipe(gulp.dest(srcJsDir + '/min'));
-});
-
-gulp.task('info_min', function() {
-	return gulp.src([
-	       srcJsDir + '/info/sujibunseog.js'])
+	       srcJsDir + '/map/hotplace.bosangpyeonib.js',
+	       srcJsDir + '/map/hotplace.sujibunseog.js'])
 		   .pipe(stripDebug())
 		   .pipe(uglify().on('error', function(uglify) {
 				console.log(uglify.message);
@@ -101,16 +90,9 @@ gulp.task('map_concat_min', function() {
   	       srcJsDir + '/min/hotplace.acceptbuilding.min.js',
   	       srcJsDir + '/min/hotplace.gongmae.min.js',
   	       srcJsDir + '/min/hotplace.silgeolae.min.js',
-  	       srcJsDir + '/min/hotplace.bosangpyeonib.min.js'])
+  	       srcJsDir + '/min/hotplace.bosangpyeonib.min.js',
+  	       srcJsDir + '/min/hotplace.sujibunseog.min.js'])
 	       .pipe(concat('hotplace-all.min.js'))
-	       .pipe(gulp.dest(distJsDir));
-});
-
-
-gulp.task('info_concat_min', function() {
-	return gulp.src([
-  	       srcJsDir + '/min/sujibunseog.min.js'])
-	       .pipe(concat('info-all.min.js'))
 	       .pipe(gulp.dest(distJsDir));
 });
 
@@ -168,6 +150,6 @@ gulp.task('reload', function() {
 
 //gulp.task('default', ['clean', 'js_min', 'css_min', 'img_min', 'watch', 'reload']);
 gulp.task('default', function() {
-	runSequence('clean-all', ['map_min', 'info_min', 'js_min'], 'map_concat_min', 'info_concat_min', 'clean-js');
+	runSequence('clean-all', ['map_min', 'js_min'], 'map_concat_min', 'clean-js');
 });
 
