@@ -535,6 +535,7 @@
 	
 	var _err = {
 		PAGE_NOT_FOUND: '404',
+		SERVER_ERR: '500',
 		DUP_LOGIN: '202', //중복 로그인
 		WRONG_ACCOUNT: '102', //아이디 및 비밀번호
 		JANGAE_GONGJI: '900', //장애공지
@@ -563,8 +564,8 @@
 		case _err.JANGAE_GONGJI :	//장애공지걸림
 			window.location.reload();
 			break;
-		case '500' :
-			hotplace.dom.showAlertMsg();
+		case _err.SERVER_ERR: 
+			hotplace.dom.showAlertMsg(null, '서버오류가 발생했습니다.');
 			break;
 		case _err.WRONG_ACCOUNT :
 			hotplace.dom.showAlertMsg(function() {console.log('ooooo')}, '아이디 또는 비밀번호가 틀립니다.', {width:'30%'});

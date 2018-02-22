@@ -2,6 +2,9 @@
  * @namespace hotplace.bosangpyeonib
  */
 (function(bosangpyeonib, $) {
+	var _dvBosangPyeonibInfoWin = '#dvBosangPyeonibInfoWin',
+		_btnBosangPyeonibPano = '#btnBosangPyeonibPano',
+		_btnBosangPyeonibThumbClose = '#btnBosangPyeonibThumbClose';
 	
 	function _getThumb(unu, callback) {
 		hotplace.ajax({

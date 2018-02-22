@@ -42,7 +42,9 @@ gulp.task('map_min', function() {
 	       srcJsDir + '/map/hotplace.notice.js',
 	       srcJsDir + '/map/hotplace.gyeongmae.js',
 	       srcJsDir + '/map/hotplace.acceptbuilding.js',
-	       srcJsDir + '/map/hotplace.gongmae.js'])
+	       srcJsDir + '/map/hotplace.gongmae.js',
+	       srcJsDir + '/map/hotplace.silgeolae.js',
+	       srcJsDir + '/map/hotplace.bosangpyeonib.js'])
 		   .pipe(stripDebug())
 		   .pipe(uglify().on('error', function(uglify) {
 				console.log(uglify.message);
@@ -54,8 +56,6 @@ gulp.task('map_min', function() {
 
 gulp.task('info_min', function() {
 	return gulp.src([
-	       srcJsDir + '/info/bosangpyeonib.js',
-	       srcJsDir + '/info/silgeolae.js',
 	       srcJsDir + '/info/sujibunseog.js'])
 		   .pipe(stripDebug())
 		   .pipe(uglify().on('error', function(uglify) {
@@ -99,7 +99,9 @@ gulp.task('map_concat_min', function() {
   	       srcJsDir + '/min/hotplace.notice.min.js',
   	       srcJsDir + '/min/hotplace.gyeongmae.min.js',
   	       srcJsDir + '/min/hotplace.acceptbuilding.min.js',
-  	       srcJsDir + '/min/hotplace.gongmae.min.js'])
+  	       srcJsDir + '/min/hotplace.gongmae.min.js',
+  	       srcJsDir + '/min/hotplace.silgeolae.min.js',
+  	       srcJsDir + '/min/hotplace.bosangpyeonib.min.js'])
 	       .pipe(concat('hotplace-all.min.js'))
 	       .pipe(gulp.dest(distJsDir));
 });
@@ -107,8 +109,6 @@ gulp.task('map_concat_min', function() {
 
 gulp.task('info_concat_min', function() {
 	return gulp.src([
-  	       srcJsDir + '/min/bosangpyeonib.min.js',
-  	       srcJsDir + '/min/silgeolae.min.js',
   	       srcJsDir + '/min/sujibunseog.min.js'])
 	       .pipe(concat('info-all.min.js'))
 	       .pipe(gulp.dest(distJsDir));

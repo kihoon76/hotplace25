@@ -73,7 +73,18 @@
 	 */
 	var _locationBounds = {'swy' : 0, 'swx' : 0, 'ney' : 0,	'nex' : 0};	  
 	
-	var _cellTypes = {DEFAULT:'HP', GONGSI:'GONGSI', GONGSI_GR: 'GONGSI_GR', ACCEPT_BUILDING: 'ACCEPT_BUILDING'};
+	var _cellTypes = {
+		DEFAULT:'HP',
+		GONGSI:'GONGSI', 
+		GONGSI_GR:'GONGSI_GR',
+		TOJI_LIMIT_MIN:'TOJI_LIMIT_MIN', 				//토지이용규제완화
+		DEV_BIZ_AREA:'DEV_BIZ_AREA', 					//개발사업면적
+		BOSANG_MULGEON:'BOSANG_MULGEON', 				//보상물건
+		ACCEPT_DEV:'ACCEPT_DEV', 						//개발행위허가
+		ACCEPT_BUILDING_AREA:'ACCEPT_BUILDING_AREA', 	//건축허가면적
+		ACCEPT_SALES_AREA:'ACCEPT_SALES_AREA', 			//영업허가면적
+		SILGEOLAE_AREA:'SILGEOLAE_AREA' 				//실거래가•거래면적상승
+	};
 	
 	/** 
 	 * @private 
@@ -83,7 +94,18 @@
 	 * @property {string} GONGSI  - 공시지가
 	 * @property {string} GONGSI_GR  - 공시지가 증가율
 	 */
-	var _cellLayerOnOff = {DEFAULT:0, GONGSI:0, GONGSI_GR:0, ACCEPT_BUILDING:0};
+	var _cellLayerOnOff = {
+		DEFAULT:0, 
+		GONGSI:0, 
+		GONGSI_GR:0, 
+		TOJI_LIMIT_MIN:0,
+		DEV_BIZ_AREA:0,
+		BOSANG_MULGEON:0,
+		ACCEPT_DEV:0,
+		ACCEPT_BUILDING_AREA:0,
+		ACCEPT_SALES_AREA:0,
+		SILGEOLAE_AREA:0
+	};
 	
 	/** 
 	 * @private 

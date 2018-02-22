@@ -79,36 +79,116 @@
 	</select>
 	
 	<select id="selectLocationBounds" statementType="CALLABLE" resultType="string" parameterType="hashmap">
-        <if test="type == 'GONGSI'">
-		 { call [Ranking].[dbo].[SEL_공시지가] (
-        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
-   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
-			#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
-			#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
-   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
-   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
-         )}
-        </if>
-        <if test="type == 'GONGSI_GR'">
-        { call [Ranking].[dbo].[SEL_공시지가_증감률] (
-        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
-   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
-			#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
-			#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
-   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
-   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
-         )}
-        </if> 
-       <if test="type == 'ACCEPT_BUILDING'">
-        { call [Ranking].[dbo].[SEL_PNU10_건축허가면적] (
-        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
-   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
-			#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
-			#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
-   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
-   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
-         )}
-        </if> 
+		<choose>
+			<!-- 공시지가  -->
+			<when test="type == 'GONGSI'">
+			{call [Ranking].[dbo].[SEL_공시지가] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 공시지가  증가율-->
+			<when test="type == 'GONGSI_GR'">
+			 { call [Ranking].[dbo].[SEL_공시지가_증감률] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 토지이용규제완화 -->
+			<when test="type == 'TOJI_LIMIT_MIN'">
+			{ call [Ranking].[dbo].[SEL_PNU10_토지이용규제완화] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 개발사업면적 -->
+			<when test="type == 'DEV_BIZ_AREA'">
+			{ call [Ranking].[dbo].[SEL_PNU10_개발사업면적] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 보상물건  -->
+			<when test="type == 'BOSANG_MULGEON'">
+			{ call [Ranking].[dbo].[SEL_PNU10_보상물건] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 개발행위허가  -->
+			<when test="type == 'ACCEPT_DEV'">
+			{ call [Ranking].[dbo].[SEL_PNU10_개발행위허가] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 건축허가면적  -->
+			<when test="type == 'ACCEPT_BUILDING_AREA'">
+			{ call [Ranking].[dbo].[SEL_PNU10_건축허가면적] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 영업허가면적 -->
+			<when test="type == 'ACCEPT_SALES_AREA'">
+			{ call [Ranking].[dbo].[SEL_PNU10_영업허가면적] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 실거래가, 거래면적 상승  -->
+			<when test="type == 'SILGEOLAE_AREA'">
+			{ call [Ranking].[dbo].[SEL_PNU10_실거래가거래면적상승] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+		</choose>
 	</select>
 	
 	<select id="selectGyeongmaeMarker" statementType="CALLABLE" resultType="string" parameterType="hashmap">

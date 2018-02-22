@@ -2,8 +2,13 @@
  * @namespace hotplace.silgeolae
  */
 (function(silgeolae, $) {
+	var _dvSilgeolaeInfoWin = '#dvSilgeolaeInfoWin',
+		_btnSilgeolaePano = '#btnSilgeolaePano',
+		_btnSilgeolaeThumbClose = '#btnSilgeolaeThumbClose',
+		_address = null;;
 	
-	function _getThumb(data) {
+	
+	function _getThumb(data, cbSucc) {
 		console.log(data);
 		$('#silYongdo').text(data.info.yongdo);
 		$('#silJimok').text(data.info.jimok);
@@ -22,45 +27,28 @@
 	 */
 	silgeolae.markerClick = function(map, marker, win) {
 		var data = marker._data;
-		win.open(map, marker);
 		var tForm = hotplace.dom.getTemplate('silgeolaeForm');
 		
-		//win.setOptions('anchorSkew', true);
-		win.setOptions('maxWidth', 300);
-		win.setOptions('content', tForm());
+		win.open(map, marker);
+		win.setOptions('content', tForm(data));
 		
-		$('#btnSilgeoraeClose').on('click', function() {
+		$(_btnSilgeolaeThumbClose)
+		.off('click')
+		.on('click', function() {
 			win.close();
 		});
 		
-		_bindDetailClickHandler();
 		_bindGeoClickHandler(data.location[1], data.location[0]);
-		_bindThumbClickHandler();
-		_getThumb(data);
-	}
-	
-	function _bindDetailClickHandler() {
-		//경매 물건상세보기 handler
+		/*_getThumb(data, function(d) {
 		
-		$('#dvSilgeorae .silgeolae-detail').on('click', function() {
-			
-		});
-	}
-	
-	function _bindThumbClickHandler() {
-		$('#btnSilgeoraeThumb').on('click', function() {
-			$('#tbSilgeoraeThumb').show();
-			$('#tbSilgeoraePano').hide();
-		});
+		});*/
 	}
 	
 	function _bindGeoClickHandler(x, y) {
-		$('#btnSilgeoraePano').on('click', function() {
-			$('#tbSilgeoraeThumb').hide();
-			$('#tbSilgeoraePano').show();
-			hotplace.panomaps.createPanomaps('dvSilgeoraePano', x, y, true, function(location, msg) {
-				$('#dvSilgeoraePanoInfo').html(msg);
-			});
+		$(_btnSilgeolaePano)
+		.off('click')
+		.on('click', function() {
+			hotplace.dom.showMulgeonPanoramaForm(null, null, {x:x, y:y, address:_address});
 		});
 	}
 }(
