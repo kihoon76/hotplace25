@@ -346,6 +346,11 @@
 		 where 경매_목록_고유번호 = #{goyubeonho}
 	</select>
 	
+	
+	<sql id="gongmaeColumns">
+		PNU, 공매_목록_고유번호, 물건관리번호, 처분방식_자산구분, 용도, 면적, 감정평가금액, 입찰방식, 입찰기간_회차_차수, 유찰횟수, 집행기관, 최저입찰가_예정금액, 지번주소, 전자보증서사용여부, 차순위매수신청가능여부, 공동입찰가능여부, 2인미만유찰여부, 2회이상입찰가능여부
+	</sql>
+	
 	<!-- 공매 -->
 	<select id="selectGongmaeMarker" resultType="string" parameterType="hashmap">
 		select concat(PNU, '|$', 공매_목록_고유번호, '|$', 물건관리번호, '|$', 경도, '|$', 위도) 
@@ -358,7 +363,7 @@
        order by t.경도 asc
 	</select>
 
-	<resultMap id="RM_selectGongmaeThumb" type="Gongmae">
+	<resultMap id="RM_selectGongmaeThumb" type="Gongmae" >
 		<result column="PNU" property="pnu" javaType="string" />
 		<result column="공매_목록_고유번호" property="goyubeonho" javaType="string" />
 		<result column="물건관리번호" property="mulgeonCode" javaType="string" />
@@ -372,14 +377,87 @@
 		<result column="집행기관" property="jibhaengGigwan" javaType="string" />
 		<result column="최저입찰가_예정금액" property="minIbchalga" javaType="string" />
 		<result column="지번주소" property="mulgeonAddress" javaType="string" />
+		<result column="전자보증서사용여부" property="jeonjaBojeungseoYN" javaType="string" />
+		<result column="차순위매수신청가능여부" property="chasunwiMaesuYN" javaType="string" />
+		<result column="공동입찰가능여부" property="gongdongIbchalYN" javaType="string" />
+		<result column="2인미만유찰여부" property="twoPersonYN" javaType="string" />
+		<result column="2회이상입찰가능여부" property="twoTimeYN" javaType="string" />
+	</resultMap>
+	
+	<resultMap id="RM_selectGongmaeDetail" type="GongmaeDetail" extends="RM_selectGongmaeThumb">
+		<collection property="areaList" column="공매_목록_고유번호" 
+					javaType="java.util.ArrayList"
+					ofType="GongmaeArea" 
+					select="selectGongmaeArea"
+					/>
+		<collection property="ibchalList" column="공매_목록_고유번호"
+					javaType="java.util.ArrayList"
+					ofType="GongmaeIbchal"
+					select="selectGongmaeIbchal"
+					/>
+		<collection property="mulgeonList" column="공매_목록_고유번호"
+					javaType="java.util.ArrayList"
+					ofType="GongmaeAroundNagchalMulgeon"
+					select="selectGongmaeAroundNagchalMulgeon"
+					/>
+		<collection property="tonggyeList" column="공매_목록_고유번호"
+					javaType="java.util.ArrayList"
+					ofType="GongmaeAroundNagchalTonggye"
+					select="selectGongmaeAroundNagchalTonggye"
+					/>
+		<collection property="gamjeongList" column="공매_목록_고유번호"
+					javaType="java.util.ArrayList"
+					ofType="GongmaeGamjeong"
+					select="selectGongmaeGamjeong"
+					/>
 	</resultMap>
 	
 	<select id="selectGongmaeThumb" parameterType="string" resultMap="RM_selectGongmaeThumb">
-		select PNU, 공매_목록_고유번호, 물건관리번호, 처분방식_자산구분, 용도, 면적, 감정평가금액, 입찰방식, 입찰기간_회차_차수, 유찰횟수, 집행기관, 최저입찰가_예정금액, 지번주소
+		select <include refid="gongmaeColumns" />
 		  from [수작업입력].[dbo].[공매_기본정보]
 		 where [공매_목록_고유번호] = #{goyubeonho}
 	</select>
 	
+	<select id="selectGongmaeDetail" parameterType="string" resultMap="RM_selectGongmaeDetail" >
+		select <include refid="gongmaeColumns" />
+		  from [수작업입력].[dbo].[공매_기본정보]
+		 where [공매_목록_고유번호] = #{goyubeonho}
+	</select>
+	
+	<!-- 공매 면적정보 -->
+	<select id="selectGongmaeArea" parameterType="string" resultType="GongmaeArea">
+		select 번호 as number, 종별 as jongbyeol, 지목 as jimok, 면적 as area, 지분 as jiboon, 비고 as bigo
+		  from [수작업입력].[dbo].[공매_면적정보]
+		 where [공매_목록_고유번호] = #{goyubeonho}
+	</select>
+	
+	<!-- 공매  회차별 입찰정보-->
+	<select id="selectGongmaeIbchal" parameterType="string" resultType="GongmaeIbchal">
+		select 입찰번호 as ibchalNum, 회차 as hoecha, 차수 as chasu, 구분 as gubun, 대금납부 as daegeumNabbu, 납부기한 as nabbuGihan, 입찰기간시작 as ibchalStart, 입찰기간종료 as ibchalEnd, 개찰일시 as gaechal, 개찰장소 as gaechalJangso, 최저입찰가 as minIbchalga
+		  from [수작업입력].[dbo].[공매_회차별입찰정보]
+		 where [공매_목록_고유번호] = #{goyubeonho} 
+	</select>
+	
+	<!-- 공매 인근 낙찰물건 -->
+	<select id="selectGongmaeAroundNagchalMulgeon" parameterType="string" resultType="GongmaeAroundNagchalMulgeon">
+		select 번호 as number, 물건명 as mulgeonName, 낙찰금액 as nagchalPrice
+		  from [수작업입력].[dbo].[공매_인근낙찰물건]
+		 where [공매_목록_고유번호] = #{goyubeonho}
+	</select>
+	
+	<!-- 공매 인근 낙찰 통계 -->
+	<select id="selectGongmaeAroundNagchalTonggye" parameterType="string" resultType="GongmaeAroundNagchalTonggye">
+		select 통계기간 as tonggyeGigan, 부찰건수 as buchalGeonsu, 낙찰건수 as nagchalGeonsu, 감정가대비 as gamjeongga, 최저입찰가대비 as minIbchalga
+		  from [수작업입력].[dbo].[공매_인근낙찰통계]
+		 where [공매_목록_고유번호] = #{goyubeonho} 
+	</select>
+	
+	<!-- 공매 감정평가정보 -->
+	<select id="selectGongmaeGamjeong" parameterType="string" resultType="GongmaeGamjeong">
+		select 감정평가기관 as pyeonggaGigwan, 평가일 as pyeonggaDate, 평가금액 as pyeonggaPrice
+		  from [수작업입력].[dbo].[공매_감정평가정보]
+		 where [공매_목록_고유번호] = #{goyubeonho} 
+	</select>
 	<!-- 보상편입물건 -->
 	<!-- <select id="selectBosangPyeonibMarker" resultType="string" parameterType="hashmap">
        	select concat(PNU, '|$', 고유번호, '|$', 경도, '|$', 위도) 

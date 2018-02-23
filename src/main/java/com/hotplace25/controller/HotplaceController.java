@@ -27,6 +27,7 @@ import com.hotplace25.domain.AjaxVO;
 import com.hotplace25.domain.ApplicationConfig;
 import com.hotplace25.domain.BosangPyeonib;
 import com.hotplace25.domain.Gongmae;
+import com.hotplace25.domain.GongmaeDetail;
 import com.hotplace25.domain.Gyeongmae;
 import com.hotplace25.domain.HpSearch;
 import com.hotplace25.domain.Notice;
@@ -312,6 +313,16 @@ public class HotplaceController {
 	public Gongmae getGongmaeThumb(@RequestParam("unu") String unu) {
 		
 		return hotplaceService.getGongmaeThumb(unu);
+	}
+	
+	@GetMapping("gongmae/detail")
+	@ResponseBody
+	public GongmaeDetail getGongmaeDetail(@RequestParam("goyubeonho") String goyubeonho,
+									  	  @RequestParam("pnu") String pnu) {
+		
+		GongmaeDetail gD = hotplaceService.getGongmaeDetail(goyubeonho);
+		
+		return gD;
 	}
 	
 	@GetMapping("bosangpyeonib/thumb")

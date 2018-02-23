@@ -8,6 +8,7 @@ import com.hotplace25.domain.AcceptBuilding;
 import com.hotplace25.domain.Address;
 import com.hotplace25.domain.BosangPyeonib;
 import com.hotplace25.domain.Gongmae;
+import com.hotplace25.domain.GongmaeDetail;
 import com.hotplace25.domain.Gyeongmae;
 import com.hotplace25.domain.Silgeolae;
 import com.hotplace25.domain.Yaggwan;
@@ -49,4 +50,6 @@ public interface HotplaceDao {
 	public List<String> selectBosangPyeonibGroupList(HashMap m);
 
 	public List<Yaggwan> selectYaggwanList();
+
+	public GongmaeDetail selectGongmaeDetail(String goyubeonho);
 }

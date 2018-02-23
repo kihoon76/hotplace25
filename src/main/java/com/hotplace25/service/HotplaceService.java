@@ -14,6 +14,7 @@ import com.hotplace25.domain.AcceptBuilding;
 import com.hotplace25.domain.Address;
 import com.hotplace25.domain.BosangPyeonib;
 import com.hotplace25.domain.Gongmae;
+import com.hotplace25.domain.GongmaeDetail;
 import com.hotplace25.domain.Gyeongmae;
 import com.hotplace25.domain.GyeongmaeImage;
 import com.hotplace25.domain.Silgeolae;
@@ -144,5 +145,9 @@ public class HotplaceService {
 	
 	public List<Yaggwan> getYaggwanList() {
 		return hotplaceDao.selectYaggwanList();
+	}
+
+	public GongmaeDetail getGongmaeDetail(String goyubeonho) {
+		return hotplaceDao.selectGongmaeDetail(goyubeonho);
 	}
 }

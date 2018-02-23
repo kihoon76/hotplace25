@@ -3,10 +3,9 @@ package com.hotplace25.domain;
 import org.apache.ibatis.type.Alias;
 
 @Alias("Gongmae")
-public class Gongmae {
+public class Gongmae extends GongmaeKey{
 
 	private String pnu;							//PNU 코드
-	private String goyubeonho;					//고유번호
 	private String mulgeonCode;					//물건관리번호
 	private String cheoboonJasan;				//처분방식/자산구분
 	private String yongdo;						//용도
@@ -18,18 +17,18 @@ public class Gongmae {
 	private String mulgeonAddress;				//물건주소지
 	private String jibhaengGigwan;				//집행기관
 	private String minIbchalga;					//최저입찰가
+	private String jeonjaBojeungseoYN;			//전자보증서 사용여부
+	private String chasunwiMaesuYN;				//차순위매수신청가능여부
+	private String gongdongIbchalYN;			//공동입찰가능여부
+	private String twoPersonYN;					//2인미만 유찰여부
+	private String twoTimeYN;					//2회이상 입찰가능여부
+	
 	
 	public String getPnu() {
 		return pnu;
 	}
 	public void setPnu(String pnu) {
 		this.pnu = pnu;
-	}
-	public String getGoyubeonho() {
-		return goyubeonho;
-	}
-	public void setGoyubeonho(String goyubeonho) {
-		this.goyubeonho = goyubeonho;
 	}
 	public String getMulgeonCode() {
 		return mulgeonCode;
@@ -96,5 +95,35 @@ public class Gongmae {
 	}
 	public void setMinIbchalga(String minIbchalga) {
 		this.minIbchalga = minIbchalga;
+	}
+	public String getJeonjaBojeungseoYN() {
+		return jeonjaBojeungseoYN;
+	}
+	public void setJeonjaBojeungseoYN(String jeonjaBojeungseoYN) {
+		this.jeonjaBojeungseoYN = jeonjaBojeungseoYN;
+	}
+	public String getChasunwiMaesuYN() {
+		return chasunwiMaesuYN;
+	}
+	public void setChasunwiMaesuYN(String chasunwiMaesuYN) {
+		this.chasunwiMaesuYN = chasunwiMaesuYN;
+	}
+	public String getGongdongIbchalYN() {
+		return gongdongIbchalYN;
+	}
+	public void setGongdongIbchalYN(String gongdongIbchalYN) {
+		this.gongdongIbchalYN = gongdongIbchalYN;
+	}
+	public String getTwoPersonYN() {
+		return twoPersonYN;
+	}
+	public void setTwoPersonYN(String twoPersonYN) {
+		this.twoPersonYN = twoPersonYN;
+	}
+	public String getTwoTimeYN() {
+		return twoTimeYN;
+	}
+	public void setTwoTimeYN(String twoTimeYN) {
+		this.twoTimeYN = twoTimeYN;
 	}
 }

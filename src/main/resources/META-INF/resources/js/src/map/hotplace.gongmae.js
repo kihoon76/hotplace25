@@ -25,27 +25,25 @@
 		});
 	}
 	
-	function _bindDetailClickHandler() {
+	function _bindDetailClickHandler(d) {
 		
 		$(_btnGongmaeDetail)
 		.off('click')
 		.on('click', function() {
 			var param = {
-				goyubeonho: $(this).data('goyubeonho'),
-				pnu: $(this).data('pnu'),
-				deunglogbeonho: $(this).data('deunglogbeonho')
+				goyubeonho: d.goyubeonho,
+				pnu: d.pnu
 			}
 			
-			hotplace.dom.showGyeongmaeDetail(null, {path: hotplace.getContextUrl() + 'resources/'});
-			
 			hotplace.ajax({
-				url: 'gyeongmae/detail',
+				url: 'gongmae/detail',
 				method: 'GET',
 				dataType: 'json',
 				data: param,
-				loadEl: hotplace.dom.getModalPopId(),
+				//loadEl: hotplace.dom.getModalPopId(),
 				success: function(data, textStatus, jqXHR) {
-				
+					console.log(data);
+					hotplace.dom.showGongmaeDetail(null, data);
 				},
 				error:function() {
 					
@@ -85,7 +83,8 @@
 				win.close();
 			});
 			
-			_bindDetailClickHandler(win);
+			
+			_bindDetailClickHandler(d);
 			_bindGeoClickHandler(data.location[1], data.location[0]);
 		});
 	}

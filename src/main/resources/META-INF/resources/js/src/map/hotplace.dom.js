@@ -536,13 +536,17 @@
 	
 	dom.showGyeongmaeDetail = function(fn, param) {
 		_appendModalPopup('gyeongmaeDetailForm', null ,param);
-		
 		dom.openModal('', null, null, fn);
 	}
 	
 	dom.showGyeongmaeImage = function(modalSize, param) {
 		_appendModalPopup('gyeongmaeImageForm', _$imagePopup, param);
 		dom.openImageModalOnModal(modalSize);
+	}
+	
+	dom.showGongmaeDetail = function(fn, param) {
+		_appendModalPopup('gongmaeDetailForm', null ,param);
+		dom.openModal('', null, null, fn);
 	}
 	
 	/**

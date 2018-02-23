@@ -13,6 +13,7 @@ import com.hotplace25.domain.AcceptBuilding;
 import com.hotplace25.domain.Address;
 import com.hotplace25.domain.BosangPyeonib;
 import com.hotplace25.domain.Gongmae;
+import com.hotplace25.domain.GongmaeDetail;
 import com.hotplace25.domain.Gyeongmae;
 import com.hotplace25.domain.Silgeolae;
 import com.hotplace25.domain.Yaggwan;
@@ -122,5 +123,10 @@ public class HotplaceDaoImpl implements HotplaceDao {
 	@Override
 	public List<Yaggwan> selectYaggwanList() {
 		return msSqlSession.selectList(namespace + ".selectYaggwanList");
+	}
+
+	@Override
+	public GongmaeDetail selectGongmaeDetail(String goyubeonho) {
+		return msSqlSessionAgent2.selectOne(namespace + ".selectGongmaeDetail", goyubeonho);
 	}
 }
