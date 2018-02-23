@@ -22,6 +22,12 @@ public class Gongmae extends GongmaeKey{
 	private String gongdongIbchalYN;			//공동입찰가능여부
 	private String twoPersonYN;					//2인미만 유찰여부
 	private String twoTimeYN;					//2회이상 입찰가능여부
+	private String myeongdoChaegim;				//명도책임
+	private String budaeJogeon;					//부대조건
+	
+	private String wichiBugeun;					//위치및부근현황
+	private String use;							//이용현황
+	private String etc;							//기타
 	
 	
 	public String getPnu() {
@@ -125,5 +131,35 @@ public class Gongmae extends GongmaeKey{
 	}
 	public void setTwoTimeYN(String twoTimeYN) {
 		this.twoTimeYN = twoTimeYN;
+	}
+	public String getWichiBugeun() {
+		return wichiBugeun;
+	}
+	public void setWichiBugeun(String wichiBugeun) {
+		this.wichiBugeun = wichiBugeun;
+	}
+	public String getUse() {
+		return use;
+	}
+	public void setUse(String use) {
+		this.use = use;
+	}
+	public String getEtc() {
+		return etc;
+	}
+	public void setEtc(String etc) {
+		this.etc = etc;
+	}
+	public String getMyeongdoChaegim() {
+		return myeongdoChaegim;
+	}
+	public void setMyeongdoChaegim(String myeongdoChaegim) {
+		this.myeongdoChaegim = myeongdoChaegim;
+	}
+	public String getBudaeJogeon() {
+		return budaeJogeon;
+	}
+	public void setBudaeJogeon(String budaeJogeon) {
+		this.budaeJogeon = budaeJogeon;
 	}
 }

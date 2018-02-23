@@ -2,7 +2,7 @@
  * @namespace hotplace.panomaps
  * */
 (function(panomaps, $) {
-	var _pano = null;
+	var pano = null;
 	var _marker = null;
 	var _mode = null;
 	var _streetMode = 'S';
@@ -21,7 +21,7 @@
 			});
 		}
 		
-		_pano = new naver.maps.Panorama(container, {
+		pano = new naver.maps.Panorama(container, {
 	        position: new naver.maps.LatLng(x, y),
 	        pov: {
 	            pan: -135,
@@ -35,28 +35,28 @@
 	        }
 	    });
 		
-		_pano.zoomIn();
+		pano.zoomIn();
 		//pano.setVisible(false);
 		
-		naver.maps.Event.addListener(_pano, 'init', function() {
+		naver.maps.Event.addListener(pano, 'init', function() {
 	        if(hasMarker) {
-	        	_marker.setMap(_pano);
-	        	 var proj = _pano.getProjection();
+	        	_marker.setMap(pano);
+	        	 var proj = pano.getProjection();
 	 	        var lookAtPov = proj.fromCoordToPov(_marker.getPosition());
 	 	        if (lookAtPov) {
-	 	            _pano.setPov(lookAtPov);
+	 	            pano.setPov(lookAtPov);
 	 	        }
 	        }
 	        
 	        if(callback) {
-	        	var location = _pano.getLocation();
+	        	var location = pano.getLocation();
 	        	var msg = '<div>[출처: naver]</div><div>사진촬영일은  ' + location.photodate.substring(0,10) + ' 입니다.</div>';
-	        	callback(location, msg, _pano);
+	        	callback(location, msg, pano);
 	        }
 	    });
 		
 		if(pano_changed) {
-			naver.maps.Event.addListener(_pano, 'pano_changed', function() {
+			naver.maps.Event.addListener(pano, 'pano_changed', function() {
 				pano_changed(pano);
 			});
 		}
@@ -64,17 +64,17 @@
 	}
 	
 	panomaps.clear = function() {
-		if(_pano) {
-			naver.maps.Event.clearInstanceListeners(_pano);
-			_pano = null;
+		if(pano) {
+			naver.maps.Event.clearInstanceListeners(pano);
+			pano = null;
 		}
 	}
 	
 	panomaps.resize = function($element) {
-		if(_pano  && _mode == _streetMode) {
+		if(pano  && _mode == _streetMode) {
 			var width = $element.width();
 			var height = $element.height();
-			_pano.setSize({width: width, height: height});
+			pano.setSize({width: width, height: height});
 		}
 	}
 }(

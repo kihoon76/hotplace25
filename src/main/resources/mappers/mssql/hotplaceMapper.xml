@@ -348,7 +348,7 @@
 	
 	
 	<sql id="gongmaeColumns">
-		PNU, 공매_목록_고유번호, 물건관리번호, 처분방식_자산구분, 용도, 면적, 감정평가금액, 입찰방식, 입찰기간_회차_차수, 유찰횟수, 집행기관, 최저입찰가_예정금액, 지번주소, 전자보증서사용여부, 차순위매수신청가능여부, 공동입찰가능여부, 2인미만유찰여부, 2회이상입찰가능여부
+		PNU, 물건관리번호, 처분방식_자산구분, 용도, 면적, 감정평가금액, 입찰방식, 입찰기간_회차_차수, 유찰횟수, 집행기관, 최저입찰가_예정금액, 지번주소, 전자보증서사용여부, 차순위매수신청가능여부, 공동입찰가능여부, 2인미만유찰여부, 2회이상입찰가능여부, 명도책임, 부대조건
 	</sql>
 	
 	<!-- 공매 -->
@@ -382,9 +382,15 @@
 		<result column="공동입찰가능여부" property="gongdongIbchalYN" javaType="string" />
 		<result column="2인미만유찰여부" property="twoPersonYN" javaType="string" />
 		<result column="2회이상입찰가능여부" property="twoTimeYN" javaType="string" />
+		<result column="명도책임" property="myeongdoChaegim" javaType="string" />
+		<result column="부대조건" property="budaeJogeon" javaType="string" />
 	</resultMap>
 	
 	<resultMap id="RM_selectGongmaeDetail" type="GongmaeDetail" extends="RM_selectGongmaeThumb">
+		<result column="위치및부근현황" property="wichiBugeun" javaType="string"/>
+		<result column="이용현황" property="use" javaType="string"/>
+		<result column="기타사항" property="etc" javaType="string"/>
+		
 		<collection property="areaList" column="공매_목록_고유번호" 
 					javaType="java.util.ArrayList"
 					ofType="GongmaeArea" 
@@ -413,15 +419,17 @@
 	</resultMap>
 	
 	<select id="selectGongmaeThumb" parameterType="string" resultMap="RM_selectGongmaeThumb">
-		select <include refid="gongmaeColumns" />
+		select 공매_목록_고유번호, <include refid="gongmaeColumns" />
 		  from [수작업입력].[dbo].[공매_기본정보]
 		 where [공매_목록_고유번호] = #{goyubeonho}
 	</select>
 	
 	<select id="selectGongmaeDetail" parameterType="string" resultMap="RM_selectGongmaeDetail" >
-		select <include refid="gongmaeColumns" />
-		  from [수작업입력].[dbo].[공매_기본정보]
-		 where [공매_목록_고유번호] = #{goyubeonho}
+		select a.공매_목록_고유번호, 위치및부근현황, 이용현황, 기타사항, <include refid="gongmaeColumns" />
+		  from [수작업입력].[dbo].[공매_기본정보] a
+		  left outer join [수작업입력].[dbo].[공매_위치_이용현황] b
+		    on a.[공매_목록_고유번호] = b.[공매_목록_고유번호]
+		 where a.[공매_목록_고유번호] = #{goyubeonho}
 	</select>
 	
 	<!-- 공매 면적정보 -->
