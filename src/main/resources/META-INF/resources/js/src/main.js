@@ -46,7 +46,6 @@ $(document).ready(function() {
 	
 	/***************** 거리뷰 버튼 ************************/
 	$('#btnStreetView').on('click', function(e, t) {
-		console.log(t)
 		//heatmap이 켜져있으면 동작 안함
 		if(!t) {
 			if(!hotplace.maps.isOffCell()) {
@@ -62,6 +61,8 @@ $(document).ready(function() {
 		
 		hotplace.dom.activeButton(onOff, $(this));
 		hotplace.maps.showStreetLayer(onOff, $(this));
+		
+		
 	});
 	
 	/***************** 타임뷰 버튼 ************************/

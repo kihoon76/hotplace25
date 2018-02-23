@@ -43,7 +43,7 @@
 	 * @property {function} calcIncomeSellLand  	수입>매각>토지 연산함수
 	 * @property {function} calcIncomeManageImdae	수입>운영>임대 연산함수
 	 */
-	calc.profit = function() {
+	calc.sujibunseog = function() {
 		/**
 		 * @private
 		 * @property {object} defaultValue 

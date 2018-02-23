@@ -45,6 +45,8 @@
 			_fixedMarker = false;
 			_createMarker(map, coord);
 		}
+		
+		hotplace.dom.adjustMapZindex('10');
 	
 	}
 	
@@ -55,6 +57,7 @@
 	streetview.stop = function() {
 		_isStarted = false;
 		_destroyMarker();
+		hotplace.dom.adjustMapZindex();
 	}
 	
 	streetview.fixedMarker = function() {

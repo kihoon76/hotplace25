@@ -90,13 +90,13 @@
 											<th>(최근 1년간)토지이용규제 변경 여부</th>
 											<td>
 												<span class="rdchBox">
-													<input type="radio" id="Profit_00_01" name="Profit_00" checked />
-													<label for="Profit_00_01" class="labelCh"><em class="text">유</em></label>
+													<input type="radio" id="radioLandChangeY" name="radioLandChange" {{#xif " limitChange == 'Y' " }} checked {{/xif}} disabled />
+													<label for="radioLandChangeY" class="labelCh"><em class="text">유</em></label>
 												</span>
 												&nbsp;&nbsp;&nbsp;
 												<span class="rdchBox">
-													<input type="radio" id="Profit_00_02" name="Profit_00" />
-													<label for="Profit_00_02" class="labelCh"><em class="text">무</em></label>
+													<input type="radio" id="radioLandChangeN" name="radioLandChange" {{#xif " limitChange == 'N' " }} checked {{/xif}} disabled/>
+													<label for="radioLandChangeN" class="labelCh"><em class="text">무</em></label>
 												</span>
 												<button type="button" id="btnSujiTojiUseLimitHistory" class="btnstyle small black fr tooltipBtn"><i class="ambicon-024_view_big"></i> 토지이용규제 변경내역보기</button>
 											</td>
@@ -166,13 +166,13 @@
 									<th>매입(보유)주체</th>
 									<td>
 										<span class="rdchBox">
-											<input type="radio" id="radioPrivate" name="radioOwn" value="gaein" {{#xif " own == 'gaein' " }} checked {{/xif}} />
-											<label for="radioPrivate" class="labelCh"><em class="text">개인</em></label>
+											<input type="radio" id="radioGaein" name="radioOwn" value="gaein" {{#xif " own == 'gaein' " }} checked {{/xif}} />
+											<label for="radioGaein" class="labelCh"><em class="text">개인</em></label>
 										</span>
 										&nbsp;&nbsp;&nbsp;
 										<span class="rdchBox">
-											<input type="radio" id="radioInc" name="radioOwn" value="beobin" {{#xif " own == 'beobin' " }} checked {{/xif}}/>
-											<label for="radioInc" class="labelCh"><em class="text">법인</em></label>
+											<input type="radio" id="radioBeobin" name="radioOwn" value="beobin" {{#xif " own == 'beobin' " }} checked {{/xif}}/>
+											<label for="radioBeobin" class="labelCh"><em class="text">법인</em></label>
 										</span>
 									</td>
 

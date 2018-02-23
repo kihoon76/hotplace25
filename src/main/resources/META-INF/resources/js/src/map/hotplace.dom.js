@@ -25,6 +25,7 @@
 		_$btnStreetView = $('#btnStreetView'),
 		_dvCommonPano = '#dvCommonPano', //물건보기에서 파노라마 컨테이너
 		_dvCommonPanoInfo = '#dvCommonPanoInfo', //물건보기에서 파노라마 정보 컨테이너
+		_$mapArea = $('#mapArea'), 
 		_sliderGrp = {}; //slider 관리객체
 	
 	dom.getModalPopId = function() {
@@ -1252,6 +1253,10 @@
 
 	        _infoWinCoordAddr.open(hotplace.maps.getMap(), coord);
 	    });
+	}
+	
+	dom.adjustMapZindex = function(z) {
+		_$mapArea.css('z-index', z || '0');
 	}
 	
 	/*************************************************************

@@ -68,6 +68,7 @@
 		
 		hotplace.dom.showSpotSujibunseogForm(function() {
 			hotplace.sujibunseog.init();
+			hotplace.calc.sujibunseog.initCalc();
 		}, param);
 	}
 	

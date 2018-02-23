@@ -388,7 +388,7 @@
 			var address = arg ? arg.address : _selectedAddressObj.address;
 			var pnu = arg ? arg.pnu : _selectedAddressObj.pnu;
 			var datas = {
-				params : $.extend({address:address, pnu:pnu}, {defaultValue:hotplace.calc.profit.defaultValue}, {
+				params : $.extend({address:address, pnu:pnu}, {defaultValue:hotplace.calc.sujibunseog.defaultValue}, {
 					jimok: '전',
 					valPerPyeung:21000000,
 					area: 132,

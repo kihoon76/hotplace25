@@ -1739,10 +1739,6 @@
 		return _venderMap.getCenter();
 	}
 	
-	maps.showStreetLayer = function() {
-		
-	}
-	
 	/** 
 	 * @memberof hotplace.maps 
 	 * @function panToBounds 

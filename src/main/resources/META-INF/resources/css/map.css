@@ -70,6 +70,7 @@
 
 body {color:#111; font-weight:400;}
 a, a:hover {color:#111; cursor:pointer;}
+a:hover {text-decoration:underline;}
 a:focus,
 button:focus {outline:none;}
 
@@ -249,6 +250,8 @@ table.tableStyle.gridStyle thead th {background:#f5f6f7; text-align:center; bord
 table.tableStyle.gridStyle tbody td {text-align:;}
 table.tableStyle.gridStyle tbody tr:hover td {font-weight:normal;}
 table.tableStyle.gridStyle tbody th {background:#f5f6f7; border-right:1px solid #ccc;}
+table.tableStyle.gridStyle tbody td {border-right:1px solid #ccc;}
+table.tableStyle.gridStyle tbody tr td:last-of-type {border-right:none;}
 
 /* table topBold */
 table.tableStyle.topBold  {border-top-width:1px; border-top-style:solid; border-top-color:#888;}
@@ -278,7 +281,7 @@ table.tableStyle td img {max-width:100%;}
 /*************************************/
 /* layout */
 .mapArea {position:absolute; z-index:0; top:50px; bottom:0; left:60px; right:0;  padding-top:0px; overflow:auto; }
-#map     {width:100%; height:100%; margin:0 0; padding:0; /*display:none;*/}
+#map     {width:100%; height:100%; margin:0 0; padding:0; }
 .gnbArea {position:absolute; z-index:2; top:0; left:0; width:100%; height:50px;  border-bottom:1px solid rgba(255,255,255,0.2); box-shadow:0 2px 2px rgba(0,0,0,0.05); background:#333336;}
 .lnbArea {position:absolute; z-index:4; top:50px; left:0; bottom:0; width:60px; border-bottom:1px solid #aaa; background:#333336; box-shadow:1px 0px 2px rgba(0,0,0,0.2);}
 .lnbCont {position:absolute; z-index:3; top:50px; left:60px; bottom:0; display:none;}
@@ -296,14 +299,15 @@ body	 {min-height:600px;}
 /* dvIntro */
 #dvIntro   {position:fixed; padding:0; margin:0; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0); z-index: 11;}
 
-#dvStreetView {position:fixed; padding:0; margin:0;	top:50px; left:0; width:100%; height:100%;	background: rgb(255, 255, 255);	z-index:9; display:none;}
-#dvStreetViewHeader {padding:0;	margin:0; width:100%; height:30px; background-color:#000;}
+#dvStreetView {position:fixed; padding:0; margin:0;	top:0px; left:0; right:0; bottom:0; width:100%; height:100%; background:rgb(255, 255, 255); z-index:10; display:none;}
+#dvStreetViewHeader {padding:0;	margin:0; width:100%; height:50px; background-color:#000;}
 #dvStreetViewContent, #dvStreet {padding:0;	margin:0; width:100%; height:100%; background-color:#000;}
 #dvStreetMini {width:300px; height:300px;}
 
 /* 파노라마 div */
-.pano-close {text-decoration:none;}
-.pano-close span {color:#fff; font-size:1.5em; position:relative; top:2px; left:98%;}
+.pano-close,
+.pano-close:hover {text-decoration:none;}
+.pano-close span  {color:#fff; font-size:1.5em; position:relative; top:2px; left:98%;}
 
 /*************************************/
 /* 지도 우측 버튼 */
@@ -1023,8 +1027,13 @@ input.searchInp {display:block; width:100%; border:2px solid #ddd; height:50px; 
 
 /*************************************/
 /* dvGyeongmaeDetail // 경매 상세보기 */
+.detailWrap .tabWrap .nav-tabs .tabLink {height:32px;}
+.detailWrap .tabWrap .nav-tabs .tabLink > a, 
+.detailWrap .tabWrap .nav-tabs .tabLink > button {padding:0px 25px 2px;}
+
+.detailWrap .tabWrap .tab-pane .unit:nth-of-type(1) > .unit_tit:nth-of-type(1) {margin-top:0px;}
 .detailWrap .unit .unit_tit {margin-top:15px;}
-.detailWrap .unit .unit_tit .sTit {font-size:14px; padding:0 0 0 16px; color:#000; font-weight:bold;}
+.detailWrap .unit .unit_tit .sTit {font-size:14px; padding:0 0 0 18px; color:#000; font-weight:bold;}
 .detailWrap .unit .unit_tit .sTit:before {display:;}
 .detailWrap .unit .unit_tit .sTit:before {display:inline-block; content:'';border:none; border-radius:0; width:11px; height:11px; position:absolute; left:0; top:50%; margin-top:-6px; background:url('../img/bullet_01.png') no-repeat center center; background-size:100%; 100%;}
 
@@ -1040,7 +1049,13 @@ input.searchInp {display:block; width:100%; border:2px solid #ddd; height:50px; 
 /* dvGongmaeDetail // 공매 상세보기 */
 .dvGongmaeDetail {}
 .dvGongmaeTab {}
-.dvGongmaeTab {}
+
+.typeListBox {overflow:auto; clear:both;}
+.typeListBox.fileDownBox li {display:inline-block; width:33.33%; float:left;}
+.typeListBox li {position:relative; padding:5px 10px; overflow:auto;}
+
+.fileDown {display:inline-block; position:relative;}
+.fileDown i {display:inline-block; width:14px; height:14px; vertical-align:middle; font-size:12px; margin-right:5px;}
 
 /*************************************/
 /* imageViewBox // 사진이미지보기 모달 */

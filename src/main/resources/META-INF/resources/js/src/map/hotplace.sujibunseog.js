@@ -121,7 +121,7 @@
 		$('input[name="radioOwn"]').on('click', function(e) {
 			var targetId = e.target.id;
 			//개인 (양도세 세율)
-			if(id == 'radioPrivate') {
+			if(targetId == 'radioPrivate') {
 				
 			}
 			else {
