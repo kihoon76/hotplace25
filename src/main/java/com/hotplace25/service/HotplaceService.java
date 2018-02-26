@@ -15,6 +15,7 @@ import com.hotplace25.domain.Address;
 import com.hotplace25.domain.BosangPyeonib;
 import com.hotplace25.domain.Gongmae;
 import com.hotplace25.domain.GongmaeDetail;
+import com.hotplace25.domain.GongmaeImage;
 import com.hotplace25.domain.Gyeongmae;
 import com.hotplace25.domain.GyeongmaeImage;
 import com.hotplace25.domain.Silgeolae;
@@ -148,6 +149,17 @@ public class HotplaceService {
 	}
 
 	public GongmaeDetail getGongmaeDetail(String goyubeonho) {
-		return hotplaceDao.selectGongmaeDetail(goyubeonho);
+		GongmaeDetail g = hotplaceDao.selectGongmaeDetail(goyubeonho);
+		
+		if(g.getImages() != null && g.getImages().size() > 0) {
+			for(GongmaeImage gImg : g.getImages()) {
+				String sImg = gImg.getImage();
+				byte[] bImg = DataUtil.hexStringToByteArray(sImg); 
+				String b64 = Base64Utils.encodeToString(bImg);
+				gImg.setImage("data:image/" + gImg.getExt() + ";base64," + b64);
+			}
+		}
+		
+		return g;
 	}
 }

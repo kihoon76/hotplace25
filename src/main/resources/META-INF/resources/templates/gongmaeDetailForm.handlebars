@@ -58,27 +58,15 @@
 							</tr>
 							<tr>
 								<th>최저입찰가(예정금액)</td>
-								<td colspan="5"><span class="bold color_blue font16">{{#xif " minIbchalga != null "}}{{minIbchalga}} 원{{else}} - {{/xif}}</span></td>
+								<td colspan="5"><span class="bold color_blue font16">{{#xif " minIbchalga != null "}}{{currency minIbchalga}} 원{{else}} - {{/xif}}</span></td>
 							</tr>
 							<tr>
 								<th>
-									사진
+									사진(<span id="gongmaeImageCnt">0</span>)
 								</th>
 								<td colspan="5">
 									<div class="touchSliderWrap">
-										<div id="touchSlider" class="touchSlider" style="height:160px;">
-											<ul>
-												<li><a href="#"><img src="img/photo_sample00.jpg" data-gubun="전경도"></a></li>
-												<li><a href="#"><img src="img/photo_sample.jpg" data-gubun="전경도"></a></li>
-												<li><a href="#"><img src="img/photo_sample02.jpg" data-gubun="전경도"></a></li>
-												<li><a href="#"><img src="img/photo_sample03.jpg" data-gubun="전경도"></a></li>
-												<li><a href="#"><img src="img/photo_sample00.jpg" data-gubun="내부구조"></a></li>
-												<li><a href="#"><img src="img/photo_sample.jpg" data-gubun="내부구조"></a></li>
-												<li><a href="#"><img src="img/photo_sample02.jpg" data-gubun="내부구조"></a></li>
-												<li><a href="#"><img src="img/photo_sample03.jpg" data-gubun="내부구조"></a></li>
-												<li><a href="#"><img src="img/photo_sample04.jpg" data-gubun="기타"></a></li>
-												<li><a href="#"><img src="img/photo_sample05.jpg" data-gubun="기타"></a></li>
-											</ul>
+										<div id="gongmaeimages" class="touchSlider" style="height:160px;">
 										</div>
 										<div class="tsBtnArea">
 											<button type="button" class="btn_prev"><span class="hidden">prev</span></button>
@@ -128,26 +116,6 @@
 							<div class="unit">
 								<div class="unit_tit">
 									<span class="sTit color_black">면적 정보</span>
-								</div>
-								<div class="unit_cont bgWhite">
-									<table id="" class="tableStyle topBold left">
-										<colgroup>
-											<col style="width:12%;">
-											<col style="width:38%;">
-
-											<col style="width:12%;">
-											<col style="width:38%;">
-										</colgroup>
-										<tbody>
-											<tr>
-												<th>○ 토지면적:</th>
-												<td><span class="bold font15">1,152㎡</span></td>
-
-												<th>○ 건물면적:</th>
-												<td><span class="bold font15">1,152㎡</span></td>
-											</tr>
-										</tbody>
-									</table>
 								</div>
 								<div class="unit_cont bgWhite mgT10">
 									<table id="" class="tableStyle gridStyle center">
@@ -272,7 +240,7 @@
 											<tr>	
 												<td>{{pyeonggaGigwan}}</td>
 												<td>{{pyeonggaDate}}</td>
-												<td class="right">{{pyeonggaPrice}}</td>
+												<td class="right">{{#xif " pyeonggaPrice != null "}} {{currency pyeonggaPrice}} {{else}}  {{pyeonggaPrice}} {{/xif}}</td>
 												<td>
 													<button type="button" class="btnstyle small white"><i class="ambicon-054_loard_down"></i> 감정평가서</button>
 												</td>
@@ -337,21 +305,21 @@
 										<tbody>
 											<tr>
 												<th>전자보증서 사용여부</th>
-												<td>{{xif " jeonjaBojeungseoYN == 'Y' "}} 사용 가능 {{else}} 사용 불가능 {{/xif}}</td>
+												<td>{{#xif " jeonjaBojeungseoYN == 'Y' "}} 사용 가능 {{else}} 사용 불가능 {{/xif}}</td>
 												<th>차순위 매수신청<br> 가능여부</th>
-												<td>{{xif " chasunwiMaesuYN == 'Y' "}} 신청 가능 {{else}} 신청 불가능 {{/xif}}</td>
+												<td>{{#xif " chasunwiMaesuYN == 'Y' "}} 신청 가능 {{else}} 신청 불가능 {{/xif}}</td>
 											</tr>
 											<tr>
 												<th>공동입찰 가능여부</th>
-												<td>{{xif " gongdongIbchalYN == 'Y' "}} 공동입찰 가능 {{else}} 공동입찰 불가능 {{/xif}}</td>
+												<td>{{#xif " gongdongIbchalYN == 'Y' "}} 공동입찰 가능 {{else}} 공동입찰 불가능 {{/xif}}</td>
 												<th>2인 미만 유찰여부</th>
-												<td>1인이 입찰하더라도 유효한 입찰로 성립</td>
+												<td>{{#xif " twoPersonYN == 'Y' "}} 1인이 입찰하더라도 유효한 입찰로 성립 {{else}} 2인 이상 입찰자가 있는 경우에만 유효한 입찰로 성립 {{/xif}}</td>
 											</tr>
 											<tr>
 												<th>대리입찰 가능여부</th>
-												<td>대리입찰 불가능</td>
+												<td>{{#xif " daeliIbchalYN == 'Y' "}} 대리입찰 가능 {{else}} 대리입찰 불가능 {{/xif}}</td>
 												<th>2회 이상 입찰 가능여부</th>
-												<td>동일물건 2회 이상 입찰 불가능</td>
+												<td>{{#xif " twoTimeYN == 'Y' "}} 동일물건 2회 이상 입찰 가능 {{else}} 동일물건 2회 이상 입찰 불가능 {{/xif}}</td>
 											</tr>
 											
 										</tbody>
@@ -390,19 +358,24 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>	
-												<td>0001</td>
-												<td>001 / 001</td>
-												<td>인터넷</td>
-												<td>일시불 / 낙찰 후 7일 이내</td>
-												<td>2018-02-21 16:30 ~ 2018-02-27 17:00</td>
-												<td>2018-02-28 10:00</td>
-												<td>당사 입찰집행관 PC</td>
-												<td class="right">2,112,638,121</td>
-											</tr>
+										{{#xif " ibchalList.length == 0 " }}
 											<tr>	
 												<td colspan="8">조회된 데이타가 없습니다.</td>
 											</tr>
+										{{else}}
+										{{#each ibchalList}}
+											<tr>	
+												<td>{{ibchalNum}}</td>
+												<td>{{hoecha}} / {{chasu}}</td>
+												<td>{{gubun}}</td>
+												<td>{{daegeumNabbu}} / {{nabbuGihan}}</td>
+												<td>{{trimString ibchalStart 0 16}} / {{trimString ibchalEnd 0 16}}</td>
+												<td>{{trimString gaechal 0 16}}</td>
+												<td>{{gaechalJangso}}</td>
+												<td>{{#xif " minIbchalga != null "}} {{currency minIbchalga}} {{else}} {{minIbchalga}} {{/xif}}</td>
+											</tr>
+										{{/each}}
+										{{/xif}}
 										</tbody>
 									</table>
 								</div>
@@ -410,7 +383,7 @@
 							<!-- //////// -->
 
 							<!-- 첨부파일 -->
-							<div class="unit">
+							<!--<div class="unit">
 								<div class="unit_tit">
 									<span class="sTit color_black">첨부파일</span>
 								</div>
@@ -423,7 +396,7 @@
 										<li><a href="#" class="fileDown"><i class="ambicon-087_flieadd"></i> 공고문(3차).hwp (24.00 KB)</a></li>
 									</ul>
 								</div>
-							</div>
+							</div>-->
 							<!-- //////// -->
 
 						</div>
@@ -466,30 +439,22 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>3개월</td>
-												<td>51</td>
-												<td>11</td>
-												<td>22%</td>
-												<td>116.15%</td>
-												<td>165.7%</td>
+										{{#xif " tonggyeList.length == 0 " }}
+											<tr>	
+												<td colspan="6">조회된 데이타가 없습니다.</td>
 											</tr>
-											<tr>
-												<td>6개월</td>
-												<td>92</td>
-												<td>19</td>
-												<td>21%</td>
-												<td>149.37%</td>
-												<td>169.36%</td>
+										{{else}}
+										{{#each tonggyeList}}
+											<tr>	
+												<td>{{tonggyeGigan}}개월</td>
+												<td>{{buchalGeonsu}}</td>
+												<td>{{nagchalGeonsu}}</td>
+												<td>{{#xif " nagchalRatio != null "}} {{nagchalRatio}}% {{else}} {{nagchalRatio}} {{/xif}}</td>
+												<td>{{#xif " gamjeongga != null "}} {{gamjeongga}}% {{else}} {{gamjeongga}} {{/xif}}</td>
+												<td>{{#xif " minIbchalga != null "}} {{minIbchalga}}% {{else}} {{minIbchalga}} {{/xif}}</td>
 											</tr>
-											<tr>
-												<td>12개월</td>
-												<td>135</td>
-												<td>37</td>
-												<td>27%</td>
-												<td>144.08%</td>
-												<td>148.48%</td>
-											</tr>
+										{{/each}}
+										{{/xif}}
 										</tbody>
 									</table>
 								</div>
@@ -517,49 +482,21 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td class="left"><a href="#">잠실(2)역 216-111,112호 점포</a></td>
-												<td class="right">420,600,000</td>
+										{{#xif " mulgeonList.length == 0 " }}
+											<tr>	
+												<td colspan="3">조회된 데이타가 없습니다.</td>
 											</tr>
-											<tr>
-												<td>1</td>
-												<td class="left"><a href="#">잠실(2)역 216-111,112호 점포</a></td>
-												<td class="right">420,600,000</td>
+										{{else}}
+										{{#each mulgeonList}}
+											<tr>	
+												<td>{{number}}</td>
+												<td>{{mulgeonName}}</td>
+												<td>{{#xif " nagchalPrice != null "}} {{currency nagchalPrice}} {{else}} {{nagchalPrice}} {{/xif}}</td>
 											</tr>
-											<tr>
-												<td>1</td>
-												<td class="left"><a href="#">잠실(2)역 216-111,112호 점포</a></td>
-												<td class="right">420,600,000</td>
-											</tr>
-											<tr>
-												<td>1</td>
-												<td class="left"><a href="#">잠실(2)역 216-111,112호 점포</a></td>
-												<td class="right">420,600,000</td>
-											</tr>
+										{{/each}}
+										{{/xif}}
 										</tbody>
 									</table>
-								</div>
-								<div class="unit_cont center">
-									<ul class="paginglist">
-											
-										<li class="first"><a href="#"><i class="ambicon-006_arrow_first"></i></a></li>
-										<li class="prev"><a href="#"><i class="ambicon-002_arrow_left"></i></a></li>
-
-										<li><a href="#"> 1 </a></li>
-										<li><a href="#"> 2 </a></li>
-										<li class="active"><a href="#"> 3 </a></li>
-										<li><a href="#"> 4 </a></li>
-										<li><a href="#"> 5 </a></li>
-										<li><a href="#"> 6 </a></li>
-										<li><a href="#"> 7 </a></li>
-										<li><a href="#"> 8 </a></li>
-										<li><a href="#"> 9 </a></li>
-										<li><a href="#"> 10 </a></li>
-
-										<li class="next"><a href="#"><i class="ambicon-001_arrow_right"></i></a></li>
-										<li class="last"><a href="#"><i class="ambicon-005_arrow_last"></i></a></li>
-									</ul>
 								</div>
 							</div>
 							<!-- //////// -->

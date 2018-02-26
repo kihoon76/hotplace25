@@ -14,6 +14,8 @@ public class BosangPyeonib {
 	private String gonggobeonho;				//공고번호
 	private String saeobsihaengja;				//사업시행자
 	private String siseolkind;					//시설종류
+	private float lat;							//위도
+	private float lng;							//경도
 	
 	public String getPnu() {
 		return pnu;
@@ -68,5 +70,17 @@ public class BosangPyeonib {
 	}
 	public void setSiseolkind(String siseolkind) {
 		this.siseolkind = siseolkind;
+	}
+	public float getLat() {
+		return lat;
+	}
+	public void setLat(float lat) {
+		this.lat = lat;
+	}
+	public float getLng() {
+		return lng;
+	}
+	public void setLng(float lng) {
+		this.lng = lng;
 	}
 }

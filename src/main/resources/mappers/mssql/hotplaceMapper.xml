@@ -348,7 +348,7 @@
 	
 	
 	<sql id="gongmaeColumns">
-		PNU, 물건관리번호, 처분방식_자산구분, 용도, 면적, 감정평가금액, 입찰방식, 입찰기간_회차_차수, 유찰횟수, 집행기관, 최저입찰가_예정금액, 지번주소, 전자보증서사용여부, 차순위매수신청가능여부, 공동입찰가능여부, 2인미만유찰여부, 2회이상입찰가능여부, 명도책임, 부대조건
+		PNU, 물건관리번호, 처분방식_자산구분, 용도, 면적, 감정평가금액, 입찰방식, 입찰기간_회차_차수, 유찰횟수, 집행기관, 최저입찰가_예정금액, 지번주소, 전자보증서사용여부, 차순위매수신청가능여부, 공동입찰가능여부, 2인미만유찰여부, 2회이상입찰가능여부, 대리입찰가능여부, 명도책임, 부대조건
 	</sql>
 	
 	<!-- 공매 -->
@@ -382,6 +382,7 @@
 		<result column="공동입찰가능여부" property="gongdongIbchalYN" javaType="string" />
 		<result column="2인미만유찰여부" property="twoPersonYN" javaType="string" />
 		<result column="2회이상입찰가능여부" property="twoTimeYN" javaType="string" />
+		<result column="대리입찰가능여부" property="daeliIbchalYN" javaType="string" />
 		<result column="명도책임" property="myeongdoChaegim" javaType="string" />
 		<result column="부대조건" property="budaeJogeon" javaType="string" />
 	</resultMap>
@@ -415,6 +416,11 @@
 					javaType="java.util.ArrayList"
 					ofType="GongmaeGamjeong"
 					select="selectGongmaeGamjeong"
+					/>
+		<collection property="images" column="공매_목록_고유번호"
+					javaType="java.util.ArrayList"
+					ofType="GongmaeImage"
+					select="selectGongmaeImage"
 					/>
 	</resultMap>
 	
@@ -455,7 +461,7 @@
 	
 	<!-- 공매 인근 낙찰 통계 -->
 	<select id="selectGongmaeAroundNagchalTonggye" parameterType="string" resultType="GongmaeAroundNagchalTonggye">
-		select 통계기간 as tonggyeGigan, 부찰건수 as buchalGeonsu, 낙찰건수 as nagchalGeonsu, 감정가대비 as gamjeongga, 최저입찰가대비 as minIbchalga
+		select 통계기간 as tonggyeGigan, 부찰건수 as buchalGeonsu, 낙찰건수 as nagchalGeonsu, ROUND(감정가대비, 2) as gamjeongga, ROUND(최저입찰가대비, 2) as minIbchalga
 		  from [수작업입력].[dbo].[공매_인근낙찰통계]
 		 where [공매_목록_고유번호] = #{goyubeonho} 
 	</select>
@@ -465,6 +471,17 @@
 		select 감정평가기관 as pyeonggaGigwan, 평가일 as pyeonggaDate, 평가금액 as pyeonggaPrice
 		  from [수작업입력].[dbo].[공매_감정평가정보]
 		 where [공매_목록_고유번호] = #{goyubeonho} 
+	</select>
+	
+	<!-- 공매 이미지 -->
+	<select id="selectGongmaeImage" parameterType="string" resultType="GongmaeImage">
+		select 이미지  as image, 확장자 as ext
+		  from [수작업입력].[dbo].[공매_사진_별도수집]
+		 where [atchFilePtcsNo] 
+		 	in (select  atchFilePtcsNo 
+		 		  from [수작업입력].[dbo].[공매_사진목록] 
+		 		 where [공매_목록_고유번호] = #{goyubeonho}
+		 	)
 	</select>
 	<!-- 보상편입물건 -->
 	<!-- <select id="selectBosangPyeonibMarker" resultType="string" parameterType="hashmap">
@@ -511,10 +528,12 @@
 		<result column="공고번호" property="gonggobeonho" javaType="string" />
 		<result column="사업시행자" property="saeobsihaengja" javaType="string"/>
 		<result column="시설종류" property="siseolkind" javaType="string" />
+		<result column="위도" property="lat" javaType="float" />
+		<result column="경도" property="lng" javaType="float" />
 	</resultMap>
 	
 	<select id="selectBosangPyeonibThumb" parameterType="string" resultMap="RM_selectBosangPyeonibThumb">
-		select 고유번호, 물건소재지, PNU, 공고기관, 사업명, 공고일, 공고번호, 사업시행자, 시설종류
+		select 고유번호, 물건소재지, PNU, 공고기관, 사업명, 공고일, 공고번호, 사업시행자, 시설종류, 위도, 경도
 		  from [수작업].[dbo].[보상물건]
 		 where 고유번호 = #{unu}
 	</select>

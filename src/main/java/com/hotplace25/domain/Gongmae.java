@@ -22,6 +22,7 @@ public class Gongmae extends GongmaeKey{
 	private String gongdongIbchalYN;			//공동입찰가능여부
 	private String twoPersonYN;					//2인미만 유찰여부
 	private String twoTimeYN;					//2회이상 입찰가능여부
+	private String daeliIbchalYN;				//대리입찰가능여부
 	private String myeongdoChaegim;				//명도책임
 	private String budaeJogeon;					//부대조건
 	
@@ -101,6 +102,12 @@ public class Gongmae extends GongmaeKey{
 	}
 	public void setMinIbchalga(String minIbchalga) {
 		this.minIbchalga = minIbchalga;
+	}
+	public String getDaeliIbchalYN() {
+		return daeliIbchalYN;
+	}
+	public void setDaeliIbchalYN(String daeliIbchalYN) {
+		this.daeliIbchalYN = daeliIbchalYN;
 	}
 	public String getJeonjaBojeungseoYN() {
 		return jeonjaBojeungseoYN;

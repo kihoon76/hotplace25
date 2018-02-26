@@ -12,6 +12,7 @@ public class GongmaeDetail extends Gongmae {
 	private List<GongmaeAroundNagchalMulgeon> mulgeonList;
 	private List<GongmaeAroundNagchalTonggye> tonggyeList;
 	private List<GongmaeGamjeong> gamjeongList;
+	private List<GongmaeImage> images;
 	
 
 	public List<GongmaeArea> getAreaList() {
@@ -52,5 +53,13 @@ public class GongmaeDetail extends Gongmae {
 
 	public void setGamjeongList(List<GongmaeGamjeong> gamjeongList) {
 		this.gamjeongList = gamjeongList;
+	}
+
+	public List<GongmaeImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<GongmaeImage> images) {
+		this.images = images;
 	}
 }

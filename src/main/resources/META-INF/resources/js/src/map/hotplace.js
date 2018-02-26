@@ -343,7 +343,10 @@
      * @desc 숫자 자리수 
      */
     Handlebars.registerHelper('currency', function(amount, options) {
-    	if (typeof(amount) === 'string') { amount = options.contexts[0].get(amount); }
+    	try {
+    		if (typeof(amount) === 'string') { amount = options.contexts[0].get(amount); }
+    	}
+    	catch(e) {}
 
     	return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     });
@@ -387,6 +390,11 @@
     	
     	var n = parseInt(s1);
     	return Math.round(n * (ratio * 0.01));
+    });
+    
+    Handlebars.registerHelper('trimString', function(passedString, startString, endString) {
+    	var theString = passedString.substring(startString, endString);
+    	return Handlebars.SafeString(theString);
     });
 
     /**

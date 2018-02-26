@@ -1,41 +1,49 @@
 <div id="dvBosangPyeonibInfoWin" class="mapInnerBox type2"> 
-    <div class="mibHeader"><span class="titIcon gyeongmae">경매</span></div> 
-    <div class="mibBody">
-        <div class="tableType">
-            <table class="tableStyle borderStyle left">
-                <tbody>
-                    <tr>
-                        <th>소재지</th>
-                        <td>{{sojaeji}}</td>
-                    </tr>
-                    <tr>
-                        <th> 용도</th>
-                        <td>{{yongdo}}</td>
-                    </tr>
-                    <tr>
-                        <th>감정평가액</th>
-                        <td>{{gamjeongpyeongga}}</td>
-                    </tr>
-                    <tr>
-                        <th>유찰</th>
-                        <td>{{yuchal}}</td>
-                    </tr>
-                    <tr>
-                        <th>매각기일</th>
-                        <td>{{maegaggiil}}</td>
-                    </tr>
-                    <tr>
-                        <th>사진</th>
-                        <td>
-                        	<img id="gImgThumb" src="http://placehold.it/100x100/E8117F/ffffff?text=NoImage" style="width:100px; height:100px"/>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="mibHeader"><span class="titIcon {{#xif " kind == '보상' "}} bosang {{else}} pyeonib {{/xif}}">{{kind}}</span></div> 
+    <div class="mibBody" style="height:305px;">
+       	<!-- list -->
+    	<div id="dvBosangPyeonibList" class="listType" style="display:none;"></div>
+
+	   	<!-- table -->
+	   	<div id="dvBosangPyeonibTable" class="tableType" style="display:none;">
+	   		<table class="tableStyle borderStyle left">
+	   			<tbody>
+	   			<tr>
+					<td>물건<br/>소재지</td>
+					<td><span id="bpMulgeonsojaeji">{{mulgeonsojaeji}}</span></td>
+				</tr>
+				<tr>
+					<td>공고기관</td>
+					<td><span id="bpGonggogigwan">{{gonggogigwan}}</span></td>
+				</tr>
+				<tr>
+					<td>공고일</td>
+					<td><span id="bpGonggoil">{{gonggoil}}</span></td>
+				</tr>
+				<tr>
+					<td>사업명</td>
+					<td><span id="bpSaeobname">{{saeobname}}</span></td>
+				</tr>
+				<tr>
+					<td>공고번호</td>
+					<td><span id="bpGonggobeonho">{{gonggobeonho}}</span></td>
+				</tr>
+				<tr>
+					<td>시설종류</td>
+					<td><span id="bpSiseolkind">{{siseolkind}}</span></td>
+				</tr>
+				<tr>
+					<td>사업<br/>시행자</td>
+					<td><span id="bpSaeobsihaengja">{{saeobsihaengja}}</span></td>
+				</tr>
+	   			</tbody>
+	   		</table>
+	   	</div>       
+       
     </div>
     <div class="mibfooter">
     	<button type="button" id="btnBosangPyeonibPano" class="link" data-name="위치보기">위치보기</button>
+    	<button type="button" id="btnBosangPyeonibList" class="goList" style="displat:none;">목록으로</button>
         <button type="button" id="btnBosangPyeonibThumbClose" class="close">닫기</button>
     </div>
 </div>

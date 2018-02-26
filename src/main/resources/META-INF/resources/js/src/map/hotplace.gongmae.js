@@ -6,6 +6,8 @@
 		_btnGongmaePano = '#btnGongmaePano',
 		_btnGongmaeDetail = '#btnGongmaeDetail',
 		_btnGongmaeThumbClose = '#btnGongmaeThumbClose',
+		_gDimages = '#gongmaeimages',
+		_gongmaeImageCnt = '#gongmaeImageCnt',
 		_address = null;
 	
 	function _getThumb(data, cbSucc) {
@@ -43,7 +45,9 @@
 				//loadEl: hotplace.dom.getModalPopId(),
 				success: function(data, textStatus, jqXHR) {
 					console.log(data);
-					hotplace.dom.showGongmaeDetail(null, data);
+					hotplace.dom.showGongmaeDetail(function() {
+						_makeGongmaeImages(data.images);
+					}, data);
 				},
 				error:function() {
 					
@@ -57,6 +61,52 @@
 		.off('click')
 		.on('click', function() {
 			hotplace.dom.showMulgeonPanoramaForm(null, null, {x:x, y:y, address:_address});
+		});
+	}
+	
+	function _bindImageClick() {
+		$(_gDimages + ' li > a')
+		.off('click')
+		.on('click', function() {
+			var $img = $(this).children();
+			var imgSrc = $img.prop('src');
+			var title = $img.data('gubun');
+			
+			hotplace.dom.showGyeongmaeImage({width:700}, {src:imgSrc, title:title});
+		});
+	}
+	
+	function _makeGongmaeImages(images) {
+		var $gDimages = $(_gDimages);
+		var cnt = images.length;
+		var currentRow = 0;
+		var html = [];
+		
+		if(cnt >= 1) {
+			$(_gongmaeImageCnt).text(cnt);
+			
+			html.push('<ul>');
+			for(var i=0; i<cnt; i++) {
+				html.push('<li><a href="#"><img src="' + images[i].image + '"></a></li>');
+			}
+		}
+		
+		$gDimages.html(html.join(''));
+		if(cnt >= 1) _initImageSlider();
+		_bindImageClick();
+	}
+	
+	function _initImageSlider() {
+		var $touchSlider = $(_gDimages);
+		$touchSlider.touchSlider({
+			autoplay : {
+				enable : true,
+				pauseHover : true,
+				interval : 3500
+			},	
+			view : 4,
+			btn_prev : $touchSlider.next().find('.btn_prev'),
+			btn_next : $touchSlider.next().find('.btn_next'),
 		});
 	}
 	
