@@ -27,6 +27,13 @@
 	function _createMarker(map, coord) {
 		_streetMarker = new naver.maps.Marker({
 			position: new naver.maps.LatLng(coord.y, coord.x),
+			icon: {
+				url: hotplace.getContextUrl() + 'resources/img/marker/marker_search.png', //50, 68 크기의 원본 이미지
+				size: new naver.maps.Size(25, 34),
+				scaledSize: new naver.maps.Size(25, 34),
+				origin: new naver.maps.Point(0, 0),
+				anchor: new naver.maps.Point(12, 34)
+			},
 			map: map ,
 			clickable: false
 		});
@@ -74,7 +81,10 @@
 			console.log(pano.getPosition())
 			hotplace.minimaps.setPanoMarkerPosition(pano.getPosition());
 		});
-		hotplace.minimaps.create(map, _streetviewMinimapAreaId, coord);
+		
+		hotplace.minimaps.create(map, _streetviewMinimapAreaId, coord, function(coord) {
+			hotplace.panomaps.setPosition(coord);
+		});
 	}
 	
 	streetview.resize = function() {

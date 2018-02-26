@@ -120,6 +120,7 @@
 		}
 		else {
 			_getThumb(data.info.unu, function(d) {
+				_address = d.mulgeonsojaeji;
 				win.open(map, marker);
 				win.setOptions('content', tForm($.extend({kind:kind}, d)));
 				

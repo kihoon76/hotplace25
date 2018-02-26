@@ -63,6 +63,12 @@
 		
 	}
 	
+	panomaps.setPosition = function(coord) {
+		if(pano) {
+			pano.setPosition({lat:coord.y, lng:coord.x});
+		}
+	}
+	
 	panomaps.clear = function() {
 		if(pano) {
 			naver.maps.Event.clearInstanceListeners(pano);
