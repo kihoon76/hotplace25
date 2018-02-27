@@ -101,7 +101,7 @@
 		}
 		
 	    $txt.val(viewVal);
-	    hotplace.calc.profit[fnStr]();
+	    hotplace.calc.sujibunseog[fnStr]();
 	}
 	
 	sujibunseog.init = function() {
@@ -153,14 +153,14 @@
 				$WJaesanse2.prop('disabled', true);
 			}
 			
-			hotplace.calc.profit.calcJaesanse2(false, true);
+			hotplace.calc.sujibunseog.calcJaesanse2(false, true);
 		});
 		
 		//양도세 비사업용 체크 
 		$(_chkYangdose)
 		.off('change')
 		.on('change', function() {
-			hotplace.calc.profit.calcYangdose();
+			hotplace.calc.sujibunseog.calcYangdose();
 		});
 		
 		//농지보전부담금 감면 체크
@@ -173,59 +173,59 @@
 			if($(this).is(':checked')) {
 				$txtFarmBudam.prop('disabled', true);
 				$WFarmBudam.prop('disabled', true);
-				hotplace.calc.profit.calcFarmBudam(true);
+				hotplace.calc.sujibunseog.calcFarmBudam(true);
 			}
 			else {
 				$txtFarmBudam.prop('disabled', false);
 				$WFarmBudam.prop('disabled', false);
-				hotplace.calc.profit.calcFarmBudam(false);
+				hotplace.calc.sujibunseog.calcFarmBudam(false);
 			}
 		});
 		
 		hotplace.validation.numberOnly('#txtJaesanseH1', function() {
-			hotplace.calc.profit.calcJaesanse2();
+			hotplace.calc.sujibunseog.calcJaesanse2();
 		});
 		
 		hotplace.validation.numberOnly('#stepYangdose', function($this) {
-			var step = hotplace.calc.profit.makeStep($this.data('value'), hotplace.config.yangdoseStepPercent);
+			var step = hotplace.calc.sujibunseog.makeStep($this.data('value'), hotplace.config.yangdoseStepPercent);
 			$this.data('step', step);
-			hotplace.calc.profit.calcYangdose();
+			hotplace.calc.sujibunseog.calcYangdose();
 		});
 		
 		hotplace.validation.numberOnly('#stepGeonchugGongsa', function($this) {
-			hotplace.calc.profit.calcGeonchugGongsa();
+			hotplace.calc.sujibunseog.calcGeonchugGongsa();
 		});
 		
 		hotplace.validation.numberOnly('#stepTomogGongsa', function($this) {
-			hotplace.calc.profit.calcTomogGongsa();
+			hotplace.calc.sujibunseog.calcTomogGongsa();
 		});
 		
 		hotplace.validation.numberOnly('#stepPojangGongsa', function($this) {
-			hotplace.calc.profit.calcPojangGongsa();
+			hotplace.calc.sujibunseog.calcPojangGongsa();
 		});
 		
 		hotplace.validation.numberOnly('#stepInibGongsa', function($this) {
-			hotplace.calc.profit.calcInibGongsa();
+			hotplace.calc.sujibunseog.calcInibGongsa();
 		});
 		
 		//운영비
 		hotplace.validation.numberOnly('#txtManagement', function($this) {
-			hotplace.calc.profit.calcManagement();
+			hotplace.calc.sujibunseog.calcManagement();
 		});
 		
 		//매각 > 설비
 		hotplace.validation.numberOnly('#txtIncomeSellSeolbi', function($this) {
-			hotplace.calc.profit.calcIncomeSellSeolbi();
+			hotplace.calc.sujibunseog.calcIncomeSellSeolbi();
 		});
 		
 		//매각 > 토지
 		hotplace.validation.numberOnly('#txtIncomeSellLand', function($this) {
-			hotplace.calc.profit.calcIncomeSellLand();
+			hotplace.calc.sujibunseog.calcIncomeSellLand();
 		});
 		
 		//운영 > 임대
 		hotplace.validation.numberOnly('#txtIncomeManageImdae', function($this) {
-			hotplace.calc.profit.calcIncomeManageImdae();
+			hotplace.calc.sujibunseog.calcIncomeManageImdae();
 		});
 		
 		//spinner

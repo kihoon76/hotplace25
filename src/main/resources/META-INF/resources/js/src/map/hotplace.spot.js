@@ -58,7 +58,7 @@
 	 ************************************************************/
 	function _viewSujibunseog() {
 		
-		var param = $.extend({address: _address, pnu:_pnu}, {defaultValue:hotplace.calc.profit.defaultValue}, {
+		var param = $.extend({address: _address, pnu:_pnu}, {defaultValue:hotplace.calc.sujibunseog.defaultValue}, {
 			jimok: '전',
 			valPerPyeung:21000000,
 			area: 132,

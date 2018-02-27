@@ -4,7 +4,7 @@
 (function(calc, $) {
 	/**
 	 * @memberof hotplace.calc
-	 * @name profit
+	 * @name sujibunseog
 	 * @type {object} 
 	 * @property {object} defaultValue
 	 * @property {string} defaultValue.own - 매입(보유)주체 ('gaein' | 'beobin')
@@ -89,23 +89,23 @@
 			$txtPurchase.val(pyeung + '㎡');
 			$txtPurchase.data('value', pyeung);*/
 			
-			calc.profit.calcPurchase();
-			calc.profit.calcYangdose(true);
-			calc.profit.calcGeonchugGongsa(true);
-			calc.profit.calcTomogGongsa(true);
-			calc.profit.calcPojangGongsa(true);
-			calc.profit.calcInibGongsa(true);
-			calc.profit.calcAcceptGaebal();				//인허가비 > 개발행위허가 등
-			calc.profit.calcCheuglyang();				//인허가비 > 측량비
-			calc.profit.calcEvalueGamjeung();			//인허가비 > 감정평가
-			calc.profit.calcSplitPilji();				//인허가비 > 필지분할
-			calc.profit.calcDevBudam();					//부담금 > 개별부담금
-			calc.profit.calcFarmBudam();				//부담금 > 농지보전부담금
-			calc.profit.calcAlterSanrim();				//부담금 > 대체산림자원조성비
-			calc.profit.calcManagement();				//사업경비 > 운영비
-			calc.profit.calcIncomeSellSeolbi();			//매각 > 설비
-			calc.profit.calcIncomeSellLand();			//매각 > 토지
-			calc.profit.calcIncomeManageImdae();		//운영 > 임대
+			calc.sujibunseog.calcPurchase();
+			calc.sujibunseog.calcYangdose(true);
+			calc.sujibunseog.calcGeonchugGongsa(true);
+			calc.sujibunseog.calcTomogGongsa(true);
+			calc.sujibunseog.calcPojangGongsa(true);
+			calc.sujibunseog.calcInibGongsa(true);
+			calc.sujibunseog.calcAcceptGaebal();				//인허가비 > 개발행위허가 등
+			calc.sujibunseog.calcCheuglyang();				//인허가비 > 측량비
+			calc.sujibunseog.calcEvalueGamjeung();			//인허가비 > 감정평가
+			calc.sujibunseog.calcSplitPilji();				//인허가비 > 필지분할
+			calc.sujibunseog.calcDevBudam();					//부담금 > 개별부담금
+			calc.sujibunseog.calcFarmBudam();				//부담금 > 농지보전부담금
+			calc.sujibunseog.calcAlterSanrim();				//부담금 > 대체산림자원조성비
+			calc.sujibunseog.calcManagement();				//사업경비 > 운영비
+			calc.sujibunseog.calcIncomeSellSeolbi();			//매각 > 설비
+			calc.sujibunseog.calcIncomeSellLand();			//매각 > 토지
+			calc.sujibunseog.calcIncomeManageImdae();		//운영 > 임대
 		}
 		
 		/**
@@ -251,9 +251,9 @@
 			$WGongsabi.val($$r.toString().money());
 			
 			//감리비 : 공사비 X 비율
-			hotplace.calc.profit.calcGamri(true);
+			hotplace.calc.sujibunseog.calcGamri(true);
 			//보존등기비 : 공사비 X 비율
-			hotplace.calc.profit.calcPreserveDeunggi(true);
+			hotplace.calc.sujibunseog.calcPreserveDeunggi(true);
 			calcJichool();
 		}
 		
@@ -390,7 +390,7 @@
 			$WIncomeSell.val($$r.toString().money());
 			
 			//사업경비 > 매각수수료
-			calc.profit.calcSellSusulyo(true);
+			calc.sujibunseog.calcSellSusulyo(true);
 			calcIncome();
 		}
 		
@@ -430,7 +430,7 @@
 			$WIncome.val($$r.toString().money());
 			
 			//사업경비 > 예비비
-			calc.profit.calcPreparation(true);
+			calc.sujibunseog.calcPreparation(true);
 			
 			calcIncomeRatio($$r);
 			calcMaechool();
@@ -524,13 +524,13 @@
 			makeStep: makeStep,
 			defaultValue: defaultValue,
 			calcOwnTerm: function() {
-				hotplace.calc.profit.calcJaesanse(true);
-				hotplace.calc.profit.calcJaesanse2(true);
-				hotplace.calc.profit.calcYangdose();
+				hotplace.calc.sujibunseog.calcJaesanse(true);
+				hotplace.calc.sujibunseog.calcJaesanse2(true);
+				hotplace.calc.sujibunseog.calcYangdose();
 			},
 			calcOtherAssetRatio: function() {
 				console.log('타인자본비율');
-				hotplace.calc.profit.calcDaechulIja(true);
+				hotplace.calc.sujibunseog.calcDaechulIja(true);
 			},
 			calcPurchase: function(initFn) {
 				console.log('매입금액');
@@ -545,17 +545,17 @@
 				$WPurchase.val($$r.toString().money());
 				
 				//명도비 : 매입금액 * 비율
-				hotplace.calc.profit.calcMyeongdobi(true);
+				hotplace.calc.sujibunseog.calcMyeongdobi(true);
 				//토지승낙비 : 매입금액 * 비율
-				hotplace.calc.profit.calcAcceptLandUse(true);
+				hotplace.calc.sujibunseog.calcAcceptLandUse(true);
 				//대출이자 : 매입가 * 타인자본비율
-				hotplace.calc.profit.calcDaechulIja(true);
+				hotplace.calc.sujibunseog.calcDaechulIja(true);
 				//취득세 : 매입가 * 비율
-				hotplace.calc.profit.calcChwideugse(true);
+				hotplace.calc.sujibunseog.calcChwideugse(true);
 				//재산세
-				hotplace.calc.profit.calcJaesanse(true);
+				hotplace.calc.sujibunseog.calcJaesanse(true);
 				//채권매입비
-				hotplace.calc.profit.calcPurchaseChaegwon(true);
+				hotplace.calc.sujibunseog.calcPurchaseChaegwon(true);
 				
 				calcMymoney();//자기자본
 				calcTojibi();
@@ -623,7 +623,7 @@
 					$txtDaechulIja.val(_$$r.toString().money());
 					
 					//근저당비 : 대출금 X 130%
-					hotplace.calc.profit.calcSetGeunjeodang(true);
+					hotplace.calc.sujibunseog.calcSetGeunjeodang(true);
 				}
 				
 				var $stepDaechulIja = $('#stepDaechulIja');
@@ -834,7 +834,7 @@
 				$WGeonchugGongsa.val($$r.toString().money());
 				
 				//수입 > 매각 > 건물
-				hotplace.calc.profit.calcIncomeSellBuilding(true);
+				hotplace.calc.sujibunseog.calcIncomeSellBuilding(true);
 				calcMymoney();//자기자본
 				calcGongsabi();
 			},
@@ -860,7 +860,7 @@
 				$WTomogGongsa.val($$r.toString().money());
 				
 				//수입 > 매각 > 건물
-				hotplace.calc.profit.calcIncomeSellBuilding(true);
+				hotplace.calc.sujibunseog.calcIncomeSellBuilding(true);
 				calcMymoney();//자기자본
 				calcGongsabi();
 			},
@@ -922,7 +922,7 @@
 				$WAcceptGaebal.val($stepAcceptGaebal.data('value').toString().money());
 				
 				//수입 > 매각 > 건물
-				hotplace.calc.profit.calcIncomeSellBuilding(true);
+				hotplace.calc.sujibunseog.calcIncomeSellBuilding(true);
 				calcMymoney();//자기자본
 				calcInheogabi();
 			},
