@@ -240,6 +240,7 @@
 			if(_isOffCell()) {
 				_removeAllCells();
 				hotplace.dom.enableYearRangeDiv(false);
+				hotplace.dom.initYearRangeValue();
 				hotplace.database.initLevel(_getCurrentLevel(), _getActiveCellType());
 			}
 			else {
@@ -265,6 +266,44 @@
 				return _cellTypes[t];
 			}
 		}
+	}
+	
+	maps.getActiveCellTypeName = function() {
+		var cellType = _getActiveCellType();
+		var name = '';
+		
+		switch(_getActiveCellType()) {
+		case _cellTypes.GONGSI:
+			name = '공시지가';
+			break;
+		case _cellTypes.GONGSI_GR:
+			name = '공시지가율';
+			break;
+		case _cellTypes.TOJI_LIMIT_MIN:
+			name = '토지이용규제완화';
+			break;
+		case _cellTypes.DEV_BIZ_AREA:
+			name = '개발사업면적';
+			break;
+		case _cellTypes.BOSANG_MULGEON:
+			name = '보상물건';
+			break;
+		case _cellTypes.ACCEPT_DEV:
+			name = '개발행위허가';
+			break;
+		case _cellTypes.ACCEPT_BUILDING_AREA:
+			name = '건축허가면적';
+			break;
+		case _cellTypes.ACCEPT_SALES_AREA:
+			name = '영업허가면적';
+			break;
+		case _cellTypes.SILGEOLAE_AREA:
+			name = '실거래가•거래면적상승';
+			break;
+			
+		}
+		
+		return name;
 	}
 	
 	var _isOffCell = function(isWrite) {

@@ -1,6 +1,8 @@
 package com.hotplace25.controller;
 
 import java.net.URLEncoder;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +63,19 @@ public class HotplaceController {
 		//request.setAttribute("notices", notices);
 		request.setAttribute("jangeagongji", applicationConfig.getValue("C1"));
 		request.setAttribute("debug", applicationConfig.getValue("C2"));
+		String currentYear = "";
+		
+		try {
+			currentYear = hotplaceService.getCurrentTear();
+		}
+		catch(Exception e) {
+			Date date = new Date(); 
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			currentYear = String.valueOf(cal.get(Calendar.YEAR) - 1);
+		}
+		
+		request.setAttribute("currYear", currentYear);
 		return "main";
 	}
 	

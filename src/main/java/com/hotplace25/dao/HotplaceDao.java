@@ -52,4 +52,6 @@ public interface HotplaceDao {
 	public List<Yaggwan> selectYaggwanList();
 
 	public GongmaeDetail selectGongmaeDetail(String goyubeonho);
+
+	public String selectCurrentYear();
 }

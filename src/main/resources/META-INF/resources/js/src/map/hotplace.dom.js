@@ -25,6 +25,7 @@
 		_$btnStreetView = $('#btnStreetView'),
 		_dvCommonPano = '#dvCommonPano', //물건보기에서 파노라마 컨테이너
 		_dvCommonPanoInfo = '#dvCommonPanoInfo', //물건보기에서 파노라마 정보 컨테이너
+		_dvHeatMapCapture = '#dvHeatMapCapture',
 		_$mapArea = $('#mapArea'), 
 		_sliderGrp = {}; //slider 관리객체
 	
@@ -119,7 +120,7 @@
 	 * @private
 	 * @desc cell layer에 기본적으로 표시할 데이터 연도 
 	 */
-	var _showCellYear = 2017;
+	var _showCellYear = $('body').data('year');
 	
 	/**
 	 * @private
@@ -514,16 +515,26 @@
 	
 	
 	dom.showHeatmapCapturedImages = function(arr) {
-		_appendModalPopup('mapcaptureForm');
+		var currYear = $('body').data('year');
+		_appendModalPopup('mapCaptureForm', null, {title: hotplace.maps.getActiveCellTypeName(), year:currYear});
 		var len = arr.length;
+		for(var i = 0; i < len; i++) {
+			$('#' + (currYear - 4 + i) + 'Map').append(arr[i]);
+		}
 		
-		dom.openModal('', {width: 800}, null, function() {
-			for(var i = 0; i < len; i++) {
-				$('#' + (2014+i) + 'Map').append(arr[i]);
-			}
+		arr.length = 0;
+		
+		$(_dvHeatMapCapture + ' img')
+		.off('click')
+		.on('click', function() {
+			var $td = $(this).parent();
+			var captureYear = $td.data('captureYear');
 			
-			arr.length = 0;
+			dom.showHeatMapCaptureImagePop({width:700}, {title:captureYear, src:$(this).prop('src')});
+			
 		});
+		
+		dom.openModal('', {width: 1000}, null);
 	}
 	
 	dom.showNoticeList = function() {
@@ -545,6 +556,11 @@
 		dom.openImageModalOnModal(modalSize);
 	}
 	
+	dom.showHeatMapCaptureImagePop = function(modalSize, param) {
+		_appendModalPopup('mapCaptureImageForm', _$imagePopup, param);
+		dom.openImageModalOnModal(modalSize);
+	}
+	
 	dom.showGongmaeDetail = function(fn, param) {
 		_appendModalPopup('gongmaeDetailForm', null ,param);
 		dom.openModal('', null, null, fn);
@@ -559,8 +575,8 @@
 	 * {@link http://ghusse.github.io/jQRangeSlider/documentation.html jQRangeSlider} 
 	 */
 	dom.showYearRangeDiv = function(mx, mn) {
-		var max = 2017, min = 2011, i = 0, step = 1;
-		var range = max - min - 1;
+		var max = 2017/*_showCellYear*/, min = 2012/*_showCellYear - 5*/, i = 0, step = 1;
+		var range = max - min;
 		var capturedImgs = [];
 		/*
 		 * Auto
@@ -578,10 +594,23 @@
 				else {
 					dom.captureImage($('body'), capturedImgs, function() {
 						_$yearRange.rangeSlider('scrollRight', step);
+						
+						if(i == range) {
+							i = 0;
+							_triggerAutoYearRangeDiv();
+							if(hotplace.browser.msie || hotplace.browser.msedge) {
+								alert('크롬브라우저를 사용하시면 캡쳐된 이미지를 제공합니다.')
+							}
+							else {
+								dom.showHeatmapCapturedImages(capturedImgs);
+							}
+							
+							dom.removeBodyAllMask();
+						}
 					});
 				}
 			}
-			else {
+			/*else {
 				i = 0;
 				_triggerAutoYearRangeDiv();
 				if(hotplace.browser.msie || hotplace.browser.msedge) {
@@ -592,7 +621,7 @@
 				}
 				
 				dom.removeBodyAllMask();
-			}
+			}*/
 		};
 		
 		_$yearRange.rangeSlider({
@@ -662,7 +691,12 @@
 			_triggerAutoYearRangeDiv();
 		}
 		
-		_$yearRange.rangeSlider('values', 2016, 2017);
+		dom.initYearRangeValue();
+	}
+	
+	dom.initYearRangeValue = function() {
+		_showCellYear = $('body').data('year');
+		_$yearRange.rangeSlider('values', _showCellYear - 1, _showCellYear);
 	}
 	
 	/**

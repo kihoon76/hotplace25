@@ -162,4 +162,8 @@ public class HotplaceService {
 		
 		return g;
 	}
+	
+	public String getCurrentTear() {
+		return hotplaceDao.selectCurrentYear();
+	}
 }

@@ -129,4 +129,9 @@ public class HotplaceDaoImpl implements HotplaceDao {
 	public GongmaeDetail selectGongmaeDetail(String goyubeonho) {
 		return msSqlSessionAgent2.selectOne(namespace + ".selectGongmaeDetail", goyubeonho);
 	}
+
+	@Override
+	public String selectCurrentYear() {
+		return msSqlSession.selectOne(namespace + ".selectCurrentYear");
+	}
 }

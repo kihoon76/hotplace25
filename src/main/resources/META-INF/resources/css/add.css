@@ -7,3 +7,5 @@
 .naver-distance-vertex-start-text {position:absolute; z-index:2; padding:2px 3px 0; border:1px solid; background:#ff0000; font-size:13px; letter-spacing:-1px; white-space:nowrap; line-height:20px; left:0px; top:-25px; color:#fff; font-weight:bold;}
 .naver-area-div {padding: 2px 3px 0; border:2px solid blue; background:#fff; font-size:12px; letter-spacing: -1px; line-height: 30px;}
 .mulgeon-pano {width:100% !important; height:220px;}
+
+#dvHeatMapCapture img:hover {cursor:pointer;}
