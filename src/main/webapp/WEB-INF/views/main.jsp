@@ -19,6 +19,7 @@
 	
 	<!-- 개인적으로 추가 css -->
 	<link rel="stylesheet" href="/resources/css/add.css" />
+	
     
 </head>
 <body>

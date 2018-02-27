@@ -546,6 +546,20 @@
 		});
 	}
 	
+	dom.showTutorial = function() {
+		_appendModalPopup('tutorialForm');
+		dom.openModal('', {width: 1000}, null, function() {
+			//$("#s1").attr("src", 'http://hotplace.ddns.net/resources/video/use1.mp4');
+			//동영상을 다시 load 함
+			//$("#tutoV").load();
+			//load한 동영상을 재생
+			//document.getElementById("tutoV").play();
+			$('#tuto1').attr('src', 'https://www.youtube.com/embed/qZAkIpkPbmc?modestbranding=1&rel=0&showinfo=0');
+			$('#tuto2').attr('src', 'https://www.youtube.com/embed/qZAkIpkPbmc');
+			$('#tuto3').attr('src', 'https://www.youtube.com/embed/qZAkIpkPbmc');
+		});
+	}
+	
 	dom.showGyeongmaeDetail = function(fn, param) {
 		_appendModalPopup('gyeongmaeDetailForm', null ,param);
 		dom.openModal('', null, null, fn);

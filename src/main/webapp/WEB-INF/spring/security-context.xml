@@ -8,6 +8,10 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<sec:http auto-config="true" use-expressions="true">
+<!-- 		<sec:headers> -->
+<!-- 			<sec:frame-options disabled="true" /> -->
+<!-- 		</sec:headers> -->
+		
 		<sec:intercept-url pattern="/index.jsp" access="permitAll" />
 		<sec:intercept-url pattern="/resources/**" access="permitAll" />
 		<sec:intercept-url pattern="/main" access="permitAll" />
@@ -37,6 +41,7 @@
 					logout-url="/logout"
 					delete-cookies="true"/>
 		<sec:csrf disabled="true"/>
+		
 		
 		<!-- 세션 제한 지정 -->
 		<!-- http://niees.tistory.com/17 -->

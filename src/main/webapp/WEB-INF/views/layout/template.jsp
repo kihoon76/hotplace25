@@ -61,6 +61,7 @@
 						<li><a href="#" class="link" id="modalMypage">My Page</a></li>
 						<li><a href="#" class="link" id="modalNotice">공지사항</a></li>
 						<li><a href="#" class="link" id="modalCompany">회사소개</a></li>
+						<li><a href="#" class="link" id="modalTutorial">사용법</a></li>
 					</ul>
 				</div>
 			</span>

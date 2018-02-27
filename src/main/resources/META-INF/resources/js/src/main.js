@@ -121,7 +121,9 @@ $(document).ready(function() {
 		hotplace.dom.showNoticeList();
 	});
 	
-	
+	$('#modalTutorial').on('click', function() {
+		hotplace.dom.showTutorial();
+	});
 	
 	hotplace.maps.init('naver', {
 		X: hotplace.config.mapDefaultX,
