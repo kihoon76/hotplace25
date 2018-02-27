@@ -589,6 +589,13 @@
 				if(hotplace.browser.msie || hotplace.browser.msedge) {
 					setTimeout(function() {
 						_$yearRange.rangeSlider('scrollRight', step);
+						
+						if(i == range) {
+							i = 0;
+							_triggerAutoYearRangeDiv();
+							dom.removeBodyAllMask();
+							hotplace.dom.showAlertMsg(null, '크롬브라우저를 사용하시면 캡쳐된 이미지를 제공합니다.', {width:550});
+						}
 					}, 2000);
 				}
 				else {
@@ -598,30 +605,12 @@
 						if(i == range) {
 							i = 0;
 							_triggerAutoYearRangeDiv();
-							if(hotplace.browser.msie || hotplace.browser.msedge) {
-								alert('크롬브라우저를 사용하시면 캡쳐된 이미지를 제공합니다.')
-							}
-							else {
-								dom.showHeatmapCapturedImages(capturedImgs);
-							}
-							
+							dom.showHeatmapCapturedImages(capturedImgs);
 							dom.removeBodyAllMask();
 						}
 					});
 				}
 			}
-			/*else {
-				i = 0;
-				_triggerAutoYearRangeDiv();
-				if(hotplace.browser.msie || hotplace.browser.msedge) {
-					alert('크롬브라우저를 사용하시면 캡쳐된 이미지를 제공합니다.')
-				}
-				else {
-					dom.showHeatmapCapturedImages(capturedImgs);
-				}
-				
-				dom.removeBodyAllMask();
-			}*/
 		};
 		
 		_$yearRange.rangeSlider({
