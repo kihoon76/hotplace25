@@ -78,9 +78,12 @@
 	
 	panomaps.resize = function($element) {
 		if(pano  && _mode == _streetMode) {
-			var width = $element.width();
-			var height = $element.height();
-			pano.setSize({width: width, height: height});
+			var winW = $(window).width();
+			var winH = $(window).height();
+			$element.width(winW);
+			$element.height(winH);
+			
+			pano.setSize({width: winW, height: winH});
 		}
 	}
 }(
