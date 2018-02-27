@@ -1836,8 +1836,7 @@
 		newMarker._data = data;
 		
 		if(options.icon) {
-			//원본이미지 50X68 기본
-			var x = 25, y = 34;/*, cx = 22, cy = 33*/
+			var x = 22, y = 33;/*, cx = 22, cy = 33*/
 			if(options.size) {
 				x = options.size.x;
 				y = options.size.y;
@@ -1846,6 +1845,7 @@
 			//클러스트링된 마커구별
 			if(options.isClustering && !stopGroupping && data.info.xgc >= hotplace.config.markerGrpCount) {
 				content = '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url('+ hotplace.getContextUrl() +'resources/img/marker/' + options.clusterIcon + ');background-size:contain;">' + data.info.xgc + '</div>';
+				x = 40; y = 40;
 			}
 			else {
 				content = '<img src="'+ hotplace.getContextUrl() +'resources/img/marker/' + options.icon + '" alt="" ' +

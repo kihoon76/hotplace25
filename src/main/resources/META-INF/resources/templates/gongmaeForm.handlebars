@@ -42,7 +42,7 @@
                     </tr>
                     <tr>
                         <th>최저입찰가(예정금액)</th>
-                        <td>{{currency minIbchalga}}</td>
+                        <td>{{#xif " minIbchalga != null "}} {{currency minIbchalga}} {{else}} {{minIbchalga}} {{/xif}}</td>
                     </tr>
                 </tbody>
             </table>
