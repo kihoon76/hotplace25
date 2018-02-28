@@ -555,7 +555,8 @@
 		CONSULTING_REG: '604', //컨설팅 등록오류
 		CONSULTING_DUP: '605',  //컨설팅 중복오류
 		COORD: '606', //주소검색 오류
-		MISS_LATLNG: '607' //위경도 정보 오류
+		MISS_LATLNG: '607', //위경도 정보 오류
+		HEATMAP_CAPTURE:'608' //히트맵 캡쳐오류
 	};
 	
 	hotplace.error = _err;
@@ -611,6 +612,9 @@
 			break;
 		case _err.MISS_LATLNG:
 			hotplace.dom.showAlertMsg(null, '위경도 정보가 존재하지 않습니다.', {width:'50%'});
+			break;
+		case _err.HEATMAP_CAPTURE:
+			hotplace.dom.showAlertMsg(null, '히트맵 캡쳐도중 오류가 발생했습니다.', {width:'50%'});
 			break;
 		case '000' :
 			break;

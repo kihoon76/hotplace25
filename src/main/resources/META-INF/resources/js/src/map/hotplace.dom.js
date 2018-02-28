@@ -122,6 +122,9 @@
 	 */
 	var _showCellYear = $('body').data('year');
 	
+	var _timeViewSliderMin = _showCellYear - 5;
+	var _timeViewSliderMax = _showCellYear;
+	
 	/**
 	 * @private
 	 * @type {function}
@@ -489,11 +492,10 @@
 	 * @desc  히트맵을 이미지로 캡쳐해서 보여준다 (ie 지원안됨)
 	 * {@link https://github.com/tsayen/dom-to-image dom-to-image}
 	 */
-	dom.captureImage = function($element, $target, completeFn) {
+	dom.captureImage = function($element, $target, completeFn, errFn) {
 		domtoimage.toPng($element[0])
 	    .then(function(dataUrl) {
 	        var img = new Image();
-	        var _$ = null;
 	        
 	        img.src = dataUrl;
 	        img.style.width = '100%';
@@ -509,6 +511,7 @@
 	        if(completeFn) completeFn();
 	    })
 	    .catch(function (error) {
+	    	if(errFn) errFn();
 	        throw error;
 	    });
 	}
@@ -589,7 +592,7 @@
 	 * {@link http://ghusse.github.io/jQRangeSlider/documentation.html jQRangeSlider} 
 	 */
 	dom.showYearRangeDiv = function(mx, mn) {
-		var max = 2017/*_showCellYear*/, min = 2012/*_showCellYear - 5*/, i = 0, step = 1;
+		var max = _timeViewSliderMax, min = _timeViewSliderMin, i = 0, step = 1;
 		var range = max - min;
 		var capturedImgs = [];
 		/*
@@ -599,30 +602,38 @@
 		var callback = function() {
 			i++;
 			if(i<=range) {
-				//ms 브라우저는 캡쳐하지 않는다.
-				if(hotplace.browser.msie || hotplace.browser.msedge) {
-					setTimeout(function() {
-						_$yearRange.rangeSlider('scrollRight', step);
-						
-						if(i == range) {
-							i = 0;
-							_triggerAutoYearRangeDiv();
-							dom.removeBodyAllMask();
-							hotplace.dom.showAlertMsg(null, '크롬브라우저를 사용하시면 캡쳐된 이미지를 제공합니다.', {width:550});
-						}
-					}, 2000);
+				try {
+					//ms 브라우저는 캡쳐하지 않는다.
+					if(hotplace.browser.msie || hotplace.browser.msedge) {
+						setTimeout(function() {
+							_$yearRange.rangeSlider('scrollRight', step);
+							
+							if(i == range) {
+								i = 0;
+								_triggerAutoYearRangeDiv();
+								dom.removeBodyAllMask();
+								hotplace.dom.showAlertMsg(null, '크롬브라우저를 사용하시면 캡쳐된 이미지를 제공합니다.', {width:550});
+							}
+						}, 2000);
+					}
+					else {
+						dom.captureImage($('body'), capturedImgs, function() {
+							_$yearRange.rangeSlider('scrollRight', step);
+							if(i == range) {
+								i = 0;
+								_triggerAutoYearRangeDiv();
+								dom.showHeatmapCapturedImages(capturedImgs);
+								dom.removeBodyAllMask();
+							}
+						});
+					}
 				}
-				else {
-					dom.captureImage($('body'), capturedImgs, function() {
-						_$yearRange.rangeSlider('scrollRight', step);
-						
-						if(i == range) {
-							i = 0;
-							_triggerAutoYearRangeDiv();
-							dom.showHeatmapCapturedImages(capturedImgs);
-							dom.removeBodyAllMask();
-						}
-					});
+				catch(e) {
+					console.log(e);
+					dom.initYearRangeDiv();
+					hotplace.processAjaxError(hotplace.error.HEATMAP_CAPTURE);
+					dom.removeBodyAllMask();
+					throw e;
 				}
 			}
 		};
@@ -645,8 +656,15 @@
 			}
 		});
 		
+		/********************************************************
+		* valuesChange 이벤트를 사용하면 안됨
+		* 중간에 오류가 났을경우 dom.initYearRangeDiv 메소드를 호출하는데
+		* range 초기값을 다시 설정할때 valuesChange는 호출이 되지만 
+		* userValuesChanged 이벤트는 호출되지 않는다.
+		*********************************************************/
 		_$yearRange.on('userValuesChanged', function(e, data){
-			_showCellYear = data.values.max;
+			//auto mode에서 slider가 처음위치에 있었을때 trigger로 들어왔을 경우
+			_showCellYear = (data == undefined) ? _timeViewSliderMin + (_$yearRange.rangeSlider('option', 'step')) : data.values.max;
 			
 			dom.addBodyAllMask();
 			setTimeout(function() {
@@ -677,7 +695,15 @@
 			
 			if($(this).prop('checked')) {
 				_yearRangeMode = 'auto';
-				_$yearRange.rangeSlider('scrollLeft', 100);
+				
+				//현재 slider의 위치가 처음부분에 있으면  userValuesChanged 이벤트가 발생하지 않는다. 
+				if(_$yearRange.rangeSlider('min') == _timeViewSliderMin) {
+					//_$yearRange.rangeSlider('values', _timeViewSliderMin-1, _timeViewSliderMin);
+					_$yearRange.trigger('userValuesChanged');
+				}
+				else {
+					_$yearRange.rangeSlider('scrollLeft', 100);
+				}
 			}
 			else {
 				_yearRangeMode = 'manual';
