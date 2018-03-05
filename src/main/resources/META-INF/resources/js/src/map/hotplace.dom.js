@@ -698,7 +698,7 @@
 				
 				//현재 slider의 위치가 처음부분에 있으면  userValuesChanged 이벤트가 발생하지 않는다. 
 				if(_$yearRange.rangeSlider('min') == _timeViewSliderMin) {
-					//_$yearRange.rangeSlider('values', _timeViewSliderMin-1, _timeViewSliderMin);
+					//이벤트 강제발생
 					_$yearRange.trigger('userValuesChanged');
 				}
 				else {

@@ -25,8 +25,8 @@
 	report.PDF = {
 		profit : function() {
 			var cfg = {
-				fileName:'profitFormPdf',
-				cssName: 'profitPdf',
+				fileName:'sujibunseogFormPdf',
+				cssName: 'pdf',
 				docName: '수지분석',
 				address: '서울시 강남구 도곡동 963',
 				jimok: '전',

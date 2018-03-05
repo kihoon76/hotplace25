@@ -805,6 +805,18 @@
 		return obj;
 	}
 	
+	menu.hasMulgeonView = function() {
+		var r = false;
+		$(_mulgeonViewMenu + ' input[type="checkbox"]').each(function(){
+			if($(this).is(':checked')) {
+				r = true;
+				return;
+			}
+		});
+		
+		return r;
+	}
+	
 	menu.initMulgeonView = function() {
 		menu.eachMulgeonViewChk(function($chk) {
 			$chk.prop('checked', false);
@@ -867,6 +879,7 @@
 			_startHeatmap('OFF');
 			$(this).hide();
 			$(_btnHeatmapShow).show();
+			_closeMenu(hotplace.config.menus.HEATMAP_VIEW);
 		});
 		
 		$(_heatmapViewMenu + ' input[name=hitmap]')

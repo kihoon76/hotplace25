@@ -446,7 +446,7 @@ body	 {min-height:600px;}
 /* GNB  Area */
 .gnbArea {clear:both; text-align:right;}
 .gnbArea h1{display:inline-block; height:100%; width:auto; margin:0 30px 0 7px; vertical-align:middle; float:left; border:0px solid #fff;}
-.gnbArea h1 .logo {display:block; width:150px; height:100%; background:url('../img/gnb_logo.png') no-repeat; display:none;}
+.gnbArea h1 .logo {display:block; width:150px; height:100%; background:url('../img/gnb_logo.png') no-repeat; /*display:none;*/}
 
 .gnbArea .dvNoticeTicker {display:inline-block; display:none; width:400px; overflow:hidden; position:relative; vertical-align:middle;}
 .gnbArea .dvNoticeTicker:before {display:inline-block; content:''; position:absolute; left:0; top:0; width:30px; height:30px;

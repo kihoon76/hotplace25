@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	var _currLevel = hotplace.config.minZoomLevel,
+		_prevLevel = _currLevel,
 		_menusThreshold = {},//menu 특정레벨에서 비활성화
 		_contextCoord = null, //마우스 우클릭시 coord
 		$_lnbMulgeon = $('#lnbArea .MULGEON');   
@@ -125,6 +126,26 @@ $(document).ready(function() {
 		hotplace.dom.showTutorial();
 	});
 	
+	function _isZoomIn() {
+		return _prevLevel - _currLevel < 0;
+	}
+	
+	var _checkedDisableMulgeon = false;
+	var _checkedEnableMulgeon = false;
+	
+	function _showMsgChangedState() {
+		if(!_isZoomIn() && !_checkedDisableMulgeon && hotplace.menu.hasMulgeonView() && _currLevel < hotplace.config.mulgeonViewLevel ) {
+			_checkedDisableMulgeon = true;
+			_checkedEnableMulgeon = false;
+			hotplace.dom.showAlertMsg(null, '물건보기가 비활성화 되었습니다', {width:'40%'});
+		}
+		else if(_isZoomIn() && !_checkedEnableMulgeon && _currLevel > hotplace.config.mulgeonViewLevel) {
+			_checkedDisableMulgeon = false;
+			_checkedEnableMulgeon = true;
+			//hotplace.dom.showAlertMsg(null, '물건보기가 활성화 되었습니다', {width:'40%'});
+		}
+	}
+	
 	hotplace.maps.init('naver', {
 		X: hotplace.config.mapDefaultX,
 		Y: hotplace.config.mapDefaultY, 
@@ -134,6 +155,8 @@ $(document).ready(function() {
 			_currLevel = level;
 			hotplace.dom.addBodyAllMask();
 			
+			_showMsgChangedState();
+			
 			setTimeout(function() {
 				hotplace.maps.showMarkers();
 				hotplace.maps.showCellLayer();
@@ -142,11 +165,14 @@ $(document).ready(function() {
 			},500);
 		},
 		'zoom_start' : function(map, level) {
+			_prevLevel = level;
 			hotplace.maps.destroyMarkers(true);
 			//hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.RADIUS_SEARCH);
 			hotplace.maps.destroyAllMarkerWindow();
 			hotplace.database.initLevel(level);
 			hotplace.dom.hideContextMenu();
+			
+			
 		},
 		'dragend' : function(map, bnds) {
 			//cell과 marker가 동시에 켜져있을 경우 
