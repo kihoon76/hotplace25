@@ -41,6 +41,7 @@ import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
 import com.itextpdf.tool.xml.pipeline.html.AbstractImageProvider;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
+import com.itextpdf.tool.xml.pipeline.html.LinkProvider;
 
 @Component("pdfItext")
 public class PdfItext {
@@ -80,7 +81,7 @@ public class PdfItext {
 		@Override
 		public String getImageRootPath() {
 			// TODO Auto-generated method stub
-			return null;
+			return cssRootPath + "../img/";
 		}
 		
 	}
@@ -122,6 +123,8 @@ public class PdfItext {
 		HtmlPipelineContext htmlContext = new HtmlPipelineContext(cssAppliers);
 		htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
 		htmlContext.setImageProvider(new Base64ImageProvider());
+		
+		
 		
 		PdfWriterPipeline pdf = new PdfWriterPipeline(doc, writer);
 		HtmlPipeline html = new HtmlPipeline(htmlContext, pdf);

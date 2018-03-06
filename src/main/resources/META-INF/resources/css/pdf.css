@@ -277,7 +277,8 @@ table.tableStyle td img {max-width:100%;}
 .unit_tit:after,
 .unit_cont:after {display:block; content:''; height:0; line-height:0; padding:0; margin:0; clear:both;}
 
-.sTit {display:inline-block; font-size:15px; font-weight:500; padding:0 0 0 18px; position:relative; margin-top:6px; color:#000; float:left; background:url('http://hotplace.ddns.net/resources/img/bullet_01.png') no-repeat left center;}
+/* .sTit {display:inline-block; font-size:15px; font-weight:500; padding:0 0 0 18px; position:relative; margin-top:6px; color:#000; float:left; background:url('../img/bullet_01.png') no-repeat left center; background-size: 5px 5px;} */
+.sTit {padding:0 0 0 30px; font-size:15px; }
 .sTit:before {display:none;}
 .sTit.circle:before {background:none;}
 
