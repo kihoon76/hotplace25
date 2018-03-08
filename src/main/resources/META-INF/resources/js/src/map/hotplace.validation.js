@@ -3,9 +3,9 @@
  * */
 (function(validation, $) {
 	
-	/*$(document).on('focus', '.readonly', function() {
+	$(document).on('focus', '.readonly', function() {
 		$(this).trigger('blur')
-	});*/
+	});
 	
 	//숫자관련 제한 공통함수
 	function _digitKeyLimit(selector, regEx, isComma, blurFn) {
@@ -54,7 +54,13 @@
 				}
 			}
 			
-			$(this).data('value', v);
+			//전부 지웠을 경우 원래값 복원
+			if(v == '') {
+				v = $(this).data('value');
+			}
+			else {
+				$(this).data('value', v);
+			}
 			
 			if(isComma) {
 				v = v.toString().money(); 
@@ -64,9 +70,11 @@
 			if(blurFn) blurFn($(this));
 			
 			//spinner textbox일 경우
-			var $next = $(this).next();
-			var fnStr = $next.data('fn');
-			if(fnStr != undefined) hotplace.calc.profit[fnStr]();
+			//var $next = $(this).next();
+			var $spinnerDiv = $(this).siblings('div.btn-vertical');
+			var fnStr = $spinnerDiv.data('fn');
+			if(fnStr != undefined) hotplace.calc.sujibunseog[fnStr]();
+			
 			
 		});
 	}

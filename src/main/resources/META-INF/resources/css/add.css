@@ -9,4 +9,9 @@
 .mulgeon-pano {width:100% !important; height:220px;}
 
 #dvHeatMapCapture img:hover {cursor:pointer;}
+#dvHeatMapCapture table th {height:40px; text-align:center; color:#fff; background-color:#000; font-weight:bold;}
 #dvStreetMini {width:300px; height:300px; border:5px solid aliceblue;}
+
+/* bootstrap tooltip html style */
+.innerTooltip {font-size:.9em;}
+#tooltipStepJaesanseT3 .tooltip-inner {min-width:200px; width:200px;}

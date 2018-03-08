@@ -64,10 +64,6 @@
 							</div>
 							<div class="unit_cont bgWhite">
 								
-								{{#xif " limitChange == 'Y' " }}
-								<div style="displat:none;">툴팁내용</div>
-								{{/xif}}
-								
 								<table class="tableStyle borderStyle topBold left">
 									<colgroup>
 										<col style="width:25%;">
@@ -98,7 +94,7 @@
 													<input type="radio" id="radioLandChangeN" name="radioLandChange" {{#xif " limitChange == 'N' " }} checked {{/xif}} disabled/>
 													<label for="radioLandChangeN" class="labelCh"><em class="text">무</em></label>
 												</span>
-												<button type="button" id="btnSujiTojiUseLimitHistory" class="btnstyle small black fr tooltipBtn"><i class="ambicon-024_view_big"></i> 토지이용규제 변경내역보기</button>
+												<button type="button" id="btnSujiTojiUseLimitHistory" class="btnstyle small black fr tooltipBtn" {{#xif " limitChange == 'N' " }} disabled {{/xif}}><i class="ambicon-024_view_big"></i> 토지이용규제 변경내역보기</button>
 											</td>
 										</tr>
 										<tr>
@@ -248,19 +244,19 @@
 
 									<td class="center">
 										<div class="inputGroup" style="width:90%;">
-											<input type="text" class="inp txtProfitTooltip" id="txtPurchase" title="면적" style="width:50%;" value="{{../area}}㎡" data-value="{{../area}}" readonly />
+											<input type="text" class="inp TOOLTIP" id="txtPurchase" style="width:50%;" value="{{../area}}㎡" data-value="{{../area}}" title="<span class='innerTooltip'>면적</span>" readonly />
 
 											<span class="inline center" style="width:5%;">x</span>
 
 											<div class="spinner" style="width:45%;">
-												<input type="text" class="inp txtProfitTooltip  numberOnly" id="stepPurchase"  
+												<input type="text" class="inp TOOLTIP numberOnly" id="stepPurchase"  
 													value="{{currency ../gongsi}}원" 
 													data-value="{{../gongsi}}" 
 													data-min="0" 
 													data-step="50000" 
 													data-suffix="원" 
 													data-type="money"
-													title="실거래가 평균"  />
+													title="<span class='innerTooltip'>최근 1년간 <br/>반경 1km이내 <br/>유사 조건 물건의 <br/>실거래가 평균</span>"  />
 												<div class="btn-vertical" data-fn="calcPurchase">
 													<button class="btn" type="button"></button>
 													<button class="btn" type="button"></button>
@@ -280,18 +276,19 @@
 
 									<td class="center">
 										<div class="inputGroup" style="width:90%;">
-											<input type="text" class="inp txtProfitTooltip " id="txtMyeongdobi" title="매입가" style="width:50%;"  readonly />
+											<input type="text" class="inp TOOLTIP " id="txtMyeongdobi" title="매입가" style="width:50%;"  readonly />
 
 											<span class="inline center" style="width:5%;" >x</span>
 
 											<div class="spinner" style="width:45%;">
-												<input type="text" class="inp numberOnly" id="stepMyeongdobi" 
+												<input type="text" class="inp TOOLTIP numberOnly" id="stepMyeongdobi" 
 													value="{{myeongdobi}}%" 
 													data-value="{{myeongdobi}}" 
 													data-min="0" 
 													data-max="100" 
 													data-step="1" 
-													data-suffix="%" />
+													data-suffix="%"
+													title="<span class='innerTooltip'>값범위  0~100</span>" />
 												<div class="btn-vertical" data-fn="calcMyeongdobi">
 													<button class="btn" type="button"></button>
 													<button class="btn" type="button"></button>
@@ -311,18 +308,19 @@
 
 									<td class="center">
 										<div class="inputGroup" style="width:90%;">
-											<input type="text" class="inp txtProfitTooltip " id="txtAcceptLandUse" title="매입가" style="width:50%;" readonly />
+											<input type="text" class="inp TOOLTIP " id="txtAcceptLandUse" title="<span class='innerTooltip'>매입가</span>" style="width:50%;" readonly />
 
 											<span class="inline center" style="width:5%;" >x</span>
 
 											<div class="spinner" style="width:45%;">
-												<input type="text" class="inp numberOnly" id="stepAcceptLandUse" 
+												<input type="text" class="inp TOOLTIP numberOnly" id="stepAcceptLandUse" 
 													value="{{acceptLandUse}}%" 
 													data-value="{{acceptLandUse}}" 
 													data-min="0" 
 													data-max="100" 
 													data-step="1" 
-													data-suffix="%" />
+													data-suffix="%"
+													title="<span class='innerTooltip'>값범위  0~100</span>" />
 												<div class="btn-vertical" data-fn="calcAcceptLandUse">
 													<button class="btn" type="button"></button>
 													<button class="btn" type="button"></button>
@@ -355,18 +353,19 @@
 
 									<td class="center">
 										<div class="inputGroup" style="width:90%;">
-											<input type="text" class="inp" id="txtDaechulIja"  style="width:50%;" readonly />
+											<input type="text" class="inp TOOLTIP" id="txtDaechulIja"  style="width:50%;" title="<span class='innerTooltip'>매입가 X 타인자본비율</span>" readonly />
 
 											<span class="inline center" style="width:5%;" >x</span>
 
 											<div class="spinner" style="width:45%;">
-												<input type="text" class="inp numberNdot" id="stepDaechulIja" 
+												<input type="text" class="inp numberNdot TOOLTIP" id="stepDaechulIja" 
 													value="{{daechulIja}}%" 
 													data-value="{{daechulIja}}" 
 													data-min="0" 
 													data-max="100" 
 													data-step="0.1" 
-													data-suffix="%" />
+													data-suffix="%"
+													title="<span class='innerTooltip'>값범위  0~100</span>" />
 												<div class="btn-vertical" data-fn="calcDaechulIja">
 													<button class="btn" type="button"></button>
 													<button class="btn" type="button"></button>
@@ -388,18 +387,19 @@
 
 									<td class="center">
 										<div class="inputGroup" style="width:90%;">
-											<input type="text" class="inp" id="txtChwideugse" style="width:50%;" readonly />
+											<input type="text" class="inp TOOLTIP" id="txtChwideugse" style="width:50%;" title="<span class='innerTooltip'>매입가</span>"readonly />
 
 											<span class="inline center" style="width:5%;" >x</span>
 
 											<div class="spinner" style="width:45%;">
-												<input type="text" class="inp numberNdot" id="stepChwideugse" 
+												<input type="text" class="inp numberNdot TOOLTIP" id="stepChwideugse" 
 													value="{{chwideugse}}%" 
 													data-value="{{chwideugse}}" 
 													data-min="0" 
 													data-max="100" 
 													data-step="0.1" 
-													data-suffix="%" />
+													data-suffix="%"
+													title="<span class='innerTooltip'>값범위  0~100</span>" />
 												<div class="btn-vertical" data-fn="calcChwideugse">
 													<button class="btn" type="button"></button>
 													<button class="btn" type="button"></button>
@@ -408,7 +408,7 @@
 										</div>
 									</td>
 									<td>
-										<input type="text" class="inp right" id="WChwideugse" readonly />
+										<input type="text" class="inp right" id="WChwideugse" data-value="0" readonly />
 									</td>
 									<td><span id="ratioChwideugse"></span>%</td>
 									<td>
@@ -420,25 +420,25 @@
 								<tr>
 									<th rowspan="2">재산세</th>
 
-									<td class="center">
+									<td  class="center">
 										<div class="inputGroup" style="width:100%;">
-											<input type="text" class="inp txtProfitTooltip " id="txtJaesanseT1" title="개별공시지가 X 면적"  style="width:40%;" readonly />
+											<input type="text" class="inp TOOLTIP " id="txtJaesanseT1" title="<span class='innerTooltip'>개별공시지가 X 면적<br/>=매입가</span>"  style="width:40%;" readonly />
 
 											<span class="inline center" style="width:5%;" >x</span>
 
-											<input type="text" class="inp txtProfitTooltip " id="txtJaesanseT2" title="보유기간" style="width:25%;" readonly />
+											<input type="text" class="inp TOOLTIP " id="txtJaesanseT2" title="<span class='innerTooltip'>보유기간</span>" style="width:25%;" readonly />
 
 											<span class="inline center" style="width:5%;" >x</span>
 
-											<div class="spinner" style="width:25%;">
-												<input type="text" class="inp txtProfitTooltip " id="stepJaesanseT3" 
+											<div class="spinner" style="width:25%;" id="tooltipStepJaesanseT3">
+												<input type="text" class="inp TOOLTIP readonly" id="stepJaesanseT3" 
 													value="{{jaesanse}}%" 
 													data-value="{{jaesanse}}" 
 													data-min="0" 
 													data-max="0" 
 													data-step="[0.07, 0.2, 0.25, 0.5]" 
 													data-suffix="%" 
-													title="요율" />
+													title="<span class='innerTooltip' style='width:300px;'>요율<br/>범위:[0.07, 0.2, 0.25, 0.5]</span>" />
 												<div class="btn-vertical" data-fn="calcJaesanse">
 													<button class="btn" type="button"></button>
 													<button class="btn" type="button"></button>
@@ -447,7 +447,7 @@
 										</div>
 									</td>
 									<td>
-										<input type="text" class="inp right" id="WJaesanse" readonly />
+										<input type="text" class="inp right" id="WJaesanse" data-value="0" readonly />
 									</td>
 									<td rowspan="2"><span id="ratioJaesanse"></span>%</td>
 									<td rowspan="2">
@@ -471,19 +471,19 @@
 											<label for="chkJaesanse" class="labelCh"><em class="text">주택</em></label>
 										</span>
 										<div class="inputGroup" style="width:90%;">
-											<input type="text" class="inp txtProfitTooltip " id="txtJaesanseH1" title="공시지가" style="width:40%;" data-value="0" value="0" readonly />
+											<input type="text" class="inp TOOLTIP " id="txtJaesanseH1" title="공시지가" style="width:40%;" data-value="0" value="0" disabled />
+
+											<span class="inline center" style="width:5%;" >:</span>
+
+											<input type="text" class="inp TOOLTIP " id="txtJaesanseH2" title="보유기간" style="width:25%;" data-value="0" value="{{ownTerm}}년" disabled readonly/>
 
 											<span class="inline center" style="width:5%;" >x</span>
 
-											<input type="text" class="inp txtProfitTooltip " id="txtJaesanseH2" title="보유기간" style="width:25%;" data-value="0" value="{{ownTerm}}년" readonly />
-
-											<span class="inline center" style="width:5%;" >x</span>
-
-											<input type="text" class="inp txtProfitTooltip " id="txtJaesanseH3" title="요율" style="width:25%;" data-value="0" value="0" readonly />
+											<input type="text" class="inp TOOLTIP " id="txtJaesanseH3" title="요율" style="width:25%;" data-value="0" value="0" disabled readonly/>
 										</div>
 									</td>
 									<td>
-										<input type="text" class="inp right" id="WJaesanse2" value="0" readonly/>
+										<input type="text" class="inp right" id="WJaesanse2" value="0" data-value="0" readonly/>
 									</td>
 								</tr>
 
@@ -498,10 +498,11 @@
 										<div class="inputGroup" style="width:90%;">
 											
 											<div class="spinner" style="width:50%;">
-												<input type="text" class="inp" id="stepYangdose" 
+												<input type="text" class="inp TOOLTIP" id="stepYangdose" 
 													data-min="0"
     					   							data-type="money"
-    					   							data-suffix="원" />
+    					   							data-suffix="원"
+    					   							title="<span class='innerTooltip'>매입금액 변경시 <br/>변경값으로 초기화 됨</span>" />
 												<div class="btn-vertical" data-fn="calcYangdose">
 													<button class="btn" type="button"></button>
 													<button class="btn" type="button"></button>
@@ -510,11 +511,11 @@
 
 											<span class="inline center" style="width:5%;" >x</span>
 
-											<input type="text" class="inp"  id="stepYangdose2" style="width:45%;" value="-10%" data-suffix="%" readonly />											
+											<input type="text" class="inp TOOLTIP"  id="stepYangdose2" style="width:45%;" value="-10%" data-suffix="%" readonly title="test"/>											
 										</div>
 									</td>
 									<td>
-										<input type="text" class="inp right" id="WYangdose" readonly />
+										<input type="text" class="inp right" id="WYangdose" data-value="0" readonly />
 									</td>
 									<td><span id="ratioYangdose"></span>%</td>
 									<td>
@@ -542,7 +543,7 @@
 
 									<td class="center"></td>
 									<td>
-										<input type="text" class="inp right" id="WJesegeum" readonly />
+										<input type="text" class="inp right" id="WJesegeum" data-value="0" readonly />
 									</td>
 									<td><span id="ratioJesegeum"></span>%</td>
 									<td></td>
@@ -906,7 +907,7 @@
 											<label for="chkFarmBudam" class="labelCh"><em class="text">부담금 감면</em></label>
 										</span>
 										<div class="inputGroup" style="width:90%;">
-											<input type="text" class="inp txtProfitTooltip " id="txtFarmBudam" title="공시지가" style="width:50%;" readonly value="{{currency ../gongsi}}" data-value="{{../gongsi}}" />
+											<input type="text" class="inp TOOLTIP " id="txtFarmBudam" title="공시지가" style="width:50%;" readonly value="{{currency ../gongsi}}" data-value="{{../gongsi}}" />
 
 											<span class="inline center" style="width:5%;" >x</span>
 
@@ -941,7 +942,7 @@
 
 									<td class="center">
 										<div class="inputGroup" style="width:90%;">
-											<input type="text" class="inp txtProfitTooltip " id="txtAlterSanrim" title="공시지가" style="width:50%;" readonly value="{{currency ../gongsi}}" data-value="{{../gongsi}}" />
+											<input type="text" class="inp TOOLTIP " id="txtAlterSanrim" title="공시지가" style="width:50%;" readonly value="{{currency ../gongsi}}" data-value="{{../gongsi}}" />
 
 											<span class="inline center" style="width:5%;" >x</span>
 

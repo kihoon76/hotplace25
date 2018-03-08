@@ -242,4 +242,7 @@ $(document).ready(function() {
 		hotplace.dom.showAutoYearRangeDiv();
 		hotplace.dom.enableYearRangeDiv(false);
 	});
+	
+	hotplace.validation.numberOnly('.numberOnly');
+	hotplace.validation.numberNdot('.numberNdot');
 });

@@ -108,14 +108,17 @@
 		//펼침버튼
 		hotplace.dom.listExpandCollapse(_dvSujibunseog);
 		
+		//툴팁 초기화
+		hotplace.dom.initTooltip(_dvSujibunseog);
+		
 		//수지분석 토지이용규제 변경 내역 보기
 		$(_btnSujiTojiUseLimitHistory)
 		.off('click')
 		.on('click', function(e) {
-			
+			hotplace.dom.showSujiTojiUseLimitHistory();
 		});
 		
-		var stepYangdose2 = $('#stepYangdose2');
+		//var stepYangdose2 = $('#stepYangdose2');
 		
 		//매입주체 
 		$('input[name="radioOwn"]').on('click', function(e) {

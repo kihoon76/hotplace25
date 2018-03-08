@@ -499,7 +499,7 @@
 	        
 	        img.src = dataUrl;
 	        img.style.width = '100%';
-	        img.style.height = '500px';
+	        img.style.height = '400px';
 	        
 	        if($.isArray($target)) {
 	        	$target.push(img);
@@ -547,6 +547,11 @@
 		dom.openModal('', {width: 1000}, function() {
 			hotplace.notice.clear();
 		});
+	}
+	
+	dom.showSujiTojiUseLimitHistory = function() {
+		_appendModalPopup('spotSujibunseogTojiHistoryForm', _$momPopup);
+		dom.openModalOnModal('', {width: 1000});
 	}
 	
 	dom.showTutorial = function() {
@@ -1320,6 +1325,12 @@
 	
 	dom.adjustMapZindex = function(z) {
 		_$mapArea.css('z-index', z || '0');
+	}
+	
+	dom.initTooltip = function(containerId) {
+		$(containerId + ' .TOOLTIP').tooltip({
+			html:true
+		});
 	}
 	
 	/*************************************************************

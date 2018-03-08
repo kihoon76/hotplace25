@@ -556,6 +556,8 @@
 				hotplace.calc.sujibunseog.calcJaesanse(true);
 				//채권매입비
 				hotplace.calc.sujibunseog.calcPurchaseChaegwon(true);
+				//양도세
+				hotplace.calc.sujibunseog.calcYangdose(true);
 				
 				calcMymoney();//자기자본
 				calcTojibi();
@@ -761,34 +763,44 @@
 				var $$1 = parseInt($stepYangdose.data('value')); 
 				var $$2 = 0;
 				var isNonSaeob = $('#chkYangdose').is(':checked');
+				var tooltipStr = '';
 				
 				//개인
-				if($('#radioPrivate').is(':checked')) {
+				if($('#radioGaein').is(':checked')) {
 					//보유기간
 					var term = parseFloat($('#stepOwnTerm').data('value'));
 					if(term < 1) {
+						tooltipStr += '1년미만 ' + (isNonSaeob ? '비사업자용 60%' : '50%');
 						$$2 = isNonSaeob ? 60 : 50;
 					}
 					else if(term >=1 && term < 2) {
+						tooltipStr += '2년미만 ' + (isNonSaeob ? '비사업자용 50%' : '40%');
 						$$2 = isNonSaeob ? 50 : 40;
 					}
 					else {
+						tooltipStr = '2년이상보유 ';
 						if($$1 <= 12000000) {
+							tooltipStr += '기본세율 1200만원 이하 ' + (isNonSaeob ? '비사업자용 16%(6% + 10%)' : '6%');
 							$$2 = isNonSaeob ? 16 : 6;
 						}
 						else if($$1 > 12000000 && $$1 <= 46000000) {
+							tooltipStr += '기본세율 1200만원 초과 ~ 4600만원이하 ' + (isNonSaeob ? '비사업자용 25%(15% + 10%)' : '15%');
 							$$2 = isNonSaeob ? 25 : 15;
 						}
 						else if($$1 > 46000000 && $$1 <= 88000000) {
+							tooltipStr += '기본세율 4600만원 초과 ~ 8800만원이하 ' + (isNonSaeob ? '비사업자용 34%(24% + 10%)' : '24%');
 							$$2 = isNonSaeob ? 34 : 24;
 						}
 						else if($$1 > 88000000 && $$1 <= 150000000) {
+							tooltipStr += '기본세율 8800만원 초과 ~ 1억5천만원이하 ' + (isNonSaeob ? '비사업자용 45%(35% + 10%)' : '35%');
 							$$2 = isNonSaeob ? 45 : 35;
 						}
 						else if($$1 > 150000000 && $$1 <= 500000000) {
+							tooltipStr += '기본세율 1억5천만원 초과 ~ 5억원이하 ' + (isNonSaeob ? '비사업자용 48%(38% + 10%)' : '38%');
 							$$2 = isNonSaeob ? 48 : 38;
 						}
 						else {
+							tooltipStr += '기본세율 5억 초과 ' + (isNonSaeob ? '비사업자용 50%(40% + 10%)' : '40%');
 							$$2 = isNonSaeob ? 50 : 40;
 						}
 					}
@@ -812,6 +824,11 @@
 				$WYangdose.data('value', $$r);
 				$WYangdose.val($$r.toString().money());
 				calcJesegeum();
+				
+				$stepYangdose2
+				.tooltip('hide')
+			    .attr('data-original-title', tooltipStr);
+			      
 			},
 			calcGeonchugGongsa: function(isSet) {
 				console.log('건축공사비');
