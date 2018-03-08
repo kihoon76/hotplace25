@@ -22,8 +22,13 @@ import com.hotplace25.util.DataUtil;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.codec.Base64;
 import com.itextpdf.tool.xml.XMLWorker;
@@ -134,13 +139,26 @@ public class PdfItext {
 		XMLParser xmlParser = new XMLParser(worker, Charset.forName("UTF-8"));
 		
 		//System.out.println(getHtmlString(jo));
-		StringReader strReader = new StringReader(getHtmlString(jo));
-		xmlParser.parse(strReader);
+		String contentHtml = getHtmlString(jo);
+		
+		if("".equals(contentHtml)) {
+			BaseFont bfont = BaseFont.createFont(fontsRootPath + "NanumGothic.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+			Font font = new Font(bfont, 12);
+	        
+			doc.add(new Paragraph("문서내용이 존재하지 않습니다.", font));
+		}
+		else {
+			StringReader strReader = new StringReader(contentHtml);
+			xmlParser.parse(strReader);
+		}
+		
+		
 		 
 		//Image luris = Image.getInstance(DataUtil.hexStringToByteArray("89504E470D0A1A0A0000000D49484452000001900000019008020000000FDDA19B000007174944415478DAEDDD5D6EDC20184051F6BFA8EE252B712BA54D89F931B6011BE51CCD43321DA9D26874F59971206C008B08DE0240B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102040BE67CDCC2DF070816CB640B040BC142B0A0EB25210816062B040BBA8E57B2856001820520580082C50B3E53E1DB03040BC142B0A06BAD040BC1C284856041FF6085966655EA163F2F823E5CDE0206242BFCFAD8BE1EE1305B87A98A5F23588205836A1567EB74B0B29D122CC182D1C13A18B5D2E7BF262C97840816936B75306A658395FD27FD122C9816ACFDA8B5EB4EE5F96C9E044BB0605CAD4E2CC637FC97DE76C18219C13A5E8C172C048B5705EBD6A825588205336B7571D4B2E22E58F060B0FAAC6A215830A1567D56B5102C98192CA31682C532B5FA366AD9FB01C1628960FD79081682C59AB5122C9F376F01E382F5B91465C242B05866C20AFF081682C5ABC7ABCFD784EFDCE88060F1C6F1EAE684A5560816F32E06EF2F69091682C5F060A52FF8BA3C142C048BD78D57F1CB3A5C1296B6514EF7F943B0208E42FA455EE50BBEF89EF58BC1AA94E8F00508163F79BCCAE6A9745F42FCC3C5601DD66A4B4ED941B0E054B0D241EC62ADB6EA5160BB8B41CD122C2805AB54A2DD6BAE35EBE07AD049AB8205A76A555A6BCFBE6CBBFC15E1E189AAEE86172CC80C3551B3D25FE35A85C2CBDCD380603163BC6ABCF76AF74739761F45B07875B0EEDF8175E29868040B4ED5AAFD96F75BC1B25025583028589DFFEC59AD040BC68D573D8FCF719B95CFA1B780658265C2F239F416D02B58F73744B6E28E603169BCDA6D2E7A73B9DD3D0D0816F3AE07EF0F5C82856031A3566E1945B05829588EF642B058E36250B0102C1608D6CD2B41A73D23582C335E99B0102C040BC142B03E46ADCAFB9610C16248AD6E9EEDAC5908160F8C577DB325580816DD6A952D94602158BC345871B6BA5F180A168245E75A4DDD5E06C18234582D87DC8C4E9B602158B48E57F5600DFD7E50B0102CFA076BDCEE7D828560D13358E3BE1FCC1F559FDEF8BE7BD2CDF182855ACDFF7E303F6465CFA4A83C8F60F11382553F597EE8BA553158D90329044BB0305EB55C09CE6956A81CED9506CBF5A0602158A585AA5EE7D1F709965409166AD5D2AC71A356C82EB4C7F3941577C1E2E7842A7E5CDEFD6A6CB040B0E812AC098B599A856091D93DFD257F4228580816C7CD0AAF6C96602158E486AC6D0BEFCB96602158D43B166C328360B15EB61E2F976021588C1AB84A4BF8E9F38D2BFD82856031245B5BF4D78895E7CF7E29596C969B45050B2E67AB3D58ED1B421C040BC182CBD96AB9248C7F102C048B79D9CA966B2BE7AC32885D59C6D22CC1826B03D76EBCDA0A1B6C9DBDB75EB0102CE65D27F6DCC6CFF60C82056FCE56D026048BD1D9EA55AEFFB56A3C8442DA040B1E1CB8F2CDAAEF448A60C1E46CA5DBE0D4DAA45682050F66AB58ABB4506A2558F060B66AE395600916CCCC564BB98ACD4A7F45B0E0C1812B1C4E5808163C952D7942B058265B828560B14CB1040BC162D96681602158081680600108162058008205081680600108162058008205205880600108168060018205205800820508168060010816205800820520588060010816806001820520580082050816806001081620580082050816806001081620580082052058806001081680600182052058008205081680600108162058008205205880600108168060018205205800820508168060010816205800820508168060010816205800820520588060010816806001820520580082050816806001081620580082052058806001081680600182052058008205081680600182E52D00040B40B000C102102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C00C102040B40B000040B102C00C102102C40B000040B40B000C102102C40B000040B40B000C102102C00C102040B40B0006EF80DD6F3DDD05D8133E80000000049454E44AE426082"));
 		//html 해당 위치
 		//luris.setAbsolutePosition(200f, 0f);
 		//doc.add(luris);
+		
 		doc.close();
 		writer.close();
 		os.close();
@@ -156,8 +174,7 @@ public class PdfItext {
 	}
 	
 	private String getHtmlString(JsonObject jo) {
-		String r = "<p>문서내용이 존재하지 않습니다.</p>";
-		//System.err.println(jo);
+		String r = "";
 		try {
 			org.jsoup.nodes.Document doc = getJsoupDoc(jo.get("fileName").getAsString());
 			
@@ -175,9 +192,12 @@ public class PdfItext {
 			sb.append(Base64Utils.encodeToString(img));
 			
 			doc.outputSettings().syntax(org.jsoup.nodes.Document.OutputSettings.Syntax.xml);
+			//doc.append(createByeolCheom());
 			doc.select("body").attr("style", "font-family: NanumGothic;");
 			doc.select("img#luris").attr("src", sb.toString());
+			doc.select("span#pyojiAddress").first().text(jo.get("address").getAsString());
 			doc.select("span#address").first().text(jo.get("address").getAsString());
+			doc.select("span#pyojiWriteDate").first().text(DataUtil.getDateString("yyyy.MM.dd"));
 			doc.select("span#jimok").first().text(jo.get("jimok").getAsString());
 			doc.select("span#gongsi").first().text(jo.get("gongsi").getAsString());
 			doc.select("span#area").first().text(jo.get("area").getAsString());
@@ -185,7 +205,20 @@ public class PdfItext {
 			doc.select("span#ownTerm").first().text(jo.get("ownTerm").getAsString());
 			doc.select("span#otherAssetRatio").first().text(jo.get("otherAssetRatio").getAsString());
 			
+			doc.select("span#byeolCheom1Year").first().text("2017");
+			doc.select("span#byeolCheom2Year").first().text("2016");
+			doc.select("span#byeolCheom3Year").first().text("2015");
+			
+			doc.select("img#byeolCheom1Drawing").attr("src", sb.toString());
+			doc.select("img#byeolCheom2Drawing").attr("src", sb.toString());
+			doc.select("img#byeolCheom3Drawing").attr("src", sb.toString());
+			
+			
+			//별첨 동적 생성
+			//doc.select("span#yyy").first().text("aa" + jo.get("address").getAsString());
+			
 			bind(doc, jo, items);
+			
 			
 			r = doc.toString();
 		} 
@@ -214,5 +247,58 @@ public class PdfItext {
 				doc.select("span#r" + items[i]).first().text(jo.get("r" + items[i]).getAsString() + "%");
 			}
 		}
+	}
+	
+	
+	//한글 출력이 안되서 동적 생성 보류
+	private String bulletImg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGNTA2REI4NzE3QTYxMUU4QkY4REQzRjMyQjY5M0EyRSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGNTA2REI4ODE3QTYxMUU4QkY4REQzRjMyQjY5M0EyRSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkY1MDZEQjg1MTdBNjExRThCRjhERDNGMzJCNjkzQTJFIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkY1MDZEQjg2MTdBNjExRThCRjhERDNGMzJCNjkzQTJFIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+4dYllQAAADpJREFUeNpi/OPk9J8BDfz2+MoIpDDEmRhIAINEMQtzLBsjuuBfB7AQhjiLy+GNGL6W52cYNqEBEGAAvCwLXGcrmCgAAAAASUVORK5CYII=";
+	private String createByeolCheom() {
+		StringBuilder sb = new StringBuilder();
+		// 별첨 
+		// 새페이지 시작 
+		sb.append("<div class=\"break-before\"></div>");
+		sb.append("<div class=\"otherTitle\"><span class=\"bold color_red\">[ 별첨 1 ]</span></div>");
+		
+		sb.append("<div class=\"unit\">");							
+		sb.append("    <div class=\"unit_tit\">");
+		sb.append("        <div class=\"sTit\">");
+		sb.append("            <img class=\"bullet\" src=\"" + bulletImg + "\">");
+		sb.append("			       &nbsp;");
+		sb.append("				   <span id=\"yyy\"></span>");
+		sb.append("		   </div>");
+		sb.append("    </div>");
+		sb.append("    <div class=\"unit_cont bgWhite\">");
+		sb.append("	       <table class=\"tableStyle topBold left\">");
+		sb.append("		       <thead class=\"colgroup\">");
+		sb.append("			       <th style=\"width:15%\"></th>");
+		sb.append("			       <th style=\"width:28%\"></th>");
+		sb.append("			       <th style=\"\"></th>");
+		sb.append("		       </thead>");
+		sb.append("		       <tbody>");
+		sb.append("			       <tr>");
+		sb.append("				       <th rowspan=\"2\">지역지구등 지정여부</th>");
+		sb.append("				       <th>국토의 계획 및 이용에 관한 법률에 따른 지역, 지구</th>");
+		sb.append("				       <td>보전 관리 지역, 소로1류</td>");
+		sb.append("			       </tr>");
+		sb.append("			       <tr>");
+		sb.append("				       <th>다른 법령 등에 따른 지역, 지구등</th>");
+		sb.append("				       <td>가축 사육제한구역(소,젖소,닭,오리,돼지)</td>");
+		sb.append("			       </tr>");
+		sb.append("			       <tr>");
+		sb.append("				       <th colspan=\"2\">");
+		sb.append("					          토지이용 규제 기본값 시행령<br/>");
+		sb.append("					          제9조제4항 각 호에 해당하는 사항");
+		sb.append("                    </th>");
+		sb.append("                    <td>");
+		sb.append("					       &lt;추가재&gt;<br>");
+		sb.append("					               하천과 인접한 토지의 경우 재난관리과 하천담당(055-359-5533) 별도확인요");
+		sb.append("				       </td>");
+		sb.append("			       </tr>");
+		sb.append("		       </tbody>");
+		sb.append("        </table>");
+		sb.append("    </div>");							
+		sb.append("</div>");
+		
+		return sb.toString();
 	}
 }

@@ -1,5 +1,8 @@
 package com.hotplace25.util;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -299,6 +302,12 @@ public class DataUtil {
 	public static String getMssqlEscape(String str) {
 		if(StringUtils.isEmpty(str)) return str;
 		return str.replaceAll("%", "\\\\%").replaceAll("_", "\\\\_");
+	}
+	
+	public static String getDateString(String format) {
+		DateFormat dateFormat = new SimpleDateFormat(format);
+		Calendar cal = Calendar.getInstance();
+		return dateFormat.format(cal.getTime()); 
 	}
 	
 }
