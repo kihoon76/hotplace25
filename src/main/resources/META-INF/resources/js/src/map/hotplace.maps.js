@@ -1848,9 +1848,24 @@
 				x = 40; y = 40;
 			}
 			else {
-				content = '<img src="'+ hotplace.getContextUrl() +'resources/img/marker/' + options.icon + '" alt="" ' +
-       		 			  'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; ' +
-       		 			  '-webkit-user-select: none; position: absolute; width: ' + x + 'px; height: ' + y + 'px; left: 0px; top: 0px;">';
+				if(markerType == _markerTypes.ADDRESS_SEARCH) {
+					content = [ 
+					    '<div class="jusoMarker">',
+		                	'<button type="button" class="close">',
+		                		'<i class="ambicon-015_mark_times"></i>',
+		                		'<span class="hidden">닫기</span>',
+		                	'</button>',
+		                    '<span class="markerIocn">',
+								'<img src="' + hotplace.getContextUrl() + 'resources/img/marker/marker_search.png" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; width: 25px; height: 34px;">',
+							'</span>',
+		                '</div>'
+					 ].join('');
+				}
+				else {
+					content = '<img src="'+ hotplace.getContextUrl() +'resources/img/marker/' + options.icon + '" alt="" ' +
+ 		 			  'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; ' +
+ 		 			  '-webkit-user-select: none; position: absolute; width: ' + x + 'px; height: ' + y + 'px; left: 0px; top: 0px;">';
+				}
 			}
 			
 			newMarker.setOptions('icon', {
@@ -1888,9 +1903,9 @@
 		if(listeners) {
 			for(var eventName in listeners) {
 				_venderEvent.addListener(newMarker, eventName, function($$eventName, $$newInfoWindow) {
-					return function(obj) {
+					return function(e) {
 						
-						listeners[$$eventName](_venderMap, newMarker, $$newInfoWindow);
+						listeners[$$eventName](_venderMap, newMarker, $$newInfoWindow, e);
 					}
 				}(eventName, newInfoWindow));
 			}
@@ -2303,13 +2318,24 @@
 			if(menuName) hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
 		       
 			hotplace.maps.getMarker(_markerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
-				'click' : function(map, newMarker, newInfoWindow) {
-					 if(newInfoWindow.getMap()) {
-						 newInfoWindow.close();
-				     }
-					 else {
-						 newInfoWindow.open(map, newMarker);
-				     }
+				'click' : function(map, newMarker, newInfoWindow, e) {
+					
+					var nodeName = e.domEvent.toElement.nodeName.toLowerCase();
+					
+					//닫기버튼
+					if(nodeName == 'i' || nodeName == 'button') {
+						newMarker.setMap(null);
+					}
+					else {
+						if(newInfoWindow.getMap()) {
+							newInfoWindow.close();
+					    }
+						else {
+							newInfoWindow.open(map, newMarker);
+					    }
+					}
+					
+					
 				}
 			}, {
 				hasInfoWindow: true,
