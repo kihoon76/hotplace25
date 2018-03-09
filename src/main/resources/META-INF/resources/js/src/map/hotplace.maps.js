@@ -2334,8 +2334,6 @@
 							newInfoWindow.open(map, newMarker);
 					    }
 					}
-					
-					
 				}
 			}, {
 				hasInfoWindow: true,
