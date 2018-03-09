@@ -23,8 +23,7 @@
 	}
 	
 	report.PDF = {
-		profit : function() {
-			//console.log(cfg);
+		sujibunseog : function() {
 			send('pdf', hotplace.sujibunseog.getPdfParams());
 		}
 	}

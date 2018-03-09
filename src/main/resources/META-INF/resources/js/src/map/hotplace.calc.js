@@ -44,6 +44,7 @@
 	 * @property {function} calcIncomeManageImdae	수입>운영>임대 연산함수
 	 */
 	calc.sujibunseog = function() {
+		
 		/**
 		 * @private
 		 * @property {object} defaultValue 
@@ -143,43 +144,44 @@
 		 * @desc 비율
 		 */
 		function calcJichoolRatio(sum) {
+			var suji = hotplace.sujibunseog;
 			
-			calcRatio('#ratioPurchase', ['#WPurchase'], sum);					//매입금액 
-			calcRatio('#ratioMyeongdobi', ['#WMyeongdobi'], sum);				//명도비 
-			calcRatio('#ratioAcceptLandUse', ['#WAcceptLandUse'], sum);			//토지사용승낙 
-			calcRatio('#ratioTojibi', ['#WTojibi'], sum);						//[토지비 비율]
-			calcRatio('#ratioDaechulIja', ['#WDaechulIja'], sum);				//대출이자
-			calcRatio('#ratioChwideugse', ['#WChwideugse'], sum);				//취득세
-			calcRatio('#ratioJaesanse', ['#WJaesanse', '#WJaesanse2'], sum);	//재산세
-			calcRatio('#ratioYangdose', ['#WYangdose'], sum);					//양도세
-			calcRatio('#ratioJesegeum', ['#WJesegeum'], sum);					//[제세금 비율]
-			calcRatio('#ratioGeonchugGongsa', ['#WGeonchugGongsa'], sum);		//건축공사비
-			calcRatio('#ratioTomogGongsa', ['#WTomogGongsa'], sum);				//토목공사비
-			calcRatio('#ratioPojangGongsa', ['#WPojangGongsa'], sum);			//포장공사비
-			calcRatio('#ratioInibGongsa', ['#WInibGongsa'], sum);				//인입공사비
-			calcRatio('#ratioGongsabi', ['#WGongsabi'], sum);					//[공사비 비율]
-			calcRatio('#ratioAcceptGaebal', ['#WAcceptGaebal'], sum);			//개발행위허가 등
-			calcRatio('#ratioGamri', ['#WGamri'], sum);							//감리비
-			calcRatio('#ratioCheuglyang', ['#WCheuglyang'], sum);				//측량비
-			calcRatio('#ratioEvalueGamjeung', ['#WEvalueGamjeung'], sum);		//감정평가
-			calcRatio('#ratioSplitPilji', ['#WSplitPilji'], sum);				//필지분할
-			calcRatio('#ratioInheogabi', ['#WInheogabi'], sum);					//[인허가비 비율]
-			calcRatio('#ratioDevBudam', ['#WDevBudam'], sum);					//개발부담금
-			calcRatio('#ratioFarmBudam', ['#WFarmBudam'], sum);					//농지보전부담금
-			calcRatio('#ratioAlterSanrim', ['#WAlterSanrim'], sum);				//대체산림자원조성비
-			calcRatio('#ratioBudamgeum', ['#WBudamgeum'], sum);					//부담금
-			calcRatio('#ratioPurchaseChaegwon', ['#WPurchaseChaegwon'], sum);	//채권매입비
-			calcRatio('#ratioSetGeunjeodang', ['#WSetGeunjeodang'], sum);		//근저당설정비
-			calcRatio('#ratioPreserveDeunggi', ['#WPreserveDeunggi'], sum);		//보존등기비
-			calcRatio('#ratioManagement', ['#WManagement'], sum);				//운영비
-			calcRatio('#ratioSellSusulyo', ['#WSellSusulyo'], sum);				//매각수수료
-			calcRatio('#ratioPreparation', ['#WPreparation'], sum);				//예비비
-			calcRatio('#ratioSaeobgyeongbi', ['#WSaeobgyeongbi'], sum);			//[사업경비 비율]
-			
-			
+			calcRatio(suji.getRatioPurchaseId(), [suji.getWPurchaseId()], sum);							//매입금액 
+			calcRatio(suji.getRatioMyeongdobiId(), [suji.getWMyeongdobiId()], sum);						//명도비 
+			calcRatio(suji.getRatioAcceptLandUseId(), [suji.getWAcceptLandUseId()], sum);				//토지사용승낙 
+			calcRatio(suji.getRatioTojibiId(), [suji.getWTojibiId()], sum);								//[토지비 비율]
+			calcRatio(suji.getRatioDaechulIjaId(), [suji.getWDaechulIjaId()], sum);						//대출이자
+			calcRatio(suji.getRatioChwideugseId(), [suji.getWChwideugseId()], sum);						//취득세
+			calcRatio(suji.getRatioJaesanseId(), [suji.getWJaesanseId(), suji.getWJaesanse2Id()], sum);	//재산세
+			calcRatio(suji.getRatioYangdoseId(), [suji.getWYangdoseId()], sum);							//양도세
+			calcRatio(suji.getRatioJesegeumId(), [suji.getWJesegeumId()], sum);							//[제세금 비율]
+			calcRatio(suji.getRatioGeonchugGongsaId(), [suji.getWGeonchugGongsaId()], sum);				//건축공사비
+			calcRatio(suji.getRatioTomogGongsaId(), [suji.getWTomogGongsaId()], sum);					//토목공사비
+			calcRatio(suji.getRatioPojangGongsaId(), [suji.getWPojangGongsaId()], sum);					//포장공사비
+			calcRatio(suji.getRatioInibGongsaId(), [suji.getWInibGongsaId()], sum);						//인입공사비
+			calcRatio(suji.getRatioGongsabiId(), [suji.getWGongsabiId()], sum);							//[공사비 비율]
+			calcRatio(suji.getRatioAcceptGaebalId(), [suji.getWAcceptGaebalId()], sum);					//개발행위허가 등
+			calcRatio(suji.getRatioGamriId(), [suji.getWGamriId()], sum);								//감리비
+			calcRatio(suji.getRatioCheuglyangId(), [suji.getWCheuglyangId()], sum);						//측량비
+			calcRatio(suji.getRatioEvalueGamjeungId(), [suji.getWEvalueGamjeungId()], sum);				//감정평가
+			calcRatio(suji.getRatioSplitPiljiId(), [suji.getWSplitPiljiId()], sum);						//필지분할
+			calcRatio(suji.getRatioInheogabiId(), [suji.getWInheogabiId()], sum);						//[인허가비 비율]
+			calcRatio(suji.getRatioDevBudamId(), [suji.getWDevBudamId()], sum);							//개발부담금
+			calcRatio(suji.getRatioFarmBudamId(), [suji.getWFarmBudamId()], sum);						//농지보전부담금
+			calcRatio(suji.getRatioAlterSanrimId(), [suji.getWAlterSanrimId()], sum);					//대체산림자원조성비
+			calcRatio(suji.getRatioBudamgeumId(), [suji.getWBudamgeumId()], sum);						//부담금
+			calcRatio(suji.getRatioPurchaseChaegwonId(), [suji.getWPurchaseChaegwonId()], sum);			//채권매입비
+			calcRatio(suji.getRatioSetGeunjeodangId(), [suji.getWSetGeunjeodangId()], sum);				//근저당설정비
+			calcRatio(suji.getRatioPreserveDeunggiId(), [suji.getWPreserveDeunggiId()], sum);			//보존등기비
+			calcRatio(suji.getRatioManagementId(), [suji.getWManagementId()], sum);						//운영비
+			calcRatio(suji.getRatioSellSusulyoId(), [suji.getWSellSusulyoId()], sum);					//매각수수료
+			calcRatio(suji.getRatioPreparationId(), [suji.getWPreparationId()], sum);					//예비비
+			calcRatio(suji.getRatioSaeobgyeongbiId(), [suji.getWSaeobgyeongbiId()], sum);				//[사업경비 비율]
 		}
 		
 		function calcIncomeRatio(sum) {
+			var suji = hotplace.sujibunseog;
+			
 			calcRatio('#ratioIncomeSellBuilding', ['#WIncomeSellBuilding'], sum);		//건물
 			calcRatio('#ratioIncomeSellSeolbi', ['#WIncomeSellBuilding'], sum);			//설비
 			calcRatio('#ratioIncomeSellLand', ['#WIncomeSellLand'], sum);				//토지

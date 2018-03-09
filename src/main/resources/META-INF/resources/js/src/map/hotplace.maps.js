@@ -2320,7 +2320,7 @@
 			hotplace.maps.getMarker(_markerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
 				'click' : function(map, newMarker, newInfoWindow, e) {
 					
-					var nodeName = e.domEvent.toElement.nodeName.toLowerCase();
+					var nodeName = e.domEvent.currentTarget.nodeName;
 					
 					//닫기버튼
 					if(nodeName == 'i' || nodeName == 'button') {

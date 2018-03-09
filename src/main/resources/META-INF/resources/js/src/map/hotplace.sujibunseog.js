@@ -5,6 +5,7 @@
 	var _dvSujibunseog = '#dvSujibunseog',
 		_btnSujiGongsiHistory = '#btnSujiGongsiHistory', //공시지가 변동보기버튼
 		_btnSujiTojiUseLimitHistory = '#btnSujiTojiUseLimitHistory', //토지이용규제 변경 내역보기
+		_btnSujibunseogPdf = '#btnSujibunseogPdf',
 		
 		_chkJaesanse = '#chkJaesanse', //재산세 checkbox (주택);
 		_chkYangdose = '#chkYangdose', //양도세 비사업용 체크
@@ -16,136 +17,251 @@
 		_stepPurchase = '#stepPurchase',
 		_WPurchase = '#WPurchase',
 		_ratioPurchase = '#ratioPurchase',
-		
 		_txtMyeongdobi = '#txtMyeongdobi',
 		_stepMyeongdobi = '#stepMyeongdobi',
 		_WMyeongdobi = '#WMyeongdobi',
 		_ratioMyeongdobi = '#ratioMyeongdobi',
-		
 		_txtAcceptLandUse = '#txtAcceptLandUse',
 		_stepAcceptLandUse = '#stepAcceptLandUse',
 		_WAcceptLandUse = '#WAcceptLandUse',
 		_ratioAcceptLandUse = '#ratioAcceptLandUse',
-		
 		_WTojibi = '#WTojibi',
 		_ratioTojibi = '#ratioTojibi',
 		_txtDaechulIja = '#txtDaechulIja',
 		_stepDaechulIja = '#stepDaechulIja',
 		_WDaechulIja = '#WDaechulIja',
 		_ratioDaechulIja = '#ratioDaechulIja',
-		
 		_txtChwideugse = '#txtChwideugse',
 		_stepChwideugse = '#stepChwideugse',
 		_WChwideugse = '#WChwideugse',
 		_ratioChwideugse = '#ratioChwideugse',
-		
+		_txtJaesanseT1 = '#txtJaesanseT1',
+		_txtJaesanseH1 = '#txtJaesanseH1',
+		_txtJaesanseT2 = '#txtJaesanseT2',
+		_txtJaesanseH2 = '#txtJaesanseH2',
+		_stepJaesanseT3 = '#stepJaesanseT3',
+		_txtJaesanseH3 = '#txtJaesanseH3',
+		_WJaesanse = '#WJaesanse',
+		_WJaesanse2 = '#WJaesanse2',
+		_ratioJaesanse = '#ratioJaesanse',
 		_stepYangdose = '#stepYangdose',
 		_stepYangdose2 = '#stepYangdose2',
 		_WYangdose = '#WYangdose',
 		_ratioYangdose = '#ratioYangdose',
-		
 		_WJesegeum = '#WJesegeum',
 		_ratioJesegeum = '#ratioJesegeum',
-		
 		_txtGeonchugGongsa = '#txtGeonchugGongsa',
 		_stepGeonchugGongsa = '#stepGeonchugGongsa',
 		_WGeonchugGongsa = '#WGeonchugGongsa',
 		_ratioGeonchugGongsa = '#ratioGeonchugGongsa',
-		
 		_txtTomogGongsa = '#txtTomogGongsa',
 		_stepTomogGongsa = '#stepTomogGongsa',
 		_WTomogGongsa = '#WTomogGongsa',
 		_ratioTomogGongsa = '#ratioTomogGongsa',
-		
 		_txtPojangGongsa = '#txtPojangGongsa',
 		_stepPojangGongsa = '#stepPojangGongsa',
 		_WPojangGongsa = '#WPojangGongsa',
 		_ratioPojangGongsa = '#ratioPojangGongsa',
-		
 		_txtInibGongsa = '#txtInibGongsa',
 		_stepInibGongsa = '#stepInibGongsa',
 		_WInibGongsa = '#WInibGongsa',
 		_ratioInibGongsa = '#ratioInibGongsa',
-		
 		_WGongsabi = '#WGongsabi',
 		_ratioGongsabi = '#ratioGongsabi',
-		
 		_txtAcceptGaebal = '#txtAcceptGaebal',
 		_stepAcceptGaebal = '#stepAcceptGaebal',
 		_WAcceptGaebal = '#WAcceptGaebal',
 		_ratioAcceptGaebal = '#ratioAcceptGaebal',
-		
 		_txtGamri = '#txtGamri',
 		_stepGamri = '#stepGamri',
 		_WGamri = '#WGamri',
 		_ratioGamri = '#ratioGamri',
-		
 		_txtCheuglyang = '#txtCheuglyang',
 		_stepCheuglyang = '#stepCheuglyang',
 		_WCheuglyang = '#WCheuglyang',
 		_ratioCheuglyang = '#ratioCheuglyang',
-		
 		_txtEvalueGamjeung = '#txtEvalueGamjeung',
 		_stepEvalueGamjeung = '#stepEvalueGamjeung',
 		_WEvalueGamjeung = '#WEvalueGamjeung',
 		_ratioEvalueGamjeung = '#ratioEvalueGamjeung',
-		
 		_txtSplitPilji = '#txtSplitPilji',
 		_stepSplitPilji = '#stepSplitPilji',
 		_WSplitPilji = '#WSplitPilji',
 		_ratioSplitPilji = '#ratioSplitPilji',
-		
 		_WInheogabi = '#WInheogabi',
 		_ratioInheogabi = '#ratioInheogabi',
-		
 		_txtDevBudam = '#txtDevBudam',
 		_stepDevBudam = '#stepDevBudam',
 		_WDevBudam = '#WDevBudam',
 		_ratioDevBudam = '#ratioDevBudam',
-		
+		_txtFarmBudam = '#txtFarmBudam',
+		_stepFarmBudam = '#stepFarmBudam',
+		_WFarmBudam = '#WFarmBudam',
+		_ratioFarmBudam = '#ratioFarmBudam',
 		_txtAlterSanrim = '#txtAlterSanrim',
 		_stepAlterSanrim = '#stepAlterSanrim',
 		_WAlterSanrim = '#WAlterSanrim',
 		_ratioAlterSanrim = '#ratioAlterSanrim',
-		
 		_WBudamgeum = '#WBudamgeum',
 		_ratioBudamgeum = '#ratioBudamgeum',
 		_txtPurchaseChaegwon = '#txtPurchaseChaegwon',
 		_stepPurchaseChaegwon = '#stepPurchaseChaegwon',
 		_WPurchaseChaegwon = '#WPurchaseChaegwon',
 		_ratioPurchaseChaegwon = '#ratioPurchaseChaegwon',
-		
 		_txtSetGeunjeodang = '#txtSetGeunjeodang',
 		_stepSetGeunjeodang = '#stepSetGeunjeodang',
 		_WSetGeunjeodang = '#WSetGeunjeodang',
 		_ratioSetGeunjeodang = '#ratioSetGeunjeodang',
-		
 		_txtPreserveDeunggi = '#txtPreserveDeunggi',
 		_stepPreserveDeunggi = '#stepPreserveDeunggi',
 		_WPreserveDeunggi = '#WPreserveDeunggi',
 		_ratioPreserveDeunggi = '#ratioPreserveDeunggi',
-		
-		
 		_txtManagement = '#txtManagement',
 		_stepManagement = '#stepManagement',
 		_WManagement = '#WManagement',
 		_ratioManagement = '#ratioManagement',
-		
 		_txtSellSusulyo = '#txtSellSusulyo',
 		_stepSellSusulyo = '#stepSellSusulyo',
 		_WSellSusulyo = '#WSellSusulyo',
 		_ratioSellSusulyo = '#ratioSellSusulyo',
-		
 		_txtPreparation = '#txtPreparation',
 		_stepPreparation = '#stepPreparation',
 		_WPreparation = '#WPreparation',
 		_ratioPreparation = '#ratioPreparation',
-		
 		_WSaeobgyeongbi = '#WSaeobgyeongbi',
 		_ratioSaeobgyeongbi = '#ratioSaeobgyeongbi',
-		
+		_txtIncomeSellBuilding = '#txtIncomeSellBuilding',
+		_stepIncomeSellBuilding = '#stepIncomeSellBuilding',
+		_WIncomeSellBuilding = '#WIncomeSellBuilding',
+		_ratioIncomeSellBuilding = '#ratioIncomeSellBuilding',
 		_WJichool = '#WJichool';
 		
+	sujibunseog.getStepOwnTermId = function() { return _stepOwnTerm; }
+	sujibunseog.getStepOtherAssetRatioId = function() { return _stepOtherAssetRatio; }
+	sujibunseog.getTxtPurchaseId = function() { return _txtPurchase; }
+	sujibunseog.getStepPurchaseId = function() { return _stepPurchase; }
+	sujibunseog.getWPurchaseId = function() { return _WPurchase; }
+	sujibunseog.getRatioPurchaseId = function() { return _ratioPurchase; }
+	sujibunseog.getTxtMyeongdobiId = function() { return _txtMyeongdobi; }
+	sujibunseog.getStepMyeongdobiId = function() { return _stepMyeongdobi; }
+	sujibunseog.getWMyeongdobiId = function() { return _WMyeongdobi; }
+	sujibunseog.getRatioMyeongdobiId = function() { return _ratioMyeongdobi; }
+	sujibunseog.getTxtAcceptLandUseId = function() { return _txtAcceptLandUse; }
+	sujibunseog.getStepAcceptLandUseId = function() { return _stepAcceptLandUse; }
+	sujibunseog.getWAcceptLandUseId = function() { return _WAcceptLandUse; }
+	sujibunseog.getRatioAcceptLandUseId = function() { return _ratioAcceptLandUse; }
+	sujibunseog.getWTojibiId = function() { return _WTojibi; }
+	sujibunseog.getRatioTojibiId = function() { return _ratioTojibi; }
+	sujibunseog.getTxtDaechulIjaId = function() { return _txtDaechulIja; }
+	sujibunseog.getStepDaechulIjaId = function() { return _stepDaechulIja; }
+	sujibunseog.getWDaechulIjaId = function() { return _WDaechulIja; }
+	sujibunseog.getRatioDaechulIjaId = function() { return _ratioDaechulIja; }
+	sujibunseog.getTxtChwideugseId = function() { return _txtChwideugse; }
+	sujibunseog.getStepChwideugseId = function() { return _stepChwideugse; }
+	sujibunseog.getWChwideugseId = function() { return _WChwideugse; }
+	sujibunseog.getRatioChwideugseId = function() { return _ratioChwideugse; }
+	sujibunseog.getTxtJaesanseT1Id = function() { return _txtJaesanseT1; }
+	sujibunseog.getTxtJaesanseH1Id = function() { return _txtJaesanseH1; }
+	sujibunseog.getTxtJaesanseT2Id = function() { return _txtJaesanseT2; }
+	sujibunseog.getTxtJaesanseH2Id = function() { return _txtJaesanseH2; }
+	sujibunseog.getStepJaesanseT3Id = function() { return _stepJaesanseT3; }
+	sujibunseog.getTxtJaesanseH3Id = function() { return _txtJaesanseH3; }
+	sujibunseog.getWJaesanseId = function() { return _WJaesanse; }
+	sujibunseog.getWJaesanse2Id = function() { return _WJaesanse2; }
+	sujibunseog.getRatioJaesanseId = function() { return _ratioJaesanse; }
+	sujibunseog.getStepYangdoseId = function() { return _stepYangdose; }
+	sujibunseog.getStepYangdose2Id = function() { return _stepYangdose2; }
+	sujibunseog.getWYangdoseId = function() { return _WYangdose; }
+	sujibunseog.getRatioYangdoseId = function() { return _ratioYangdose; }
+	sujibunseog.getWJesegeumId = function() { return _WJesegeum; }
+	sujibunseog.getRatioJesegeumId = function() { return _ratioJesegeum; }
+	sujibunseog.getTxtGeonchugGongsaId = function() { return _txtGeonchugGongsa; }
+	sujibunseog.getStepGeonchugGongsaId = function() { return _stepGeonchugGongsa; }
+	sujibunseog.getWGeonchugGongsaId = function() { return _WGeonchugGongsa; }
+	sujibunseog.getRatioGeonchugGongsaId = function() { return _ratioGeonchugGongsa; }
+	sujibunseog.getTxtTomogGongsaId = function() { return _txtTomogGongsa; }
+	sujibunseog.getStepTomogGongsaId = function() { return _stepTomogGongsa; }
+	sujibunseog.getWTomogGongsaId = function() { return _WTomogGongsa; }
+	sujibunseog.getRatioTomogGongsaId = function() { return _ratioTomogGongsa; }
+	sujibunseog.getTxtPojangGongsaId = function() { return _txtPojangGongsa; }
+	sujibunseog.getStepPojangGongsaId = function() { return _stepPojangGongsa; }
+	sujibunseog.getWPojangGongsaId = function() { return _WPojangGongsa; }
+	sujibunseog.getRatioPojangGongsaId = function() { return _ratioPojangGongsa; }
+	sujibunseog.getTxtInibGongsaId = function() { return _txtInibGongsa; }
+	sujibunseog.getStepInibGongsaId = function() { return _stepInibGongsa; }
+	sujibunseog.getWInibGongsaId = function() { return _WInibGongsa; }
+	sujibunseog.getRatioInibGongsaId = function() { return _ratioInibGongsa; }
+	sujibunseog.getWGongsabiId = function() { return _WGongsabi; }
+	sujibunseog.getRatioGongsabiId = function() { return _ratioGongsabi; }
+	sujibunseog.getTxtAcceptGaebalId = function() { return _txtAcceptGaebal; }
+	sujibunseog.getStepAcceptGaebalId = function() { return _stepAcceptGaebal; }
+	sujibunseog.getWAcceptGaebalId = function() { return _WAcceptGaebal; }
+	sujibunseog.getRatioAcceptGaebalId = function() { return _ratioAcceptGaebal; }
+	sujibunseog.getTxtGamriId = function() { return _txtGamri; }
+	sujibunseog.getStepGamriId = function() { return _stepGamri; }
+	sujibunseog.getWGamriId = function() { return _WGamri; }
+	sujibunseog.getRatioGamriId = function() { return _ratioGamri; }
+	sujibunseog.getTxtCheuglyangId = function() { return _txtCheuglyang; }
+	sujibunseog.getStepCheuglyangId = function() { return _stepCheuglyang; }
+	sujibunseog.getWCheuglyangId = function() { return _WCheuglyang; }
+	sujibunseog.getRatioCheuglyangId = function() { return _ratioCheuglyang; }
+	sujibunseog.getTxtEvalueGamjeungId = function() { return _txtEvalueGamjeung; }
+	sujibunseog.getStepEvalueGamjeungId = function() { return _stepEvalueGamjeung; }
+	sujibunseog.getWEvalueGamjeungId = function() { return _WEvalueGamjeung; }
+	sujibunseog.getRatioEvalueGamjeungId = function() { return _ratioEvalueGamjeung; }
+	sujibunseog.getTxtSplitPiljiId = function() { return _txtSplitPilji; }
+	sujibunseog.getStepSplitPiljiId = function() { return _stepSplitPilji; }
+	sujibunseog.getWSplitPiljiId = function() { return _WSplitPilji; }
+	sujibunseog.getRatioSplitPiljiId = function() { return _ratioSplitPilji; }
+	sujibunseog.getWInheogabiId = function() { return _WInheogabi; }
+	sujibunseog.getRatioInheogabiId = function() { return _ratioInheogabi; }
+	sujibunseog.getTxtDevBudamId = function() { return _txtDevBudam; }
+	sujibunseog.getStepDevBudamId = function() { return _stepDevBudam; }
+	sujibunseog.getWDevBudamId = function() { return _WDevBudam; }
+	sujibunseog.getTxtFarmBudamId = function() { return _txtFarmBudam; }
+	sujibunseog.getStepFarmBudamId = function() { return _stepFarmBudam; }
+	sujibunseog.getWFarmBudamId = function() { return _WFarmBudam; }
+	sujibunseog.getRatioFarmBudamId = function() { return _ratioFarmBudam; }
+	sujibunseog.getRatioDevBudamId = function() { return _ratioDevBudam; }
+	sujibunseog.getTxtAlterSanrimId = function() { return _txtAlterSanrim; }
+	sujibunseog.getStepAlterSanrimId = function() { return _stepAlterSanrim; }
+	sujibunseog.getWAlterSanrimId = function() { return _WAlterSanrim; }
+	sujibunseog.getRatioAlterSanrimId = function() { return _ratioAlterSanrim; }
+	sujibunseog.getWBudamgeumId = function() { return _WBudamgeum; }
+	sujibunseog.getRatioBudamgeumId = function() { return _ratioBudamgeum; }
+	sujibunseog.getTxtPurchaseChaegwonId = function() { return _txtPurchaseChaegwon; }
+	sujibunseog.getStepPurchaseChaegwonId = function() { return _stepPurchaseChaegwon; }
+	sujibunseog.getWPurchaseChaegwonId = function() { return _WPurchaseChaegwon; }
+	sujibunseog.getRatioPurchaseChaegwonId = function() { return _ratioPurchaseChaegwon; }
+	sujibunseog.getTxtSetGeunjeodangId = function() { return _txtSetGeunjeodang; }
+	sujibunseog.getStepSetGeunjeodangId = function() { return _stepSetGeunjeodang; }
+	sujibunseog.getWSetGeunjeodangId = function() { return _WSetGeunjeodang; }
+	sujibunseog.getRatioSetGeunjeodangId = function() { return _ratioSetGeunjeodang; }
+	sujibunseog.getTxtPreserveDeunggiId = function() { return _txtPreserveDeunggi; }
+	sujibunseog.getStepPreserveDeunggiId = function() { return _stepPreserveDeunggi; }
+	sujibunseog.getWPreserveDeunggiId = function() { return _WPreserveDeunggi; }
+	sujibunseog.getRatioPreserveDeunggiId = function() { return _ratioPreserveDeunggi; }
+	sujibunseog.getTxtManagementId = function() { return _txtManagement; }
+	sujibunseog.getStepManagementId = function() { return _stepManagement; }
+	sujibunseog.getWManagementId = function() { return _WManagement; }
+	sujibunseog.getRatioManagementId = function() { return _ratioManagement; }
+	sujibunseog.getTxtSellSusulyoId = function() { return _txtSellSusulyo; }
+	sujibunseog.getStepSellSusulyoId = function() { return _stepSellSusulyo; }
+	sujibunseog.getWSellSusulyoId = function() { return _WSellSusulyo; }
+	sujibunseog.getRatioSellSusulyoId = function() { return _ratioSellSusulyo; }
+	sujibunseog.getTxtPreparationId = function() { return _txtPreparation; }
+	sujibunseog.getStepPreparationId = function() { return _stepPreparation; }
+	sujibunseog.getWPreparationId = function() { return _WPreparation; }
+	sujibunseog.getRatioPreparationId = function() { return _ratioPreparation; }
+	sujibunseog.getWSaeobgyeongbiId = function() { return _WSaeobgyeongbi; }
+	sujibunseog.getRatioSaeobgyeongbiId = function() { return _ratioSaeobgyeongbi; }
+	sujibunseog.getTxtIncomeSellBuildingId = function() { return _txtIncomeSellBuilding; }
+	sujibunseog.getStepIncomeSellBuildingId = function() { return _stepIncomeSellBuilding; }
+	sujibunseog.getWIncomeSellBuildingId = function() { return _WIncomeSellBuilding; }
+	sujibunseog.getRatioIncomeSellBuildingId = function() { return _ratioIncomeSellBuilding; }
+	sujibunseog.getWJichoolId = function() { return _WJichool; }
+	
+	
 	/**
 	 * @private
 	 * @function _workSpinner
@@ -403,6 +519,13 @@
 		.off('click')
 		.on('click', function(e) {
 			hotplace.dom.showSujiTojiUseLimitHistory();
+		});
+		
+		//수지분석 pdf 다운로드
+		$(_btnSujibunseogPdf)
+		.off('click')
+		.on('click', function() {
+			hotplace.report.PDF.sujibunseog();
 		});
 		
 		//var stepYangdose2 = $('#stepYangdose2');
