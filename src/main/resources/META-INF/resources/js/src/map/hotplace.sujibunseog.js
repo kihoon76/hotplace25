@@ -10,6 +10,7 @@
 		_chkJaesanse = '#chkJaesanse', //재산세 checkbox (주택);
 		_chkYangdose = '#chkYangdose', //양도세 비사업용 체크
 		_chkFarmBudam = '#chkFarmBudam', //농지보전부담금 감면 체크
+		_radioGaein = '#radioGaein',
 		
 		_stepOwnTerm = '#stepOwnTerm',
 		_stepOtherAssetRatio = '#stepOtherAssetRatio',
@@ -134,7 +135,30 @@
 		_stepIncomeSellBuilding = '#stepIncomeSellBuilding',
 		_WIncomeSellBuilding = '#WIncomeSellBuilding',
 		_ratioIncomeSellBuilding = '#ratioIncomeSellBuilding',
-		_WJichool = '#WJichool';
+		_txtIncomeSellSeolbi = '#txtIncomeSellSeolbi',
+		_stepIncomeSellSeolbi = '#stepIncomeSellSeolbi',
+		_WIncomeSellSeolbi = '#WIncomeSellSeolbi',
+		_ratioIncomeSellSeolbi = '#ratioIncomeSellSeolbi',
+		_txtIncomeSellLand = '#txtIncomeSellLand',
+		_stepIncomeSellLand = '#stepIncomeSellLand',
+		_WIncomeSellLand = '#WIncomeSellLand',
+		_ratioIncomeSellLand = '#ratioIncomeSellLand',
+		_WIncomeSell = '#WIncomeSell',
+		_ratioIncomeSell = '#ratioIncomeSell',
+		_stepIncomeManageImdae = '#stepIncomeManageImdae',
+		_txtIncomeManageImdae = '#txtIncomeManageImdae',
+		_WIncomeManageImdae = '#WIncomeManageImdae',
+		_ratioIncomeManageImdae = '#ratioIncomeManageImdae',
+		_WIncomeManage = '#WIncomeManage',
+		_ratioIncomeManage = '#ratioIncomeManage',
+		_WIncome = '#WIncome',
+		_ratioIncome = '#ratioIncome',
+		_WJichool = '#WJichool',
+		_WMymoney = '#WMymoney',
+		_WMaechool = '#WMaechool',
+		_ratioMaechool = '#ratioMaechool',
+		_WGyeongsang = '#WGyeongsang',
+		_ratioGyeongsang = '#ratioGyeongsang';
 		
 	sujibunseog.getStepOwnTermId = function() { return _stepOwnTerm; }
 	sujibunseog.getStepOtherAssetRatioId = function() { return _stepOtherAssetRatio; }
@@ -259,9 +283,33 @@
 	sujibunseog.getStepIncomeSellBuildingId = function() { return _stepIncomeSellBuilding; }
 	sujibunseog.getWIncomeSellBuildingId = function() { return _WIncomeSellBuilding; }
 	sujibunseog.getRatioIncomeSellBuildingId = function() { return _ratioIncomeSellBuilding; }
+	sujibunseog.getTxtIncomeSellSeolbiId = function() { return _txtIncomeSellSeolbi; }
+	sujibunseog.getStepIncomeSellSeolbiId = function() { return _stepIncomeSellSeolbi; }
+	sujibunseog.getWIncomeSellSeolbiId = function() { return _WIncomeSellSeolbi; }
+	sujibunseog.getRatioIncomeSellSeolbiId = function() { return _ratioIncomeSellSeolbi; }
+	sujibunseog.getTxtIncomeSellLandId = function() { return _txtIncomeSellLand; }
+	sujibunseog.getStepIncomeSellLandId = function() { return _stepIncomeSellLand; }
+	sujibunseog.getWIncomeSellLandId = function() { return _WIncomeSellLand; }
+	sujibunseog.getRatioIncomeSellLandId = function() { return _ratioIncomeSellLand; }
+	sujibunseog.getWIncomeSellId = function() { return _WIncomeSell; }
+	sujibunseog.getRatioIncomeSellId = function() { return _ratioIncomeSell; }
+	sujibunseog.getStepIncomeManageImdaeId = function() { return _stepIncomeManageImdae; }
+	sujibunseog.getTxtIncomeManageImdaeId = function() { return _txtIncomeManageImdae; }
+	sujibunseog.getWIncomeManageImdaeId = function() { return _WIncomeManageImdae; }
+	sujibunseog.getRatioIncomeManageImdaeId = function() { return _ratioIncomeManageImdae; }
+	sujibunseog.getWIncomeManageId = function() { return _WIncomeManage; }
+	sujibunseog.getRatioIncomeManageId = function() { return _ratioIncomeManage; }
+	sujibunseog.getWIncomeId = function() { return _WIncome; }
+	sujibunseog.getRatioIncomeId = function() { return _ratioIncome; }
 	sujibunseog.getWJichoolId = function() { return _WJichool; }
+	sujibunseog.getWMymoneyId = function() { return _WMymoney; }
+	sujibunseog.getWMaechoolId = function() { return _WMaechool; }
+	sujibunseog.getRatioMaechoolId = function() { return _ratioMaechool; }
+	sujibunseog.getWGyeongsangId = function() { return _WGyeongsang; }
+	sujibunseog.getRatioGyeongsangId = function() { return _ratioGyeongsang; }
 	
-	
+	sujibunseog.getChkYangdoseId = function() { return _chkYangdose; } 
+	sujibunseog.getRadioGaeinId = function() { return _radioGaein; } 
 	/**
 	 * @private
 	 * @function _workSpinner
@@ -354,6 +402,10 @@
 		
 	    $txt.val(viewVal);
 	    hotplace.calc.sujibunseog[fnStr]();
+	}
+	
+	function _isOwnGaein() {
+		return $('#radioGaein').is(':checked');
 	}
 	
 	sujibunseog.getPdfParams = function() {
@@ -507,6 +559,8 @@
 		};
 	}
 	
+	sujibunseog.isOwnGaein = _isOwnGaein;
+	
 	sujibunseog.init = function() {
 		//펼침버튼
 		hotplace.dom.listExpandCollapse(_dvSujibunseog);
@@ -532,15 +586,7 @@
 		
 		//매입주체 
 		$('input[name="radioOwn"]').on('click', function(e) {
-			var targetId = e.target.id;
-			//개인 (양도세 세율)
-			if(targetId == 'radioPrivate') {
-				
-			}
-			else {
-				
-			}
-			
+			hotplace.calc.sujibunseog.calcYangdose();
 		});
 		
 		//재산세 checkbox (주택)

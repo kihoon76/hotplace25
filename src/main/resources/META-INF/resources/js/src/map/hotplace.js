@@ -108,9 +108,9 @@
      */
     hotplace.config = {
     	mulgeonViewLevel: 8,
-    	minZoomLevel: 3,
-    	mapDefaultX: 127.9204629,
-    	mapDefaultY: 36.0207091,
+    	minZoomLevel: 9,
+    	mapDefaultX: 126.9784147,//127.9204629,
+    	mapDefaultY: 37.5666805,//36.0207091,
     	addrSearchPanLevel: 10,
     	yangdoseStepPercent: 5,
     	gyeongmaeDetailImgInterval: 2000,

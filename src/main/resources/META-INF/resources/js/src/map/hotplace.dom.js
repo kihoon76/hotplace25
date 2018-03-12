@@ -1006,9 +1006,18 @@
 		var $parent   = $element.parent('li');		
 		var data      = $element.data('name');
 		var isNewDom  = $element.data('new');
+		//메인화면 로드시 미리 같이 로드되어야 하는지 여부
+		var isFirstLoad = $element.data('firstLoad');
+		
 		
 		_bindLnbMenu(data, isNewDom);
+		
 		var showAfterFn = hotplace.menu.initMenuDom(data);
+		
+		if(isFirstLoad) {
+			$element.data('firstLoad', false);
+			return;
+		}
 		
 		$parent.addClass('active');
 		$parent.siblings('li').removeClass('active');

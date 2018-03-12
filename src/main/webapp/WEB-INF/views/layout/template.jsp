@@ -86,8 +86,8 @@
 			<li>
 				<a href="#" class="menu03" data-name="gyeonggongSearchMenu" data-new="false"><i class="icon"></i><span>경•공매 물건 검색</span></a>
 			</li>
-			<li class="disabled MULGEON" data-key="MULGEON">
-				<a href="#" class="menu04" data-name="mulgeonViewMenu" data-new="false"><i class="icon"></i><span>물건보기</span></a>
+			<li id="lnbMulgeonLi" class="disabled MULGEON" data-key="MULGEON">
+				<a href="#" class="menu04" data-name="mulgeonViewMenu" data-new="false" data-first-load="true"><i class="icon"></i><span>물건보기</span></a>
 			</li>
 			<li>
 				<a href="#" class="menu05" data-name="heatmapViewMenu" data-new="false"><i class="icon"></i><span>히트맵보기</span></a>

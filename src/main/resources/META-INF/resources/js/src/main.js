@@ -241,7 +241,23 @@ $(document).ready(function() {
 		hotplace.dom.showYearRangeDiv();
 		hotplace.dom.showAutoYearRangeDiv();
 		hotplace.dom.enableYearRangeDiv(false);
+		_initFirstScreen();
 	});
+	
+	function _initFirstScreen() {
+		//서울시청 400M 물건보기 경매
+		_enableMenu(_currLevel, hotplace.config.mulgeonViewLevel, $_lnbMulgeon, $('#' + hotplace.config.menus.MULGEON_SEARCH + ' .close'));
+		//dom 생성
+		$('#lnbMulgeonLi > a').trigger('click');
+		//경매
+		$('#mulgeonGyeongmae').prop('checked', true);
+		//공매
+		$('#mulgeonGongmae').prop('checked', true);
+		//보상물건
+		$('#mulgeonBosang').prop('checked', true);
+		
+		$('#btnViewMulgeon').trigger('click');
+	}
 	
 	hotplace.validation.numberOnly('.numberOnly');
 	hotplace.validation.numberNdot('.numberNdot');
