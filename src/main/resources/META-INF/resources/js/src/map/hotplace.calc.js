@@ -96,15 +96,15 @@
 			calc.sujibunseog.calcTomogGongsa(true);
 			calc.sujibunseog.calcPojangGongsa(true);
 			calc.sujibunseog.calcInibGongsa(true);
-			calc.sujibunseog.calcAcceptGaebal();				//인허가비 > 개발행위허가 등
+			calc.sujibunseog.calcAcceptGaebal();			//인허가비 > 개발행위허가 등
 			calc.sujibunseog.calcCheuglyang();				//인허가비 > 측량비
 			calc.sujibunseog.calcEvalueGamjeung();			//인허가비 > 감정평가
 			calc.sujibunseog.calcSplitPilji();				//인허가비 > 필지분할
-			calc.sujibunseog.calcDevBudam();					//부담금 > 개별부담금
+			calc.sujibunseog.calcDevBudam();				//부담금 > 개별부담금
 			calc.sujibunseog.calcFarmBudam();				//부담금 > 농지보전부담금
 			calc.sujibunseog.calcAlterSanrim();				//부담금 > 대체산림자원조성비
 			calc.sujibunseog.calcManagement();				//사업경비 > 운영비
-			calc.sujibunseog.calcIncomeSellSeolbi();			//매각 > 설비
+			calc.sujibunseog.calcIncomeSellSeolbi();		//매각 > 설비
 			calc.sujibunseog.calcIncomeSellLand();			//매각 > 토지
 			calc.sujibunseog.calcIncomeManageImdae();		//운영 > 임대
 		}
