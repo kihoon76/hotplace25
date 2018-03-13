@@ -1852,7 +1852,7 @@
 				if(markerType == _markerTypes.ADDRESS_SEARCH) {
 					content = [ 
 					    '<div class="jusoMarker">',
-		                	'<button type="button" class="close">',
+		                	'<button type="button" class="close" onClick="hotplace.maps.setAddressMarkerX(this)">',
 		                		'<i class="ambicon-015_mark_times"></i>',
 		                		'<span class="hidden">닫기</span>',
 		                	'</button>',
@@ -2314,6 +2314,11 @@
 		}
 	}
 	
+	
+	maps.setAddressMarkerX = function(btn) {
+		btn.setAttribute('data-active', true);//jquery가 동작안함
+	}
+	
 	maps.panToLikeAddressSearch = function(lat, lng, menuName, winDatas) {
 		maps.panToBounds(lat, lng, function() {
 			if(menuName) hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
@@ -2321,11 +2326,12 @@
 			hotplace.maps.getMarker(_markerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
 				'click' : function(map, newMarker, newInfoWindow, e) {
 					
-					var nodeName = e.domEvent.currentTarget.nodeName;
-					
-					//닫기버튼
-					if(nodeName == 'i' || nodeName == 'button') {
+					var target = e.domEvent.currentTarget;
+					var isClose = target.childNodes[0].getAttribute('data-active');
+					//닫기버튼 (오류발생: target이 항상 div로 들어옴)
+					if(isClose/*nodeName == 'i' || nodeName == 'button'*/) {
 						newMarker.setMap(null);
+						target.childNodes[0].setAttribute('data-active', false);
 					}
 					else {
 						if(newInfoWindow.getMap()) {

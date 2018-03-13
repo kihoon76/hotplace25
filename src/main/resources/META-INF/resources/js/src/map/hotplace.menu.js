@@ -335,7 +335,7 @@
 					}
 				}
 				
-				hotplace.getPlainTextFromJson('mulgeon/search', JSON.stringify(param), function(data) {
+				hotplace.getPlainTextFromJson('mulgeon/search', JSON.stringify({detail:arg}), function(data) {
 					var dataForm = {
 						'addresses': data,
 						'rdoId': 'addr'
@@ -422,6 +422,7 @@
 		_dvToojaTab01Result = '#dvToojaTab01Result', //tabulator로 결과 테이블 영역 div
 		_dvToojaTab02Result = '#dvToojaTab02Result', //tabulator로 결과 테이블 영역 div
 		_dvToojaTab03Result = '#dvToojaTab03Result', //tabulator로 결과 테이블 영역 div
+		_dvToojaLuris = '#dvToojaLuris',
 		_toojaTab = {
 			JangmiCityPlan: '#tabJangmiCityPlan',
 			TojiUseLimitCancel: '#tabTojiUseLimitCancel',
@@ -516,12 +517,23 @@
 		.on('click', function() {
 			_toojaDvToogle();
 			_saveBtnInfo(true);
+			
+		});
+		
+		$(dvToojaLuris + ' .pano-close')
+		.off('click')
+		.on('click', function() {
+			$(dvToojaLuris).hide();
 		});
 		
 		return function() {
 			//반드시 메뉴 content가 show된후에 호출되어져야 함
 			hotplace.dom.resizeSliderGrp(_toojaRegionSearchMenu);
 		}
+	}
+	
+	function _closeLurisDv() {
+		$(dvToojaLuris).hide();
 	}
 	
 	function _toojaDvToogle() {
@@ -593,7 +605,11 @@
 				       }
 				       
 				       
-				       hotplace.maps.panToLikeAddressSearch(data.lat, data.lng, _menus.TOOJA_SEARCH, {address:data.jibeon});
+				       hotplace.maps.panToLikeAddressSearch(data.lat, data.lng, null/*_menus.TOOJA_SEARCH*/, {address:data.jibeon});
+				       
+				       //hotplace.dom.showLurisDrawing();
+				       
+				       $('#dvToojaLuris').fadeIn();
 				       
 				    },
 				}, data);

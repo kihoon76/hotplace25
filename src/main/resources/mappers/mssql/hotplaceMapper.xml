@@ -49,10 +49,7 @@
 	
 	<select id="selectMulgeonAddress" statementType="CALLABLE" parameterType="Address" resultType="string">
 		{ call  [지번주소].[dbo].[SEL_지번주소](
-			#{detail, mode=IN, jdbcType=NVARCHAR, javaType=string},
-			#{san, mode=IN, jdbcType=NVARCHAR, javaType=string},
-			#{beonjiF, mode=IN, jdbcType=SMALLINT, javaType=string},
-			#{beonjiS, mode=IN, jdbcType=SMALLINT, javaType=string}
+			#{detail, mode=IN, jdbcType=NVARCHAR, javaType=string}
 		)}
 	</select> 
 	

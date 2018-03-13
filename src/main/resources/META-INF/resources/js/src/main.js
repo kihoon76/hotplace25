@@ -283,4 +283,8 @@ $(document).ready(function() {
 	
 	hotplace.validation.numberOnly('.numberOnly');
 	hotplace.validation.numberNdot('.numberNdot');
+	
+	window.ttt = function() {
+		alert('00');
+	}
 });

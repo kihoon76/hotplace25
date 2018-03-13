@@ -498,8 +498,13 @@
 				}
 			},
 			error: function(jqXHR, textStatus, e) {
+				
+				console.log(textStatus);
 				//리턴이 html인 요청에서 오류가 발생한 경우
-				if(params.dataType == 'html') {
+				if(textStatus == 'timeout') {
+					jqXHR.errCode = _err.TIMEOUT;
+				}
+				else if(params.dataType == 'html') {
 					jqXHR.errCode = _err.PAGE_NOT_FOUND;
 				}
 				else {
@@ -538,7 +543,7 @@
 					
 				}
 			},
-			timeout: params.timeout || 300000
+			timeout: params.timeout || 2000000
 		});
 	}
 	
@@ -557,7 +562,8 @@
 		CONSULTING_DUP: '605',  //컨설팅 중복오류
 		COORD: '606', //주소검색 오류
 		MISS_LATLNG: '607', //위경도 정보 오류
-		HEATMAP_CAPTURE:'608' //히트맵 캡쳐오류
+		HEATMAP_CAPTURE:'608', //히트맵 캡쳐오류
+		TIMEOUT:'609' //타임아웃
 	};
 	
 	hotplace.error = _err;
@@ -616,6 +622,9 @@
 			break;
 		case _err.HEATMAP_CAPTURE:
 			hotplace.dom.showAlertMsg(null, '히트맵 캡쳐도중 오류가 발생했습니다.', {width:'50%'});
+			break;
+		case _err.TIMEOUT:
+			hotplace.dom.showAlertMsg(null, '요청이 타임아웃 되었습니다.', {width:'50%'});
 			break;
 		case '000' :
 			break;

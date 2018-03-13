@@ -18,3 +18,8 @@
 
 /*나중에 합치기*/
 .jusoMarker .close {opacity:0;}
+
+#dvToojaLuris {position:relative; background-color:black; width:730px; height:750px; left:10px; top:70px; z-index:1; display:none;}
+#dvToojaLurisHeader {width:100%; height:50px; background-color:red;}
+
+#dvToojaLuris img {width:630px; height:500px;}
