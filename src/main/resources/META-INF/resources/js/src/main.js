@@ -138,6 +138,7 @@ $(document).ready(function() {
 			_checkedDisableMulgeon = true;
 			_checkedEnableMulgeon = false;
 			hotplace.dom.showAlertMsg(null, '물건보기가 비활성화 되었습니다', {width:'40%'});
+			hotplace.menu.initMulgeonView();
 		}
 		else if(_isZoomIn() && !_checkedEnableMulgeon && _currLevel > hotplace.config.mulgeonViewLevel) {
 			_checkedDisableMulgeon = false;
@@ -158,8 +159,22 @@ $(document).ready(function() {
 			_showMsgChangedState();
 			
 			setTimeout(function() {
-				hotplace.maps.showMarkers();
-				hotplace.maps.showCellLayer();
+				
+				if(!hotplace.maps.isOffCell()) {
+					hotplace.dom.showMaskTransaction((hotplace.maps.isActiveMulgeonView()) ? (1 + hotplace.maps.getActiveMarkers().length) : 1);
+					hotplace.maps.showCellLayer(null, true);
+					hotplace.maps.showMarkers(null, true);
+				}
+				else {//marker만 켜져 있을 경우
+					if(hotplace.maps.isActiveMulgeonView()) {
+						var len = hotplace.maps.getActiveMarkers().length;
+						if(len > 0) {
+							hotplace.dom.showMaskTransaction(len);
+							hotplace.maps.showMarkers(null, true);
+						}
+					}
+				}
+				
 				hotplace.dom.removeBodyAllMask();
 				_enableMenu(level, hotplace.config.mulgeonViewLevel, $_lnbMulgeon, $('#' + hotplace.config.menus.MULGEON_SEARCH + ' .close'));
 			},500);
