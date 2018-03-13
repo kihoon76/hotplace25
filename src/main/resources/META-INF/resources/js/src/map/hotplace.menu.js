@@ -520,10 +520,10 @@
 			
 		});
 		
-		$(dvToojaLuris + ' .pano-close')
+		$(_dvToojaLuris + ' .pano-close')
 		.off('click')
 		.on('click', function() {
-			$(dvToojaLuris).hide();
+			_closeLurisDv();
 		});
 		
 		return function() {
@@ -533,7 +533,7 @@
 	}
 	
 	function _closeLurisDv() {
-		$(dvToojaLuris).hide();
+		$(_dvToojaLuris).hide();
 	}
 	
 	function _toojaDvToogle() {
