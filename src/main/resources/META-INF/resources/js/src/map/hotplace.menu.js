@@ -778,7 +778,11 @@
 					}
 				}
 				
-				hotplace.maps.showMarkers();
+				var activeMarkers = hotplace.maps.getActiveMarkers(),
+			        activeMarkerCnt = activeMarkers.length;
+				
+				hotplace.dom.showMaskTransaction(activeMarkerCnt);
+				hotplace.maps.showMarkers(null, true);
 				
 				_closeMenu(_menus.MULGEON_VIEW);
 			});

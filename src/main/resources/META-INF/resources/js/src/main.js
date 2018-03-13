@@ -255,6 +255,8 @@ $(document).ready(function() {
 		$('#mulgeonGongmae').prop('checked', true);
 		//보상물건
 		$('#mulgeonBosang').prop('checked', true);
+		//편입물건
+		$('#mulgeonPyeonib').prop('checked', true);
 		
 		$('#btnViewMulgeon').trigger('click');
 	}

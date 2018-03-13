@@ -488,6 +488,7 @@
 					if(activeMask) {
 						if(params.isMaskTran) {
 							dom.hideMaskTransaction();
+							console.log('99')
 						}
 						else {
 							dom.hideMask();
