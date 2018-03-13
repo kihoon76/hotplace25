@@ -747,6 +747,7 @@
 				startIdx,
 				function(data) {
 					maps.getMarker(markerType, data, listeners, options, stopGroupping);
+					console.log('00');
 				},
 				{
 					isClustering: options.isClustering,

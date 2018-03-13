@@ -192,7 +192,12 @@ $(document).ready(function() {
 					hotplace.maps.appendMarker();
 				}
 				else {
-					hotplace.maps.showMarkers();
+					var len = hotplace.maps.getActiveMarkers().length;
+					if(len > 0) {
+						hotplace.dom.showMaskTransaction(len);
+						hotplace.maps.showMarkers(null, true);
+					}
+					
 				}
 			}
 			
