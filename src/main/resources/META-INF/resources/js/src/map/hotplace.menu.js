@@ -521,7 +521,7 @@
 			
 		});
 		
-		$(_dvToojaLuris + ' .pano-close')
+		$(_dvToojaLuris + ' button')
 		.off('click')
 		.on('click', function() {
 			_closeLurisDv();
