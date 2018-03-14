@@ -8,9 +8,9 @@
 .naver-area-div {padding: 2px 3px 0; border:2px solid blue; background:#fff; font-size:12px; letter-spacing: -1px; line-height: 30px;}
 .mulgeon-pano {width:100% !important; height:220px;}
 
-#dvHeatMapCapture img:hover {cursor:pointer;}
+/*#dvHeatMapCapture img:hover {cursor:pointer;}
 #dvHeatMapCapture table th {height:40px; text-align:center; color:#fff; background-color:#000; font-weight:bold;}
-#dvStreetMini {width:300px; height:300px; border:5px solid aliceblue;}
+#dvStreetMini {width:300px; height:300px; border:5px solid aliceblue;}*/
 
 /* bootstrap tooltip html style */
 .innerTooltip {font-size:.9em;}
@@ -19,7 +19,4 @@
 /*나중에 합치기*/
 .jusoMarker .close {opacity:0;}
 
-#dvToojaLuris {position:relative; background-color:black; width:730px; height:750px; left:10px; top:70px; z-index:1; display:none;}
-#dvToojaLurisHeader {width:100%; height:50px; background-color:red;}
-
-#dvToojaLuris img {width:630px; height:500px;}
+.dvToojaLuris {position:relative; width:100%; height:100%; left:0%; top:0%; z-index:1; display:none;  padding:140px 40px 280px;}

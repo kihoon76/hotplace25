@@ -549,6 +549,11 @@
 		});
 	}
 	
+	dom.showSite = function() {
+		_appendModalPopup('introSiteForm');
+		dom.openModal('', {width: 1000});
+	}
+	
 	dom.showSujiTojiUseLimitHistory = function() {
 		_appendModalPopup('spotSujibunseogTojiHistoryForm', _$momPopup);
 		dom.openModalOnModal('', {width: 1000});
@@ -1187,6 +1192,11 @@
 		$(_dvContextMenu).hide();
 	}
 	
+	dom.createTabulatorNoEdit = function(cell) {
+		 var data = cell.getRow().getData();
+		 return data.pseudo !== undefined; 
+	}
+	
 	dom.createTabulator = function(tableId, param, tbData) {
 		var $table = $(tableId);
 		param = param || {};
@@ -1196,7 +1206,6 @@
 		    fitColumns:true, //fit columns to width of table (optional)
 		    rowClick:function(e, row){ //trigger an alert message when the row is clicked
 		       var data = row.getData();
-		       console.log(data)
 		       hotplace.dom.showAlertMsg();
 		       
 		       /*var formName, icon = '', callbak = null;
@@ -1223,14 +1232,15 @@
 	}
 	
 	dom.getTabulatorSelectFilter = function(arr) {
-		return function(cell, onRendered, success, cancel) {
+		return function(cell, onRendered, success, cancel, editorParams) {
+			
 			var len = arr.length;
 			
 			var htmlStr = '';
 				
 			for(var i=0; i<len; i++) {
 				htmlStr += '<option value="' + arr[i].value + '">' + arr[i].name + '</option>';
-				console.log(htmlStr);
+				//console.log(htmlStr);
 			}
 				
 			var editor = $('<select><option value=""></option>' + htmlStr + '</select>');
@@ -1253,6 +1263,13 @@
 			editor.on('change blur', function(e){
 				success(editor.val());
 			});
+			
+			editor.on('focus', function(e) {
+//				console.log(e);
+//				e.preventDefault();
+//				$(e.currentTarget).blur();
+			});
+			
 	
 			//return the editor element
 			return editor;

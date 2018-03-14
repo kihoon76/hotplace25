@@ -10,20 +10,21 @@
 		_heatmapViewMenu = '#' + _menus.HEATMAP_VIEW;
 		
 	var _selectedAddressObj = null;
+	
 	var _tabulatorColumns = {
 		jangmi:[
 		    {title:'연번', field:'num', align:'center', width:70},
-		    {title:'지번주소', field:'jibeon', align:'left', width:170, headerFilter:'input', headerFilterPlaceholder:'주소검색'},
+		    {title:'지번주소', field:'jibeon', align:'left', width:370, headerFilter:'input', headerFilterPlaceholder:'주소검색'},
 		    {title:'도시계획시설', field:'cityPlan', align:'center', width:100, headerFilter:true,
-		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.cityPlan)
+		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.cityPlan), editable:hotplace.dom.createTabulatorNoEdit
 		    },
 			{title:'용도지역', field:'yongdoJiyeog', align:'center', width:80, headerFilter:true,
-		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.yongdoJiyeog)
+		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.yongdoJiyeog), editable:hotplace.dom.createTabulatorNoEdit
 			},
 			{title:'HP등급', field:'hpGrade', align:'center', width:80},
 //			{title:'경공매 진행 여부', field:'gong', align:'center', width:120},
 			{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter:true,
-				editor:_makeTabulatorFilterFromCode(hotplace.config.codes.bosangPyeonib)
+				editor:_makeTabulatorFilterFromCode(hotplace.config.codes.bosangPyeonib), editable:hotplace.dom.createTabulatorNoEdit
 			},
 //			{title:'등기사건', field:'deunggi', align:'center', width:80},
 			{title:'위도', field:'lat', visible:false},
@@ -61,7 +62,7 @@
 			{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter:true,
 				editor:_makeTabulatorFilterFromCode(hotplace.config.codes.bosangPyeonib)
 			},
-//		        			{title:'등기사건', field:'deunggi', align:'center', width:80},
+//			{title:'등기사건', field:'deunggi', align:'center', width:80},
 			{title:'위도', field:'lat', visible:false},
 			{title:'경도', field:'lng', visible: false}
 		],
@@ -592,12 +593,13 @@
 				
 				hotplace.dom.createTabulator(tableId, {
 				    height:700, // set height of table
-				    fitColumns:true, //fit columns to width of table (optional)
+				    fitColumns:false, //fit columns to width of table (optional)
 				    columns:param.columns,/*_tabulatorColumns.jangmi,*/
 				    movableColumns:true,
+				    resizableRows:true,
 				    rowClick:function(e, row){ //trigger an alert message when the row is clicked
 				       var data = row.getData();
-				       console.log(data)
+				      console.log('=======================================rowClick====================================');
 				       
 				       if(data.lng == 0) {
 				    	   hotplace.processAjaxError(hotplace.error.MISS_LATLNG);

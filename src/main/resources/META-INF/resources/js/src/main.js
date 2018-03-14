@@ -117,6 +117,11 @@ $(document).ready(function() {
 		hotplace.dom.hideContextMenu();
 	});
 	
+	/***************** 서비스소개 버튼 ************************/
+	$('#modalSite').on('click', function() {
+		hotplace.dom.showSite();
+	});
+	
 	/***************** 공지사항 버튼 ************************/
 	$('#modalNotice').on('click', function() {
 		hotplace.dom.showNoticeList();
