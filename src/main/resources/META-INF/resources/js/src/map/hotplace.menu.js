@@ -521,9 +521,11 @@
 			
 		});
 		
-		$(_dvToojaLuris + ' button')
+		$(_dvToojaLuris + ' button.close')
 		.off('click')
-		.on('click', function() {
+		.on('click', function(e) {
+			//반드시 있어야 함, 이벤트가 전달되면서 dvToojaLurisBox에 영향을 줌
+			e.stopPropagation();
 			_closeLurisDv();
 		});
 		
@@ -535,6 +537,10 @@
 	
 	function _closeLurisDv() {
 		$(_dvToojaLuris).hide();
+	}
+	
+	function _openLurisDv() {
+		$(_dvToojaLuris).fadeIn();
 	}
 	
 	function _toojaDvToogle() {
@@ -608,11 +614,7 @@
 				       
 				       
 				       hotplace.maps.panToLikeAddressSearch(data.lat, data.lng, null/*_menus.TOOJA_SEARCH*/, {address:data.jibeon});
-				       
-				       //hotplace.dom.showLurisDrawing();
-				       
-				       $('#dvToojaLuris').fadeIn();
-				       
+				       _openLurisDv();
 				    },
 				}, data);
 				if($.isFunction(fn)) fn();
