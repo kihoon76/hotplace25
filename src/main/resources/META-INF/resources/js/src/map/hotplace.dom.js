@@ -493,6 +493,7 @@
 	 * {@link https://github.com/tsayen/dom-to-image dom-to-image}
 	 */
 	dom.captureImage = function($element, $target, completeFn, errFn) {
+		//completeFn();
 		domtoimage.toPng($element[0])
 	    .then(function(dataUrl) {
 	        var img = new Image();
@@ -512,7 +513,7 @@
 	    })
 	    .catch(function (error) {
 	    	if(errFn) errFn();
-	        throw error;
+	        //throw error;
 	    });
 	}
 	
@@ -533,7 +534,7 @@
 			var $td = $(this).parent();
 			var captureYear = $td.data('captureYear');
 			
-			dom.showHeatMapCaptureImagePop({width:700}, {title:captureYear, src:$(this).prop('src')});
+			dom.showHeatMapCaptureImagePop({width:1000}, {title:captureYear, src:$(this).prop('src')});
 			
 		});
 		
@@ -1202,8 +1203,9 @@
 		param = param || {};
 		
 		$table.tabulator($.extend({
-		    height:826, // set height of table
+		    height:'100%',//826, // set height of table
 		    fitColumns:true, //fit columns to width of table (optional)
+		    autoResize:true,
 		    rowClick:function(e, row){ //trigger an alert message when the row is clicked
 		       var data = row.getData();
 		       hotplace.dom.showAlertMsg();

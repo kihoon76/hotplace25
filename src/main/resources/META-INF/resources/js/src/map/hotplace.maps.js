@@ -2319,11 +2319,14 @@
 		btn.setAttribute('data-active', true);//jquery가 동작안함
 	}
 	
-	maps.panToLikeAddressSearch = function(lat, lng, menuName, winDatas) {
+	maps.panToLikeAddressSearch = function(lat, lng, menuName, winDatas, closeFn) {
 		maps.panToBounds(lat, lng, function() {
 			if(menuName) hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
-		       
-			hotplace.maps.getMarker(_markerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
+		     
+			maps.destroyMarkerType(_markerTypes.ADDRESS_SEARCH);
+			maps.destroyMarkerWindow(_markerTypes.ADDRESS_SEARCH);
+			
+			maps.getMarker(_markerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
 				'click' : function(map, newMarker, newInfoWindow, e) {
 					
 					var target = e.domEvent.currentTarget;
@@ -2332,6 +2335,7 @@
 					if(isClose/*nodeName == 'i' || nodeName == 'button'*/) {
 						newMarker.setMap(null);
 						target.childNodes[0].setAttribute('data-active', false);
+						if(closeFn) closeFn();
 					}
 					else {
 						if(newInfoWindow.getMap()) {

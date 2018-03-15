@@ -598,7 +598,7 @@
 				_saveBtnInfo(false);
 				
 				hotplace.dom.createTabulator(tableId, {
-				    height:700, // set height of table
+				    //height:700, // set height of table
 				    fitColumns:false, //fit columns to width of table (optional)
 				    columns:param.columns,/*_tabulatorColumns.jangmi,*/
 				    movableColumns:true,
@@ -613,7 +613,15 @@
 				       }
 				       
 				       
-				       hotplace.maps.panToLikeAddressSearch(data.lat, data.lng, null/*_menus.TOOJA_SEARCH*/, {address:data.jibeon});
+				       hotplace.maps.panToLikeAddressSearch(
+				    		   data.lat,
+				    		   data.lng,
+				    		   null/*_menus.TOOJA_SEARCH*/,
+				    		   {address:data.jibeon},
+				    		   function() {
+				    			   //마커가 닫힐때 Luris 도면도 닫힌다.
+				    			   _closeLurisDv();
+				    		   });
 				       _openLurisDv();
 				    },
 				}, data);
