@@ -809,7 +809,7 @@
 				var activeMarkers = hotplace.maps.getActiveMarkers(),
 			        activeMarkerCnt = activeMarkers.length;
 				
-				hotplace.dom.showMaskTransaction(activeMarkerCnt);
+				if(activeMarkerCnt > 0)	hotplace.dom.showMaskTransaction(activeMarkerCnt);
 				hotplace.maps.showMarkers(null, true);
 				
 				_closeMenu(_menus.MULGEON_VIEW);

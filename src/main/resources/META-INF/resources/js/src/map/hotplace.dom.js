@@ -586,6 +586,7 @@
 	
 	dom.showHeatMapCaptureImagePop = function(modalSize, param) {
 		_appendModalPopup('mapCaptureImageForm', _$imagePopup, param);
+		
 		dom.openImageModalOnModal(modalSize);
 	}
 	
