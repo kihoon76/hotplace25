@@ -58,7 +58,7 @@
 			otherAssetRatio:70,
 			myeongdobi:0,
 			acceptLandUse:0,
-			daechulIja:5.0,
+			daechulIja:'5.0',
 			chwideugse:4.6,
 			jaesanse:0.07,
 		}
@@ -750,19 +750,24 @@
 				var $$2 = parseFloat($txtJaesanseH2.data('value'));
 				var $$3 = 0;
 				var $$r = 0;
+				var tooltipStr = '';
 				
 				//6천만원 이하 0.1%
 				if($$1 <= 60000000) {
 					$$3 = Math.round($$1 * 0.001);
+					tooltipStr += '요율 6천만원 이하 0.1% 적용';
 				}
 				else if($$1 > 60000000 && $$1 <= 150000000) {
 					$$3 = Math.round(60000 + ($$1 - 60000000) * 0.0015);
+					tooltipStr += '요율 1억 5천만원  이하<br>  (6만원 + 6천만원 초과금액의 0.15%) 적용';
 				}
 				else if($$1 > 150000000 && $$1 <= 300000000) {
 					$$3 = Math.round(195000 + ($$1 - 150000000) * 0.0025);
+					tooltipStr += '요율 3억원  이하<br> (19만 5천원 + 1.5억원 초과금액의 0.25%) 적용';
 				}
 				else {
 					$$3 = Math.round(570000 + ($$1 - 300000000) * 0.004);
+					tooltipStr += '요율 3억원  초과<br> (57만원 + 3억원 초과금액의 0.4%) 적용';
 				}
 				
 				$$r = Math.round($$2 * $$3);
@@ -774,6 +779,8 @@
 				$WJaesanse2.data('value', $$r);
 				$WJaesanse2.val($$r.toString().money());
 				calcJesegeum();
+				
+				hotplace.dom.changeTooltipText($txtJaesanseH3, '<span class="innerTooltip">' + tooltipStr + '<span>');
 			},
 			calcYangdose: function(isSet) {
 				console.log('양도세');
@@ -860,10 +867,7 @@
 				$WYangdose.val($$r.toString().money());
 				calcJesegeum();
 				
-				$stepYangdose2
-				.tooltip('hide')
-			    .attr('data-original-title', tooltipStr);
-			      
+				hotplace.dom.changeTooltipText($stepYangdose2, '<span class="innerTooltip">' + tooltipStr +'</span>');
 			},
 			calcGeonchugGongsa: function(isSet) {
 				console.log('건축공사비');

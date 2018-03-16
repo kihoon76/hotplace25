@@ -1362,6 +1362,12 @@
 		});
 	}
 	
+	dom.changeTooltipText = function($el, tooltipStr) {
+		$el
+		.tooltip('hide')
+	    .attr('data-original-title', tooltipStr);
+	}
+	
 	/*************************************************************
 	 * 브라우저창 사이즈가 변할때 발생하는 이벤트 핸들러
 	 * hotplace.streetview.resize : 거리뷰의 파노라마 사이즈를 변경함

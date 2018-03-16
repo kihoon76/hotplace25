@@ -27,6 +27,7 @@
 			//max 점검
 			var maxObj = $(this).data('max');
 			var suffix = $(this).data('suffix');
+			var step = $(this).data('step');
 			
 			$(this).val($(this).val().replace(regEx,''));
 			var v = $(this).val();
@@ -46,6 +47,8 @@
 				if(v.length - 1 == v.lastIndexOf('.')) {
 					v = v + '0';
 				}
+				
+				v = parseFloat(v).toFixed((step.toString().split('.'))[1].length);
 			}
 			
 			if(maxObj != undefined) {
