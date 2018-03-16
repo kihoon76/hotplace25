@@ -9,15 +9,13 @@
 		</encoder>
 	</appender>
 	
-	<logger name="com.hotplace25" level="info">
-		<appender-ref ref="console"/>
-	</logger>
-	<logger name="org.springframework" level="info" />
+	<logger name="com.hotplace25" level="INFO"/>
+	<logger name="org.springframework" level="INFO" />
 	
 	<!-- MyBatis mapper.xml 로그 -->
-	<logger name="mappers" level="info" />
+	<logger name="mappers" level="INFO" />
 	
-	<root level="info">
+	<root level="INFO">
 		<appender-ref ref="console"/>
 	</root>
 </configuration>

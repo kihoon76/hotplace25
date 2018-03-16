@@ -59,6 +59,10 @@ $(document).ready(function() {
 		if(onOff == 'on') {
 			hotplace.streetview.stop();
 		}
+		else {
+			//거리재기, 면적재기 끄기
+			hotplace.maps.offCalcDisArea();
+		}
 		
 		hotplace.dom.activeButton(onOff, $(this));
 		hotplace.maps.showStreetLayer(onOff, $(this));

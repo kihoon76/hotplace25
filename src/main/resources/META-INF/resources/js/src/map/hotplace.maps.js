@@ -958,6 +958,14 @@
 		}
 	}
 	
+	maps.offCalcDisArea = function() {
+		if(_$btnCalcDistance.hasClass('active')) {
+			_$btnCalcDistance.trigger('click');
+		}
+		else if(_$btnCalcArea.hasClass('active')) {
+			_$btnCalcArea.trigger('click');
+		}
+	}
 	/** 
 	 * @private 
 	 * @function _initCalcArea 
@@ -1313,14 +1321,21 @@
 						return;
 					}
 		        }
-
+		        
+		        
 		        var btn = $(e.target),
+		        	btnStreetView = $('#btnStreetView'),
 		            mode = this._mode;
 
 		        if (btn.hasClass('active')) {
 		            btn.removeClass('active');
 		        } 
 		        else {
+		        	//거리뷰가 켜져 있으면 닫는다.
+		        	if(btnStreetView.data('switch') == 'on') {
+		        		btnStreetView.trigger('click')
+		        	}
+		        	
 		            btn.addClass('active');
 		        }
 
@@ -1789,7 +1804,11 @@
 	maps.panToBounds = function(lat, lng, moveAfterFn) {
 		
 		if(_venderStr == 'naver') {
+			console.log(lng - (lng - _currentBounds.swx)/10);
+			console.log(lng - (_currentBounds.swx));
+			console.log(_currentBounds.swx);
 			_venderMap.morph(new _vender.LatLng(lat, lng), hotplace.config.addrSearchPanLevel, {duration: 100});
+
 		}
 		else if(_venderStr == 'daum') {
 			/*_venderMap.panTo(new _vender.LatLngBounds(
