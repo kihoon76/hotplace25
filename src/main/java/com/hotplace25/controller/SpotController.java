@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hotplace25.domain.AjaxVO;
 import com.hotplace25.domain.Consulting;
 import com.hotplace25.domain.FileBucket;
+import com.hotplace25.domain.GwansimMulgeon;
 import com.hotplace25.domain.Maemul;
 import com.hotplace25.service.SpotService;
 import com.hotplace25.util.SessionUtil;
@@ -170,4 +171,41 @@ public class SpotController {
 		
 		return vo;
 	}
+	
+	@PostMapping("/reg/gwansim")
+	@ResponseBody
+	public AjaxVO regGwansimMulgeon(@RequestBody GwansimMulgeon gwansimMulgeon) {
+		boolean doRegisted = false;
+		AjaxVO vo = new AjaxVO();
+		
+		gwansimMulgeon.setAccountId("khnam");
+		try {
+			doRegisted = spotService.doRegistedGwansimMulgeon(gwansimMulgeon);
+			if(doRegisted) {
+				vo.setSuccess(false);
+				vo.setErrCode("DUP");
+			}
+		}
+		catch(Exception e) {
+			vo.setSuccess(false);
+			vo.setErrMsg(e.getMessage());
+			
+			return vo;
+		}
+		
+		if(!doRegisted) {
+			vo.setSuccess(true);
+			try {
+				spotService.regGwansimMulgeon(gwansimMulgeon);
+			}
+			catch(Exception e) {
+				vo.setSuccess(false);
+				vo.setErrMsg(e.getMessage());
+			}
+		}
+		
+		return vo;
+	}
+	
+	
 }

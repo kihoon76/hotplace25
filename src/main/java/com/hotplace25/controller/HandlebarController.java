@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hotplace25.service.HotplaceService;
+import com.hotplace25.service.SpotService;
+import com.hotplace25.util.SessionUtil;
 
 
 @RequestMapping("/handlebar")
@@ -17,6 +19,9 @@ public class HandlebarController {
 
 	@Resource(name="hotplaceService")
 	HotplaceService hotplaceService;
+	
+	@Resource(name="spotService")
+	SpotService spotService;
 	
 	@GetMapping("join")
 	public String getJoinTos(ModelMap m) {
@@ -27,7 +32,7 @@ public class HandlebarController {
 	}
 	
 	@GetMapping("tab/tojiuselimit/{tabName}")
-	public String _getTojiUseLimitTabHtml(@PathVariable("tabName") String tabName) {
+	public String getTojiUseLimitTabHtml(@PathVariable("tabName") String tabName) {
 		
 		String jspName = "";
 		
@@ -51,5 +56,13 @@ public class HandlebarController {
 		
 		
 		return "tabs/" + jspName;
+	}
+	
+	@GetMapping("mypage")
+	public String getMypage(ModelMap m) {
+		String accountId = "khnam";//SessionUtil.getSessionUserId();
+		m.addAttribute("gwansim", spotService.getMyGwansimList(accountId));
+		
+		return "mypageForm";
 	}
 }

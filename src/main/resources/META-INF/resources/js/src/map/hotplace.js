@@ -603,10 +603,12 @@
 		MAEMUL_DUP: '603', //매물중복등록 오류,
 		CONSULTING_REG: '604', //컨설팅 등록오류
 		CONSULTING_DUP: '605',  //컨설팅 중복오류
-		COORD: '606', //주소검색 오류
-		MISS_LATLNG: '607', //위경도 정보 오류
-		HEATMAP_CAPTURE:'608', //히트맵 캡쳐오류
-		TIMEOUT:'609' //타임아웃
+		GWANSIM_DUP:'606',
+		GWANSIM_REG:'607',
+		COORD: '608', //주소검색 오류
+		MISS_LATLNG: '609', //위경도 정보 오류
+		HEATMAP_CAPTURE:'610', //히트맵 캡쳐오류
+		TIMEOUT:'611' //타임아웃
 	};
 	
 	hotplace.error = _err;
@@ -645,6 +647,14 @@
 			hotplace.dom.showAlertMsg(function() {
 				hotplace.dom.closeModal();
 			}, '이미 등록된 매물입니다.', {width:'40%'});
+			break;
+		case _err.GWANSIM_REG:
+			hotplace.dom.showAlertMsg(null, '관심물건 등록중 에러가 발생했습니다.', {width:'40%'});
+			break;
+		case _err.GWANSIM_DUP:
+			hotplace.dom.showAlertMsg(function() {
+				hotplace.dom.closeModal();
+			}, '이미 등록된 관심물건입니다.', {width:'40%'});
 			break;
 		case _err.CONSULTING_REG:
 			hotplace.dom.showAlertMsg(null, '컨설팅요청 등록중 에러가 발생했습니다.', {width:'40%'});

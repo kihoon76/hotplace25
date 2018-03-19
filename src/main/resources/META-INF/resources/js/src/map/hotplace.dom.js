@@ -847,6 +847,28 @@
 		dom.openModal('', {width:'500'});
 	}
 	
+	dom.showMypage = function() {
+		//template 저장 안하고 계속 새로 로딩 
+		if(true/*_templates['mypageForm'] == undefined*/) {
+			hotplace.ajax({
+				async: false,
+				url: 'handlebar/mypage',
+				dataType : 'html',
+				method : 'GET',
+				activeMask : false,
+				success : function(data, textStatus, jqXHR) {
+					_templates['mypageForm'] = Handlebars.compile(data);
+				},
+				error: function() {
+					throw new Error('html template error')
+				}
+			});
+		}
+		
+		_appendModalPopup('mypageForm');
+		dom.openModal('', {width:'800'});
+	}
+	
 	dom.showLogoutForm = function(fn) {
 		hotplace.dom.showAlertMsg(function() {
 			dom.logout(fn);

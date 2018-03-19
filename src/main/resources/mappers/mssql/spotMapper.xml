@@ -45,6 +45,31 @@
 		insert into [웹].[dbo].[컨설팅요청](계정아이디, PNU, 이름, 연락처, 이메일, 문의사항, 경도, 위도, 지번주소)
 		values (#{accountId}, #{pnu}, #{name}, #{phone}, #{email}, #{question}, #{lat}, #{lng}, #{address})
 	</insert>
+	
+	<select id="selectRegistedGwansimMulgeon" parameterType="GwansimMulgeon" resultType="int">
+		select count(관심물건번호)
+		  from [웹].[dbo].[관심물건]
+		 where 계정아이디 = #{accountId}
+		   and PNU = #{pnu}
+	</select>
+	
+	<insert id="insertGwansimMulgeon" parameterType="GwansimMulgeon">
+		insert into [웹].[dbo].[관심물건](PNU, 등록물건지번주소, 메모, 계정아이디, 위도, 경도)
+		values (#{pnu}, #{address}, #{memo}, #{accountId}, #{lng}, #{lat})
+	</insert>
+	
+	<select id="selectMyGwansimList" parameterType="string" resultType="GwansimMulgeon">
+		select 관심물건번호 gwansimMulgeonNum,
+			   PNU pnu,
+			      등록물건지번주소 address,
+			      메모 memo,
+			      위도 lng,
+			      경도 lat,
+			   CONVERT(char(10), 등록일, 23) regDate
+		  from [웹].[dbo].[관심물건]
+		 where 계정아이디 = #{accountId} 
+	     order by  등록일 desc         
+	</select>
 </mapper>
 <!-- 
 

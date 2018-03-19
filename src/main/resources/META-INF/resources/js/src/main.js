@@ -131,6 +131,13 @@ $(document).ready(function() {
 		hotplace.dom.showNoticeList();
 	});
 	
+	/***************** my page 버튼 ************************/
+	$('#modalMypage').on('click', function() {
+		hotplace.dom.showMypage();
+	});
+	
+	
+	
 	$('#modalTutorial').on('click', function() {
 		hotplace.dom.showTutorial();
 	});
@@ -294,7 +301,4 @@ $(document).ready(function() {
 	hotplace.validation.numberOnly('.numberOnly');
 	hotplace.validation.numberNdot('.numberNdot');
 	
-	window.ttt = function() {
-		alert('00');
-	}
 });

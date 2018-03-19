@@ -31,7 +31,7 @@
 			_viewSujibunseog();
 			break;
 		case 'GWANSIM_MULGEON' :
-			hotplace.dom.showSpotGwansimRegForm();
+			_viewGwansimReg();
 			break;
 		case 'MAEMUL' :
 			_viewMaemulReg();
@@ -71,6 +71,60 @@
 			hotplace.calc.sujibunseog.initCalc();
 		}, param);
 	}
+	
+	/*************************************************************
+	 * 관심물건 등록
+	 ************************************************************/
+	var _btnRegGwansimMulgeon = '#btnRegGwansimMulgeon',
+		_txtGwansimMemo = '#txtGwansimMemo';
+	
+	function _validateGwansimMulgeon() {
+		var isNotEmpty = hotplace.validation.isFormNotEmpty([_txtGwansimMemo]);
+		return isNotEmpty;
+	}
+	
+	function _viewGwansimReg() {
+		hotplace.dom.showSpotGwansimRegForm();
+		
+		$(_btnRegGwansimMulgeon)
+		.off('click')
+		.on('click', function() {
+			if(_validateGwansimMulgeon()) {
+				hotplace.ajax({
+		    		url: 'spot/reg/gwansim',
+		    		contentType: 'application/json',
+		            data: JSON.stringify({
+		            	pnu:_pnu,
+		            	address:_address,
+		            	lng: _lng,
+		    			lat: _lat,
+		    			memo:$(_txtGwansimMemo).val()
+		            }),
+		            success: function(data, textStatus, jqXHR) {
+		                if(!data.success) {
+		                	if(data.errCode == 'DUP') {
+		                		jqXHR.errCode = hotplace.error.GWANSIM_DUP;
+		                	}
+		                	else {
+		                		jqXHR.errCode = hotplace.error.GWANSIM_REG;
+		                	}
+		                }
+		                else {
+		                	_saveGwansimSuccess();
+		                }
+		                
+		            }
+		    	});
+			}
+		});
+	}
+	
+	function _saveGwansimSuccess() {
+		hotplace.dom.showAlertMsg(function() {
+    		hotplace.dom.closeModal();
+    	}, '관심물건이 성공적으로 등록되었습니다.', {width:'40%'});
+	}
+	
 	
 	/*************************************************************
 	 * 매물등록

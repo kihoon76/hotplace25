@@ -1,5 +1,7 @@
 package com.hotplace25.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hotplace25.dao.SpotDao;
 import com.hotplace25.domain.Consulting;
+import com.hotplace25.domain.GwansimMulgeon;
 import com.hotplace25.domain.Maemul;
 
 @Service("spotService")
@@ -39,11 +42,24 @@ public class SpotService {
 	}
 
 	public boolean doRegistedConsulting(Consulting consulting) {
-		return 1 == spotDao.selectRegistedConsulting(consulting);
+		return 1 <= spotDao.selectRegistedConsulting(consulting);
 	}
 
 	public void regConsulting(Consulting consulting) {
 		spotDao.insertConsulting(consulting);
+		
+	}
+
+	public List<GwansimMulgeon> getMyGwansimList(String accountId) {
+		return spotDao.selectMyGwansimList(accountId);
+	}
+
+	public boolean doRegistedGwansimMulgeon(GwansimMulgeon gwansimMulgeon) {
+		return 1 <= spotDao.selectRegistedGwansimMulgeon(gwansimMulgeon);
+	}
+
+	public boolean regGwansimMulgeon(GwansimMulgeon gwansimMulgeon) {
+		return 1 <= spotDao.insertGwansimMulgeon(gwansimMulgeon);
 		
 	}
 }
