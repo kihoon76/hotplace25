@@ -608,7 +608,8 @@
 		COORD: '608', //주소검색 오류
 		MISS_LATLNG: '609', //위경도 정보 오류
 		HEATMAP_CAPTURE:'610', //히트맵 캡쳐오류
-		TIMEOUT:'611' //타임아웃
+		TIMEOUT:'611', //타임아웃
+		GWANSIM_DEL:'612', //관심물건 삭제오류
 	};
 	
 	hotplace.error = _err;
@@ -655,6 +656,11 @@
 			hotplace.dom.showAlertMsg(function() {
 				hotplace.dom.closeModal();
 			}, '이미 등록된 관심물건입니다.', {width:'40%'});
+			break;
+		case _err.GWANSIM_DEL:
+			hotplace.dom.showAlertMsg(function() {
+				hotplace.dom.closeModal();
+			}, '관심물건이 삭제 되지 않았습니다.', {width:'40%'});
 			break;
 		case _err.CONSULTING_REG:
 			hotplace.dom.showAlertMsg(null, '컨설팅요청 등록중 에러가 발생했습니다.', {width:'40%'});

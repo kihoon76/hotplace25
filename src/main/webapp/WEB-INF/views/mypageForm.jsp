@@ -34,15 +34,15 @@
 								<colgroup>
 									<col style="width:15%;">
 									<col style="width:25%;">
-									<col style="width:55%;">
-									<col style="width:5%;">
+									<col style="width:53%;">
+									<col style="width:7%;">
 								</colgroup>
 								<thead>
 									<tr>
 										<th>등록일</th>
 										<th>물건주소</th>
 										<th>메모내용</th>
-										<th>&nbsp;</th>
+										<th>삭제</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -54,11 +54,11 @@
 									</c:when>
 									<c:otherwise>
 									<c:forEach var="item" items="${gwansim}" varStatus="status">
-									<tr data-lat="${item.lat}" data-lng="${item.lng}" data-pnu="${item.pnu}">
+									<tr data-lat="${item.lat}" data-lng="${item.lng}" data-pnu="${item.pnu}" data-address="${item.address}">
 										<td>${item.regDate}</td>
 										<td>${item.address}</td>
 										<td class="left ellipsis">${item.memo}</td>
-										<td><span class="glyphicon glyphicon-minus-sign" style="color:red; font-size:1.2em;"></span></td>	
+										<td class="DEL" data-address="${item.address}" data-key="${item.gwansimMulgeonNum}"><span class="glyphicon glyphicon-minus-sign" style="color:red; font-size:1.2em;"></span></td>	
 									</tr>
 									</c:forEach>
 									</c:otherwise>

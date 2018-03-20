@@ -133,7 +133,9 @@ $(document).ready(function() {
 	
 	/***************** my page 버튼 ************************/
 	$('#modalMypage').on('click', function() {
-		hotplace.dom.showMypage();
+		hotplace.dom.showMypage(function() {
+			hotplace.mypage.init();
+		});
 	});
 	
 	

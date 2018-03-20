@@ -63,4 +63,9 @@ public class SpotDaoImpl implements SpotDao {
 	public List<GwansimMulgeon> selectMyGwansimList(String accountId) {
 		return msSqlSession.selectList(namespace + ".selectMyGwansimList", accountId);
 	}
+
+	@Override
+	public int deleteMyGwansimMulgeon(GwansimMulgeon gm) {
+		return msSqlSession.delete(namespace + ".deleteMyGwansim", gm);
+	}
 }

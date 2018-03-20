@@ -45,7 +45,8 @@ gulp.task('map_min', function() {
 	       srcJsDir + '/map/hotplace.gongmae.js',
 	       srcJsDir + '/map/hotplace.silgeolae.js',
 	       srcJsDir + '/map/hotplace.bosangpyeonib.js',
-	       srcJsDir + '/map/hotplace.sujibunseog.js'])
+	       srcJsDir + '/map/hotplace.sujibunseog.js',
+	       srcJsDir + '/map/hotplace.mypage.js'])
 		   .pipe(stripDebug())
 		   .pipe(uglify().on('error', function(uglify) {
 				console.log(uglify.message);
@@ -91,7 +92,8 @@ gulp.task('map_concat_min', function() {
   	       srcJsDir + '/min/hotplace.gongmae.min.js',
   	       srcJsDir + '/min/hotplace.silgeolae.min.js',
   	       srcJsDir + '/min/hotplace.bosangpyeonib.min.js',
-  	       srcJsDir + '/min/hotplace.sujibunseog.min.js'])
+  	       srcJsDir + '/min/hotplace.sujibunseog.min.js',
+  	       srcJsDir + '/min/hotplace.mypage.min.js'])
 	       .pipe(concat('hotplace-all.min.js'))
 	       .pipe(gulp.dest(distJsDir));
 });

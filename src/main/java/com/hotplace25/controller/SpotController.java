@@ -12,6 +12,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -207,5 +208,32 @@ public class SpotController {
 		return vo;
 	}
 	
-	
+	@GetMapping("del/gwansim")
+	@ResponseBody
+	public AjaxVO removeMyGwansimMulgeon(@RequestParam("gwansimNum") String gwansimNum) {
+		
+		AjaxVO vo = new AjaxVO();
+		vo.setSuccess(false);
+		
+		String currentId = "khnam";//SessionUtil.getSessionUserId();
+		
+		GwansimMulgeon gm = new GwansimMulgeon();
+		gm.setAccountId(currentId);
+		gm.setGwansimMulgeonNum(gwansimNum);
+		
+		try {
+			boolean isValid = spotService.removeMyGwansimMulgeon(gm);
+			
+			if(isValid) {
+				vo.setSuccess(true);
+				vo.addObject(gwansimNum);
+			}
+			
+		}
+		catch(Exception e) {
+			vo.setErrMsg(e.getMessage());
+		}
+		
+		return vo;
+	}
 }

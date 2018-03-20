@@ -17,6 +17,7 @@
 		_$gnbLogin = $('#gnbLogin'),
 		_$gnbLogout = $('#gnbLogout'),
 		_btnAlrt = '#btnAlrt',//alert 창버튼
+		_btnConfirmOK = '#btnConfirmOK', //confirm 창 OK 버튼
 		_dvContextMenu = '#dvContextMenu',
 		_infoWinCoordAddr = null, //context address infowin
 		_markerCoord = null,
@@ -797,8 +798,22 @@
 		_appendModalPopup('alertForm', _$alrtPopup);
 		_$alrtPopup.find('p.alertText').html(msg || '');
 		
-		if(btnText) $(btnAlrt).text(btnText);
+		if(btnText) $(_btnAlrt).text(btnText);
 		dom.openAlrtModal(modalSize, fn);
+	}
+	
+	dom.showConfirmBox = function(okFn, msg, modalSize) {
+		_appendModalPopup('confirmForm', _$alrtPopup);
+		_$alrtPopup.find('p.alertText').html(msg || '');
+		
+		$(_btnConfirmOK)
+		.off('click')
+		.on('click', function() {
+			okFn();
+			_$alrtPopup.modal('hide');
+		});
+		
+		dom.openAlrtModal(modalSize);
 	}
 	
 	function _appendModalPopup(formName, $element, param) {
@@ -847,26 +862,24 @@
 		dom.openModal('', {width:'500'});
 	}
 	
-	dom.showMypage = function() {
+	dom.showMypage = function(openFn) {
 		//template 저장 안하고 계속 새로 로딩 
 		if(true/*_templates['mypageForm'] == undefined*/) {
 			hotplace.ajax({
-				async: false,
+				async: true,
 				url: 'handlebar/mypage',
 				dataType : 'html',
 				method : 'GET',
-				activeMask : false,
 				success : function(data, textStatus, jqXHR) {
 					_templates['mypageForm'] = Handlebars.compile(data);
+					_appendModalPopup('mypageForm');
+					dom.openModal('', {width:'800'}, null, openFn);
 				},
 				error: function() {
 					throw new Error('html template error')
 				}
 			});
 		}
-		
-		_appendModalPopup('mypageForm');
-		dom.openModal('', {width:'800'});
 	}
 	
 	dom.showLogoutForm = function(fn) {

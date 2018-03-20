@@ -70,6 +70,13 @@
 		 where 계정아이디 = #{accountId} 
 	     order by  등록일 desc         
 	</select>
+	
+	<delete id="deleteMyGwansim" parameterType="GwansimMulgeon">
+		delete 
+		  from [웹].[dbo].[관심물건]
+		 where 계정아이디 = #{accountId}
+		   and 관심물건번호 = #{gwansimMulgeonNum}
+	</delete>
 </mapper>
 <!-- 
 

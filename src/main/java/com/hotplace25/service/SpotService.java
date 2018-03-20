@@ -62,4 +62,9 @@ public class SpotService {
 		return 1 <= spotDao.insertGwansimMulgeon(gwansimMulgeon);
 		
 	}
+
+	public boolean removeMyGwansimMulgeon(GwansimMulgeon gwansimMulgeon) {
+		return 1 == spotDao.deleteMyGwansimMulgeon(gwansimMulgeon);
+		
+	}
 }

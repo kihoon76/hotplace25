@@ -26,4 +26,6 @@ public interface SpotDao {
 
 	public List<GwansimMulgeon> selectMyGwansimList(String accountId);
 
+	public int deleteMyGwansimMulgeon(GwansimMulgeon gm);
+
 }
