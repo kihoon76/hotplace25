@@ -339,6 +339,18 @@
 	} 
 	
 	function _commonModal($element, modalSize) {
+		
+		//modal popup인지 검사 
+		if(_modalPopup == '#' + $element.attr('id')) {
+			//modal full size시 height도 fullsize로 만든다.
+			if(modalSize) {
+				$element.find('.modal-dialog').removeClass('fullWidth');
+			}
+			else {
+				$element.find('.modal-dialog').addClass('fullWidth');
+			}
+		}
+		
 		$element.removeClass('in').data('bs.modal', null);
 		$element
 		.modal({
@@ -490,7 +502,7 @@
 	 * @param {object} $element - 캡쳐할 요소
 	 * @param {object} $target - 캡쳐한 이미지를 넣을 요소 혹은 캡쳐한 이미지를 저장한 배열
 	 * @param {function} completeFn - 캡쳐이후 실행할 함수
-	 * @desc  히트맵을 이미지로 캡쳐해서 보여준다 (ie 지원안됨)
+	 * @desc  히트맵을 이미지로 캡쳐해서 보여준다 (ie, safari 지원안됨)
 	 * {@link https://github.com/tsayen/dom-to-image dom-to-image}
 	 */
 	dom.captureImage = function($element, $target, completeFn, errFn) {
@@ -882,6 +894,11 @@
 		}
 	}
 	
+	dom.showMypageGwansimPop = function() {
+		_appendModalPopup('mulgeonPanoForm', _$momPopup, {});
+		dom.openModalOnModal('', {width:'800'});
+	}
+	
 	dom.showLogoutForm = function(fn) {
 		hotplace.dom.showAlertMsg(function() {
 			dom.logout(fn);
@@ -946,11 +963,11 @@
 		_$modalPopup.modal('hide');
 	}
 	
-	
-	
-		
 	function _setModalMaxHeight($element) {
-		$content = $element.find('.modal-content');
+		var $content = $element.find('.modal-content');
+		var $dialog = $element.find('.modal-dialog');
+		var $body = $element.find('.modal-body');
+		
 		var borderWidth   = $content.outerHeight() - $content.innerHeight();
 	    var dialogMargin  = $(window).width() < 768 ? 20 : 60;
 	    var contentHeight = $(window).height() - (dialogMargin + borderWidth);
@@ -960,9 +977,25 @@
 
 		$content.css({'overflow':'hidden'});
 	  
-		$element
+		if($dialog.hasClass('fullWidth')) {
+			$body
+			.css({
+				'max-height': maxHeight,
+				'min-height': maxHeight,
+				'overflow-y': 'auto'
+			});
+		}
+		else {
+			$body
+			.css({
+				'max-height': maxHeight,
+				'overflow-y': 'auto'
+			});
+		}
+		
+		/*$element
 		.find('.modal-body')
-		.css({'max-height': maxHeight, 'overflow-y': 'auto'});
+		.css({'max-height': maxHeight, 'overflow-y': 'auto'});*/
 	}
 	
 	function _setModalMarginTop($element) {

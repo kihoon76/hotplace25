@@ -1,3 +1,5 @@
-.dvMypage table.dvGwansimMulgeon tr:hover{background:#f5f5f5; cursor:pointer;}  
+.dvMypage {max-height:800px; height:800px;}
+.dvMypage table.dvGwansimMulgeon tr:hover{background:#f5f5f5; cursor:pointer;} 
+ 
 
 
