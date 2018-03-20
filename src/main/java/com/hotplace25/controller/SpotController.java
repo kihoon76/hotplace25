@@ -11,6 +11,7 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -235,5 +236,22 @@ public class SpotController {
 		}
 		
 		return vo;
+	}
+	
+	@GetMapping("my/gwansim")
+	public String getMyGwansim(@RequestParam("gwansimNum") String gwansimNum, ModelMap m) {
+		
+		String currentId = "khnam";//SessionUtil.getSessionUserId();
+		
+		GwansimMulgeon gm = new GwansimMulgeon();
+		gm.setAccountId(currentId);
+		gm.setGwansimMulgeonNum(gwansimNum);
+		
+		gm = spotService.getMyGwansim(gm);
+		gm.setAccountId("");
+		
+		m.addAttribute("gwansim", gm);
+		
+		return "mypage/mypageGwansimForm";
 	}
 }

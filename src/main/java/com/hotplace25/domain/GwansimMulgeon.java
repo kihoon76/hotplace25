@@ -9,8 +9,8 @@ public class GwansimMulgeon {
 	private String address;
 	private String memo;
 	private String regDate;
-	private float lng;
-	private float lat;
+	private float lng;//경도
+	private float lat;//위도
 	private String accountId;
 	
 	public String getPnu() {

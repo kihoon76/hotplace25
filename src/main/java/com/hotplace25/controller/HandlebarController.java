@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hotplace25.domain.Account;
 import com.hotplace25.service.HotplaceService;
 import com.hotplace25.service.SpotService;
+import com.hotplace25.service.UserService;
 import com.hotplace25.util.SessionUtil;
 
 
@@ -22,6 +24,9 @@ public class HandlebarController {
 	
 	@Resource(name="spotService")
 	SpotService spotService;
+	
+	@Resource(name="userService")
+	private UserService userService;
 	
 	@GetMapping("join")
 	public String getJoinTos(ModelMap m) {
@@ -61,8 +66,19 @@ public class HandlebarController {
 	@GetMapping("mypage")
 	public String getMypage(ModelMap m) {
 		String accountId = "khnam";//SessionUtil.getSessionUserId();
-		m.addAttribute("gwansim", spotService.getMyGwansimList(accountId));
 		
-		return "mypageForm";
+		Account account = userService.getUserInfo(accountId);
+		String[] email = account.getEmail().split("@");
+		String[] phone = account.getPhone().split("-");
+		account.setEmail1(email[0]);
+		account.setEmail2(email[1]);
+		account.setPhone1(phone[0]);
+		account.setPhone2(phone[1]);
+		account.setPhone3(phone[2]);
+		
+		m.addAttribute("gwansim", spotService.getMyGwansimList(accountId));
+		m.addAttribute("account", account);
+		
+		return "mypage/mypageForm";
 	}
 }

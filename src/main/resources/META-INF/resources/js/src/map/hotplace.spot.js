@@ -84,7 +84,7 @@
 	}
 	
 	function _viewGwansimReg() {
-		hotplace.dom.showSpotGwansimRegForm();
+		hotplace.dom.showSpotGwansimRegForm({address:_address});
 		
 		$(_btnRegGwansimMulgeon)
 		.off('click')

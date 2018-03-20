@@ -28,4 +28,6 @@ public interface SpotDao {
 
 	public int deleteMyGwansimMulgeon(GwansimMulgeon gm);
 
+	public GwansimMulgeon selectMyGwansim(GwansimMulgeon gm);
+
 }

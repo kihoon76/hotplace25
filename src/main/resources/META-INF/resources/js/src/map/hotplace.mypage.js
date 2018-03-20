@@ -15,18 +15,52 @@
 		_$selectedGwansimTr = $tr;
 	}
 	
+	function _createMap(id, lat, lng) {
+		var mapOptions = {
+		    center: new naver.maps.LatLng(lat, lng),
+		    zoom: 10
+		};
+
+		var map = new naver.maps.Map(id, mapOptions);
+		_createMarker(map, lat, lng);
+	}
+	
+	function _createMarker(map, lat, lng) {
+		var marker = new naver.maps.Marker({
+		    position: new naver.maps.LatLng(lat, lng),
+		    clickable:false,
+		    map: map
+		});
+	}
+	
 	mypage.init = function() {
+		_initAccount();
 		_initGwansimMulgeon();
 	}
 	
+	/************************************************
+	 * 계정정보
+	 ***********************************************/
+	function _initAccount() {
+		var $joinUserEmailInMypage = $('#joinUserEmailInMypage');
+		var $hdnEmail = $('#hdnEmail');
+		$joinUserEmailInMypage.val($hdnEmail.val());
+	}
+	
+	/************************************************
+	 * 관심물건
+	 ***********************************************/
 	function _initGwansimMulgeon() {
 		$(_tabMypageGwansimMulgeon + ' table tr')
 		.off('click')
 		.on('click', function(e) {
-			_setConfigSelectTr($(this));
+			var $tr = $(this);
+			_setConfigSelectTr($tr);
 			console.log(e);
-			hotplace.dom.showMypageGwansimPop();
 			
+			hotplace.dom.showMypageGwansimPop($tr.data('key'), function() {
+				_createMap('dvGwansimMap', $tr.data('lat'), $tr.data('lng'));
+			});
 		});
 		
 		$(_tabMypageGwansimMulgeon + ' .DEL')

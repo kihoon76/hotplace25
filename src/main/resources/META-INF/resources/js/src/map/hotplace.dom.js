@@ -843,8 +843,8 @@
 		dom.openModal('', null, null, fn);
 	}
 	
-	dom.showSpotGwansimRegForm = function(fn) {
-		_appendModalPopup('spotGwansimRegForm');
+	dom.showSpotGwansimRegForm = function(param, fn) {
+		_appendModalPopup('spotGwansimRegForm', null, param);
 		dom.openModal('', {width: '500'}, fn);
 	}
 	
@@ -894,9 +894,22 @@
 		}
 	}
 	
-	dom.showMypageGwansimPop = function() {
-		_appendModalPopup('mulgeonPanoForm', _$momPopup, {});
-		dom.openModalOnModal('', {width:'800'});
+	dom.showMypageGwansimPop = function(param, fn) {
+		hotplace.ajax({
+			url: 'spot/my/gwansim?gwansimNum=' + param,
+			dataType : 'html',
+			method : 'GET',
+			success : function(data, textStatus, jqXHR) {
+				_templates['mypageGwansimForm'] = Handlebars.compile(data);
+				_appendModalPopup('mypageGwansimForm', _$momPopup);
+				
+				if(fn) fn();
+				dom.openModalOnModal('', {width:'500'});
+			},
+			error: function() {
+				throw new Error('html template error')
+			}
+		});
 	}
 	
 	dom.showLogoutForm = function(fn) {
