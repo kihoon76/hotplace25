@@ -119,10 +119,10 @@ $(document).ready(function() {
 		return hotplace.validation.isValidPhoneL($(_joinStep02_TXT_UserPhoneL));
 	}
 	
-	function _isEmptyTxt($element) {
+	/*function _isEmptyTxt($element) {
 		if($.trim($element.val()) == '') return true;
 		return false;
-	}
+	}*/
 	
 	function _initJoinStep03() {
 		$(_joinStep03_SPN_UserId).text($(_joinStep02_TXT_UserId).val());
@@ -312,5 +312,5 @@ $(document).ready(function() {
 	    }
 	});
 	
-	hotplace.validation.phone('#joinStep02 .NUMBER_ONLY')
+	hotplace.validation.phone('#joinStep02 .NUMBER_ONLY');
 });

@@ -42,24 +42,20 @@
 								<tr>
 									<th>아이디</th>
 									<td>
-										<input type="text" id="joinUserIdInMypage" class="inp" style="width:60%;" value="${account.id}">
-										<button type="button" class="btnstyle middle white" id="btnJoinIdCheckInMypage">중복검색</button>
-
-										<span class="helpCont EMPTY">아이디값을 입력하세요</span>
-										<span class="helpCont DUP">아이디 중복체크를 하세요</span>
+										<input type="text" id="mypageAccUserId" class="inp" style="width:60%;" value="${account.id}" disabled>
 									</td>
 								</tr>
 								<tr>
 									<th>비밀번호</th>
 									<td>
-										<input type="password" id="joinPwInMypage" class="inp" style="width:100%;">
+										<input type="password" id="mypageAccPw" class="inp" style="width:100%;">
 										<span class="helpCont EMPTY">비밀번호를 입력하세요</span>
 									</td>
 								</tr>
 								<tr>
 									<th>비밀번호확인</th>
 									<td>
-										<input type="password" id="joinPwConfirmInMypage" class="inp" style="width:100%;">
+										<input type="password" id="mypageAccPwConfirm" class="inp" style="width:100%;">
 										<span class="helpCont EMPTY">비밀번호를 입력하세요</span>
 										<span class="helpCont CONFIRM">비밀번호가 일치하지 않습니다</span>
 									</td>
@@ -67,7 +63,7 @@
 								<tr>
 									<th>이름</th>
 									<td>
-										<input type="text" id="joinUserNameInMypage" class="inp" style="width:100%;" value="${account.userName}">
+										<input type="text" id="mypageAccUserName" class="inp" style="width:100%;" value="${account.userName}">
 										<span class="helpCont EMPTY">이름을 입력하세요</span>
 									</td>
 								</tr>
@@ -77,9 +73,9 @@
 										<div class="inputGroup">
 											<c:set var="email" value="${account.email}" />
 											<c:set var="emailDirect" value="Y" />
-											<input type="text" id="joinUserEmailInMypage" class="inp fl" style="width:50%;">
+											<input type="text" id="mypageAccUserEmail" class="inp fl" style="width:50%;">
 											<span class="inline center fl" style="width:5%;">@</span>
-											<select class="inp fl" style="width:45%;" id="joinUserEmail2InMypage">
+											<select class="inp fl" style="width:45%;" id="mypageAccUserEmail2">
 												<option value="X">== 선택하세요 ==</option>
 												<c:choose>
 													<c:when test="${account.email2 == 'naver.com'}">
@@ -165,7 +161,7 @@
 									<th>연락처</th>
 									<td>
 										<div class="inputGroup">
-											<select class="inp fl" style="width:30%;" id="joinUserPhoneFInMypage">
+											<select class="inp fl" style="width:30%;" id="mypageAccUserPhoneF">
 												<c:choose>
 													<c:when test="${account.phone1 == '010'}">
 													<option value="010" selected>010</option>
@@ -336,9 +332,9 @@
 												</c:choose>
 											</select>		
 											<span class="inline center fl" style="width:5%;">-</span>
-											<input type="text" id="joinUserPhoneMInMypage" class="inp fl NUMBER_ONLY" style="width:30%;" maxlength="4" value="${account.phone2}">
+											<input type="text" id="mypageAccUserPhoneM" class="inp fl NUMBER_ONLY" style="width:30%;" maxlength="4" value="${account.phone2}" data-value="${account.phone2}">
 											<span class="inline center fl" style="width:5%;">-</span>
-											<input type="text" id="joinUserPhoneLInMypage" class="inp fl NUMBER_ONLY" style="width:30%;" maxlength="4" value="${account.phone3}">
+											<input type="text" id="mypageAccUserPhoneL" class="inp fl NUMBER_ONLY" style="width:30%;" maxlength="4" value="${account.phone3}" data-value="${account.phone3}">
 										</div>
 										<span class="helpCont EMPTY">숫자를 입력해 주세요</span>
 										<span class="helpCont PHONE_M">가운데자리 3자리~4자리를 입력해 주세요</span>
@@ -349,7 +345,7 @@
 							</table>
 						
 							<div class="modal-footer">
-								<button type="button" class="btnstyle middle blue">수정</button>
+								<button type="button" class="btnstyle middle blue" id="btnAccModifyAccount">수정</button>
 							</div>
 						</div>
 						<div id="tabMypageGwansimMulgeon" class="tab-pane">
@@ -379,7 +375,7 @@
 									<c:forEach var="item" items="${gwansim}" varStatus="status">
 									<tr data-lat="${item.lat}" data-lng="${item.lng}" data-pnu="${item.pnu}" data-address="${item.address}" data-key="${item.gwansimMulgeonNum}">
 										<td>${item.regDate}</td>
-										<td>${item.address}</td>
+										<td class="left ellipsis">${item.address}</td>
 										<td class="left ellipsis">${item.memo}</td>
 										<td class="DEL" data-address="${item.address}" data-key="${item.gwansimMulgeonNum}"><span class="glyphicon glyphicon-minus-sign" style="color:red; font-size:1.2em;"></span></td>	
 									</tr>

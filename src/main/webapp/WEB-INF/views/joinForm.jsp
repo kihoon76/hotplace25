@@ -110,9 +110,9 @@
 										<div class="inputGroup">
 											<select class="inp fl" style="width:30%;" id="joinUserPhoneF"><select>		
 											<span class="inline center fl"  style="width:5%;">-</span>
-											<input type="text" id="joinUserPhoneM" class="inp fl NUMBER_ONLY" style="width:30%;" maxLength="4"/>
+											<input type="text" id="joinUserPhoneM" class="inp fl NUMBER_ONLY" style="width:30%;" maxLength="4" data-value=""/>
 											<span class="inline center fl"  style="width:5%;">-</span>
-											<input type="text" id="joinUserPhoneL" class="inp fl NUMBER_ONLY" style="width:30%;" maxLength="4"/>
+											<input type="text" id="joinUserPhoneL" class="inp fl NUMBER_ONLY" style="width:30%;" maxLength="4" data-value=""/>
 										</div>
 										<span class="helpCont EMPTY">숫자를 입력해 주세요</span>
 										<span class="helpCont PHONE_M">가운데자리 3자리~4자리를 입력해 주세요</span>

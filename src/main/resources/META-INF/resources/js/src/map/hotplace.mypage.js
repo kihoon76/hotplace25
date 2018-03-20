@@ -2,7 +2,8 @@
  * @namespace hotplace.mypage
  */
 (function(mypage, $) {
-	var _tabMypageGwansimMulgeon = '#tabMypageGwansimMulgeon';
+	var _tabMypageAccount = '#tabMypageAccount',
+		_tabMypageGwansimMulgeon = '#tabMypageGwansimMulgeon';
 	
 	var _$selectedGwansimTr = null;
 	
@@ -41,10 +42,87 @@
 	/************************************************
 	 * 계정정보
 	 ***********************************************/
+	var _$mypageAccPw,
+		_$mypageAccPwConfirm,
+		_$mypageAccUserName,
+		_$mypageAccUserEmail,
+		_$mypageAccUserEmail2,
+		_$mypageAccUserPhoneF,
+		_$mypageAccUserPhoneM,
+		_$mypageAccUserPhoneL,
+		_$btnAccModifyAccount,
+		_mypageAccTxtElements,
+		_$hdnEmail;
+	
 	function _initAccount() {
-		var $joinUserEmailInMypage = $('#joinUserEmailInMypage');
-		var $hdnEmail = $('#hdnEmail');
-		$joinUserEmailInMypage.val($hdnEmail.val());
+		_$mypageAccPw = $('#mypageAccPw'),
+		_$mypageAccPwConfirm = $('#mypageAccPwConfirm'),
+		_$mypageAccUserName = $('#mypageAccUserName'),
+		_$mypageAccUserEmail = $('#mypageAccUserEmail'),
+		_$mypageAccUserEmail2 = $('#mypageAccUserEmail2'),
+		_$mypageAccUserPhoneF = $('#mypageAccUserPhoneF'),
+		_$mypageAccUserPhoneM = $('#mypageAccUserPhoneM'),
+		_$mypageAccUserPhoneL = $('#mypageAccUserPhoneL'),
+		_$btnAccModifyAccount = $('#btnAccModifyAccount'),
+		_mypageAccTxtElements = ['#mypageAccPw', '#mypageAccPwConfirm', '#mypageAccUserName', '#mypageAccUserEmail', '#mypageAccUserPhoneM', '#mypageAccUserPhoneL', '#mypageAccUserEmail2'],
+		_$hdnEmail = $('#hdnEmail');
+		
+		_initEmail();
+		
+		_$btnAccModifyAccount
+		.off('click')
+		.on('click', function() {
+			
+			if(_isValidAccountForm()) {
+				
+			}
+		});
+	}
+	
+	function _initEmail() {
+		_$mypageAccUserEmail.val(_$hdnEmail.val());
+	}
+	
+	function _checkMailFormat() {
+		return hotplace.validation.isValidEmail(_$mypageAccUserEmail, _$mypageAccUserEmail2.val());
+	}
+	
+	function _checkPhoneM() {
+		return hotplace.validation.isValidPhoneM(_$mypageAccUserPhoneM);
+	}
+	
+	function _checkPhoneL() {
+		return hotplace.validation.isValidPhoneL(_$mypageAccUserPhoneL);
+	}
+	
+	function _checkEmpty() {
+		return hotplace.validation.isFormNotEmpty(_mypageAccTxtElements);
+	}
+	
+	function _checkPwConfirm() {
+		
+		var v = true;
+		
+		if($.trim(_$mypageAccPw.val()) == $.trim(_$mypageAccPwConfirm.val())) {
+			hotplace.validation.ctrlValidMsg(_$mypageAccPwConfirm, false, '.CONFIRM');
+		}
+		else {
+			hotplace.validation.ctrlValidMsg(_$mypageAccPwConfirm, true, '.CONFIRM');
+			v = false;
+		}
+		
+		return v;
+	}
+	
+	function _isValidAccountForm() {
+		if(_checkEmpty()
+			&& _checkPwConfirm()
+			&& _checkMailFormat()
+			&& _checkPhoneM()
+			&& _checkPhoneL()) {
+			return true;
+		}
+		return false;
 	}
 	
 	/************************************************
@@ -95,6 +173,8 @@
 			}, msg, {width:'40%'});
 		})
 	}
+	
+	hotplace.validation.phone(_tabMypageAccount + ' .NUMBER_ONLY')
 }(
 	hotplace.mypage = hotplace.mypage || {},
 	jQuery
