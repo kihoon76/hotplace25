@@ -377,7 +377,9 @@
 										<td>${item.regDate}</td>
 										<td class="left ellipsis">${item.address}</td>
 										<td class="left ellipsis">${item.memo}</td>
-										<td class="DEL" data-address="${item.address}" data-key="${item.gwansimMulgeonNum}"><span class="glyphicon glyphicon-minus-sign" style="color:red; font-size:1.2em;"></span></td>	
+										<td class="DEL" data-address="${item.address}" data-key="${item.gwansimMulgeonNum}">
+											<span class="iconRBtnDel"><i class="ambicon-023_trash"></i></span>
+										</td>	
 									</tr>
 									</c:forEach>
 									</c:otherwise>
@@ -386,10 +388,16 @@
 							</table>
 						</div>
 						<div id="tabMypageConsulting" class="tab-pane">
-							<div class="serviceReady"><span>서비스 준비중입니다</span>	</div>
+							<div class="serviceReady" style="margin-top:160px;">
+								<span class="iconBlock"></span>
+								<span class="text">서비스 준비중입니다</span>	
+							</div>
 						</div>
 						<div id="tabMaemul" class="tab-pane">
-							<div class="serviceReady"><span>서비스 준비중입니다</span>	</div>
+							<div class="serviceReady" style="margin-top:160px;">
+								<span class="iconBlock"></span>
+								<span class="text">서비스 준비중입니다</span>	
+							</div>
 						</div>
 					</div>
 				</div>

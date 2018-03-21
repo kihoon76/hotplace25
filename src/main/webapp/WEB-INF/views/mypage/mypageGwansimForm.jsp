@@ -27,22 +27,13 @@
 							<tr>
 								<th>메모</th>
 								<td>
-									<textarea class="inp" style="width:100%; height:200px;" placeholder="남기실 메모를 입력해 주세요" id="txtMypageGwansimMemo">
-										${gwansim.memo}
-									</textarea>
+									<textarea class="inp" style="width:100%; height:200px;" placeholder="남기실 메모를 입력해 주세요" id="txtMypageGwansimMemo">${gwansim.memo}</textarea>
 									<span class="helpCont EMPTY">메모를  입력해 주세요</span>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2">
-									<div id="dvGwansimMap" style="width:436px; height:300px; z-index:10;"></div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<div class="btnArea right mgT10">
-										<button type="button" id="btnGwansimModify" class="btnstyle middle blue" style="width:80px;">수정</button>
-									</div>
+								<td colspan="2" class="center">
+									<div id="dvGwansimMap" style="width:400px; height:300px; z-index:10; margin:0 auto;"></div>
 								</td>
 							</tr>
 						</tbody>
@@ -51,6 +42,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
+			<button type="button" id="btnGwansimModify" class="btnstyle middle blue" style="width:80px;">수정</button>
 			<!--<button type="button" class="btnstyle middle blue" id="btnRegGwansimMulgeon">등록</button>
 			<button type="button" class="btnstyle middle gray" data-dismiss="modal">취소</button>-->
 		</div>

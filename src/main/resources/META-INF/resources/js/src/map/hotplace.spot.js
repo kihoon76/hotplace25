@@ -98,7 +98,7 @@
 		            	address:_address,
 		            	lng: _lng,
 		    			lat: _lat,
-		    			memo:$(_txtGwansimMemo).val()
+		    			memo:$(_txtGwansimMemo).val().trimTS()
 		            }),
 		            success: function(data, textStatus, jqXHR) {
 		                if(!data.success) {

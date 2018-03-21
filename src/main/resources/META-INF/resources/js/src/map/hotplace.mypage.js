@@ -173,7 +173,7 @@
 							url: 'spot/mod/gwansim',
 							data: {
 								gwansimNum: $tr.data('key'),
-								memo: $.trim($(_txtMypageGwansimMemo).val())
+								memo: $(_txtMypageGwansimMemo).val().trimTS()
 							},
 							success: function(data, textStatus, jqXHR) {
 								if(data.success) {

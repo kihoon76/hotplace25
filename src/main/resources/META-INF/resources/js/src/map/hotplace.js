@@ -97,6 +97,44 @@
     	return s.length - (idx + 1);
     }
     
+    String.prototype.trimTS = function() {
+    	var s = this;
+    	if(s == '') return "";
+    	
+    	var sLen = 0;
+   	  	var idx1 = -1;
+   	  	sLen = s.length;
+    	
+   	  	for(var i=0; i<sLen; i++) {
+   	  		var vch = s.substring(i, i+1);
+   	  		if(vch != '\t' && vch != ' ') {
+   	  			idx1 = i;
+   	  			break;
+   	  		}
+   	  	}
+    	
+   	  	if(idx1 != -1) {
+    	   s = s.substring(idx1);
+   	  	}
+    	  
+    	var idx2 = -1;
+    	sLen = s.length;
+    	
+    	for(var i=sLen; i>-1; i--) {
+    	   var vch = s.substring(i, i+1);
+    	   if(vch != '\t' && vch != ' ') {
+    		   idx2 = i;
+    		   break;
+    	   }
+    	}
+    	
+    	if(idx2 != -1) {
+    		s = s.substring(0, idx2 + 1);
+    	}
+    	  
+    	return s;
+    }
+    
     /**
 	 * @memberof hotplace
      * @property {object} config
