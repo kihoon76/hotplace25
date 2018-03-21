@@ -912,6 +912,11 @@
 		});
 	}
 	
+	dom.showIntroMain = function() {
+		_appendModalPopup('introMainForm', null, {});
+		dom.openModal('', {width:'600'});
+	}
+	
 	dom.showLogoutForm = function(fn) {
 		hotplace.dom.showAlertMsg(function() {
 			dom.logout(fn);

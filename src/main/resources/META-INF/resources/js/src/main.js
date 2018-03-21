@@ -280,6 +280,7 @@ $(document).ready(function() {
 		hotplace.dom.showAutoYearRangeDiv();
 		hotplace.dom.enableYearRangeDiv(false);
 		_initFirstScreen();
+		_showIntro();
 	});
 	
 	function _initFirstScreen() {
@@ -298,6 +299,15 @@ $(document).ready(function() {
 		$('#mulgeonPyeonib').prop('checked', true);*/
 		
 		$('#btnViewMulgeon').trigger('click');
+	}
+	
+	function _showIntro() {
+		var hasCookie = !$.cookie('intro');
+		
+		if(hasCookie) {
+			hotplace.dom.showIntroMain();
+		}
+	
 	}
 	
 	hotplace.validation.numberOnly('.numberOnly');

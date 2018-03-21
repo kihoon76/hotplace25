@@ -157,6 +157,7 @@
 
 <sitemesh:write property="body" />
 <script type="text/javascript" src="/resources/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/vendors/jQuery-Cookie/jquery.cookie.min.js"></script>
 <script type="text/javascript" src="/resources/handlebars/4.0.5/handlebars.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/waitMe/waitMe.min.js"></script>
 <script type="text/javascript" src="/resources/jquery-ui/1.12.0/jquery-ui.min.js"></script>
