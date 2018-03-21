@@ -25,5 +25,9 @@ public class UserService {
 	public void join(Account account) {
 		userDao.insertJoin(account);
 	}
+
+	public boolean modifyUserInfo(Account account) {
+		return userDao.updateUserInfo(account);
+	}
 	
 }

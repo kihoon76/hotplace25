@@ -90,6 +90,13 @@
 		 where 계정아이디 = #{accountId}
 		   and 관심물건번호 = #{gwansimMulgeonNum}
 	</select>
+	
+	<update id="updateMyGwansimMulgeon" parameterType="GwansimMulgeon">
+		update [웹].[dbo].[관심물건]
+		   set 메모 = #{memo}
+		 where 계정아이디 = #{accountId}
+		   and 관심물건번호 = #{gwansimMulgeonNum}
+	</update>
 </mapper>
 <!-- 
 

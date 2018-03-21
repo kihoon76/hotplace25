@@ -1,7 +1,11 @@
 package com.hotplace25.controller;
 
+import java.io.IOException;
+
 import javax.annotation.Resource;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hotplace25.domain.Account;
 import com.hotplace25.domain.AjaxVO;
 import com.hotplace25.service.UserService;
+import com.hotplace25.util.SessionUtil;
 
 @RequestMapping("/user")
 @Controller
@@ -58,6 +63,33 @@ public class UserController {
 		}
 		catch(Exception e) {
 			vo.setSuccess(false);
+			vo.setErrMsg(e.getMessage());
+		}
+		
+		return vo;
+	}
+	
+	@PostMapping("modify")
+	@ResponseBody
+	public AjaxVO modifyUserInfo(@RequestBody Account account) throws JsonGenerationException, JsonMappingException, IOException {
+		AjaxVO vo = new AjaxVO();
+		vo.setSuccess(false);
+		
+		ObjectMapper m = new ObjectMapper();
+		System.err.println(m.writeValueAsString(account));
+		
+		account.setId("khnam"/*SessionUtil.getSessionUserId()*/);
+		
+		try {
+			boolean r = userService.modifyUserInfo(account);
+			if(r) {
+				vo.setSuccess(true);
+			}
+			else {
+				vo.setSuccess(false);
+			}
+		}
+		catch(Exception e) {
 			vo.setErrMsg(e.getMessage());
 		}
 		

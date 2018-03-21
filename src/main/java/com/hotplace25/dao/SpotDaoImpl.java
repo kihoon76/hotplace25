@@ -73,4 +73,9 @@ public class SpotDaoImpl implements SpotDao {
 	public GwansimMulgeon selectMyGwansim(GwansimMulgeon gm) {
 		return msSqlSession.selectOne(namespace + ".selectMyGwansim", gm);
 	}
+
+	@Override
+	public int updateMyGwansimMulgeon(GwansimMulgeon gm) {
+		return msSqlSession.update(namespace + ".updateMyGwansimMulgeon", gm);
+	}
 }

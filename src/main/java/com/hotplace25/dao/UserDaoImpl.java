@@ -31,4 +31,9 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 
+	@Override
+	public boolean updateUserInfo(Account account) {
+		return 1 == msSqlSession.update(namespace + ".updateUserInfo", account);
+	}
+
 }

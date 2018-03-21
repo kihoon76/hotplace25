@@ -71,4 +71,8 @@ public class SpotService {
 	public GwansimMulgeon getMyGwansim(GwansimMulgeon gm) {
 		return spotDao.selectMyGwansim(gm);
 	}
+
+	public boolean modifyMyGwansimMulgeon(GwansimMulgeon gm) {
+		return 1 == spotDao.updateMyGwansimMulgeon(gm);
+	}
 }

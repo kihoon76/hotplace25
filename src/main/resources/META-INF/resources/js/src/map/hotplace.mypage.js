@@ -74,7 +74,27 @@
 		.on('click', function() {
 			
 			if(_isValidAccountForm()) {
-				
+				hotplace.ajax({
+					url: 'user/modify',
+					data: JSON.stringify({
+						userName: _$mypageAccUserName.val(),
+						password: _$mypageAccPw.val(),
+						phone: _$mypageAccUserPhoneF.val() + '-' + _$mypageAccUserPhoneM.val() + '-' + _$mypageAccUserPhoneL.val(),
+						email: (_$mypageAccUserEmail2.val() == 'D') ? _$mypageAccUserEmail.val() : _$mypageAccUserEmail.val() + '@' + _$mypageAccUserEmail2.val()
+					}),
+					contentType: 'application/json; charset=UTF-8',
+					success: function(data, textStatus, jqXHR) {
+						if(data.success) {
+							hotplace.dom.showAlertMsg(null, '회원정보가 수정되었습니다.', {width:'40%'});
+						}
+						else {
+							jqXHR.errCode = hotplace.error.USER_MOD;
+						}
+					},
+					error: function(jqXHR, textStatus, e) {
+						jqXHR.errCode = hotplace.error.USER_MOD;
+					}
+				})
 			}
 		});
 	}
@@ -95,7 +115,7 @@
 		return hotplace.validation.isValidPhoneL(_$mypageAccUserPhoneL);
 	}
 	
-	function _checkEmpty() {
+	function _checkAccEmpty() {
 		return hotplace.validation.isFormNotEmpty(_mypageAccTxtElements);
 	}
 	
@@ -115,7 +135,7 @@
 	}
 	
 	function _isValidAccountForm() {
-		if(_checkEmpty()
+		if(_checkAccEmpty()
 			&& _checkPwConfirm()
 			&& _checkMailFormat()
 			&& _checkPhoneM()
@@ -128,6 +148,13 @@
 	/************************************************
 	 * 관심물건
 	 ***********************************************/
+	var _btnGwansimModify = '#btnGwansimModify',
+		_txtMypageGwansimMemo = '#txtMypageGwansimMemo';
+	
+	function _checkGwansimEmpty() {
+		return hotplace.validation.isFormNotEmpty([_txtMypageGwansimMemo]);
+	}
+	
 	function _initGwansimMulgeon() {
 		$(_tabMypageGwansimMulgeon + ' table tr')
 		.off('click')
@@ -138,6 +165,31 @@
 			
 			hotplace.dom.showMypageGwansimPop($tr.data('key'), function() {
 				_createMap('dvGwansimMap', $tr.data('lat'), $tr.data('lng'));
+				$(_btnGwansimModify)
+				.off('click')
+				.on('click', function() {
+					if(_checkGwansimEmpty()) {
+						hotplace.ajax({
+							url: 'spot/mod/gwansim',
+							data: {
+								gwansimNum: $tr.data('key'),
+								memo: $.trim($(_txtMypageGwansimMemo).val())
+							},
+							success: function(data, textStatus, jqXHR) {
+								if(data.success) {
+									hotplace.dom.showAlertMsg(null, '관심물건이 수정되었습니다.', {width:'40%'});
+								}
+								else {
+									jqXHR.errCode = hotplace.error.GWANSIM_MOD;
+								}
+							},
+							error: function(jqXHR, textStatus, e) {
+								jqXHR.errCode = hotplace.error.GWANSIM_MOD;
+							}
+						})
+					}
+				})
+				
 			});
 		});
 		

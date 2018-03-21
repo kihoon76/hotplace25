@@ -6,7 +6,6 @@
 		<div class="modal-header">
 			<h2 class="modal-title">
 				관심물건
-				<span class="sText">( 소재지 : ${gwansim.address} )</span>
 			</h2>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<i class="ambicon-015_mark_times"></i><span class="hidden">닫기</span>
@@ -28,7 +27,7 @@
 							<tr>
 								<th>메모</th>
 								<td>
-									<textarea class="inp" style="width:100%; height:200px;" placeholder="남기실 메모를 입력해 주세요" id="txtGwansimMemoInMypage">
+									<textarea class="inp" style="width:100%; height:200px;" placeholder="남기실 메모를 입력해 주세요" id="txtMypageGwansimMemo">
 										${gwansim.memo}
 									</textarea>
 									<span class="helpCont EMPTY">메모를  입력해 주세요</span>
@@ -37,6 +36,13 @@
 							<tr>
 								<td colspan="2">
 									<div id="dvGwansimMap" style="width:436px; height:300px; z-index:10;"></div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div class="btnArea right mgT10">
+										<button type="button" id="btnGwansimModify" class="btnstyle middle blue" style="width:80px;">수정</button>
+									</div>
 								</td>
 							</tr>
 						</tbody>

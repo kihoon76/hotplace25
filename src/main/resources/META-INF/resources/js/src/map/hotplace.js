@@ -605,11 +605,13 @@
 		CONSULTING_DUP: '605',  //컨설팅 중복오류
 		GWANSIM_DUP:'606',
 		GWANSIM_REG:'607',
+		GWANSIM_MOD:'614',
 		COORD: '608', //주소검색 오류
 		MISS_LATLNG: '609', //위경도 정보 오류
 		HEATMAP_CAPTURE:'610', //히트맵 캡쳐오류
 		TIMEOUT:'611', //타임아웃
 		GWANSIM_DEL:'612', //관심물건 삭제오류
+		USER_MOD:'613', //회원계정정보 수정오류
 	};
 	
 	hotplace.error = _err;
@@ -638,6 +640,9 @@
 		case _err.JOIN :
 			hotplace.dom.showAlertMsg(null, '회원가입도중 오류가 발생했습니다.', {width:'40%'});
 			break;
+		case _err.USER_MOD :
+			hotplace.dom.showAlertMsg(null, '회원정보 수정중 오류가 발생했습니다.', {width:'40%'});
+			break;
 		case _err.UPLOAD:
 			hotplace.dom.showAlertMsg(null, '파일업로드중 에러가 발생했습니다.', {width:'40%'});
 			break;
@@ -661,6 +666,9 @@
 			hotplace.dom.showAlertMsg(function() {
 				hotplace.dom.closeModal();
 			}, '관심물건이 삭제 되지 않았습니다.', {width:'40%'});
+			break;
+		case _err.GWANSIM_MOD:
+			hotplace.dom.showAlertMsg(null, '관심물건 수정중 에러가 발생했습니다.', {width:'40%'});
 			break;
 		case _err.CONSULTING_REG:
 			hotplace.dom.showAlertMsg(null, '컨설팅요청 등록중 에러가 발생했습니다.', {width:'40%'});

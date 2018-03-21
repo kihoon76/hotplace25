@@ -238,6 +238,34 @@ public class SpotController {
 		return vo;
 	}
 	
+	@PostMapping("mod/gwansim")
+	@ResponseBody
+	public AjaxVO modifyMyGwansimMulgeon(@RequestParam("gwansimNum") String gwansimNum, @RequestParam("memo") String memo) {
+		
+		AjaxVO vo = new AjaxVO();
+		vo.setSuccess(false);
+		
+		String currentId = "khnam";//SessionUtil.getSessionUserId();
+		
+		GwansimMulgeon gm = new GwansimMulgeon();
+		gm.setAccountId(currentId);
+		gm.setGwansimMulgeonNum(gwansimNum);
+		gm.setMemo(memo);
+		
+		try {
+			boolean r = spotService.modifyMyGwansimMulgeon(gm);
+			
+			if(r) {
+				vo.setSuccess(true);
+			}
+		}
+		catch(Exception e) {
+			vo.setErrMsg(e.getMessage());
+		}
+		
+		return vo;
+	}
+	
 	@GetMapping("my/gwansim")
 	public String getMyGwansim(@RequestParam("gwansimNum") String gwansimNum, ModelMap m) {
 		

@@ -344,8 +344,8 @@
 							</tbody>
 							</table>
 						
-							<div class="modal-footer">
-								<button type="button" class="btnstyle middle blue" id="btnAccModifyAccount">수정</button>
+							<div class="btnArea right mgT10">
+								<button type="button" class="btnstyle middle blue" id="btnAccModifyAccount" style="margin-right:10px; width:80px;">수정</button>
 							</div>
 						</div>
 						<div id="tabMypageGwansimMulgeon" class="tab-pane">
@@ -385,8 +385,12 @@
 								</tbody>
 							</table>
 						</div>
-						<div id="tabMypageConsulting" class="tab-pane">tab2</div>
-						<div id="tabMaemul" class="tab-pane">tab3</div>
+						<div id="tabMypageConsulting" class="tab-pane">
+							<div class="serviceReady"><span>서비스 준비중입니다</span>	</div>
+						</div>
+						<div id="tabMaemul" class="tab-pane">
+							<div class="serviceReady"><span>서비스 준비중입니다</span>	</div>
+						</div>
 					</div>
 				</div>
 			</div>

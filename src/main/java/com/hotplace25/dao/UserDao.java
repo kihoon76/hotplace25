@@ -9,4 +9,6 @@ public interface UserDao {
 	public int selectIdCount(String id);
 
 	public void insertJoin(Account account);
+
+	public boolean updateUserInfo(Account account);
 }
