@@ -12,6 +12,14 @@
 <!-- 			<sec:frame-options disabled="true" /> -->
 <!-- 		</sec:headers> -->
 		
+		<sec:intercept-url pattern="/resources/templates/gyeongmaeForm.handlebars" access="hasRole('ROLE_JOINED')"/>
+		<sec:intercept-url pattern="/resources/templates/gyeongmaeDetailForm.handlebars" access="hasRole('ROLE_JOINED')"/>
+		<sec:intercept-url pattern="/resources/templates/gongmaeForm.handlebars" access="hasRole('ROLE_JOINED')"/>
+		<sec:intercept-url pattern="/resources/templates/gongmaeDetailForm.handlebars" access="hasRole('ROLE_JOINED')"/>
+		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasRole('ROLE_JOINED')"/>
+		<sec:intercept-url pattern="/resources/templates/acceptbuildingForm.handlebars" access="hasRole('ROLE_JOINED')"/>
+		
+		<sec:intercept-url pattern="/locationbounds/**" access="permitAll"/>
 		<sec:intercept-url pattern="/index.jsp" access="permitAll" />
 		<sec:intercept-url pattern="/resources/**" access="permitAll" />
 		<sec:intercept-url pattern="/main" access="permitAll" />
@@ -25,8 +33,15 @@
 		<sec:intercept-url pattern="/system/notice" access="permitAll"/> 
 		<sec:intercept-url pattern="/system/config/**" access="permitAll"/>
 		<sec:intercept-url pattern="/errors/**" access="permitAll"/> 
-		<sec:intercept-url pattern="/**" access="permitAll"/> 
-<!-- 		<sec:intercept-url pattern="/**" access="hasRole('ROLE_JOINED')"/> -->
+		<sec:intercept-url pattern="/gyeongmaemarker" access="permitAll"/>
+		<sec:intercept-url pattern="/gongmaemarker" access="permitAll"/>
+		<sec:intercept-url pattern="/bosangmarker" access="permitAll"/>
+		<sec:intercept-url pattern="/pyeonibmarker" access="permitAll"/>
+		<sec:intercept-url pattern="/silgeolaemarker" access="permitAll"/>
+		<sec:intercept-url pattern="/acceptbuildingmarker" access="permitAll"/>
+		
+<!-- 		<sec:intercept-url pattern="/**" access="permitAll"/>  -->
+		<sec:intercept-url pattern="/**" access="hasRole('ROLE_JOINED')"/>
 		<sec:form-login login-page="/signin/100"
 						username-parameter="id"
 						password-parameter="pw"

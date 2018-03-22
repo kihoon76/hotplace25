@@ -165,6 +165,12 @@ $(document).ready(function() {
 		}
 	}
 	
+	function _enableAcceptBuilding() {
+		if(hotplace.maps.isActiveMulgeonView()) {
+			
+		}
+	}
+	
 	hotplace.maps.init('naver', {
 		X: hotplace.config.mapDefaultX,
 		Y: hotplace.config.mapDefaultY, 
@@ -190,11 +196,16 @@ $(document).ready(function() {
 							hotplace.dom.showMaskTransaction(len);
 							hotplace.maps.showMarkers(null, true);
 						}
+						else {
+							//건축허가 활성, 비활성 체크(뷰만 변경)
+							hotplace.maps.checkMarkerLevelLimit(false, true);
+						}
 					}
 				}
 				
 				hotplace.dom.removeBodyAllMask();
 				_enableMenu(level, hotplace.config.mulgeonViewLevel, $_lnbMulgeon, $('#' + hotplace.config.menus.MULGEON_SEARCH + ' .close'));
+				
 			},500);
 		},
 		'zoom_start' : function(map, level) {

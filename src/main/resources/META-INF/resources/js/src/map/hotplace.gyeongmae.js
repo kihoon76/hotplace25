@@ -251,41 +251,46 @@
 				deunglogbeonho: $(this).data('deunglogbeonho')
 			}
 			
-			hotplace.dom.showGyeongmaeDetail(null, {path: hotplace.getContextUrl() + 'resources/'});
+			var hasForm = hotplace.dom.showGyeongmaeDetail(null, {path: hotplace.getContextUrl() + 'resources/'});
 			
-			hotplace.ajax({
-				url: 'gyeongmae/detail',
-				method: 'GET',
-				dataType: 'json',
-				data: param,
-				loadEl: hotplace.dom.getModalPopId(),
-				success: function(data, textStatus, jqXHR) {
-					console.log(data)
-					$('#gDsageonbeonho').text(data.sageonbeonho);
-					$('#gDdamdang').text(data.damdang);
-					$('#gDsageonjeobsuil').text(data.sageonjeobsuil);
-					$('#gDsojaeji').text(data.sojaeji);
-					$('#gDyongdo').text(data.yongdo);
-					$('#gDibchalbangbeob').text(data.ibchalbangbeob);
-					$('#gDgamjeongpyeongga').text((data.gamjeongpyeongga) ? data.gamjeongpyeongga.money() + ' 원' : '');
-					$('#gDminmaegaggagyeog').text((data.minmaegaggagyeog) ? data.minmaegaggagyeog.money() + ' 원' : '');
-					$('#gDyuchal').text(data.yuchal);
-					$('#gDbaedangyogu').text(data.baedangyogu);
-					$('#gDcheonggu').text((data.cheonggu) ? data.cheonggu.money() + ' 원': '');
-					$('#gDmaegaggiil').text(data.maegaggiil);
-					$('#gDbigo').text(data.bigo);
-					
-					_makeGyeongmaeImages(data.images);
-					_makeGyeongmaeGiils(data.giils);
-					_makeGyeongmaeLists(data.lists);
-					_makeGyeongmaeTonggyes(data.tonggyes);
-					_makeGyeongmaeMaegagmulgeons(data.maegagmulgeons);
-					_makeGyeongmaeJinhaengmulgeons(data.jinhaengmulgeons);
-				},
-				error:function() {
-					
-				}
-			});
+			if(hasForm) {
+				hotplace.ajax({
+					url: 'gyeongmae/detail',
+					method: 'GET',
+					dataType: 'json',
+					data: param,
+					loadEl: hotplace.dom.getModalPopId(),
+					success: function(data, textStatus, jqXHR) {
+						console.log(data)
+						$('#gDsageonbeonho').text(data.sageonbeonho);
+						$('#gDdamdang').text(data.damdang);
+						$('#gDsageonjeobsuil').text(data.sageonjeobsuil);
+						$('#gDsojaeji').text(data.sojaeji);
+						$('#gDyongdo').text(data.yongdo);
+						$('#gDibchalbangbeob').text(data.ibchalbangbeob);
+						$('#gDgamjeongpyeongga').text((data.gamjeongpyeongga) ? data.gamjeongpyeongga.money() + ' 원' : '');
+						$('#gDminmaegaggagyeog').text((data.minmaegaggagyeog) ? data.minmaegaggagyeog.money() + ' 원' : '');
+						$('#gDyuchal').text(data.yuchal);
+						$('#gDbaedangyogu').text(data.baedangyogu);
+						$('#gDcheonggu').text((data.cheonggu) ? data.cheonggu.money() + ' 원': '');
+						$('#gDmaegaggiil').text(data.maegaggiil);
+						$('#gDbigo').text(data.bigo);
+						
+						_makeGyeongmaeImages(data.images);
+						_makeGyeongmaeGiils(data.giils);
+						_makeGyeongmaeLists(data.lists);
+						_makeGyeongmaeTonggyes(data.tonggyes);
+						_makeGyeongmaeMaegagmulgeons(data.maegagmulgeons);
+						_makeGyeongmaeJinhaengmulgeons(data.jinhaengmulgeons);
+					},
+					error:function() {
+						
+					}
+				});
+			}
+			else {
+				hotplace.dom.showAlertMsg(null, '경매상세정보를 보실수 있는 권한이 없습니다.', {width:'40%'});
+			}
 		});
 	}
 	
@@ -320,37 +325,44 @@
 		var data = marker._data;
 		
 		var tForm = hotplace.dom.getTemplate('gyeongmaeForm');
-		_getThumb(data, function(d) {
-			_address = d.sojaeji || '';
-			win.open(map, marker);
-			win.setOptions('content', tForm($.extend(
-				{path: hotplace.getContextUrl() + 'resources/'},
-				d,
-				{
-					yongdo:(d.yongdo || '').replace(/\|/gm, ','),
-					gamjeongpyeongga:(d.gamjeongpyeongga || '').money(),
-					
-				})
-			));
-			
-			if(d.imgThumb) {
-				$('#gImgThumb').prop('src', d.imgThumb);
-			}
-			
-			$(_btnGyeongmaeDetail)
-			.data('goyubeonho', d.goyubeonho)
-			.data('pnu', d.pnu)
-			.data('deunglogbeonho', d.deunglogbeonho);
-			
-			$(_btnGyeongmaeThumbClose)
-			.off('click')
-			.on('click', function() {
-				win.close();
+		
+		if(!tForm) {
+			//security로 인해 권한 없음
+			hotplace.dom.showAlertMsg(null, '경매정보를 보실수 있는 권한이 없습니다.', {width:'40%'});
+		}
+		else {
+			_getThumb(data, function(d) {
+				_address = d.sojaeji || '';
+				win.open(map, marker);
+				win.setOptions('content', tForm($.extend(
+					{path: hotplace.getContextUrl() + 'resources/'},
+					d,
+					{
+						yongdo:(d.yongdo || '').replace(/\|/gm, ','),
+						gamjeongpyeongga:(d.gamjeongpyeongga || '').money(),
+						
+					})
+				));
+				
+				if(d.imgThumb) {
+					$('#gImgThumb').prop('src', d.imgThumb);
+				}
+				
+				$(_btnGyeongmaeDetail)
+				.data('goyubeonho', d.goyubeonho)
+				.data('pnu', d.pnu)
+				.data('deunglogbeonho', d.deunglogbeonho);
+				
+				$(_btnGyeongmaeThumbClose)
+				.off('click')
+				.on('click', function() {
+					win.close();
+				});
+				
+				_bindDetailClickHandler(win);
+				_bindGeoClickHandler(data.location[1], data.location[0]);
 			});
-			
-			_bindDetailClickHandler(win);
-			_bindGeoClickHandler(data.location[1], data.location[0]);
-		});
+		}
 	}
 }(
 	hotplace.gyeongmae = hotplace.gyeongmae || {},

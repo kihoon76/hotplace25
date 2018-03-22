@@ -56,17 +56,24 @@
 		win.open(map, marker);
 		var tForm = hotplace.dom.getTemplate('acceptbuildingForm');
 		
-		win.setOptions('content', tForm());
-		
-		$(_btnAcceptBuildingThumbClose)
-		.off('click')
-		.on('click', function() {
-			win.close();
-		});
-		
-		_bindDetailClickHandler();
-		_bindGeoClickHandler(data.location[1], data.location[0]);
-		_getThumb(data);
+		if(!tForm) {
+			//security로 인해 권한 없음
+			hotplace.dom.showAlertMsg(null, '건축허가정보를 보실수 있는 권한이 없습니다.', {width:'40%'});
+		}
+		else {
+			win.setOptions('content', tForm());
+			
+			$(_btnAcceptBuildingThumbClose)
+			.off('click')
+			.on('click', function() {
+				win.close();
+			});
+			
+			_bindDetailClickHandler();
+			_bindGeoClickHandler(data.location[1], data.location[0]);
+			_getThumb(data);
+		}
+
 	}
 }(
 	hotplace.acceptbuilding = hotplace.acceptbuilding || {},

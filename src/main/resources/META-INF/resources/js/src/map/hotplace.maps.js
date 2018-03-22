@@ -2147,7 +2147,7 @@
 		}
 	}
 	
-	function _markerLevelLimit() {
+	function _markerLevelLimit(isMaskTran, isJustCss) {
 		if(maps.isActiveMulgeonView()) {
 			hotplace.menu.eachMulgeonViewChk(function($chk, checked, type) {
 				var minLevel = null;
@@ -2170,8 +2170,16 @@
 							if(checked) {
 								$chk.prop('checked', false);
 								//$this.data('prev', 'on');
-								_markerGroupOnOff[type] = 0;
 								
+								if(!isJustCss) {
+									//mask transaction일 경우 
+									//물건보기 변경후 확인버튼을 안누르고 줌 변경한 경우 때문에 
+									if(isMaskTran && _markerGroupOnOff[type] == 1) {
+										hotplace.dom.discountLoadEndCount();
+									}
+									
+									_markerGroupOnOff[type] = 0;
+								}
 							}
 							else {
 								$chk.data('prev', 'off');
@@ -2184,6 +2192,18 @@
 	}
 	
 	maps.checkMarkerLevelLimit = _markerLevelLimit;
+	
+	//물건보기 설정후 확인을 누르지않고 줌 변경하면 내용과 체크버튼이 싱크가 맞지 않는다.
+	maps.initMulgeonCheckMarker = function() {
+		hotplace.menu.eachMulgeonViewChk(function($chk, checked, type) {
+			if(_markerGroupOnOff[type] == 1) {
+				$chk.prop('checked', true);
+			}
+			else {
+				$chk.prop('checked', false);
+			}
+		});
+	}
 	
 	/*function _markerLevelLimit2() {
 		if(maps.isActiveMulgeonView()) {
@@ -2233,7 +2253,7 @@
 	 * @desc marker type의 marker를 보여준다  
 	 */
 	maps.showMarkers = function(callback, isMaskTran) {
-		_markerLevelLimit();
+		_markerLevelLimit(isMaskTran);
 		var currentLevel = _getCurrentLevel(),
 		    activeMarkers = maps.getActiveMarkers(),
 		    activeMarkerCnt = activeMarkers.length,

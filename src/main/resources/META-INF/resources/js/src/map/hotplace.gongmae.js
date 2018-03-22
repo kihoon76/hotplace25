@@ -45,9 +45,11 @@
 				//loadEl: hotplace.dom.getModalPopId(),
 				success: function(data, textStatus, jqXHR) {
 					console.log(data);
-					hotplace.dom.showGongmaeDetail(function() {
+					var hasForm = hotplace.dom.showGongmaeDetail(function() {
 						_makeGongmaeImages(data.images);
 					}, data);
+					
+					if(!hasForm) hotplace.dom.showAlertMsg(null, '공매상세정보를 보실수 있는 권한이 없습니다.', {width:'40%'});
 				},
 				error:function() {
 					
@@ -121,22 +123,29 @@
 		var data = marker._data;
 		
 		var tForm = hotplace.dom.getTemplate('gongmaeForm');
-		_getThumb(data, function(d) {
-			_address = d.mulgeonAddress;
-			
-			win.open(map, marker);
-			win.setOptions('content', tForm(d));
-			
-			$(_btnGongmaeThumbClose)
-			.off('click')
-			.on('click', function() {
-				win.close();
+		
+		if(!tForm) {
+			//security로 인해 권한 없음
+			hotplace.dom.showAlertMsg(null, '공매정보를 보실수 있는 권한이 없습니다.', {width:'40%'});
+		}
+		else {
+			_getThumb(data, function(d) {
+				_address = d.mulgeonAddress;
+				
+				win.open(map, marker);
+				win.setOptions('content', tForm(d));
+				
+				$(_btnGongmaeThumbClose)
+				.off('click')
+				.on('click', function() {
+					win.close();
+				});
+				
+				
+				_bindDetailClickHandler(d);
+				_bindGeoClickHandler(data.location[1], data.location[0]);
 			});
-			
-			
-			_bindDetailClickHandler(d);
-			_bindGeoClickHandler(data.location[1], data.location[0]);
-		});
+		}
 	}
 }(
 	hotplace.gongmae = hotplace.gongmae || {},

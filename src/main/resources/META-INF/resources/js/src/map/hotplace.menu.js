@@ -817,8 +817,13 @@
 		});
 		
 		//건축허가면적 enable 설정 여부 검토
-		return function() {
-			hotplace.maps.checkMarkerLevelLimit();
+		return {
+			after:function() {
+				hotplace.maps.checkMarkerLevelLimit();
+			},
+			before:function() {
+				hotplace.maps.initMulgeonCheckMarker();
+			}
 		}
 	}
 	

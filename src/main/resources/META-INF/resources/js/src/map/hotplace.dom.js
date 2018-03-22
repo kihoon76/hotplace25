@@ -28,7 +28,18 @@
 		_dvCommonPanoInfo = '#dvCommonPanoInfo', //물건보기에서 파노라마 정보 컨테이너
 		_dvHeatMapCapture = '#dvHeatMapCapture',
 		_$mapArea = $('#mapArea'), 
+		_mulgeonAcceptBuilding = '#mulgeonAcceptBuilding',  //물건보기 건축허가 체크박스
 		_sliderGrp = {}; //slider 관리객체
+	
+	dom.onOffAcceptBuilding = function(onOff) {
+		var $chk = $(_mulgeonAcceptBuilding);
+		if(onOff == 'on') {
+			$chk.removeAttr('disabled');
+		}
+		else {
+			$chk.prop('disabled', true);
+		}
+	}
 	
 	dom.getModalPopId = function() {
 		return _modalPopup;
@@ -405,6 +416,12 @@
 		dom.showMask(loadEl, msg);
 	}
 	
+	dom.discountLoadEndCount = function() {
+		if(_loadEndCount > 0) {
+			_loadEndCount--;
+		}
+	}
+	
 	/**
 	 * @memberof hotplace.dom
 	 * @function hideMaskTransaction
@@ -451,7 +468,14 @@
 					method : 'GET',
 					activeMask : false,
 					success : function(data, textStatus, jqXHR) {
-						_templates[name] = Handlebars.compile(data);
+						
+						//security check
+						if(data.indexOf('{') == 0) {
+							_templates[name] = undefined;
+						}
+						else {
+							_templates[name] = Handlebars.compile(data);
+						}
 					},
 					error: function() {
 						throw new Error('html template error')
@@ -588,8 +612,10 @@
 	}
 	
 	dom.showGyeongmaeDetail = function(fn, param) {
-		_appendModalPopup('gyeongmaeDetailForm', null ,param);
-		dom.openModal('', null, null, fn);
+		var ok = _appendModalPopup('gyeongmaeDetailForm', null ,param);
+		if(ok) dom.openModal('', null, null, fn);
+		
+		return ok;
 	}
 	
 	dom.showGyeongmaeImage = function(modalSize, param) {
@@ -604,8 +630,9 @@
 	}
 	
 	dom.showGongmaeDetail = function(fn, param) {
-		_appendModalPopup('gongmaeDetailForm', null ,param);
-		dom.openModal('', null, null, fn);
+		var ok = _appendModalPopup('gongmaeDetailForm', null ,param);
+		if(ok) dom.openModal('', null, null, fn);
+		return ok;
 	}
 	
 	/**
@@ -830,7 +857,10 @@
 	
 	function _appendModalPopup(formName, $element, param) {
 		var tForm = dom.getTemplate(formName);
+		if(!tForm) return false;
 		($element || _$modalPopup).html(tForm(param));
+		
+		return true;
 	}
 	
 	dom.showLoginForm = function(fn) {
@@ -914,7 +944,17 @@
 	
 	dom.showIntroMain = function() {
 		_appendModalPopup('introMainForm', null, {});
-		dom.openModal('', {width:'600'});
+		dom.openModal('', {width:'600'}, null, function() {
+			$('#btnIntroMainClose')
+			.off('click')
+			.on('click', function() {
+				if($('#chkIntroCookie').is(':checked')) {
+					$.cookie('intro', 'N', {expires:1, path: '/'});
+				}
+				
+				dom.closeModal();
+			});
+		});
 	}
 	
 	dom.showLogoutForm = function(fn) {
@@ -1105,7 +1145,22 @@
 		
 		_bindLnbMenu(data, isNewDom);
 		
+		var showBeforeFn;
 		var showAfterFn = hotplace.menu.initMenuDom(data);
+		
+		/*************************************************************
+		* 초기에는 lnb가 열린후에 실행될 함수만 리턴했는데 열리기전 실행될 함수가 추가됨
+		* showAfterFn type이 function이면 기존대로 show이후 실행
+		* {before:function, after:function}
+		**************************************************************/
+		if(showAfterFn) {
+			if($.isPlainObject(showAfterFn)) {
+				showBeforeFn = showAfterFn.before;
+				showAfterFn = showAfterFn.after;
+			}
+		}
+		
+		if(showBeforeFn) showBeforeFn();
 		
 		if(isFirstLoad) {
 			$element.data('firstLoad', false);

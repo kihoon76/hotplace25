@@ -65,7 +65,7 @@ public class HandlebarController {
 	
 	@GetMapping("mypage")
 	public String getMypage(ModelMap m) {
-		String accountId = "khnam";//SessionUtil.getSessionUserId();
+		String accountId = SessionUtil.getSessionUserId();
 		
 		Account account = userService.getUserInfo(accountId);
 		String[] email = account.getEmail().split("@");
