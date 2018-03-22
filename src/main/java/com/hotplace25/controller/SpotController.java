@@ -42,8 +42,7 @@ public class SpotController {
 		boolean doRegisted = false;
 		AjaxVO vo = new AjaxVO();
 		
-		//maemul.setAccountId(SessionUtil.getSessionUserId());
-		maemul.setAccountId("khnam");
+		maemul.setAccountId(SessionUtil.getSessionUserId());
 		
 		try {
 			doRegisted = spotService.doRegistedMaemul(maemul);
@@ -92,8 +91,7 @@ public class SpotController {
 		AjaxVO vo = new AjaxVO();
 		
 		Maemul maemul = new Maemul();
-		//maemul.setAccountId(SessionUtil.getSessionUserId());
-		maemul.setAccountId("khnam");
+		maemul.setAccountId(SessionUtil.getSessionUserId());
 		maemul.setAddressJibeon(addressJibeon);
 		maemul.setDescription(description);
 		maemul.setPnu(pnu);
@@ -146,8 +144,7 @@ public class SpotController {
 		boolean doRegisted = false;
 		AjaxVO vo = new AjaxVO();
 		
-		//consulting.setAccountId(SessionUtil.getSessionUserId());
-		consulting.setAccountId("khnam");
+		consulting.setAccountId(SessionUtil.getSessionUserId());
 		try {
 			doRegisted = spotService.doRegistedConsulting(consulting);
 			if(doRegisted) {
@@ -180,7 +177,7 @@ public class SpotController {
 		boolean doRegisted = false;
 		AjaxVO vo = new AjaxVO();
 		
-		gwansimMulgeon.setAccountId("khnam");
+		gwansimMulgeon.setAccountId(SessionUtil.getSessionUserId());
 		try {
 			doRegisted = spotService.doRegistedGwansimMulgeon(gwansimMulgeon);
 			if(doRegisted) {
@@ -216,7 +213,7 @@ public class SpotController {
 		AjaxVO vo = new AjaxVO();
 		vo.setSuccess(false);
 		
-		String currentId = "khnam";//SessionUtil.getSessionUserId();
+		String currentId = SessionUtil.getSessionUserId();
 		
 		GwansimMulgeon gm = new GwansimMulgeon();
 		gm.setAccountId(currentId);
@@ -245,7 +242,7 @@ public class SpotController {
 		AjaxVO vo = new AjaxVO();
 		vo.setSuccess(false);
 		
-		String currentId = "khnam";//SessionUtil.getSessionUserId();
+		String currentId = SessionUtil.getSessionUserId();
 		
 		GwansimMulgeon gm = new GwansimMulgeon();
 		gm.setAccountId(currentId);
@@ -269,7 +266,7 @@ public class SpotController {
 	@GetMapping("my/gwansim")
 	public String getMyGwansim(@RequestParam("gwansimNum") String gwansimNum, ModelMap m) {
 		
-		String currentId = "khnam";//SessionUtil.getSessionUserId();
+		String currentId = SessionUtil.getSessionUserId();
 		
 		GwansimMulgeon gm = new GwansimMulgeon();
 		gm.setAccountId(currentId);

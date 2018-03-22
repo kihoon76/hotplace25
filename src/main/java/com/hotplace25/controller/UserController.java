@@ -78,7 +78,7 @@ public class UserController {
 		ObjectMapper m = new ObjectMapper();
 		System.err.println(m.writeValueAsString(account));
 		
-		account.setId("khnam"/*SessionUtil.getSessionUserId()*/);
+		account.setId(SessionUtil.getSessionUserId());
 		
 		try {
 			boolean r = userService.modifyUserInfo(account);

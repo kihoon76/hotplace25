@@ -120,7 +120,7 @@
 		
 		<div id="dvStreetView">
 			<div id="dvStreetViewHeader">
-				<span class="tit">HotPlace25</span>
+				<span class="tit logo"><span class="hidden">HotPlace25</span></span>
 				<a href="#" class="pano-close">
 					<i class="ambicon-015_mark_times">
 						<span class="hidden">닫기</span>
