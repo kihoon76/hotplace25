@@ -243,7 +243,7 @@
 	}
 	
 	//주소검색후 결과가 없는 메시지를 뿌림
-	function _emptyAddressSearchResultForm() {
+	function _emptyAddressSearchResultForm(r) {
 		var emptyHtml = [];
 		emptyHtml.push('<table class="tableStyle left">');
 		emptyHtml.push('<colgroup>');
@@ -251,7 +251,7 @@
 		emptyHtml.push('</colgroup>');
 		emptyHtml.push('<tbody>');
 		emptyHtml.push('	<tr>');
-		emptyHtml.push('		<td class="">검색결과가 없습니다</td>');
+		emptyHtml.push('		<td class="">' + ((r == 'L') ? '로그인후 사용하세요' : '검색결과가 없습니다.') + '</td>');
 		emptyHtml.push('	</tr>');
 		emptyHtml.push('</tbody>');
 		emptyHtml.push('</table>');
@@ -362,7 +362,8 @@
 						else {
 							//검색 결과가 없을때 
 							console.log(data.length)
-							_bindAddressSearchResult(_emptyAddressSearchResultForm());
+							var r = data.length;
+							_bindAddressSearchResult(_emptyAddressSearchResultForm((r == undefined)? 'L':'R'));
 							_ctrlMoveMapInAddressSearch(false);
 						}
 					}
