@@ -67,7 +67,7 @@
 		})
 		
 		hotplace.dom.showSpotSujibunseogForm(function() {
-			hotplace.sujibunseog.init();
+			hotplace.sujibunseog.init({address: _address});
 			hotplace.calc.sujibunseog.initCalc();
 		}, param);
 	}

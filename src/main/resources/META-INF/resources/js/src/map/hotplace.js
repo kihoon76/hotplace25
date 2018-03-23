@@ -629,6 +629,7 @@
 	}
 	
 	var _err = {
+		LOGIN:'100',
 		PAGE_NOT_FOUND: '404',
 		SERVER_ERR: '500',
 		DUP_LOGIN: '202', //중복 로그인
@@ -656,8 +657,8 @@
 	
 	hotplace.processAjaxError = function(errCode) {
 		switch(errCode) {
-		case '100' :
-			hotplace.dom.showAlertMsg();
+		case _err.LOGIN :
+			hotplace.dom.showAlertMsg(hotplace.dom.showLoginForm, '로그인후 사용하세요.');
 			break;
 		case _err.DUP_LOGIN :
 			hotplace.dom.showAlertMsg(function() {

@@ -158,7 +158,8 @@
 		_WMaechool = '#WMaechool',
 		_ratioMaechool = '#ratioMaechool',
 		_WGyeongsang = '#WGyeongsang',
-		_ratioGyeongsang = '#ratioGyeongsang';
+		_ratioGyeongsang = '#ratioGyeongsang',
+		_address = null;
 		
 	sujibunseog.getStepOwnTermId = function() { return _stepOwnTerm; }
 	sujibunseog.getStepOtherAssetRatioId = function() { return _stepOtherAssetRatio; }
@@ -413,7 +414,7 @@
 			fileName:'sujibunseogFormPdf',
 			cssName: 'pdf',
 			docName: '수지분석',
-			address: '서울시 강남구 도곡동 963',
+			address: _address,
 			jimok: '전',
 			valPerPyeung:'21,000',
 			area: '132',
@@ -561,7 +562,8 @@
 	
 	sujibunseog.isOwnGaein = _isOwnGaein;
 	
-	sujibunseog.init = function() {
+	sujibunseog.init = function(param) {
+		_address = param.address
 		//펼침버튼
 		hotplace.dom.listExpandCollapse(_dvSujibunseog);
 		

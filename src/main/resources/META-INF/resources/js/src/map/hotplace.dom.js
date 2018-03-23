@@ -579,13 +579,21 @@
 	}
 	
 	dom.showNoticeList = function() {
-		_appendModalPopup('noticeListForm');
-		hotplace.notice.showPage();
+		var ok = _appendModalPopup('noticeListForm');
+		if(ok) {
+			hotplace.notice.showPage();
+			
+			dom.openModal('', {width: 1000}, function() {
+				hotplace.notice.clear();
+			});
+		}
+		else {
+			_showLoginMsg();
+		}
 		
-		dom.openModal('', {width: 1000}, function() {
-			hotplace.notice.clear();
-		});
 	}
+	
+	
 	
 	dom.showSite = function() {
 		_appendModalPopup('introSiteForm');
@@ -863,19 +871,35 @@
 		return true;
 	}
 	
+	function _showLoginMsg() {
+		dom.showAlertMsg(dom.showLoginForm, '로그인후 사용하세요.');
+	}
+	
 	dom.showLoginForm = function(fn) {
 		_appendModalPopup('loginForm');
 		dom.openModal('', {width: '410'}, fn);
 	}
 	
 	dom.showSpotSujibunseogForm = function(fn, param) {
-		_appendModalPopup('spotSujibunseogForm', null, param);
-		dom.openModal('', null, null, fn);
+		var ok = _appendModalPopup('spotSujibunseogForm', null, param);
+		
+		if(ok) {
+			dom.openModal('', null, null, fn);
+		}
+		else {
+			_showLoginMsg();
+		}
 	}
 	
 	dom.showSpotGwansimRegForm = function(param, fn) {
-		_appendModalPopup('spotGwansimRegForm', null, param);
-		dom.openModal('', {width: '500'}, fn);
+		var ok = _appendModalPopup('spotGwansimRegForm', null, param);
+		if(ok) {
+			dom.openModal('', {width: '500'}, fn);
+		}
+		else {
+			_showLoginMsg();
+		}
+		
 	}
 	
 	dom.showSpotMaemulRegForm = function(fn, param) {
@@ -884,8 +908,13 @@
 	}
 	
 	dom.showSpotConsultingForm = function(closeFn, openFn, param) {
-		_appendModalPopup('spotConsultingForm', null, param);
-		dom.openModal('', {width: '500'}, closeFn, openFn);
+		var ok = _appendModalPopup('spotConsultingForm', null, param);
+		if(ok) {
+			dom.openModal('', {width: '500'}, closeFn, openFn);
+		}
+		else {
+			_showLoginMsg();
+		}
 	}
 	
 	dom.showSpotTojiUseLimitForm = function(closeFn, openFn, param) {
@@ -913,6 +942,11 @@
 				dataType : 'html',
 				method : 'GET',
 				success : function(data, textStatus, jqXHR) {
+					if(data.indexOf('{') == 0) {
+						jqXHR.errCode = hotplace.error.LOGIN;
+						return;
+					}
+					
 					_templates['mypageForm'] = Handlebars.compile(data);
 					_appendModalPopup('mypageForm');
 					dom.openModal('', {width:'800'}, null, openFn);

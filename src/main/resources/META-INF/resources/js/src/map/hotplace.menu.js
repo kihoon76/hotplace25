@@ -595,6 +595,11 @@
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
 				
+				if(data.errCode == hotplace.error.LOGIN) {
+					hotplace.dom.showAlertMsg(hotplace.dom.showLoginForm, '로그인후 사용하세요.');
+					return;
+				}
+				
 				_toojaDvToogle();
 				_saveBtnInfo(false);
 				
@@ -754,6 +759,11 @@
 			contentType: 'application/json; charset=UTF-8',
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
+				
+				if(data.errCode == hotplace.error.LOGIN) {
+					hotplace.dom.showAlertMsg(hotplace.dom.showLoginForm, '로그인후 사용하세요.');
+					return;
+				}
 				
 				if(data.success) {
 					_gyeonggongDvToogle();

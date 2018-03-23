@@ -18,8 +18,19 @@
 		<sec:intercept-url pattern="/resources/templates/gongmaeDetailForm.handlebars" access="hasRole('ROLE_JOINED')"/>
 		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasRole('ROLE_JOINED')"/>
 		<sec:intercept-url pattern="/resources/templates/acceptbuildingForm.handlebars" access="hasRole('ROLE_JOINED')"/>
+		<sec:intercept-url pattern="/resources/templates/spotSujibunseogForm.handlebars" access="hasRole('ROLE_JOINED')"/>
+		<sec:intercept-url pattern="/resources/templates/spotGwansimRegForm.handlebars" access="hasRole('ROLE_JOINED')"/>
+		<sec:intercept-url pattern="/resources/templates/spotConsultingForm.handlebars" access="hasRole('ROLE_JOINED')"/>
 		
+		<sec:intercept-url pattern="/handlebar/mypage" access="hasRole('ROLE_JOINED')"/>
+		
+		<!-- heatmap 보기 -->
 		<sec:intercept-url pattern="/locationbounds/**" access="permitAll"/>
+		<!-- 공지사항 -->
+		<sec:intercept-url pattern="/notice/page/**" access="permitAll"/> 
+		<!-- 주소검색 -->
+		<sec:intercept-url pattern="/mulgeon/search" access="permitAll"/> 
+		
 		<sec:intercept-url pattern="/index.jsp" access="permitAll" />
 		<sec:intercept-url pattern="/resources/**" access="permitAll" />
 		<sec:intercept-url pattern="/main" access="permitAll" />
