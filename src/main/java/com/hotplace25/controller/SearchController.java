@@ -19,7 +19,9 @@ import com.hotplace25.domain.AjaxVO;
 import com.hotplace25.domain.GyeongGongmaeIn;
 import com.hotplace25.domain.GyeongGongmaeOut;
 import com.hotplace25.domain.Jangmi;
+import com.hotplace25.domain.ToojaSearchResult;
 import com.hotplace25.service.SearchService;
+import com.hotplace25.util.DataUtil;
 
 @RequestMapping("/search")
 @Controller
@@ -64,25 +66,19 @@ public class SearchController {
 	
 	@PostMapping("jangmi")
 	@ResponseBody
-	public List<Jangmi> getJangmiList(@RequestBody Map<String, Object>  param) {
+	public List<ToojaSearchResult> getJangmiList(@RequestBody Map<String, Object>  param) {
 		
 		System.err.println(param.toString());
 		
-		List<Jangmi> list = new ArrayList<>();
-		Jangmi j = null;
 		
-		for(int i=0; i<20; i++) {
-			j = new Jangmi();
-			j.setNum(i + 1);
-			j.setCityPlan("도로");
-			j.setJibeon("서울시 송파구 잠실본동 40");
-			j.setYongdoJiyeog("녹지지역");
-			j.setHpGrade("2등급");
-			j.setBosangPyeonib("편입");
-			j.setLat(37.50838492780f);
-			j.setLng(127.09740818600f);
-			list.add(j);
-		}
+		Jangmi jangmiIn = new Jangmi();
+		//System.err.println(DataUtil.convertArrayToString((ArrayList<String>)param.get("jiyeog")));
+		jangmiIn.setJiyeok(DataUtil.convertArrayToString((ArrayList<String>)param.get("jiyeog")));
+		jangmiIn.setJimok(DataUtil.convertArrayToString((ArrayList<String>)param.get("jimok")));
+		jangmiIn.setGongsi(DataUtil.convertArrayToString((ArrayList<String>)param.get("gongsi")));
+		
+		
+		List<ToojaSearchResult> list = searchService.getJangmiList(jangmiIn);
 		
 		return list;
 		

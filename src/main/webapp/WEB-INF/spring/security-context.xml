@@ -11,8 +11,8 @@
 <!-- 		<sec:headers> -->
 <!-- 			<sec:frame-options disabled="true" /> -->
 <!-- 		</sec:headers> -->
-		
-		<sec:intercept-url pattern="/resources/templates/gyeongmaeForm.handlebars" access="hasRole('ROLE_JOINED')"/>
+		<sec:intercept-url pattern="/resources/templates/gyeongmaeForm.handlebars" access="hasRole('ROLE_ECONOMY')"/>	
+<!-- 		<sec:intercept-url pattern="/resources/templates/gyeongmaeForm.handlebars" access="hasRole('ROLE_ECONOMY')"/> -->
 		<sec:intercept-url pattern="/resources/templates/gyeongmaeDetailForm.handlebars" access="hasRole('ROLE_JOINED')"/>
 		<sec:intercept-url pattern="/resources/templates/gongmaeForm.handlebars" access="hasRole('ROLE_JOINED')"/>
 		<sec:intercept-url pattern="/resources/templates/gongmaeDetailForm.handlebars" access="hasRole('ROLE_JOINED')"/>

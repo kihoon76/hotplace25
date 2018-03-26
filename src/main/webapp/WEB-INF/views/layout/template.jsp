@@ -22,7 +22,7 @@
 <body data-url="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" data-year="${currYear}">
 	<!-- top GNB영역 -->
 	<div id="gnbArea" class="gnbArea">
-		<h1><a href="#" class="logo"><span class="hidden">HotPlace25</span></a></h1>
+		<h1><a href="" class="logo"><span class="hidden">HotPlace25</span></a></h1>
 
 		<div class="dvBtnArea">
 			<!-- 타임뷰 Range -->

@@ -349,6 +349,10 @@
 		_commonModal(_$alrtPopup, modalSize);
 	} 
 	
+	dom.isOpenedAlrtModal = function() {
+		return _$alrtPopup.is(':visible');
+	}
+	
 	function _commonModal($element, modalSize) {
 		
 		//modal popup인지 검사 
@@ -477,8 +481,8 @@
 							_templates[name] = Handlebars.compile(data);
 						}
 					},
-					error: function() {
-						throw new Error('html template error')
+					error: function(jqXHR, textStatus, e) {
+						//throw new Error('html template error');
 					}
 				});
 			}
@@ -1268,7 +1272,7 @@
 		var lnbWidth   = $('#lnbArea').outerWidth();
 		$('.mapArea').animate({
 			'left': lnbWidth 
-		},100);
+		},50);
 		$('.mapArea').css({'min-width':'964px'});
 	}
 	
@@ -1379,7 +1383,7 @@
 		param = param || {};
 		
 		$table.tabulator($.extend({
-		    height:'100%',//826, // set height of table
+		    height:'826',//826, // set height of table (높이가 설정되지 않으면 virtual dom 동작안함)
 		    fitColumns:true, //fit columns to width of table (optional)
 		    autoResize:true,
 		    rowClick:function(e, row){ //trigger an alert message when the row is clicked

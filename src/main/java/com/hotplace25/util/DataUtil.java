@@ -2,6 +2,8 @@ package com.hotplace25.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -308,6 +310,22 @@ public class DataUtil {
 		DateFormat dateFormat = new SimpleDateFormat(format);
 		Calendar cal = Calendar.getInstance();
 		return dateFormat.format(cal.getTime()); 
+	}
+	
+	public static String convertArrayToString(ArrayList<String> list) {
+		StringBuffer listString = null;
+		if(list != null && list.size() > 0) {
+			listString = new StringBuffer();
+			
+			for (String s : list) {
+			    listString.append(s + ",");
+			}
+			
+			listString.deleteCharAt(listString.length()-1);
+			return listString.toString();
+		}
+		
+		return "";
 	}
 	
 }

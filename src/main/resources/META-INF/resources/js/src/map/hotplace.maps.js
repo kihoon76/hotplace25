@@ -403,7 +403,7 @@
 		GYEONGMAE : { m: [], url: 'gyeongmaemarker', icon:'gyeongmae.png'/*, trigger: 'mouseover'*/ },
 		GONGMAE : { m: [], url: 'gongmaemarker', icon: 'gongmae.png'/*, trigger: 'mouseover'*/ },
 		BOSANG: { m: [], url: 'bosangmarker', icon: 'bosang.png', clusterIcon:'bosangC.png', clustering: true, stopLevel: 11},
-		PYEONIB: { m: [], url: 'pyeonibmarker', icon: 'pyeonib.png', clusterIcon:'pyeonibC.png', clustering: true },
+		PYEONIB: { m: [], url: 'pyeonibmarker', icon: 'pyeonib.png', clusterIcon:'pyeonibC.png', clustering: true, stopLevel: 11},
 		SILGEOLAE: { m: [], url: 'silgeolaemarker', icon: 'silgeolae.png' },
 		ACCEPT_BUILDING: { m: [], url: 'acceptbuildingmarker', icon: 'acceptbuilding.png', level:13 },
 		ADDRESS_SEARCH: { m: [], icon: 'marker_search.png' }

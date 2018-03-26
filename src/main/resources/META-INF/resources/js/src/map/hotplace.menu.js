@@ -13,22 +13,23 @@
 	
 	var _tabulatorColumns = {
 		jangmi:[
-		    {title:'연번', field:'num', align:'center', width:70},
-		    {title:'지번주소', field:'jibeon', align:'left', width:370, headerFilter:'input', headerFilterPlaceholder:'주소검색'},
-		    {title:'도시계획시설', field:'cityPlan', align:'center', width:100, headerFilter:true,
-		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.cityPlan), editable:hotplace.dom.createTabulatorNoEdit
+		    //{title:'연번', field:'num', align:'center', width:70},
+		    {title:'pnu', field:'pnu', visible:false},
+		    {title:'지목', field:'jimokCode', align:'center', width:70, headerFilter:true, 
+		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.jimok), editable:hotplace.dom.createTabulatorNoEdit,
+		    	formatter:function(cell) {
+			    	
+			    	return hotplace.util.getJimokStr(cell.getValue());
+			    }
 		    },
-			{title:'용도지역', field:'yongdoJiyeog', align:'center', width:80, headerFilter:true,
-		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.yongdoJiyeog), editable:hotplace.dom.createTabulatorNoEdit
-			},
-			{title:'HP등급', field:'hpGrade', align:'center', width:80},
-//			{title:'경공매 진행 여부', field:'gong', align:'center', width:120},
-			{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter:true,
-				editor:_makeTabulatorFilterFromCode(hotplace.config.codes.bosangPyeonib), editable:hotplace.dom.createTabulatorNoEdit
-			},
-//			{title:'등기사건', field:'deunggi', align:'center', width:80},
-			{title:'위도', field:'lat', visible:false},
-			{title:'경도', field:'lng', visible: false}
+		    {title:'면적', field:'area', align:'center', width:100},
+		    {title:'공시지가', field:'gongsi', align:'center', width:100},
+		    {title:'지역', field:'jiyeokCode', align:'left', width:170, headerFilter:'input', headerFilterPlaceholder:'주소검색', formatter:function(cell) {
+		    	
+		    	return hotplace.util.getJiyeokStr(cell.getValue());
+		    }},
+			//{title:'위도', field:'lat', visible:false},
+			//{title:'경도', field:'lng', visible: false}
 		],
 		tojiuselimitcancel:[
 		    {title:'연번', field:'num', align:'center', width:70},

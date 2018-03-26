@@ -108,6 +108,24 @@
 		
 		return options.join('');
 	}
+	
+	function _getCodeStr(code, val) {
+		for(var key in code) {
+			if(code[key].value == val) {
+				return code[key].name;
+			}
+		}
+		
+		throw new Error(val + ' is not valid');
+	}
+	
+	util.getJiyeokStr = function(val) {
+		return _getCodeStr(hotplace.config.codes.jiyeok, val);
+	}
+	
+	util.getJimokStr = function(val) {
+		return _getCodeStr(hotplace.config.codes.jimok, val);
+	}
 }(
 	hotplace.util = hotplace.util || {},
 	jQuery

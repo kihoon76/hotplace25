@@ -7,8 +7,12 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hotplace25.domain.GyeongGongmaeIn;
 import com.hotplace25.domain.GyeongGongmaeOut;
+import com.hotplace25.domain.Jangmi;
+import com.hotplace25.domain.ToojaSearchResult;
 
 @Repository("searchDao")
 public class SearchDaoImpl implements SearchDao {
@@ -25,6 +29,11 @@ public class SearchDaoImpl implements SearchDao {
 	public List<GyeongGongmaeOut> selectGyeongGongList(GyeongGongmaeIn gyeongGongIn) {
 		
 		return msSqlSessionAgent2.selectList(namespace + ".selectGyeongGongList", gyeongGongIn);
+	}
+
+	@Override
+	public List<ToojaSearchResult> selectJangmiList(Jangmi jangmiIn) {
+		return msSqlSession.selectList(namespace + ".selectJangmiList", jangmiIn);
 	}
 
 }

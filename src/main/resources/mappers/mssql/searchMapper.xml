@@ -39,4 +39,23 @@
 		  </if>
 		  </where>
 	</select>
+	
+	<resultMap id="RM_selectJangmiList" type="ToojaSearchResult">
+		<result column="PNU"			property="pnu"/>
+		<result column="지목"				property="jimok"/>
+		<result column="지목코드"			property="jimokCode"/>
+		<result column="면적"				property="area" />
+		<result column="공시지가_코드"  	property="gongsiCode" />
+		<result column="공시지가_기준년월"   property="gongsiCode" />
+		<result column="공시지가"  		property="gongsi" />
+		<result column="지역코드"  		property="jiyeokCode" />
+	</resultMap>
+	
+	<select id="selectJangmiList" statementType="CALLABLE" parameterType="Jangmi" resultMap="RM_selectJangmiList">
+		{ call  [서비스].[dbo].[SEL_일반조건_구분자없음](
+			#{jiyeok, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{jimok, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{gongsi, mode=IN, jdbcType=NVARCHAR, javaType=string}
+		)}
+	</select> 
 </mapper>

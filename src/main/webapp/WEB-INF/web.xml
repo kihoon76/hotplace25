@@ -28,6 +28,11 @@
 		<location>/WEB-INF/views/errors/403.jsp</location>
 	</error-page>
 	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/errors/404.jsp</location>
+	</error-page>
+	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

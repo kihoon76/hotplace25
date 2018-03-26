@@ -183,7 +183,7 @@
     			'pyeonib':{name:'편입', value:'편입'},
     		},
     		jiyeok: {
-    			'seoul':{name:'서울', value:'11'},
+    			'seoul':{name:'서울특별시', value:'11'},
     			'busan':{name:'부산광역시', value:'26'},
     			'daegu':{name:'대구광역시', value:'27'},
     			'incheon':{name:'인천광역시', value:'28'},
@@ -202,33 +202,34 @@
     			'jeju':{name:'제주도', value:'50'}
     		},
     		jimok: {
-    			'jeon':{name:'전', value:'전'},
-    			'imya':{name:'임야', value:'임야'},
-    			'gongjang':{name:'공장', value:'공장'},
-    			'doro':{name:'도로', value:'도로'},
-    			'gugeo':{name:'구거', value:'구거'},
-    			'park':{name:'공원', value:'공원'},
-    			'sajeogji':{name:'사적지', value:'사적지'},
-    			'dab':{name:'답', value:'답'},
-    			'gwangcheonji':{name:'광천지', value:'광천지'},
-    			'school':{name:'학교', value:'학교'},
-    			'yuji':{name:'유지', value:'유지'},
-    			'cheyugyongji':{name:'체육용지', value:'체육용지'},
-    			'myoji':{name:'묘지', value:'묘지'},
-    			'gwasuwon':{name:'과수원', value:'과수원'},
-    			'yeomjeon':{name:'염전', value:'염전'},
-    			'juchajang':{name:'주차장', value:'주차장'},
-    			'jebang':{name:'제방', value:'제방'},
-    			'yangeojang':{name:'양어장', value:'양어장'},
-    			'yuwonji':{name:'유원지', value:'유원지'},
-    			'jabjongji':{name:'잡종지', value:'잡종지'},
-    			'mogjang':{name:'목장', value:'목장'},
-    			'dae':{name:'대', value:'대'},
-    			'juyuso':{name:'주유소', value:'주유소'},
-    			'hacheon':{name:'하천', value:'하천'},
-    			'sudoyongji':{name:'수도용지', value:'수도용지'},
-    			'jonggyoyongji':{name:'종교용지', value:'종교용지'},
-    			'changgo':{name:'창고', value:'창고'}
+    			'jeon':{name:'전', value:'01'},
+    			'dab':{name:'답', value:'02'},
+    			'gwasuwon':{name:'과수원', value:'03'},
+    			'mogjang':{name:'목장', value:'04'},
+    			'imya':{name:'임야', value:'05'},
+    			'gwangcheonji':{name:'광천지', value:'06'},
+    			'yeomjeon':{name:'염전', value:'07'},
+    			'dae':{name:'대', value:'08'},
+    			'gongjang':{name:'공장', value:'09'},
+    			'school':{name:'학교', value:'10'},
+    			'juchajang':{name:'주차장', value:'11'},
+    			'juyuso':{name:'주유소', value:'12'},
+    			'changgo':{name:'창고', value:'13'},
+    			'doro':{name:'도로', value:'14'},
+    			'cheoldo':{name:'철도', value:'15'},
+    			'jebang':{name:'제방', value:'16'},
+    			'hacheon':{name:'하천', value:'17'},
+    			'gugeo':{name:'구거', value:'18'},
+    			'yuji':{name:'유지', value:'19'},
+    			'yangeojang':{name:'양어장', value:'20'},
+    			'sudoyongji':{name:'수도용지', value:'21'},
+    			'park':{name:'공원', value:'22'},
+    			'cheyugyongji':{name:'체육용지', value:'23'},
+    			'yuwonji':{name:'유원지', value:'24'},
+    			'jonggyoyongji':{name:'종교용지', value:'25'},
+    			'sajeogji':{name:'사적지', value:'26'},
+    			'myoji':{name:'묘지', value:'27'},
+    			'jabjongji':{name:'잡종지', value:'28'}
     		},
     		yongdoJiyeog: {
     			//'jugeo':{name:'주거지역', value:'주거지역'},
@@ -340,11 +341,12 @@
     			'philji':{name:'토지이용규제 해소 필지', value:'토지이용규제 해소 필지'}
     		},
     		gongsi: {
-    			'm1000':{name:'1,000원 미만', value:'m1000'},
-    			'1000TO9999':{name:'1,000원~10,000원', value:'1000|9999'},
-    			'10000TO99999':{name:'10,000원~100,000원', value:'10000|99999'},
-    			'100000TO999999':{name:'100,000원~1,000,000원', value:'100000|999999'},
-    			'M10000000':{name:'1천만원 이상', value:'M10000000'}
+    			'm1000':{name:'1,000원 미만', value:'1'},
+    			'1001TO10000':{name:'1,000원~10,000원', value:'2'},
+    			'10001TO100000':{name:'10,000원~100,000원', value:'3'},
+    			'100001TO1000000':{name:'100,000원~1,000,000원', value:'4'},
+    			'1000001TO10000000':{name:'1,000,000원~10,000,000원', value:'5'},
+    			'M10000000':{name:'1천만원 이상', value:'6'}
     		},
     		mulgeonKind: {
     			'jugeo':{name:'주거용', value:''},
@@ -550,11 +552,11 @@
 			method: params.method || 'POST',
 			context: params.context || document.body,
 			data: params.data,
-			statusCode: {
+			/*statusCode: {
 				404: function() {
 					console.log('Page not found');
-				}  
-			},
+				}
+			},*/
 			success: function(data, textStatus, jqXHR) {
 				if(!params.success || typeof params.success !== 'function') {
 					throw new Error('success function not defined');
@@ -569,7 +571,6 @@
 					if(activeMask) {
 						if(params.isMaskTran) {
 							dom.hideMaskTransaction();
-							console.log('99')
 						}
 						else {
 							dom.hideMask();
@@ -585,7 +586,10 @@
 				if(textStatus == 'timeout') {
 					jqXHR.errCode = _err.TIMEOUT;
 				}
-				else if(params.dataType == 'html') {
+				else if(e.toLowerCase() == 'forbidden') {
+					jqXHR.errCode = _err.FORBIDDEN;
+				}
+				else if(e.toLowerCase() == 'not found') {
 					jqXHR.errCode = _err.PAGE_NOT_FOUND;
 				}
 				else {
@@ -620,7 +624,7 @@
 						params.completeBeforeFn();
 					}
 					
-					hotplace.processAjaxError(jqXHR.errCode);
+					hotplace.processAjaxError(jqXHR.errCode, jqXHR.errMsg);
 					
 				}
 			},
@@ -630,6 +634,7 @@
 	
 	var _err = {
 		LOGIN:'100',
+		FORBIDDEN: '403',
 		PAGE_NOT_FOUND: '404',
 		SERVER_ERR: '500',
 		DUP_LOGIN: '202', //중복 로그인
@@ -719,6 +724,9 @@
 			break;
 		case _err.PAGE_NOT_FOUND:
 			hotplace.dom.showAlertMsg(null, '해당요청이 서버에 존재하지 않습니다.', {width:'50%'});
+			break;
+		case _err.FORBIDDEN:
+			hotplace.dom.showAlertMsg(null, '이용권한이 없습니다.', {width:'50%'});
 			break;
 		case _err.COORD:
 			hotplace.dom.showAlertMsg(null, '주소찾아오는중 오류가 발생했습니다.', {width:'50%'});
