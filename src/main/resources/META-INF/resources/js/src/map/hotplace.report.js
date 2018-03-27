@@ -9,7 +9,7 @@
 		var form = document.createElement('form');
 		form.action = hotplace.getContextUrl() + 'download/' + type;
 		form.method = 'POST';
-		form.target = '_self';
+		form.target = '_blank';
 		
 		var input = document.createElement('input');
 		input.type = 'hidden';

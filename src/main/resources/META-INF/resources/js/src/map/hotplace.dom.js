@@ -876,8 +876,11 @@
 	}
 	
 	function _showLoginMsg() {
-		dom.showAlertMsg(dom.showLoginForm, '로그인후 사용하세요.');
+		if(!hotplace.dom.isOpenedAlrtModal())
+		hotplace.processAjaxError(hotplace.error.LOGIN);
 	}
+	
+	dom.showLoginMsg = _showLoginMsg;
 	
 	dom.showLoginForm = function(fn) {
 		_appendModalPopup('loginForm');
@@ -907,8 +910,13 @@
 	}
 	
 	dom.showSpotMaemulRegForm = function(fn, param) {
-		_appendModalPopup('spotMaemulRegForm', null, param);
-		dom.openModal('', {width: '500'}, fn);
+		var ok = _appendModalPopup('spotMaemulRegForm', null, param);
+		if(ok) {
+			dom.openModal('', {width: '500'}, fn);
+		}
+		else {
+			_showLoginMsg();
+		}
 	}
 	
 	dom.showSpotConsultingForm = function(closeFn, openFn, param) {
@@ -922,8 +930,13 @@
 	}
 	
 	dom.showSpotTojiUseLimitForm = function(closeFn, openFn, param) {
-		_appendModalPopup('spotTojiUseLimitForm', null, param);
-		dom.openModal('', {width: '1000'}, closeFn, openFn);
+		var ok = _appendModalPopup('spotTojiUseLimitForm', null, param);
+		if(ok) {
+			dom.openModal('', {width: '1000'}, closeFn, openFn);
+		}
+		else {
+			_showLoginMsg();
+		}
 	}
 	
 	dom.showMulgeonPanoramaForm = function(closeFn, openFn, param) {
@@ -996,9 +1009,14 @@
 	}
 	
 	dom.showLogoutForm = function(fn) {
-		hotplace.dom.showAlertMsg(function() {
+		/*hotplace.dom.showAlertMsg(function() {
 			dom.logout(fn);
-		},'로그아웃 하시겠습니까?', {width: '410'}, '확인');
+		},'로그아웃 하시겠습니까?', {width: '410'}, '확인');*/
+		
+		dom.showConfirmBox(function() {
+			dom.addBodyAllMask();
+			dom.logout(fn);
+		}, '로그아웃 하시겠습니까?', {width: '410'});
 	}
 	
 	dom.toggleLogin = function() {

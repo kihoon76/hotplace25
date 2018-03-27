@@ -11,16 +11,33 @@
 <!-- 		<sec:headers> -->
 <!-- 			<sec:frame-options disabled="true" /> -->
 <!-- 		</sec:headers> -->
-		<sec:intercept-url pattern="/resources/templates/gyeongmaeForm.handlebars" access="hasRole('ROLE_ECONOMY')"/>	
-<!-- 		<sec:intercept-url pattern="/resources/templates/gyeongmaeForm.handlebars" access="hasRole('ROLE_ECONOMY')"/> -->
-		<sec:intercept-url pattern="/resources/templates/gyeongmaeDetailForm.handlebars" access="hasRole('ROLE_JOINED')"/>
-		<sec:intercept-url pattern="/resources/templates/gongmaeForm.handlebars" access="hasRole('ROLE_JOINED')"/>
-		<sec:intercept-url pattern="/resources/templates/gongmaeDetailForm.handlebars" access="hasRole('ROLE_JOINED')"/>
-		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasRole('ROLE_JOINED')"/>
-		<sec:intercept-url pattern="/resources/templates/acceptbuildingForm.handlebars" access="hasRole('ROLE_JOINED')"/>
-		<sec:intercept-url pattern="/resources/templates/spotSujibunseogForm.handlebars" access="hasRole('ROLE_JOINED')"/>
-		<sec:intercept-url pattern="/resources/templates/spotGwansimRegForm.handlebars" access="hasRole('ROLE_JOINED')"/>
-		<sec:intercept-url pattern="/resources/templates/spotConsultingForm.handlebars" access="hasRole('ROLE_JOINED')"/>
+
+		<!-- 물건보기 infowin 및 상세보기 -->
+		<sec:intercept-url pattern="/resources/templates/gyeongmaeForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>	
+		<sec:intercept-url pattern="/resources/templates/gyeongmaeDetailForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<sec:intercept-url pattern="/resources/templates/gongmaeForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<sec:intercept-url pattern="/resources/templates/gongmaeDetailForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<sec:intercept-url pattern="/resources/templates/acceptbuildingForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
+		
+		<!-- 매물등록, 관심물건, 컨설팅, 수지분석, 토지이용규제현황보기 -->
+		<!-- 수지분석 팝업 -->
+		<sec:intercept-url pattern="/resources/templates/spotSujibunseogForm.handlebars" access="hasAnyRole('ROLE_ECONOMY','ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<!-- 관심물건 등록 -->
+		<sec:intercept-url pattern="/resources/templates/spotGwansimRegForm.handlebars" access="hasAnyRole('ROLE_ECONOMY', 'ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<!-- 컨설팅 -->
+		<sec:intercept-url pattern="/resources/templates/spotConsultingForm.handlebars" access="hasAnyRole('ROLE_ECONOMY', 'ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<!-- 매물등록 -->
+		<sec:intercept-url pattern="/resources/templates/spotMaemulRegForm.handlebars" access="hasAnyRole('ROLE_ECONOMY', 'ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<!-- 토지이용 규제 현황보기 -->
+		<sec:intercept-url pattern="/resources/templates/spotTojiUseLimitForm.handlebars" access="hasAnyRole('ROLE_ECONOMY', 'ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<!-- 토지이용 규제 현황보기 탭-->
+		<sec:intercept-url pattern="/handlebar/tab/tojiuselimit/**" access="hasAnyRole('ROLE_ECONOMY', 'ROLE_SMART', 'ROLE_PREMIUM')"/>
+		
+		<!-- 수지분석 pdf -->
+		<sec:intercept-url pattern="/download/**" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
+		
+		<sec:intercept-url pattern="/spot/**" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
 		
 		<sec:intercept-url pattern="/handlebar/mypage" access="hasRole('ROLE_JOINED')"/>
 		

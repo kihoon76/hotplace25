@@ -660,38 +660,38 @@
 	
 	hotplace.error = _err;
 	
-	hotplace.processAjaxError = function(errCode) {
+	hotplace.processAjaxError = function(errCode, msg) {
 		switch(errCode) {
 		case _err.LOGIN :
-			hotplace.dom.showAlertMsg(hotplace.dom.showLoginForm, '로그인후 사용하세요.');
+			hotplace.dom.showAlertMsg(hotplace.dom.showLoginForm, msg || '로그인후 사용하세요.');
 			break;
 		case _err.DUP_LOGIN :
 			hotplace.dom.showAlertMsg(function() {
 				window.location.reload();
-			},'중복 로그인');
+			},msg || '중복 로그인');
 		case _err.JANGAE_GONGJI :	//장애공지걸림
 			window.location.reload();
 			break;
 		case _err.SERVER_ERR: 
-			hotplace.dom.showAlertMsg(null, '서버오류가 발생했습니다.');
+			hotplace.dom.showAlertMsg(null, msg || '서버오류가 발생했습니다.');
 			break;
 		case _err.WRONG_ACCOUNT :
-			hotplace.dom.showAlertMsg(function() {console.log('ooooo')}, '아이디 또는 비밀번호가 틀립니다.', {width:'30%'});
+			hotplace.dom.showAlertMsg(function() {console.log('ooooo')}, msg || '아이디 또는 비밀번호가 틀립니다.', {width:'30%'});
 			break;
 		case _err.DUP_ID :
-			hotplace.dom.showAlertMsg(null, '중복된 아이디입니다.', {width:'30%'});
+			hotplace.dom.showAlertMsg(null, msg || '중복된 아이디입니다.', {width:'30%'});
 			break;
 		case _err.JOIN :
-			hotplace.dom.showAlertMsg(null, '회원가입도중 오류가 발생했습니다.', {width:'40%'});
+			hotplace.dom.showAlertMsg(null, msg || '회원가입도중 오류가 발생했습니다.', {width:'40%'});
 			break;
 		case _err.USER_MOD :
-			hotplace.dom.showAlertMsg(null, '회원정보 수정중 오류가 발생했습니다.', {width:'40%'});
+			hotplace.dom.showAlertMsg(null, msg || '회원정보 수정중 오류가 발생했습니다.', {width:'40%'});
 			break;
 		case _err.UPLOAD:
-			hotplace.dom.showAlertMsg(null, '파일업로드중 에러가 발생했습니다.', {width:'40%'});
+			hotplace.dom.showAlertMsg(null, msg || '파일업로드중 에러가 발생했습니다.', {width:'40%'});
 			break;
 		case _err.MAEMUL_REG:
-			hotplace.dom.showAlertMsg(null, '매물등록중 에러가 발생했습니다.', {width:'40%'});
+			hotplace.dom.showAlertMsg(null, msg || '매물등록중 에러가 발생했습니다.', {width:'40%'});
 			break;
 		case _err.MAEMUL_DUP:
 			hotplace.dom.showAlertMsg(function() {
@@ -699,48 +699,46 @@
 			}, '이미 등록된 매물입니다.', {width:'40%'});
 			break;
 		case _err.GWANSIM_REG:
-			hotplace.dom.showAlertMsg(null, '관심물건 등록중 에러가 발생했습니다.', {width:'40%'});
+			hotplace.dom.showAlertMsg(null, msg || '관심물건 등록중 에러가 발생했습니다.', {width:'40%'});
 			break;
 		case _err.GWANSIM_DUP:
 			hotplace.dom.showAlertMsg(function() {
 				hotplace.dom.closeModal();
-			}, '이미 등록된 관심물건입니다.', {width:'40%'});
+			}, msg || '이미 등록된 관심물건입니다.', {width:'40%'});
 			break;
 		case _err.GWANSIM_DEL:
 			hotplace.dom.showAlertMsg(function() {
 				hotplace.dom.closeModal();
-			}, '관심물건이 삭제 되지 않았습니다.', {width:'40%'});
+			}, msg || '관심물건이 삭제 되지 않았습니다.', {width:'40%'});
 			break;
 		case _err.GWANSIM_MOD:
-			hotplace.dom.showAlertMsg(null, '관심물건 수정중 에러가 발생했습니다.', {width:'40%'});
+			hotplace.dom.showAlertMsg(null, msg || '관심물건 수정중 에러가 발생했습니다.', {width:'40%'});
 			break;
 		case _err.CONSULTING_REG:
-			hotplace.dom.showAlertMsg(null, '컨설팅요청 등록중 에러가 발생했습니다.', {width:'40%'});
+			hotplace.dom.showAlertMsg(null, msg || '컨설팅요청 등록중 에러가 발생했습니다.', {width:'40%'});
 			break;
 		case _err.CONSULTING_DUP:
 			hotplace.dom.showAlertMsg(function() {
 				hotplace.dom.closeModal();
-			}, '이미 요청된 컨설팅입니다.', {width:'40%'});
+			}, msg || '이미 요청된 컨설팅입니다.', {width:'40%'});
 			break;
 		case _err.PAGE_NOT_FOUND:
-			hotplace.dom.showAlertMsg(null, '해당요청이 서버에 존재하지 않습니다.', {width:'50%'});
+			hotplace.dom.showAlertMsg(null, msg || '해당요청이 서버에 존재하지 않습니다.', {width:'50%'});
 			break;
 		case _err.FORBIDDEN:
-			hotplace.dom.showAlertMsg(null, '이용권한이 없습니다.', {width:'50%'});
+			hotplace.dom.showAlertMsg(null, msg || '이용권한이 없습니다.', {width:'50%'});
 			break;
 		case _err.COORD:
-			hotplace.dom.showAlertMsg(null, '주소찾아오는중 오류가 발생했습니다.', {width:'50%'});
+			hotplace.dom.showAlertMsg(null, msg || '주소찾아오는중 오류가 발생했습니다.', {width:'50%'});
 			break;
 		case _err.MISS_LATLNG:
-			hotplace.dom.showAlertMsg(null, '위경도 정보가 존재하지 않습니다.', {width:'50%'});
+			hotplace.dom.showAlertMsg(null, msg || '위경도 정보가 존재하지 않습니다.', {width:'50%'});
 			break;
 		case _err.HEATMAP_CAPTURE:
-			hotplace.dom.showAlertMsg(null, '히트맵 캡쳐도중 오류가 발생했습니다.', {width:'50%'});
+			hotplace.dom.showAlertMsg(null, msg || '히트맵 캡쳐도중 오류가 발생했습니다.', {width:'50%'});
 			break;
 		case _err.TIMEOUT:
-			hotplace.dom.showAlertMsg(null, '요청이 타임아웃 되었습니다.', {width:'50%'});
-			break;
-		case '000' :
+			hotplace.dom.showAlertMsg(null, msg || '요청이 타임아웃 되었습니다.', {width:'50%'});
 			break;
 		}
 	}
