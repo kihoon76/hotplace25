@@ -16,19 +16,19 @@
 		</encoder>
 	</appender> 
 	
-	<logger name="com.hotplace25" level="debug">
+	<logger name="com.hotplace25" level="info">
 		<appender-ref ref="file"/>
 	</logger>
-	<logger name="org.springframework" level="debug">
+	<logger name="org.springframework" level="info">
 		<appender-ref ref="file"/>
 	</logger>
 	
 	<!-- MyBatis mapper.xml 로그 -->
-	<logger name="mappers" level="debug">
+	<logger name="mappers" level="info">
 		<appender-ref ref="file"/>
 	</logger>
 	
-	<root level="debug">
+	<root level="info">
 		<appender-ref ref="file"/>
 	</root>
 </configuration>
