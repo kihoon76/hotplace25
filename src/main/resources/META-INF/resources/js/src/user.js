@@ -304,13 +304,16 @@ $(document).ready(function() {
 	$(document).on('click', _join_BTN_Login, function() {
 		hotplace.dom.showLoginForm();
 	});
-
-	$(document).on('keydown', '#pw', function(e) {
+	
+	//로그인폼 엔터키
+	$(document)
+	.off('keydown', '#pw')
+	.on('keydown', '#pw', function(e) {
 		if (e.which == 13) {
 			var txt = e.target.value;
-			$(_btnLoginId).trigger('click'); 
+			$(_login_BTN).trigger('click'); 
 	    }
 	});
-	
+
 	hotplace.validation.phone('#joinStep02 .NUMBER_ONLY');
 });

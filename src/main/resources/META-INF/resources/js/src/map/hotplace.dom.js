@@ -1009,10 +1009,6 @@
 	}
 	
 	dom.showLogoutForm = function(fn) {
-		/*hotplace.dom.showAlertMsg(function() {
-			dom.logout(fn);
-		},'로그아웃 하시겠습니까?', {width: '410'}, '확인');*/
-		
 		dom.showConfirmBox(function() {
 			dom.addBodyAllMask();
 			dom.logout(fn);

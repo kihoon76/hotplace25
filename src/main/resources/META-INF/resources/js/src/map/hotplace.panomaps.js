@@ -25,7 +25,7 @@
 	        position: new naver.maps.LatLng(x, y),
 	        pov: {
 	            pan: -135,
-	            tilt: -29, //상하
+	            tilt: -20, //상하
 	            fov: 100
 	        },
 	        zoomControl: true,
