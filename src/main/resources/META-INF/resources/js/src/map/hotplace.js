@@ -586,10 +586,10 @@
 				if(textStatus == 'timeout') {
 					jqXHR.errCode = _err.TIMEOUT;
 				}
-				else if(e.toLowerCase() == 'forbidden' || e.toLowerCase() == '403') {
+				else if(e == '403' || e.toLowerCase() == 'forbidden') {
 					jqXHR.errCode = _err.FORBIDDEN;
 				}
-				else if(e.toLowerCase() == 'not found' || e.toLowerCase() == '404') {
+				else if(e == '404' || e.toLowerCase() == 'not found') {
 					jqXHR.errCode = _err.PAGE_NOT_FOUND;
 				}
 				else {
