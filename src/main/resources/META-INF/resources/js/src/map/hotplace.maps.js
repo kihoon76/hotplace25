@@ -1918,6 +1918,10 @@
 			newInfoWindow = new _vender.InfoWindow(winContent);
 			
 			_infoWindowsForMarker[markerType].push(newInfoWindow);
+			
+			if(options.InfoWindowDom) {
+				options.InfoWindowDom(_venderMap, newInfoWindow);
+			}
 		}
 		
 		if(listeners) {
@@ -2382,6 +2386,11 @@
 					    }
 						else {
 							newInfoWindow.open(map, newMarker);
+							$('#btnAddrSearchWinClose')
+							.off('click')
+							.on('click', function() {
+								newInfoWindow.close();
+							});
 					    }
 					}
 				}
