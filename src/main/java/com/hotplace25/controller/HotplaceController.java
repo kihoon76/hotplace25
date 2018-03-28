@@ -366,6 +366,15 @@ public class HotplaceController {
 		return "errors/" + errCode;
 	}
 	
+	@GetMapping("auth/heatmap")
+	@ResponseBody
+	public AjaxVO checkAuth() {
+		AjaxVO vo = new AjaxVO();
+		vo.setSuccess(true);
+		
+		return vo;
+	}
+	
 	private Map<String, String> getBoundsParam(String nex, String swx, String swy, String ney, String stopGrouping) {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("nex", nex);

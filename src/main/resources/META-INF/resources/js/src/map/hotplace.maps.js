@@ -1931,7 +1931,7 @@
 			}
 		}
 		
-		if(options.radius) {
+		/*if(options.radius) {
 			var radiusSearchCircle = new _vender.Circle({
 			    map: _venderMap,
 			    center:  new _vender.LatLng(data.location[1], data.location[0]),
@@ -1988,8 +1988,8 @@
 			});
 			
 			_markers[markerType].c.push(radiusSearchCircle);
-		}
-	},
+		}*/
+	};
 	
 	/**
 	 * @memberof hotplace.maps 

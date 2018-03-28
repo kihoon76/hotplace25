@@ -2,6 +2,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <c:set var="req" value="${pageContext.request}" />
 <c:set var="url">${req.requestURL}</c:set>
 <c:set var="uri" value="${req.requestURI}" />
@@ -66,8 +68,15 @@
 				</div>
 			</span>
 			<span class="boxUnit">
-				<button type="button" class="unit login" id="gnbLogin" title="로그인" style=""><span class="hidden">로그인</span></button>
+				<sec:authorize access="hasRole('ROLE_JOINED')">
+				<button type="button" class="unit login" id="gnbLogin" title="로그인" style="display: none;"><span class="hidden">로그인</span></button>
+				<button type="button" class="unit logout" id="gnbLogout" title="로그아웃" style="display:block;"><span class="hidden">로그아웃</span></button>
+				</sec:authorize>
+				<sec:authorize access="!hasRole('ROLE_JOINED')">
+				<button type="button" class="unit login" id="gnbLogin" title="로그인" style="display:block;"><span class="hidden">로그인</span></button>
 				<button type="button" class="unit logout" id="gnbLogout" title="로그아웃" style="display: none;"><span class="hidden">로그아웃</span></button>
+				</sec:authorize>
+				
 			</span>
 		</div>
 	</div>

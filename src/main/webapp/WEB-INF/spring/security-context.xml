@@ -33,16 +33,16 @@
 		<sec:intercept-url pattern="/resources/templates/spotTojiUseLimitForm.handlebars" access="hasAnyRole('ROLE_ECONOMY', 'ROLE_SMART', 'ROLE_PREMIUM')"/>
 		<!-- 토지이용 규제 현황보기 탭-->
 		<sec:intercept-url pattern="/handlebar/tab/tojiuselimit/**" access="hasAnyRole('ROLE_ECONOMY', 'ROLE_SMART', 'ROLE_PREMIUM')"/>
-		
 		<!-- 수지분석 pdf -->
 		<sec:intercept-url pattern="/download/**" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
-		
+		<!-- heatmap -->
+		<sec:intercept-url pattern="/auth/heatmap" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<sec:intercept-url pattern="/locationbounds" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<!-- spot -->
 		<sec:intercept-url pattern="/spot/**" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
 		
 		<sec:intercept-url pattern="/handlebar/mypage" access="hasRole('ROLE_JOINED')"/>
 		
-		<!-- heatmap 보기 -->
-		<sec:intercept-url pattern="/locationbounds/**" access="permitAll"/>
 		<!-- 공지사항 -->
 		<sec:intercept-url pattern="/notice/page/**" access="permitAll"/> 
 		<!-- 주소검색 -->

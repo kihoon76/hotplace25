@@ -915,9 +915,29 @@
 		$(_btnHeatmapShow)
 		.off('click')
 		.on('click', function() {
-			_heatmapOn(true);
-			$(this).hide();
-			$(_btnHeatmapHide).show();
+			
+			//권한 체크
+			hotplace.ajax({
+				url: 'auth/heatmap', 
+				async:false,
+				method:'GET',
+				success: function(data, textStatus, jqXHR) {
+					if(data.success) {
+						_heatmapOn(true);
+						$(this).hide();
+						$(_btnHeatmapHide).show();
+					}
+					else {
+						jqXHR.errCode = hotplace.error.LOGIN;
+					}
+				
+				},
+				error: function(jqXHR, textStatus, e) {
+					console.log(jqXHR);
+				}
+			});
+			
+			
 		});
 		
 		//히트맵끄기
