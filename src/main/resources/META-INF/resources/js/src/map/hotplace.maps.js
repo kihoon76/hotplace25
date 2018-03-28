@@ -1157,7 +1157,7 @@
 		        }
 		        else {
 		        	icon = {
-		        		content: '<a href="#" class="calc-link" data-uuid="' + uuid + '"><img src="' + hotplace.getContextUrl() + 'resources/img/icon/close_icon.png" /></a>&nbsp;<div class="naver-area-div"><span>'+ text +'</span></div>',
+		        		content: '<a href="#" class="calc-link" data-uuid="' + uuid + '"><img src="' + hotplace.getContextUrl() + 'resources/img/icon/close_icon.png" /><div class="naver-area-div"><span>'+ text +'</span></div></a>',
 			            anchor: new naver.maps.Point(-5, -5)
 		        	};
 		        }
