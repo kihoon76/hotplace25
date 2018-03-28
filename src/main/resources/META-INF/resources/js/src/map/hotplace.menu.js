@@ -520,7 +520,7 @@
 		.on('click', function() {
 			_toojaDvToogle();
 			_saveBtnInfo(true);
-			
+			hotplace.dom.resizeSliderGrp(_toojaRegionSearchMenu);
 		});
 		
 		$(_dvToojaLuris + ' button.close')

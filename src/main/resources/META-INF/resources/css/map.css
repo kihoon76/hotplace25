@@ -362,7 +362,7 @@ body	 {min-height:600px;}
 
 /* addrSearchWin */
 .mapInnerBox.addrSearchWin {}
-.mapInnerBox.addrSearchWin .mibHeader {padding:15px 45px 15px 15px;}
+.mapInnerBox.addrSearchWin .mibHeader {padding:15px 45px 15px 15px; min-height:50px;}
 .mapInnerBox.addrSearchWin .mibHeader .close {opacity:0.8;}
 .mapInnerBox.addrSearchWin .mibHeader .close:after {
 	font-family: 'AMB-iconfont' !important; speak:none; font-style:normal; font-weight:normal; font-variant:normal; text-transform:none; line-height:1;
@@ -654,18 +654,29 @@ body	 {min-height:600px;}
 .unit_tit:after,
 .unit_cont:after {display:block; content:''; height:0; line-height:0; padding:0; margin:0; clear:both;}
 
+/*
 .sTit {display:inline-block; font-size:14px; font-weight:500; padding:0 0 0 10px; position:relative; margin-top:6px; color:#2a7cdd; float:left;}
 .sTit:before {display:inline-block; content:''; width:6px; height:6px; border-radius:3px; background:#2a7cdd; border:1px solid #2a7cdd; position:absolute; left:0; top:50%; margin-top:-3px;}
+*/
+.sTit {display:inline-block;  font-size:15px;  font-weight:500; padding:0 0 0 18px; color:#2a7cdd; position:relative;   margin-top:8px;}
+.sTit:before {display:inline-block; content:'';border:none; border-radius:0; width:11px; height:11px; position:absolute; left:0; top:50%; margin-top:-6px; background:url('../img/bullet_01.png') no-repeat center center; background-size:100%; 100%;}
+
 .sTit.circle:before {background:none;}
 
 .sTit.color_black {color:#333;}
+/*
 .sTit.color_black:before {background:none; border-color:#333;}
+*/
 
 .sTit.color_red {color:#e73131;}
+/*
 .sTit.color_red:before {background:none; border-color:#e73131;}
+*/
 
 .sTit.color_blue {color:#3192e7;}
+/*
 .sTit.color_blue:before {background:none; border-color:#3192e7;}
+*/
 
 .sTit.noBullt {padding-left:0;}
 .sTit.noBullt:before {display:none;}
@@ -710,7 +721,7 @@ body	 {min-height:600px;}
 
 /*************************************/
 /* slideShow */
-.unit_tit .slideShow {margin-top:5px;}
+.unit_tit .slideShow {margin-top:-2px;}
 
 .slideShow {height:24px; line-height:24px; padding:0px 0px 0 20px; display:inline-block; width:; text-align:left; position:relative; vertical-align:middle; font-weight:500;}
 .slideShow:before {
@@ -805,6 +816,11 @@ body	 {min-height:600px;}
 .etcText {}
 .termBox {border:1px solid #aaa; background:#fff; height:100px; padding:10px; overflow:auto; line-height:1.4em; color:#000;}
 .termBox img {max-height:100%;}
+
+.joinBox .unit {margin-bottom:10px;}
+.joinBox .unit .sTit {display:inline-block; font-size:14px; font-weight:500; padding:0 0 0 10px; position:relative; margin-top:6px; color:#2a7cdd; float:left;}
+.joinBox .unit .sTit:before {display:inline-block; content:''; width:6px; height:6px; border-radius:3px; background:#2a7cdd; border:1px solid #2a7cdd; position:absolute; left:0; top:50%; margin-top:-3px;}
+
 
 .joinBox .lineBox {background:#fff;}
 .joinBox .lineBox > table {border-top:0 !important;}
@@ -970,10 +986,27 @@ body	 {min-height:600px;}
 .searchArea       {display:block; overflow:auto;}
 .searchResultArea {display:none; overflow:auto;}
 
-td .rangeSliderWrap {padding:0 25px 0 10px; position:relative;}
+td .rangeSliderWrap {padding:5px 30px 0 20px; position:relative; clear:both;}
 td .rangeSliderWrap .rangeSlider {margin:0 0;}
+td .rangeSliderWrap span.textLabel {display:inline-block; height:auto; margin-top:2px; font-size:11px; font-weight:500;}
+td .rangeSliderWrap span.textLabel.fl {margin-left:-20px;}
+td .rangeSliderWrap span.textLabel.fr {margin-right:-22px;}
 
-.searchArea .unit_tit .slideShow {margin-left:20px;}
+.searchArea .unit {margin-bottom:20px;}
+.searchArea .unit_tit {margin-bottom:8px;}
+.searchArea .unit_tit .slideShow {margin-left:15px;}
+.searchArea .unit_tit .sTit {color:#000 !important;}
+
+.searchArea .unit_tit .slideShow {height:20px; line-height:18px; padding:0px 10px 0 25px; background:#fff; border:1px solid #aaa; margin-top:-4px; color:#666; font-size:12px; border-radius:10px;} 
+.searchArea .unit_tit .slideShow:before {
+	display:inline-block; width:20px; height:20px; line-height:20px; text-align:center; font-size:13px; vertical-align:middle;
+	position:absolute; top:0px; left:3px;
+	background:; color:#666; border-radius:50%;
+}
+.searchArea .unit_tit .slideShow:hover {background:#f9f9f9; border-color:#999; font-weight:bold; color:#333;}
+.searchArea .unit_tit .slideShow.stateOn:before  {line-height:18px;}
+
+.searchArea .unit_cont table.borderStyle tbody th {color:#666; font-weight:500;}
 
 /*************************************/
 /* LNB  lnbCont -  주소 검색 */
@@ -999,7 +1032,7 @@ input.searchInp {display:block; width:100%; border:2px solid #ddd; height:50px; 
 .dvTooja table td .rdchBox label {font-weight:normal;}
 
 .dvTooja.tabWrap .tab-pane .unit:nth-of-type(1) > .unit_tit:nth-of-type(1) {margin-top:-5px;}
-.dvTooja.tabWrap .tab-pane .unit {margin-bottom:10px;}
+.dvTooja.tabWrap .tab-pane .unit {}
 
 .dvToojaDetail {}
 
@@ -1042,6 +1075,14 @@ input.searchInp {display:block; width:100%; border:2px solid #ddd; height:50px; 
 .dvProfit td .inputGroup > .spinner {float:left;}
 .dvProfitDetail .slideShow {margin-left:10px;}
 
+.dvProfit td img {max-height:326px; margin:0 auto;}
+
+.dvProfit .unit.dvProfitDetail {margin-bottom:0;}
+
+.dvProfit .unit {margin-bottom:15px;}
+.dvProfit .sTit {display:inline-block;  font-size:15px;  font-weight:500; padding:0 0 0 18px; color:#2a7cdd; position:relative;   margin-top:8px;}
+.dvProfit .sTit:before {display:inline-block; content:'';border:none; border-radius:0; width:11px; height:11px; position:absolute; left:0; top:50%; margin-top:-6px; background:url('../img/bullet_01.png') no-repeat center center; background-size:100%; 100%;}
+
 /*************************************/
 /* dvCateGwansim // 관심물건등록 */
 .dvCateGwansim {}
@@ -1053,6 +1094,9 @@ input.searchInp {display:block; width:100%; border:2px solid #ddd; height:50px; 
 /*************************************/
 /* dvTojiUseRegul // 토지 이용 규제 현황 보기 */
 .dvTojiUseRegul {}
+.dvTojiUseRegul .unit {margin-bottom:15px;}
+.dvTojiUseRegul .sTit {display:inline-block;  font-size:15px;  font-weight:500; padding:0 0 0 18px; color:#2a7cdd;  position:relative;   margin-top:8px;}
+.dvTojiUseRegul .sTit:before {display:inline-block; content:'';border:none; border-radius:0; width:11px; height:11px; position:absolute; left:0; top:50%; margin-top:-6px; background:url('../img/bullet_01.png') no-repeat center center; background-size:100%; 100%;}
 
 .drawingLegend li {padding:2px 0;}
 .drawingLegend li * {vertical-align:middle;}
@@ -1068,12 +1112,14 @@ input.searchInp {display:block; width:100%; border:2px solid #ddd; height:50px; 
 .detailWrap .tabWrap .nav-tabs .tabLink > button {padding:0px 25px 2px;}
 
 .detailWrap .tabWrap .tab-pane .unit:nth-of-type(1) > .unit_tit:nth-of-type(1) {margin-top:0px;}
-.detailWrap .unit .unit_tit {margin-top:15px;}
+.detailWrap .unit {margin-bottom:15px;}
 .detailWrap .unit .unit_tit .sTit {font-size:14px; padding:0 0 0 18px; color:#000; font-weight:bold;}
 .detailWrap .unit .unit_tit .sTit:before {display:;}
 .detailWrap .unit .unit_tit .sTit:before {display:inline-block; content:'';border:none; border-radius:0; width:11px; height:11px; position:absolute; left:0; top:50%; margin-top:-6px; background:url('../img/bullet_01.png') no-repeat center center; background-size:100%; 100%;}
 
 .dvGyeongmaeDetail {}
+.dvGyeongmaeDetail .unit {margin-bottom:15px;}
+
 
 /* 인근매각물건사례 탭컨텐츠*/
 .dvMaegagmulgeon {}
@@ -1164,7 +1210,7 @@ ul.paginglist a:hover {color:#222;}
 /* dvCompany // 회사소개 */
 .dvCompany{}
 .tabWrap.dvCompany .tab-pane .unit:nth-of-type(1) > .unit_tit:nth-of-type(1) {margin-top:0;}
-.tabWrap.dvCompany .unit .unit_tit .sTit {font-size:14px; padding:0 0 0 18px; color:#000; font-weight:bold;}
+.tabWrap.dvCompany .unit .unit_tit .sTit {font-size:15px; padding:0 0 0 18px; color:#000; font-weight:500;}
 .tabWrap.dvCompany .unit .unit_tit .sTit:before {display:inline-block; content:'';border:none; border-radius:0; width:11px; height:11px; position:absolute; left:0; top:50%; margin-top:-6px; background:url('../img/bullet_01.png') no-repeat center center; background-size:100%; 100%;}
 
 .companyTextBox {margin:5px 18px 15px; font-size:13px; line-height:1.6em;}
