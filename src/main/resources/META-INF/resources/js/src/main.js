@@ -291,7 +291,7 @@ $(document).ready(function() {
 		hotplace.dom.showAutoYearRangeDiv();
 		hotplace.dom.enableYearRangeDiv(false);
 		_initFirstScreen();
-		_showIntro();
+		checkBrowser(_showIntro);
 	});
 	
 	function _initFirstScreen() {
@@ -318,7 +318,15 @@ $(document).ready(function() {
 		if(hasCookie) {
 			hotplace.dom.showIntroMain();
 		}
+	}
 	
+	function checkBrowser(fn) {
+		if(hotplace.browser.msie || hotplace.browser.msedge) {
+			hotplace.dom.showAlertMsg(fn, '크롬브라우저 사용을 권장합니다.<br/><a href="https://www.google.co.kr/chrome/index.html" target="_blank" style="font-size:.7em; color:#298A08;">크롬다운로드</a>', {width:'30%'});
+		}
+		else {
+			if(fn) fn();
+		}
 	}
 	
 	hotplace.validation.numberOnly('.numberOnly');
