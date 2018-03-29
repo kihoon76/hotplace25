@@ -233,7 +233,9 @@
 	 ****************************************************************************/
 	var _btnMoveAddressToMap = '#btnMoveAddressToMap',
 		_txtAddressSearch = '#txtAddressSearch',
-		_btnAddressSearch = '#btnAddressSearch';
+		_btnAddressSearch = '#btnAddressSearch',
+		_rdoAddressType = 'addressType',
+		_addressType = 'N';
 	
 	//주소검색 후 라디오버튼 선택
 	function _eventHandlerAddrRdo() {
@@ -281,6 +283,13 @@
 		.off('change', '.ADDR_RDO', _eventHandlerAddrRdo)
 		.on('change', '.ADDR_RDO', _eventHandlerAddrRdo);
 		
+		$(_addrSearchMenu + ' input[name="addressType"]')
+		.off('change')
+		.on('change', function() {
+			_addressType = $(this).val();
+			console.log(_addressType)
+		});
+		
 		$(_txtAddressSearch)
 		.off('keydown')
 		.on('keydown', function(e) {
@@ -298,46 +307,46 @@
 			}
 			
 			if(arg) {
-				var param = {san:'1'};
-				var beonji, beonjiF, beonjiS, beonjiArr, beonjiArrLen;
+//				var param = {san:'1'};
+//				var beonji, beonjiF, beonjiS, beonjiArr, beonjiArrLen;
+//				
+//				var token = arg.split(' ');
+//				var tokenLen = token.length;
+//				var t;
+//				var arr = [];
+//				
+//				for(var i=0; i<tokenLen; i++) {
+//					t = token[i];
+//					if(t == ' ') continue;
+//					arr.push(t);
+//				}
+//				
+//				var arrLen = arr.length;
+//				for(var k=0; k<arrLen; k++) {
+//					if(arr[k] == '산') {
+//						param.san = '2';
+//					}
+//					else if(beonji = arr[k].match(/[0-9]+\-?[0-9]*/g)){
+//						if(beonji) {
+//							beonjiArr = beonji.toString().split('-');
+//							beonjiArrLen = beonjiArr.length;
+//							
+//							if(beonjiArrLen == 1) {
+//								param.beonjiF = $.trim(beonjiArr[0]);
+//								param.beonjiS = '0';
+//							}
+//							else {
+//								param.beonjiF = $.trim(beonjiArr[0]);
+//								param.beonjiS = $.trim(beonjiArr[1]);
+//							}
+//						}
+//					}
+//					else {
+//						param.detail = arr[k];
+//					}
+//				}
 				
-				var token = arg.split(' ');
-				var tokenLen = token.length;
-				var t;
-				var arr = [];
-				
-				for(var i=0; i<tokenLen; i++) {
-					t = token[i];
-					if(t == ' ') continue;
-					arr.push(t);
-				}
-				
-				var arrLen = arr.length;
-				for(var k=0; k<arrLen; k++) {
-					if(arr[k] == '산') {
-						param.san = '2';
-					}
-					else if(beonji = arr[k].match(/[0-9]+\-?[0-9]*/g)){
-						if(beonji) {
-							beonjiArr = beonji.toString().split('-');
-							beonjiArrLen = beonjiArr.length;
-							
-							if(beonjiArrLen == 1) {
-								param.beonjiF = $.trim(beonjiArr[0]);
-								param.beonjiS = '0';
-							}
-							else {
-								param.beonjiF = $.trim(beonjiArr[0]);
-								param.beonjiS = $.trim(beonjiArr[1]);
-							}
-						}
-					}
-					else {
-						param.detail = arr[k];
-					}
-				}
-				
-				hotplace.getPlainTextFromJson('mulgeon/search', JSON.stringify({detail:arg}), function(data) {
+				hotplace.getPlainTextFromJson('mulgeon/search', JSON.stringify({detail:arg, type:_addressType}), function(data) {
 					var dataForm = {
 						'addresses': data,
 						'rdoId': 'addr'
@@ -370,9 +379,6 @@
 					}
 					
 				}, true);
-			}
-			else {
-				console.log('b');
 			}
 		});
 		
