@@ -1,5 +1,4 @@
-textarea {
-   resize: none;
-}
+textarea {resize:none;}
+.zoomImg {width:2000px;	height:2000px !important; max-height:2000px !important;}
 
 

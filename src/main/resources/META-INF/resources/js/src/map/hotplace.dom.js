@@ -158,6 +158,8 @@
 	 */
 	var _modalOpenAfterFn = function() {};
 	
+	var _imageModalOpenAfterFn = function() {};
+	
 	/**
 	 * @private
 	 * @function _runWaitMe
@@ -272,6 +274,10 @@
 		console.log(_modalOpenAfterFn)
 	}
 	
+	function _bindImageModalOpenEvent(openFn) {
+		_imageModalOpenAfterFn = openFn;
+	}
+	
 	/**
 	 * @memberof hotplace.dom
 	 * @function getCurrentFnAfterModalClose
@@ -341,7 +347,8 @@
 	}
 	
 	dom.openImageModalOnModal = function(modalSize, closeFn, openFn) {
-		_commonModal(_$imagePopup, modalSize);
+		_bindImageModalOpenEvent(openFn || function() {});
+		_commonModal(_$imagePopup, modalSize, closeFn, openFn);
 	}
 	
 	dom.openAlrtModal = function(modalSize, closeFn) {
@@ -353,7 +360,7 @@
 		return _$alrtPopup.is(':visible');
 	}
 	
-	function _commonModal($element, modalSize) {
+	function _commonModal($element, modalSize, closeFn, openFn) {
 		
 		//modal popup인지 검사 
 		if(_modalPopup == '#' + $element.attr('id')) {
@@ -638,7 +645,9 @@
 	dom.showHeatMapCaptureImagePop = function(modalSize, param) {
 		_appendModalPopup('mapCaptureImageForm', _$imagePopup, param);
 		
-		dom.openImageModalOnModal(modalSize);
+		dom.openImageModalOnModal(modalSize, null, function() {
+			$('#dvEnlargeHeatmapImageModalSource').zoom();
+		});
 	}
 	
 	dom.showGongmaeDetail = function(fn, param) {
@@ -1139,6 +1148,7 @@
 	_$imagePopup.on('shown.bs.modal', function(e) {
 		_initModalSize($(this));
 		$('.modal-backdrop').remove();
+		_imageModalOpenAfterFn();
 	});
 	
 	/*************************************************************
