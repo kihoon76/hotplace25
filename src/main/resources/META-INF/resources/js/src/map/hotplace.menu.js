@@ -278,6 +278,7 @@
 	
 	function _initAddressDom() {
 		_selectedAddressObj = {};
+		_addressType = 'N';
 		
 		$(document)
 		.off('change', '.ADDR_RDO', _eventHandlerAddrRdo)
