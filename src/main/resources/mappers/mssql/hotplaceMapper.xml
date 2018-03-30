@@ -48,9 +48,18 @@
 	</select> -->
 	
 	<select id="selectMulgeonAddress" statementType="CALLABLE" parameterType="Address" resultType="string">
-		{ call  [지번주소].[dbo].[SEL_지번주소](
-			#{detail, mode=IN, jdbcType=NVARCHAR, javaType=string}
-		)}
+		<choose>
+			<when test='type == "N"'>
+			{ call  [지번주소].[dbo].[SEL_지번주소](
+				#{detail, mode=IN, jdbcType=NVARCHAR, javaType=string}
+			)}
+			</when>
+			<otherwise>
+			{ call  [지번주소].[dbo].[SEL_도로명주소](
+				#{detail, mode=IN, jdbcType=NVARCHAR, javaType=string}
+			)}
+			</otherwise>
+		</choose>
 	</select> 
 	
 	<select id="selectAddress" resultType="string" parameterType="Address">
