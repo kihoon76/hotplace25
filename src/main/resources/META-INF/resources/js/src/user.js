@@ -138,7 +138,7 @@ $(document).ready(function() {
 			userName: $(_joinStep02_TXT_UserName).val(),
 			password: $(_joinStep02_TXT_Pw).val(),
 			phone: $(_joinStep03_SPN_UserPhone).text(),
-			email: $(_joinStep03_SPN_UserPhone).text()
+			email: $(_joinStep03_SPN_UserEmail).text()
 		}
 	}
 	
