@@ -51,13 +51,12 @@
 			//loadEl: '#dvBosangPyeonib',
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
-				if(data.success === false && data.errCode) {
+				var jo = $.parseJSON(data);
+				if(jo.success === false && jo.errCode) {
 					jqXHR.errCode = data.errCode;
 				}
 				else {
-					var jo = $.parseJSON(data);
 					var list = jo.datas;
-					
 					cbSucc(list);
 				}
 			},
