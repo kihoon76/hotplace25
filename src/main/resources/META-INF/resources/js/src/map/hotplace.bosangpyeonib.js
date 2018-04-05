@@ -53,7 +53,7 @@
 				console.log(data);
 				var jo = $.parseJSON(data);
 				if(jo.success === false && jo.errCode) {
-					jqXHR.errCode = data.errCode;
+					jqXHR.errCode = jo.errCode;
 				}
 				else {
 					var list = jo.datas;
