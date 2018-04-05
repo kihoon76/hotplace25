@@ -39,7 +39,7 @@
 			</div>
 			
 			<c:if test="${jangeagongji eq 'on'}">
-			<button class="mapBtn">장애공지중.....</button>
+			<button class="mapBtn btnJangeagongji">장애공지중.....</button>
 			</c:if>
 			
 			<!-- 타임뷰 버튼 -->
