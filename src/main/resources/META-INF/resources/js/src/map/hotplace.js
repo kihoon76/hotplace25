@@ -656,6 +656,7 @@
 		TIMEOUT:'611', //타임아웃
 		GWANSIM_DEL:'612', //관심물건 삭제오류
 		USER_MOD:'613', //회원계정정보 수정오류
+		
 	};
 	
 	hotplace.error = _err;

@@ -304,8 +304,12 @@
 			success: function(data, textStatus, jqXHR) {
 				//hotplace.dom.createChart('canvas');
 				console.log(data);
-				cbSucc(data);
-				
+				if(data.success) {
+					cbSucc(data);
+				}
+				else {
+					if(data.errCode) jqXHR.errCode = data.errCode;
+				}
 			},
 			error:function() {
 				
