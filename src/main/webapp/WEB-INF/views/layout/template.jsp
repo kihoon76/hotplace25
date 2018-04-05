@@ -38,6 +38,10 @@
 				<div id="dvYearRange" class="dvYearRange"></div>
 			</div>
 			
+			<c:if test="${jangeagongji eq 'on'}">
+			<button class="mapBtn">장애공지중.....</button>
+			</c:if>
+			
 			<!-- 타임뷰 버튼 -->
 			<button id="btnTimeview" class="mapBtn btnTimeview" data-switch="off">타임뷰</button>	
 
