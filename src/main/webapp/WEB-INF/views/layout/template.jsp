@@ -25,7 +25,9 @@
 	<!-- top GNB영역 -->
 	<div id="gnbArea" class="gnbArea">
 		<h1><a href="" class="logo"><span class="hidden">HotPlace25</span></a></h1>
-
+		<c:if test="${jangeagongji eq 'on'}">
+			<h1><span class="spanJangeagongji">장애공지중.....</span></h1>
+		</c:if>
 		<div class="dvBtnArea">
 			<!-- 타임뷰 Range -->
 			<div id="dvTimeview" class="dvTimeview">
