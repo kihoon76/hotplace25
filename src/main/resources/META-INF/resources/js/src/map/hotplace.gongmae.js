@@ -19,7 +19,12 @@
 			//loadEl: _dvGongmaeInfoWin,
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
-				cbSucc(data);
+				if(data.success === false && data.errCode) {
+					jqXHR.errCode = data.errCode;
+				}
+				else {
+					cbSucc(data);
+				}
 			},
 			error:function() {
 				
@@ -45,11 +50,17 @@
 				//loadEl: hotplace.dom.getModalPopId(),
 				success: function(data, textStatus, jqXHR) {
 					console.log(data);
-					var hasForm = hotplace.dom.showGongmaeDetail(function() {
-						_makeGongmaeImages(data.images);
-					}, data);
+					if(data.success === false && data.errCode) {
+						jqXHR.errCode = data.errCode;
+					}
+					else {
+						var hasForm = hotplace.dom.showGongmaeDetail(function() {
+							_makeGongmaeImages(data.images);
+						}, data);
+						
+						if(!hasForm) hotplace.dom.showAlertMsg(null, '공매상세정보를 보실수 있는 권한이 없습니다.', {width:'40%'});
+					}
 					
-					if(!hasForm) hotplace.dom.showAlertMsg(null, '공매상세정보를 보실수 있는 권한이 없습니다.', {width:'40%'});
 				},
 				error:function() {
 					
