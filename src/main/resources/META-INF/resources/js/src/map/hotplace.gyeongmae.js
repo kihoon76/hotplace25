@@ -304,11 +304,11 @@
 			success: function(data, textStatus, jqXHR) {
 				//hotplace.dom.createChart('canvas');
 				console.log(data);
-				if(data.success) {
-					cbSucc(data);
+				if(data.success === false && data.errCode) {
+					jqXHR.errCode = data.errCode;
 				}
 				else {
-					if(data.errCode) jqXHR.errCode = data.errCode;
+					cbSucc(data);
 				}
 			},
 			error:function() {
