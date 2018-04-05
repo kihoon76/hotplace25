@@ -19,7 +19,12 @@
 			success: function(data, textStatus, jqXHR) {
 				//hotplace.dom.createChart('canvas');
 				console.log(data);
-				cbSucc(data);
+				if(data.success === false && data.errCode) {
+					jqXHR.errCode = data.errCode;
+				}
+				else {
+					cbSucc(data);
+				}
 				
 				/*$('#bpMulgeonsojaeji').text(data.mulgeonsojaeji);
 				$('#bpGonggogigwan').text(data.gonggogigwan);
@@ -46,10 +51,15 @@
 			//loadEl: '#dvBosangPyeonib',
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
-				var jo = $.parseJSON(data);
-				var list = jo.datas;
-				
-				cbSucc(list);
+				if(data.success === false && data.errCode) {
+					jqXHR.errCode = data.errCode;
+				}
+				else {
+					var jo = $.parseJSON(data);
+					var list = jo.datas;
+					
+					cbSucc(list);
+				}
 			},
 			error:function() {
 				
