@@ -262,26 +262,31 @@
 					loadEl: hotplace.dom.getModalPopId(),
 					success: function(data, textStatus, jqXHR) {
 						console.log(data)
-						$('#gDsageonbeonho').text(data.sageonbeonho);
-						$('#gDdamdang').text(data.damdang);
-						$('#gDsageonjeobsuil').text(data.sageonjeobsuil);
-						$('#gDsojaeji').text(data.sojaeji);
-						$('#gDyongdo').text(data.yongdo);
-						$('#gDibchalbangbeob').text(data.ibchalbangbeob);
-						$('#gDgamjeongpyeongga').text((data.gamjeongpyeongga) ? data.gamjeongpyeongga.money() + ' 원' : '');
-						$('#gDminmaegaggagyeog').text((data.minmaegaggagyeog) ? data.minmaegaggagyeog.money() + ' 원' : '');
-						$('#gDyuchal').text(data.yuchal);
-						$('#gDbaedangyogu').text(data.baedangyogu);
-						$('#gDcheonggu').text((data.cheonggu) ? data.cheonggu.money() + ' 원': '');
-						$('#gDmaegaggiil').text(data.maegaggiil);
-						$('#gDbigo').text(data.bigo);
-						
-						_makeGyeongmaeImages(data.images);
-						_makeGyeongmaeGiils(data.giils);
-						_makeGyeongmaeLists(data.lists);
-						_makeGyeongmaeTonggyes(data.tonggyes);
-						_makeGyeongmaeMaegagmulgeons(data.maegagmulgeons);
-						_makeGyeongmaeJinhaengmulgeons(data.jinhaengmulgeons);
+						if(data.success === false && data.errCode) {
+							jqXHR.errCode = data.errCode;
+						}
+						else {
+							$('#gDsageonbeonho').text(data.sageonbeonho);
+							$('#gDdamdang').text(data.damdang);
+							$('#gDsageonjeobsuil').text(data.sageonjeobsuil);
+							$('#gDsojaeji').text(data.sojaeji);
+							$('#gDyongdo').text(data.yongdo);
+							$('#gDibchalbangbeob').text(data.ibchalbangbeob);
+							$('#gDgamjeongpyeongga').text((data.gamjeongpyeongga) ? data.gamjeongpyeongga.money() + ' 원' : '');
+							$('#gDminmaegaggagyeog').text((data.minmaegaggagyeog) ? data.minmaegaggagyeog.money() + ' 원' : '');
+							$('#gDyuchal').text(data.yuchal);
+							$('#gDbaedangyogu').text(data.baedangyogu);
+							$('#gDcheonggu').text((data.cheonggu) ? data.cheonggu.money() + ' 원': '');
+							$('#gDmaegaggiil').text(data.maegaggiil);
+							$('#gDbigo').text(data.bigo);
+							
+							_makeGyeongmaeImages(data.images);
+							_makeGyeongmaeGiils(data.giils);
+							_makeGyeongmaeLists(data.lists);
+							_makeGyeongmaeTonggyes(data.tonggyes);
+							_makeGyeongmaeMaegagmulgeons(data.maegagmulgeons);
+							_makeGyeongmaeJinhaengmulgeons(data.jinhaengmulgeons);
+						}
 					},
 					error:function() {
 						
