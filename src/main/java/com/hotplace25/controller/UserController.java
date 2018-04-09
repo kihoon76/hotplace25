@@ -39,9 +39,6 @@ public class UserController {
 		AjaxVO vo = new AjaxVO();
 		
 		try {
-//			ObjectMapper m = new ObjectMapper();
-//			System.err.println(m.writeValueAsString(account));
-			
 			boolean isValid = ValidationUtil.isValidAccount(account);
 			
 			if(!isValid) {
