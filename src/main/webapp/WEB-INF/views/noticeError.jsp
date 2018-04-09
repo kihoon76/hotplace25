@@ -40,7 +40,6 @@ $(document).ready( function() {
 		<div class="copyright">Copyright HOTPLACE25 All rights reserved</div>
 
 	</div>
-	
 </body>
 </html>
 

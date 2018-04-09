@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,9 +25,11 @@ import com.hotplace25.util.SessionUtil;
 @RequestMapping("/user")
 @Controller
 public class UserController {
-
 	@Resource(name="userService")
 	private UserService userService;
+	
+	@Autowired 
+	private PasswordEncoder passwordEncoder;
 	
 	@PostMapping("join")
 	@ResponseBody
@@ -34,9 +38,10 @@ public class UserController {
 		AjaxVO vo = new AjaxVO();
 		
 		try {
-			ObjectMapper m = new ObjectMapper();
-			System.err.println(m.writeValueAsString(account));
+//			ObjectMapper m = new ObjectMapper();
+//			System.err.println(m.writeValueAsString(account));
 			vo.setSuccess(true);
+			account.setPassword(passwordEncoder.encode(account.getPassword()));
 			userService.join(account);
 			
 		}

@@ -110,7 +110,10 @@
     -->
 			  
 	<sec:authentication-manager>
-		<sec:authentication-provider ref="customAuthenticationProvider" />
+		<sec:authentication-provider ref="customAuthenticationProvider"/>
+		<sec:authentication-provider user-service-ref="userDetailsService">
+			<sec:password-encoder ref="passwordEncoder" />
+		</sec:authentication-provider>
 	</sec:authentication-manager>
 	
 	<!-- http://zgundam.tistory.com/54 -->

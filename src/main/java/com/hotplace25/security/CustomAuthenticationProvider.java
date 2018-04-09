@@ -24,8 +24,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 	@Resource(name="userDetailsService")
 	UserDetailsServiceImpl userDetailsService;
 	
-	//@Autowired 
-	//private PasswordEncoder passwordEncoder;
+	@Autowired 
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -33,6 +33,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 		String password = (String) authentication.getCredentials();
 		
 		logger.info("사용자가 입력한 로그인정보입니다. {}", username + "/" + password);
+		password = passwordEncoder.encode(password);
 		UserDetailsImpl user;
 		
 		try {
@@ -57,7 +58,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 
 		}
 		
-		//return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
 		return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
 		
 	}

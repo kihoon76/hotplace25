@@ -15,8 +15,6 @@ import com.hotplace25.service.UserService;
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService{
 
-	private static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
-	
 	@Autowired
 	UserService userService;
 	
