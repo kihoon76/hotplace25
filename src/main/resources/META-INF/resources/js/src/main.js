@@ -204,7 +204,7 @@ $(document).ready(function() {
 				}
 				
 				hotplace.dom.removeBodyAllMask();
-				_enableMenu(level, hotplace.config.mulgeonViewLevel, $_lnbMulgeon, $('#' + hotplace.config.menus.MULGEON_SEARCH + ' .close'));
+				_enableMenu(level, hotplace.config.mulgeonViewLevel, $_lnbMulgeon, $('#' + hotplace.config.menus.MULGEON_VIEW + ' .close'));
 				
 			},500);
 		},
