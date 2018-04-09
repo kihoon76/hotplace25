@@ -201,6 +201,21 @@
 		return v;
 	}
 	
+	validation.isPasswordFormat = function($txtPw) {
+		var v = true;
+		var re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		
+		v = re.test($txtPw.val());
+		if(v) {
+			_ctrlValidMsg($txtPw, false, '.FORMAT');
+		}
+		else {
+			_ctrlValidMsg($txtPw, true, '.FORMAT');
+		}
+		
+		return v;
+	}
+	
 	
 }(
 	hotplace.validation = hotplace.validation || {},

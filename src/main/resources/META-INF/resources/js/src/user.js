@@ -64,6 +64,7 @@ $(document).ready(function() {
 	function _isValidJoinForm() {
 		if(_checkEmpty()
 			&& _checkDupId()
+			&& _checkPwFormat()
 			&& _checkPwConfirm()
 			&& _checkMailFormat()
 			&& _checkPhoneM()
@@ -90,6 +91,11 @@ $(document).ready(function() {
 		
 		return v;
 	}
+	
+	function _checkPwFormat() {
+		return hotplace.validation.isPasswordFormat($(_joinStep02_TXT_Pw));
+	}
+	
 	
 	function _checkPwConfirm() {
 		var $joinStep02_TXT_Pw = $(_joinStep02_TXT_Pw);
