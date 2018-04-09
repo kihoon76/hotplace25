@@ -32,8 +32,9 @@ public class ValidationUtil {
 		return isValid(phone, PHONE_REGEX);
 	}
 	
-//	public static boolean isValidAccount(Account account) {
-//		return isValidEmail(account.getEmail()) &&
-//				isValidPassword(account.get)
-//	}
+	public static boolean isValidAccount(Account account) {
+		return isValidEmail(account.getEmail()) &&
+			   isValidPassword(account.getPassword()) &&
+			   isValidPhone(account.getPhone());
+	}
 }

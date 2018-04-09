@@ -21,6 +21,7 @@ import com.hotplace25.domain.Account;
 import com.hotplace25.domain.AjaxVO;
 import com.hotplace25.service.UserService;
 import com.hotplace25.util.SessionUtil;
+import com.hotplace25.util.ValidationUtil;
 
 @RequestMapping("/user")
 @Controller
@@ -40,10 +41,17 @@ public class UserController {
 		try {
 //			ObjectMapper m = new ObjectMapper();
 //			System.err.println(m.writeValueAsString(account));
-			vo.setSuccess(true);
-			account.setPassword(passwordEncoder.encode(account.getPassword()));
-			userService.join(account);
 			
+			boolean isValid = ValidationUtil.isValidAccount(account);
+			
+			if(!isValid) {
+				vo.setSuccess(false);
+			}
+			else {
+				vo.setSuccess(true);
+				account.setPassword(passwordEncoder.encode(account.getPassword()));
+				userService.join(account);
+			}
 		}
 		catch(Exception e) {
 			vo.setSuccess(false);
