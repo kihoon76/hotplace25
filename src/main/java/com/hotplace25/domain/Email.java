@@ -6,6 +6,11 @@ public class Email {
 	private Account account;
 	private String accountId;
 	private String content = "";
+	private String url;
+	
+	public Email(String url) {
+		this.url = url;
+	}
 	
 	public String getSubject() {
 		return subject;
@@ -42,8 +47,11 @@ public class Email {
 	public String getEmailBody() {
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("<table style=\"width:500px; border:1px solid red;\" >");
+		sb.append("<table style=\"width:500px;\">");
 		sb.append("<tbody>");
+		sb.append("<tr style=\"background-color:#333336\">");
+		sb.append("<td><img src=\"" + url + "resources/img/gnb_logo.png\" /></td>");
+		sb.append("</tr>");
 		sb.append("<tr>");
 		sb.append("<td>" + content + "</td>");
 		sb.append("</tr>");

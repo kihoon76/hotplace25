@@ -330,8 +330,9 @@ $(document).ready(function() {
 				success: function(data, textStatus, jqXHR) {
 					//var jo = $.parseJSON(data);
 					if(data.success) {
-						hotplace.dom.closeModal();
-						
+						hotplace.dom.showAlertMsg(function() {
+							hotplace.dom.closeMom();
+						}, '비밀번호를 메일로 발송해 드렸습니다.', {width:400});
 					}
 					else {
 						hotplace.dom.showAlertMsg(null, data.errMsg, {width:400});

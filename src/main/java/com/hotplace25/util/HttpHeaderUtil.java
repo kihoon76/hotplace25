@@ -59,4 +59,8 @@ public class HttpHeaderUtil {
 		
 		return false;
 	}
+	
+	public static String getUrlRoot(HttpServletRequest request) {
+		return request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath()) + "/";
+	}
 }

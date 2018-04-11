@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ import com.hotplace25.domain.ToojaSearchResult;
 import com.hotplace25.service.SearchService;
 import com.hotplace25.service.UserService;
 import com.hotplace25.util.DataUtil;
+import com.hotplace25.util.HttpHeaderUtil;
 import com.hotplace25.util.MailUtil;
 import com.hotplace25.util.ValidationUtil;
 
@@ -166,7 +168,8 @@ public class SearchController {
 	@ResponseBody
 	public AjaxVO searchPassword(
 			@RequestParam("accountId") String accountId, 
-			@RequestParam("email") String emailStr) {
+			@RequestParam("email") String emailStr,
+			HttpServletRequest request) {
 		
 		AjaxVO vo = new AjaxVO();
 		
@@ -179,9 +182,9 @@ public class SearchController {
 			else {
 				String imsiPw = mailUtil.getRandomPassword("P", 16);
 				try {
-					Email email = new Email();
+					Email email = new Email(HttpHeaderUtil.getUrlRoot(request));
 					email.setAccount(account);
-					email.setContent("<p>임시로 발급된 비밀번호는 <span style=\"font-color:red; font-weight:bolder;\">" + imsiPw + "</span> 입니다.</p>");
+					email.setContent("<p>임시로 발급된 비밀번호는 <span style=\"color:#ff0000; font-weight:bolder;\">" + imsiPw + "</span> 입니다.</p>");
 					mailUtil.sendMail(email);
 					
 					account.setPassword(passwordEncoder.encode(imsiPw));

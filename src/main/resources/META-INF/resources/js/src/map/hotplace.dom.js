@@ -1087,6 +1087,10 @@
 		_$modalPopup.modal('hide');
 	}
 	
+	dom.closeMom = function() {
+		_$momPopup.modal('hide');
+	}
+	
 	function _setModalMaxHeight($element) {
 		var $content = $element.find('.modal-content');
 		var $dialog = $element.find('.modal-dialog');
