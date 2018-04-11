@@ -16,6 +16,7 @@
 	
 	function _makePagination(total, pageNum) {
 		
+		if(total == 0) return;
 		var totalPage = Math.ceil(total/rowPerPage);
 		
 		if(totalPage < pageNum) {
@@ -118,6 +119,9 @@
 				trs.push('<tr><td>' + list[i].num + '</td><td class="left ellipsis"><a href="#" class="contView" data-index="' + list[i].num + '">' + list[i].title + '</a></td></tr>');
 				trs.push('<tr class="contentViewBox"><td colspan="2"><div id="dvContentBox' + list[i].num + '" class="contentBox"></div></td></tr>');
 			}
+		}
+		else {
+			trs.push('<tr><td colspan="2">등록된 공지사항이 없습니다.</td></tr>');
 		}
 		
 		$container.html(trs.join(''));
