@@ -64,7 +64,7 @@
 		_$mypageAccUserPhoneM = $('#mypageAccUserPhoneM'),
 		_$mypageAccUserPhoneL = $('#mypageAccUserPhoneL'),
 		_$btnAccModifyAccount = $('#btnAccModifyAccount'),
-		_mypageAccTxtElements = ['#mypageAccPw', '#mypageAccPwConfirm', '#mypageAccUserName', '#mypageAccUserEmail', '#mypageAccUserPhoneM', '#mypageAccUserPhoneL', '#mypageAccUserEmail2'],
+		_mypageAccTxtElements = ['#mypageAccUserName', '#mypageAccUserEmail', '#mypageAccUserPhoneM', '#mypageAccUserPhoneL', '#mypageAccUserEmail2'],
 		_$hdnEmail = $('#hdnEmail');
 		
 		_initEmail();
@@ -74,6 +74,7 @@
 		.on('click', function() {
 			
 			if(_isValidAccountForm()) {
+				hotplace.validation.ctrlValidMsg(_$mypageAccPw, false, '.FORMAT');
 				hotplace.ajax({
 					url: 'user/modify',
 					data: JSON.stringify({
@@ -134,9 +135,15 @@
 		return v;
 	}
 	
+	function _checkPwFormat() {
+		if($.trim(_$mypageAccPw.val()) == '') return true;
+		return hotplace.validation.isPasswordFormat(_$mypageAccPw);
+	}
+	
 	function _isValidAccountForm() {
 		if(_checkAccEmpty()
 			&& _checkPwConfirm()
+			&& _checkPwFormat()
 			&& _checkMailFormat()
 			&& _checkPhoneM()
 			&& _checkPhoneL()) {

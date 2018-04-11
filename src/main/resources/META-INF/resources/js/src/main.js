@@ -138,8 +138,6 @@ $(document).ready(function() {
 		});
 	});
 	
-	
-	
 	$('#modalTutorial').on('click', function() {
 		hotplace.dom.showTutorial();
 	});

@@ -29,5 +29,9 @@ public class UserService {
 	public boolean modifyUserInfo(Account account) {
 		return userDao.updateUserInfo(account);
 	}
+
+	public void modifyUserPw(Account account) {
+		userDao.updateUserPw(account);
+	}
 	
 }

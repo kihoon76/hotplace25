@@ -959,6 +959,11 @@
 		dom.openModal('', {width:'500'});
 	}
 	
+	dom.showPwSearchForm = function(closeFn, openFn) {
+		_appendModalPopup('searchPwForm', _$momPopup);
+		dom.openModalOnModal('', {width: 400});
+	}
+	
 	dom.showMypage = function(openFn) {
 		//template 저장 안하고 계속 새로 로딩 
 		if(true/*_templates['mypageForm'] == undefined*/) {

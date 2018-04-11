@@ -20,6 +20,13 @@ public class ValidationUtil {
 		return matcher.matches();
 	}
 	
+	public static boolean isNotEmpty(String str) {
+		if(str == null || "".equals(str.trim()))
+			return false;
+		
+		return true;
+	}
+	
 	public static boolean isValidEmail(String email) {
 		return isValid(email, EMAIL_REGEX);
 	}
@@ -32,7 +39,12 @@ public class ValidationUtil {
 		return isValid(phone, PHONE_REGEX);
 	}
 	
-	public static boolean isValidAccount(Account account) {
-		return isValidEmail(account.getEmail()) && isValidPassword(account.getPassword()) && isValidPhone(account.getPhone());
+	public static boolean isValidAccount(Account account, boolean isPasswordCheck) {
+		if(isPasswordCheck) {
+			return isValidEmail(account.getEmail()) && isValidPassword(account.getPassword()) && isValidPhone(account.getPhone());
+		}
+		else {
+			return isValidEmail(account.getEmail()) && isValidPhone(account.getPhone());
+		}
 	}
 }

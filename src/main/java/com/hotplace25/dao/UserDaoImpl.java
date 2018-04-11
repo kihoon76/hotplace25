@@ -36,4 +36,9 @@ public class UserDaoImpl implements UserDao {
 		return 1 == msSqlSession.update(namespace + ".updateUserInfo", account);
 	}
 
+	@Override
+	public void updateUserPw(Account account) {
+		msSqlSession.update(namespace + ".updateUserPw", account);
+	}
+
 }

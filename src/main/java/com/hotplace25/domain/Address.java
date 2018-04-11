@@ -3,7 +3,7 @@ package com.hotplace25.domain;
 import org.apache.ibatis.type.Alias;
 
 @Alias("Address")
-public class Address {
+public class Address extends Latlng {
 
 	private String pnu;				//PNU 코드
 	private String type;			//R:도로명 주소, N:지번주소

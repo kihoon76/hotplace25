@@ -1,6 +1,11 @@
 $(document).ready(function() {
 	var _login_BTN = '#btnLogin',
 		_login_BTN_Join = '#joinBtn', //로그인 폼에서 회원가입링크 id
+		_search_LINK_Pw = '#searchPwBtn', //비밀번호 찾기 링크
+		_search_BTN_Pw = '#btnSearchPw',  //비밀번호 찾기 버튼
+		_search_TXT_RegId = '#txtRegId',
+		_search_TXT_RegEmail = '#txtRegEmail',
+		_searchTxtElements = [_search_TXT_RegId, _search_TXT_RegEmail],
 		_join_BTN_Login = '#btnStep04Login',
 		_joinStep01 = '#joinStep01',
 		_joinStep02 = '#joinStep02',
@@ -305,6 +310,47 @@ $(document).ready(function() {
 			_reset();
 		});
 	});
+	
+	//비밀번호 찾기 링크
+	$(document).on('click', _search_LINK_Pw, function() {
+		hotplace.dom.showPwSearchForm();
+	});
+	
+	//비밀번호 찾기 버튼
+	$(document).on('click', _search_BTN_Pw, function() {
+		if(_checkEmptyForPw() && _checkMailFormatForPw()) {
+			hotplace.ajax({
+				url: 'search/password',
+				method: 'POST',
+				data: {
+					accountId: $(_search_TXT_RegId).val(),
+					email:$(_search_TXT_RegEmail).val()
+				},
+				//contentType: 'application/json; charset=UTF-8',
+				success: function(data, textStatus, jqXHR) {
+					//var jo = $.parseJSON(data);
+					if(data.success) {
+						hotplace.dom.closeModal();
+						
+					}
+					else {
+						hotplace.dom.showAlertMsg(null, data.errMsg, {width:400});
+					}
+				},
+				error: function(data, textStatus, jqXHR) {
+					console.log(data)
+				}
+			});
+		}
+	});
+	
+	function _checkMailFormatForPw() {
+		return hotplace.validation.isValidEmail($(_search_TXT_RegEmail), 'D');
+	}
+	
+	function _checkEmptyForPw() {
+		return hotplace.validation.isFormNotEmpty(_searchTxtElements); 
+	}
 	
 	//로그인버튼 (회원가입폼이  로그인 모달로 교체)
 	$(document).on('click', _join_BTN_Login, function() {

@@ -47,6 +47,8 @@
 		<sec:intercept-url pattern="/notice/page/**" access="permitAll"/> 
 		<!-- 주소검색 -->
 		<sec:intercept-url pattern="/mulgeon/search" access="permitAll"/> 
+		<!-- 패스워드 찾기 -->
+		<sec:intercept-url pattern="/search/password" access="permitAll"/>
 		
 		<sec:intercept-url pattern="/index.jsp" access="permitAll" />
 		<sec:intercept-url pattern="/resources/**" access="permitAll" />

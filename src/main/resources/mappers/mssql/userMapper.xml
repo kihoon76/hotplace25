@@ -42,4 +42,10 @@
 		   	       이메일 = #{email}
 		 where 아이디 = #{id}      
 	</update>
+	
+	<update id="updateUserPw" parameterType="Account">
+		update [웹].[dbo].[계정]
+		   set 비번 = #{password}
+		 where 아이디 = #{id}
+	</update>
 </mapper>

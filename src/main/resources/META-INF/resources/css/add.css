@@ -2,3 +2,7 @@ textarea {resize:none;}
 .zoomImg {width:2000px;	height:2000px !important; max-height:2000px !important;}
 .spanJangeagongji {color: red; padding-top: 15px; font-size: 20px;}
 
+
+.loginBox .joinLink .search-underline {text-decoration:underline; display:inline-block; }
+.loginBox .joinLink .search-underline:hover {color:#000;}
+

@@ -39,7 +39,7 @@ public class UserController {
 		AjaxVO vo = new AjaxVO();
 		
 		try {
-			boolean isValid = ValidationUtil.isValidAccount(account);
+			boolean isValid = ValidationUtil.isValidAccount(account, true);
 			
 			if(!isValid) {
 				vo.setSuccess(false);
@@ -88,9 +88,30 @@ public class UserController {
 		ObjectMapper m = new ObjectMapper();
 		System.err.println(m.writeValueAsString(account));
 		
+		if(account.getPassword() != null && !"".equals(account.getPassword())) {
+			boolean r = ValidationUtil.isValidAccount(account, true);
+			
+			if(!r) {
+				vo.setSuccess(false);
+				return vo;
+			}
+			else {
+				account.setPassword(passwordEncoder.encode(account.getPassword()));
+			}
+		}
+		else {
+			boolean r = ValidationUtil.isValidAccount(account, false);
+			
+			if(!r) {
+				vo.setSuccess(false);
+				return vo;
+			}
+		}
+		
 		account.setId(SessionUtil.getSessionUserId());
 		
 		try {
+			
 			boolean r = userService.modifyUserInfo(account);
 			if(r) {
 				vo.setSuccess(true);

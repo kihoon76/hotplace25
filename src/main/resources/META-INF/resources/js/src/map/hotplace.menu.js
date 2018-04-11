@@ -24,10 +24,7 @@
 		    },
 		    {title:'면적', field:'area', align:'center', width:100},
 		    {title:'공시지가', field:'gongsi', align:'center', width:100},
-		    {title:'지역', field:'jiyeokCode', align:'left', width:170, headerFilter:'input', headerFilterPlaceholder:'주소검색', formatter:function(cell) {
-		    	
-		    	return hotplace.util.getJiyeokStr(cell.getValue());
-		    }},
+		    {title:'주소', field:'detail', align:'left', width:370, headerFilter:'input'},
 			//{title:'위도', field:'lat', visible:false},
 			//{title:'경도', field:'lng', visible: false}
 		],
@@ -149,6 +146,46 @@
 		hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
 	}
 	
+	function _convertToYN(arr) {
+		if(arr && arr.length > 0) {
+			var len = arr.length;
+			var result;
+			var digit = arr[0].length;
+			
+			for(var i=0; i<len; i++) {
+				if(i == 0) {
+					result = parseInt(arr[i], 2);
+				}
+				else {
+					result = result | parseInt(arr[i], 2);
+				}
+			}
+			
+			result = result.toString(2);
+			var resultLen = result.length;
+			
+			if(digit > resultLen) {
+				for(var p=0, pLen = digit-resultLen; p < pLen; p++) {
+					result = '0' + result;
+				}
+				
+				resultLen = result.length;
+			}
+			
+			arr.length = 0;
+			for(var r=0; r<resultLen; r++) {
+				if(result.substr(r, 1) == '1') {
+					arr.push('Y');
+				}
+				else {
+					arr.push('N');
+				}
+			}
+		}
+		
+		return arr;
+	}
+	
 	function _getToojaParam(cate) {
 		var param = null;
 		
@@ -156,8 +193,8 @@
 		case _toojaTab.JangmiCityPlan :
 			param = {
 				'cityPlan':_getCheckboxesData('itemCityPlanTab01'),
-				'cityPlanState':_getCheckboxesData('itemCityPlanStateTab01'),
-				'bosangPyeonib':_getCheckboxesData('itemBosangPyeonibTab01'),
+				'cityPlanState':_convertToYN(_getCheckboxesData('itemCityPlanStateTab01')),
+				'bosangPyeonib':_convertToYN(_getCheckboxesData('itemBosangPyeonibTab01')),
 				'jiyeog':_getCheckboxesData('itemJiyeogTab01'),
 				'jimok':_getCheckboxesData('itemJimokTab01'),
 				'gongsi':_getCheckboxesData('itemGongsiTab01'),

@@ -805,11 +805,11 @@ body	 {min-height:600px;}
 .loginBox .inputArea .btnLogin:hover,
 .loginBox .inputArea .btnLogin:focus {background:#000;}
 
-.loginBox .joinLink {display:block; margin:40px auto 0; width:70px; height:auto;}
-.loginBox .joinLink:before {}
-.loginBox .joinLink .underline {text-decoration:underline; display:inline-block; }
+.loginBox .joinLink {display:block; margin:40px auto 0; width:100%; height:auto;}
+.loginBox .joinLink:before {display:block; content:''; margin:0 auto 10px; width:70px; height:70px; background:url('../img/login_img_join.png') no-repeat; background-size:70px auto; background-position:0 0;}
+.loginBox .joinLink .underline {text-decoration:underline; display:inline-block;  margin:0 5px 0;}
 .loginBox .joinLink .underline:hover {color:#000;}
-.loginBox .joinLink .underline:before {display:block; content:''; margin-bottom:10px; width:70px; height:70px; background:url('../img/login_img_join.png') no-repeat; background-size:70px auto; background-position:0 0;}
+.loginBox .joinLink .underline:before {}
 
 /*************************************/
 /* joinBox */

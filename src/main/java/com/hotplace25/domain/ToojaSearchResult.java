@@ -3,7 +3,7 @@ package com.hotplace25.domain;
 import org.apache.ibatis.type.Alias;
 
 @Alias("ToojaSearchResult")
-public class ToojaSearchResult extends Latlng {
+public class ToojaSearchResult extends Address {
 
 	private String pnu;
 	private String jimokCode;

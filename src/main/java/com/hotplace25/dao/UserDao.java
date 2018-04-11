@@ -11,4 +11,6 @@ public interface UserDao {
 	public void insertJoin(Account account);
 
 	public boolean updateUserInfo(Account account);
+
+	public void updateUserPw(Account account);
 }
