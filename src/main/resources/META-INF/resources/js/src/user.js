@@ -316,6 +316,12 @@ $(document).ready(function() {
 		hotplace.dom.showPwSearchForm();
 	});
 	
+	$(document).on('keydown', _search_TXT_RegEmail, function(e) {
+		if(e.keyCode == 13) {
+			$(_search_BTN_Pw).trigger('click');
+		}
+	});
+	
 	//비밀번호 찾기 버튼
 	$(document).on('click', _search_BTN_Pw, function() {
 		if(_checkEmptyForPw() && _checkMailFormatForPw()) {
