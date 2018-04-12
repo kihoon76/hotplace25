@@ -43,6 +43,7 @@ public class UserController {
 			
 			if(!isValid) {
 				vo.setSuccess(false);
+				vo.setErrCode("999");
 			}
 			else {
 				vo.setSuccess(true);
@@ -93,6 +94,7 @@ public class UserController {
 			
 			if(!r) {
 				vo.setSuccess(false);
+				vo.setErrCode("999");
 				return vo;
 			}
 			else {
@@ -104,6 +106,7 @@ public class UserController {
 			
 			if(!r) {
 				vo.setSuccess(false);
+				vo.setErrCode("999");
 				return vo;
 			}
 		}

@@ -247,7 +247,7 @@ $(document).ready(function() {
 					$(_joinStep04).show();
 				}
 				else {
-					jqXHR.errCode = hotplace.error.JOIN;
+					jqXHR.errCode = data.errCode || hotplace.error.JOIN;
 				}
 			},
 			error: function(jqXHR, textStatus, e) {

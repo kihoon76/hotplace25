@@ -74,7 +74,7 @@
 									<td>
 										<input type="password" id="joinPw" class="inp" style="width:100%;" />
 										<span class="helpCont EMPTY">비밀번호를 입력하세요</span>
-										<span class="helpCont FORMAT">비밀번호 형식이 맞지 않습니다(최소 8자 이상, 대문자 + 소문자 + 숫자 + 특수문자 조합)</span>
+										<span class="helpCont FORMAT">비밀번호 형식이 맞지 않습니다(최소 8자 이상, 대문자 + 소문자 + 숫자 + 특수문자 조합)(\&lt;&gt;제외)</span>
 									</td>
 								</tr>
 								<tr>

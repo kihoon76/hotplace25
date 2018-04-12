@@ -8,7 +8,7 @@ import com.hotplace25.domain.Account;
 public class ValidationUtil {
 
 	private final static String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
-	private final static String PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$";
+	private final static String PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&.^~()`_,/+=-])[A-Za-z\\d$@$!%*#?&.^~()`_,/+=-]{8,}$";
 	private final static String PHONE_REGEX = "\\d{2,4}-\\d{3,4}-\\d{4}";
 	
 	private static boolean isValid(String value, String regex) {

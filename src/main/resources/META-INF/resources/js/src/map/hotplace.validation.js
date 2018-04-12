@@ -203,7 +203,7 @@
 	
 	validation.isPasswordFormat = function($txtPw) {
 		var v = true;
-		var re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		var re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_`]).{8,}$/;
 		
 		v = re.test($txtPw.val());
 		if(v) {
