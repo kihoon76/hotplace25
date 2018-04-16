@@ -668,7 +668,7 @@
 				    		   data.lat,
 				    		   data.lng,
 				    		   null/*_menus.TOOJA_SEARCH*/,
-				    		   {address:data.jibeon},
+				    		   {address:data.detail},
 				    		   function() {
 				    			   //마커가 닫힐때 Luris 도면도 닫힌다.
 				    			   _closeLurisDv();

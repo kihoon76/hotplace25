@@ -55,7 +55,7 @@
 	</resultMap>
 	
 	<select id="selectJangmiList" statementType="CALLABLE" parameterType="Jangmi" resultMap="RM_selectJangmiList">
-		{ call  [서비스].[dbo].[SEL_장기미집행도시계획시설](
+		{ call  [서비스].[dbo].[SEL_장기미집행도시계획시설2](
 			#{cityPlan, mode=IN, jdbcType=NVARCHAR, javaType=string},
 			#{cityPlanState, mode=IN, jdbcType=NVARCHAR, javaType=string},
 			#{bosangPyeonib, mode=IN, jdbcType=NVARCHAR, javaType=string},
