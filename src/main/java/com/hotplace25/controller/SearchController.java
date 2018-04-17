@@ -180,7 +180,7 @@ public class SearchController {
 				vo.setErrMsg("값이 유효하지 않습니다");
 			}
 			else {
-				String imsiPw = mailUtil.getRandomPassword("C", 16);
+				String imsiPw = mailUtil.getRandomPassword("C", 15) + "#";
 				try {
 					Email email = new Email(HttpHeaderUtil.getUrlRoot(request));
 					email.setAccount(account);
