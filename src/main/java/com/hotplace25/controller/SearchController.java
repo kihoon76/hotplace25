@@ -175,7 +175,7 @@ public class SearchController {
 		
 		if(ValidationUtil.isNotEmpty(accountId) && ValidationUtil.isValidEmail(emailStr)) {
 			Account account = userService.getUserInfo(accountId);
-			if(account != null && !emailStr.equals(account.getEmail())) {
+			if(account == null || !emailStr.equals(account.getEmail())) {
 				vo.setSuccess(false);
 				vo.setErrMsg("값이 유효하지 않습니다");
 			}
