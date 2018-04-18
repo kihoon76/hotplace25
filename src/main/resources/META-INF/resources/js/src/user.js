@@ -283,6 +283,16 @@ $(document).ready(function() {
 		var id = $('#id').val(),
 			pw = $('#pw').val();
 		
+		if($.trim(id) == '') {
+			$('#id').focus();
+			return;
+		}
+		
+		if($.trim(pw) == '') {
+			$('#pw').focus();
+			return;
+		}
+		
 		hotplace.ajax({
 			url: 'login',
 			method: 'POST',
