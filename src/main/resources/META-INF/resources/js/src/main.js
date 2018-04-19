@@ -299,11 +299,11 @@ $(document).ready(function() {
 		$('#lnbMulgeonLi > a').trigger('click');
 		//경매
 		$('#mulgeonGyeongmae').prop('checked', true);
-		/*
+		
 		//공매
 		$('#mulgeonGongmae').prop('checked', true);
 		//보상물건
-		$('#mulgeonBosang').prop('checked', true);
+		/*$('#mulgeonBosang').prop('checked', true);
 		//편입물건
 		$('#mulgeonPyeonib').prop('checked', true);*/
 		
@@ -329,5 +329,4 @@ $(document).ready(function() {
 	
 	hotplace.validation.numberOnly('.numberOnly');
 	hotplace.validation.numberNdot('.numberNdot');
-	
 });

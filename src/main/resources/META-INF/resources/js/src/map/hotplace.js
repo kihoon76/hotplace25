@@ -832,6 +832,113 @@
 	hotplace.isExistJqDom = function($el) {
 		return ($el && $el.get(0).length > 0);
 	}
+	
+	
+	hotplace.saveAddrSearchHistory = function(value) {
+		_saveLocalStorageByArray(STORAGE_KEY.ADDRESS, value);
+	}
+	
+	hotplace.getAddrSearchHistory = function() {
+		return _getLocalStorageByArray(STORAGE_KEY.ADDRESS);
+	}
+	
+	hotplace.clearAddrSearchHistory = function() {
+		_clearLocalStorage(STORAGE_KEY.ADDRESS);
+	}
+	
+	hotplace.removeAddrSearchHistory = function(index) {
+		_removeLocalStorageByArray(STORAGE_KEY.ADDRESS, index);
+	}
+	
+	var STORAGE_KEY = {
+		ADDRESS: 'A'
+	};
+	
+	//html5 로컬스토리지 
+	//localStorage only supports strings. 
+	//Use JSON.stringify() and JSON.parse().
+	function _saveLocalStorageByArray(key, value) {
+		if(localStorage) {
+			var item = localStorage.getItem(key);
+			var obj = null;
+			var isDup = false;
+			if(item) {
+				obj = JSON.parse(item);
+				
+				
+				//중복체크
+				var len = obj.data.length;
+				for(var i=0; i<len; i++) {
+					if(obj.data[i] == value) {
+						isDup = true;
+						break;
+					}
+				}
+				
+				if(!isDup) {
+					//max 10개 제한
+					if(len == 10) {
+						obj.data.shift();
+					}
+					
+					obj.data.push(value);
+				}
+			}
+			else {
+				obj = {data: [value]};
+			}
+			
+			localStorage.setItem(key, JSON.stringify(obj));
+		}
+		else {
+			alert('html5 로컬스토리지를 지원하지 않습니다.');
+		}
+	}
+	
+	function _getLocalStorageByArray(key) {
+		if(localStorage) {
+		
+			var item = localStorage.getItem(key);
+			if(item) {
+				item = JSON.parse(item);
+				return item.data;
+			}
+			
+			return null;
+		}
+		
+		return null;
+	}
+	
+	function _clearLocalStorage(key) {
+		if(localStorage) {
+			localStorage.removeItem(key);
+		}
+	}
+	
+	function _removeLocalStorageByArray(key, index) {
+		if(localStorage) {
+			var item = localStorage.getItem(key);
+			
+			if(item) {
+				item = JSON.parse(item);
+				var arr = item.data;
+				
+				try {
+					arr.splice(index, 1);
+					if(arr.length == 0) {
+						localStorage.removeItem(key);
+					}
+					else {
+						localStorage.setItem(key, JSON.stringify(item));
+					}
+				}
+				catch(e) {
+					throw e;
+				}
+			}
+		}
+	}
 }(
 	window.hotplace = window.hotplace || {},
 	jQuery	

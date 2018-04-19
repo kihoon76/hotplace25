@@ -3,6 +3,7 @@ textarea {resize:none;}
 .spanJangeagongji {color: red; padding-top: 15px; font-size: 20px;}
 
 
-.loginBox .joinLink .search-underline {text-decoration:underline; display:inline-block; }
-.loginBox .joinLink .search-underline:hover {color:#000;}
+.loginBox .responsibility {background-color:#333336; margin-top:10px; height:90px;}
+.loginBox .responsibility .logo {display:block; width:150px; height:40px; background:url('../img/gnb_logo.png') no-repeat;  /*background-size: 100px 33px;*/} 
+.loginBox .responsibility .notice {color:#ffffff; font-size:12px; margin-top:3px; text-align:left; padding-left:10px;}
 

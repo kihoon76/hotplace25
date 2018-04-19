@@ -272,6 +272,9 @@
 		_txtAddressSearch = '#txtAddressSearch',
 		_btnAddressSearch = '#btnAddressSearch',
 		_rdoAddressType = 'addressType',
+		_divSearchHistory = '#addressSearchHistory',
+		_btnRemoveAllSearchHistory = '#btnRemoveAllSearchHistory',
+		_btnCloseSearchHistory = '#btnCloseSearchHistory',
 		_addressType = 'N';
 	
 	//주소검색 후 라디오버튼 선택
@@ -313,13 +316,44 @@
 		}
 	}
 	
+	function _createHistory() {
+		var history = hotplace.getAddrSearchHistory();
+		if(history) {
+			var len = history.length;
+			var arr = [];
+			
+			for(var i=0; i<len; i++) {
+				arr.push('<li><span class="text">' + history[i] + '</span><button type="button" class="delete">' 
+						 + ' <i class="ambicon-015_mark_times"></i><span class="hidden">닫기</span></button></li>');
+			}
+			
+			$(_divSearchHistory + ' ul').html(arr.join(''));
+		}
+	}
+	
+	function _closeHistory() {
+		$(_divSearchHistory).slideUp(100);
+	}
+	
+	function _showHistory() {
+		$(_divSearchHistory).slideDown(100);
+	}
+	
 	function _initAddressDom() {
 		_selectedAddressObj = {};
 		_addressType = 'N';
+		_createHistory();
 		
 		$(document)
 		.off('change', '.ADDR_RDO', _eventHandlerAddrRdo)
 		.on('change', '.ADDR_RDO', _eventHandlerAddrRdo);
+		
+		$(_divSearchHistory + ' li > .text')
+		.off('click')
+		.on('click', function() {
+			$(_txtAddressSearch).val($(this).text());
+			_closeHistory();
+		});
 		
 		$(_addrSearchMenu + ' input[name="addressType"]')
 		.off('change')
@@ -328,13 +362,41 @@
 			console.log(_addressType)
 		});
 		
+		//history delete event
+		$(_divSearchHistory + ' .delete')
+		.off('click')
+		.on('click', function(e) {
+			var li = $(this).parents('li');
+			hotplace.removeAddrSearchHistory(li.index());
+			li.remove();
+		});
+		
+		//history close event
+		$(_btnCloseSearchHistory)
+		.off('click')
+		.on('click', function() {
+			_closeHistory($(this));
+		});
+		
 		$(_txtAddressSearch)
 		.off('keydown')
+		.off('focus')
 		.on('keydown', function(e) {
 			if (e.which == 13) {
 				var txt = e.target.value;
+				$(this).blur();
 				$(_btnAddressSearch).trigger('click', $.trim(txt)); 
 		    }
+			//아래 화살표
+			else if(e.which == 40) {
+				
+			}
+		})
+		.on('focus', function(e) {
+			var history = hotplace.getAddrSearchHistory();
+			if(history) {
+				_showHistory($(this));
+			}
 		});
 		
 		$(_btnAddressSearch)
@@ -345,44 +407,10 @@
 			}
 			
 			if(arg) {
-//				var param = {san:'1'};
-//				var beonji, beonjiF, beonjiS, beonjiArr, beonjiArrLen;
-//				
-//				var token = arg.split(' ');
-//				var tokenLen = token.length;
-//				var t;
-//				var arr = [];
-//				
-//				for(var i=0; i<tokenLen; i++) {
-//					t = token[i];
-//					if(t == ' ') continue;
-//					arr.push(t);
-//				}
-//				
-//				var arrLen = arr.length;
-//				for(var k=0; k<arrLen; k++) {
-//					if(arr[k] == '산') {
-//						param.san = '2';
-//					}
-//					else if(beonji = arr[k].match(/[0-9]+\-?[0-9]*/g)){
-//						if(beonji) {
-//							beonjiArr = beonji.toString().split('-');
-//							beonjiArrLen = beonjiArr.length;
-//							
-//							if(beonjiArrLen == 1) {
-//								param.beonjiF = $.trim(beonjiArr[0]);
-//								param.beonjiS = '0';
-//							}
-//							else {
-//								param.beonjiF = $.trim(beonjiArr[0]);
-//								param.beonjiS = $.trim(beonjiArr[1]);
-//							}
-//						}
-//					}
-//					else {
-//						param.detail = arr[k];
-//					}
-//				}
+				hotplace.saveAddrSearchHistory(arg);
+				_closeHistory();
+				//변경된 히스토리로 새로 만든다.
+				_createHistory();
 				
 				hotplace.getPlainTextFromJson('mulgeon/search', JSON.stringify({detail:arg, type:_addressType}), function(data) {
 					var dataForm = {
@@ -453,6 +481,9 @@
 			
 			hotplace.maps.panToLikeAddressSearch(lat, lng, _menus.ADDRESS_SEARCH, {address:address, pnu:pnu, lng:lng, lat:lat});
 		});
+		
+		
+		//_createHistory();
 	}
 	
 	/*****************************************************************************
