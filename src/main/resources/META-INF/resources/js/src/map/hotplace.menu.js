@@ -285,6 +285,27 @@
 		_selectedAddressObj.lat =  $(this).data('lat');
 	}
 	
+	function _eventHandlerHistoryTextClick(e) {
+		$(_txtAddressSearch).val($(this).text());
+		_closeHistory();
+	}
+	
+	function _eventHandlerHistoryItemDel(e) {
+		var li = $(e.target).parents('li');
+		hotplace.removeAddrSearchHistory(li.index());
+		li.remove();
+	}
+	
+	function _eventHandlerHistoryAllDel() {
+		hotplace.clearAddrSearchHistory();
+		$(_divSearchHistory + ' ul').html('');
+		_closeHistory();
+	}
+	
+	function _eventHandlerHistoryClose() {
+		_closeHistory();
+	}
+	
 	//주소검색후 결과가 없는 메시지를 뿌림
 	function _emptyAddressSearchResultForm(r) {
 		var emptyHtml = [];
@@ -348,34 +369,31 @@
 		.off('change', '.ADDR_RDO', _eventHandlerAddrRdo)
 		.on('change', '.ADDR_RDO', _eventHandlerAddrRdo);
 		
-		$(_divSearchHistory + ' li > .text')
-		.off('click')
-		.on('click', function() {
-			$(_txtAddressSearch).val($(this).text());
-			_closeHistory();
-		});
+		//history text click event
+		$(document)
+		.off('click', _divSearchHistory + ' li > .text', _eventHandlerHistoryTextClick)
+		.on('click', _divSearchHistory + ' li > .text', _eventHandlerHistoryTextClick);
+
+		//history delete event
+		$(document)
+		.off('click', _divSearchHistory + ' .delete', _eventHandlerHistoryItemDel)
+		.on('click', _divSearchHistory + ' .delete', _eventHandlerHistoryItemDel);
+		
+		//history close event
+		$(document)
+		.off('click', _btnCloseSearchHistory, _eventHandlerHistoryClose)
+		.on('click', _btnCloseSearchHistory, _eventHandlerHistoryClose);
+		
+		//history all remove event
+		$(document)
+		.off('click', _btnRemoveAllSearchHistory, _eventHandlerHistoryAllDel)
+		.on('click', _btnRemoveAllSearchHistory, _eventHandlerHistoryAllDel);
 		
 		$(_addrSearchMenu + ' input[name="addressType"]')
 		.off('change')
 		.on('change', function() {
 			_addressType = $(this).val();
 			console.log(_addressType)
-		});
-		
-		//history delete event
-		$(_divSearchHistory + ' .delete')
-		.off('click')
-		.on('click', function(e) {
-			var li = $(this).parents('li');
-			hotplace.removeAddrSearchHistory(li.index());
-			li.remove();
-		});
-		
-		//history close event
-		$(_btnCloseSearchHistory)
-		.off('click')
-		.on('click', function() {
-			_closeHistory($(this));
 		});
 		
 		$(_txtAddressSearch)
@@ -395,7 +413,7 @@
 		.on('focus', function(e) {
 			var history = hotplace.getAddrSearchHistory();
 			if(history) {
-				_showHistory($(this));
+				_showHistory();
 			}
 		});
 		
