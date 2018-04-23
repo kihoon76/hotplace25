@@ -162,16 +162,16 @@
     	},
     	codes: {
     		cityPlan: {
-    			'doro':{name:'도로', value:'0500'},
-    			'cheoldo':{name:'철도', value:'0900'},
-    			'etcTraffic':{name:'기타교통', value:'0400'},
-    			'park':{name:'공원', value:'0200'},
-    			'etcGonggan':{name:'기타공간시설', value:'0300'},
-    			'publicMunhwa':{name:'공공문화체육시설', value:'0100'},
-    			'bangjae':{name:'방재시설', value:'0600'},
-    			'bogeon':{name:'보건위생시설', value:'0700'},
-    			'yutong':{name:'유통공급시설', value:'0800'},
-    			'environment':{name:'환경기초시설', value:'1000'}
+    			'doro':{name:'도로', value:'05'},
+    			'cheoldo':{name:'철도', value:'09'},
+    			'etcTraffic':{name:'기타교통', value:'04'},
+    			'park':{name:'공원', value:'02'},
+    			'etcGonggan':{name:'기타공간시설', value:'03'},
+    			'publicMunhwa':{name:'공공문화체육시설', value:'01'},
+    			'bangjae':{name:'방재시설', value:'06'},
+    			'bogeon':{name:'보건위생시설', value:'07'},
+    			'yutong':{name:'유통공급시설', value:'08'},
+    			'environment':{name:'환경기초시설', value:'10'}
     		},
     		cityPlanState: {
     			'jeonphil':{name:'전필', value:'100'},

@@ -42,22 +42,21 @@
 	
 	<resultMap id="RM_selectJangmiList" type="ToojaSearchResult">
 		<result column="PNU"			property="pnu"/>
-		<result column="지목"				property="jimok"/>
-		<result column="지목코드"			property="jimokCode"/>
-		<result column="면적"				property="area" />
-		<result column="공시지가_코드"  	property="gongsiCode" />
-		<result column="공시지가_기준년월"   property="gongsiStandardDate" />
-		<result column="공시지가"  		property="gongsi" />
-		<result column="지역코드"  		property="jiyeokCode" />
-		<result column="FullName"  		property="detail" />
+		<result column="주소"				property="address"/>
+		<result column="지목코드"			property="jimokCode" />
+		<result column="HP등급"			property="hpgrade" />
+		<result column="보상여부"			property="bosang" />
+		<result column="편입여부"			property="pyeonib" />
 		<result column="위도" 			property="lat" />
 		<result column="경도" 			property="lng" />
 	</resultMap>
 	
 	<select id="selectJangmiList" statementType="CALLABLE" parameterType="Jangmi" resultMap="RM_selectJangmiList">
-		{ call  [서비스].[dbo].[SEL_장기미집행도시계획시설2](
+		{ call  [서비스].[dbo].[SEL_장기미집행도시계획시설3](
 			#{cityPlan, mode=IN, jdbcType=NVARCHAR, javaType=string},
-			#{cityPlanState, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{cityPlanStateJeon, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{cityPlanStateJeo, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{cityPlanStateJeob, mode=IN, jdbcType=NVARCHAR, javaType=string},
 			#{bosangPyeonib, mode=IN, jdbcType=NVARCHAR, javaType=string},
 			#{jiyeok, mode=IN, jdbcType=NVARCHAR, javaType=string},
 			#{jimok, mode=IN, jdbcType=NVARCHAR, javaType=string},

@@ -93,11 +93,19 @@ public class SearchController {
 		
 		System.err.println(param.toString());
 		
-		
+		ArrayList<String> cityPlanState = (ArrayList<String>)param.get("cityPlanState");
 		Jangmi jangmiIn = new Jangmi();
 		//System.err.println(DataUtil.convertArrayToString((ArrayList<String>)param.get("jiyeog")));
 		jangmiIn.setCityPlan(DataUtil.convertArrayToString((ArrayList<String>)param.get("cityPlan")));
-		jangmiIn.setCityPlanState(DataUtil.convertArrayToString((ArrayList<String>)param.get("cityPlanState")));
+		jangmiIn.setCityPlanState(DataUtil.convertArrayToString(cityPlanState));
+		
+		
+		if(cityPlanState.size() > 0) {
+			jangmiIn.setCityPlanStateJeon(cityPlanState.get(0));
+			jangmiIn.setCityPlanStateJeo(cityPlanState.get(1));
+			jangmiIn.setCityPlanStateJeob(cityPlanState.get(2));
+		}
+		
 		jangmiIn.setBosangPyeonib(DataUtil.convertArrayToString((ArrayList<String>)param.get("bosangPyeonib")));
 		jangmiIn.setJiyeok(DataUtil.convertArrayToString((ArrayList<String>)param.get("jiyeog")));
 		jangmiIn.setJimok(DataUtil.convertArrayToString((ArrayList<String>)param.get("jimok")));

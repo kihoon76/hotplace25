@@ -6,18 +6,23 @@ import org.apache.ibatis.type.Alias;
 public class ToojaSearchResult extends Address {
 
 	private String pnu;
+	private String address;
 	private String jimokCode;
-	private String jimok;
-	private String area;
-	private String gongsiCode;
-	private String gongsiStandardDate;
-	private String gongsi;
-	private String jiyeokCode;
+	private String hpgrade;
+	private String bosang;
+	private String pyeonib;
+	
 	public String getPnu() {
 		return pnu;
 	}
 	public void setPnu(String pnu) {
 		this.pnu = pnu;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public String getJimokCode() {
 		return jimokCode;
@@ -25,40 +30,22 @@ public class ToojaSearchResult extends Address {
 	public void setJimokCode(String jimokCode) {
 		this.jimokCode = jimokCode;
 	}
-	public String getJimok() {
-		return jimok;
+	public String getHpgrade() {
+		return hpgrade;
 	}
-	public void setJimok(String jimok) {
-		this.jimok = jimok;
+	public void setHpgrade(String hpgrade) {
+		this.hpgrade = hpgrade;
 	}
-	public String getArea() {
-		return area;
+	public String getBosang() {
+		return bosang;
 	}
-	public void setArea(String area) {
-		this.area = area;
+	public void setBosang(String bosang) {
+		this.bosang = bosang;
 	}
-	public String getGongsiCode() {
-		return gongsiCode;
+	public String getPyeonib() {
+		return pyeonib;
 	}
-	public void setGongsiCode(String gongsiCode) {
-		this.gongsiCode = gongsiCode;
-	}
-	public String getGongsiStandardDate() {
-		return gongsiStandardDate;
-	}
-	public void setGongsiStandardDate(String gongsiStandardDate) {
-		this.gongsiStandardDate = gongsiStandardDate;
-	}
-	public String getGongsi() {
-		return gongsi;
-	}
-	public void setGongsi(String gongsi) {
-		this.gongsi = gongsi;
-	}
-	public String getJiyeokCode() {
-		return jiyeokCode;
-	}
-	public void setJiyeokCode(String jiyeokCode) {
-		this.jiyeokCode = jiyeokCode;
+	public void setPyeonib(String pyeonib) {
+		this.pyeonib = pyeonib;
 	}
 }

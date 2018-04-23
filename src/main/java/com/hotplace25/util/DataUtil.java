@@ -325,7 +325,7 @@ public class DataUtil {
 			return listString.toString();
 		}
 		
-		return "";
+		return null;
 	}
 	
 }

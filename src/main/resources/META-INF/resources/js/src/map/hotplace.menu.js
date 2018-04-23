@@ -18,15 +18,14 @@
 		    {title:'지목', field:'jimokCode', align:'center', width:70, headerFilter:true, 
 		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.jimok), editable:hotplace.dom.createTabulatorNoEdit,
 		    	formatter:function(cell) {
-			    	
 			    	return hotplace.util.getJimokStr(cell.getValue());
 			    }
 		    },
-		    {title:'면적', field:'area', align:'center', width:100},
-		    {title:'공시지가', field:'gongsi', align:'center', width:100},
-		    {title:'주소', field:'detail', align:'left', width:370, headerFilter:'input'},
-			//{title:'위도', field:'lat', visible:false},
-			//{title:'경도', field:'lng', visible: false}
+		    {title:'HP등급', field:'hpgrade', align:'center', width:100},
+		    {title:'보상편입여부', field:'bosang', align:'center', width:100},
+		    {title:'주소', field:'address', align:'left', width:370, headerFilter:'input'},
+			{title:'위도', field:'lat', visible:false},
+			{title:'경도', field:'lng', visible: false}
 		],
 		tojiuselimitcancel:[
 		    {title:'연번', field:'num', align:'center', width:70},
@@ -275,6 +274,9 @@
 		_divSearchHistory = '#addressSearchHistory',
 		_btnRemoveAllSearchHistory = '#btnRemoveAllSearchHistory',
 		_btnCloseSearchHistory = '#btnCloseSearchHistory',
+		_historyCount = 0,
+		_historyIndex = -1,
+		_useKeyboardHistory = false, //history 목록을 키보드로 선택했는지 여부
 		_addressType = 'N';
 	
 	//주소검색 후 라디오버튼 선택
@@ -339,8 +341,11 @@
 	
 	function _createHistory() {
 		var history = hotplace.getAddrSearchHistory();
+		_historyIndex = -1;
+		
 		if(history) {
 			var len = history.length;
+			_historyCount = len;
 			var arr = [];
 			
 			for(var i=0; i<len; i++) {
@@ -350,14 +355,31 @@
 			
 			$(_divSearchHistory + ' ul').html(arr.join(''));
 		}
+		else {
+			_historyCount = 0;
+		}
 	}
 	
 	function _closeHistory() {
 		$(_divSearchHistory).slideUp(100);
+		_historyIndex = -1;
+		_initHistoryCss()
 	}
 	
 	function _showHistory() {
 		$(_divSearchHistory).slideDown(100);
+	}
+	
+	function _rmHistoryHoverCss(index) {
+		$(_divSearchHistory + ' li:eq(' + index + ') > .text')
+		.css('background', '')
+		.css('font-weight','');
+	}
+	
+	function _initHistoryCss() {
+		$( _divSearchHistory + ' li > .text').each(function() {
+			$(this).css('background', '').css('font-weight','');
+		});
 	}
 	
 	function _initAddressDom() {
@@ -389,6 +411,30 @@
 		.off('click', _btnRemoveAllSearchHistory, _eventHandlerHistoryAllDel)
 		.on('click', _btnRemoveAllSearchHistory, _eventHandlerHistoryAllDel);
 		
+		
+		$(document)
+		.on('mouseover', _divSearchHistory + ' li > .text', function(e, arg) {
+			//마우스일 경우
+			if(arg == undefined) {
+				//이전에 키보드로 동작했는지 체크
+				if(_useKeyboardHistory) {
+					//css 초기화
+					_initHistoryCss();
+					_useKeyboardHistory = false;
+				}
+			}
+			else {// 키보드일 경우
+				if(!_useKeyboardHistory) _useKeyboardHistory = true;
+			}
+			
+			$(this).css({'background':'rgba(0,0,0,0.05)', 'font-weight':'bold'});
+		});
+		
+		$(document)
+		.on('mouseout', _divSearchHistory + ' li > .text', function() {
+			$(this).css('background', '').css('font-weight','');
+		});
+		
 		$(_addrSearchMenu + ' input[name="addressType"]')
 		.off('change')
 		.on('change', function() {
@@ -400,6 +446,9 @@
 		.off('keydown')
 		.off('focus')
 		.on('keydown', function(e) {
+			var historyTxt = '';
+			var historyObj = null;
+			
 			if (e.which == 13) {
 				var txt = e.target.value;
 				$(this).blur();
@@ -407,7 +456,30 @@
 		    }
 			//아래 화살표
 			else if(e.which == 40) {
-				
+				if(_historyCount > 0) {
+					if(_historyIndex == -1) {
+						++_historyIndex;
+					}
+					else if(_historyIndex == -2) {//rolling
+						_historyIndex = 0;
+						_rmHistoryHoverCss(_historyCount-1);
+					}
+					else {
+						//이전 css hover를 제거
+						_rmHistoryHoverCss(_historyIndex-1);
+					}
+					
+					historyObj = $(_divSearchHistory + ' li:eq(' + _historyIndex + ') > .text')
+					$(this).val(historyObj.text());
+					historyObj.trigger('mouseover', true);
+					
+					if(_historyIndex == _historyCount - 1) {
+						_historyIndex = -2;
+					}
+					else {
+						++_historyIndex;
+					}
+				}
 			}
 		})
 		.on('focus', function(e) {

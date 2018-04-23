@@ -9,6 +9,9 @@ public class Jangmi extends Latlng {
 	private String jibeon;
 	private String cityPlan;
 	private String cityPlanState;
+	private String cityPlanStateJeon;  //전필
+	private String cityPlanStateJeo;   //저촉
+	private String cityPlanStateJeob;  //접함
 	private String bosangPyeonib;
 	private String jiyeok;
 	private String jimok;
@@ -131,5 +134,23 @@ public class Jangmi extends Latlng {
 	}
 	public void setNum(int num) {
 		this.num = num;
+	}
+	public String getCityPlanStateJeon() {
+		return cityPlanStateJeon;
+	}
+	public void setCityPlanStateJeon(String cityPlanStateJeon) {
+		this.cityPlanStateJeon = cityPlanStateJeon;
+	}
+	public String getCityPlanStateJeo() {
+		return cityPlanStateJeo;
+	}
+	public void setCityPlanStateJeo(String cityPlanStateJeo) {
+		this.cityPlanStateJeo = cityPlanStateJeo;
+	}
+	public String getCityPlanStateJeob() {
+		return cityPlanStateJeob;
+	}
+	public void setCityPlanStateJeob(String cityPlanStateJeob) {
+		this.cityPlanStateJeob = cityPlanStateJeob;
 	}
 }
