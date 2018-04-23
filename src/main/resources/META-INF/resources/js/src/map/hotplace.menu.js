@@ -296,6 +296,9 @@
 		var li = $(e.target).parents('li');
 		hotplace.removeAddrSearchHistory(li.index());
 		li.remove();
+		
+		_historyIndex = -1;
+		_historyCount--;
 	}
 	
 	function _eventHandlerHistoryAllDel() {
@@ -414,6 +417,7 @@
 		
 		$(document)
 		.on('mouseover', _divSearchHistory + ' li > .text', function(e, arg) {
+			console.log($(this).parents('li').index());
 			//마우스일 경우
 			if(arg == undefined) {
 				//이전에 키보드로 동작했는지 체크
@@ -422,6 +426,9 @@
 					_initHistoryCss();
 					_useKeyboardHistory = false;
 				}
+				
+				_historyIndex = $(this).parents('li').index() + 1;  
+				if(_historyIndex == _historyCount) _historyIndex = 0;
 			}
 			else {// 키보드일 경우
 				if(!_useKeyboardHistory) _useKeyboardHistory = true;
