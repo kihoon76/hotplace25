@@ -17,6 +17,7 @@ public class Account {
 	private String email;
 	private String email1;
 	private String email2;
+	private String out;
 	
 	private List<Authority> authorities;
 	
@@ -85,5 +86,11 @@ public class Account {
 	}
 	public void setEmail2(String email2) {
 		this.email2 = email2;
+	}
+	public String getOut() {
+		return out;
+	}
+	public void setOut(String out) {
+		this.out = out;
 	}
 }
