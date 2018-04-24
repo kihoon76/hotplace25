@@ -1,43 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.mssql.searchMapper">
-
-	<select id="selectGyeongGongList" parameterType="GyeongGongmaeIn" resultType="GyeongGongmaeOut">
-		select PNU, 'G' as gubun, 지목 as type, 소재지 as address, 위도 as lng, 경도 as lat, 고유번호 as unu, 감정평가액 as gamjeongga
-		  from [경매].[dbo].[경매_목록]
-		  <where>
-		  <if test="jiyeog.length > 0">
-		  (<foreach collection="jiyeog" item="p" separator="or">
-		  	PNU like #{p} + '%'
-		  </foreach>)
-		  </if> 
-		  <if test="jimok.length > 0">
-		  	and 지목 in
-		  	<foreach collection="jimok" item="j" open="(" close=")" separator=",">
-		  	#{j}
-		  	</foreach>
-		  </if>
-		  <if test="gamjeongga.size() > 0">
-		  	and
-		  	(<foreach collection="gamjeongga" item="g"  separator="or">
-		  		<choose>
-		  			<when test="g.min == -1">감정평가액  >= (#{g.max} * 10000)</when>
-		  			<when test="g.max == -1">감정평가액  <![CDATA[<]]> (#{g.min} * 10000)</when>
-		  			<otherwise>(감정평가액  >= (#{g.min} * 10000) and 감정평가액  <![CDATA[<]]> (#{g.max} * 10000)) </otherwise>
-		  		</choose>
-		  	</foreach>)
-		  </if>
-		  <if test="minIbchalga.size() > 0">
-		  	and
-		  	(<foreach collection="minIbchalga" item="m"  separator="or">
-		  		<choose>
-		  			<when test="m.min == -1">최저매각가격  >= (#{m.max} * 10000)</when>
-		  			<when test="m.max == -1">최저매각가격  <![CDATA[<]]> (#{m.min} * 10000)</when>
-		  			<otherwise>(최저매각가격  >= (#{m.min} * 10000) and 최저매각가격  <![CDATA[<]]> (#{m.max} * 10000)) </otherwise>
-		  		</choose>
-		  	</foreach>)
-		  </if>
-		  </where>
+	<resultMap id="RM_selectGyeongGongList" type="GyeongGongmaeOut">
+		<result column="PNU"			property="pnu"/>
+		<result column="경매_여부"			property="gyeongmae"/>
+		<result column="공매_여부"			property="gongmae"/>
+		<result column="주소"				property="address"/>
+		<result column="지목코드"			property="jimokCode" />
+		<result column="HP등급"			property="hpgrade" />
+		<result column="보상여부"			property="bosang" />
+		<result column="편입여부"			property="pyeonib" />
+		<result column="위도" 			property="lat" />
+		<result column="경도" 			property="lng" />
+	</resultMap>
+	
+	<select id="selectGyeongGongList" parameterType="GyeongGongmaeIn" resultMap="RM_selectGyeongGongList">
+		{ call  [서비스].[dbo].[SEL_경공매검색](
+			#{paramJiyeog, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramMulgeonKind, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramJimok, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramJiboon, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramGamjeongga, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramMinIbchalga, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramGongsi, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramMinIbchalgaR, mode=IN, jdbcType=NVARCHAR, javaType=string}, 
+			#{paramYongdoJiyeog, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramYongdoJigu, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramYongdoGuyeog, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramEtcLawLimit, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramEtcChamgo, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramCityPlan, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramCityPlanStateJeon, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramCityPlanStateJeo, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramCityPlanStateJeob, mode=IN, jdbcType=NVARCHAR, javaType=string},
+			#{paramBosangPyeonib, mode=IN, jdbcType=NVARCHAR, javaType=string}
+		)}
 	</select>
 	
 	<resultMap id="RM_selectJangmiList" type="ToojaSearchResult">

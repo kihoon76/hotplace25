@@ -28,7 +28,7 @@ public class SearchDaoImpl implements SearchDao {
 	@Override
 	public List<GyeongGongmaeOut> selectGyeongGongList(GyeongGongmaeIn gyeongGongIn) {
 		
-		return msSqlSessionAgent2.selectList(namespace + ".selectGyeongGongList", gyeongGongIn);
+		return msSqlSession.selectList(namespace + ".selectGyeongGongList", gyeongGongIn);
 	}
 
 	@Override

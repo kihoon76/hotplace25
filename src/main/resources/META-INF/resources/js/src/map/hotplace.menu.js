@@ -880,28 +880,6 @@
 	}
 	
 	function _searchGyeonggong() {
-		/*console.log({
-			'jiyeog':_getCheckboxesData('itemGyeonggongJiyeog'),
-			'mulgeonKind':_getCheckboxesData('itemGyeonggongMulgeonKind'),
-			'jimok':_getCheckboxesData('itemGyeonggongJimok'),
-			'jiboon':_getCheckboxesData('itemGyeonggongJiboon'),
-			'gamjeongga':_getMinMax('itemGyeonggongGamjeongga'),
-			'minIbchalga':_getMinMax('itemGyeonggongMinIbchalga'),
-			'gongsi':_getMinMax('itemGyeonggongGongsiStandard'),
-			'minIbchalgaR':_getMinMax('itemGyeonggongMinIbchalgaR'),
-			'yongdoJiyeog':_getCheckboxesData('itemGyeonggongYongdoJiyeog'),
-			'yongdoJigu':_getCheckboxesData('itemGyeonggongYongdoJigu'),
-			'yongdoGuyeog':_getCheckboxesData('itemGyeonggongYongdoGuyeog'),
-			'etcLawLimit':_getCheckboxesData('itemGyeonggongEtcLawLimit'),
-			'etcChamgo':_getCheckboxesData('itemGyeonggongEtcChamgo'),
-			'cityPlan':_getCheckboxesData('itemGyeonggongCityPlan'),
-			'cityPlanState':_getCheckboxesData('itemGyeonggongCityPlanState'),
-			'bosangPyeonib':_getCheckboxesData('itemGyeonggongBosangPyeonib'),
-			'hpGrade':hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongHpGrade.substring(1)),
-			'envGrade':hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongEnvGrade.substring(1))
-		});
-		
-		return;*/
 		
 		//min max 값을 교환해야 한다
 		var hpGrade = hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongHpGrade.substring(1));
@@ -913,18 +891,18 @@
 				'mulgeonKind':_getCheckboxesData('itemGyeonggongMulgeonKind'),
 				'jimok':_getCheckboxesData('itemGyeonggongJimok'),
 				'jiboon':_getCheckboxesData('itemGyeonggongJiboon'),
-				'gamjeongga':_getMinMax('itemGyeonggongGamjeongga'),
-				'minIbchalga':_getMinMax('itemGyeonggongMinIbchalga'),
-				'gongsi':_getMinMax('itemGyeonggongGongsiStandard'),
-				'minIbchalgaR':_getMinMax('itemGyeonggongMinIbchalgaR'),
+				'gamjeongga':_getCheckboxesData('itemGyeonggongGamjeongga'), //_getMinMax('itemGyeonggongGamjeongga'),
+				'minIbchalga':_getCheckboxesData('itemGyeonggongMinIbchalga'), 	//_getMinMax('itemGyeonggongMinIbchalga'),
+				'gongsi':null, //_getMinMax('itemGyeonggongGongsiStandard'),
+				'minIbchalgaR':_getCheckboxesData('itemGyeonggongMinIbchalgaR'),  //_getMinMax('itemGyeonggongMinIbchalgaR'),
 				'yongdoJiyeog':_getCheckboxesData('itemGyeonggongYongdoJiyeog'),
 				'yongdoJigu':_getCheckboxesData('itemGyeonggongYongdoJigu'),
 				'yongdoGuyeog':_getCheckboxesData('itemGyeonggongYongdoGuyeog'),
 				'etcLawLimit':_getCheckboxesData('itemGyeonggongEtcLawLimit'),
 				'etcChamgo':_getCheckboxesData('itemGyeonggongEtcChamgo'),
 				'cityPlan':_getCheckboxesData('itemGyeonggongCityPlan'),
-				'cityPlanState':_getCheckboxesData('itemGyeonggongCityPlanState'),
-				'bosangPyeonib':_getCheckboxesData('itemGyeonggongBosangPyeonib'),
+				'cityPlanState':_convertToYN(_getCheckboxesData('itemGyeonggongCityPlanState')),
+				'bosangPyeonib':_convertToYN(_getCheckboxesData('itemGyeonggongBosangPyeonib')),
 				'hpGrade':_getReverseMinMax(hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongHpGrade.substring(1))),
 				'envGrade':_getReverseMinMax(hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongEnvGrade.substring(1))),
 				'tojiUseLimitCancel':_getCheckboxesData('itemGyeonggongTojiUseLimitCancel')

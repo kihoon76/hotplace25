@@ -1,7 +1,5 @@
 package com.hotplace25.domain;
 
-import java.util.List;
-
 import org.apache.ibatis.type.Alias;
 
 @Alias("GyeongGongmaeIn")
@@ -21,14 +19,33 @@ public class GyeongGongmaeIn {
 	private String[] bosangPyeonib;
 	private String[] tojiUseLimitCancel;
 	
-	private List<MinMax> gamjeongga;
-	private List<MinMax> minIbchalga;
-	private List<MinMax> gongsi;
-	private List<MinMax> minIbchalgaR;
+	private String[] gamjeongga;
+	private String[] minIbchalga;
+	private String[] gongsi;
+	private String[] minIbchalgaR;
 	private MinMax hpGrade;
 	private MinMax envGrade;
 	
-
+	
+	private String paramJiyeog;
+	private String paramJimok;
+	private String paramMulgeonKind;
+	private String paramJiboon;
+	private String paramYongdoJiyeog;
+	private String paramYongdoJigu;
+	private String paramYongdoGuyeog;
+	private String paramEtcLawLimit;
+	private String paramEtcChamgo;
+	private String paramCityPlan;
+	private String paramCityPlanStateJeon;  //전필
+	private String paramCityPlanStateJeo;   //저촉
+	private String paramCityPlanStateJeob;  //접함
+	private String paramBosangPyeonib;
+	private String paramGamjeongga;
+	private String paramMinIbchalga;
+	private String paramGongsi;
+	private String paramMinIbchalgaR;
+	
 	public String[] getJiyeog() {
 		return jiyeog;
 	}
@@ -43,22 +60,6 @@ public class GyeongGongmaeIn {
 
 	public void setJimok(String[] jimok) {
 		this.jimok = jimok;
-	}
-
-	public List<MinMax> getGamjeongga() {
-		return gamjeongga;
-	}
-
-	public void setGamjeongga(List<MinMax> gamjeongga) {
-		this.gamjeongga = gamjeongga;
-	}
-
-	public List<MinMax> getMinIbchalga() {
-		return minIbchalga;
-	}
-
-	public void setMinIbchalga(List<MinMax> minIbchalga) {
-		this.minIbchalga = minIbchalga;
 	}
 
 	public String[] getMulgeonKind() {
@@ -149,21 +150,6 @@ public class GyeongGongmaeIn {
 		this.tojiUseLimitCancel = tojiUseLimitCancel;
 	}
 
-	public List<MinMax> getGongsi() {
-		return gongsi;
-	}
-
-	public void setGongsi(List<MinMax> gongsi) {
-		this.gongsi = gongsi;
-	}
-
-	public List<MinMax> getMinIbchalgaR() {
-		return minIbchalgaR;
-	}
-
-	public void setMinIbchalgaR(List<MinMax> minIbchalgaR) {
-		this.minIbchalgaR = minIbchalgaR;
-	}
 
 	public MinMax getHpGrade() {
 		return hpGrade;
@@ -180,4 +166,182 @@ public class GyeongGongmaeIn {
 	public void setEnvGrade(MinMax envGrade) {
 		this.envGrade = envGrade;
 	}
+
+	public String[] getGamjeongga() {
+		return gamjeongga;
+	}
+
+	public void setGamjeongga(String[] gamjeongga) {
+		this.gamjeongga = gamjeongga;
+	}
+
+	public String[] getMinIbchalga() {
+		return minIbchalga;
+	}
+
+	public void setMinIbchalga(String[] minIbchalga) {
+		this.minIbchalga = minIbchalga;
+	}
+
+	public String[] getGongsi() {
+		return gongsi;
+	}
+
+	public void setGongsi(String[] gongsi) {
+		this.gongsi = gongsi;
+	}
+
+	public String[] getMinIbchalgaR() {
+		return minIbchalgaR;
+	}
+
+	public void setMinIbchalgaR(String[] minIbchalgaR) {
+		this.minIbchalgaR = minIbchalgaR;
+	}
+
+	public String getParamJiyeog() {
+		return paramJiyeog;
+	}
+
+	public void setParamJiyeog(String paramJiyeog) {
+		this.paramJiyeog = paramJiyeog;
+	}
+
+	public String getParamJimok() {
+		return paramJimok;
+	}
+
+	public void setParamJimok(String paramJimok) {
+		this.paramJimok = paramJimok;
+	}
+
+	public String getParamMulgeonKind() {
+		return paramMulgeonKind;
+	}
+
+	public void setParamMulgeonKind(String paramMulgeonKind) {
+		this.paramMulgeonKind = paramMulgeonKind;
+	}
+
+	public String getParamJiboon() {
+		return paramJiboon;
+	}
+
+	public void setParamJiboon(String paramJiboon) {
+		this.paramJiboon = paramJiboon;
+	}
+
+	public String getParamYongdoJiyeog() {
+		return paramYongdoJiyeog;
+	}
+
+	public void setParamYongdoJiyeog(String paramYongdoJiyeog) {
+		this.paramYongdoJiyeog = paramYongdoJiyeog;
+	}
+
+	public String getParamYongdoJigu() {
+		return paramYongdoJigu;
+	}
+
+	public void setParamYongdoJigu(String paramYongdoJigu) {
+		this.paramYongdoJigu = paramYongdoJigu;
+	}
+
+	public String getParamYongdoGuyeog() {
+		return paramYongdoGuyeog;
+	}
+
+	public void setParamYongdoGuyeog(String paramYongdoGuyeog) {
+		this.paramYongdoGuyeog = paramYongdoGuyeog;
+	}
+
+	public String getParamEtcLawLimit() {
+		return paramEtcLawLimit;
+	}
+
+	public void setParamEtcLawLimit(String paramEtcLawLimit) {
+		this.paramEtcLawLimit = paramEtcLawLimit;
+	}
+
+	public String getParamEtcChamgo() {
+		return paramEtcChamgo;
+	}
+
+	public void setParamEtcChamgo(String paramEtcChamgo) {
+		this.paramEtcChamgo = paramEtcChamgo;
+	}
+
+	public String getParamCityPlan() {
+		return paramCityPlan;
+	}
+
+	public void setParamCityPlan(String paramCityPlan) {
+		this.paramCityPlan = paramCityPlan;
+	}
+
+	public String getParamCityPlanStateJeon() {
+		return paramCityPlanStateJeon;
+	}
+
+	public void setParamCityPlanStateJeon(String paramCityPlanStateJeon) {
+		this.paramCityPlanStateJeon = paramCityPlanStateJeon;
+	}
+
+	public String getParamCityPlanStateJeo() {
+		return paramCityPlanStateJeo;
+	}
+
+	public void setParamCityPlanStateJeo(String paramCityPlanStateJeo) {
+		this.paramCityPlanStateJeo = paramCityPlanStateJeo;
+	}
+
+	public String getParamCityPlanStateJeob() {
+		return paramCityPlanStateJeob;
+	}
+
+	public void setParamCityPlanStateJeob(String paramCityPlanStateJeob) {
+		this.paramCityPlanStateJeob = paramCityPlanStateJeob;
+	}
+
+	public String getParamBosangPyeonib() {
+		return paramBosangPyeonib;
+	}
+
+	public void setParamBosangPyeonib(String paramBosangPyeonib) {
+		this.paramBosangPyeonib = paramBosangPyeonib;
+	}
+
+	public String getParamGamjeongga() {
+		return paramGamjeongga;
+	}
+
+	public void setParamGamjeongga(String paramGamjeongga) {
+		this.paramGamjeongga = paramGamjeongga;
+	}
+
+	public String getParamMinIbchalga() {
+		return paramMinIbchalga;
+	}
+
+	public void setParamMinIbchalga(String paramMinIbchalga) {
+		this.paramMinIbchalga = paramMinIbchalga;
+	}
+
+	public String getParamGongsi() {
+		return paramGongsi;
+	}
+
+	public void setParamGongsi(String paramGongsi) {
+		this.paramGongsi = paramGongsi;
+	}
+
+	public String getParamMinIbchalgaR() {
+		return paramMinIbchalgaR;
+	}
+
+	public void setParamMinIbchalgaR(String paramMinIbchalgaR) {
+		this.paramMinIbchalgaR = paramMinIbchalgaR;
+	}
+
+	
 }

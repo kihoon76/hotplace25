@@ -125,9 +125,9 @@
 	         )}
 			</when>
 			
-			<!-- 개발사업면적 -->
-			<when test="type == 'DEV_BIZ_AREA'">
-			{ call [Ranking].[dbo].[SEL_PNU10_개발사업면적] (
+			<!-- 개발사업면적(건수) -->
+			<when test="type == 'DEV_BIZ_AREA_GEONSU'">
+			{ call [Ranking].[dbo].[SEL_PNU10_개발사업면적_건수] (
 	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
 	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
 				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
@@ -137,9 +137,9 @@
 	         )}
 			</when>
 			
-			<!-- 보상물건  -->
-			<when test="type == 'BOSANG_MULGEON'">
-			{ call [Ranking].[dbo].[SEL_PNU10_보상물건] (
+			<!-- 개발사업면적(면적) -->
+			<when test="type == 'DEV_BIZ_AREA_AREA'">
+			{ call [Ranking].[dbo].[SEL_PNU10_개발사업면적_면적] (
 	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
 	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
 				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
@@ -149,9 +149,9 @@
 	         )}
 			</when>
 			
-			<!-- 개발행위허가  -->
-			<when test="type == 'ACCEPT_DEV'">
-			{ call [Ranking].[dbo].[SEL_PNU10_개발행위허가] (
+			<!-- 보상물건 (건수) -->
+			<when test="type == 'BOSANG_MULGEON_GEONSU'">
+			{ call [Ranking].[dbo].[SEL_PNU10_보상물건_건수] (
 	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
 	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
 				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
@@ -161,9 +161,9 @@
 	         )}
 			</when>
 			
-			<!-- 건축허가면적  -->
-			<when test="type == 'ACCEPT_BUILDING_AREA'">
-			{ call [Ranking].[dbo].[SEL_PNU10_건축허가면적] (
+			<!-- 보상물건 (면적) -->
+			<when test="type == 'BOSANG_MULGEON_AREA'">
+			{ call [Ranking].[dbo].[SEL_PNU10_보상물건_면적] (
 	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
 	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
 				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
@@ -173,9 +173,9 @@
 	         )}
 			</when>
 			
-			<!-- 영업허가면적 -->
-			<when test="type == 'ACCEPT_SALES_AREA'">
-			{ call [Ranking].[dbo].[SEL_PNU10_영업허가면적] (
+			<!-- 개발행위허가 (건수)  -->
+			<when test="type == 'ACCEPT_DEV_GEONSU'">
+			{ call [Ranking].[dbo].[SEL_PNU10_개발행위허가_건수] (
 	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
 	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
 				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
@@ -185,9 +185,81 @@
 	         )}
 			</when>
 			
-			<!-- 실거래가, 거래면적 상승  -->
-			<when test="type == 'SILGEOLAE_AREA'">
-			{ call [Ranking].[dbo].[SEL_PNU10_실거래가거래면적상승] (
+			<!-- 개발행위허가 (면적) -->
+			<when test="type == 'ACCEPT_DEV_AREA'">
+			{ call [Ranking].[dbo].[SEL_PNU10_개발행위허가_면적] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 건축허가면적 (건수) -->
+			<when test="type == 'ACCEPT_BUILDING_AREA_GEONSU'">
+			{ call [Ranking].[dbo].[SEL_PNU10_건축허가면적_건수] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 건축허가면적 (면적) -->
+			<when test="type == 'ACCEPT_BUILDING_AREA_AREA'">
+			{ call [Ranking].[dbo].[SEL_PNU10_건축허가면적_면적] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 영업허가면적 (건수) -->
+			<when test="type == 'ACCEPT_SALES_AREA_GEONSU'">
+			{ call [Ranking].[dbo].[SEL_PNU10_영업허가면적_건수] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 영업허가면적 (면적) -->
+			<when test="type == 'ACCEPT_SALES_AREA_AREA'">
+			{ call [Ranking].[dbo].[SEL_PNU10_영업허가면적_면적] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 실거래가, 거래면적 상승  (건수) -->
+			<when test="type == 'SILGEOLAE_AREA_GEONSU'">
+			{ call [Ranking].[dbo].[SEL_PNU10_실거래가거래면적상승_건수] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 실거래가, 거래면적 상승 (면적)  -->
+			<when test="type == 'SILGEOLAE_AREA_AREA'">
+			{ call [Ranking].[dbo].[SEL_PNU10_실거래가거래면적상승_면적] (
 	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
 	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
 				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},

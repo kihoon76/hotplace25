@@ -3,28 +3,41 @@ package com.hotplace25.domain;
 import org.apache.ibatis.type.Alias;
 
 @Alias("GyeongGongmaeOut")
-public class GyeongGongmaeOut {
+public class GyeongGongmaeOut extends Latlng{
 
-	private String gubun;
-	private String type;
-	private String address;
 	private String pnu;
-	private String unu;
-	private String gamjeongga;
-	private float lat;
-	private float lng;
+	private String gubun;
+	private String gyeongmae;
+	private String gongmae;
+	private String address;
+	private String jimokCode;
+	private String hpgrade;
+	private String bosang;
+	private String pyeonib;
 	
+	public String getPnu() {
+		return pnu;
+	}
+	public void setPnu(String pnu) {
+		this.pnu = pnu;
+	}
 	public String getGubun() {
 		return gubun;
 	}
 	public void setGubun(String gubun) {
 		this.gubun = gubun;
 	}
-	public String getType() {
-		return type;
+	public String getGyeongmae() {
+		return gyeongmae;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setGyeongmae(String gyeongmae) {
+		this.gyeongmae = gyeongmae;
+	}
+	public String getGongmae() {
+		return gongmae;
+	}
+	public void setGongmae(String gongmae) {
+		this.gongmae = gongmae;
 	}
 	public String getAddress() {
 		return address;
@@ -32,34 +45,28 @@ public class GyeongGongmaeOut {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public float getLat() {
-		return lat;
+	public String getJimokCode() {
+		return jimokCode;
 	}
-	public void setLat(float lat) {
-		this.lat = lat;
+	public void setJimokCode(String jimokCode) {
+		this.jimokCode = jimokCode;
 	}
-	public float getLng() {
-		return lng;
+	public String getHpgrade() {
+		return hpgrade;
 	}
-	public void setLng(float lng) {
-		this.lng = lng;
+	public void setHpgrade(String hpgrade) {
+		this.hpgrade = hpgrade;
 	}
-	public String getPnu() {
-		return pnu;
+	public String getBosang() {
+		return bosang;
 	}
-	public void setPnu(String pnu) {
-		this.pnu = pnu;
+	public void setBosang(String bosang) {
+		this.bosang = bosang;
 	}
-	public String getUnu() {
-		return unu;
+	public String getPyeonib() {
+		return pyeonib;
 	}
-	public void setUnu(String unu) {
-		this.unu = unu;
-	}
-	public String getGamjeongga() {
-		return gamjeongga;
-	}
-	public void setGamjeongga(String gamjeongga) {
-		this.gamjeongga = gamjeongga;
-	}
+	public void setPyeonib(String pyeonib) {
+		this.pyeonib = pyeonib;
+	} 
 }

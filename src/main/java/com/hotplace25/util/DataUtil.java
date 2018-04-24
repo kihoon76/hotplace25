@@ -312,7 +312,7 @@ public class DataUtil {
 		return dateFormat.format(cal.getTime()); 
 	}
 	
-	public static String convertArrayToString(ArrayList<String> list) {
+	public static String convertListToString(ArrayList<String> list) {
 		StringBuffer listString = null;
 		if(list != null && list.size() > 0) {
 			listString = new StringBuffer();
@@ -327,5 +327,21 @@ public class DataUtil {
 		
 		return null;
 	}
+	
+	public static String convertArrayToString(String[] arr) {
+		StringBuffer arrString = null;
+		if(arr != null && arr.length > 0) {
+			arrString = new StringBuffer();
+			
+			for (String s : arr) {
+			    arrString.append(s + ",");
+			}
+			
+			arrString.deleteCharAt(arrString.length()-1);
+			return arrString.toString();
+		}
+		
+		return null;
+	} 
 	
 }

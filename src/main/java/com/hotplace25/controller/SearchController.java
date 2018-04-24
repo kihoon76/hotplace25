@@ -10,19 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.hotplace25.domain.Account;
 import com.hotplace25.domain.AjaxVO;
 import com.hotplace25.domain.Email;
@@ -60,24 +55,38 @@ public class SearchController {
 		AjaxVO<GyeongGongmaeOut> vo = new AjaxVO<GyeongGongmaeOut>();
 		
 		try {
+			vo.setSuccess(true);
+			
+			String[] cityPlanState = gyeongGongIn.getCityPlanState();
+			
+			gyeongGongIn.setParamJiyeog(DataUtil.convertArrayToString(gyeongGongIn.getJiyeog()));
+			gyeongGongIn.setParamMulgeonKind(DataUtil.convertArrayToString(gyeongGongIn.getMulgeonKind()));
+			gyeongGongIn.setParamJimok(DataUtil.convertArrayToString(gyeongGongIn.getJimok()));
+			gyeongGongIn.setParamJiboon(DataUtil.convertArrayToString(gyeongGongIn.getJiboon()));
+			gyeongGongIn.setParamGamjeongga(DataUtil.convertArrayToString(gyeongGongIn.getGamjeongga()));
+			gyeongGongIn.setParamMinIbchalga(DataUtil.convertArrayToString(gyeongGongIn.getMinIbchalga()));
+			gyeongGongIn.setParamGongsi(null); //※현재 데이터 없음. 그냥 null로 전송.
+			gyeongGongIn.setParamMinIbchalgaR(DataUtil.convertArrayToString(gyeongGongIn.getMinIbchalgaR()));
+			gyeongGongIn.setParamYongdoJiyeog(DataUtil.convertArrayToString(gyeongGongIn.getYongdoJiyeog()));
+			gyeongGongIn.setParamYongdoJigu(DataUtil.convertArrayToString(gyeongGongIn.getYongdoJigu()));
+			gyeongGongIn.setParamYongdoGuyeog(DataUtil.convertArrayToString(gyeongGongIn.getYongdoGuyeog()));
+			gyeongGongIn.setParamEtcLawLimit(DataUtil.convertArrayToString(gyeongGongIn.getEtcLawLimit()));
+			gyeongGongIn.setParamEtcChamgo(DataUtil.convertArrayToString(gyeongGongIn.getEtcChamgo()));
+			gyeongGongIn.setParamCityPlan(DataUtil.convertArrayToString(gyeongGongIn.getCityPlan()));
+					
+			if(cityPlanState != null && cityPlanState.length > 0) {
+				gyeongGongIn.setParamCityPlanStateJeon(cityPlanState[0]);
+				gyeongGongIn.setParamCityPlanStateJeo(cityPlanState[1]);
+				gyeongGongIn.setParamCityPlanStateJeob(cityPlanState[1]);
+			}
+			
+			gyeongGongIn.setParamBosangPyeonib(DataUtil.convertArrayToString(gyeongGongIn.getBosangPyeonib()));
+			
 			ObjectMapper o = new ObjectMapper();
 			System.err.println(o.writeValueAsString(gyeongGongIn));
-			vo.setSuccess(true);
-			GyeongGongmaeOut gg = new GyeongGongmaeOut();
-			gg.setGubun("G");
-			gg.setType("대");
-			gg.setAddress("서울시 강남구 도곡동 963");
-			gg.setLat(37.50838492780f);
-			gg.setLng(127.09740818600f);
+			List<GyeongGongmaeOut> list = searchService.getGyeongGongSearch(gyeongGongIn);
 			
-			
-			/*List<GyeongGongmaeOut> list = searchService.getGyeongGongSearch(gyeongGongIn);
-			int size = list.size();
-			for(int i=0; i<size; i++) {
-				vo.addObject(list.get(i));
-			}*/
-			
-			vo.addObject(gg);
+			vo.setDatas(list);
 		}
 		catch(Exception e) {
 			vo.setSuccess(false);
@@ -95,9 +104,9 @@ public class SearchController {
 		
 		ArrayList<String> cityPlanState = (ArrayList<String>)param.get("cityPlanState");
 		Jangmi jangmiIn = new Jangmi();
-		//System.err.println(DataUtil.convertArrayToString((ArrayList<String>)param.get("jiyeog")));
-		jangmiIn.setCityPlan(DataUtil.convertArrayToString((ArrayList<String>)param.get("cityPlan")));
-		jangmiIn.setCityPlanState(DataUtil.convertArrayToString(cityPlanState));
+		//System.err.println(DataUtil.convertListToString((ArrayList<String>)param.get("jiyeog")));
+		jangmiIn.setCityPlan(DataUtil.convertListToString((ArrayList<String>)param.get("cityPlan")));
+		jangmiIn.setCityPlanState(DataUtil.convertListToString(cityPlanState));
 		
 		
 		if(cityPlanState.size() > 0) {
@@ -106,15 +115,15 @@ public class SearchController {
 			jangmiIn.setCityPlanStateJeob(cityPlanState.get(2));
 		}
 		
-		jangmiIn.setBosangPyeonib(DataUtil.convertArrayToString((ArrayList<String>)param.get("bosangPyeonib")));
-		jangmiIn.setJiyeok(DataUtil.convertArrayToString((ArrayList<String>)param.get("jiyeog")));
-		jangmiIn.setJimok(DataUtil.convertArrayToString((ArrayList<String>)param.get("jimok")));
-		jangmiIn.setGongsi(DataUtil.convertArrayToString((ArrayList<String>)param.get("gongsi")));
-		jangmiIn.setYongdoJiyeog(DataUtil.convertArrayToString((ArrayList<String>)param.get("yongdoJiyeog")));   
-		jangmiIn.setYongdoJigu(DataUtil.convertArrayToString((ArrayList<String>)param.get("yongdoJigu")));
-		jangmiIn.setYongdoGuyeog(DataUtil.convertArrayToString((ArrayList<String>)param.get("yongdoGuyeog")));
-		jangmiIn.setEtcLawLimit(DataUtil.convertArrayToString((ArrayList<String>)param.get("etcLawLimit")));
-		jangmiIn.setEtcChamgo(DataUtil.convertArrayToString((ArrayList<String>)param.get("etcChamgo")));
+		jangmiIn.setBosangPyeonib(DataUtil.convertListToString((ArrayList<String>)param.get("bosangPyeonib")));
+		jangmiIn.setJiyeok(DataUtil.convertListToString((ArrayList<String>)param.get("jiyeog")));
+		jangmiIn.setJimok(DataUtil.convertListToString((ArrayList<String>)param.get("jimok")));
+		jangmiIn.setGongsi(DataUtil.convertListToString((ArrayList<String>)param.get("gongsi")));
+		jangmiIn.setYongdoJiyeog(DataUtil.convertListToString((ArrayList<String>)param.get("yongdoJiyeog")));   
+		jangmiIn.setYongdoJigu(DataUtil.convertListToString((ArrayList<String>)param.get("yongdoJigu")));
+		jangmiIn.setYongdoGuyeog(DataUtil.convertListToString((ArrayList<String>)param.get("yongdoGuyeog")));
+		jangmiIn.setEtcLawLimit(DataUtil.convertListToString((ArrayList<String>)param.get("etcLawLimit")));
+		jangmiIn.setEtcChamgo(DataUtil.convertListToString((ArrayList<String>)param.get("etcChamgo")));
 		
 		List<ToojaSearchResult> list = searchService.getJangmiList(jangmiIn);
 		
