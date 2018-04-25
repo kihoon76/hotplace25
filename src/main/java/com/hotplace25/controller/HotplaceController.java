@@ -328,8 +328,11 @@ public class HotplaceController {
 	@GetMapping("gongmae/thumb")
 	@ResponseBody
 	public Gongmae getGongmaeThumb(@RequestParam("unu") String unu) {
-		
-		return hotplaceService.getGongmaeThumb(unu);
+		Gongmae g = hotplaceService.getGongmaeThumb(unu);
+		if(g == null) {
+			g = new Gongmae();
+		}
+		return g;
 	}
 	
 	@GetMapping("gongmae/detail")

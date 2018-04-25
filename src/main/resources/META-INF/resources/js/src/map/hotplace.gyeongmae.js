@@ -218,11 +218,11 @@
 			$('#gDgwanlyeonsajin').text(gwanlyeonsajin);
 			$('#gDnaebugujo').text(naebugujo);
 			$('#gDetc').text(etc);
+			
+			$gDimages.html(html.join(''));
+			_initImageSlider();
+			_bindImageClick();
 		}
-		
-		$gDimages.html(html.join(''));
-		_initImageSlider();
-		_bindImageClick();
 	}
 	
 	function _initImageSlider() {

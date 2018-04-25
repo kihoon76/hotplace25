@@ -2388,14 +2388,15 @@
 		btn.setAttribute('data-active', true);//jquery가 동작안함
 	}
 	
-	maps.panToLikeAddressSearch = function(lat, lng, menuName, winDatas, closeFn) {
+	maps.panToLikeAddressSearch = function(lat, lng, menuName, winDatas, closeFn, options) {
 		maps.panToBounds(lat, lng, function() {
 			if(menuName) hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
 		     
 			maps.destroyMarkerType(_markerTypes.ADDRESS_SEARCH);
 			maps.destroyMarkerWindow(_markerTypes.ADDRESS_SEARCH);
 			
-			maps.getMarker(_markerTypes.ADDRESS_SEARCH, {location:[lng, lat]}, {
+			var unu = (options && options.unu) ? options.unu : '';
+			maps.getMarker(_markerTypes.ADDRESS_SEARCH, {location:[lng, lat], info: {unu:unu}}, {
 				'click' : function(map, newMarker, newInfoWindow, e) {
 					
 					var target = e.domEvent.currentTarget;
@@ -2407,30 +2408,37 @@
 						if(closeFn) closeFn();
 					}
 					else {
-						if(newInfoWindow.getMap()) {
-							newInfoWindow.close();
-					    }
+						
+						if(options && options.mulgeonGubun) {
+							switch(options.mulgeonGubun) {
+							case 'K' :
+								hotplace.gyeongmae.markerClick(map, newMarker, newInfoWindow);
+								break;
+							case 'G' :
+								hotplace.gongmae.markerClick(map, newMarker, newInfoWindow);
+								break;
+							}
+						}
 						else {
-							newInfoWindow.open(map, newMarker);
-							$('#btnAddrSearchWinClose')
-							.off('click')
-							.on('click', function() {
+							if(newInfoWindow.getMap()) {
 								newInfoWindow.close();
-							});
-					    }
+						    }
+							else {
+								newInfoWindow.open(map, newMarker);
+								$('#btnAddrSearchWinClose')
+								.off('click')
+								.on('click', function() {
+									newInfoWindow.close();
+								});
+						    }
+						}
 					}
 				}
 			}, {
 				hasInfoWindow: true,
-				infoWinFormName: 'win/addrSearchWin',
-				/*winContent: {
-					backgroundColor: 'transparent',
-					borderColor: '#666',
-					borderWidth: 0,
-					anchorSize: new naver.maps.Size(0, 0),
-					anchorSkew: false,  
-					pixelOffset: new naver.maps.Point(0, -12)
-				},*/
+				isAjaxContent: (options && options.isAjaxContent != undefined) ? options.isAjaxContent : false,
+				infoWinFormName: (options && options.infoWinFormName) ? options.infoWinFormName : 'win/addrSearchWin',
+				winContent: (options && options.winContent) ? options.winContent : null,
 				radius: 0,
 				datas: {
 					params : winDatas || {}

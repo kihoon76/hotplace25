@@ -112,6 +112,8 @@
 			{ title:'주소', field:'address',   headerFilter:'input', headerFilterPlaceholder:'주소검색' },
 			{ title:'위도', field:'lat', visible: false },
 			{ title:'경도', field:'lng', visible: false },
+			{ title:'', field:'unuGyeongmae', visible: false },
+			{ title:'', field:'unuGongmae', visible: false },
 		],
 	}
 	
@@ -838,6 +840,8 @@
 				    		   function() {
 				    			   //마커가 닫힐때 Luris 도면도 닫힌다.
 				    			   _closeLurisDv();
+				    		   }, {
+				    			   
 				    		   });
 				       _openLurisDv();
 				    },
@@ -982,11 +986,34 @@
 					    resizableRows:true,
 					    rowClick:function(e, row){ //trigger an alert message when the row is clicked
 					       var data = row.getData();
+					       var gyeongGongGubun = data.gyeongGongmae;
+					       var options = null;
 					       
 					       if(data.lng == 0) {
 					    	   hotplace.processAjaxError(hotplace.error.MISS_LATLNG);
 					       }
 					       else {
+					    	   // 경공매 동시일 경우 경매를 보여준다
+					    	   switch(gyeongGongGubun) {
+					    	   case 'K':
+					    	   case 'A':
+					    		   options = {
+					    			   infoWinFormName: 'gyeongmaeForm',
+					    			   mulgeonGubun: 'K',
+					    			   unu: data.unuGyeongmae,
+					    			   isAjaxContent: true
+					    	   	   };
+					    		   break;
+					    	   case 'G' :
+					    		   options = {
+					    			   infoWinFormName: 'gongmaeForm',
+					    			   mulgeonGubun: 'G',
+					    			   unu: data.unuGongmae,
+					    			   isAjaxContent: true
+					    	   	   };
+					    		   break;
+					    	   }
+					    	   
 						       hotplace.maps.panToLikeAddressSearch(
 						    		   data.lat,
 						    		   data.lng,
@@ -995,7 +1022,8 @@
 						    		   function() {
 						    			   //마커가 닫힐때 Luris 도면도 닫힌다.
 						    			   _closeGyeongGongLurisDv();
-						    		   }
+						    		   }, 
+						    		   options
 						       );  
 					       }
 					       

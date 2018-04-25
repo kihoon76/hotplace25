@@ -6,6 +6,8 @@ import org.apache.ibatis.type.Alias;
 public class GyeongGongmaeOut extends Latlng{
 
 	private String pnu;
+	private String unuGyeongmae;
+	private String unuGongmae;
 	private String gyeongGongmae;
 	private String address;
 	private String jimokCode;
@@ -47,5 +49,17 @@ public class GyeongGongmaeOut extends Latlng{
 	}
 	public void setBosangPyeonib(String bosangPyeonib) {
 		this.bosangPyeonib = bosangPyeonib;
+	}
+	public String getUnuGyeongmae() {
+		return unuGyeongmae;
+	}
+	public void setUnuGyeongmae(String unuGyeongmae) {
+		this.unuGyeongmae = unuGyeongmae;
+	}
+	public String getUnuGongmae() {
+		return unuGongmae;
+	}
+	public void setUnuGongmae(String unuGongmae) {
+		this.unuGongmae = unuGongmae;
 	}
 }

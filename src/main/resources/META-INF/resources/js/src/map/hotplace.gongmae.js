@@ -105,8 +105,10 @@
 		}
 		
 		$gDimages.html(html.join(''));
-		if(cnt >= 1) _initImageSlider();
-		_bindImageClick();
+		if(cnt >= 1) {
+			_initImageSlider();
+			_bindImageClick();
+		}
 	}
 	
 	function _initImageSlider() {
