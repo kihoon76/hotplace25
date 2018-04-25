@@ -3,13 +3,11 @@
 <mapper namespace="mappers.mssql.searchMapper">
 	<resultMap id="RM_selectGyeongGongList" type="GyeongGongmaeOut">
 		<result column="PNU"			property="pnu"/>
-		<result column="경매_여부"			property="gyeongmae"/>
-		<result column="공매_여부"			property="gongmae"/>
+		<result column="경공매여부"			property="gyeongGongmae"/>
 		<result column="주소"				property="address"/>
 		<result column="지목코드"			property="jimokCode" />
 		<result column="HP등급"			property="hpgrade" />
-		<result column="보상여부"			property="bosang" />
-		<result column="편입여부"			property="pyeonib" />
+		<result column="보상편입여부"		property="bosangPyeonib" />
 		<result column="위도" 			property="lat" />
 		<result column="경도" 			property="lng" />
 	</resultMap>
@@ -39,11 +37,11 @@
 	
 	<resultMap id="RM_selectJangmiList" type="ToojaSearchResult">
 		<result column="PNU"			property="pnu"/>
+		<result column="경공매여부"			property="gyeongGong"/>
 		<result column="주소"				property="address"/>
 		<result column="지목코드"			property="jimokCode" />
 		<result column="HP등급"			property="hpgrade" />
-		<result column="보상여부"			property="bosang" />
-		<result column="편입여부"			property="pyeonib" />
+		<result column="보상편입여부"		property="bosangPyeonib" />
 		<result column="위도" 			property="lat" />
 		<result column="경도" 			property="lng" />
 	</resultMap>
@@ -65,4 +63,12 @@
 			#{etcChamgo, mode=IN, jdbcType=NVARCHAR, javaType=string}
 		)}
 	</select> 
+	
+	<select id="selectLurisDrawing" parameterType="string" resultType="map">
+		select 고유번호 unu, PNU pnu, CONVERT(varchar(max), 지적도 ,2)  image
+		  from [온나라].[dbo].[온나라PNU] a with (nolock)
+         inner join [온나라_이미지].[dbo].[온나라_지적도] b with (nolock) 
+            on (b.온나라PNU_고유번호 = a.고유번호)
+         where a.PNU = #{pnu}
+	</select>
 </mapper>

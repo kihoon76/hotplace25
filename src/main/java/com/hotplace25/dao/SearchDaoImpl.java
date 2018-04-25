@@ -1,14 +1,13 @@
 package com.hotplace25.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hotplace25.domain.GyeongGongmaeIn;
 import com.hotplace25.domain.GyeongGongmaeOut;
 import com.hotplace25.domain.Jangmi;
@@ -36,4 +35,9 @@ public class SearchDaoImpl implements SearchDao {
 		return msSqlSession.selectList(namespace + ".selectJangmiList", jangmiIn);
 	}
 
+	@Override
+	public Map<String, String> selectLurisDrawing(String pnu) {
+		return msSqlSessionAgent2.selectOne(namespace + ".selectLurisDrawing", pnu);
+	}
+	
 }

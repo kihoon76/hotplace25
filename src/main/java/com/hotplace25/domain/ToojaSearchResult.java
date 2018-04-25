@@ -9,8 +9,9 @@ public class ToojaSearchResult extends Address {
 	private String address;
 	private String jimokCode;
 	private String hpgrade;
-	private String bosang;
+	private String bosangPyeonib;
 	private String pyeonib;
+	private String gyeongGong;			
 	
 	public String getPnu() {
 		return pnu;
@@ -36,16 +37,22 @@ public class ToojaSearchResult extends Address {
 	public void setHpgrade(String hpgrade) {
 		this.hpgrade = hpgrade;
 	}
-	public String getBosang() {
-		return bosang;
-	}
-	public void setBosang(String bosang) {
-		this.bosang = bosang;
-	}
 	public String getPyeonib() {
 		return pyeonib;
 	}
 	public void setPyeonib(String pyeonib) {
 		this.pyeonib = pyeonib;
+	}
+	public String getBosangPyeonib() {
+		return bosangPyeonib;
+	}
+	public void setBosangPyeonib(String bosangPyeonib) {
+		this.bosangPyeonib = bosangPyeonib;
+	}
+	public String getGyeongGong() {
+		return gyeongGong;
+	}
+	public void setGyeongGong(String gyeongGong) {
+		this.gyeongGong = gyeongGong;
 	}
 }

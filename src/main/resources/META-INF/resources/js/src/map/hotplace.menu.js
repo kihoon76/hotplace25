@@ -11,9 +11,24 @@
 		
 	var _selectedAddressObj = null;
 	
+	var _getGyeongGongCode = function() {
+		return {
+    		'gyeongmae': {name: '경매', value: 'K'},
+    		'gongmae': {name: '공매', value: 'G'},
+    		'all': {name: '경매+공매', value: 'A'}
+    	};
+	}
+	
+	var _getBosangPyeonibCode = function() {
+		return {
+    		'bosang': {name: '보상', value: 'B'},
+    		'pyeonib': {name: '편입', value: 'P'},
+    		'all': {name: '보상+편입', value: 'A'}
+    	};
+	}
+	
 	var _tabulatorColumns = {
 		jangmi:[
-		    //{title:'연번', field:'num', align:'center', width:70},
 		    {title:'pnu', field:'pnu', visible:false},
 		    {title:'지목', field:'jimokCode', align:'center', width:70, headerFilter:true, 
 		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.jimok), editable:hotplace.dom.createTabulatorNoEdit,
@@ -21,8 +36,19 @@
 			    	return hotplace.util.getJimokStr(cell.getValue());
 			    }
 		    },
+		    {title:'매각구분', field:'gyeongGongmae', align:'center', width:90, headerFilter:true, 
+		    	editor:_makeTabulatorFilterFromCode(_getGyeongGongCode()), editable:hotplace.dom.createTabulatorNoEdit,
+		    	formatter:function(cell) {
+			    	return hotplace.util.getMaegakGubunStr(cell.getValue());
+			    }
+		    },
 		    {title:'HP등급', field:'hpgrade', align:'center', width:100},
-		    {title:'보상편입여부', field:'bosang', align:'center', width:100},
+		    {title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter: true, 
+		    	editor:_makeTabulatorFilterFromCode(_getBosangPyeonibCode()), editable:hotplace.dom.createTabulatorNoEdit,
+		    	formatter:function(cell) {
+			    	return hotplace.util.getBosangPyeonibGubunStr(cell.getValue());
+			    }
+		    },
 		    {title:'주소', field:'address', align:'left', width:370, headerFilter:'input'},
 			{title:'위도', field:'lat', visible:false},
 			{title:'경도', field:'lng', visible: false}
@@ -64,12 +90,25 @@
 			{title:'경도', field:'lng', visible: false}
 		],
 		gyeonggong:[
-		    { title:'고유번호', field:'unu', width:100 },
-			{ title:'구분', field:'gubun', width:100, headerFilter:true, 
-		    	editor:_makeTabulatorFilterFromCode({'gongmae': {name:'공매', value: 'G'}, 'gyeongmae':{name:'경매', value: 'K'}}) 
+		    {title:'매각구분', field:'gyeongGongmae', align:'center', width:90, headerFilter:true, 
+		    	editor:_makeTabulatorFilterFromCode(_getGyeongGongCode()), editable:hotplace.dom.createTabulatorNoEdit,
+		    	formatter:function(cell) {
+			    	return hotplace.util.getMaegakGubunStr(cell.getValue());
+			    }
 		    },
-			{ title:'물건유형', field:'type', width:150,  headerFilter:true, editor:_makeTabulatorFilterFromCode(hotplace.config.codes.jimok)},
-			{ title:'감정평가액', field:'gamjeongga', width:150, formatter:'money', formatterParams: {thousand: ',', decimal: ''}},
+		    {title:'지목', field:'jimokCode', align:'center', width:70, headerFilter:true, 
+		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.jimok), editable:hotplace.dom.createTabulatorNoEdit,
+		    	formatter:function(cell) {
+			    	return hotplace.util.getJimokStr(cell.getValue());
+			    }
+		    },
+			{title:'HP등급', field:'hpgrade', align:'center', width:80},
+			{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter: true, 
+		    	editor:_makeTabulatorFilterFromCode(_getBosangPyeonibCode()), editable:hotplace.dom.createTabulatorNoEdit,
+		    	formatter:function(cell) {
+			    	return hotplace.util.getBosangPyeonibGubunStr(cell.getValue());
+			    }
+		    },
 			{ title:'주소', field:'address',   headerFilter:'input', headerFilterPlaceholder:'주소검색' },
 			{ title:'위도', field:'lat', visible: false },
 			{ title:'경도', field:'lng', visible: false },
@@ -784,7 +823,6 @@
 				    resizableRows:true,
 				    rowClick:function(e, row){ //trigger an alert message when the row is clicked
 				       var data = row.getData();
-				      console.log('=======================================rowClick====================================');
 				       
 				       if(data.lng == 0) {
 				    	   hotplace.processAjaxError(hotplace.error.MISS_LATLNG);
@@ -817,7 +855,16 @@
 		_gyeonggongEnvGrade = '#gyeonggongEnvGrade',
 		_btnGyeonggongSearch = '#btnGyeonggongSearch',
 		_btnGyeonggongSearchPrev = '#btnGyeonggongSearchPrev',
+		_dvGyeongGongLuris = '#dvGyeongGongLuris',
 		_dvGyeonggongResult = '#dvGyeonggongResult';
+	
+	function _closeGyeongGongLurisDv() {
+		$(_dvGyeongGongLuris).hide();
+	}
+	
+	function _openGyeongGongLurisDv() {
+		$(_dvGyeongGongLuris).fadeIn();
+	}
 	
 	function _gyeonggongDvToogle() {
 		var $searchArea = $(_gyeonggongSearchMenu  + ' .searchArea'),
@@ -864,6 +911,14 @@
 		.off('click')
 		.on('click', function() {
 			_gyeonggongDvToogle();
+		});
+		
+		$(_dvGyeongGongLuris + ' button.close')
+		.off('click')
+		.on('click', function(e) {
+			//반드시 있어야 함, 이벤트가 전달되면서 GyeongGongLuris에 영향을 줌
+			e.stopPropagation();
+			_closeGyeongGongLurisDv();
 		});
 	}
 	
@@ -920,22 +975,53 @@
 					_gyeonggongDvToogle();
 					
 					hotplace.dom.createTabulator(_dvGyeonggongResult, {
-					    height:700, // set height of table
 					    fitColumns:true, //fit columns to width of table (optional)
-					    columns:_tabulatorColumns.gyeonggong,
+					    columns:_tabulatorColumns.gyeonggong,/*_tabulatorColumns.jangmi,*/
 					    movableColumns:true,
+					    resizableRows:true,
 					    rowClick:function(e, row){ //trigger an alert message when the row is clicked
 					       var data = row.getData();
-					       console.log(data)
 					       
 					       if(data.lng == 0) {
 					    	   hotplace.processAjaxError(hotplace.error.MISS_LATLNG);
-					    	   return;
+					       }
+					       else {
+						       hotplace.maps.panToLikeAddressSearch(
+						    		   data.lat,
+						    		   data.lng,
+						    		   null/*_menus.TOOJA_SEARCH*/,
+						    		   {address:data.jibeon},
+						    		   function() {
+						    			   //마커가 닫힐때 Luris 도면도 닫힌다.
+						    			   _closeGyeongGongLurisDv();
+						    		   }
+						       );  
 					       }
 					       
-					       
-					       hotplace.maps.panToLikeAddressSearch(data.lat, data.lng, _menus.GYEONGGONG_SEARCH, {address:data.jibeon});
-					       
+					       hotplace.ajax({
+					    	    url: 'search/luris/drawing?pnu=' + data.pnu,
+								method: 'GET',
+								activeMask: false,//(isActiveMask != undefined) ? isActiveMask : true,
+								//isMaskTran: isMaskTran,
+								//loadEl: '#',
+								success: function(data, textStatus, jqXHR) {
+									//var jo = $.parseJSON(data);
+									console.log(data)
+									if(data.datas[0] != null) {
+										$(_dvGyeongGongLuris + ' img').prop('src', data.datas[0].image);
+									}
+									else {
+										
+									}
+									
+									_openGyeongGongLurisDv();
+									
+								},
+								error: function(jqXHR, textStatus, e) {
+									if(cbErr) cbErr();
+								}, 
+					       });
+					      
 					    },
 					}, data.datas);
 				}

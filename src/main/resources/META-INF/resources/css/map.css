@@ -1310,21 +1310,32 @@ ul.paginglist a:hover {color:#222;}
 
 .jusoMarker .close {opacity:0;}
 
-.dvToojaLuris {position:relative; width:100%; height:100%; left:0%; top:0%; z-index:1; display:none;  padding:0px 0px; text-align:center;}
-.dvToojaLuris .dvToojaLurisBox {box-shadow:0 0px 3px rgba(0,0,0,0.3); position:relative; max-width:100%; max-height:100%; margin:0 auto; top:50%; transform: translateY(-50%);}
-.dvToojaLuris .dvToojaLurisBgBack {width:100%; height:100%; position:absolute; top:0; bottom:0; left:0; z-index:-1; background:#000; opacity:0.4;}
+.dvToojaLuris, 
+.dvGyeongGongLuris {position:relative; width:100%; height:100%; left:0%; top:0%; z-index:1; display:none;  padding:0px 0px; text-align:center;}
+.dvToojaLuris .dvToojaLurisBox,
+.dvGyeongGongLuris .dvGyeongGongLurisBox {box-shadow:0 0px 3px rgba(0,0,0,0.3); position:relative; max-width:100%; max-height:100%; margin:0 auto; top:50%; transform: translateY(-50%);}
+.dvToojaLuris .dvToojaLurisBgBack,
+.dvGyeongGongLuris .dvGyeongGongLurisBgBack {width:100%; height:100%; position:absolute; top:0; bottom:0; left:0; z-index:-1; background:#000; opacity:0.4;}
 
-.dvToojaLurisHeader {border-bottom:0px solid #ccc; display:block; position:absolute; width:100%; top:0; left:0; right:0; height:50px; background-color:#f5f6f7;}
-.dvToojaLurisBody {border:1px solid #ccc; position:absolute; width:100%; top:50px; bottom:0px; left:0; right:0; margin:0 0; background:#fff; overflow:auto; text-align:center; }
-.dvToojaLurisBody::-webkit-scrollbar {width:8px; height:8px;}
+.dvToojaLurisHeader,
+.dvGyeongGongLurisHeader {border-bottom:0px solid #ccc; display:block; position:absolute; width:100%; top:0; left:0; right:0; height:50px; background-color:#f5f6f7;}
+.dvToojaLurisBody,
+.dvGyeongGongLurisBody {border:1px solid #ccc; position:absolute; width:100%; top:50px; bottom:0px; left:0; right:0; margin:0 0; background:#fff; overflow:auto; text-align:center; }
+.dvToojaLurisBody::-webkit-scrollbar,
+.dvGyeongGongLurisBody::-webkit-scrollbar {width:8px; height:8px;}
 
-.dvToojaLurisHeader h2 {color:#333; display:inline-block; padding:0 15px; font-size:14px; line-height:48px;}
-.dvToojaLurisHeader .close {display:block; position:absolute; width:50px; height:50px; right:0; top:0; border-left:0px solid rgba(0,0,0,0.05); color:#333; opacity:0.8; font-size:18px;}
-.dvToojaLurisHeader .close:hover {background:rgba(0,0,0,0.05);}
+.dvToojaLurisHeader h2,
+.dvGyeongGongLurisHeader h2 {color:#333; display:inline-block; padding:0 15px; font-size:14px; line-height:48px;}
+.dvToojaLurisHeader .close,
+.dvGyeongGongLurisHeader .close {display:block; position:absolute; width:50px; height:50px; right:0; top:0; border-left:0px solid rgba(0,0,0,0.05); color:#333; opacity:0.8; font-size:18px;}
+.dvToojaLurisHeader .close:hover,
+.dvGyeongGongLurisHeader .close:hover {background:rgba(0,0,0,0.05);}
 
 
-.dvToojaLurisBody img {width:90%; max-width:90%; height:auto; margin:30px auto;}
-.dvToojaLurisBody .unit {width:90%; margin:0px auto 20px;}
+.dvToojaLurisBody img,
+.dvGyeongGongLurisBody img {width:90%; max-width:90%; height:auto; margin:30px auto;}
+.dvToojaLurisBody .unit,
+.dvGyeongGongLurisBody .unit {width:90%; margin:0px auto 20px;}
 
 
 /* intro */

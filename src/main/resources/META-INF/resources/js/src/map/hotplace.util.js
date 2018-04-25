@@ -126,6 +126,42 @@
 	util.getJimokStr = function(val) {
 		return _getCodeStr(hotplace.config.codes.jimok, val);
 	}
+	
+	util.getMaegakGubunStr = function(val) {
+		if(val) {
+			switch(val) {
+			case 'G':
+				val = '공매';
+				break;
+			case 'K':
+				val = '경매';
+				break;
+			case 'A':
+				val = '경매,공매';
+				break;
+			}
+		}
+		
+		return val;
+	}
+	
+	util.getBosangPyeonibGubunStr = function(val) {
+		if(val) {
+			switch(val) {
+			case 'B':
+				val = '보상';
+				break;
+			case 'P':
+				val = '편입';
+				break;
+			case 'A':
+				val = '보상,편입';
+				break;
+			}
+		}
+		
+		return val;
+	}
 }(
 	hotplace.util = hotplace.util || {},
 	jQuery

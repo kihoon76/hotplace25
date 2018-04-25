@@ -12,6 +12,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -220,8 +221,27 @@ public class SearchController {
 			vo.setErrMsg("값이 유효하지 않습니다");
 		}
 		
+		return vo;
+	}
+	
+	@GetMapping("luris/drawing")
+	@ResponseBody
+	public AjaxVO<Map<String, String>> getLurisDrawing(@RequestParam("pnu") String pnu) {
 		
+		AjaxVO<Map<String, String>> vo = new AjaxVO<Map<String, String>>();
+		
+		try {
+			vo.setSuccess(true);
+			Map<String, String> result = searchService.getLurisDrawing(pnu);
+			vo.addObject(result);
+		}
+		catch(Exception e) {
+			vo.setSuccess(false);
+			vo.setErrMsg(e.getMessage());
+		}
 		
 		return vo;
 	}
+	
+	
 }
