@@ -856,6 +856,7 @@
 		_btnGyeonggongSearch = '#btnGyeonggongSearch',
 		_btnGyeonggongSearchPrev = '#btnGyeonggongSearchPrev',
 		_dvGyeongGongLuris = '#dvGyeongGongLuris',
+		_spGyeongGongLurisTitle = '#spGyeongGongLurisTitle',
 		_dvGyeonggongResult = '#dvGyeonggongResult';
 	
 	function _closeGyeongGongLurisDv() {
@@ -990,13 +991,15 @@
 						    		   data.lat,
 						    		   data.lng,
 						    		   null/*_menus.TOOJA_SEARCH*/,
-						    		   {address:data.jibeon},
+						    		   {address:data.address},
 						    		   function() {
 						    			   //마커가 닫힐때 Luris 도면도 닫힌다.
 						    			   _closeGyeongGongLurisDv();
 						    		   }
 						       );  
 					       }
+					       
+					       $(_spGyeongGongLurisTitle).text(data.address);
 					       
 					       hotplace.ajax({
 					    	    url: 'search/luris/drawing?pnu=' + data.pnu,
@@ -1007,6 +1010,7 @@
 								success: function(data, textStatus, jqXHR) {
 									//var jo = $.parseJSON(data);
 									console.log(data)
+								
 									if(data.datas[0] != null) {
 										$(_dvGyeongGongLuris + ' img').prop('src', data.datas[0].image);
 									}
