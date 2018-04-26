@@ -964,6 +964,11 @@
 		dom.openModalOnModal('', {width: 400});
 	}
 	
+	dom.showSelectRadioForm = function(closeFn) {
+		_appendModalPopup('selectGyeongGongForm', _$alrtPopup);
+		dom.openAlrtModal({width: '400px'}, closeFn);
+	}
+	
 	dom.showMypage = function(openFn) {
 		//template 저장 안하고 계속 새로 로딩 
 		if(true/*_templates['mypageForm'] == undefined*/) {
@@ -1458,7 +1463,7 @@
 				//console.log(htmlStr);
 			}
 				
-			var editor = $('<select><option value=""></option>' + htmlStr + '</select>');
+			var editor = $('<select><option value="">전체</option>' + htmlStr + '</select>');
 			editor.css({
 				'padding':'3px',
 		        'width':'100%',

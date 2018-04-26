@@ -21,7 +21,6 @@
 	var _$btnCalcDistance = $('#btnCalcDistance');
 	var _$btnCalcArea = $('#btnCalcArea');
 	
-	
 	/** 
 	 * @private
 	 * @desc hotplace.naps.init 함수가 호출되었는지 여부
@@ -1879,10 +1878,16 @@
 	maps.getMarker = function(markerType, data, listeners, options, stopGroupping) {
 		var newMarker, newInfoWindow = null, content = '';
 		
-		newMarker = new _vender.Marker({
+		var markerOption = {
 			position: new _vender.LatLng(data.location[1], data.location[0]),
 			map: _venderMap
-		});
+		};
+		
+		if(options && options.zIndex != undefined) {
+			markerOption.zIndex = options.zIndex;
+		}
+		
+		newMarker = new _vender.Marker(markerOption);
 		
 		newMarker._data = data;
 		
@@ -2240,45 +2245,6 @@
 		});
 	}
 	
-	/*function _markerLevelLimit2() {
-		if(maps.isActiveMulgeonView()) {
-			$('#dvSalesView input[type="checkbox"]').each(function() {
-				var $this = $(this);
-				var type = $this.data('value');
-				var minLevel = null;
-				var checked = $this.prop('checked');
-				var currentLevel = _getCurrentLevel();
-				var prevState = $this.data('prev');
-				
-				if(type) {
-					minLevel = _markers[type].level;
-					if(minLevel) {
-						if(currentLevel >= minLevel) {
-							$this.prop('disabled', false);
-							
-							//if(!checked && prevState == 'on') {
-							//	$this.prop('checked', true);
-							//	_markerGroupOnOff[type] = 1;
-							//}
-						}
-						else {
-							$this.prop('disabled', true);
-							if(checked) {
-								$this.prop('checked', false);
-								//$this.data('prev', 'on');
-								_markerGroupOnOff[type] = 0;
-								
-							}
-							else {
-								$this.data('prev', 'off');
-							}
-						}
-					}
-				} 
-			})
-		}
-	}*/
-	
 	
 	/**
 	 * @memberof hotplace.maps 
@@ -2452,7 +2418,8 @@
 				size: {
 					x: 26,
 					y: 36
-				}
+				},
+				zIndex: 1000
 			})
 		});
 	}

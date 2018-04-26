@@ -8,7 +8,7 @@
 		_gyeonggongSearchMenu = '#' + _menus.GYEONGGONG_SEARCH,
 		_mulgeonViewMenu = '#' + _menus.MULGEON_VIEW,
 		_heatmapViewMenu = '#' + _menus.HEATMAP_VIEW;
-		
+	
 	var _selectedAddressObj = null;
 	
 	var _getGyeongGongCode = function() {
@@ -177,6 +177,85 @@
 				if(cbErr) cbErr();
 			} 
        });
+	}
+	
+	function _getSelectedGyeongGong() {
+		return $(':radio[name="gyeongGongType"]:checked').val();
+	}
+	
+	/**
+     * @private
+     * @function _rowClickHandler
+     * @param {string} type - 경공매검색('G')인지 투자유망('T')인지 구분
+     * @param {object} row - tabulator 선택한 row 객체
+     * @param {object} data - 데이타
+     * @gubun {string} gubun - 경매('K')인지 공매('G')인지 구분
+     * @desc create UUID 
+     */
+	function _rowClickHandler(type, row, data, gubun) {
+		var data = row.getData();
+		var gyeongGongGubun = gubun || data.gyeongGongmae;
+		var options = null;
+   
+		if(data.lng == 0) {
+			hotplace.processAjaxError(hotplace.error.MISS_LATLNG);
+		}
+		else {
+			switch(gyeongGongGubun) {
+			case 'K':
+				options = {
+					infoWinFormName: 'gyeongmaeForm',
+					mulgeonGubun: 'K',
+					unu: data.unuGyeongmae,
+					isAjaxContent: true
+				};
+				break;
+			case 'A':
+				hotplace.dom.showSelectRadioForm(function() {
+					_rowClickHandler(type, row, data, _getSelectedGyeongGong());
+				});
+				return;
+			case 'G' :
+				options = {
+					infoWinFormName: 'gongmaeForm',
+					mulgeonGubun: 'G',
+					unu: data.unuGongmae,
+					isAjaxContent: true
+				};
+				break;
+			}
+   
+			hotplace.maps.panToLikeAddressSearch(
+					data.lat,
+					data.lng,
+					null/*_menus.TOOJA_SEARCH*/, {
+						address:data.address,
+						pnu:data.pnu,
+						lat:data.lat,
+						lng:data.lng
+					},
+					function() {
+						//마커가 닫힐때 Luris 도면도 닫힌다.
+						if(type == 'G') {
+							_closeGyeongGongLurisDv();
+						}
+						else {
+							_closeLurisDv();
+						}
+						
+					}, 
+					options
+			);  
+		}
+   
+		if(type == 'G') {
+			$(_spGyeongGongLurisTitle).text(data.address);
+		}
+		else {
+			$(_spToojaLurisTitle).text(data.address);
+		}
+	       
+		_getLurisDrawing(data, type);
 	}
 	
 	menu.initMenuDom = function(menuId) {
@@ -853,51 +932,8 @@
 				    columns:param.columns,/*_tabulatorColumns.jangmi,*/
 				    movableColumns:true,
 				    resizableRows:true,
-				    rowClick:function(e, row){ //trigger an alert message when the row is clicked
-				       var data = row.getData();
-				       var gyeongGongGubun = data.gyeongGongmae;
-				       var options = null;
-				       
-				       if(data.lng == 0) {
-				    	   hotplace.processAjaxError(hotplace.error.MISS_LATLNG);
-				       }
-				       else {
-				    	   switch(gyeongGongGubun) {
-				    	   case 'K':
-				    	   case 'A':
-				    		   options = {
-				    			   infoWinFormName: 'gyeongmaeForm',
-				    			   mulgeonGubun: 'K',
-				    			   unu: data.unuGyeongmae,
-				    			   isAjaxContent: true
-				    	   	   };
-				    		   break;
-				    	   case 'G' :
-				    		   options = {
-				    			   infoWinFormName: 'gongmaeForm',
-				    			   mulgeonGubun: 'G',
-				    			   unu: data.unuGongmae,
-				    			   isAjaxContent: true
-				    	   	   };
-				    		   break;
-				    	   }
-				    	   
-				    	   hotplace.maps.panToLikeAddressSearch(
-					    		   data.lat,
-					    		   data.lng,
-					    		   null/*_menus.TOOJA_SEARCH*/,
-					    		   {address:data.address},
-					    		   function() {
-					    			   //마커가 닫힐때 Luris 도면도 닫힌다.
-					    			   _closeLurisDv();
-					    		   }, 
-					    		   options);
-					       _openLurisDv();
-				       }
-				       
-				       $(_spToojaLurisTitle).text(data.address);
-				       _getLurisDrawing(data, 'T');
-				       
+				    rowClick: function(e, row) {
+				    	_rowClickHandler('T', row, data);
 				    },
 				}, data);
 				if($.isFunction(fn)) fn();
@@ -993,6 +1029,7 @@
 		return obj;
 	}
 	
+	
 	function _searchGyeonggong() {
 		
 		//min max 값을 교환해야 한다
@@ -1038,52 +1075,8 @@
 					    columns:_tabulatorColumns.gyeonggong,/*_tabulatorColumns.jangmi,*/
 					    movableColumns:true,
 					    resizableRows:true,
-					    rowClick:function(e, row){ //trigger an alert message when the row is clicked
-					       var data = row.getData();
-					       var gyeongGongGubun = data.gyeongGongmae;
-					       var options = null;
-					       
-					       if(data.lng == 0) {
-					    	   hotplace.processAjaxError(hotplace.error.MISS_LATLNG);
-					       }
-					       else {
-					    	   // 경공매 동시일 경우 경매를 보여준다
-					    	   switch(gyeongGongGubun) {
-					    	   case 'K':
-					    	   case 'A':
-					    		   options = {
-					    			   infoWinFormName: 'gyeongmaeForm',
-					    			   mulgeonGubun: 'K',
-					    			   unu: data.unuGyeongmae,
-					    			   isAjaxContent: true
-					    	   	   };
-					    		   break;
-					    	   case 'G' :
-					    		   options = {
-					    			   infoWinFormName: 'gongmaeForm',
-					    			   mulgeonGubun: 'G',
-					    			   unu: data.unuGongmae,
-					    			   isAjaxContent: true
-					    	   	   };
-					    		   break;
-					    	   }
-					    	   
-						       hotplace.maps.panToLikeAddressSearch(
-						    		   data.lat,
-						    		   data.lng,
-						    		   null/*_menus.TOOJA_SEARCH*/,
-						    		   {address:data.address},
-						    		   function() {
-						    			   //마커가 닫힐때 Luris 도면도 닫힌다.
-						    			   _closeGyeongGongLurisDv();
-						    		   }, 
-						    		   options
-						       );  
-					       }
-					       
-					       $(_spGyeongGongLurisTitle).text(data.address);
-					       _getLurisDrawing(data, 'G');
-					      
+					    rowClick: function(e,row) {
+					    	_rowClickHandler('G', row, data);
 					    },
 					}, data.datas);
 				}
