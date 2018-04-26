@@ -659,7 +659,7 @@
 	hotplace.processAjaxError = function(errCode, msg) {
 		switch(errCode) {
 		case _err.LOGIN :
-			hotplace.dom.showAlertMsg(hotplace.dom.showLoginForm, msg || '로그인후 사용하세요.', {width:'50%'});
+			hotplace.dom.showAlertMsg(hotplace.dom.showLoginForm, msg || '로그인후 사용하세요.', {width:'300px'});
 			break;
 		case _err.DUP_LOGIN :
 			hotplace.dom.showAlertMsg(function() {
