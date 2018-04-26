@@ -39,7 +39,7 @@
 	
 	<resultMap id="RM_selectJangmiList" type="ToojaSearchResult">
 		<result column="PNU"			property="pnu"/>
-		<result column="경공매여부"			property="gyeongGong"/>
+		<result column="경공매여부"			property="gyeongGongmae"/>
 		<result column="경매_고유번호"		property="unuGyeongmae"/>
 		<result column="공매_고유번호"		property="unuGongmae"/>
 		<result column="주소"				property="address"/>

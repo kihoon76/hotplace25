@@ -81,9 +81,10 @@
 		//TOJI_LIMIT_MIN_AREA:'TOJI_LIMIT_MIN_AREA', 					//토지이용규제완화(면적)
 		//DEV_BIZ_AREA_GEONSU:'DEV_BIZ_AREA_GEONSU', 					//개발사업면적(건수)
 		//DEV_BIZ_AREA_AREA:'DEV_BIZ_AREA_AREA', 						//개발사업면적(면적)
-		BOSANG_MULGEON:'BOSANG_MULGEON', 							//보상물건
-		ACCEPT_DEV_GEONSU:'ACCEPT_DEV_GEONSU', 						//개발행위허가(건수)
-		ACCEPT_DEV_AREA:'ACCEPT_DEV_AREA', 							//개발행위허가(면적)
+		BOSANG_MULGEON_GEONSU:'BOSANG_MULGEON_GEONSU', 				//보상물건(건수)
+		BOSANG_MULGEON_AREA:'BOSANG_MULGEON_AREA', 					//보상물건(면적)
+		//ACCEPT_DEV_GEONSU:'ACCEPT_DEV_GEONSU', 						//개발행위허가(건수)
+		//ACCEPT_DEV_AREA:'ACCEPT_DEV_AREA', 							//개발행위허가(면적)
 		ACCEPT_BUILDING_GEONSU:'ACCEPT_BUILDING_GEONSU', 			//건축허가(건수)
 		ACCEPT_BUILDING_AREA:'ACCEPT_BUILDING_AREA', 				//건축허가(면적)
 		ACCEPT_SALES_GEONSU:'ACCEPT_SALES_GEONSU', 					//영업허가(건수)
@@ -107,9 +108,10 @@
 		//TOJI_LIMIT_MIN:0,
 		//DEV_BIZ_AREA_GEONSU:0,
 		//DEV_BIZ_AREA_AREA:0,
-		BOSANG_MULGEON:0,
-		ACCEPT_DEV_GEONSU:0,
-		ACCEPT_DEV_AREA:0,
+		BOSANG_MULGEON_GEONSU:0,
+		BOSANG_MULGEON_AREA:0,
+		//ACCEPT_DEV_GEONSU:0,
+		//ACCEPT_DEV_AREA:0,
 		ACCEPT_BUILDING_GEONSU:0,
 		ACCEPT_BUILDING_AREA:0,
 		ACCEPT_SALES_GEONSU:0,
@@ -299,15 +301,18 @@
 //		case _cellTypes.DEV_BIZ_AREA_AREA:
 //			name = '개발사업면적(면적기준)';
 //			break;
-		case _cellTypes.BOSANG_MULGEON:
-			name = '보상물건';
+		case _cellTypes.BOSANG_MULGEON_GEONSU:
+			name = '보상물건(건수기준)';
 			break;
-		case _cellTypes.ACCEPT_DEV_GEONSU:
-			name = '개발행위허가(건수기준)';
+		case _cellTypes.BOSANG_MULGEON_AREA:
+			name = '보상물건(면적기준)';
 			break;
-		case _cellTypes.ACCEPT_DEV_AREA:
-			name = '개발행위허가(면적기준)';
-			break;
+//		case _cellTypes.ACCEPT_DEV_GEONSU:
+//			name = '개발행위허가(건수기준)';
+//			break;
+//		case _cellTypes.ACCEPT_DEV_AREA:
+//			name = '개발행위허가(면적기준)';
+//			break;
 		case _cellTypes.ACCEPT_BUILDING_GEONSU:
 			name = '건축허가(건수기준)';
 			break;

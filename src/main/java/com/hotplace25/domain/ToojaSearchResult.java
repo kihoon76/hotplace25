@@ -3,17 +3,17 @@ package com.hotplace25.domain;
 import org.apache.ibatis.type.Alias;
 
 @Alias("ToojaSearchResult")
-public class ToojaSearchResult extends Address {
+public class ToojaSearchResult extends Latlng {
 
 	private String pnu;
 	private String unuGyeongmae;
 	private String unuGongmae;
+	private String gyeongGongmae;
 	private String address;
 	private String jimokCode;
 	private String hpgrade;
 	private String bosangPyeonib;
-	private String pyeonib;
-	private String gyeongGong;			
+				
 	
 	public String getPnu() {
 		return pnu;
@@ -39,23 +39,11 @@ public class ToojaSearchResult extends Address {
 	public void setHpgrade(String hpgrade) {
 		this.hpgrade = hpgrade;
 	}
-	public String getPyeonib() {
-		return pyeonib;
-	}
-	public void setPyeonib(String pyeonib) {
-		this.pyeonib = pyeonib;
-	}
 	public String getBosangPyeonib() {
 		return bosangPyeonib;
 	}
 	public void setBosangPyeonib(String bosangPyeonib) {
 		this.bosangPyeonib = bosangPyeonib;
-	}
-	public String getGyeongGong() {
-		return gyeongGong;
-	}
-	public void setGyeongGong(String gyeongGong) {
-		this.gyeongGong = gyeongGong;
 	}
 	public String getUnuGyeongmae() {
 		return unuGyeongmae;

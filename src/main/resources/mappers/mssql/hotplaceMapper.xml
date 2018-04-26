@@ -149,9 +149,21 @@
 	         )}
 			</when>
 			
-			<!-- 보상물건  -->
-			<when test="type == 'BOSANG_MULGEON'">
-			{ call [Ranking].[dbo].[SEL_PNU10_보상물건] (
+			<!-- 보상물건 (건수) -->
+			<when test="type == 'BOSANG_MULGEON_GEONSU'">
+			{ call [Ranking].[dbo].[SEL_PNU10_보상물건_건수] (
+	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
+	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+				#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{ney, mode=IN, jdbcType=DECIMAL, javaType=string},
+	   		 	#{year, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	         )}
+			</when>
+			
+			<!-- 보상물건 (면적) -->
+			<when test="type == 'BOSANG_MULGEON_AREA'">
+			{ call [Ranking].[dbo].[SEL_PNU10_보상물건_면적] (
 	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
 	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
 				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},

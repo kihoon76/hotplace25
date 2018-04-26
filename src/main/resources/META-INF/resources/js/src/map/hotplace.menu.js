@@ -49,7 +49,7 @@
 			    	return hotplace.util.getBosangPyeonibGubunStr(cell.getValue());
 			    }
 		    },
-		    {title:'주소', field:'address', align:'left', width:370, headerFilter:'input'},
+		    {title:'주소', field:'address', align:'left', width:370, headerFilter:'input', headerFilterPlaceholder:'주소검색'},
 			{title:'위도', field:'lat', visible:false},
 			{title:'경도', field:'lng', visible: false}
 		],
@@ -148,6 +148,35 @@
 		}
 		
 		return minmax;
+	}
+	
+	function _getLurisDrawing(data, gubun, cbErr) {
+		var $image = (gubun == 'G') ? $(_dvGyeongGongLuris + ' img') : $(_dvToojaLuris + ' img');
+		hotplace.ajax({
+    	    url: 'search/luris/drawing?pnu=' + data.pnu,
+			method: 'GET',
+			activeMask: false,//(isActiveMask != undefined) ? isActiveMask : true,
+			//isMaskTran: isMaskTran,
+			//loadEl: '#',
+			success: function(data, textStatus, jqXHR) {
+				console.log(data)
+			
+				if(data.datas[0] != null) {
+					$image.prop('src', data.datas[0].image);
+				}
+				
+				if(gubun == 'G') {
+					_openGyeongGongLurisDv();
+				}
+				else {
+					_openLurisDv();
+				}
+				
+			},
+			error: function(jqXHR, textStatus, e) {
+				if(cbErr) cbErr();
+			} 
+       });
 	}
 	
 	menu.initMenuDom = function(menuId) {
@@ -639,6 +668,7 @@
 		_dvToojaTab02Result = '#dvToojaTab02Result', //tabulator로 결과 테이블 영역 div
 		_dvToojaTab03Result = '#dvToojaTab03Result', //tabulator로 결과 테이블 영역 div
 		_dvToojaLuris = '#dvToojaLuris',
+		_spToojaLurisTitle = '#spToojaLurisTitle',
 		_toojaTab = {
 			JangmiCityPlan: '#tabJangmiCityPlan',
 			TojiUseLimitCancel: '#tabTojiUseLimitCancel',
@@ -825,25 +855,49 @@
 				    resizableRows:true,
 				    rowClick:function(e, row){ //trigger an alert message when the row is clicked
 				       var data = row.getData();
+				       var gyeongGongGubun = data.gyeongGongmae;
+				       var options = null;
 				       
 				       if(data.lng == 0) {
 				    	   hotplace.processAjaxError(hotplace.error.MISS_LATLNG);
-				    	   return;
+				       }
+				       else {
+				    	   switch(gyeongGongGubun) {
+				    	   case 'K':
+				    	   case 'A':
+				    		   options = {
+				    			   infoWinFormName: 'gyeongmaeForm',
+				    			   mulgeonGubun: 'K',
+				    			   unu: data.unuGyeongmae,
+				    			   isAjaxContent: true
+				    	   	   };
+				    		   break;
+				    	   case 'G' :
+				    		   options = {
+				    			   infoWinFormName: 'gongmaeForm',
+				    			   mulgeonGubun: 'G',
+				    			   unu: data.unuGongmae,
+				    			   isAjaxContent: true
+				    	   	   };
+				    		   break;
+				    	   }
+				    	   
+				    	   hotplace.maps.panToLikeAddressSearch(
+					    		   data.lat,
+					    		   data.lng,
+					    		   null/*_menus.TOOJA_SEARCH*/,
+					    		   {address:data.address},
+					    		   function() {
+					    			   //마커가 닫힐때 Luris 도면도 닫힌다.
+					    			   _closeLurisDv();
+					    		   }, 
+					    		   options);
+					       _openLurisDv();
 				       }
 				       
+				       $(_spToojaLurisTitle).text(data.address);
+				       _getLurisDrawing(data, 'T');
 				       
-				       hotplace.maps.panToLikeAddressSearch(
-				    		   data.lat,
-				    		   data.lng,
-				    		   null/*_menus.TOOJA_SEARCH*/,
-				    		   {address:data.detail},
-				    		   function() {
-				    			   //마커가 닫힐때 Luris 도면도 닫힌다.
-				    			   _closeLurisDv();
-				    		   }, {
-				    			   
-				    		   });
-				       _openLurisDv();
 				    },
 				}, data);
 				if($.isFunction(fn)) fn();
@@ -1028,31 +1082,7 @@
 					       }
 					       
 					       $(_spGyeongGongLurisTitle).text(data.address);
-					       
-					       hotplace.ajax({
-					    	    url: 'search/luris/drawing?pnu=' + data.pnu,
-								method: 'GET',
-								activeMask: false,//(isActiveMask != undefined) ? isActiveMask : true,
-								//isMaskTran: isMaskTran,
-								//loadEl: '#',
-								success: function(data, textStatus, jqXHR) {
-									//var jo = $.parseJSON(data);
-									console.log(data)
-								
-									if(data.datas[0] != null) {
-										$(_dvGyeongGongLuris + ' img').prop('src', data.datas[0].image);
-									}
-									else {
-										
-									}
-									
-									_openGyeongGongLurisDv();
-									
-								},
-								error: function(jqXHR, textStatus, e) {
-									if(cbErr) cbErr();
-								}, 
-					       });
+					       _getLurisDrawing(data, 'G');
 					      
 					    },
 					}, data.datas);
