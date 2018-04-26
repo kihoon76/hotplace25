@@ -257,9 +257,9 @@
 	         )}
 			</when>
 			
-			<!-- 실거래가 (면적)  -->
+			<!-- 실거래가 (거래가총계) -->
 			<when test="type == 'SILGEOLAE_AREA'">
-			{ call [Ranking].[dbo].[SEL_PNU10_실거래가_면적] (
+			{ call [Ranking].[dbo].[SEL_PNU10_실거래가_거래가총계] (
 	        	#{level, mode=IN, jdbcType=TINYINT, javaType=string},
 	   		 	#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
 				#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
