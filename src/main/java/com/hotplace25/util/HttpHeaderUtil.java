@@ -63,4 +63,26 @@ public class HttpHeaderUtil {
 	public static String getUrlRoot(HttpServletRequest request) {
 		return request.getRequestURL().toString().replace(request.getRequestURI(), request.getContextPath()) + "/";
 	}
+	
+	public static String isMobile(String ua) {
+		
+		String isMobile = "N";
+		
+		if(ua == null || "".equals(ua)) {
+			String[] mobileOs = {"iPhone", "iPad", "Android", "BlackBerry", "Windows CE", "Nokia", "Webos", "Opera Mini", "SonyEricsson", "Opera Mobi", "IEMobile"};
+			int len = mobileOs.length;
+			int j = -1;
+			
+			for(int i=0; i<len; i++) {
+				j = ua.indexOf(mobileOs[i]);
+				
+				if(j > -1) {
+					isMobile = "Y";
+					break;
+				}
+			}
+		}
+		
+		return isMobile;
+	}
 }

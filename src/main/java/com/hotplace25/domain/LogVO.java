@@ -10,6 +10,8 @@ public class LogVO {
 	private String referer;
 	private String url;
 	private String parameter;
+	private String userAgent;
+	private String isMobile;
 	
 	public String getIp() {
 		return ip;
@@ -40,6 +42,18 @@ public class LogVO {
 	}
 	public void setParameter(String parameter) {
 		this.parameter = parameter;
+	}
+	public String getUserAgent() {
+		return userAgent;
+	}
+	public void setUserAgent(String userAgent) {
+		this.userAgent = userAgent;
+	}
+	public String getIsMobile() {
+		return isMobile;
+	}
+	public void setIsMobile(String isMobile) {
+		this.isMobile = isMobile;
 	}
 	
 }

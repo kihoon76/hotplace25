@@ -28,6 +28,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		
 		String ip = HttpHeaderUtil.getClientIP(request);
+		String userAgent = request.getHeader("User-Agent");
 		
 		if(!ip.startsWith("192.")) {
 			LogVO log = new LogVO();
@@ -36,6 +37,9 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 			log.setId(getId());
 			log.setReferer(request.getHeader("referer"));
 			log.setUrl(request.getRequestURL().toString());
+			log.setUserAgent(userAgent);
+			log.setIsMobile(HttpHeaderUtil.isMobile(userAgent));
+			
 			
 			String param = request.getQueryString();
 			if(param != null) {
