@@ -68,7 +68,7 @@ public class HttpHeaderUtil {
 		
 		String isMobile = "N";
 		
-		if(ua == null || "".equals(ua)) {
+		if(ua != null && !"".equals(ua)) {
 			String[] mobileOs = {"iPhone", "iPad", "Android", "BlackBerry", "Windows CE", "Nokia", "Webos", "Opera Mini", "SonyEricsson", "Opera Mobi", "IEMobile"};
 			int len = mobileOs.length;
 			int j = -1;
