@@ -361,7 +361,7 @@ public class HotplaceController {
 	@GetMapping("celldetail")
 	@ResponseBody
 	public AjaxVO getCellDetail() throws InterruptedException {
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 		return new AjaxVO();
 	}
 	

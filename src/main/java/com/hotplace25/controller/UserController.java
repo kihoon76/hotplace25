@@ -67,7 +67,7 @@ public class UserController {
 		
 		try {
 			vo.setSuccess(true);
-			boolean r = userService.checkDuplicateId(id);
+			boolean r = ("anonymoususer".equals(id.toLowerCase()) ? true : userService.checkDuplicateId(id));
 			if(r) {
 				vo.setErrCode("300"); //중복됨
 			}

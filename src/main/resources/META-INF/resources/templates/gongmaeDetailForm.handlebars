@@ -27,38 +27,38 @@
 						<tbody>
 							<tr>
 								<th>처분방식 / 자산구분</th>
-								<td>{{cheoboonJasan}}</td>
+								<td><span id="gongDcheoboonJasan"></span></td>
 
 								<th>용도</th>
-								<td>{{yongdo}}</td>
+								<td><span id="gongDyongdo"></span></td>
 
 								<th>면적</th>
-								<td>{{area}}</td>
+								<td><span id="gongDarea"></span></td>
 							</tr>
 							<tr>
 
 								<th>감정평가금액</th>
-								<td>{{gamjeongga}}</td>
+								<td><span id="gongDgamjeongga"></span></td>
 
 								<th>입찰방식</th>
-								<td>{{ibchalMethod}}</td>
+								<td><span id="gongDibchalMethod"></span></td>
 
 								<th>입찰기간 (회차/차수)</th>
-								<td>{{ibchalPeriodNumber}}</td>
+								<td><span id="gongDibchalPeriodNumber"></span></td>
 							</tr>
 							<tr>
 								<th>유찰횟수</th>
-								<td>{{yuchal}}회 </td>
+								<td><span id="gongDyuchal"></span>회 </td>
 
 								<th>집행기관</th>
-								<td>{{jibhaengGigwan}}</td>
+								<td><span id="gongDjibhaengGigwan"></span></td>
 
 								<th>담당자정보</th>
 								<td>-</td>
 							</tr>
 							<tr>
 								<th>최저입찰가(예정금액)</td>
-								<td colspan="5"><span class="bold color_blue font16">{{#xif " minIbchalga != null "}}{{currency minIbchalga}} 원{{else}} - {{/xif}}</span></td>
+								<td colspan="5"><span id="gongDminIbchalga" class="bold color_blue font16">{{#xif " minIbchalga != null "}}{{currency minIbchalga}} 원{{else}} - {{/xif}}</span></td>
 							</tr>
 							<tr>
 								<th>
@@ -135,23 +135,7 @@
 												<th>비고</th> 
 											</tr>
 										</thead>
-										<tbody>
-											{{#xif " areaList.length == 0 "}}
-											<tr>	
-												<td colspan="5">조회된 데이타가 없습니다.</td>
-											</tr>
-											{{else}}
-											{{#each areaList}}
-											<tr>	
-												<td>{{number}}</td>
-												<td>{{jongbyeol}}({{jimok}})</td>
-												<td>{{area}}</td>
-												<td>{{jiboon}}</td>
-												<td>{{bigo}}</td>
-											</tr>
-											{{/each}}
-											{{/xif}}
-										</tbody>
+										<tbody id="gongDmulgeonDetailArea"></tbody>
 									</table>
 								</div>
 							</div>
@@ -173,7 +157,7 @@
 											<tr>
 												<th rowspan="2">소재지</th>
 												<th>지번</th>
-												<td>{{mulgeonAddress}}</td>
+												<td><span id="gongDmulgeonAddress"></span></td>
 											</tr>
 											<tr>
 												<th>도로명</th>
@@ -191,17 +175,15 @@
 										<tbody>
 											<tr>
 												<th>위치 및 부근현황</th>
-												<td>{{#xif " wichiBugeun != null "}} {{wichiBugeun}} {{else}} - {{/xif}}</td>
+												<td><span id="gongDwichiBugeun"></span></td>
 											</tr>
 											<tr>
 												<th>이용현황</th>
-												<td>{{#xif " use != null "}} {{use}} {{else}} - {{/xif}}</td>
+												<td><span id="gongDuse"></span></td>
 											</tr>
 											<tr>
 												<th>기타사항</th>
-												<td>
-													{{#xif " etc != null "}} {{etc}} {{else}} - {{/xif}}
-												</td>
+												<td><span id="gongDetc"></span></td>
 											</tr>
 										</tbody>
 									</table>
@@ -230,24 +212,7 @@
 												<th>감정평가서</th>
 											</tr>
 										</thead>
-										<tbody>
-										{{#xif " gamjeongList.length == 0 " }}
-											<tr>	
-												<td colspan="4">조회된 데이타가 없습니다.</td>
-											</tr>
-										{{else}}
-										{{#each gamjeongList}}
-											<tr>	
-												<td>{{pyeonggaGigwan}}</td>
-												<td>{{pyeonggaDate}}</td>
-												<td class="right">{{#xif " pyeonggaPrice != null "}} {{currency pyeonggaPrice}} {{else}}  {{pyeonggaPrice}} {{/xif}}</td>
-												<td>
-													<button type="button" class="btnstyle small white"><i class="ambicon-054_loard_down"></i> 감정평가서</button>
-												</td>
-											</tr>
-										{{/each}}
-										{{/xif}}
-										</tbody>
+										<tbody id="gongDmulgeonDetailGamjeong"></tbody>
 									</table>
 								</div>
 							</div>
@@ -267,11 +232,11 @@
 										<tbody>
 											<tr>
 												<th>명도책임</th>
-												<td>{{myeongdoChaegim}}</td>
+												<td><span id="gongDmyeongdoChaegim"></span>{{myeongdoChaegim}}</td>
 											</tr>
 											<tr>
 												<th>부대조건</th>
-												<td>{{budaeJogeon}}</td>
+												<td><span id="gongDbudaeJogeon"></span></td>
 											</tr>
 										</tbody>
 									</table>
@@ -305,23 +270,22 @@
 										<tbody>
 											<tr>
 												<th>전자보증서 사용여부</th>
-												<td>{{#xif " jeonjaBojeungseoYN == 'Y' "}} 사용 가능 {{else}} 사용 불가능 {{/xif}}</td>
+												<td><span id="gongDjeonjaBojeungseoYN"></span></td>
 												<th>차순위 매수신청<br> 가능여부</th>
-												<td>{{#xif " chasunwiMaesuYN == 'Y' "}} 신청 가능 {{else}} 신청 불가능 {{/xif}}</td>
+												<td><span id="gongDchasunwiMaesuYN"></span></td>
 											</tr>
 											<tr>
 												<th>공동입찰 가능여부</th>
-												<td>{{#xif " gongdongIbchalYN == 'Y' "}} 공동입찰 가능 {{else}} 공동입찰 불가능 {{/xif}}</td>
+												<td><span id="gongDgongdongIbchalYN"></span></td>
 												<th>2인 미만 유찰여부</th>
-												<td>{{#xif " twoPersonYN == 'Y' "}} 1인이 입찰하더라도 유효한 입찰로 성립 {{else}} 2인 이상 입찰자가 있는 경우에만 유효한 입찰로 성립 {{/xif}}</td>
+												<td><span id="gongDtwoPersonYN"></span></td>
 											</tr>
 											<tr>
 												<th>대리입찰 가능여부</th>
-												<td>{{#xif " daeliIbchalYN == 'Y' "}} 대리입찰 가능 {{else}} 대리입찰 불가능 {{/xif}}</td>
+												<td><span id="gongDdaeliIbchalYN"></span></td>
 												<th>2회 이상 입찰 가능여부</th>
-												<td>{{#xif " twoTimeYN == 'Y' "}} 동일물건 2회 이상 입찰 가능 {{else}} 동일물건 2회 이상 입찰 불가능 {{/xif}}</td>
+												<td><span id="gongDtwoTimeYN"></span></td>
 											</tr>
-											
 										</tbody>
 									</table>
 								</div>
@@ -357,26 +321,7 @@
 												<th>최저입찰가(원)</th>
 											</tr>
 										</thead>
-										<tbody>
-										{{#xif " ibchalList.length == 0 " }}
-											<tr>	
-												<td colspan="8">조회된 데이타가 없습니다.</td>
-											</tr>
-										{{else}}
-										{{#each ibchalList}}
-											<tr>	
-												<td>{{ibchalNum}}</td>
-												<td>{{hoecha}} / {{chasu}}</td>
-												<td>{{gubun}}</td>
-												<td>{{daegeumNabbu}} / {{nabbuGihan}}</td>
-												<td>{{trimString ibchalStart 0 16}} / {{trimString ibchalEnd 0 16}}</td>
-												<td>{{trimString gaechal 0 16}}</td>
-												<td>{{gaechalJangso}}</td>
-												<td>{{#xif " minIbchalga != null "}} {{currency minIbchalga}} {{else}} {{minIbchalga}} {{/xif}}</td>
-											</tr>
-										{{/each}}
-										{{/xif}}
-										</tbody>
+										<tbody id="gongDibchalInfoPerHoecha"></tbody>
 									</table>
 								</div>
 							</div>
@@ -438,24 +383,7 @@
 												<th>최저입찰가 대비</th>
 											</tr>
 										</thead>
-										<tbody>
-										{{#xif " tonggyeList.length == 0 " }}
-											<tr>	
-												<td colspan="6">조회된 데이타가 없습니다.</td>
-											</tr>
-										{{else}}
-										{{#each tonggyeList}}
-											<tr>	
-												<td>{{tonggyeGigan}}개월</td>
-												<td>{{buchalGeonsu}}</td>
-												<td>{{nagchalGeonsu}}</td>
-												<td>{{#xif " nagchalRatio != null "}} {{nagchalRatio}}% {{else}} {{nagchalRatio}} {{/xif}}</td>
-												<td>{{#xif " gamjeongga != null "}} {{gamjeongga}}% {{else}} {{gamjeongga}} {{/xif}}</td>
-												<td>{{#xif " minIbchalga != null "}} {{minIbchalga}}% {{else}} {{minIbchalga}} {{/xif}}</td>
-											</tr>
-										{{/each}}
-										{{/xif}}
-										</tbody>
+										<tbody id="gongDsiseInfoTonggye"></tbody>
 									</table>
 								</div>
 							</div>
@@ -481,7 +409,7 @@
 												<th>낙찰금액(원)</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="gongDsiseInfoMulgeon">
 										{{#xif " mulgeonList.length == 0 " }}
 											<tr>	
 												<td colspan="3">조회된 데이타가 없습니다.</td>
