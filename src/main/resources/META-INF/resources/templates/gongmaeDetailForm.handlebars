@@ -409,21 +409,7 @@
 												<th>낙찰금액(원)</th>
 											</tr>
 										</thead>
-										<tbody id="gongDsiseInfoMulgeon">
-										{{#xif " mulgeonList.length == 0 " }}
-											<tr>	
-												<td colspan="3">조회된 데이타가 없습니다.</td>
-											</tr>
-										{{else}}
-										{{#each mulgeonList}}
-											<tr>	
-												<td>{{number}}</td>
-												<td>{{mulgeonName}}</td>
-												<td>{{#xif " nagchalPrice != null "}} {{currency nagchalPrice}} {{else}} {{nagchalPrice}} {{/xif}}</td>
-											</tr>
-										{{/each}}
-										{{/xif}}
-										</tbody>
+										<tbody id="gongDsiseInfoMulgeon"></tbody>
 									</table>
 								</div>
 							</div>
