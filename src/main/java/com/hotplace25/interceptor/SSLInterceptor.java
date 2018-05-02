@@ -19,6 +19,22 @@ public class SSLInterceptor extends HandlerInterceptorAdapter {
 //			return false;
 //		}
 		
+		if(url.startsWith("https://hotplace25.com")) {
+			url = url.replace("https://hotplace25.com", "https://www.hotplace25.com");
+			response.sendRedirect(url);
+			return false;
+		}
+		else if(url.startsWith("https://25cell.com")) {
+			url = url.replace("https://25cell.com", "https://www.hotplace25.com");
+			response.sendRedirect(url);
+			return false;
+		}
+		else if(url.startsWith("https://www.25cell.com")) {
+			url = url.replace("https://www.25cell.com", "https://www.hotplace25.com");
+			response.sendRedirect(url);
+			return false;
+		}
+		
 		return true;
 	}
 	
