@@ -81,7 +81,7 @@ public class SearchController {
 				gyeongGongIn.setParamCityPlanStateJeob(cityPlanState[1]);
 			}
 			
-			gyeongGongIn.setParamBosangPyeonib(DataUtil.convertArrayToString(gyeongGongIn.getBosangPyeonib()));
+			gyeongGongIn.setParamBosangPyeonib(/*DataUtil.convertArrayToString(gyeongGongIn.getBosangPyeonib())*/null);
 			
 			ObjectMapper o = new ObjectMapper();
 			System.err.println(o.writeValueAsString(gyeongGongIn));
@@ -116,7 +116,7 @@ public class SearchController {
 			jangmiIn.setCityPlanStateJeob(cityPlanState.get(2));
 		}
 		
-		jangmiIn.setBosangPyeonib(DataUtil.convertListToString((ArrayList<String>)param.get("bosangPyeonib")));
+		jangmiIn.setBosangPyeonib(/*DataUtil.convertListToString((ArrayList<String>)param.get("bosangPyeonib"))*/null);
 		jangmiIn.setJiyeok(DataUtil.convertListToString((ArrayList<String>)param.get("jiyeog")));
 		jangmiIn.setJimok(DataUtil.convertListToString((ArrayList<String>)param.get("jimok")));
 		jangmiIn.setGongsi(DataUtil.convertListToString((ArrayList<String>)param.get("gongsi")));

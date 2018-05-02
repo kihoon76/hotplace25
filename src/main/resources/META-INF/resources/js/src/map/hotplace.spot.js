@@ -34,16 +34,21 @@
 			_viewGwansimReg();
 			break;
 		case 'MAEMUL' :
-			_viewMaemulReg();
+			hotplace.dom.showServiceReady();
+			//_viewMaemulReg();
 			break;
 		case 'CONSULTING':
-			_viewConsulting();
+			hotplace.dom.showServiceReady();
+			//_viewConsulting();
 			break;
 		case 'TOJI_USE_LIMT' :
-			_viewTojiUseLimit();
+			hotplace.dom.showServiceReady();
+			//_viewTojiUseLimit();
 			break;
 		}
 	} 
+	
+	
 	
 	function _spotInfo(el) {
 		var $el = $(el).closest('.munuType');

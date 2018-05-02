@@ -395,6 +395,7 @@
 		select 목록번호 as listnum, 목록구분 as listgubun, 상세내역 as detailhistory
 		  from [경매].[dbo].[경매_목록내역]
 		 where 경매_목록_고유번호 = #{goyubeonho}
+		 order by 목록번호
 	</select>
 	
 	<!-- 경매인근매각통계 -->
@@ -406,7 +407,7 @@
 		       Round(평균유찰회수,1) as avgyuchal
 		  from [경매].[dbo].[경매_인근매각통계]
 		 where 경매_목록_고유번호 = #{goyubeonho}
-		 order by 평균감정가 asc
+		 --order by 평균감정가 asc
 	</select>
 	
 	<!-- 경매인근매각물건 -->

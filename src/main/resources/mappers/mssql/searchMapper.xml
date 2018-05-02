@@ -9,7 +9,7 @@
 		<result column="주소"				property="address"/>
 		<result column="지목코드"			property="jimokCode" />
 		<result column="HP등급"			property="hpgrade" />
-		<result column="보상편입여부"		property="bosangPyeonib" />
+<!-- 		<result column="보상편입여부"		property="bosangPyeonib" /> -->
 		<result column="위도" 			property="lat" />
 		<result column="경도" 			property="lng" />
 	</resultMap>
@@ -45,7 +45,7 @@
 		<result column="주소"				property="address"/>
 		<result column="지목코드"			property="jimokCode" />
 		<result column="HP등급"			property="hpgrade" />
-		<result column="보상편입여부"		property="bosangPyeonib" />
+<!-- 		<result column="보상편입여부"		property="bosangPyeonib" /> -->
 		<result column="위도" 			property="lat" />
 		<result column="경도" 			property="lng" />
 	</resultMap>

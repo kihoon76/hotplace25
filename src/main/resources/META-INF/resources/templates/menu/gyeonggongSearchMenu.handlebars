@@ -88,17 +88,6 @@
 									{{/each}}
 								</td>
 							</tr>
-							<tr id="itemGyeonggongGongsiStandard">
-								<th>공시지가기준가격</th>
-								<td>
-									{{#each codes.jiga as |jiga|}}
-									<span class="rdchBox">
-										<input type="checkbox" id="chkGyeonggongGongsiStandard{{@index}}" value="{{jiga.value}}">
-										<label for="chkGyeonggongGongsiStandard{{@index}}" class="labelCh"><em class="text">{{jiga.name}}</em></label>
-									</span>
-									{{/each}}
-								</td>
-							</tr>
 							
 							<tr id="itemGyeonggongMinIbchalgaR">
 								<th>최소입찰가율</th>
@@ -206,94 +195,6 @@
 									<span class="rdchBox">
 										<input type="checkbox" id="chkGyeonggongCityPlanState{{@index}}" value="{{cityPlanState.value}}">
 										<label for="chkGyeonggongCityPlanState{{@index}}" class="labelCh"><em class="text">{{cityPlanState.name}}</em></label>
-									</span>
-									{{/each}}
-								</td>
-							</tr>
-							<tr id="itemGyeonggongBosangPyeonib">
-								<th>보상편입여부</th>
-								<td>
-									{{#each codes.bosangPyeonib as |bosangPyeonib|}}
-									<span class="rdchBox">
-										<input type="checkbox" id="chkGyeonggongBosangPyeonib{{@index}}" value="{{bosangPyeonib.value}}">
-										<label for="chkGyeonggongBosangPyeonib{{@index}}" class="labelCh"><em class="text">{{bosangPyeonib.name}}</em></label>
-									</span>
-									{{/each}}
-								</td>
-							</tr>
-						</tbody>
-					</table>
-							
-				</div>
-			</div>
-			
-			<!-- 투자유망물건조건 -->
-			<div class="unit">							
-				<div class="unit_tit">
-					<span class="sTit color_black">투자유망물건조건</span>
-					<button href="#gyeonggongToggle03" class="slideShow" data-role="slideShow">
-						<em class="on">펼침</em>
-						<em class="off">닫힘</em>
-					</button>
-				</div>
-				<div id="gyeonggongToggle03" class="unit_cont bgWhite slideShow-cont">
-					<table class="tableStyle borderStyle topBold left">
-						<colgroup>
-							<col style="width:15%;">
-							<col style="width:;">
-						</colgroup>
-						<tbody>
-							<tr>
-								<th>HP등급</th>
-								<td>							
-									<!-- HP등급 Range -->
-									<div class="rangeSliderWrap">
-										<div id="gyeonggongHpGrade" class="gyeonggongHpGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;"></div>
-										<span class="textLabel color_red fr"><i class="ambicon-007_arrow2_right"></i> 투자유망</span>
-										<span class="textLabel color_blue fl">투자유의 <i class="ambicon-008_arrow2_left"></i></span>
-									</div>
-								</td>
-							</tr>
-							<tr id="itemGyeonggongGyeongsado">
-								<th>경사도</th>
-								<td>
-									{{#each codes.gyeongsado as |gyeongsado|}}
-									<span class="rdchBox">
-										<input type="checkbox" id="chkGyeonggongGyeongsado{{@index}}" value="{{gyeongsado.value}}">
-										<label for="chkGyeonggongGyeongsado{{@index}}" class="labelCh"><em class="text">{{gyeongsado.name}}</em></label>
-									</span>
-									{{/each}}
-								</td>
-							</tr>
-							<tr id="itemGyeonggongJyeobdo">
-								<th>접도현황</th>
-								<td>
-									{{#each codes.jyeobdoState as |jyeobdoState|}}
-									<span class="rdchBox">
-										<input type="checkbox" id="chkGyeonggongJyeobdo{{@index}}" value="{{jyeobdoState.value}}">
-										<label for="chkGyeonggongJyeobdo{{@index}}" class="labelCh"><em class="text">{{jyeobdoState.name}}</em></label>
-									</span>
-									{{/each}}
-								</td>
-							</tr>
-							<tr>
-								<th>환경평가등급</th>
-								<td>
-									<!-- 환경평가등급 Range -->
-									<div class="rangeSliderWrap">
-										<div id="gyeonggongEnvGrade" class="gyeonggongEnvGrade rangeSlider ui-rangeSlider ui-rangeSlider-noArrow" style="position: relative;"></div>
-										<span class="textLabel color_red fl">투자유망 <i class="ambicon-008_arrow2_left"></i></span>
-										<span class="textLabel color_blue fr"><i class="ambicon-007_arrow2_right"></i> 투자유의</span>
-									</div>
-								</td>
-							</tr>
-							<tr id="itemGyeonggongTojiUseLimitCancel">
-								<th>토지이용규제해소물건</th>
-								<td>
-									{{#each codes.tojiUseLimitCancel as |tojiUseLimitCancel|}}
-									<span class="rdchBox">
-										<input type="checkbox" id="chkGyeonggongTojiUseLimitCancel{{@index}}" value="{{tojiUseLimitCancel.value}}">
-										<label for="chkGyeonggongTojiUseLimitCancel{{@index}}" class="labelCh"><em class="text">{{tojiUseLimitCancel.name}}</em></label>
 									</span>
 									{{/each}}
 								</td>

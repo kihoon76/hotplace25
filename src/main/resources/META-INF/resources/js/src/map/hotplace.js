@@ -650,6 +650,7 @@
 		TIMEOUT:'611', //타임아웃
 		GWANSIM_DEL:'612', //관심물건 삭제오류
 		USER_MOD:'613', //회원계정정보 수정오류
+		SERVICE_READY: '888', //서비스 준비중
 		FORMAT: '999'   //입력폼 포멧오류
 		
 	};
@@ -659,12 +660,15 @@
 	hotplace.processAjaxError = function(errCode, msg) {
 		switch(errCode) {
 		case _err.LOGIN :
-			hotplace.dom.showAlertMsg(hotplace.dom.showLoginForm, msg || '로그인후 사용하세요.', {width:'300px'});
+			hotplace.dom.showAlertMsg(hotplace.dom.showLoginForm, msg || '로그인후 사용하세요.', {width:'400px'});
 			break;
 		case _err.DUP_LOGIN :
 			hotplace.dom.showAlertMsg(function() {
 				window.location.reload();
 			},msg || '중복 로그인');
+		case _err.SERVICE_READY :
+			hotplace.dom.showAlertMsg(null, msg || '서비스 준비중입니다.', {width:'400px'});
+			break;
 		case _err.JANGAE_GONGJI :	//장애공지걸림
 			window.location.reload();
 			break;
