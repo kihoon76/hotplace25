@@ -708,21 +708,11 @@
 			var lat = arg ? arg.lat : _selectedAddressObj.lat;
 			var address = arg ? arg.address : _selectedAddressObj.address;
 			var pnu = arg ? arg.pnu : _selectedAddressObj.pnu;
-			var datas = {
-				params : $.extend({address:address, pnu:pnu}, {defaultValue:hotplace.calc.sujibunseog.defaultValue}, {
-					jimok: '전',
-					valPerPyeung:21000000,
-					area: 132,
-					gongsi: 4040000,
-					limitChange:'Y'
-				})
-			};
 			
-			if(lng == undefined || lat == undefined) return;
-			//$('#btnNews').trigger('click');
-			
-			hotplace.maps.destroyMarkerType(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
-			hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
+			if(!lng || !lat) {
+				hotplace.processAjaxError(hotplace.error.MISS_LATLNG);
+				return;
+			}
 			
 			
 			hotplace.maps.panToLikeAddressSearch(lat, lng, _menus.ADDRESS_SEARCH, {address:address, pnu:pnu, lng:lng, lat:lat});

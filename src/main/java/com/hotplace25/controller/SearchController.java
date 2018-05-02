@@ -242,4 +242,23 @@ public class SearchController {
 		
 		return vo;
 	}
+	
+	@GetMapping("sujiboonseok/base")
+	@ResponseBody
+	public AjaxVO<Map<String, String>> getSujiboonseokBase(@RequestParam("pnu") String pnu) {
+		
+		AjaxVO<Map<String, String>> vo = new AjaxVO<Map<String, String>>();
+		
+		try {
+			Map<String, String> result = searchService.getSujiboonseokBase(pnu);
+			vo.setSuccess(true);
+			vo.addObject(result);
+		}
+		catch(Exception e) {
+			vo.setSuccess(false);
+			vo.setErrMsg(e.getMessage());
+		}
+		
+		return vo;
+	}
 }

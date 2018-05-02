@@ -18,6 +18,7 @@
 		_txtMaemulReqPhone = '#txtMaemulReqPhone',
 		_fileMaemul = '#maemulFileUp',
 		_dvSpotTojiUseLimit = '#dvSpotTojiUseLimit',
+		_sujiLurisDrawing = '#sujiLurisDrawing',
 		_tabTojiUseLimit01 = '#tabTojiUseLimit01';
 	
 	var _pnu, _address, _lng, _lat;
@@ -61,20 +62,63 @@
 	/*************************************************************
 	 * 수지분석
 	 ************************************************************/
+	var _dvSujiLurisDrawing = '#dvSujiLurisDrawing',
+		_btnSujiGongsiHistory = '#btnSujiGongsiHistory';
+	
+	function _bindSujiImageClick() {
+		$(_dvSujiLurisDrawing + ' a')
+		.off('click')
+		.on('click', function() {
+			var $img = $(this).children();
+			var imgSrc = $img.prop('src');
+			
+			hotplace.dom.showSujiLurisDrawing({width:700}, {src:imgSrc});
+		});
+	}
+	
+	function _bindSujiGongsiHistory() {
+		$(_btnSujiGongsiHistory)
+		.off('click')
+		.on('click', function() {
+			hotplace.dom.showServiceReady();
+		});
+		
+	}
+	
 	function _viewSujibunseog() {
-		
-		var param = $.extend({address: _address, pnu:_pnu}, {defaultValue:hotplace.calc.sujibunseog.defaultValue}, {
-			jimok: '전',
-			valPerPyeung:21000000,
-			area: 132,
-			gongsi: 4040000,
-			limitChange:'Y'
-		})
-		
-		hotplace.dom.showSpotSujibunseogForm(function() {
-			hotplace.sujibunseog.init({address: _address});
-			hotplace.calc.sujibunseog.initCalc();
-		}, param);
+		hotplace.ajax({
+    	    url: 'search/sujiboonseok/base?pnu=' + _pnu,
+			method: 'GET',
+			activeMask: false,//(isActiveMask != undefined) ? isActiveMask : true,
+			//isMaskTran: isMaskTran,
+			//loadEl: '#',
+			success: function(data, textStatus, jqXHR) {
+				console.log(data)
+				
+				if(data.success) {
+					var datas = data.datas[0];
+					var param = $.extend({address:_address, pnu:_pnu, lng:_lng, lat:_lat}, {defaultValue:hotplace.calc.sujibunseog.defaultValue}, {
+							jimok: datas.jimok,
+							valPerPyeung:21000000,
+							area: datas.area,
+							gongsi: 4040000,
+							limitChange:'Y',
+							luris: datas.luris
+					});
+					
+					hotplace.dom.showSpotSujibunseogForm(function() {
+						hotplace.sujibunseog.init({address: _address});
+						hotplace.calc.sujibunseog.initCalc();
+						_bindSujiImageClick();
+						_bindSujiGongsiHistory();
+					}, param);
+				}
+				else {
+					var errCode = data.errCode;
+					if(errCode)	jqXHR.errCode = errCode;
+				}
+			}
+       });
 	}
 	
 	/*************************************************************

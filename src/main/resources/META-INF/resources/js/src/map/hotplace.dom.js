@@ -642,6 +642,11 @@
 		dom.openImageModalOnModal(modalSize);
 	}
 	
+	dom.showSujiLurisDrawing = function(modalSize, param) {
+		_appendModalPopup('spotSujibunseokImageForm', _$imagePopup, param);
+		dom.openImageModalOnModal(modalSize);
+	}
+	
 	dom.showHeatMapCaptureImagePop = function(modalSize, param) {
 		_appendModalPopup('mapCaptureImageForm', _$imagePopup, param);
 		

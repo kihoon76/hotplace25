@@ -39,5 +39,10 @@ public class SearchDaoImpl implements SearchDao {
 	public Map<String, String> selectLurisDrawing(String pnu) {
 		return msSqlSessionAgent2.selectOne(namespace + ".selectLurisDrawing", pnu);
 	}
+
+	@Override
+	public Map<String, String> selectSujiboonseokBase(String pnu) {
+		return msSqlSession.selectOne(namespace + ".selectSujiboonseokBase", pnu);
+	}
 	
 }

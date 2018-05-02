@@ -75,4 +75,10 @@
             on (b.온나라PNU_고유번호 = a.고유번호)
          where a.PNU = #{pnu}
 	</select>
+	
+	<select id="selectSujiboonseokBase" parameterType="string" resultType="map">
+		select 지목 jimok, 면적 area, 공시지가기준가격 gongsi
+		  from [서비스].[dbo].[검색_일반목록]
+		 where PNU = #{pnu}  
+	</select>
 </mapper>

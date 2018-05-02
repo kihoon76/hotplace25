@@ -50,10 +50,18 @@ public class SearchService {
 			String b64 = Base64Utils.encodeToString(bImg);
 			luris.put("image", "data:image/png;base64," + b64);
 		}
-		else {
-			
-		}
 		
 		return luris;
+	}
+
+	public Map<String, String> getSujiboonseokBase(String pnu) {
+		Map<String, String> sujiBase = searchDao.selectSujiboonseokBase(pnu);
+		
+		if(sujiBase != null) {
+			Map<String, String> luris = getLurisDrawing(pnu);
+			sujiBase.put("luris", luris.get("image"));
+		}
+		
+		return sujiBase;
 	}
 }
