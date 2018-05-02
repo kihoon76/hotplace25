@@ -15,8 +15,6 @@ public class SSLInterceptor extends HandlerInterceptorAdapter {
 		
 //		if(url.startsWith("http://")) {
 //			url = url.replace("http://", "https://");
-//			response.sendRedirect(url);
-//			return false;
 //		}
 		
 		if(url.startsWith("https://hotplace25.com")) {

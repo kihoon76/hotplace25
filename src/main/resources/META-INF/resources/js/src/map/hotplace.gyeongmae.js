@@ -51,20 +51,28 @@
 		var html = null;
 		
 		if(cnt >= 1) {
-			html = [];
 			
-			for(var i=0; i<cnt; i++) {
-				html.push('<tr>');
-				html.push('<td>' + maegagmulgeons[i].sageonbeonho + '</td>');
-				html.push('<td>' + maegagmulgeons[i].yongdo + '</td>');
-				html.push('<td>' + maegagmulgeons[i].sojaeji + '</td>');
-				html.push('<td>' + maegagmulgeons[i].gamjeongpyeongga.money() + ' 원</td>');
-				html.push('<td>' + maegagmulgeons[i].maegagmonth + '</td>');
-				html.push('<td>' + maegagmulgeons[i].maegagdaegeum.money() + ' 원</td>');
-				html.push('</tr>');
+			//검색 결과가 없을경우 사건번호에 '검색결과가 없습니다.' 로 표시되는 경우가 발생
+			//예외처리
+			if(cnt == 1 && (maegagmulgeons[0].sageonbeonho == '검색결과가 없습니다.' || maegagmulgeons[0].soonbeon == '')) {
+				html = '<tr><td colspan="6">정보가 존재하지 않습니다.</td></tr>';
 			}
-			
-			html = html.join('');
+			else {
+				html = [];
+				
+				for(var i=0; i<cnt; i++) {
+					html.push('<tr>');
+					html.push('<td>' + maegagmulgeons[i].sageonbeonho + '</td>');
+					html.push('<td>' + maegagmulgeons[i].yongdo + '</td>');
+					html.push('<td>' + maegagmulgeons[i].sojaeji + '</td>');
+					html.push('<td>' + maegagmulgeons[i].gamjeongpyeongga.money() + ' 원</td>');
+					html.push('<td>' + maegagmulgeons[i].maegagmonth + '</td>');
+					html.push('<td>' + maegagmulgeons[i].maegagdaegeum.money() + ' 원</td>');
+					html.push('</tr>');
+				}
+				
+				html = html.join('');
+			}
 		}
 		else {
 			html = '<tr><td colspan="6">정보가 존재하지 않습니다.</td></tr>';

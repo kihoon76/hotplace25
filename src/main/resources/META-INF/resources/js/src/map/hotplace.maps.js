@@ -1703,9 +1703,10 @@
 	 * @name createTimeView 
 	 * @type {function}
 	 * @desc  연도별 히트맵을 이미지로 캡쳐해서 보여준다 (ie 지원안됨)
+	 * @deprecated
 	 * {@link https://github.com/tsayen/dom-to-image dom-to-image}
 	 */
-	maps.createTimeView = function() {
+	/*maps.createTimeView = function() {
 		if(hotplace.browser.msie || hotplace.browser.msedge) {
 			alert('인터넷 익스플로러에서는 지원되지 않습니다');
 			return;
@@ -1738,7 +1739,7 @@
 		}
 		
 		a(2014);
-	}
+	}*/
 	
 	/** 
 	 * @memberof hotplace.maps 

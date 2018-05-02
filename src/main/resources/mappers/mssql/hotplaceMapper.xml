@@ -357,13 +357,14 @@
 	</resultMap>
 	
 	<select id="selectGyeongmaeThumb" parameterType="string" resultMap="RM_selectGyeongmaeThumb">
-		select  top 1 a.고유번호, a.등록번호, a.PNU, a.소재지, a.용도, a.감정평가액, a.유찰회수, CONVERT(char(19), a.매각기일, 120) as 매각기일, CONVERT(varchar(max), c.이미지 ,2) as imgThumb, c.확장자 as imgThumbExt
+		select  top 1 a.고유번호, a.등록번호, a.PNU, a.소재지, a.용도, a.감정평가액, a.유찰회수, CONVERT(char(19), a.매각기일, 120) as 매각기일, CONVERT(varchar(max), c.이미지 ,2) as imgThumb, isnull(c.확장자, 'zzz')  as imgThumbExt
   		  from [경매].[dbo].[경매_목록] a
   		  left outer join [경매].[dbo].[경매_이미지_목록] b
   		    on a.고유번호 = b.경매_목록_고유번호
   		 left outer join [경매].[dbo].[경매_이미지_별도수집] c
   		 	on b.이미지명 = c.이미지명 and b.확장자 = c.확장자 
  		 where a.고유번호 = #{unu}
+ 		 order by imgThumbExt
 	</select>
 	
 	<select id="selectGyeongmaeDetail" parameterType="map" resultMap="RM_selectGyeongmae">
@@ -395,7 +396,8 @@
 		select 목록번호 as listnum, 목록구분 as listgubun, 상세내역 as detailhistory
 		  from [경매].[dbo].[경매_목록내역]
 		 where 경매_목록_고유번호 = #{goyubeonho}
-		 order by 목록번호
+	     group by [경매_목록_고유번호], [목록번호], [목록구분], [상세내역]
+         order by 목록번호
 	</select>
 	
 	<!-- 경매인근매각통계 -->
@@ -412,7 +414,7 @@
 	
 	<!-- 경매인근매각물건 -->
 	<select id="selectGyeongmaeMaegagmulgeon" resultType="GyeongmaeMaegagmulgeon">
-		select 사건번호 as sageonbeonho, 용도 as yongdo, 소재지 as sojaeji, 
+		select 사건번호 as sageonbeonho, 용도 as yongdo, 소재지 as sojaeji, 순번 as soonbeon,
 			      감정평가액 as gamjeongpyeongga, 매각월 as maegagmonth, 매각대금 as maegagdaegeum
 		  from [경매].[dbo].[경매_인근매각물건] 
 		 where 경매_목록_고유번호 = #{goyubeonho}

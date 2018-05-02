@@ -11,6 +11,7 @@ public class GyeongmaeMaegagmulgeon {
 	private String gamjeongpyeongga;	//감정평가액
 	private String maegagmonth;			//매각월
 	private String maegagdaegeum;		//매각대금
+	private String soonbeon;			//순번
 	
 	public String getSageonbeonho() {
 		return sageonbeonho;
@@ -47,5 +48,11 @@ public class GyeongmaeMaegagmulgeon {
 	}
 	public void setMaegagdaegeum(String maegagdaegeum) {
 		this.maegagdaegeum = maegagdaegeum;
+	}
+	public String getSoonbeon() {
+		return soonbeon;
+	}
+	public void setSoonbeon(String soonbeon) {
+		this.soonbeon = soonbeon;
 	}
 }
