@@ -209,12 +209,12 @@
 		_makeCommonTd(
 			$('#gongDmulgeonDetailGamjeong'),
 			gamjeongList,
-			'4',
+			'3',
 			function(contentArr, data) {
 				contentArr.push('<td>' + data.pyeonggaGigwan + '</td>');
 				contentArr.push('<td>' + data.pyeonggaDate + '</td>');
 				contentArr.push((data.pyeonggaPrice != null) ? '<td>' + data.pyeonggaPrice.money() + '</td>' : '<td>&nbsp;</td>');
-				contentArr.push('<td><button type="button" class="btnstyle small white"><i class="ambicon-054_loard_down"></i> 감정평가서</button></td>');
+				//contentArr.push('<td><button type="button" class="btnstyle small white"><i class="ambicon-054_loard_down"></i> 감정평가서</button></td>');
 			}
 		);
 	}
