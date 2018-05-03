@@ -594,6 +594,10 @@
 					
 					if(data.success) {
 						var datas = data.datas;
+						if(datas[0] == null) {
+							hotplace.dom.showAlertMsg(null, '공시지가 변동내역이 없습니다', {width:400});
+							return;
+						}
 						hotplace.dom.showSujiGongsiHistory(null, {history: datas});
 					}
 					else {

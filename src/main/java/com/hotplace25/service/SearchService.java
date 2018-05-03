@@ -86,7 +86,7 @@ public class SearchService {
 			
 			//다른법령지역지구
 			if(sujiBase.get(2) != null) {
-				result.put("etclaw", StringUtil.getStringNullValue(sujiBase.get(2).get(0)));
+				result.put("etclaw", StringUtil.getStringNullValue(sujiBase.get(2).get(0)).replaceAll("&lt;", "").replaceAll("&gt;", " "));
 			}
 			
 			//시행부칙추가확인
