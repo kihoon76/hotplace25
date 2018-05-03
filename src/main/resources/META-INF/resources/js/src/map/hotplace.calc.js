@@ -877,10 +877,12 @@
 				var $WGeonchugGongsa = $(suji.getWGeonchugGongsaId());
 				
 				if(isSet) {
-					var _$$1 = Math.round(parseFloat($txtGeonchugGongsa.data('area') / 3.3));
-					_$$1 = _$$1 * 4500000;
+					var pyeong = Math.round(parseFloat($txtGeonchugGongsa.data('area') / 3.3));
+					var _$$1 = pyeong * 4500000;
 					$txtGeonchugGongsa.data('value', _$$1);
 					$txtGeonchugGongsa.val(_$$1.toString().money());
+					
+					hotplace.dom.changeTooltipText($txtGeonchugGongsa, '<span class="innerTooltip">' + pyeong +'평 X 450만원</span>');
 				}
 				
 				var $$1 = parseInt($txtGeonchugGongsa.data('value'));
@@ -903,10 +905,12 @@
 				var $WTomogGongsa = $(suji.getWTomogGongsaId());
 				
 				if(isSet) {
-					var _$$1 = Math.round(parseFloat($txtTomogGongsa.data('area') / 3.3));
-					_$$1 = _$$1 * 1500000;
+					var pyeong = Math.round(parseFloat($txtTomogGongsa.data('area') / 3.3));
+					var _$$1 = pyeong * 150000;
 					$txtTomogGongsa.data('value', _$$1);
 					$txtTomogGongsa.val(_$$1.toString().money());
+					
+					hotplace.dom.changeTooltipText($txtTomogGongsa, '<span class="innerTooltip">' + pyeong +'평 X 15만원</span>');
 				}
 				
 				var $$1 = parseInt($txtTomogGongsa.data('value'));
@@ -929,10 +933,13 @@
 				var $WPojangGongsa = $(suji.getWPojangGongsaId());
 				
 				if(isSet) {
-					var _$$1 = Math.round(parseFloat($txtPojangGongsa.data('area') / 3.3));
-					_$$1 = _$$1 * 1500000;
+					var pyeong = Math.round(parseFloat($txtPojangGongsa.data('area') / 3.3));
+					var _$$1 = pyeong * 150000;
+					
 					$txtPojangGongsa.data('value', _$$1);
 					$txtPojangGongsa.val(_$$1.toString().money());
+					
+					hotplace.dom.changeTooltipText($txtPojangGongsa, '<span class="innerTooltip">' + pyeong +'평 X 15만원</span>');
 				}
 				
 				var $$1 = parseInt($txtPojangGongsa.data('value'));
@@ -953,10 +960,13 @@
 				var $WInibGongsa = $(suji.getWInibGongsaId());
 				
 				if(isSet) {
-					var _$$1 = Math.round(parseFloat($txtInibGongsa.data('area') / 3.3));
-					_$$1 = _$$1 * 1500000;
+					var pyeong = Math.round(parseFloat($txtInibGongsa.data('area') / 3.3));
+					var _$$1 = pyeong * 150000;
+		
 					$txtInibGongsa.data('value', _$$1);
 					$txtInibGongsa.val(_$$1.toString().money());
+					
+					hotplace.dom.changeTooltipText($txtInibGongsa, '<span class="innerTooltip">' + pyeong +'평 X 15만원</span>');
 				}
 				
 				var $$1 = parseInt($txtInibGongsa.data('value'));

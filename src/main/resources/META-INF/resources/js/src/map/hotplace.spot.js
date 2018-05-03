@@ -85,6 +85,11 @@
 							etclaw: datas.etclaw,
 					});
 					
+//					if(datas.gongsi == '') {
+//						hotplace.dom.showAlertMsg(null, '공시지가 정보가 없습니다', {width:400});
+//						return;
+//					}
+					
 					hotplace.dom.showSpotSujibunseogForm(function() {
 						hotplace.sujibunseog.init({address: _address});
 						hotplace.calc.sujibunseog.initCalc();

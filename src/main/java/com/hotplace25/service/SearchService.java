@@ -64,7 +64,7 @@ public class SearchService {
 			result.put("pnu", "");
 			result.put("jimok", "");
 			result.put("area", "");
-			result.put("gongsi", "");
+			result.put("gongsi", "0");
 			result.put("gugtolaw", "");
 			result.put("etclaw", "");
 			result.put("boochickadd", "");
@@ -73,10 +73,12 @@ public class SearchService {
 			//pnu, jimok(지목), area(면적), gongsi(공시지가)
 			if(sujiBase.get(0) != null && sujiBase.get(0).get(0) != null) {
 				Map<String, Object> m = sujiBase.get(0).get(0);
+				String gongsi = StringUtil.getStringNullValue(m.get("gongsi"));
+				
 				result.put("pnu", String.valueOf(m.get("pnu")));
 				result.put("jimok", StringUtil.getStringNullValue(m.get("jimok")));
 				result.put("area", StringUtil.getStringNullValue(m.get("area")));
-				result.put("gongsi", StringUtil.getStringNullValue(m.get("gongsi")));
+				result.put("gongsi", "".equals(gongsi) ? "0" : gongsi);
 			}
 			
 			//국토법지역지구

@@ -28,25 +28,6 @@
 	      order by name
 	</select>
 	
-	<!-- <select id="selectMulgeonAddress" resultType="string" parameterType="Address">
-		select concat('"',[PNU], '","', [시도명], ' ', [시군구명], ' ', [읍면동명], ' ', [리명], case when [필지구분코드] = '1' then '' else '산' end, case when [부번숫자] <![CDATA[<>]]> '0' then [본번숫자] + '-' + [부번숫자] else [본번숫자] end, '",',  [위도], ',', [경도])  
-		  from [지번주소].[dbo].[전국지번통합]
-		  <where>
-		  	[필지구분코드] = #{san}
-		  	<if test='beonjiF != null'>
-		  	and [본번숫자] = #{beonjiF}
-		  	</if>
-		  	<if test='beonjiS != null'>
-		  	and [부번숫자] = #{beonjiS}
-		  	</if>
-		  	<if test='detail != null'>
-		  	and [읍면동명] like #{detail} + '%'
-		  	</if>
-		  	and 위도 is not null
-		  	and 경도 is not null
-		  </where>
-	</select> -->
-	
 	<select id="selectMulgeonAddress" statementType="CALLABLE" parameterType="Address" resultType="string">
 		<choose>
 			<when test='type == "N"'>
@@ -409,7 +390,6 @@
 		       Round(평균유찰회수,1) as avgyuchal
 		  from [경매].[dbo].[경매_인근매각통계]
 		 where 경매_목록_고유번호 = #{goyubeonho}
-		 --order by 평균감정가 asc
 	</select>
 	
 	<!-- 경매인근매각물건 -->
@@ -435,15 +415,13 @@
 	</sql>
 	
 	<!-- 공매 -->
-	<select id="selectGongmaeMarker" resultType="string" parameterType="hashmap">
-		select concat(PNU, '|$', 공매_목록_고유번호, '|$', 물건관리번호, '|$', 경도, '|$', 위도) 
-       	  from (
-             	select a.PNU, a.공매_목록_고유번호, a.물건관리번호, a.경도, a.위도
-                  from [수작업입력].[dbo].[공매_기본정보] a
-       ) t
-       where t.위도 between convert(float, #{swy}) and convert(float, #{ney})
-         and t.경도 between convert(float, #{swx}) and convert(float, #{nex})
-       order by t.경도 asc
+	<select id="selectGongmaeMarker"  statementType="CALLABLE"  resultType="string" parameterType="hashmap">
+       { call [수작업입력].[dbo].[SEL_공매_목록2](
+       		#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
+			#{ney, mode=IN, jdbcType=DECIMAL, javaType=string}
+       )}
 	</select>
 
 	<resultMap id="RM_selectGongmaeThumb" type="Gongmae" >
