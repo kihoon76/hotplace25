@@ -1142,13 +1142,12 @@
 			calcSetGeunjeodang: function(isSet) {
 				console.log('근저당 설정비');
 				var suji = hotplace.sujibunseog;
-				var $txtDaechulIja;
+				var $txtDaechulIja = $(suji.getTxtDaechulIjaId());
 				var $txtSetGeunjeodang = $(suji.getTxtSetGeunjeodangId());
 				var $stepSetGeunjeodang = $(suji.getStepSetGeunjeodangId());
 				var $WSetGeunjeodang = $(suji.getWSetGeunjeodangId());
 				
 				if(isSet) {
-					$txtDaechulIja = $(suji.getTxtDaechulIjaId());
 					var _$$1 = $txtDaechulIja.data('value');
 					var _$$2 = 1.3;
 					var _$$r = Math.round(_$$1 * _$$2);
@@ -1163,6 +1162,8 @@
 				
 				$WSetGeunjeodang.data('value', $$r);
 				$WSetGeunjeodang.val($$r.toString().money());
+				
+				hotplace.dom.changeTooltipText($txtSetGeunjeodang, '<span class="innerTooltip">대출금액(' + $txtDaechulIja.data('value').toString().money() +'원)의 130%</span>');
 				
 				calcMymoney();//자기자본
 				calcSaeobgyeongbi();

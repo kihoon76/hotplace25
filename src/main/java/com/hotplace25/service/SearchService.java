@@ -75,10 +75,19 @@ public class SearchService {
 				Map<String, Object> m = sujiBase.get(0).get(0);
 				String gongsi = StringUtil.getStringNullValue(m.get("gongsi"));
 				
+				if("".equals(gongsi)) {
+					gongsi = "0";
+				}
+				else {
+					//. 제거
+					String[] gongsiArr = gongsi.split("\\.");
+					gongsi = gongsiArr[0];
+				}
+				
 				result.put("pnu", String.valueOf(m.get("pnu")));
 				result.put("jimok", StringUtil.getStringNullValue(m.get("jimok")));
 				result.put("area", StringUtil.getStringNullValue(m.get("area")));
-				result.put("gongsi", "".equals(gongsi) ? "0" : gongsi);
+				result.put("gongsi", gongsi);
 			}
 			
 			//국토법지역지구

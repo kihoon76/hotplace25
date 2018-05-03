@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -28,7 +29,7 @@ public class MultiDatasetTest {
 	@Resource(name="searchDao")
 	SearchDao searchDao;
 	
-	@Test
+	@Ignore @Test
 	public void test01_sujiboonseok() {
 		
 		List<List<Map<String, Object>>> result = searchDao.selectSujiboonseogBase("4711312100113730002");
@@ -46,5 +47,14 @@ public class MultiDatasetTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Ignore @Test
+	public void test02_split() {
+		String s = "192,456.0";
+		
+		String[] arr = s.split("\\.");
+		
+		System.out.println(arr[0]);
 	}
 }
