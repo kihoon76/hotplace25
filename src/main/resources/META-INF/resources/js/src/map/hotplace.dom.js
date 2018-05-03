@@ -343,7 +343,7 @@
 	}
 	
 	dom.openModalOnModal = function(title, modalSize, closeFn, openFn) {
-		_commonModal(_$momPopup, modalSize);
+		_commonModal(_$momPopup, modalSize, closeFn, openFn);
 	}
 	
 	dom.openImageModalOnModal = function(modalSize, closeFn, openFn) {
@@ -643,7 +643,7 @@
 	}
 	
 	dom.showSujiLurisDrawing = function(modalSize, param) {
-		_appendModalPopup('spotSujibunseokImageForm', _$imagePopup, param);
+		_appendModalPopup('spotSujibunseogImageForm', _$imagePopup, param);
 		dom.openImageModalOnModal(modalSize);
 	}
 	
@@ -906,6 +906,17 @@
 		
 		if(ok) {
 			dom.openModal('', null, null, fn);
+		}
+		else {
+			_showLoginMsg();
+		}
+	}
+	
+	dom.showSujiGongsiHistory = function(fn, param) {
+		var ok = _appendModalPopup('spotSujibunseogGongsiHistoryForm', _$momPopup, param);
+		
+		if(ok) {
+			dom.openModalOnModal('', {width: 400}, null, fn);
 		}
 		else {
 			_showLoginMsg();

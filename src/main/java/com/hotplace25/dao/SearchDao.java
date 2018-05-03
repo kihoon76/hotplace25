@@ -16,6 +16,8 @@ public interface SearchDao {
 
 	Map<String, String> selectLurisDrawing(String pnu);
 
-	Map<String, String> selectSujiboonseokBase(String pnu);
+	List<List<Map<String, Object>>> selectSujiboonseogBase(String pnu);
+
+	List<Map<String, String>> selectSujiboonseogGongsiHistory(String pnu);
 
 }

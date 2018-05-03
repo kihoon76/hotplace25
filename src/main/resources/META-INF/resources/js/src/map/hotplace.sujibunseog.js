@@ -3,8 +3,10 @@
  */
 (function(sujibunseog, $) {
 	var _dvSujibunseog = '#dvSujibunseog',
+		_dvSujiLurisDrawing = '#dvSujiLurisDrawing',
 		_btnSujiGongsiHistory = '#btnSujiGongsiHistory', //공시지가 변동보기버튼
 		_btnSujiTojiUseLimitHistory = '#btnSujiTojiUseLimitHistory', //토지이용규제 변경 내역보기
+		_btnSujiGongsiHistory = '#btnSujiGongsiHistory', //공시지가 변동보기
 		_btnSujibunseogPdf = '#btnSujibunseogPdf',
 		
 		_chkJaesanse = '#chkJaesanse', //재산세 checkbox (주택);
@@ -575,6 +577,42 @@
 		.off('click')
 		.on('click', function(e) {
 			hotplace.dom.showSujiTojiUseLimitHistory();
+		});
+		
+		//공시지가 변동보기
+		$(_btnSujiGongsiHistory)
+		.off('click')
+		.on('click', function() {
+			//hotplace.dom.showServiceReady();
+			var pnu = $(this).data('pnu');
+			
+			hotplace.ajax({
+	    	    url: 'search/sujiboonseog/gongsi_history?pnu=' + pnu,
+				method: 'GET',
+				success: function(data, textStatus, jqXHR) {
+					console.log(data)
+					
+					if(data.success) {
+						var datas = data.datas;
+						hotplace.dom.showSujiGongsiHistory(null, {history: datas});
+					}
+					else {
+						var errCode = data.errCode;
+						if(errCode)	jqXHR.errCode = errCode;
+					}
+				}
+	       });
+			
+		});
+		
+		//luris 도면 이미지 보기
+		$(_dvSujiLurisDrawing + ' a')
+		.off('click')
+		.on('click', function() {
+			var $img = $(this).children();
+			var imgSrc = $img.prop('src');
+			
+			hotplace.dom.showSujiLurisDrawing({width:700}, {src:imgSrc});
 		});
 		
 		//수지분석 pdf 다운로드

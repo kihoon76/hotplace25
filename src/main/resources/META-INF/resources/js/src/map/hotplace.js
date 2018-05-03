@@ -428,6 +428,23 @@
     	return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     });
     
+
+    /**
+     * @desc 년월 분리 201701 => 2017-01 
+     */
+    Handlebars.registerHelper('ymString', function(yyyyMM, options) {
+    	try {
+    		if (typeof(yyyyMM) === 'string') { yyyyMM = options.contexts[0].get(yyyyMM); }
+    	}
+    	catch(e) {}
+    	
+    	var yyyy = yyyyMM.toString().substring(0, 4);
+    	var d = '-';
+    	var mm = yyyyMM.toString().substring(4);
+    	
+    	return yyyy + d + mm;
+    });
+    
     /**
      * @desc 숫자 연산 
      * {@link https://gist.github.com/FrankFang/6603970 math.js}

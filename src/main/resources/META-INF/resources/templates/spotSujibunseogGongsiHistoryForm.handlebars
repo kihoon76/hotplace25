@@ -1,0 +1,36 @@
+<div id="dvSujiGongsiHistory" class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h2 class="modal-title">
+				공시지가 변동내역
+			</h2>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<i class="ambicon-015_mark_times"></i><span class="hidden">닫기</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="unit">
+				<div class="unit_cont bgWhite">
+					<table class="tableStyle borderStyle left">
+    						<colgroup>
+							<col style="width:100px">
+							<col style="width:250px">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>기준년월</th>
+								<th>공시지가</th>
+							</tr>
+							{{#history}}
+							<tr>
+								<td>{{ymString sYmd}}</td>
+								<td>{{currency gongsi}}원</td>
+							</tr>
+							{{/history}}
+						</tbody>
+    				</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

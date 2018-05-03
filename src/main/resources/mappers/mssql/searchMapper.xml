@@ -76,9 +76,37 @@
          where a.PNU = #{pnu}
 	</select>
 	
-	<select id="selectSujiboonseokBase" parameterType="string" resultType="map">
-		select 지목 jimok, 면적 area, 공시지가기준가격 gongsi
-		  from [서비스].[dbo].[검색_일반목록]
-		 where PNU = #{pnu}  
+	<resultMap id="RM_selectSujiboonseogBase1" type="map">
+		<result column="PNU" 	property="pnu"/>
+		<result column="지목" 	property="jimok"/>
+		<result column="면적" 	property="area"/>
+		<result column="공시지가"  property="gongsi"/>
+	</resultMap>
+	<resultMap id="RM_selectSujiboonseogBase2" type="string"></resultMap>
+	<resultMap id="RM_selectSujiboonseogBase3" type="string"></resultMap>
+	<resultMap id="RM_selectSujiboonseogBase4" type="string"></resultMap>
+	<resultMap id="RM_selectSujiboonseogBase5" type="string"></resultMap>
+	
+	<select id="selectSujiboonseogBase" statementType="CALLABLE" parameterType="string"
+			resultMap="RM_selectSujiboonseogBase1,
+					   RM_selectSujiboonseogBase2,
+					   RM_selectSujiboonseogBase3,
+					   RM_selectSujiboonseogBase4,
+					   RM_selectSujiboonseogBase1">
+	{ call [서비스].[dbo].[SEL_수지분석_01](
+		#{pnu, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	)}
+	</select>
+	
+	
+	<resultMap id="RM_selectSujiboonseogGongsiHistory" type="map">
+		<result column="기준년월" property="sYmd"/>
+		<result column="공시지가" property="gongsi"/>
+	</resultMap>
+	
+	<select id="selectSujiboonseogGongsiHistory" statementType="CALLABLE"  resultMap="RM_selectSujiboonseogGongsiHistory">
+	{ call [서비스].[dbo].[SEL_공시지가변동내역_01](
+		#{pnu, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	)}
 	</select>
 </mapper>

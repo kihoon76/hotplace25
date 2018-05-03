@@ -243,16 +243,34 @@ public class SearchController {
 		return vo;
 	}
 	
-	@GetMapping("sujiboonseok/base")
+	@GetMapping("sujiboonseog/base")
 	@ResponseBody
-	public AjaxVO<Map<String, String>> getSujiboonseokBase(@RequestParam("pnu") String pnu) {
+	public AjaxVO<Map<String, String>> getSujiboonseogBase(@RequestParam("pnu") String pnu) {
 		
 		AjaxVO<Map<String, String>> vo = new AjaxVO<Map<String, String>>();
 		
 		try {
-			Map<String, String> result = searchService.getSujiboonseokBase(pnu);
+			Map<String, String> result = searchService.getSujiboonseogBase(pnu);
 			vo.setSuccess(true);
 			vo.addObject(result);
+		}
+		catch(Exception e) {
+			vo.setSuccess(false);
+			vo.setErrMsg(e.getMessage());
+		}
+		
+		return vo;
+	}
+	
+	@GetMapping("sujiboonseog/gongsi_history")
+	@ResponseBody
+	public AjaxVO<Map<String, String>> getSujiboonseogGongsiHistory(@RequestParam("pnu") String pnu) {
+		AjaxVO<Map<String, String>> vo = new AjaxVO<Map<String, String>>();
+		
+		try {
+			List<Map<String, String>> result = searchService.getSujiboonseogGongsiHistory(pnu);
+			vo.setSuccess(true);
+			vo.setDatas(result);
 		}
 		catch(Exception e) {
 			vo.setSuccess(false);

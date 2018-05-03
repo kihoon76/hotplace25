@@ -17,6 +17,7 @@ import com.hotplace25.domain.GyeongGongmaeOut;
 import com.hotplace25.domain.Jangmi;
 import com.hotplace25.domain.ToojaSearchResult;
 import com.hotplace25.util.DataUtil;
+import com.hotplace25.util.StringUtil;
 
 @Service("searchService")
 public class SearchService {
@@ -54,14 +55,59 @@ public class SearchService {
 		return luris;
 	}
 
-	public Map<String, String> getSujiboonseokBase(String pnu) {
-		Map<String, String> sujiBase = searchDao.selectSujiboonseokBase(pnu);
+	public Map<String, String> getSujiboonseogBase(String pnu) {
+		List<List<Map<String, Object>>> sujiBase = searchDao.selectSujiboonseogBase(pnu);
+		Map<String, String> result = null;
 		
 		if(sujiBase != null) {
+			result = new HashMap<String, String>();
+			result.put("pnu", "");
+			result.put("jimok", "");
+			result.put("area", "");
+			result.put("gongsi", "");
+			result.put("gugtolaw", "");
+			result.put("etclaw", "");
+			result.put("boochickadd", "");
+			result.put("tojiuse", "");
+			
+			//pnu, jimok(지목), area(면적), gongsi(공시지가)
+			if(sujiBase.get(0) != null && sujiBase.get(0).get(0) != null) {
+				Map<String, Object> m = sujiBase.get(0).get(0);
+				result.put("pnu", String.valueOf(m.get("pnu")));
+				result.put("jimok", StringUtil.getStringNullValue(m.get("jimok")));
+				result.put("area", StringUtil.getStringNullValue(m.get("area")));
+				result.put("gongsi", StringUtil.getStringNullValue(m.get("gongsi")));
+			}
+			
+			//국토법지역지구
+			if(sujiBase.get(1) != null) {
+				result.put("gugtolaw", StringUtil.getStringNullValue(sujiBase.get(1).get(0)));
+			}
+			
+			//다른법령지역지구
+			if(sujiBase.get(2) != null) {
+				result.put("etclaw", StringUtil.getStringNullValue(sujiBase.get(2).get(0)));
+			}
+			
+			//시행부칙추가확인
+			if(sujiBase.get(3) != null) {
+				result.put("boochickadd", StringUtil.getStringNullValue(sujiBase.get(3).get(0)));
+			}
+			
+			//토지이용시행령
+			if(sujiBase.get(4) != null) {
+				result.put("tojiuse", StringUtil.getStringNullValue(sujiBase.get(4).get(0)));
+			}
+			
 			Map<String, String> luris = getLurisDrawing(pnu);
-			sujiBase.put("luris", luris.get("image"));
+			result.put("luris", luris.get("image"));
 		}
+
 		
-		return sujiBase;
+		return result;
+	}
+
+	public List<Map<String, String>> getSujiboonseogGongsiHistory(String pnu) {
+		return searchDao.selectSujiboonseogGongsiHistory(pnu);
 	}
 }

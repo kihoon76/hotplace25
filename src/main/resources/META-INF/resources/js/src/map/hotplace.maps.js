@@ -1777,7 +1777,7 @@
 			        	position: _vender.Position.TOP_RIGHT
 			        },*/
 			        minZoom: mapOptions.minZoom || 3,
-			        logoControl: false,
+			        logoControl: false, //false,
 			        mapDataControl: false,
 			        disableDoubleClickZoom: true
 			        //maxZoom: mapOptions.maxZoom || 13
@@ -1835,11 +1835,7 @@
 	maps.panToBounds = function(lat, lng, moveAfterFn) {
 		
 		if(_venderStr == 'naver') {
-			console.log(lng - (lng - _currentBounds.swx)/10);
-			console.log(lng - (_currentBounds.swx));
-			console.log(_currentBounds.swx);
 			_venderMap.morph(new _vender.LatLng(lat, lng), hotplace.config.addrSearchPanLevel, {duration: 100});
-
 		}
 		else if(_venderStr == 'daum') {
 			/*_venderMap.panTo(new _vender.LatLngBounds(
