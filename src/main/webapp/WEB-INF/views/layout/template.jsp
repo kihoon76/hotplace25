@@ -159,7 +159,7 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			주소 : 서울 송파구 법원로 127 문정대명벨리온 1108호 
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			대표전화 : 02-111-2222
+			대표전화 : 070-7117-6782
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<strong>본 정보를 이용한 결과의 책임은 투자자에게 귀속됩니다.</strong> 
 			&nbsp;&nbsp;&nbsp;&nbsp;
