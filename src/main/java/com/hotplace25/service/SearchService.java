@@ -111,7 +111,8 @@ public class SearchService {
 			}
 			
 			Map<String, String> luris = getLurisDrawing(pnu);
-			result.put("luris", luris.get("image"));
+			
+			if(luris != null) result.put("luris", luris.get("image"));
 		}
 
 		
