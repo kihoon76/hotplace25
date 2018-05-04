@@ -151,13 +151,24 @@
 	}
 	
 	function _getLurisDrawing(data, gubun, cbErr) {
-		var $image = (gubun == 'G') ? $(_dvGyeongGongLuris + ' img') : $(_dvToojaLuris + ' img');
+		var $image = null,
+			loadEl = '';
+		
+		//경공매 검색
+		if(gubun == 'G') {
+			$image = $(_dvGyeongGongLuris + ' img');
+			loadEl = _dvGyeonggongResult;
+		}
+		else {
+			$image = $(_dvToojaLuris + ' img');
+			loadEl = _dvToojaTab01Result;
+		}
+		
 		hotplace.ajax({
     	    url: 'search/luris/drawing?pnu=' + data.pnu,
 			method: 'GET',
-			activeMask: false,//(isActiveMask != undefined) ? isActiveMask : true,
-			//isMaskTran: isMaskTran,
-			//loadEl: '#',
+			activeMask: true, 
+			loadEl: loadEl,
 			success: function(data, textStatus, jqXHR) {
 				console.log(data)
 			

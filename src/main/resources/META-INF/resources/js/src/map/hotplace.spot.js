@@ -83,6 +83,9 @@
 							luris: datas.luris,
 							gugtolaw: datas.gugtolaw,
 							etclaw: datas.etclaw,
+							boochickadd: datas.boochickadd,
+							tojiuse: datas.tojiuse
+							
 					});
 					
 //					if(datas.gongsi == '') {
@@ -91,7 +94,7 @@
 //					}
 					
 					hotplace.dom.showSpotSujibunseogForm(function() {
-						hotplace.sujibunseog.init({address: _address});
+						hotplace.sujibunseog.init(param);
 						hotplace.calc.sujibunseog.initCalc();
 					}, param);
 				}

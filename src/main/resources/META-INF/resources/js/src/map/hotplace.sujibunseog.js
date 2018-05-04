@@ -161,7 +161,8 @@
 		_ratioMaechool = '#ratioMaechool',
 		_WGyeongsang = '#WGyeongsang',
 		_ratioGyeongsang = '#ratioGyeongsang',
-		_address = null;
+		_address = null,
+		_baseData = null;
 		
 	sujibunseog.getStepOwnTermId = function() { return _stepOwnTerm; }
 	sujibunseog.getStepOtherAssetRatioId = function() { return _stepOtherAssetRatio; }
@@ -412,16 +413,26 @@
 	}
 	
 	sujibunseog.getPdfParams = function() {
+		var fileName = 'sujibunseogFormPdf';
+		
+		if(_baseData.gongsi == '0') {
+			fileName = 'sujibunseogFormPdfNoGongsi';
+		}
+		
 		return {
-			fileName:'sujibunseogFormPdf',
+			fileName:fileName,
 			cssName: 'pdf',
 			docName: '수지분석',
 			address: _address,
-			jimok: '전',
-			valPerPyeung:'21,000',
-			area: '132',
-			gongsi: '4,040,000',
-			limitChange:'Y',
+			jimok: _baseData.jimok,
+			//valPerPyeung:'21,000',
+			area: _baseData.area,
+			gongsi: _baseData.gongsi.money(),
+			luris: _baseData.luris,
+			gugtolaw: _baseData.gugtolaw,
+			etclaw: _baseData.etclaw,
+			tojiuse: _baseData.tojiuse,
+			//limitChange:'Y',
 			ownTerm: $(_stepOwnTerm).val(),
 			otherAssetRatio: $(_stepOtherAssetRatio).val(),
 			tPurchase: $(_txtPurchase).val(),
@@ -565,6 +576,7 @@
 	sujibunseog.isOwnGaein = _isOwnGaein;
 	
 	sujibunseog.init = function(param) {
+		_baseData = param;
 		_address = param.address
 		//펼침버튼
 		hotplace.dom.listExpandCollapse(_dvSujibunseog);
