@@ -368,7 +368,7 @@
 								<tbody>
 								<c:choose>
 									<c:when test="${fn:length(gwansim) == 0}">
-									<tr>
+									<tr class="NO-DATA">
 										<td colspan="4">등록된 관심물건이 없습니다.</td>
 									</tr>
 									</c:when>

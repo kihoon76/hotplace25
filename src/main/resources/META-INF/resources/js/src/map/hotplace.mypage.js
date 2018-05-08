@@ -164,6 +164,7 @@
 	
 	function _initGwansimMulgeon() {
 		$(_tabMypageGwansimMulgeon + ' table tr')
+		.not('.NO-DATA')
 		.off('click')
 		.on('click', function(e) {
 			var $tr = $(this);

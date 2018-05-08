@@ -512,6 +512,8 @@
 			
 			$ratioMaechool.text(Math.floor(($$r/$$1) * 100 * 100)/100);
 			
+			//경상이익
+			calcGyeongsang();
 		}
 		
 		/**
@@ -538,12 +540,14 @@
 			var $ratioGyeongsang = $(suji.getRatioGyeongsangId());
 			
 			$WGyeongsang.data('value', $$r);
-			$WGyeongsang.text($$r.toString().money());
+			$WGyeongsang.val($$r.toString().money());
 			
 			//수입합계
 			var $WIncome = $(suji.getWIncomeId());
 			var $$r2 = $WIncome.data('value');
 			$ratioGyeongsang.text(Math.floor(($$r/$$r2) * 100 * 100)/100);
+			
+			//hotplace.dom.changeTooltipText($WGyeongsang, '<span class="innerTooltip">매출이익(' + $$1.toString().money() +') - 대출이자(' + $$2.toStrong().money() + ')</span>');
 		}
 		
 		return {
@@ -1330,28 +1334,6 @@
 				$WIncomeManageImdae.val($$r.toString().money());
 				
 				calcIncomeManage();
-			},
-			calcGyeongsang: function() {
-				console.log('경상이익');
-				var suji = hotplace.sujibunseog;
-				//매출이익 - 대출이자
-				
-				var $WDaechulIja = $(suji.getWDaechulIjaId());
-				var $WMaechool = $(suji.getWMaechoolId());
-				var $$1 = $WMaechool.data('value');
-				var $$2 = $WDaechulIja.data('value'); //대출이자
-				var $$r = $$1 - $$2;
-				
-				var $WGyeongsang = $(suji.getWGyeongsangId());
-				var $ratioGyeongsang = $(suji.getRatioGyeongsangId());
-				
-				$WGyeongsang.data('value', $$r);
-				$WGyeongsang.text($$r.toString().money());
-				
-				//수입합계
-				var $WIncome = $(suji.getWIncomeId());
-				var $$r2 = $WIncome.data('value');
-				$ratioGyeongsang.text(Math.floor(($$r/$$r2) * 100 * 100)/100);
 			}
 		}
 	}();
