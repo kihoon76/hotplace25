@@ -81,6 +81,21 @@
 			</span>
 		</div>
 	</div>
+
+	<!-- 문의하기 영역//항상노출 -->
+	<div class="contactUsLayer">
+		<dl>
+			<dt>연락처</dt>
+			<dd><input type="text" class="inp" placeholder="연락처: '-'없이 숫자만 입력" /></dd>
+		</dl>
+		<dl>
+			<dt>문의사항</dt>
+			<dd><textarea class="inp" placeholder="문의사항 입력"></textarea></dd>
+		</dl>
+		<div class="btnArea">
+			<button type="button" class="btnstyle middle blue">문의하기</button>
+		</div>
+	</div>
 	
 	<!-- 좌측 LNB영역 -->
 	<div id="lnbArea" class="lnbArea">

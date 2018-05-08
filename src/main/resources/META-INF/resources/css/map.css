@@ -513,15 +513,31 @@ body	 {min-height:600px;}
 .gnbArea .dvEtc .boxUnit {display:inline-block; text-align:center; position:relative;}
 .gnbArea .dvEtc .boxUnit:hover .dropMenu {display:block;animation:ani_down2 0.2s ease-out 0s 1 alternate;}
 
-.gnbArea .dropMenu {display:none; position:absolute; right:0; top:49px; width:160px; z-index:11;}
-.gnbArea .dropMenu .dropMenuBox {display:block; background:#333; padding:10px 30px; margin-top:5px; position:relative; border-radius:4px;}
-.gnbArea .dropMenu .dropMenuBox:before {display:block; content:''; position:absolute; top:-5px; right:20px; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:5px solid #333;}
-.gnbArea .dropMenu .dropMenuBox li {text-align:left; clear:both; position:relative;}
+.gnbArea .dropMenu {display:none; position:absolute; right:0; top:49px; width:260px; z-index:11;}
+.gnbArea .dropMenu:before {display:block; content:''; position:absolute; top:49x; right:20px; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:5px solid #333;}
+.gnbArea .dropMenu .dropMenuBox {display:block; background:#333; padding:15px 10px 15px 30px; margin-top:5px; position:relative; border-radius:4px; clear:both; overflow:hidden;}
+.gnbArea .dropMenu .dropMenuBox:before {}
+.gnbArea .dropMenu .dropMenuBox li {display:inline-block; width:50%; float:left; text-align:left; clear:; position:relative;}
 
-.gnbArea .dropMenu .dropMenuBox li .link {display:block; margin:10px 0px; color:#ddd; position:relative;}
+.gnbArea .dropMenu .dropMenuBox li .link {display:block; margin:5px 0px; color:#ddd; position:relative;}
 .gnbArea .dropMenu .dropMenuBox li .link:before{display:block; content:''; position:absolute; top:8px; left:-10px; width:3px; height:3px; background:#ddd; border-radius:50%;}
 
 .gnbArea .dropMenu .dropMenuBox li:hover .link {animation:ani_down2 0.2s ease-out 0s 1 alternate;}
+
+.contactUsLayer {display:block; z-index:1; position:absolute; top:65px; right:50px; width:200px; background:#f1f1f1; padding:5px 7px; border-radius:0 0 0 0;  clear:both; overflow:auto;border:1px solid #333;}
+.contactUsLayer dl {overflow:hidden; clear:both; padding:0px 0px 2px; color:#333;}
+.contactUsLayer dl dt,
+.contactUsLayer dl dd {display:inline-block; float:left; line-height:30px; text-align:left; padding:0px 0;}
+.contactUsLayer dl dt {display:none;width:25%;font-weight:normal; color:#aaa; font-size:12px;}
+.contactUsLayer dl dd {width:100%;}
+.contactUsLayer dl dd input {width:100%; line-height:25px; height:25px;}
+.contactUsLayer dl dd textarea {width:100%; }
+.contactUsLayer dl dd input:focus,
+.contactUsLayer dl dd textarea:focus {outline:none; }
+.contactUsLayer dl dd textarea {height:25px; padding:2px 5px !important;}
+.contactUsLayer dl dd textarea:focus {height:80px;}
+.contactUsLayer .btnArea {margin:-8px 0px 2px; padding:0 0 0 0;}
+.contactUsLayer .btnArea .btnstyle {width:100%;}
 
 /* GNB 지도 관련 버튼 */
 .dvBtnArea {font-size:13px; letter-spacing:-0.05em;  display:inline-block; position:relative; vertical-align:top; height:100%; margin-right:10px;}
