@@ -40,6 +40,7 @@ import com.hotplace25.reporter.PdfItext;
 import com.hotplace25.service.HotplaceService;
 import com.hotplace25.service.NoticeService;
 import com.hotplace25.util.DataUtil;
+import com.hotplace25.util.ValidationUtil;
 
 
 @Controller
@@ -387,9 +388,18 @@ public class HotplaceController {
 	public AjaxVO registQuestion(@RequestBody QnA qna) {
 		//Thread.sleep(2000);
 		AjaxVO vo = new AjaxVO();
+		
 		try {
-			hotplaceService.registQuestion(qna);
-			vo.setSuccess(true);
+			if(ValidationUtil.isValidNumberOnly(qna.getPhone(), 15) && !"".equals(qna.getQuestion())) {
+				
+				hotplaceService.registQuestion(qna);
+				vo.setSuccess(true);
+			}
+			else {
+				vo.setSuccess(false);
+				vo.setErrMsg("입력형식이 올바르지 않습니다.");
+			}
+
 		}
 		catch(Exception e) {
 			vo.setSuccess(false);

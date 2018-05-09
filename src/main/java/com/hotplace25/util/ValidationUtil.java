@@ -10,6 +10,7 @@ public class ValidationUtil {
 	private final static String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
 	private final static String PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&.^~()`_,/+=-])[A-Za-z\\d$@$!%*#?&.^~()`_,/+=-]{8,}$";
 	private final static String PHONE_REGEX = "\\d{2,4}-\\d{3,4}-\\d{4}";
+	private final static String NUMBER_ONLY = "\\d+";
 	
 	private static boolean isValid(String value, String regex) {
 		if(value == null || "".equals(value.trim())) return false;
@@ -37,6 +38,17 @@ public class ValidationUtil {
 	
 	public static boolean isValidPhone(String phone) {
 		return isValid(phone, PHONE_REGEX);
+	}
+	
+	public static boolean isValidNumberOnly(String number, int maxlength) {
+		if(number == null || "".equals(number.trim()) || number.length() > maxlength) return false;
+		
+		return isValid(number, NUMBER_ONLY);
+		
+	}
+	
+	public static boolean isValidNumberOnly(String number) {
+		return isValid(number, NUMBER_ONLY);
 	}
 	
 	public static boolean isValidAccount(Account account, boolean isPasswordCheck) {
