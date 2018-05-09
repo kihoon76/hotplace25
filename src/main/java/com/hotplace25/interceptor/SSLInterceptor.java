@@ -33,6 +33,7 @@ public class SSLInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 		
+		System.err.println(url);
 		return true;
 	}
 	
