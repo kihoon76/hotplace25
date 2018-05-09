@@ -162,15 +162,13 @@ $(document).ready(function() {
 			contentType: 'application/json; charset=UTF-8',
 			success: function(data, textStatus, jqXHR) {
 				if(data.success) {
-					hotplace.dom.showAlertMsg(null, '회원정보가 수정되었습니다.', {width:'40%'});
+					hotplace.dom.showAlertMsg(null, '상담이 신청되었습니다', {width:'400px'});
 				}
 				else {
-					jqXHR.errCode = hotplace.error.USER_MOD;
+					hotplace.dom.showAlertMsg(null, '오류가 발생했습니다', {width:'400px'});
 				}
-			},
-			error: function(jqXHR, textStatus, e) {
-				jqXHR.errCode = hotplace.error.USER_MOD;
 			}
+			
 		})
 	});
 	
@@ -338,10 +336,6 @@ $(document).ready(function() {
 		
 		//공매
 		$('#mulgeonGongmae').prop('checked', true);
-		//보상물건
-		/*$('#mulgeonBosang').prop('checked', true);
-		//편입물건
-		$('#mulgeonPyeonib').prop('checked', true);*/
 		
 		$('#btnViewMulgeon').trigger('click');
 	}

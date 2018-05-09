@@ -86,11 +86,14 @@
 					contentType: 'application/json; charset=UTF-8',
 					success: function(data, textStatus, jqXHR) {
 						if(data.success) {
-							hotplace.dom.showAlertMsg(null, '상담이 신청되었습니다', {width:'400px'});
+							hotplace.dom.showAlertMsg(null, '회원정보가 수정되었습니다.', {width:'40%'});
 						}
 						else {
-							hotplace.dom.showAlertMsg(null, '오류가 발생했습니다', {width:'400px'});
+							jqXHR.errCode = hotplace.error.USER_MOD;
 						}
+					},
+					error: function(jqXHR, textStatus, e) {
+						jqXHR.errCode = hotplace.error.USER_MOD;
 					}
 				})
 			}
