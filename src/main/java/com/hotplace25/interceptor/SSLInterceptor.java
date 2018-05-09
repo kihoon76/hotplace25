@@ -19,6 +19,7 @@ public class SSLInterceptor extends HandlerInterceptorAdapter {
 		
 		if(url.startsWith("http://")) {
 			url = url.replace("http://", "https://");
+			response.sendRedirect(url);
 		}
 		
 		logger.debug("url ===> " + url);
