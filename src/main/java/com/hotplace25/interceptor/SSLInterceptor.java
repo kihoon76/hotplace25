@@ -13,9 +13,9 @@ public class SSLInterceptor extends HandlerInterceptorAdapter {
 		
 		String url = request.getRequestURL().toString();
 		
-//		if(url.startsWith("http://")) {
-//			url = url.replace("http://", "https://");
-//		}
+		if(url.startsWith("http://")) {
+			url = url.replace("http://", "https://");
+		}
 		
 		if(url.startsWith("https://hotplace25.com")) {
 			url = url.replace("https://hotplace25.com", "https://www.hotplace25.com");
