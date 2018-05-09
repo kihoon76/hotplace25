@@ -97,7 +97,7 @@
 	}
 	
 	validation.numberOnlyNotComma = function(selector, blurFn){
-		_digitKeyLimit(selector, /[^0-9]+$/gi, true, blurFn);
+		_digitKeyLimit(selector, /[^0-9]+$/gi, false, blurFn);
 	}
 	
 	/**
