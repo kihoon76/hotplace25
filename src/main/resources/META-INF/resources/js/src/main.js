@@ -140,16 +140,19 @@ $(document).ready(function() {
 	
 	/***************** 상담신청 버튼 ************************/
 	$('#btnQuestionApply').on('click', function() {
-		var phone = $.trim($('#txtQuestionPhone').val()).trimTS();
-		var content = $.trim($('#txtQuestionContent').val()).trimTS();
+		var $phone = $('#txtQuestionPhone');
+		var $content = $('#txtQuestionContent');
+		
+		var phone = $.trim($phone.val()).trimTS();
+		var content = $.trim($content.val()).trimTS();
 		
 		if(phone == '') {
-			$('#txtQuestionPhone').focus();
+			$phone.focus();
 			return;
 		}
 		
 		if(content == '') {
-			$('#txtQuestionContent').focus();
+			$content.focus();
 			return;
 		}
 		
@@ -163,6 +166,8 @@ $(document).ready(function() {
 			success: function(data, textStatus, jqXHR) {
 				if(data.success) {
 					hotplace.dom.showAlertMsg(null, '상담이 신청되었습니다', {width:'400px'});
+					$phone.val('');
+					$content.val('');
 				}
 				else {
 					hotplace.dom.showAlertMsg(null, '오류가 발생했습니다', {width:'400px'});
