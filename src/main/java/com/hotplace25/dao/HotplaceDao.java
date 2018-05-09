@@ -10,6 +10,7 @@ import com.hotplace25.domain.BosangPyeonib;
 import com.hotplace25.domain.Gongmae;
 import com.hotplace25.domain.GongmaeDetail;
 import com.hotplace25.domain.Gyeongmae;
+import com.hotplace25.domain.QnA;
 import com.hotplace25.domain.Silgeolae;
 import com.hotplace25.domain.Yaggwan;
 
@@ -54,4 +55,6 @@ public interface HotplaceDao {
 	public GongmaeDetail selectGongmaeDetail(String goyubeonho);
 
 	public String selectCurrentYear();
+
+	public void insertQuestion(QnA qna);
 }

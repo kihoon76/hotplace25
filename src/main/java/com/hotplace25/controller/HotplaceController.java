@@ -34,6 +34,7 @@ import com.hotplace25.domain.GongmaeDetail;
 import com.hotplace25.domain.Gyeongmae;
 import com.hotplace25.domain.HpSearch;
 import com.hotplace25.domain.Notice;
+import com.hotplace25.domain.QnA;
 import com.hotplace25.domain.Silgeolae;
 import com.hotplace25.reporter.PdfItext;
 import com.hotplace25.service.HotplaceService;
@@ -376,6 +377,24 @@ public class HotplaceController {
 	public AjaxVO checkAuth() {
 		AjaxVO vo = new AjaxVO();
 		vo.setSuccess(true);
+		
+		return vo;
+	}
+	
+	//상담신청
+	@PostMapping("question")
+	@ResponseBody
+	public AjaxVO registQuestion(@RequestBody QnA qna) {
+		//Thread.sleep(2000);
+		AjaxVO vo = new AjaxVO();
+		try {
+			hotplaceService.registQuestion(qna);
+			vo.setSuccess(true);
+		}
+		catch(Exception e) {
+			vo.setSuccess(false);
+			vo.setErrMsg(e.getMessage());
+		}
 		
 		return vo;
 	}

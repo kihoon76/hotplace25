@@ -15,6 +15,7 @@ import com.hotplace25.domain.BosangPyeonib;
 import com.hotplace25.domain.Gongmae;
 import com.hotplace25.domain.GongmaeDetail;
 import com.hotplace25.domain.Gyeongmae;
+import com.hotplace25.domain.QnA;
 import com.hotplace25.domain.Silgeolae;
 import com.hotplace25.domain.Yaggwan;
 
@@ -133,5 +134,10 @@ public class HotplaceDaoImpl implements HotplaceDao {
 	@Override
 	public String selectCurrentYear() {
 		return msSqlSession.selectOne(namespace + ".selectCurrentYear");
+	}
+
+	@Override
+	public void insertQuestion(QnA qna) {
+		msSqlSession.insert(namespace + ".insertQuestion", qna);
 	}
 }

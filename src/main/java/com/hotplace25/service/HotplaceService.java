@@ -18,6 +18,7 @@ import com.hotplace25.domain.GongmaeDetail;
 import com.hotplace25.domain.GongmaeImage;
 import com.hotplace25.domain.Gyeongmae;
 import com.hotplace25.domain.GyeongmaeImage;
+import com.hotplace25.domain.QnA;
 import com.hotplace25.domain.Silgeolae;
 import com.hotplace25.domain.Yaggwan;
 import com.hotplace25.util.DataUtil;
@@ -165,5 +166,10 @@ public class HotplaceService {
 	
 	public String getCurrentTear() {
 		return hotplaceDao.selectCurrentYear();
+	}
+
+	public void registQuestion(QnA qna) {
+		hotplaceDao.insertQuestion(qna);
+		
 	}
 }

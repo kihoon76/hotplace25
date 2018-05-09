@@ -676,31 +676,10 @@
 		  from [웹].[dbo].[약관]
 		 order by 순서 asc
 	</select>
+	
+	<!-- 상담신청 -->
+	<insert id="insertQuestion" parameterType="QnA">
+	insert into [웹].[dbo].[문의사항](연락처, 문의사항) 
+	values (#{phone}, #{question})
+	</insert>
 </mapper>
-<!-- 
-		select 
-   a.극서, a.극동, a.극남, a.극북, b.공시지가
-   from 
-   좌표계.dbo.좌표계13_하위 a
-   inner join Ranking.dbo.공시지가 b on (b.좌표계13_하위_고유번호=a.고유번호 and b.기준년월='201701')
-   where 
-   a.레벨=10 and 
-   a.극서 >= 129.1 and 
-   a.극동 <= 129.2 and 
-   a.극남 >= 35.9 and 
-   a.극북 <= 36.0
-   OPTION (TABLE HINT(a, INDEX(IX_좌표계13_하위_1)), TABLE HINT(b, INDEX(PK_공시지가)))
-   
-   
-   
-   		select concat(PNU, '|$', 경도, '|$', 위도) 
-          from [데이터수집].[dbo].[실거래가]
-         where 위도 between convert(float, #{swy}) and convert(float, #{ney})
-   		   and 경도 between convert(float, #{swx}) and convert(float, #{nex})
-   		   and 경도 is not null
-   		   and 위도 is not null
-   		 order by 경도 asc
-
-
-
- -->

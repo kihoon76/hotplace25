@@ -138,6 +138,42 @@ $(document).ready(function() {
 		});
 	});
 	
+	/***************** 상담신청 버튼 ************************/
+	$('#btnQuestionApply').on('click', function() {
+		var phone = $.trim($('#txtQuestionPhone').val()).trimTS();
+		var content = $.trim($('#txtQuestionContent').val()).trimTS();
+		
+		if(phone == '') {
+			$('#txtQuestionPhone').focus();
+			return;
+		}
+		
+		if(content == '') {
+			$('#txtQuestionContent').focus();
+			return;
+		}
+		
+		hotplace.ajax({
+			url: 'question',
+			data: JSON.stringify({
+				phone: phone,
+				question: content
+			}),
+			contentType: 'application/json; charset=UTF-8',
+			success: function(data, textStatus, jqXHR) {
+				if(data.success) {
+					hotplace.dom.showAlertMsg(null, '회원정보가 수정되었습니다.', {width:'40%'});
+				}
+				else {
+					jqXHR.errCode = hotplace.error.USER_MOD;
+				}
+			},
+			error: function(jqXHR, textStatus, e) {
+				jqXHR.errCode = hotplace.error.USER_MOD;
+			}
+		})
+	});
+	
 	$('#modalTutorial').on('click', function() {
 		hotplace.dom.showTutorial();
 	});

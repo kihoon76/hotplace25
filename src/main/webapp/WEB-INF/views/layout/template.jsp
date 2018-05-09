@@ -86,14 +86,14 @@
 	<div class="contactUsLayer">
 		<dl>
 			<dt>연락처</dt>
-			<dd><input type="text" class="inp" placeholder="연락처: '-'없이 숫자만 입력" /></dd>
+			<dd><input id="txtQuestionPhone" type="text" class="inp numberOnly" placeholder="연락처: '-'없이 숫자만 입력" /></dd>
 		</dl>
 		<dl>
-			<dt>문의사항</dt>
-			<dd><textarea class="inp" placeholder="문의사항 입력"></textarea></dd>
+			<dt>상담내용</dt>
+			<dd><textarea id="txtQuestionContent" class="inp" placeholder="상담내용 입력"></textarea></dd>
 		</dl>
 		<div class="btnArea">
-			<button type="button" class="btnstyle middle blue">문의하기</button>
+			<button id="btnQuestionApply" type="button" class="btnstyle middle blue">상담신청</button>
 		</div>
 	</div>
 	
