@@ -365,4 +365,5 @@ $(document).ready(function() {
 	
 	hotplace.validation.numberOnly('.numberOnly');
 	hotplace.validation.numberNdot('.numberNdot');
+	hotplace.validation.numberOnlyNotComma('.numberOnlyNotComma');
 });

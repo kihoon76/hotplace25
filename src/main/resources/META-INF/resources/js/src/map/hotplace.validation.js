@@ -96,6 +96,10 @@
 		_digitKeyLimit(selector, /[^0-9]/gi, false);
 	}
 	
+	validation.numberOnlyNotComma = function(selector, blurFn){
+		_digitKeyLimit(selector, /[^0-9]+$/gi, true, blurFn);
+	}
+	
 	/**
 	 * @memberof hotplace.validation
 	 * @function numberNdot
