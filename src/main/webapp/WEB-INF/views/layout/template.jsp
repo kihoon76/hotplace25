@@ -86,7 +86,7 @@
 	<div class="contactUsLayer">
 		<dl>
 			<dt>연락처</dt>
-			<dd><input id="txtQuestionPhone" type="text" class="inp numberOnlyNotComma" placeholder="연락처: '-'없이 숫자만 입력" maxlength="15"/></dd>
+			<dd><input id="txtQuestionPhone" type="text" class="inp" placeholder="연락처: '-'없이 숫자만 입력" maxlength="15"/></dd>
 		</dl>
 		<dl>
 			<dt>상담내용</dt>

@@ -156,6 +156,11 @@ $(document).ready(function() {
 			return;
 		}
 		
+		if(!/[^0-9]+$/gi.test(phone)) {
+			$phone.focus();
+			return;
+		}
+		
 		hotplace.ajax({
 			url: 'question',
 			data: JSON.stringify({
@@ -364,5 +369,5 @@ $(document).ready(function() {
 	
 	hotplace.validation.numberOnly('.numberOnly');
 	hotplace.validation.numberNdot('.numberNdot');
-	hotplace.validation.numberOnlyNotComma('.numberOnlyNotComma');
+	//hotplace.validation.numberOnlyNotComma('.numberOnlyNotComma');
 });
