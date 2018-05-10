@@ -17,7 +17,7 @@
 		<sec:intercept-url pattern="/resources/templates/gyeongmaeDetailForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
 		<sec:intercept-url pattern="/resources/templates/gongmaeForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
 		<sec:intercept-url pattern="/resources/templates/gongmaeDetailForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
-		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
+		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasRole('ROLE_ADMIN')"/>
 		<sec:intercept-url pattern="/resources/templates/acceptbuildingForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
 		
 		<!-- 매물등록, 관심물건, 컨설팅, 수지분석, 토지이용규제현황보기 -->
@@ -70,8 +70,9 @@
 		<sec:intercept-url pattern="/errors/**" access="permitAll"/> 
 		<sec:intercept-url pattern="/gyeongmaemarker" access="permitAll"/>
 		<sec:intercept-url pattern="/gongmaemarker" access="permitAll"/>
-		<sec:intercept-url pattern="/bosangmarker" access="permitAll"/>
-		<sec:intercept-url pattern="/pyeonibmarker" access="permitAll"/>
+		<sec:intercept-url pattern="/bosangmarker" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/pyeonibmarker" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/bosangpyeonib/**" access="hasRole('ROLE_ADMIN')"/>
 		<sec:intercept-url pattern="/silgeolaemarker" access="permitAll"/>
 		<sec:intercept-url pattern="/acceptbuildingmarker" access="permitAll"/>
 		

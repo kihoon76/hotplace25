@@ -129,7 +129,7 @@
 	 * @property {string} PYEONIB - 공매
 	 * @property {string} SILGEOLAE - 실거래가
 	 */
-	var _markerGroupOnOff = { GYEONGMAE:0, GONGMAE:0, BOSANG:0, PYEONIB:0, SILGEOLAE:0, ACCEPT_BUILDING:0 };
+	var _markerGroupOnOff = { GYEONGMAE:0, GONGMAE:0, /*BOSANG:0, PYEONIB:0, */SILGEOLAE:0, ACCEPT_BUILDING:0 };
 	
 	/** 
 	 * @private 
@@ -381,8 +381,8 @@
 		RADIUS_SEARCH: 'RADIUS_SEARCH',
 		GYEONGMAE: 'GYEONGMAE', 
 		GONGMAE: 'GONGMAE',
-		BOSANG: 'BOSANG',
-		PYEONIB: 'PYEONIB',
+		//BOSANG: 'BOSANG',
+		//PYEONIB: 'PYEONIB',
 		SILGEOLAE: 'SILGEOLAE',
 		ACCEPT_BUILDING: 'ACCEPT_BUILDING',
 		ADDRESS_SEARCH: 'ADDRESS_SEARCH'
@@ -432,8 +432,8 @@
 		RADIUS_SEARCH : { m: [], c: [], url: '' },
 		GYEONGMAE : { m: [], url: 'gyeongmaemarker', icon:'gyeongmae.png'/*, trigger: 'mouseover'*/ },
 		GONGMAE : { m: [], url: 'gongmaemarker', icon: 'gongmae.png'/*, trigger: 'mouseover'*/ },
-		BOSANG: { m: [], url: 'bosangmarker', icon: 'bosang.png', clusterIcon:'bosangC.png', clustering: true, stopLevel: 11},
-		PYEONIB: { m: [], url: 'pyeonibmarker', icon: 'pyeonib.png', clusterIcon:'pyeonibC.png', clustering: true, stopLevel: 11},
+		//BOSANG: { m: [], url: 'bosangmarker', icon: 'bosang.png', clusterIcon:'bosangC.png', clustering: true, stopLevel: 11},
+		//PYEONIB: { m: [], url: 'pyeonibmarker', icon: 'pyeonib.png', clusterIcon:'pyeonibC.png', clustering: true, stopLevel: 11},
 		SILGEOLAE: { m: [], url: 'silgeolaemarker', icon: 'silgeolae.png' },
 		ACCEPT_BUILDING: { m: [], url: 'acceptbuildingmarker', icon: 'acceptbuilding.png', level:13 },
 		ADDRESS_SEARCH: { m: [], icon: 'marker_search.png' }
@@ -463,8 +463,8 @@
 		RADIUS_SEARCH : [],
 		GYEONGMAE : [],
 		GONGMAE : [],
-		BOSANG : [],
-		PYEONIB : [],
+		//BOSANG : [],
+		//PYEONIB : [],
 		SILGEOLAE : [],
 		ACCEPT_BUILDING : [],
 		ADDRESS_SEARCH: []
@@ -758,12 +758,12 @@
 		case _markerTypes.GONGMAE :
 			markerData = hotplace.database.getLevelData(level, _markerTypes.GONGMAE);
 			break;
-		case _markerTypes.BOSANG :
-			markerData = hotplace.database.getLevelData(level, _markerTypes.BOSANG);
-			break;
-		case _markerTypes.PYEONIB :
-			markerData = hotplace.database.getLevelData(level, _markerTypes.PYEONIB);
-			break;
+//		case _markerTypes.BOSANG :
+//			markerData = hotplace.database.getLevelData(level, _markerTypes.BOSANG);
+//			break;
+//		case _markerTypes.PYEONIB :
+//			markerData = hotplace.database.getLevelData(level, _markerTypes.PYEONIB);
+//			break;
 		case _markerTypes.SILGEOLAE :
 			markerData = hotplace.database.getLevelData(level, _markerTypes.SILGEOLAE);
 			break;
@@ -1440,12 +1440,12 @@
 		case 'GONGMAE' :
 			hotplace.gongmae.markerClick(map, marker, win);
 			break;
-		case 'BOSANG' :
-			hotplace.bosangpyeonib.markerClick(map, marker, win, '보상');
-			break;
-		case 'PYEONIB' :
-			hotplace.bosangpyeonib.markerClick(map, marker, win, '편입');
-			break;
+//		case 'BOSANG' :
+//			hotplace.bosangpyeonib.markerClick(map, marker, win, '보상');
+//			break;
+//		case 'PYEONIB' :
+//			hotplace.bosangpyeonib.markerClick(map, marker, win, '편입');
+//			break;
 		case 'SILGEOLAE' :
 			hotplace.silgeolae.markerClick(map, marker, win);
 			break;
