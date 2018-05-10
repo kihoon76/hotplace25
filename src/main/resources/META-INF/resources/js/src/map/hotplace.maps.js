@@ -87,7 +87,7 @@
 		ACCEPT_BUILDING_GEONSU:'ACCEPT_BUILDING_GEONSU', 			//건축허가(건수)
 		ACCEPT_BUILDING_AREA:'ACCEPT_BUILDING_AREA', 				//건축허가(면적)
 		ACCEPT_SALES_GEONSU:'ACCEPT_SALES_GEONSU', 					//영업허가(건수)
-		ACCEPT_SALES_AREA:'ACCEPT_SALES_AREA', 						//영업허가(면적)
+		//ACCEPT_SALES_AREA:'ACCEPT_SALES_AREA', 						//영업허가(면적)
 		SILGEOLAE_GEONSU:'SILGEOLAE_GEONSU',						//실거래가(건수)
 		SILGEOLAE_AREA:'SILGEOLAE_AREA' 							//실거래가(면적)
 	};
@@ -114,7 +114,7 @@
 		ACCEPT_BUILDING_GEONSU:0,
 		ACCEPT_BUILDING_AREA:0,
 		ACCEPT_SALES_GEONSU:0,
-		ACCEPT_SALES_AREA:0,
+		//ACCEPT_SALES_AREA:0,
 		SILGEOLAE_GEONSU:0,
 		SILGEOLAE_AREA:0
 	};
@@ -321,9 +321,9 @@
 		case _cellTypes.ACCEPT_SALES_GEONSU:
 			name = '영업허가(건수기준)';
 			break;
-		case _cellTypes.ACCEPT_SALES_AREA:
-			name = '영업허가(면적기준)';
-			break;
+//		case _cellTypes.ACCEPT_SALES_AREA:
+//			name = '영업허가(면적기준)';
+//			break;
 		case _cellTypes.SILGEOLAE_GEONSU:
 			name = '실거래가(건수기준)';
 			break;
