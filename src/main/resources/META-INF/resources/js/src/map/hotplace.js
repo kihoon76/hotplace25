@@ -680,9 +680,11 @@
 			hotplace.dom.showAlertMsg(hotplace.dom.showLoginForm, msg || '로그인후 사용하세요.', {width:'400px'});
 			break;
 		case _err.DUP_LOGIN :
-			hotplace.dom.showAlertMsg(function() {
-				window.location.reload();
-			},msg || '중복 로그인');
+//			hotplace.dom.showAlertMsg(function() {
+//				window.location.reload();
+//			},msg || '중복 로그인');
+			hotplace.dom.showAlertMsg(null, '이미 로그인 된 계정입니다', {width:'400px'});
+			break;
 		case _err.SERVICE_READY :
 			hotplace.dom.showAlertMsg(null, msg || '서비스 준비중입니다.', {width:'400px'});
 			break;

@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.hotplace25.exception.DuplicatedLoginException;
 import com.hotplace25.exception.NotAuthorizedByAdmin;
 
 @Component
@@ -34,18 +33,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 		String password = (String) authentication.getCredentials();
 		
 		logger.info("사용자가 입력한 로그인정보입니다. {}", username + "/" + password);
-		password = passwordEncoder.encode(password);
 		UserDetailsImpl user;
 		
 		try {
 			user = userDetailsService.loadUserByUsername(username);
-			if(!password.equals(user.getPassword())) throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
-
-			//중복 로그인 체크
-			if("Y".equals(user.getAccount().getLogInOut())) throw new DuplicatedLoginException("이미 로그인된 사용자입니다.");
 			
-			//로그인 정보를 남김
-			userDetailsService.writeLogin(username);
+			if(!passwordEncoder.matches(password, user.getPassword())) throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
+			
 			logger.info("정상로그인 입니다.");
 				
 		}
@@ -56,9 +50,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 			throw e; 
 		}
 		catch(NotAuthorizedByAdmin e) {
-			throw e;
-		}
-		catch(DuplicatedLoginException e) {
 			throw e;
 		}
 		catch(Exception e) {

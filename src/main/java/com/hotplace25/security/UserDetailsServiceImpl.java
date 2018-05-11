@@ -1,12 +1,7 @@
 package com.hotplace25.security;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -44,12 +39,5 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		
 		
 		return userDetails;
-	}
-	
-	public void writeLogin(String accountId) {
-		Map<String, String> m = new HashMap<String, String>();
-		m.put("ID", accountId);
-		m.put("YN", "Y");
-		userService.writeLogInOut(m);
 	}
 }

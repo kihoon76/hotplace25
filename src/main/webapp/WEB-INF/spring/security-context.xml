@@ -103,9 +103,9 @@
 		expired-url error-if-maximum-exceeded가 false일 때 에러페이지 대신 지정한 url로 리다이렉트 한다.
 
 		 -->
-<!-- 		<sec:session-management> -->
-<!-- 			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" /> -->
-<!-- 		</sec:session-management> -->
+		<sec:session-management>
+			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+		</sec:session-management>
 	</sec:http> 
 	
 

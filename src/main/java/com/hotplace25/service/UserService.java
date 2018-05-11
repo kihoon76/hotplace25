@@ -36,17 +36,4 @@ public class UserService {
 	public void modifyUserPw(Account account) {
 		userDao.updateUserPw(account);
 	}
-	
-	
-	public void writeLogInOut(Map<String, String> param) {
-		userDao.updateUserLogInOut(param);
-	}
-	
-	//시스템이 올라올때 계정의 모든 로그인 여부는 N 으로 초기화 한다
-	public void initLogout() {
-		Map<String, String> param = new HashMap<String, String>();
-		param.put("YN", "N");
-		userDao.updateUserLogInOut(param);
-	}
-	
 }

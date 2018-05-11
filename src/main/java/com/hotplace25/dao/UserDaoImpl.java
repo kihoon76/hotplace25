@@ -43,9 +43,4 @@ public class UserDaoImpl implements UserDao {
 		msSqlSession.update(namespace + ".updateUserPw", account);
 	}
 
-	@Override
-	public void updateUserLogInOut(Map<String, String> param) {
-		msSqlSession.update(namespace + ".updateUserLogInOut", param);
-	}
-
 }
