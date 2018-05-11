@@ -97,13 +97,15 @@
 		<!-- 세션 제한 지정 -->
 		<!-- http://niees.tistory.com/17 -->
 		<!-- 
-		만약 두번째 인증을 거부하게 하고 싶은 경우 concurrency-control에​ error-if-maximum-exceeded="true"속성을 지정하면 된다.​
+		concurrency-control에​ error-if-maximum-exceeded
+		true -> 이미 로그인 한 사용자를 유효한 사용자로 취급하여 SessionAuthenticationException 예외가 발생하고 새로 로그인한 사용자는 로그인 할 수 없다.
+		false -> 새로 로그인 한 사용자를 유효한 사용자로 취급한다
+		expired-url error-if-maximum-exceeded가 false일 때 에러페이지 대신 지정한 url로 리다이렉트 한다.
+
 		 -->
-		<sec:session-management>
-			<!-- <sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" expired-url="/signin/202" /> -->
-			<sec:concurrency-control max-sessions="1" expired-url="/signin/202"/>
-		</sec:session-management> 
-		
+<!-- 		<sec:session-management> -->
+<!-- 			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" /> -->
+<!-- 		</sec:session-management> -->
 	</sec:http> 
 	
 

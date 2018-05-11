@@ -1,5 +1,7 @@
 package com.hotplace25.dao;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
@@ -39,6 +41,11 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void updateUserPw(Account account) {
 		msSqlSession.update(namespace + ".updateUserPw", account);
+	}
+
+	@Override
+	public void updateUserLogInOut(Map<String, String> param) {
+		msSqlSession.update(namespace + ".updateUserLogInOut", param);
 	}
 
 }

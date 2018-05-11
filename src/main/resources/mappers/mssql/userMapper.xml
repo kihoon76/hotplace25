@@ -8,13 +8,14 @@
 		<result column="비번" property="password" javaType="string"/>
 		<result column="연락처" property="phone" javaType="string"/>
 		<result column="이메일" property="email" javaType="string"/>
+		<result column="로그인여부" property="logInOut" javaType="string"/>
 		<result column="탈퇴여부" property="out" javaType="string"/>
 	 	<collection property="authorities" column="아이디" javaType="java.util.ArrayList"
 	 				ofType="Authority" select="selectAuthorities" />
 	</resultMap>
 	
 	<select id="selectUser" parameterType="string" resultMap="RM_selectUser">
-		select 아이디, 이름, 비번, 연락처, 이메일
+		select 아이디, 이름, 비번, 연락처, 이메일, 로그인여부
 		  from [웹].[dbo].[계정]
 		 where 아이디 = #{id}
 		   and 탈퇴여부 = 'N'
@@ -49,5 +50,13 @@
 		update [웹].[dbo].[계정]
 		   set 비번 = #{password}
 		 where 아이디 = #{id}
+	</update>
+	
+	<update id="updateUserLogInOut" parameterType="map">
+		update [웹].[dbo].[계정]
+		   set 로그인여부 = #{YN}
+		 <if test="ID != null">
+		 where 아이디 = #{ID}
+		 </if>
 	</update>
 </mapper>

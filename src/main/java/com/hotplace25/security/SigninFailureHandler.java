@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 import com.hotplace25.domain.AjaxVO;
+import com.hotplace25.exception.DuplicatedLoginException;
 import com.hotplace25.exception.NotAuthorizedByAdmin;
 
 @Component
@@ -35,12 +36,14 @@ public class SigninFailureHandler extends SimpleUrlAuthenticationFailureHandler{
 		Map<String, String> data = new HashMap<String, String>();
 		//사용자정보 없음
 		if(exception.getClass().isAssignableFrom(UsernameNotFoundException.class)) {
-			//data.put("type", "ID");
 			ajax.setErrCode("101");
 		}
 		else if(exception.getClass().isAssignableFrom(BadCredentialsException.class)) {
 			//data.put("type", "PW");
 			ajax.setErrCode("102");
+		}
+		else if(exception.getClass().isAssignableFrom(DuplicatedLoginException.class)) {
+			ajax.setErrCode("202");
 		}
 		else if(exception.getClass().isAssignableFrom(NotAuthorizedByAdmin.class)) {
 			//data.put("type", "AUTH");

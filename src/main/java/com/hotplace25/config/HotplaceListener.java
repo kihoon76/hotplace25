@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.hotplace25.domain.ApplicationConfig;
 import com.hotplace25.domain.SystemConfig;
 import com.hotplace25.service.SystemService;
+import com.hotplace25.service.UserService;
 
 @Component
 public class HotplaceListener {
@@ -22,12 +23,18 @@ public class HotplaceListener {
 	@Resource(name="systemService")
 	SystemService systemService;
 	
+	@Resource(name="userService")
+	UserService userService;
+	
 	@Resource(name="applicationConfig")
 	ApplicationConfig applicationConfig;
 	
 	@EventListener
 	public void initApp(ContextRefreshedEvent event) {
 		try {
+			//계정의 로그인여부를 모두 N으로 초기화 한다
+			userService.initLogout();
+			
 			List<SystemConfig> config = systemService.getSystemConfigs();
 			int cnt = config.size();
 			
@@ -45,4 +52,5 @@ public class HotplaceListener {
 			ErrorPolicy.setDefaultSystemConfig(applicationConfig);
 		}
 	}
+	
 }

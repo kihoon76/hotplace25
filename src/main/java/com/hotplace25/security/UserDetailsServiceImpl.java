@@ -1,5 +1,8 @@
 package com.hotplace25.security;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -41,5 +44,12 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		
 		
 		return userDetails;
+	}
+	
+	public void writeLogin(String accountId) {
+		Map<String, String> m = new HashMap<String, String>();
+		m.put("ID", accountId);
+		m.put("YN", "Y");
+		userService.writeLogInOut(m);
 	}
 }

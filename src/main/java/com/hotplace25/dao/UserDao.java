@@ -1,5 +1,7 @@
 package com.hotplace25.dao;
 
+import java.util.Map;
+
 import com.hotplace25.domain.Account;
 
 public interface UserDao {
@@ -13,4 +15,6 @@ public interface UserDao {
 	public boolean updateUserInfo(Account account);
 
 	public void updateUserPw(Account account);
+
+	public void updateUserLogInOut(Map<String, String> param);
 }

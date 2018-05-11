@@ -18,6 +18,7 @@ public class Account {
 	private String email1;
 	private String email2;
 	private String out;
+	private String logInOut;
 	
 	private List<Authority> authorities;
 	
@@ -92,5 +93,11 @@ public class Account {
 	}
 	public void setOut(String out) {
 		this.out = out;
+	}
+	public String getLogInOut() {
+		return logInOut;
+	}
+	public void setLogInOut(String logInOut) {
+		this.logInOut = logInOut;
 	}
 }
