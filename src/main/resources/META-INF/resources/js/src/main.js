@@ -138,6 +138,22 @@ $(document).ready(function() {
 		});
 	});
 	
+	$('.contactUsLayer dl dd textarea').on('blur', function(e) {
+		var relatedTarget;
+		if(hotplace.browser.msie) {
+			relatedTarget = document.activeElement;
+		}
+		else {
+			relatedTarget = e.relatedTarget;
+		}
+		
+		if(relatedTarget) {
+			if(relatedTarget.nodeName == 'BUTTON') {
+				$('#btnQuestionApply').trigger('click');
+			}
+		}
+	});
+	
 	/***************** 상담신청 버튼 ************************/
 	$('#btnQuestionApply').on('click', function() {
 		var $phone = $('#txtQuestionPhone');
@@ -156,8 +172,9 @@ $(document).ready(function() {
 			return;
 		}
 		
-		if(!/[^0-9]+$/gi.test(phone)) {
+		if(/[^0-9]+$/gi.test(phone)) {
 			$phone.focus();
+			$phone.val('');
 			return;
 		}
 		
