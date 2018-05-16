@@ -50,7 +50,7 @@ public class DataUtil {
 			void run(List<String> list, StringBuilder sb, String deli) {
 				// TODO Auto-generated method stub
 				for(String token : list) {
-					String[] s = StringUtils.splitByWholeSeparator(token, deli);
+					String[] s = StringUtils.splitByWholeSeparatorPreserveAllTokens(token, deli);
 					sb.append("[");
 					sb.append(s[0]);
 					sb.append(",");
@@ -75,7 +75,7 @@ public class DataUtil {
 			void run(List<String> list, StringBuilder sb, String deli) {
 				// TODO Auto-generated method stub
 				for(String token : list) {
-					String[] s = StringUtils.splitByWholeSeparator(token, deli);
+					String[] s = StringUtils.splitByWholeSeparatorPreserveAllTokens(token, deli);
 					sb.append("{\"weight\":");
 					sb.append(s[4]);
 					sb.append(",");
@@ -103,7 +103,7 @@ public class DataUtil {
 			void run(List<String> list, StringBuilder sb, String deli) {
 				// TODO Auto-generated method stub
 				for(String token : list) {
-					String[] s = StringUtils.splitByWholeSeparator(token, deli);
+					String[] s = StringUtils.splitByWholeSeparatorPreserveAllTokens(token, deli);
 					sb.append("{\"info\":{\"pnu\":\"" + s[0] + "\", \"unu\":\"" + s[1] + "\", \"rnu\":\"" + s[2] + "\"}");
 					sb.append(",");
 					sb.append("\"location\":[");
@@ -126,7 +126,7 @@ public class DataUtil {
 			void run(List<String> list, StringBuilder sb, String deli) {
 				// TODO Auto-generated method stub
 				for(String token : list) {
-					String[] s = StringUtils.splitByWholeSeparator(token, deli);
+					String[] s = StringUtils.splitByWholeSeparatorPreserveAllTokens(token, deli);
 					sb.append("{\"info\":{\"pnu\":\"" + s[0] + "\", \"unu\":\"" + s[1] + "\", \"mnu\":\"" + s[2] + "\"}");
 					sb.append(",");
 					sb.append("\"location\":[");
@@ -182,7 +182,7 @@ public class DataUtil {
 			void run(List<String> list, StringBuilder sb, String deli) {
 				// TODO Auto-generated method stub
 				for(String token : list) {
-					String[] s = StringUtils.splitByWholeSeparator(token, deli);
+					String[] s = StringUtils.splitByWholeSeparatorPreserveAllTokens(token, deli);
 					sb.append("{\"info\":{\"pnu\":\"" + s[0] + "\",");
 					sb.append( "\"unu\":\"" + s[1] + "\",");
 					sb.append( "\"radius\":\"" + s[4] + "\",");
@@ -210,7 +210,7 @@ public class DataUtil {
 			void run(List<String> list, StringBuilder sb, String deli) {
 				// TODO Auto-generated method stub
 				for(String token : list) {
-					String[] s = StringUtils.splitByWholeSeparator(token, deli);
+					String[] s = StringUtils.splitByWholeSeparatorPreserveAllTokens(token, deli);
 					sb.append("{\"info\":{\"pnu\":\"" + s[0] + "\",");
 					sb.append( "\"unu\":\"" + s[1] + "\"}");
 					sb.append(",");
@@ -233,7 +233,7 @@ public class DataUtil {
 			void run(List<String> list, StringBuilder sb, String deli) {
 				// TODO Auto-generated method stub
 				for(String token : list) {
-					String[] s = StringUtils.splitByWholeSeparator(token, deli);
+					String[] s = StringUtils.splitByWholeSeparatorPreserveAllTokens(token, deli);
 					sb.append("{\"info\":{");
 					sb.append("\"pnu\":\"" + s[0] + "\",");
 					sb.append("\"gyeyagnyeonwol\":\"" + s[1]+ "\",");

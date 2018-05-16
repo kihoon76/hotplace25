@@ -17,11 +17,11 @@ public class SSLInterceptor extends HandlerInterceptorAdapter {
 		
 		String url = request.getRequestURL().toString();
 		
-		if(url.startsWith("http://")) {
+		/*if(url.startsWith("http://")) {
 			url = url.replace("http://", "https://");
 			response.sendRedirect(url);
 			return false;
-		}
+		}*/
 		
 		//logger.debug("url ===> " + url);
 		if(url.startsWith("https://hotplace25.com")) {

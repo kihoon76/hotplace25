@@ -256,7 +256,7 @@ $(document).ready(function() {
 							hotplace.maps.showMarkers(null, true);
 						}
 						else {
-							//건축허가 활성, 비활성 체크(뷰만 변경)
+							//건축허가, 실거래가 활성, 비활성 체크(뷰만 변경)
 							hotplace.maps.checkMarkerLevelLimit(false, true);
 						}
 					}

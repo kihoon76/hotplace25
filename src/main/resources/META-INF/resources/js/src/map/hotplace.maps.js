@@ -434,7 +434,7 @@
 		GONGMAE : { m: [], url: 'gongmaemarker', icon: 'gongmae.png'/*, trigger: 'mouseover'*/ },
 		//BOSANG: { m: [], url: 'bosangmarker', icon: 'bosang.png', clusterIcon:'bosangC.png', clustering: true, stopLevel: 11},
 		//PYEONIB: { m: [], url: 'pyeonibmarker', icon: 'pyeonib.png', clusterIcon:'pyeonibC.png', clustering: true, stopLevel: 11},
-		SILGEOLAE: { m: [], url: 'silgeolaemarker', icon: 'silgeolae.png' },
+		SILGEOLAE: { m: [], url: 'silgeolaemarker', icon: 'silgeolae.png', level:13 },
 		ACCEPT_BUILDING: { m: [], url: 'acceptbuildingmarker', icon: 'acceptbuilding.png', level:13 },
 		ADDRESS_SEARCH: { m: [], icon: 'marker_search.png' }
 	};
