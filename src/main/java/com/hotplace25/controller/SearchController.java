@@ -83,8 +83,8 @@ public class SearchController {
 			
 			gyeongGongIn.setParamBosangPyeonib(/*DataUtil.convertArrayToString(gyeongGongIn.getBosangPyeonib())*/null);
 			
-			ObjectMapper o = new ObjectMapper();
-			System.err.println(o.writeValueAsString(gyeongGongIn));
+//			ObjectMapper o = new ObjectMapper();
+//			System.err.println(o.writeValueAsString(gyeongGongIn));
 			List<GyeongGongmaeOut> list = searchService.getGyeongGongSearch(gyeongGongIn);
 			
 			vo.setDatas(list);
