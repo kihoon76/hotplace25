@@ -96,12 +96,12 @@ public class HotplaceDaoImpl implements HotplaceDao {
 
 	@Override
 	public List<String> selectSilgeolaeMarker(Map<String, String> param) {
-		return msSqlSessionAgent.selectList(namespace + ".selectSilgeolaeMarker", param);
+		return msSqlSession.selectList(namespace + ".selectSilgeolaeMarker", param);
 	}
 
 	@Override
 	public Silgeolae selectSilgeolaeThumb(String pnu) {
-		return msSqlSessionAgent.selectOne(namespace + ".selectSilgeolaeThumb", pnu);
+		return msSqlSession.selectOne(namespace + ".selectSilgeolaeThumb", pnu);
 	}
 
 	@Override
