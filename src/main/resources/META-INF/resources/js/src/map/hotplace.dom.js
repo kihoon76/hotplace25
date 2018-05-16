@@ -1050,6 +1050,11 @@
 		}, '로그아웃 하시겠습니까?', {width: '410'});
 	}
 	
+	dom.showPaymentForm = function() {
+		_appendModalPopup('paymentForm', null, {});
+		dom.openModal('', {width:'500px'});
+	}
+	
 	dom.toggleLogin = function() {
 		if(_$gnbLogin.is(':visible')) {
 			_$gnbLogin.hide();

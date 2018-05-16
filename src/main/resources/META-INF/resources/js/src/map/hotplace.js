@@ -745,7 +745,9 @@
 			hotplace.dom.showAlertMsg(null, msg || '해당요청이 서버에 존재하지 않습니다.', {width:'50%'});
 			break;
 		case _err.FORBIDDEN:
-			hotplace.dom.showAlertMsg(null, msg || '이용권한이 없습니다.', {width:'50%'});
+			hotplace.dom.showAlertMsg(function() {
+				hotplace.dom.showPaymentForm();
+			}, msg || '이용권한이 없습니다.', {width:'400px'});
 			break;
 		case _err.COORD:
 			hotplace.dom.showAlertMsg(null, msg || '주소찾아오는중 오류가 발생했습니다.', {width:'50%'});
