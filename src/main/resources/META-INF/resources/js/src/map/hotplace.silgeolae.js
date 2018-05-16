@@ -8,16 +8,6 @@
 		_address = null;;
 	
 	
-	function _getThumb(data, cbSucc) {
-		console.log(data);
-		$('#silYongdo').text(data.info.yongdo);
-		$('#silJimok').text(data.info.jimok);
-		$('#silGyeyagarea').text(data.info.gyeyagarea);
-		$('#silGyeyagnyeonwol').text(data.info.gyeyagnyeonwol);
-		$('#silGyeyagil').text(data.info.gyeyagil);
-		$('#silGeolaegeumaeg').text(data.info.geolaegeumaeg.toString().money());
-	}
-	
 	/** 
 	 * @memberof hotplace.silgeolae 
 	 * @function markerClick 
@@ -27,10 +17,11 @@
 	 */
 	silgeolae.markerClick = function(map, marker, win) {
 		var data = marker._data;
+		console.log(data);
 		var tForm = hotplace.dom.getTemplate('silgeolaeForm');
 		
 		win.open(map, marker);
-		win.setOptions('content', tForm(data));
+		win.setOptions('content', tForm(data.info || {}));
 		
 		$(_btnSilgeolaeThumbClose)
 		.off('click')
@@ -39,9 +30,6 @@
 		});
 		
 		_bindGeoClickHandler(data.location[1], data.location[0]);
-		/*_getThumb(data, function(d) {
-		
-		});*/
 	}
 	
 	function _bindGeoClickHandler(x, y) {
