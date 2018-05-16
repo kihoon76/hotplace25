@@ -1052,7 +1052,7 @@
 	
 	dom.showPaymentForm = function() {
 		_appendModalPopup('paymentForm', null, {});
-		dom.openModal('', {width:'500px'});
+		dom.openModal('', {width:'700px'});
 	}
 	
 	dom.toggleLogin = function() {
