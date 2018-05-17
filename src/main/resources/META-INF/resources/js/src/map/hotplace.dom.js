@@ -1052,7 +1052,9 @@
 	
 	dom.showPaymentForm = function() {
 		_appendModalPopup('paymentForm', null, {});
-		dom.openModal('', {width:'700px'});
+		dom.openModal('', {width:'700px'}, null, function() {
+			hotplace.payment.init();
+		});
 	}
 	
 	dom.toggleLogin = function() {

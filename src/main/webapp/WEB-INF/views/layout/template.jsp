@@ -229,6 +229,7 @@
 <script type="text/javascript" src="/resources/js/src/map/hotplace.bosangpyeonib.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.sujibunseog.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.mypage.js"></script>  
+<script type="text/javascript" src="/resources/js/src/map/hotplace.payment.js"></script> 
 </c:if>
 <c:if test="${debug eq 'off'}">
 <script type="text/javascript" src="/resources/js/dist/hotplace-all.min.js"></script>

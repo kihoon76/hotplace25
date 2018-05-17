@@ -1,4 +1,4 @@
-<div class="modal-dialog" role="document">
+<div id="dvPayment" class="modal-dialog" role="document">
 	<div class="modal-content">
 		
 		<div class="modal-header">
@@ -81,7 +81,7 @@
 				<div class="unit_tit">
 					<span class="sTit color_black noBullt">구매내용</span>
 				</div>
-				<div class="unit_cont">
+				<div class="unit_cont bgWhite">
 					<table class="tableStyle gridStyle  topBold center">
 						<colgroup>
 							<col style="width:30%;">
@@ -92,13 +92,13 @@
 							<tr>
 								<th rowspan="2" class="center">
 									<span class="rdchBox">
-										<input type="radio" id="rdoPaymentAll" name="payment" value="N" checked />
+										<input type="radio" id="rdoPaymentAll" name="payment" value="ALL" checked />
 										<label for="rdoPaymentAll" class="labelCh"><em class="text">전체서비스</em></label>
 									</span>
 								</th>
 								<th class="">
 									<span class="rdchBox">
-										<input type="radio" id="rdoPaymentAllMonth" name="paymentAll" value="N" />
+										<input type="radio" id="rdoPaymentAllMonth" name="paymentAll" value="100000" />
 										<label for="rdoPaymentAllMonth" class="labelCh"><em class="text">월간구매</em></label>
 									</span>
 								</th>
@@ -107,7 +107,7 @@
 							<tr>
 								<th class="">
 									<span class="rdchBox">
-										<input type="radio" id="rdoPaymentAllYear" name="paymentAll" value="N" checked />
+										<input type="radio" id="rdoPaymentAllYear" name="paymentAll" value="990000" checked />
 										<label for="rdoPaymentAllYear" class="labelCh"><em class="text">년간구매</em></label>
 									</span>
 								</th>
@@ -116,7 +116,7 @@
 							<tr>
 								<th rowspan="4" class="center">
 									<span class="rdchBox">
-										<input type="radio" id="rdoPaymentOne" name="payment" value="N" />
+										<input type="radio" id="rdoPaymentOne" name="payment" value="ONE" />
 										<label for="rdoPaymentOne" class="labelCh"><em class="text">개별서비스</em></label>
 									</span>
 								</th>
@@ -158,7 +158,7 @@
 
 							<tr>
 								<td class="right" colspan="3">
-									총 구매액: <input type="text" style="width: 150px; height:30px;"  readonly/>
+									총 결제하실 금액: <input type="text" id="txtPaymentSum" style="width: 150px; height:30px; font-size: 1.5em;"  readonly value="990,000원" data-value="990000"/>
 								</td>
 							</tr>
 						</tbody>
