@@ -20,6 +20,11 @@
 		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasRole('ROLE_ADMIN')"/>
 		<sec:intercept-url pattern="/resources/templates/acceptbuildingForm.handlebars" access="hasAnyRole('ROLE_SMART', 'ROLE_PREMIUM')"/>
 		
+		<!-- 경,공매 물건검색 -->
+		<sec:intercept-url pattern="/search/gyeonggong" access="hasRole('ROLE_PREMIUM')"/>
+		<sec:intercept-url pattern="/search/luris/drawing" access="hasRole('ROLE_PREMIUM')"/>
+		
+		
 		<!-- 매물등록, 관심물건, 컨설팅, 수지분석, 토지이용규제현황보기 -->
 		<!-- 수지분석 팝업 -->
 		<sec:intercept-url pattern="/resources/templates/spotSujibunseogForm.handlebars" access="hasAnyRole('ROLE_ECONOMY','ROLE_SMART', 'ROLE_PREMIUM')"/>
