@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.hotplace25.domain.AjaxVO;
 import com.hotplace25.domain.Payment;
 import com.hotplace25.util.ValidationUtil;
@@ -19,11 +16,9 @@ public class PaymentController {
 
 	@PostMapping("/do")
 	@ResponseBody
-	public AjaxVO doPayment(@RequestBody Payment payment) throws JsonProcessingException {
+	public AjaxVO doPayment(@RequestBody Payment payment) {
 		
 		AjaxVO vo = new AjaxVO();
-		ObjectMapper m = new ObjectMapper();
-		System.err.println(m.writeValueAsString(payment));
 		
 		try {
 			boolean r = ValidationUtil.isValidPayment(payment);
