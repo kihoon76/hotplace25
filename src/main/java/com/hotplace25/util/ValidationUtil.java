@@ -1,9 +1,14 @@
 package com.hotplace25.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.hotplace25.domain.Account;
+import com.hotplace25.domain.Payment;
+import com.hotplace25.types.PaymentServiceSubtype;
+import com.hotplace25.types.PaymentServiceType;
 
 public class ValidationUtil {
 
@@ -58,5 +63,57 @@ public class ValidationUtil {
 		else {
 			return isValidEmail(account.getEmail()) && isValidPhone(account.getPhone());
 		}
+	}
+	
+	public static boolean isValidPayment(Payment payment) {
+		if(payment == null) new IllegalArgumentException("파라미터가  존재하지 않습니다.");
+		
+		PaymentServiceType serviceType = PaymentServiceType.getType(payment.getServiceType());
+		List<PaymentServiceSubtype> serviceSubtypes = new ArrayList<PaymentServiceSubtype>();
+		
+		int serviceSubtypeLength = payment.getServiceSubTypes().size();
+		if(serviceSubtypeLength == 0) throw new IllegalArgumentException("serviceSubtype 값이 존재하지 않습니다.");
+		
+		for(int i=0; i<serviceSubtypeLength; i++) {
+			serviceSubtypes.add(PaymentServiceSubtype.getType(payment.getServiceSubTypes().get(i)));
+		}
+		
+		if(serviceType == PaymentServiceType.WITH_ALL) {
+			if(serviceSubtypeLength > 1) throw new IllegalArgumentException("serviceSubtype 값이  유효하지 않습니다.");
+			
+			if(serviceSubtypes.get(0) != PaymentServiceSubtype.MONTH 
+			&& serviceSubtypes.get(0) != PaymentServiceSubtype.YEAR) throw new IllegalArgumentException("serviceSubtype 값이  유효하지 않습니다.");
+			
+			if(serviceSubtypes.get(0) == PaymentServiceSubtype.MONTH) {
+				payment.setSum(100000);
+			}
+			else {
+				payment.setSum(990000);
+			}
+		}
+		else {
+			int sum = 0;
+			
+			for(PaymentServiceSubtype subType: serviceSubtypes) {
+				switch(subType) {
+				case TOOJA :
+					sum += 50000;
+					break;
+				case GYEONG_GONG :
+					sum += 50000;
+					break;
+				case MULGEON :
+					sum += 50000;
+					break;
+				case HEAT_MAP :
+					sum += 50000;
+					break;
+				}
+			}
+			
+			payment.setSum(sum);
+		}
+
+		return true;
 	}
 }

@@ -667,6 +667,7 @@
 		TIMEOUT:'611', //타임아웃
 		GWANSIM_DEL:'612', //관심물건 삭제오류
 		USER_MOD:'613', //회원계정정보 수정오류
+		PAYMENT: '777',  //결제오류
 		SERVICE_READY: '888', //서비스 준비중
 		FORMAT: '999'   //입력폼 포멧오류
 		
@@ -763,6 +764,9 @@
 			break;
 		case _err.FORMAT :
 			hotplace.dom.showAlertMsg(null, msg || '입력폼 형식이 맞지 않습니다.', {width:'50%'});
+			break;
+		case _err.PAYMENT :
+			hotplace.dom.showAlertMsg(null, msg || '결제오류입니다', {width:'400px'});
 			break;
 		}
 	}

@@ -65,6 +65,20 @@
 		param.sum = _$txtPaymentSum.data('value');
 		
 		console.log(param);
+		
+		hotplace.ajax({
+			url: param.url, //'search/jangmi',
+			data: JSON.stringify(param),
+			contentType: 'application/json; charset=UTF-8',
+			success: function(data, textStatus, jqXHR) {
+				if(data.success) {
+					
+				}
+				else {
+					jqXHR.errCode = data.errCode;
+				}
+			}
+		});
 	}
 	
 	payment.init = function() {
@@ -118,12 +132,13 @@
 		.on('click', function() {
 			
 			var sum = _$txtPaymentSum.data('value');
-			if(s == 0) {
+			if(sum == 0) {
 				hotplace.dom.showAlertMsg(null, '구매하실 서비스를 선택하세요', {width:550});
 			}
 			else {
 				_payment();
 			}
+			
 		});
 	}
 	
