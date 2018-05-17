@@ -98,7 +98,7 @@
 								</th>
 								<th class="">
 									<span class="rdchBox">
-										<input type="radio" id="rdoPaymentAllMonth" name="paymentAll" value="100000" />
+										<input type="radio" id="rdoPaymentAllMonth" name="paymentAll" value="100000" data-type="MONTH"/>
 										<label for="rdoPaymentAllMonth" class="labelCh"><em class="text">월간구매</em></label>
 									</span>
 								</th>
@@ -107,7 +107,7 @@
 							<tr>
 								<th class="">
 									<span class="rdchBox">
-										<input type="radio" id="rdoPaymentAllYear" name="paymentAll" value="990000" checked />
+										<input type="radio" id="rdoPaymentAllYear" name="paymentAll" value="990000" checked data-type="YEAR"/>
 										<label for="rdoPaymentAllYear" class="labelCh"><em class="text">년간구매</em></label>
 									</span>
 								</th>
@@ -122,7 +122,7 @@
 								</th>
 								<th class="">
 									<span class="rdchBox">
-                                    	<input type="checkbox" id="chkPaymentTooja" value="50000" disabled>
+                                    	<input type="checkbox" id="chkPaymentTooja" value="50000" disabled data-type="TOOJA">
                                         <label for="chkPaymentTooja" class="labelCh"><em class="text">투자유망지역 검색</em></label>
                                     </span>
 								</th>
@@ -131,7 +131,7 @@
 							<tr>
 								<th class="">
 									<span class="rdchBox">
-                                    	<input type="checkbox" id="chkPaymentGG" value="50000" disabled>
+                                    	<input type="checkbox" id="chkPaymentGG" value="50000" disabled data-type="GYEONGGONG">
                                         <label for="chkPaymentGG" class="labelCh"><em class="text">경공매 검색</em></label>
                                     </span>
 								</th>
@@ -140,7 +140,7 @@
 							<tr>
 								<th class="">
 									<span class="rdchBox">
-                                    	<input type="checkbox" id="chkPaymentMulgeon" value="50000" disabled>
+                                    	<input type="checkbox" id="chkPaymentMulgeon" value="50000" disabled data-type="MULGEON">
                                         <label for="chkPaymentMulgeon" class="labelCh"><em class="text">물건보기</em></label>
                                     </span>
 								</th>
@@ -149,7 +149,7 @@
 							<tr>
 								<th class="">
 									<span class="rdchBox">
-                                    	<input type="checkbox" id="chkPaymentHeatmap" value="50000" disabled>
+                                    	<input type="checkbox" id="chkPaymentHeatmap" value="50000" disabled data-type="HEATMAP">
                                         <label for="chkPaymentHeatmap" class="labelCh"><em class="text">히트맵보기</em></label>
                                     </span>
 								</th>
@@ -158,7 +158,7 @@
 
 							<tr>
 								<td class="right" colspan="3">
-									총 결제하실 금액: <input type="text" id="txtPaymentSum" style="width: 150px; height:30px; font-size: 1.5em;"  readonly value="990,000원" data-value="990000"/>
+									총 결제하실 금액: <input type="text" id="txtPaymentSum" style="width: 150px; height:30px; font-size: 1.2em; color:#ff0000; font-weight:bold;"  readonly value="990,000원" data-value="990000"/>
 								</td>
 							</tr>
 						</tbody>
@@ -167,7 +167,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="button" id="btnPayment" class="btnstyle middle black" data-dismiss="modal" style="">결제하기</button>
+			<button type="button" id="btnPayment" class="btnstyle middle black">결제하기</button>
 		</div>
 	</div>
 </div>
