@@ -63,7 +63,7 @@
 			if(_$chkPaymentHeatmap.is(':checked')) serviceSubType.push(_$chkPaymentHeatmap.data('type'));
 		}
 		
-		param.serviceSubType = serviceSubType.join(',');
+		param.serviceSubTypes = serviceSubType.join(',');
 		param.sum = _$txtPaymentSum.data('value');
 		
 		console.log(param);
