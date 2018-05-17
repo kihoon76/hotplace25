@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.hotplace25.domain.Account;
 import com.hotplace25.domain.Payment;
 import com.hotplace25.types.PaymentServiceSubtype;
@@ -71,11 +73,15 @@ public class ValidationUtil {
 		PaymentServiceType serviceType = PaymentServiceType.getType(payment.getServiceType());
 		List<PaymentServiceSubtype> serviceSubtypes = new ArrayList<PaymentServiceSubtype>();
 		
-		int serviceSubtypeLength = payment.getServiceSubTypes().size();
-		if(serviceSubtypeLength == 0) throw new IllegalArgumentException("serviceSubtype 값이 존재하지 않습니다.");
+		String serviceSubtypeStr = payment.getServiceSubTypes();
+		
+		if(serviceSubtypeStr == null || "".equals(serviceSubtypeStr)) throw new IllegalArgumentException("serviceSubtype 값이 존재하지 않습니다.");
+		String[] serviceSubtypeArr = StringUtils.splitByWholeSeparator(serviceSubtypeStr, ",");
+		
+		int serviceSubtypeLength = serviceSubtypeArr.length;
 		
 		for(int i=0; i<serviceSubtypeLength; i++) {
-			serviceSubtypes.add(PaymentServiceSubtype.getType(payment.getServiceSubTypes().get(i)));
+			serviceSubtypes.add(PaymentServiceSubtype.getType(serviceSubtypeArr[i]));
 		}
 		
 		if(serviceType == PaymentServiceType.WITH_ALL) {

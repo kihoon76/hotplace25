@@ -1,15 +1,12 @@
 package com.hotplace25.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.ibatis.type.Alias;
 
 @Alias("Payment")
 public class Payment {
 
 	private String serviceType;
-	private List<String> serviceSubTypes = new ArrayList<String>();
+	private String serviceSubTypes;
 	private int sum;
 	
 	public String getServiceType() {
@@ -18,10 +15,10 @@ public class Payment {
 	public void setServiceType(String serviceType) {
 		this.serviceType = serviceType;
 	}
-	public List<String> getServiceSubTypes() {
+	public String getServiceSubTypes() {
 		return serviceSubTypes;
 	}
-	public void setServiceSubTypes(List<String> serviceSubTypes) {
+	public void setServiceSubTypes(String serviceSubTypes) {
 		this.serviceSubTypes = serviceSubTypes;
 	}
 	public int getSum() {

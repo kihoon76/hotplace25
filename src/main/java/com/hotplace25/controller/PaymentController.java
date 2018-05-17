@@ -19,10 +19,7 @@ public class PaymentController {
 
 	@PostMapping("/do")
 	@ResponseBody
-	public AjaxVO doPayment(@RequestBody String paymentStr) throws JsonProcessingException {
-		
-		Gson gson = new Gson();
-		Payment payment = gson.fromJson(paymentStr, Payment.class);
+	public AjaxVO doPayment(@RequestBody Payment payment) throws JsonProcessingException {
 		
 		AjaxVO vo = new AjaxVO();
 		ObjectMapper m = new ObjectMapper();

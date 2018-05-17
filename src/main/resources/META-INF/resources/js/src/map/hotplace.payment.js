@@ -50,18 +50,20 @@
 	
 	function _payment() {
 		var param = {};
+		var serviceSubType = [];
+		
 		param.serviceType = $(_rdoPayment + ':checked').val();
-		param.serviceSubType = [];
 		if(param.serviceType == 'ALL') {
-			param.serviceSubType.push($(_rdoPaymentAll + ':checked').data('type'));
+			serviceSubType.push($(_rdoPaymentAll + ':checked').data('type'));
 		}
 		else {
-			if(_$chkPaymentTooja.is(':checked')) param.serviceSubType.push(_$chkPaymentTooja.data('type'));
-			if(_$chkPaymentGG.is(':checked')) param.serviceSubType.push(_$chkPaymentGG.data('type'));
-			if(_$chkPaymentMulgeon.is(':checked')) param.serviceSubType.push(_$chkPaymentMulgeon.data('type'));
-			if(_$chkPaymentHeatmap.is(':checked')) param.serviceSubType.push(_$chkPaymentHeatmap.data('type'));
+			if(_$chkPaymentTooja.is(':checked')) serviceSubType.push(_$chkPaymentTooja.data('type'));
+			if(_$chkPaymentGG.is(':checked')) serviceSubType.push(_$chkPaymentGG.data('type'));
+			if(_$chkPaymentMulgeon.is(':checked')) serviceSubType.push(_$chkPaymentMulgeon.data('type'));
+			if(_$chkPaymentHeatmap.is(':checked')) serviceSubType.push(_$chkPaymentHeatmap.data('type'));
 		}
 		
+		param.serviceSubType = serviceSubType.join(',');
 		param.sum = _$txtPaymentSum.data('value');
 		
 		console.log(param);
