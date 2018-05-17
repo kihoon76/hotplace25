@@ -1,5 +1,6 @@
 package com.hotplace25.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
@@ -8,7 +9,7 @@ import org.apache.ibatis.type.Alias;
 public class Payment {
 
 	private String serviceType;
-	private List<String> serviceSubTypes;
+	private List<String> serviceSubTypes = new ArrayList<String>();
 	private int sum;
 	
 	public String getServiceType() {
