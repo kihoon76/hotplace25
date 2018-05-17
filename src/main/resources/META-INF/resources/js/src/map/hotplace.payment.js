@@ -67,7 +67,7 @@
 		console.log(param);
 		
 		hotplace.ajax({
-			url: param.url, //'search/jangmi',
+			url: 'payment/do',
 			data: JSON.stringify(param),
 			contentType: 'application/json; charset=UTF-8',
 			success: function(data, textStatus, jqXHR) {
@@ -138,7 +138,6 @@
 			else {
 				_payment();
 			}
-			
 		});
 	}
 	
