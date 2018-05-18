@@ -167,9 +167,9 @@
 		hotplace.ajax({
     	    url: 'search/luris/drawing?pnu=' + data.pnu,
 			method: 'GET',
-			activeMask: true,
-			isMaskTran: false,
-			loadEl: loadEl,
+			//activeMask: true,
+			//isMaskTran: false,
+			//loadEl: loadEl,
 			success: function(data, textStatus, jqXHR) {
 				console.log(data)
 			
