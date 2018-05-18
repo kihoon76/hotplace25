@@ -961,9 +961,6 @@
 		case 'mousedown':
 			returnObj = {coord: obj.coord, offset: obj.offset};
 			break;
-		case 'bounds_changed':
-			returnObj = {coord: obj.coord, offset: obj.offset};
-			break;
 		}
 		
 		return returnObj;
@@ -1676,6 +1673,9 @@
 		},
 	};
 	
+	maps.trigger = function(target, eventName) {
+		_venderEvent.trigger(target || _venderMap, eventName);
+	}
 	
 	maps.showMapType = function(type) {
 		if(_venderMap) {
