@@ -714,8 +714,6 @@
 						
 					}
 				}
-				
-				
 			}
 		}
 		
@@ -961,6 +959,9 @@
 			returnObj = {coord: obj.coord, offset: obj.offset, e:obj.pointerEvent};
 			break;
 		case 'mousedown':
+			returnObj = {coord: obj.coord, offset: obj.offset};
+			break;
+		case 'bounds_changed':
 			returnObj = {coord: obj.coord, offset: obj.offset};
 			break;
 		}

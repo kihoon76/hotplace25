@@ -343,6 +343,9 @@ $(document).ready(function() {
 			if($('#btnStreetView').data('switch') == 'on') {
 				hotplace.streetview.moveMarker(pe.coord);
 			}
+		},
+		'bounds_changed': function(map, pe) {
+			console.log('bounds_changed')
 		}
 	}, function(map) {
 		//hotplace.maps.showCellLayer();
