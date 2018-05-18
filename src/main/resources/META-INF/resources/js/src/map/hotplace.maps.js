@@ -1835,10 +1835,9 @@
 	 * @param {function} moveAfterFn - 지도 위치이동 후 실행할 함수
 	 */
 	maps.panToBounds = function(lat, lng, moveAfterFn) {
-		//_panningStart = true;
+		_panningStart = true;
 		if(_venderStr == 'naver') {
 			_venderMap.morph(new _vender.LatLng(lat, lng), hotplace.config.addrSearchPanLevel, {duration: 100});
-			maps.trigger(null, 'zoom_changed');
 		}
 		else if(_venderStr == 'daum') {
 			/*_venderMap.panTo(new _vender.LatLngBounds(
@@ -1848,6 +1847,14 @@
 		}
 		
 		moveAfterFn();
+	}
+	
+	maps.disablePanningStart = function() {
+		_panningStart = false;
+	}
+	
+	maps.isPanningStart = function() {
+		return _panningStart;
 	}
 	
 	maps.getClusterMarker = function(markerType, data, listeners, options) {

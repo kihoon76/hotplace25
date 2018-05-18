@@ -3,7 +3,6 @@ $(document).ready(function() {
 		_prevLevel = _currLevel,
 		_menusThreshold = {},//menu 특정레벨에서 비활성화
 		_contextCoord = null, //마우스 우클릭시 coord
-		_panning = false, //panTo, morph 메서드 등으로 지도 패닝을 시작하였을때  true로 설정
 		$_lnbMulgeon = $('#lnbArea .MULGEON');   
 	
 	function _enableMenu(level, standardLevel, $targetLi, $btnClose) {
@@ -330,12 +329,6 @@ $(document).ready(function() {
 			.css('top', pe.offset.y)
 			.show();
 		},
-		'panning' : function() {
-			console.log('panning');
-			_panning = true;
-			//
-			//hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.MULGEON_SEARCH);
-		},
 		'mouseover' : function(map, pe) {
 			if($('#btnStreetView').data('switch') == 'on') {
 				hotplace.streetview.start(map, pe.coord);
@@ -344,6 +337,12 @@ $(document).ready(function() {
 		'mousemove' : function(map, pe) {
 			if($('#btnStreetView').data('switch') == 'on') {
 				hotplace.streetview.moveMarker(pe.coord);
+			}
+		},
+		'idle': function() {
+			if(hotplace.maps.isPanningStart()) {
+				hotplace.maps.trigger(null, 'zoom_changed');
+				hotplace.maps.disablePanningStart();
 			}
 		}
 	}, function(map) {
