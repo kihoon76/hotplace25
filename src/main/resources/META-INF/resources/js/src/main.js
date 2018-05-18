@@ -345,14 +345,6 @@ $(document).ready(function() {
 			if($('#btnStreetView').data('switch') == 'on') {
 				hotplace.streetview.moveMarker(pe.coord);
 			}
-		},
-		'idle': function() {
-			//morph, panTo, panToBound 메서드로 발생
-			if(_panning) {
-				console.log('idle');
-				_panning = false;
-				hotplace.maps.trigger(null, 'zoom_changed');
-			}
 		}
 	}, function(map) {
 		//hotplace.maps.showCellLayer();
