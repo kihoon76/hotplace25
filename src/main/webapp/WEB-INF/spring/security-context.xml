@@ -55,6 +55,9 @@
 				
 		<sec:intercept-url pattern="/handlebar/mypage" access="hasRole('ROLE_JOINED')"/>
 		
+		<!-- 결제하기 -->
+		<sec:intercept-url pattern="/payment/do" access="hasRole('ROLE_JOINED')"/>
+		
 		<!-- 공지사항 -->
 		<sec:intercept-url pattern="/notice/page/**" access="permitAll"/> 
 		<!-- 주소검색 -->
