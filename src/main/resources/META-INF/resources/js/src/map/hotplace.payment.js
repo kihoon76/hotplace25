@@ -75,7 +75,9 @@
 			success: function(data, textStatus, jqXHR) {
 				if(data.success) {
 					hotplace.dom.showAlertMsg(function() {
-						hotplace.dom.logout();
+						hotplace.dom.logout(function() {
+							window.location.reload();
+						});
 					}, '결제가 완료되었습니다. 다시로그인해 주세요', {width:550});
 				}
 				else {
