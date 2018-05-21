@@ -670,7 +670,6 @@
 		PAYMENT: '777',  //결제오류
 		SERVICE_READY: '888', //서비스 준비중
 		FORMAT: '999'   //입력폼 포멧오류
-		
 	};
 	
 	hotplace.error = _err;
