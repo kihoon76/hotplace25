@@ -5,10 +5,17 @@ import org.apache.ibatis.type.Alias;
 @Alias("Payment")
 public class Payment {
 
+	private String accountId;
 	private String serviceType;
 	private String serviceSubTypes;
 	private int sum;
 	
+	public String getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
 	public String getServiceType() {
 		return serviceType;
 	}

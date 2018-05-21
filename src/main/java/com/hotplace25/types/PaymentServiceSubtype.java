@@ -4,7 +4,7 @@ import java.util.EnumSet;
 
 public enum PaymentServiceSubtype {
 
-	MONTH("MONTH"), YEAR("YEAR"), TOOJA("TOOJA"), GYEONG_GONG("GYEONGGONG"), MULGEON("MULGEON"), HEAT_MAP("HEATMAP");
+	MONTH("MONTH"), YEAR("YEAR"), TOOJA("ROLE_TOOJA"), GYEONG_GONG("ROLE_GYEONGGONG"), MULGEON("ROLE_MULGEON"), HEAT_MAP("ROLE_HEATMAP");
 	
 	private String type;
 	
