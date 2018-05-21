@@ -74,7 +74,9 @@
 			contentType: 'application/json; charset=UTF-8',
 			success: function(data, textStatus, jqXHR) {
 				if(data.success) {
-					
+					hotplace.dom.showAlertMsg(function() {
+						hotplace.dom.logout();
+					}, '결제가 완료되었습니다. 다시로그인해 주세요', {width:550});
 				}
 				else {
 					jqXHR.errCode = data.errCode;
