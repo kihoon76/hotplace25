@@ -1632,32 +1632,6 @@
 		return false;
 	});
 	
-	$(window).on('unload', function(e) {
-		console.log(e);
-		
-		 var evtobj=window.event? event : e;   
-		    if(evtobj == e)   
-		      {   
-		        //firefox    
-		          if (!evtobj.clientY)   
-		          {   
-		               console.log('close');   
-		          }   
-		      }   
-		      else   
-		      {   
-		      //IE   
-		        if (evtobj.clientY < 0)   
-		          {   
-		        	console.log('close');   
-		          }   
-		      }   
-		//새로고침시에도 동작
-		//console.log('xx');
-		//서버 세션을 끊는다.
-		//dom.logout();
-	})
-	
 }(
 	hotplace.dom = hotplace.dom || {},
 	jQuery
