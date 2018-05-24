@@ -1098,6 +1098,7 @@
 			url: 'logout',
 			method: 'POST',
 			dataType: 'text',
+			async: false,
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
 				var jo = $.parseJSON(data);
@@ -1632,7 +1633,9 @@
 	});
 	
 	$(window).on('beforeunload', function() {
-		console.log('xx');
+		//console.log('xx');
+		//서버 세션을 끊는다.
+		dom.logout();
 	})
 	
 }(
