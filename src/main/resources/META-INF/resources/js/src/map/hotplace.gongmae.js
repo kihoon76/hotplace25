@@ -338,6 +338,9 @@
 			//security로 인해 권한 없음
 			hotplace.dom.showLoginMsg();
 		}
+		else if(tForm == hotplace.error.DUP_LOGIN) {
+			return;
+		}
 		else {
 			_getThumb(data, function(d) {
 				_address = d.mulgeonAddress;

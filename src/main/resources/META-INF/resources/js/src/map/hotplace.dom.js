@@ -482,7 +482,16 @@
 						
 						//security check
 						if(data.indexOf('{') == 0) {
-							_templates[name] = undefined;
+							var jo = $.parseJSON(data);
+							if(!jo.success) {
+								if(jo.errCode == hotplace.error.DUP_LOGIN) {
+									_templates[name] = hotplace.error.DUP_LOGIN;
+								}
+							}
+							else {
+								_templates[name] = undefined;
+							}
+							
 						}
 						else {
 							_templates[name] = Handlebars.compile(data);
