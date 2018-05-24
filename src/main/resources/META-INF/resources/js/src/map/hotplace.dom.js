@@ -1337,7 +1337,7 @@
 		$('.mapArea').css({'min-width':'964px'});
 		
 		//
-		$(window).trigger('resize');
+		//$(window).trigger('resize');
 	}
 	
 	/**
@@ -1630,6 +1630,10 @@
 	$(window).contextmenu(function(e) {
 		return false;
 	});
+	
+	$(window).on('close', function() {
+		console.log('xx');
+	})
 	
 }(
 	hotplace.dom = hotplace.dom || {},

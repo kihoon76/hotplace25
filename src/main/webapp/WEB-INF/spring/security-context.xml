@@ -116,7 +116,7 @@
 
 		 -->
 		<sec:session-management>
-			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
+			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
 		</sec:session-management>
 	</sec:http> 
 	
