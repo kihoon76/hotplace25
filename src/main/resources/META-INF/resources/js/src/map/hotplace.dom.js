@@ -1632,7 +1632,9 @@
 		return false;
 	});
 	
-	$(window).on('beforeunload', function() {
+	$(window).on('beforeunload', function(e) {
+		console.log(e);
+		//새로고침시에도 동작
 		//console.log('xx');
 		//서버 세션을 끊는다.
 		//dom.logout();
