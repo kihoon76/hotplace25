@@ -100,7 +100,7 @@
 						always-use-default-target="false"/>
 		
 		<sec:logout invalidate-session="true"
-					logout-success-url="/signin/200"
+					success-handler-ref="hotplaceLogoutSuccess"
 					logout-url="/logout"
 					delete-cookies="true"/>
 		<sec:csrf disabled="true"/>
@@ -122,6 +122,7 @@
 	
 
 	<!--
+	logout-success-url="/signin/200"
  	login-page 						 : 로그인이 요청될 시에 이동할 URL을 설정합니다.
 	username-parameter 				 : 로그인 아이디의 파라미터명 즉 name필드값을 설정합니다.
 	passoword-parameter 			 : 비밀번호의 파라미터 명을 설정합니다.
