@@ -1635,7 +1635,7 @@
 	$(window).on('unload', function(e) {
 		console.log(e);
 		
-		 if(e.clientY<0){
+		 if(self.screenTop > 9000){
 
 			 alert("browser closed!!!");
 
