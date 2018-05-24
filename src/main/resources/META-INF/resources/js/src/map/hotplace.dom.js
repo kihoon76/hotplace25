@@ -1635,7 +1635,7 @@
 	$(window).on('beforeunload', function() {
 		//console.log('xx');
 		//서버 세션을 끊는다.
-		dom.logout();
+		//dom.logout();
 	})
 	
 }(
