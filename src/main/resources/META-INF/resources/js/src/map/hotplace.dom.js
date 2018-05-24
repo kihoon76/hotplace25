@@ -1635,29 +1635,23 @@
 	$(window).on('unload', function(e) {
 		console.log(e);
 		
-		 if(self.screenTop > 9000){
-
-			 alert("browser closed!!!");
-
-			}
-
-			else{
-
-			 if(document.readyState=="complete"){
-
-			 //새로고침
-				 console.log('refresh')
-
-			}
-
-			else if(document.readyState=="loading"){
-
-			 //다른 페이지 이동
-				 console.log('link')
-
-			}
-
-			}
+		 var evtobj=window.event? event : e;   
+		    if(evtobj == e)   
+		      {   
+		        //firefox    
+		          if (!evtobj.clientY)   
+		          {   
+		               console.log('close');   
+		          }   
+		      }   
+		      else   
+		      {   
+		      //IE   
+		        if (evtobj.clientY < 0)   
+		          {   
+		        	console.log('close');   
+		          }   
+		      }   
 		//새로고침시에도 동작
 		//console.log('xx');
 		//서버 세션을 끊는다.
