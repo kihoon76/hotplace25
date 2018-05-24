@@ -1335,6 +1335,9 @@
 			'left': lnbWidth 
 		},50);
 		$('.mapArea').css({'min-width':'964px'});
+		
+		//
+		$(window).trigger('resize');
 	}
 	
 	/**
