@@ -1631,7 +1631,7 @@
 		return false;
 	});
 	
-	$(window).on('close', function() {
+	$(window).on('beforeunload', function() {
 		console.log('xx');
 	})
 	
