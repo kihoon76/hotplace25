@@ -1632,7 +1632,7 @@
 		return false;
 	});
 	
-	$(window).on('beforeunload', function(e) {
+	$(window).on('unload', function(e) {
 		console.log(e);
 		
 		 if(e.clientY<0){
