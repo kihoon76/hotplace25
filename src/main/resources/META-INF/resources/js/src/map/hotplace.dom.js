@@ -486,6 +486,7 @@
 							if(!jo.success) {
 								if(jo.errCode == hotplace.error.DUP_LOGIN) {
 									_templates[name] = hotplace.error.DUP_LOGIN;
+									jqXHR.errCode = hotplace.error.DUP_LOGIN;
 								}
 							}
 							else {
