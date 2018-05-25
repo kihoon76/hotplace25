@@ -117,7 +117,7 @@
 		session-authentication-error-url : 중복 로그인
 		 -->
 		<sec:session-management invalid-session-url="/signin/100" session-authentication-error-url="/signin/202">
-			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false"/>
+			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/signin/202"/>
 		</sec:session-management>
 	</sec:http> 
 	
