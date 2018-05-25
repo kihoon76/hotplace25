@@ -297,11 +297,12 @@
 			var $WBudamgeum = $(suji.getWBudamgeumId());
 			var $WDevBudam = $(suji.getWDevBudamId());
 			var $WFarmBudam = $(suji.getWFarmBudamId());
+			var $WAlterSanrim = $(suji.getWAlterSanrimId());
 			
 			var $$1 = $WDevBudam.data('value');
 			var $$2 = $WFarmBudam.data('value');
-			
-			var $$r = $$1 + $$2;
+			var $$3 = $WAlterSanrim.data('value');
+			var $$r = $$1 + $$2 + $$3;
 			
 			$WBudamgeum.data('value', $$r);
 			$WBudamgeum.val($$r.toString().money());
