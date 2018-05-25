@@ -522,7 +522,7 @@
 		 * @desc 개발부담금(개발이익) 
 		 */
 		function calcDevIig() {
-			return 10000000;
+			return 0;
 		}
 		
 		function calcGyeongsang() {
@@ -592,6 +592,10 @@
 				hotplace.calc.sujibunseog.calcPurchaseChaegwon(true);
 				//양도세
 				hotplace.calc.sujibunseog.calcYangdose(true);
+				//농지보전부담금
+				hotplace.calc.sujibunseog.calcFarmBudam(suji.isFarmBudamGammyeon());
+				//대체산림자원조성비
+				hotplace.calc.sujibunseog.calcAlterSanrim();
 				
 				calcMymoney();//자기자본
 				calcTojibi();
@@ -1079,14 +1083,17 @@
 			calcFarmBudam: function(isGammyeon) {
 				console.log('농지보전부담금');
 				var suji = hotplace.sujibunseog;
+				var $WPurchase = $(suji.getWPurchaseId());
 				var $txtFarmBudam = $(suji.getTxtFarmBudamId());
 				var $stepFarmBudam = $(suji.getStepFarmBudamId());
 				var $WFarmBudam = $(suji.getWFarmBudamId());
 				
 				var $$r = 0;
 				
-				if(!isGammyeon) {
-					var $$1 = parseInt($txtFarmBudam.data('value'));
+				if(suji.isFarm() && !isGammyeon) {
+					$txtFarmBudam.val($WPurchase.val());
+					$txtFarmBudam.data('value', $WPurchase.data('value'));
+					var $$1 = $WPurchase.data('value');
 					var $$2 = parseInt($stepFarmBudam.data('value'));
 					$$r = Math.round($$1 * (0.01 * $$2));
 					
@@ -1094,6 +1101,10 @@
 						$$1 = 50000000;
 						$$r = Math.round($$1 * (0.01 * $$2));
 					}
+				}
+				else {
+					$txtFarmBudam.val('0');
+					$txtFarmBudam.data('value', 0);
 				}
 				
 				$WFarmBudam.data('value', $$r);
@@ -1105,11 +1116,16 @@
 			calcAlterSanrim: function() {
 				console.log('대체산림자원조성비');
 				var suji = hotplace.sujibunseog;
+				var $WPurchase = $(suji.getWPurchaseId());
 				var $txtAlterSanrim = $(suji.getTxtAlterSanrimId());
 				var $stepAlterSanrim = $(suji.getStepAlterSanrimId());
 				
-				var $$1 = parseInt($txtAlterSanrim.data('value'));
-				var $$2 = parseInt($stepAlterSanrim.data('value'));
+				
+				$txtAlterSanrim.val((suji.isForest() ? $WPurchase.val() : '0'));
+				$txtAlterSanrim.data('value', (suji.isForest() ? $WPurchase.data('value') : 0));
+				
+				var $$1 = $txtAlterSanrim.data('value');
+				var $$2 = $stepAlterSanrim.data('value');
 				var $$r = Math.round($$1 * $$2 * 0.01);
 				
 				var $WAlterSanrim = $(suji.getWAlterSanrimId());

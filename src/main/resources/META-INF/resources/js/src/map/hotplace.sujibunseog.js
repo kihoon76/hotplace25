@@ -162,8 +162,14 @@
 		_WGyeongsang = '#WGyeongsang',
 		_ratioGyeongsang = '#ratioGyeongsang',
 		_address = null,
-		_baseData = null;
-		
+		_baseData = null,
+		_isFarm = false,
+		_isForest = false,
+		_isFarmBudamGammyeon = false;
+	
+	sujibunseog.isFarm = function() { return _isFarm; }
+	sujibunseog.isForest = function() { return _isForest; }
+	sujibunseog.isFarmBudamGammyeon = function() { return _isFarmBudamGammyeon; }
 	sujibunseog.getStepOwnTermId = function() { return _stepOwnTerm; }
 	sujibunseog.getStepOtherAssetRatioId = function() { return _stepOtherAssetRatio; }
 	sujibunseog.getTxtPurchaseId = function() { return _txtPurchase; }
@@ -575,7 +581,21 @@
 	
 	sujibunseog.isOwnGaein = _isOwnGaein;
 	
+	function _initByJimok(jimok) {
+		if(jimok == '전' || jimok == '답' || jimok == '과수원' || jimok == '목장용지' || jimok == '과' || jimok == '목') {
+			_isFarm = true;
+		}
+		else if(jimok == '임야' || jimok == '임') {
+			_isForest = true;
+			$(_chkFarmBudam).prop('disabled', true);
+		}
+		else {
+			$(_chkFarmBudam).prop('disabled', true);
+		}
+	}
+	
 	sujibunseog.init = function(param) {
+		_initByJimok(param.jimok);
 		_baseData = param;
 		_address = param.address
 		//펼침버튼
@@ -688,12 +708,14 @@
 			if($(this).is(':checked')) {
 				$txtFarmBudam.prop('disabled', true);
 				$WFarmBudam.prop('disabled', true);
+				_hasFarmBudam = false;
 				hotplace.calc.sujibunseog.calcFarmBudam(true);
 			}
 			else {
 				$txtFarmBudam.prop('disabled', false);
 				$WFarmBudam.prop('disabled', false);
 				hotplace.calc.sujibunseog.calcFarmBudam(false);
+				_hasFarmBudam = true;
 			}
 		});
 		
