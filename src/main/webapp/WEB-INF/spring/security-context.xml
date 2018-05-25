@@ -100,7 +100,7 @@
 						always-use-default-target="false"/>
 		
 		<sec:logout invalidate-session="true"
-					success-handler-ref="hotplaceLogoutSuccess"
+					logout-success-url="/signin/200"
 					logout-url="/logout"
 					delete-cookies="true"/>
 		<sec:csrf disabled="true"/>
@@ -116,7 +116,7 @@
 
 		 -->
 		<sec:session-management invalid-session-url="/signin/202">
-			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/sign/202"/>
+			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
 		</sec:session-management>
 	</sec:http> 
 	
