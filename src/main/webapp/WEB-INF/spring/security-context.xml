@@ -113,10 +113,11 @@
 		true -> 이미 로그인 한 사용자를 유효한 사용자로 취급하여 SessionAuthenticationException 예외가 발생하고 새로 로그인한 사용자는 로그인 할 수 없다.
 		false -> 새로 로그인 한 사용자를 유효한 사용자로 취급한다
 		expired-url error-if-maximum-exceeded가 false일 때 에러페이지 대신 지정한 url로 리다이렉트 한다.
-
+		invalid-session-url : session expired
+		session-authentication-error-url : 중복 로그인
 		 -->
-		<sec:session-management invalid-session-url="/signin/100">
-			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
+		<sec:session-management invalid-session-url="/signin/100" session-authentication-error-url="/signin/202">
+			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false"/>
 		</sec:session-management>
 	</sec:http> 
 	
