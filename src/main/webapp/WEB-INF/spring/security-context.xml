@@ -115,8 +115,8 @@
 		expired-url error-if-maximum-exceeded가 false일 때 에러페이지 대신 지정한 url로 리다이렉트 한다.
 
 		 -->
-		<sec:session-management invalid-session-url="/signin/200">
-			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/signin/202"/>
+		<sec:session-management invalid-session-url="/signin/100">
+			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
 		</sec:session-management>
 	</sec:http> 
 	
