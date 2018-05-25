@@ -116,7 +116,7 @@
 
 		 -->
 		<sec:session-management invalid-session-url="/signin/100">
-			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
+			<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/signin/100"/>
 		</sec:session-management>
 	</sec:http> 
 	
