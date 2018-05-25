@@ -99,7 +99,7 @@
 						default-target-url="/main"
 						always-use-default-target="false"/>
 		
-		<sec:logout invalidate-session="false"
+		<sec:logout invalidate-session="true"
 					logout-success-url="/signin/200"
 					logout-url="/logout"
 					delete-cookies="true"/>
