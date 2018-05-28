@@ -598,6 +598,11 @@
 			
 			wJichool: $(_WJichool).val(),
 			rJichool: '100',
+			
+			tIncomeSellBuilding: $(_txtIncomeSellBuilding).val(),
+			sIncomeSellBuilding: $(_stepIncomeSellBuilding).val(),
+			wIncomeSellBuilding: $(_WIncomeSellBuilding).val(),
+			rIncomeSellBuilding: $(_ratioIncomeSellBuilding).text(),
 		};
 	}
 	
