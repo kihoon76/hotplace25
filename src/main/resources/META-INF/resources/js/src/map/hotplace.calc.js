@@ -103,6 +103,7 @@
 			calc.sujibunseog.calcDevBudam();				//부담금 > 개별부담금
 			calc.sujibunseog.calcFarmBudam();				//부담금 > 농지보전부담금
 			calc.sujibunseog.calcAlterSanrim();				//부담금 > 대체산림자원조성비
+			calc.sujibunseog.calcIncomeSellLand();			//매각 > 토지
 			calc.sujibunseog.calcManagement();				//사업경비 > 운영비
 			calc.sujibunseog.calcIncomeSellSeolbi();		//매각 > 설비
 			calc.sujibunseog.calcIncomeSellLand();			//매각 > 토지
@@ -1324,9 +1325,13 @@
 			calcIncomeSellLand: function() {
 				console.log('수입>매각>토지');
 				var suji = hotplace.sujibunseog;
+				
+				var $WPurchase = $(suji.getWPurchaseId());
 				var $txtIncomeSellLand = $(suji.getTxtIncomeSellLandId());
 				var $stepIncomeSellLand = $(suji.getStepIncomeSellLandId());
 				
+				$txtIncomeSellLand.data('value', $WPurchase.data('value'));
+				$txtIncomeSellLand.val($WPurchase.value);
 				var $$1 = parseInt($txtIncomeSellLand.data('value'));
 				var $$2 = parseInt($stepIncomeSellLand.data('value'));
 				var $$r = Math.round($$1 * $$2 * 0.01);
