@@ -604,6 +604,9 @@
 	sujibunseog.isOwnGaein = _isOwnGaein;
 	
 	function _initByJimok(jimok) {
+		_isFarm = false;
+		_isForest = false;
+		
 		if(jimok == '전' || jimok == '답' || jimok == '과수원' || jimok == '목장용지' || jimok == '과' || jimok == '목') {
 			_isFarm = true;
 		}
