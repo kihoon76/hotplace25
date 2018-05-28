@@ -165,7 +165,8 @@
 		_baseData = null,
 		_isFarm = false,
 		_isForest = false,
-		_isFarmBudamGammyeon = false;
+		_isFarmBudamGammyeon = false
+		_hasJaesanseHouse = false; //재산세 주택
 	
 	sujibunseog.isFarm = function() { return _isFarm; }
 	sujibunseog.isForest = function() { return _isForest; }
@@ -478,6 +479,7 @@
 			tJaesanseH2: $(_txtJaesanseH2).val(),
 			tJaesanseH3: $(_txtJaesanseH3).val(),
 			wJaesanse2: $(_WJaesanse2).val(),
+			cJaesanseH: (_hasJaesanseHouse) ? 'O' : 'X',
 			
 			//재산세
 			tYangdose: $(_stepYangdose).val(),
@@ -691,12 +693,14 @@
 				$txtJaesanseH2.prop('disabled', false);
 				$txtJaesanseH3.prop('disabled', false);
 				$WJaesanse2.prop('disabled', false);
+				_hasJaesanseHouse = true;
 			}
 			else {
 				$txtJaesanseH1.prop('disabled', true);
 				$txtJaesanseH2.prop('disabled', true);
 				$txtJaesanseH3.prop('disabled', true);
 				$WJaesanse2.prop('disabled', true);
+				_hasJaesanseHouse = false;
 			}
 			
 			hotplace.calc.sujibunseog.calcJaesanse2(false, true);

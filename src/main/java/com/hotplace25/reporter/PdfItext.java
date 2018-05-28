@@ -260,6 +260,7 @@ public class PdfItext {
 						doc.select("span#tJaesanseH1").first().text(jo.get("tJaesanseH1").getAsString());
 						doc.select("span#tJaesanseH2").first().text(jo.get("tJaesanseH2").getAsString());
 						doc.select("span#tJaesanseH3").first().text(jo.get("tJaesanseH3").getAsString());
+						doc.select("span#cJaesanseH").first().text(jo.get("cJaesanseH").getAsString());
 						doc.select("span#wJaesanse2").first().text(jo.get("wJaesanse2").getAsString() + "원");
 					}
 					else {
