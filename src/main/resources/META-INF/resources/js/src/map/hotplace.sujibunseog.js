@@ -469,6 +469,7 @@
 			wChwideugse: $(_WChwideugse).val(),
 			rChwideugse: $(_ratioChwideugse).text(),
 			
+			//재산세
 			tJaesanseT1: $(_txtJaesanseT1).val(),
 			tJaesanseT2: $(_txtJaesanseT2).val(),
 			sJaesanseT3: $(_stepJaesanseT3).val(),
@@ -481,7 +482,7 @@
 			wJaesanse2: $(_WJaesanse2).val(),
 			cJaesanseH: (_hasJaesanseHouse) ? 'O' : 'X',
 			
-			//재산세
+			
 			tYangdose: $(_stepYangdose).val(),
 			sYangdose: $(_stepYangdose2).val(),
 			wYangdose: $(_WYangdose).val(),
@@ -546,10 +547,18 @@
 			wDevBudam: $(_WDevBudam).val(),
 			rDevBudam: $(_ratioDevBudam).text(),
 			
+			tFarmBudam: $(_txtFarmBudam).val(),
+			sFarmBudam: $(_stepFarmBudam).val(),
+			wFarmBudam: $(_WFarmBudam).val(),
+			rFarmBudam: $(_ratioFarmBudam).text(),
+			isFarm: ((_isFarm) ? 'Y' : 'N'),
+			isFarmBudamGammyeon: ((_isFarmBudamGammyeon) ? 'Y' : 'N'),
+			
 			tAlterSanrim: $(_txtAlterSanrim).val(),
 			sAlterSanrim: $(_stepAlterSanrim).val(),
 			wAlterSanrim: $(_WAlterSanrim).val(),
 			rAlterSanrim: $(_ratioAlterSanrim).text(),
+			isForest: ((_isForest) ? 'Y' : 'N'),
 			
 			wBudamgeum: $(_WBudamgeum).val(),
 			rBudamgeum: $(_ratioBudamgeum).text(),
