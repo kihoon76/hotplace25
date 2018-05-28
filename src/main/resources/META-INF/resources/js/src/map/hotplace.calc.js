@@ -1331,7 +1331,7 @@
 				var $stepIncomeSellLand = $(suji.getStepIncomeSellLandId());
 				
 				$txtIncomeSellLand.data('value', $WPurchase.data('value'));
-				$txtIncomeSellLand.val($WPurchase.value);
+				$txtIncomeSellLand.val($WPurchase.val());
 				var $$1 = parseInt($txtIncomeSellLand.data('value'));
 				var $$2 = parseInt($stepIncomeSellLand.data('value'));
 				var $$r = Math.round($$1 * $$2 * 0.01);
