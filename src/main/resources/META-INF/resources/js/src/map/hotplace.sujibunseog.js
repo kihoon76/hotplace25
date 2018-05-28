@@ -472,7 +472,12 @@
 			tJaesanseT2: $(_txtJaesanseT2).val(),
 			sJaesanseT3: $(_stepJaesanseT3).val(),
 			wJaesanse: $(_WJaesanse).val(),
-			rJaesanse: $(_ratioJaesanse).val(),
+			rJaesanse: $(_ratioJaesanse).text(),
+			
+			tJaesanseH1: $(_txtJaesanseH1).val(),
+			tJaesanseH2: $(_txtJaesanseH2).val(),
+			tJaesanseH3: $(_txtJaesanseH3).val(),
+			wJaesanse2: $(_WJaesanse2).val(),
 			
 			//재산세
 			tYangdose: $(_stepYangdose).val(),

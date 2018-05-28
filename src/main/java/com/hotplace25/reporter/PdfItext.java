@@ -256,6 +256,11 @@ public class PdfItext {
 						doc.select("span#sJaesanseT3").first().text(jo.get("sJaesanseT3").getAsString());
 						doc.select("span#wJaesanse").first().text(jo.get("wJaesanse").getAsString() + "원");
 						doc.select("span#rJaesanse").first().text(jo.get("rJaesanse").getAsString() + "%");
+						
+						doc.select("span#tJaesanseH1").first().text(jo.get("tJaesanseH1").getAsString());
+						doc.select("span#tJaesanseH2").first().text(jo.get("tJaesanseH2").getAsString());
+						doc.select("span#tJaesanseH3").first().text(jo.get("tJaesanseH3").getAsString());
+						doc.select("span#wJaesanse2").first().text(jo.get("wJaesanse2").getAsString() + "원");
 					}
 					else {
 						doc.select("span#t" + items[i]).first().text(jo.get("t" + items[i]).getAsString());
