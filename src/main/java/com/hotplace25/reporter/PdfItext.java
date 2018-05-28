@@ -180,7 +180,7 @@ public class PdfItext {
 			
 			String[] items = {"Purchase", "Myeongdobi", "AcceptLandUse", "Tojibi", 
 							  "DaechulIja",
-							  "Chwideugse", "Yangdose", "Jesegeum", 
+							  "Chwideugse", "Jaesanse", "Yangdose", "Jesegeum", 
 							  "GeonchugGongsa", "TomogGongsa", "PojangGongsa", "InibGongsa", "Gongsabi",
 							  "AcceptGaebal", "Gamri", "Cheuglyang", "EvalueGamjeung", "SplitPilji", "Inheogabi",
 							  "DevBudam", "AlterSanrim", "Budamgeum",
@@ -250,8 +250,18 @@ public class PdfItext {
 				   && !"Gongsabi".equals(items[i]) && !"Inheogabi".equals(items[i])
 				   && !"Budamgeum".equals(items[i]) && !"Saeobgyeongbi".equals(items[i])
 				   && !"Jichool".equals(items[i])) {
-					doc.select("span#t" + items[i]).first().text(jo.get("t" + items[i]).getAsString());
-					doc.select("span#s" + items[i]).first().text(jo.get("s" + items[i]).getAsString());
+					if("Jaesanse".equals(items[i])) {
+						doc.select("span#tJaesanseT1").first().text(jo.get("tJaesanseT1").getAsString());
+						doc.select("span#tJaesanseT2").first().text(jo.get("tJaesanseT2").getAsString() + "년");
+						doc.select("span#sJaesanseT3").first().text(jo.get("tJaesanseT3").getAsString() + "%");
+						doc.select("span#wJaesanse").first().text(jo.get("wJaesanse").getAsString() + "원");
+						doc.select("span#rJaesanse").first().text(jo.get("rJaesanse").getAsString() + "%");
+					}
+					else {
+						doc.select("span#t" + items[i]).first().text(jo.get("t" + items[i]).getAsString());
+						doc.select("span#s" + items[i]).first().text(jo.get("s" + items[i]).getAsString());
+					}
+					
 				}
 				
 				doc.select("span#w" + items[i]).first().text(jo.get("w" + items[i]).getAsString() + "원");
