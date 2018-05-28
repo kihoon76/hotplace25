@@ -253,7 +253,7 @@ public class PdfItext {
 					if("Jaesanse".equals(items[i])) {
 						doc.select("span#tJaesanseT1").first().text(jo.get("tJaesanseT1").getAsString());
 						doc.select("span#tJaesanseT2").first().text(jo.get("tJaesanseT2").getAsString() + "년");
-						doc.select("span#sJaesanseT3").first().text(jo.get("tJaesanseT3").getAsString() + "%");
+						doc.select("span#sJaesanseT3").first().text(jo.get("sJaesanseT3").getAsString() + "%");
 						doc.select("span#wJaesanse").first().text(jo.get("wJaesanse").getAsString() + "원");
 						doc.select("span#rJaesanse").first().text(jo.get("rJaesanse").getAsString() + "%");
 					}
