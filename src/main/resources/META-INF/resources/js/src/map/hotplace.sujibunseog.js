@@ -603,6 +603,28 @@
 			sIncomeSellBuilding: $(_stepIncomeSellBuilding).val(),
 			wIncomeSellBuilding: $(_WIncomeSellBuilding).val(),
 			rIncomeSellBuilding: $(_ratioIncomeSellBuilding).text(),
+			
+			tIncomeSellSeolbi: $(_txtIncomeSellSeolbi).val(),
+			sIncomeSellSeolbi: $(_stepIncomeSellSeolbi).val(),
+			wIncomeSellSeolbi: $(_WIncomeSellSeolbi).val(),
+			rIncomeSellSeolbi: $(_ratioIncomeSellSeolbi).text(),
+			
+			tIncomeSellLand: $(_txtIncomeSellLand).val(),
+			sIncomeSellLand: $(_stepIncomeSellLand).val(),
+			wIncomeSellLand: $(_WIncomeSellLand).val(),
+			rIncomeSellLand: $(_ratioIncomeSellLand).text(),
+			
+			wIncomeSell: $(_WIncomeSell).val(),
+			rIncomeSell: $(_ratioIncomeSell).text(),
+			
+			sIncomeManageImdae: $(_stepIncomeManageImdae).val(),
+			tIncomeManageImdae: $(_txtIncomeManageImdae).val(),
+			wIncomeManageImdae: $(_WIncomeManageImdae).val(),
+			rIncomeManageImdae: $(_ratioIncomeManageImdae).text(),
+			
+			wIncomeManage: $(_WIncomeManage).val(),
+			rIncomeManage: $(_ratioIncomeManage).text()
+			
 		};
 	}
 	
