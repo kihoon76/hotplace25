@@ -468,6 +468,10 @@
 			wChwideugse: $(_WChwideugse).val(),
 			rChwideugse: $(_ratioChwideugse).text(),
 			
+			/*tJaesanseT1: $(_txtJaesanseT1).val(),
+			tJaesanseT2: $(_txtJaesanseT2).val(),
+			sJaesanseT3: $(_stepJaesanseT3).val(),*/
+			
 			//재산세
 			tYangdose: $(_stepYangdose).val(),
 			sYangdose: $(_stepYangdose2).val(),
