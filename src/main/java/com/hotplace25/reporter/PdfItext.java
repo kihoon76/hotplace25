@@ -252,7 +252,8 @@ public class PdfItext {
 				   && !"Budamgeum".equals(items[i]) && !"Saeobgyeongbi".equals(items[i])
 				   && !"Jichool".equals(items[i])   && !"IncomeSell".equals(items[i])
 				   && !"IncomeManage".equals(items[i]) && !"Income".equals(items[i])
-				   && !"Maechool".equals(items[i]) && !"Gyeongsang".equals(items[i])) {
+				   && !"Maechool".equals(items[i]) && !"Gyeongsang".equals(items[i])
+				   && !"Mymoney".equals(items[i])) {
 					
 					if("Jaesanse".equals(items[i])) {
 						doc.select("span#tJaesanseT1").first().text(jo.get("tJaesanseT1").getAsString());
