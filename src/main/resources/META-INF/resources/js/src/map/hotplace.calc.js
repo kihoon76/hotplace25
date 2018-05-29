@@ -577,7 +577,7 @@
 				var suji = hotplace.sujibunseog;
 				var $$1 = $(suji.getTxtPurchaseId()).data('value');
 				var $$2 = $(suji.getStepPurchaseId()).data('value');
-				var $$r = parseFloat($$1) * parseFloat($$2);
+				var $$r = Math.round(parseFloat($$1) * parseFloat($$2));
 				
 				var $WPurchase = $(suji.getWPurchaseId());
 				$WPurchase.data('value', $$r);
@@ -620,7 +620,7 @@
 				
 				var $$1 = $txtMyeongdobi.data('value');
 				var $$2 = $stepMyeongdobi.data('value');
-				var $$r = parseFloat($$1) * (0.01 * parseFloat($$2));
+				var $$r = Math.round(parseFloat($$1) * (0.01 * parseFloat($$2)));
 				
 				var $WMyeongdobi = $(suji.getWMyeongdobiId());
 				$WMyeongdobi.data('value', $$r);
@@ -644,7 +644,7 @@
 				
 				var $$1 = $txtAcceptLandUse.data('value');
 				var $$2 = $stepAcceptLandUse.data('value');
-				var $$r = parseFloat($$1) * (0.01 * parseFloat($$2));
+				var $$r = Math.round(parseFloat($$1) * (0.01 * parseFloat($$2)));
 				
 				var $WAcceptLandUse = $(suji.getWAcceptLandUseId());
 				$WAcceptLandUse.data('value', $$r);
@@ -698,7 +698,7 @@
 				
 				var $$1 = $txtChwideugse.data('value');
 				var $$2 = $stepChwideugse.data('value');
-				var $$r = parseFloat($$1) * (0.01 * parseFloat($$2));
+				var $$r = Math.round(parseFloat($$1) * (0.01 * parseFloat($$2)));
 				
 				var $WChwideugse = $(suji.getWChwideugseId());
 				$WChwideugse.data('value', $$r);
