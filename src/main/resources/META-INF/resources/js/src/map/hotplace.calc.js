@@ -91,7 +91,7 @@
 			$txtPurchase.data('value', pyeung);*/
 			
 			calc.sujibunseog.calcPurchase();
-			calc.sujibunseog.calcYangdose(true);
+			//calc.sujibunseog.calcYangdose(true);
 			calc.sujibunseog.calcGeonchugGongsa(true);
 			calc.sujibunseog.calcTomogGongsa(true);
 			calc.sujibunseog.calcPojangGongsa(true);
@@ -793,7 +793,7 @@
 				hotplace.dom.changeTooltipText($txtJaesanseH3, '<span class="innerTooltip">' + tooltipStr + '<span>');
 			},
 			calcYangdose: function(isSet) {
-				console.log('양도세');
+				console.log('양도세(매각금액-지출합계-양도세)');
 				var suji = hotplace.sujibunseog;
 				var $stepYangdose = $(suji.getStepYangdoseId());
 				var $stepYangdose2 = $(suji.getStepYangdose2Id());
@@ -811,7 +811,7 @@
 				
 				var $$1 = parseInt($stepYangdose.data('value')); 
 				var $$2 = 0;
-				var isNonSaeob = $(suji.getChkYangdoseId()).is(':checked');
+				var isNonSaeob = suji.isNonSaeobYangdose();
 				var tooltipStr = '';
 				
 				//개인

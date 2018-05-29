@@ -166,11 +166,13 @@
 		_isFarm = false,
 		_isForest = false,
 		_isFarmBudamGammyeon = false
-		_hasJaesanseHouse = false; //재산세 주택
+		_hasJaesanseHouse = false, //재산세 주택
+		_isNonSaeobYangdose = false; //양도세 비사업용
 	
 	sujibunseog.isFarm = function() { return _isFarm; }
 	sujibunseog.isForest = function() { return _isForest; }
 	sujibunseog.isFarmBudamGammyeon = function() { return _isFarmBudamGammyeon; }
+	sujibunseog.isNonSaeobYangdose = function() { return _isNonSaeobYangdose; }
 	sujibunseog.getStepOwnTermId = function() { return _stepOwnTerm; }
 	sujibunseog.getStepOtherAssetRatioId = function() { return _stepOtherAssetRatio; }
 	sujibunseog.getTxtPurchaseId = function() { return _txtPurchase; }
@@ -760,6 +762,13 @@
 		$(_chkYangdose)
 		.off('change')
 		.on('change', function() {
+			if($(this).is(':checked')) {
+				_isNonSaeobYangdose = true;
+			}
+			else {
+				_isNonSaeobYangdose = false;
+			}
+			
 			hotplace.calc.sujibunseog.calcYangdose();
 		});
 		
