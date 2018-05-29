@@ -249,10 +249,9 @@ public class PdfItext {
 				if(!"Tojibi".equals(items[i]) && !"Jesegeum".equals(items[i])
 				   && !"Gongsabi".equals(items[i]) && !"Inheogabi".equals(items[i])
 				   && !"Budamgeum".equals(items[i]) && !"Saeobgyeongbi".equals(items[i])
-				   && !"Jichool".equals(items[i])
-				   && !"IncomeSell".equals(items[i])
-				   && !"IncomeManage".equals(items[i])
-				   && !"Income".equals(items[i])) {
+				   && !"Jichool".equals(items[i])   && !"IncomeSell".equals(items[i])
+				   && !"IncomeManage".equals(items[i]) && !"Income".equals(items[i])) {
+					
 					if("Jaesanse".equals(items[i])) {
 						doc.select("span#tJaesanseT1").first().text(jo.get("tJaesanseT1").getAsString());
 						doc.select("span#tJaesanseT2").first().text(jo.get("tJaesanseT2").getAsString());
