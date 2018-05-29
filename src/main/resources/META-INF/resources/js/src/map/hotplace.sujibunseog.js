@@ -769,7 +769,7 @@
 				_isNonSaeobYangdose = false;
 			}
 			
-			hotplace.calc.sujibunseog.calcYangdose(false, true);
+			hotplace.calc.sujibunseog.calcYangdose();
 		});
 		
 		//농지보전부담금 감면 체크
