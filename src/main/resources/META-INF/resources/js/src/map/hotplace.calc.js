@@ -809,6 +809,7 @@
 					
 					//var $WPurchase = $(suji.getWPurchaseId());
 					var _$$1 = $WIncomeSell.data('value') - $WJichool.data('value');//$WPurchase.data('value');
+					_$$1 = Math.round(_$$1);
 					
 					$stepYangdose.data('value', _$$1);
 					//$stepYangdose.val($WPurchase.val() + $stepYangdose.data('suffix'));
