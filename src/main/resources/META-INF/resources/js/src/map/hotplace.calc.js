@@ -110,7 +110,7 @@
 			calc.sujibunseog.calcIncomeManageImdae();		//운영 > 임대
 			
 			//다른 모든 초기화가 끝나고 양도세를 세팅한다
-			calc.sujibunseog.calcYangdose(true);
+			//calc.sujibunseog.calcYangdose(true);
 			
 		}
 		
@@ -387,13 +387,16 @@
 			$WJichool.data('value', $$r);
 			$WJichool.val($$r.toString().money());
 			
-			if(fromYangdose) {
-				calcJichoolRatio($$r);
-				calcMaechool();
-			}
-			else {
-				calc.sujibunseog.calcYangdose(true);
-			}
+			calcJichoolRatio($$r);
+			calcMaechool();
+			
+//			if(fromYangdose) {
+//				calcJichoolRatio($$r);
+//				calcMaechool();
+//			}
+//			else {
+//				calc.sujibunseog.calcYangdose(true);
+//			}
 			
 		}
 		
@@ -588,7 +591,7 @@
 			calcOwnTerm: function() {
 				hotplace.calc.sujibunseog.calcJaesanse(true);
 				hotplace.calc.sujibunseog.calcJaesanse2(true);
-				hotplace.calc.sujibunseog.calcYangdose();
+				//hotplace.calc.sujibunseog.calcYangdose();
 			},
 			calcOtherAssetRatio: function() {
 				console.log('타인자본비율');
