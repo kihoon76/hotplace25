@@ -797,11 +797,11 @@
 			hotplace.calc.sujibunseog.calcJaesanse2();
 		});
 		
-		hotplace.validation.numberOnly(_stepYangdose, function($this) {
+		/*hotplace.validation.numberOnly(_stepYangdose, function($this) {
 			var step = hotplace.calc.sujibunseog.makeStep($this.data('value'), hotplace.config.yangdoseStepPercent);
 			$this.data('step', step);
 			hotplace.calc.sujibunseog.calcYangdose();
-		});
+		});*/
 		
 		hotplace.validation.numberOnly(_stepGeonchugGongsa, function($this) {
 			hotplace.calc.sujibunseog.calcGeonchugGongsa();

@@ -818,7 +818,7 @@
 				
 				hotplace.dom.changeTooltipText($txtJaesanseH3, '<span class="innerTooltip">' + tooltipStr + '<span>');
 			},
-			calcYangdose: function(isSet) {
+			calcYangdose: function(isSet, fromCheck) {
 				console.log('양도세(매각금액-지출합계-양도세)');
 				var suji = hotplace.sujibunseog;
 				var $stepYangdose = $(suji.getStepYangdoseId());
@@ -905,7 +905,7 @@
 				var $$r = Math.round($$1 * 0.01 * $$2);
 				$WYangdose.data('value', $$r);
 				$WYangdose.val($$r.toString().money());
-				calcJesegeum(isSet);
+				calcJesegeum((fromCheck != undefined) ? false : isSet);
 				
 				hotplace.dom.changeTooltipText($stepYangdose2, '<span class="innerTooltip">' + tooltipStr +'</span>');
 			},
