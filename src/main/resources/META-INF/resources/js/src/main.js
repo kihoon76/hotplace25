@@ -200,7 +200,8 @@ $(document).ready(function() {
 	});
 	
 	$('#modalTutorial').on('click', function() {
-		hotplace.dom.showTutorial();
+		//hotplace.dom.showTutorial();
+		hotplace.dom.showServiceReady();
 	});
 	
 	function _isZoomIn() {
