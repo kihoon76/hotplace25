@@ -626,7 +626,12 @@
 			rIncomeManage: $(_ratioIncomeManage).text(),
 			
 			wIncome: $(_WIncome).val(),
-			rIncome: $(_ratioIncome).text()
+			rIncome: $(_ratioIncome).text(),
+			
+			wMymoney: $(_WMymoney).val(),
+			
+			wMaechool: $(_WMaechool).val(),
+			rMaechool: $(_ratioMaechool).text(),
 			
 		};
 	}
