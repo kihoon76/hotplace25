@@ -633,6 +633,9 @@
 			wMaechool: $(_WMaechool).val(),
 			rMaechool: $(_ratioMaechool).text(),
 			
+			wGyeongsang: $(_WGyeongsang).val(),
+			rGyeongsang: $(_ratioGyeongsang).text()
+			
 		};
 	}
 	
