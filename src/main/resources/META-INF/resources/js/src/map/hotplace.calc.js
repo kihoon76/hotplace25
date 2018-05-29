@@ -902,9 +902,12 @@
 				$stepYangdose2.data('value', $$2);
 				$stepYangdose2.val($$2 + $stepYangdose2.data('suffix'));
 				
-				var $$r = Math.round($$1 * 0.01 * $$2);
-				$WYangdose.data('value', $$r);
-				$WYangdose.val($$r.toString().money());
+				if(!fromCheck) {
+					var $$r = Math.round($$1 * 0.01 * $$2);
+					$WYangdose.data('value', $$r);
+					$WYangdose.val($$r.toString().money());
+				}
+				
 				calcJesegeum((fromCheck != undefined) ? false : isSet);
 				
 				hotplace.dom.changeTooltipText($stepYangdose2, '<span class="innerTooltip">' + tooltipStr +'</span>');
