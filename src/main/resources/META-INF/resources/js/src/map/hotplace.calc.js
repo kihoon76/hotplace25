@@ -110,7 +110,7 @@
 			calc.sujibunseog.calcIncomeManageImdae();		//운영 > 임대
 			
 			//다른 모든 초기화가 끝나고 양도세를 세팅한다
-			//calc.sujibunseog.calcYangdose(true);
+			calc.sujibunseog.calcYangdose(true);
 			
 		}
 		
