@@ -622,8 +622,8 @@
 			wIncomeManageImdae: $(_WIncomeManageImdae).val(),
 			rIncomeManageImdae: $(_ratioIncomeManageImdae).text(),
 			
-			//wIncomeManage: $(_WIncomeManage).val(),
-			//rIncomeManage: $(_ratioIncomeManage).text(),
+			wIncomeManage: $(_WIncomeManage).val(),
+			rIncomeManage: $(_ratioIncomeManage).text(),
 			
 			//wIncome: $(_WIncome).val(),
 			//rIncome: $(_ratioIncome).text()
