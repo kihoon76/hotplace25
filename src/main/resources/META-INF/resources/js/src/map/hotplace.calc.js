@@ -804,8 +804,8 @@
 				
 				if(isSet) {
 					//매각
-					var $WIncomeSell = $(_WIncomeSell);
-					var $WJichool = $(_WJichool);
+					var $WIncomeSell = $(suji.getWIncomeSellId());
+					var $WJichool = $(suji.getWJichoolId());
 					
 					//var $WPurchase = $(suji.getWPurchaseId());
 					var _$$1 = $WIncomeSell.data('value') - $WJichool.data('value');//$WPurchase.data('value');
