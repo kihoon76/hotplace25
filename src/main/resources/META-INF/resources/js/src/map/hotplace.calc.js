@@ -416,6 +416,9 @@
 			
 			//사업경비 > 매각수수료
 			calc.sujibunseog.calcSellSusulyo(true);
+			
+			//양도세(매각-지출합계-양도세)
+			//calc.sujibunseog.calcYangdose(true);
 			calcIncome();
 		}
 		
@@ -829,7 +832,7 @@
 
 					var _$$1 = $WIncomeSell.data('value') - $WJichool.data('value');
 					_$$1 = Math.round(_$$1);
-					
+					_$$1 = (_$$1 < 0) ? 0 : _$$1;
 					$stepYangdose.data('value', _$$1);
 					$stepYangdose.val(_$$1.toString().money() + $stepYangdose.data('suffix'));
 					
