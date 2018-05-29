@@ -33,8 +33,8 @@ public class PaymentController {
 		try {
 			boolean r = ValidationUtil.isValidPayment(payment);
 			if(r) {
-				payment.setAccountId(accountId);
-				paymentService.setServices(payment);
+				//payment.setAccountId(accountId);
+				//paymentService.setServices(payment);
 				vo.setSuccess(true);
 			}
 			else {
