@@ -47,11 +47,17 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 //				log.setParameter(URLDecoder.decode(param, "UTF-8"));
 //			}
 			
+			String param = null;
+			
 			if("POST".equalsIgnoreCase(request.getMethod())) {
-				log.setParameter(URLDecoder.decode(request.getReader().lines().collect(Collectors.joining()), "UTF-8"));
+				param = request.getReader().lines().collect(Collectors.joining());
 			}
 			else if("GET".equalsIgnoreCase(request.getMethod())) {
-				log.setParameter(URLDecoder.decode(request.getQueryString(), "UTF-8"));
+				param = request.getQueryString();
+			}
+			
+			if(param != null) {
+				log.setParameter(URLDecoder.decode(param, "UTF-8"));
 			}
 			
 			
