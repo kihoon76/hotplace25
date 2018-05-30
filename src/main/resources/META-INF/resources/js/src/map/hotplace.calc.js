@@ -810,7 +810,7 @@
 					var _$$1 = Math.round($WIncomeSell.data('value') - $WJichool.data('value')); //$WPurchase.data('value');
 					
 					$stepYangdose.data('value', _$$1);
-					$stepYangdose.val($WPurchase.val() + $stepYangdose.data('suffix'));
+					$stepYangdose.val(_$$1.toString().money() + $stepYangdose.data('suffix'));
 					
 					$stepYangdose.data('step', makeStep(_$$1, hotplace.config.yangdoseStepPercent));
 				}
