@@ -220,13 +220,13 @@
 		 * @function calcJesegeum
 		 * @desc 제세금 (취득세,재산세,양도세)
 		 */
-		function calcJesegeum() {
+		function calcJesegeum(isCalcYangdose) {
 			console.log('제세금 (취득세,재산세,양도세)');
 			var suji = hotplace.sujibunseog;
 			var $$1 = $(suji.getWChwideugseId()).data('value');
 			var $$2 = $(suji.getWJaesanseId()).data('value');
 			var $$2_1 = $(suji.getWJaesanse2Id()).data('value');
-			var $$3 = $(suji.getWYangdoseId()).data('value');
+			var $$3 = isCalcYangdose ? $(suji.getWYangdoseId()).data('value') : 0;
 			var $$r = parseFloat($$1) + parseFloat($$2) + parseFloat($$2_1) + parseFloat($$3);
 			
 			var $WJesegeum = $(suji.getWJesegeumId());
@@ -803,8 +803,11 @@
 				var $WYangdose = $(suji.getWYangdoseId());
 				
 				if(isSet) {
-					var $WPurchase = $(suji.getWPurchaseId());
-					var _$$1 = $WPurchase.data('value');
+					//var $WPurchase = $(suji.getWPurchaseId());
+					var $WIncomeSell = $(suji.getWIncomeSellId());
+					var $WJichool = $(suji.getWJichoolId());
+					
+					var _$$1 = Math.round($WIncomeSell.data('value') - $WJichool.data('value')); //$WPurchase.data('value');
 					
 					$stepYangdose.data('value', _$$1);
 					$stepYangdose.val($WPurchase.val() + $stepYangdose.data('suffix'));
@@ -878,7 +881,7 @@
 				var $$r = Math.round($$1 * 0.01 * $$2);
 				$WYangdose.data('value', $$r);
 				$WYangdose.val($$r.toString().money());
-				calcJesegeum();
+				calcJesegeum(true);
 				
 				hotplace.dom.changeTooltipText($stepYangdose2, '<span class="innerTooltip">' + tooltipStr +'</span>');
 			},

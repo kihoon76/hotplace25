@@ -8,6 +8,7 @@
 		_btnSujiTojiUseLimitHistory = '#btnSujiTojiUseLimitHistory', //토지이용규제 변경 내역보기
 		_btnSujiGongsiHistory = '#btnSujiGongsiHistory', //공시지가 변동보기
 		_btnSujibunseogPdf = '#btnSujibunseogPdf',
+		_btnCalcYangdose = '#btnCalcYangdose',
 		
 		_chkJaesanse = '#chkJaesanse', //재산세 checkbox (주택);
 		_chkYangdose = '#chkYangdose', //양도세 비사업용 체크
@@ -792,6 +793,15 @@
 				_hasFarmBudam = true;
 			}
 		});
+		
+		//양도세 계산
+		$(_btnCalcYangdose)
+		.off('click')
+		.on('click', function() {
+			hotplace.calc.calcYangdose(true);
+		});
+		
+		
 		
 		hotplace.validation.numberOnly('#txtJaesanseH1', function() {
 			hotplace.calc.sujibunseog.calcJaesanse2();
