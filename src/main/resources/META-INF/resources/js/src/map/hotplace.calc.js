@@ -557,6 +557,7 @@
 		
 		function _initYangdose() {
 			hotplace.sujibunseog.enableYangdoseButton();
+			hotplace.sujibunseog.disableBtnSujibunseogPdf(true);
 			hotplace.calc.sujibunseog.calcYangdose(true, true);
 		}
 		
@@ -822,7 +823,7 @@
 					var $WJichool = $(suji.getWJichoolId());
 					
 					var _$$1 = (isInit) ? 0 : Math.round($WIncomeSell.data('value') - $WJichool.data('value')); //$WPurchase.data('value');
-					
+					if(_$$1 < 0) _$$1 = 0;
 					$stepYangdose.data('value', _$$1);
 					$stepYangdose.val(_$$1.toString().money() + $stepYangdose.data('suffix'));
 					

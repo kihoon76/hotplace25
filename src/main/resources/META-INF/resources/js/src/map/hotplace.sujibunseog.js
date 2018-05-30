@@ -170,6 +170,7 @@
 		_hasJaesanseHouse = false, //재산세 주택
 		_isNonSaeobYangdose = false; //양도세 비사업용
 	
+	sujibunseog.disableBtnSujibunseogPdf = function(isDisable) { return $(_btnSujibunseogPdf).prop('disabled', isDisable); };
 	sujibunseog.enableYangdoseButton = function() { $(_btnCalcYangdose).prop('disabled', false); }
 	sujibunseog.isFarm = function() { return _isFarm; }
 	sujibunseog.isForest = function() { return _isForest; }
@@ -804,6 +805,10 @@
 			if(!$(this).prop('disabled')) {
 				hotplace.calc.sujibunseog.calcYangdose(true);
 				$(this).prop('disabled', true);
+				sujibunseog.disableBtnSujibunseogPdf(false);
+			}
+			else {
+				sujibunseog.disableBtnSujibunseogPdf(true);
 			}
 			
 		});
