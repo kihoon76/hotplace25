@@ -109,7 +109,7 @@
 			calc.sujibunseog.calcIncomeSellLand();			//매각 > 토지
 			calc.sujibunseog.calcIncomeManageImdae();		//운영 > 임대
 			
-			//다른 모든 초기화가 끝나고 양도세를 세팅한다
+
 			
 		}
 		
@@ -565,7 +565,7 @@
 			calcOwnTerm: function() {
 				hotplace.calc.sujibunseog.calcJaesanse(true);
 				hotplace.calc.sujibunseog.calcJaesanse2(true);
-				hotplace.calc.sujibunseog.calcYangdose();
+				//hotplace.calc.sujibunseog.calcYangdose();
 			},
 			calcOtherAssetRatio: function() {
 				console.log('타인자본비율');
@@ -596,7 +596,7 @@
 				//채권매입비
 				hotplace.calc.sujibunseog.calcPurchaseChaegwon(true);
 				//양도세
-				hotplace.calc.sujibunseog.calcYangdose(true);
+				//hotplace.calc.sujibunseog.calcYangdose(true);
 				//농지보전부담금
 				hotplace.calc.sujibunseog.calcFarmBudam(suji.isFarmBudamGammyeon());
 				//대체산림자원조성비
