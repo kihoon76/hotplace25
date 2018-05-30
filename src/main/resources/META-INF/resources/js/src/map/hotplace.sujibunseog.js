@@ -728,8 +728,10 @@
 		//var stepYangdose2 = $('#stepYangdose2');
 		
 		//매입주체 
-		$('input[name="radioOwn"]').on('click', function(e) {
-			hotplace.calc.sujibunseog.calcYangdose();
+		$('input[name="radioOwn"]').on('change', function(e) {
+			sujibunseog.enableYangdoseButton();
+			hotplace.calc.sujibunseog.calcYangdose(true, true);
+			//hotplace.calc.sujibunseog.calcYangdose();
 		});
 		
 		//재산세 checkbox (주택)
