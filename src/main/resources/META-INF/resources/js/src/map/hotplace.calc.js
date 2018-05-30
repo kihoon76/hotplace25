@@ -110,7 +110,6 @@
 			calc.sujibunseog.calcIncomeManageImdae();		//운영 > 임대
 			
 			//다른 모든 초기화가 끝나고 양도세를 세팅한다
-			calc.sujibunseog.calcYangdose(true);
 			
 		}
 		
@@ -221,7 +220,7 @@
 		 * @function calcJesegeum
 		 * @desc 제세금 (취득세,재산세,양도세)
 		 */
-		function calcJesegeum(fromYangdose) {
+		function calcJesegeum() {
 			console.log('제세금 (취득세,재산세,양도세)');
 			var suji = hotplace.sujibunseog;
 			var $$1 = $(suji.getWChwideugseId()).data('value');
@@ -234,7 +233,7 @@
 			$WJesegeum.data('value', $$r)
 			$WJesegeum.val($$r.toString().money());
 			
-			calcJichool(fromYangdose);
+			calcJichool();
 		}
 		
 		/**
@@ -349,7 +348,7 @@
 		 * @function calcJichool
 		 * @desc 지출합계(토지비, 제세금, 공사비, 인허가비, 부담금, 사업경비)
 		 */
-		function calcJichool(fromYangdose) {
+		function calcJichool() {
 			console.log('지출합계(토지비, 금융비용, 제세금, 공사비, 인허가비, 부담금, 사업경비)');
 			var suji = hotplace.sujibunseog;
 			//토지비
@@ -357,19 +356,7 @@
 			//대출이자
 			var WDaechulIja = $(suji.getWDaechulIjaId()).data('value');
 			//제세금
-			
 			var WJesegeum = $(suji.getWJesegeumId()).data('value');
-			var WYangdose = $(suji.getWYangdoseId()).data('value')
-			if(fromYangdose) {
-				WJesegeum = isNaN(WJesegeum) ? 0 : WJesegeum;
-			} 
-			else {
-				WJesegeum = isNaN(WJesegeum) ? 0 : WJesegeum;
-				WYangdose = isNaN(WYangdose) ? 0 : WYangdose;
-				WJesegeum = WJesegeum - WYangdose;
-			}
-
-			console.log(WJesegeum);
 			//공사비
 			var WGongsabi = $(suji.getWGongsabiId()).data('value');
 			//인허가비
@@ -383,21 +370,11 @@
 			var $$r = parseFloat(WTojibi) + parseFloat(WDaechulIja) + parseFloat(WJesegeum) + 
 					  parseFloat(WGongsabi) + parseFloat(WInheogabi) + parseFloat(WBudamgeum) + parseFloat(WSaeobgyeongbi);
 			
-			
 			$WJichool.data('value', $$r);
 			$WJichool.val($$r.toString().money());
 			
 			calcJichoolRatio($$r);
 			calcMaechool();
-			
-//			if(fromYangdose) {
-//				calcJichoolRatio($$r);
-//				calcMaechool();
-//			}
-//			else {
-//				calc.sujibunseog.calcYangdose(true);
-//			}
-			
 		}
 		
 		/**
@@ -419,9 +396,6 @@
 			
 			//사업경비 > 매각수수료
 			calc.sujibunseog.calcSellSusulyo(true);
-			
-			//양도세(매각-지출합계-양도세)
-			//calc.sujibunseog.calcYangdose(true);
 			calcIncome();
 		}
 		
@@ -591,7 +565,7 @@
 			calcOwnTerm: function() {
 				hotplace.calc.sujibunseog.calcJaesanse(true);
 				hotplace.calc.sujibunseog.calcJaesanse2(true);
-				//hotplace.calc.sujibunseog.calcYangdose();
+				hotplace.calc.sujibunseog.calcYangdose();
 			},
 			calcOtherAssetRatio: function() {
 				console.log('타인자본비율');
@@ -622,7 +596,7 @@
 				//채권매입비
 				hotplace.calc.sujibunseog.calcPurchaseChaegwon(true);
 				//양도세
-				//hotplace.calc.sujibunseog.calcYangdose(true);
+				hotplace.calc.sujibunseog.calcYangdose(true);
 				//농지보전부담금
 				hotplace.calc.sujibunseog.calcFarmBudam(suji.isFarmBudamGammyeon());
 				//대체산림자원조성비
@@ -821,7 +795,7 @@
 				
 				hotplace.dom.changeTooltipText($txtJaesanseH3, '<span class="innerTooltip">' + tooltipStr + '<span>');
 			},
-			calcYangdose: function(isSet, fromCheck) {
+			calcYangdose: function(isSet) {
 				console.log('양도세(매각금액-지출합계-양도세)');
 				var suji = hotplace.sujibunseog;
 				var $stepYangdose = $(suji.getStepYangdoseId());
@@ -829,15 +803,11 @@
 				var $WYangdose = $(suji.getWYangdoseId());
 				
 				if(isSet) {
-					//var $WPurchase = $(suji.getWPurchaseId());
-					var $WIncomeSell = $(suji.getWIncomeSellId());
-					var $WJichool = $(suji.getWJichoolId());
-
-					var _$$1 = $WIncomeSell.data('value') - $WJichool.data('value');
-					_$$1 = Math.round(_$$1);
-					_$$1 = (_$$1 < 0) ? 0 : _$$1;
+					var $WPurchase = $(suji.getWPurchaseId());
+					var _$$1 = $WPurchase.data('value');
+					
 					$stepYangdose.data('value', _$$1);
-					$stepYangdose.val(_$$1.toString().money() + $stepYangdose.data('suffix'));
+					$stepYangdose.val($WPurchase.val() + $stepYangdose.data('suffix'));
 					
 					$stepYangdose.data('step', makeStep(_$$1, hotplace.config.yangdoseStepPercent));
 				}
@@ -908,8 +878,7 @@
 				var $$r = Math.round($$1 * 0.01 * $$2);
 				$WYangdose.data('value', $$r);
 				$WYangdose.val($$r.toString().money());
-				
-				calcJesegeum((fromCheck === true)? true : isSet);
+				calcJesegeum();
 				
 				hotplace.dom.changeTooltipText($stepYangdose2, '<span class="innerTooltip">' + tooltipStr +'</span>');
 			},
