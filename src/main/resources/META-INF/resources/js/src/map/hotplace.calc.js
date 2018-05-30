@@ -555,6 +555,10 @@
 			//hotplace.dom.changeTooltipText($WGyeongsang, '<span class="innerTooltip">매출이익(' + $$1.toString().money() +') - 대출이자(' + $$2.toStrong().money() + ')</span>');
 		}
 		
+		function _initYangdose() {
+			hotplace.calc.sujibunseog.calcYangdose(true, true);
+		}
+		
 		return {
 			init: function() {
 				onBindOwn();
@@ -563,15 +567,18 @@
 			makeStep: makeStep,
 			defaultValue: defaultValue,
 			calcOwnTerm: function() {
+				_initYangdose();
 				hotplace.calc.sujibunseog.calcJaesanse(true);
 				hotplace.calc.sujibunseog.calcJaesanse2(true);
 				//hotplace.calc.sujibunseog.calcYangdose();
 			},
 			calcOtherAssetRatio: function() {
+				_initYangdose();
 				console.log('타인자본비율');
 				hotplace.calc.sujibunseog.calcDaechulIja(true);
 			},
 			calcPurchase: function(initFn) {
+				_initYangdose();
 				console.log('매입금액');
 				//if(initFn) initFn();
 				var suji = hotplace.sujibunseog;
@@ -606,6 +613,7 @@
 				calcTojibi();
 			},
 			calcMyeongdobi: function(isSet) {
+				_initYangdose();
 				console.log('명도비');
 				var suji = hotplace.sujibunseog;
 				var $txtMyeongdobi = $(suji.getTxtMyeongdobiId());
@@ -630,6 +638,7 @@
 				calcTojibi();
 			},
 			calcAcceptLandUse: function(isSet) {
+				_initYangdose();
 				console.log('토지사용승낙');
 				var suji = hotplace.sujibunseog;
 				var $txtAcceptLandUse = $(suji.getTxtAcceptLandUseId());
@@ -654,6 +663,7 @@
 				calcTojibi();
 			},
 			calcDaechulIja: function(isSet) {
+				_initYangdose();
 				console.log('대출이자(매입가 X 타인자본 비율)');
 				var suji = hotplace.sujibunseog;
 				var $txtDaechulIja = $(suji.getTxtDaechulIjaId());
@@ -684,6 +694,7 @@
 				calcGyeongsang();
 			},
 			calcChwideugse: function(isSet) {
+				_initYangdose();
 				console.log('취득세(매입가 X 비율)');
 				var suji = hotplace.sujibunseog;
 				var $txtChwideugse = $(suji.getTxtChwideugseId());
@@ -708,6 +719,7 @@
 				calcJesegeum();
 			},
 			calcJaesanse: function(isSet) {
+				_initYangdose();
 				console.log('재산세');
 				var suji = hotplace.sujibunseog;
 				//주택외
@@ -739,6 +751,7 @@
 				calcJesegeum();
 			},
 			calcJaesanse2: function(isSet, isInit) {
+				_initYangdose();
 				var suji = hotplace.sujibunseog;
 				var $txtJaesanseH1 = $(suji.getTxtJaesanseH1Id());
 				var $txtJaesanseH2 = $(suji.getTxtJaesanseH2Id());
@@ -795,7 +808,7 @@
 				
 				hotplace.dom.changeTooltipText($txtJaesanseH3, '<span class="innerTooltip">' + tooltipStr + '<span>');
 			},
-			calcYangdose: function(isSet) {
+			calcYangdose: function(isSet, isInit) {
 				console.log('양도세(매각금액-지출합계-양도세)');
 				var suji = hotplace.sujibunseog;
 				var $stepYangdose = $(suji.getStepYangdoseId());
@@ -807,7 +820,7 @@
 					var $WIncomeSell = $(suji.getWIncomeSellId());
 					var $WJichool = $(suji.getWJichoolId());
 					
-					var _$$1 = Math.round($WIncomeSell.data('value') - $WJichool.data('value')); //$WPurchase.data('value');
+					var _$$1 = (isInit) ? 0 : Math.round($WIncomeSell.data('value') - $WJichool.data('value')); //$WPurchase.data('value');
 					
 					$stepYangdose.data('value', _$$1);
 					$stepYangdose.val(_$$1.toString().money() + $stepYangdose.data('suffix'));
@@ -886,6 +899,7 @@
 				hotplace.dom.changeTooltipText($stepYangdose2, '<span class="innerTooltip">' + tooltipStr +'</span>');
 			},
 			calcGeonchugGongsa: function(isSet) {
+				_initYangdose();
 				console.log('건축공사비');
 				var suji = hotplace.sujibunseog;
 				var $txtGeonchugGongsa = $(suji.getTxtGeonchugGongsaId());
@@ -914,6 +928,7 @@
 				calcGongsabi();
 			},
 			calcTomogGongsa: function(isSet) {
+				_initYangdose();
 				console.log('토목공사비');
 				var suji = hotplace.sujibunseog;
 				var $txtTomogGongsa = $(suji.getTxtTomogGongsaId());
@@ -942,6 +957,7 @@
 				calcGongsabi();
 			},
 			calcPojangGongsa: function(isSet) {
+				_initYangdose();
 				console.log('포장공사비');
 				var suji = hotplace.sujibunseog;
 				var $txtPojangGongsa = $(suji.getTxtPojangGongsaId());
@@ -969,6 +985,7 @@
 				calcGongsabi();
 			},
 			calcInibGongsa: function(isSet) {
+				_initYangdose();
 				console.log('인입공사비');
 				var suji = hotplace.sujibunseog;
 				var $txtInibGongsa = $(suji.getTxtInibGongsaId());
@@ -996,6 +1013,7 @@
 				calcGongsabi();
 			},
 			calcAcceptGaebal: function() {
+				_initYangdose();
 				console.log('개발행위허가');
 				var suji = hotplace.sujibunseog;
 				var $stepAcceptGaebal = $(suji.getStepAcceptGaebalId());
@@ -1010,6 +1028,7 @@
 				calcInheogabi();
 			},
 			calcGamri: function(isSet) {
+				_initYangdose();
 				console.log('감리비');
 				//공사비 X 비율
 				var suji = hotplace.sujibunseog;
@@ -1034,6 +1053,7 @@
 				calcInheogabi();
 			},
 			calcCheuglyang: function() {
+				_initYangdose();
 				console.log('측량비');
 				var suji = hotplace.sujibunseog;
 				var $stepCheuglyang = $(suji.getStepCheuglyangId());
@@ -1045,6 +1065,7 @@
 				calcInheogabi();
 			},
 			calcEvalueGamjeung: function() {
+				_initYangdose();
 				console.log('감정평가');
 				var suji = hotplace.sujibunseog;
 				var $stepEvalueGamjeung = $(suji.getStepEvalueGamjeungId());
@@ -1056,6 +1077,7 @@
 				calcInheogabi();
 			},
 			calcSplitPilji: function() {
+				_initYangdose();
 				console.log('필지분할');
 				var suji = hotplace.sujibunseog;
 				var $stepSplitPilji = $(suji.getStepSplitPiljiId());
@@ -1067,6 +1089,7 @@
 				calcInheogabi();
 			},
 			calcDevBudam: function() {
+				_initYangdose();
 				console.log('개발부담금');
 				//개발이익 X 비율
 				var suji = hotplace.sujibunseog;
@@ -1089,6 +1112,7 @@
 				calcBudamgeum();
 			},
 			calcFarmBudam: function(isGammyeon) {
+				_initYangdose();
 				console.log('농지보전부담금');
 				var suji = hotplace.sujibunseog;
 				var $WPurchase = $(suji.getWPurchaseId());
@@ -1122,6 +1146,7 @@
 				calcBudamgeum();
 			},
 			calcAlterSanrim: function() {
+				_initYangdose();
 				console.log('대체산림자원조성비');
 				var suji = hotplace.sujibunseog;
 				var $WPurchase = $(suji.getWPurchaseId());
@@ -1144,6 +1169,7 @@
 				calcBudamgeum();
 			},
 			calcPurchaseChaegwon: function(isSet) {
+				_initYangdose();
 				console.log('채권매입비');
 				var suji = hotplace.sujibunseog;
 				var $txtPurchaseChaegwon = $(suji.getTxtPurchaseChaegwonId());
@@ -1168,6 +1194,7 @@
 				calcSaeobgyeongbi();
 			},
 			calcSetGeunjeodang: function(isSet) {
+				_initYangdose();
 				console.log('근저당 설정비');
 				var suji = hotplace.sujibunseog;
 				var $txtDaechulIja = $(suji.getTxtDaechulIjaId());
@@ -1197,6 +1224,7 @@
 				calcSaeobgyeongbi();
 			},
 			calcPreserveDeunggi: function(isSet) {
+				_initYangdose();
 				console.log('보존등기비');
 				//공사비의 3.2% 내외
 				var suji = hotplace.sujibunseog;
@@ -1222,6 +1250,7 @@
 				calcSaeobgyeongbi();
 			},
 			calcManagement: function() {
+				_initYangdose();
 				console.log('운영비');
 				var suji = hotplace.sujibunseog;
 				var $txtManagement = $(suji.getTxtManagementId());
@@ -1238,6 +1267,7 @@
 				calcSaeobgyeongbi();
 			},
 			calcSellSusulyo: function(isSet) {
+				_initYangdose();
 				console.log('매각수수료');
 				var suji = hotplace.sujibunseog;
 				//매각 X 비율
@@ -1262,6 +1292,7 @@
 				calcSaeobgyeongbi();
 			},
 			calcPreparation: function(isSet) {
+				_initYangdose();
 				console.log('예비비');
 				var suji = hotplace.sujibunseog;
 				var WIncome;
@@ -1285,6 +1316,7 @@
 				calcSaeobgyeongbi();
 			},
 			calcIncomeSellBuilding: function(isSet) {
+				_initYangdose();
 				console.log('수입>매각>건물');
 				var suji = hotplace.sujibunseog;
 				//건물 : 건축공사비 + 토목공사비 + 개발행위 허가등
@@ -1313,6 +1345,7 @@
 				calcIncomeSell();
 			},
 			calcIncomeSellSeolbi: function() {
+				_initYangdose();
 				console.log('수입>매각>설비');
 				var suji = hotplace.sujibunseog;
 				var $txtIncomeSellSeolbi = $(suji.getTxtIncomeSellSeolbiId());
@@ -1329,6 +1362,7 @@
 				calcIncomeSell();
 			},
 			calcIncomeSellLand: function() {
+				_initYangdose();
 				console.log('수입>매각>토지');
 				var suji = hotplace.sujibunseog;
 				
@@ -1349,6 +1383,7 @@
 				calcIncomeSell();
 			},
 			calcIncomeManageImdae: function() {
+				_initYangdose();
 				console.log('수입>운영>임대');
 				var suji = hotplace.sujibunseog;
 				var $stepIncomeManageImdae = $(suji.getStepIncomeManageImdaeId());
