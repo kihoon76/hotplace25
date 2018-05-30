@@ -493,6 +493,7 @@
 			sYangdose: $(_stepYangdose2).val(),
 			wYangdose: $(_WYangdose).val(),
 			rYangdose: $(_ratioYangdose).text(),
+			isNonSaeobYangdose: (_isNonSaeob) ? 'O' : 'X',
 			
 			wJesegeum: $(_WJesegeum).val(),
 			rJesegeum: $(_ratioJesegeum).text(),
