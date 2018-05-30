@@ -444,6 +444,7 @@
 			gugtolaw: _baseData.gugtolaw,
 			etclaw: _baseData.etclaw,
 			tojiuse: _baseData.tojiuse,
+			spOwn: (_isOwnGaein()) ? '개인' : '법인',
 			//limitChange:'Y',
 			ownTerm: $(_stepOwnTerm).val(),
 			otherAssetRatio: $(_stepOtherAssetRatio).val(),

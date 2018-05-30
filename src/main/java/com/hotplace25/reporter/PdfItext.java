@@ -210,6 +210,7 @@ public class PdfItext {
 			doc.select("span#gugtolaw").first().text(jo.get("gugtolaw").getAsString());
 			doc.select("span#etclaw").first().text(jo.get("etclaw").getAsString());
 			doc.select("span#tojiuse").first().text(jo.get("tojiuse").getAsString());
+			doc.select("span#spOwn").first().text(jo.get("spOwn").getAsString());
 			
 			//doc.select("span#limitChange").first().text("Y".equals(jo.get("limitChange").getAsString()) ? "유" : "무"); 
 			doc.select("span#ownTerm").first().text(jo.get("ownTerm").getAsString());
