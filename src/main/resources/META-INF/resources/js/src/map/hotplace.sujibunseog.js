@@ -798,7 +798,7 @@
 		$(_btnCalcYangdose)
 		.off('click')
 		.on('click', function() {
-			hotplace.calc.calcYangdose(true);
+			hotplace.calc.sujibunseog.calcYangdose(true);
 		});
 		
 		
