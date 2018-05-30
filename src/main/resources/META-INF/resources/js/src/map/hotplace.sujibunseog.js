@@ -170,6 +170,7 @@
 		_hasJaesanseHouse = false, //재산세 주택
 		_isNonSaeobYangdose = false; //양도세 비사업용
 	
+	sujibunseog.enableYangdoseButton = function() { $(_btnCalcYangdose).prop('disabled', false); }
 	sujibunseog.isFarm = function() { return _isFarm; }
 	sujibunseog.isForest = function() { return _isForest; }
 	sujibunseog.isFarmBudamGammyeon = function() { return _isFarmBudamGammyeon; }

@@ -556,6 +556,7 @@
 		}
 		
 		function _initYangdose() {
+			hotplace.calc.sujibunseog.enableYangdoseButton();
 			hotplace.calc.sujibunseog.calcYangdose(true, true);
 		}
 		
