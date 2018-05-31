@@ -100,6 +100,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- http://meetup.toast.com/posts/44 -->
 	<filter-mapping>
 		<filter-name>rereadableRequestFilter</filter-name>
 		<url-pattern>/*</url-pattern>

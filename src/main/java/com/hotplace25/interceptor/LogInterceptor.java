@@ -30,8 +30,10 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 		
 		String ip = HttpHeaderUtil.getClientIP(request);
 		String userAgent = request.getHeader("User-Agent");
+		String url = request.getRequestURL().toString();
 		
-		if(!ip.startsWith("192.")) {
+		//가입시 회원정보는 로그에 남기지 않는다.
+		if(!ip.startsWith("192.") && url.indexOf("/user/join") < 0) {
 			LogVO log = new LogVO();
 			
 			log.setIp(ip);
