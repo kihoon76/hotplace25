@@ -61,7 +61,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 				log.setParameter(URLDecoder.decode(param, "UTF-8"));
 			}
 			
-			
+			System.err.println(param);
 			producer.sendMessage(gson.toJson(log));
 		//}
 		
