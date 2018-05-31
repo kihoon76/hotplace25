@@ -31,7 +31,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 		String ip = HttpHeaderUtil.getClientIP(request);
 		String userAgent = request.getHeader("User-Agent");
 		
-		if(!ip.startsWith("192.")) {
+		//if(!ip.startsWith("192.")) {
 			LogVO log = new LogVO();
 			
 			log.setIp(ip);
@@ -42,27 +42,27 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 			log.setIsMobile(HttpHeaderUtil.isMobile(userAgent));
 			
 			
-			String param = request.getQueryString();
-			if(param != null) {
-				log.setParameter(URLDecoder.decode(param, "UTF-8"));
-			}
-			
-//			String param = null;
-//			
-//			if("POST".equalsIgnoreCase(request.getMethod())) {
-//				param = request.getReader().lines().collect(Collectors.joining());
-//			}
-//			else if("GET".equalsIgnoreCase(request.getMethod())) {
-//				param = request.getQueryString();
-//			}
-//			
+//			String param = request.getQueryString();
 //			if(param != null) {
 //				log.setParameter(URLDecoder.decode(param, "UTF-8"));
 //			}
 			
+			String param = null;
+			
+			if("POST".equalsIgnoreCase(request.getMethod())) {
+				param = request.getReader().lines().collect(Collectors.joining());
+			}
+			else if("GET".equalsIgnoreCase(request.getMethod())) {
+				param = request.getQueryString();
+			}
+			
+			if(param != null) {
+				log.setParameter(URLDecoder.decode(param, "UTF-8"));
+			}
+			
 			
 			producer.sendMessage(gson.toJson(log));
-		}
+		//}
 		
 		return true;
 	}
