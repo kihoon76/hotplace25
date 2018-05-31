@@ -48,17 +48,12 @@ public class RereadableRequestWrapper extends HttpServletRequestWrapper {
             }
         };
         
-		return super.getInputStream();
+		return servletInputStream;
 	}
 
 	@Override
 	public BufferedReader getReader() throws IOException {
 		return new BufferedReader(new InputStreamReader(this.getInputStream(), this.encoding));
-	}
-
-	@Override
-	public ServletRequest getRequest() {
-		return super.getRequest();
 	}
 
 }
