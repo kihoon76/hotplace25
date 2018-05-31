@@ -291,7 +291,7 @@ public class RereadableRequestWrapper extends HttpServletRequestWrapper {
             parseParameters();
         }
 		
-		if(this.parameters == null) System.err.println("===========null");
+		System.err.println(name);
         ArrayList<String> values = this.parameters.get(name);
         String[] arr = values.toArray(new String[values.size()]);
         
