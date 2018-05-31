@@ -49,6 +49,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 			
 			String param = null;
 			
+			System.err.println(request.getMethod());
 			if("POST".equalsIgnoreCase(request.getMethod())) {
 				param = request.getReader().lines().collect(Collectors.joining());
 			}
