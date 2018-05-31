@@ -76,7 +76,7 @@
 							$('#gongDminIbchalga').text(data.minIbchalga);
 							
 							//물건세부정보 (위치 및 이용현황)
-							$('#gongDmulgeonAddress').text(data.mulgeonAddress);
+							$('#gongDmulgeonAddress').text(data.mulgeonAddress + ' (' + data.mulgeonAddressDetail + ')');
 							
 							if(data.wichiBugeun == null) data.wichiBugeun = '-';
 							$('#gongDwichiBugeun').text(data.wichiBugeun);

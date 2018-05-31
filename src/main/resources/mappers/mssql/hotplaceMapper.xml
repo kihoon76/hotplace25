@@ -493,7 +493,7 @@
 	</select>
 	
 	<select id="selectGongmaeDetail" parameterType="string" resultMap="RM_selectGongmaeDetail" >
-		select a.공매_목록_고유번호, 위치및부근현황, 이용현황, 기타사항, <include refid="gongmaeColumns" />
+		select a.공매_목록_고유번호, 상단주소, 위치및부근현황, 이용현황, 기타사항, <include refid="gongmaeColumns" />
 		  from [수작업입력].[dbo].[공매_기본정보] a
 		  left outer join [수작업입력].[dbo].[공매_위치_이용현황] b
 		    on a.[공매_목록_고유번호] = b.[공매_목록_고유번호]
