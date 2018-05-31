@@ -79,6 +79,11 @@
 		</init-param>
 	</filter>
 	
+	<filter>
+		<filter-name>rereadableRequestFilter</filter-name>
+		<filter-class>com.hotplace25.config.RereadableRequestFilter</filter-class>
+	</filter>
+	
 	
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
@@ -92,6 +97,11 @@
 	
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>rereadableRequestFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
