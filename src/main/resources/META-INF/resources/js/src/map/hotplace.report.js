@@ -8,7 +8,7 @@
 	function send(type, cfg) {
 		var form = document.createElement('form');
 		form.action = hotplace.getContextUrl() + 'download/' + type;
-		form.encoding = 'application/json',
+		form.enctype = 'application/json',
 		form.method = 'POST';
 		form.target = '_blank';
 		
