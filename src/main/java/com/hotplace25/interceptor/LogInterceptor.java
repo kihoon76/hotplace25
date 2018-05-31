@@ -31,7 +31,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 		String ip = HttpHeaderUtil.getClientIP(request);
 		String userAgent = request.getHeader("User-Agent");
 		
-		//if(!ip.startsWith("192.")) {
+		if(!ip.startsWith("192.")) {
 			LogVO log = new LogVO();
 			
 			log.setIp(ip);
@@ -49,7 +49,6 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 			
 			String param = null;
 			
-			System.err.println(request.getMethod());
 			if("POST".equalsIgnoreCase(request.getMethod())) {
 				param = request.getReader().lines().collect(Collectors.joining());
 			}
@@ -61,9 +60,8 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 				log.setParameter(URLDecoder.decode(param, "UTF-8"));
 			}
 			
-			System.err.println(param);
 			producer.sendMessage(gson.toJson(log));
-		//}
+		}
 		
 		return true;
 	}
