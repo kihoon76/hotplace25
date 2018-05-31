@@ -438,6 +438,7 @@
 		<result column="집행기관" property="jibhaengGigwan" javaType="string" />
 		<result column="최저입찰가_예정금액" property="minIbchalga" javaType="string" />
 		<result column="지번주소" property="mulgeonAddress" javaType="string" />
+		<result column="상단주소" property="mulgeonAddressDetail" javaType="string" />
 		<result column="전자보증서사용여부" property="jeonjaBojeungseoYN" javaType="string" />
 		<result column="차순위매수신청가능여부" property="chasunwiMaesuYN" javaType="string" />
 		<result column="공동입찰가능여부" property="gongdongIbchalYN" javaType="string" />
@@ -486,7 +487,7 @@
 	</resultMap>
 	
 	<select id="selectGongmaeThumb" parameterType="string" resultMap="RM_selectGongmaeThumb">
-		select 공매_목록_고유번호, <include refid="gongmaeColumns" />
+		select 공매_목록_고유번호, 상단주소, <include refid="gongmaeColumns" />
 		  from [수작업입력].[dbo].[공매_기본정보]
 		 where [공매_목록_고유번호] = #{goyubeonho}
 	</select>

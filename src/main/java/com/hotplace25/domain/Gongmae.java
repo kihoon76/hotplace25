@@ -15,6 +15,7 @@ public class Gongmae extends GongmaeKey{
 	private String ibchalPeriodNumber;			//입찰기간_회차_차수
 	private String yuchal;						//유찰횟수
 	private String mulgeonAddress;				//물건주소지
+	private String mulgeonAddressDetail;		//상단주소
 	private String jibhaengGigwan;				//집행기관
 	private String minIbchalga;					//최저입찰가
 	private String jeonjaBojeungseoYN;			//전자보증서 사용여부
@@ -168,5 +169,11 @@ public class Gongmae extends GongmaeKey{
 	}
 	public void setBudaeJogeon(String budaeJogeon) {
 		this.budaeJogeon = budaeJogeon;
+	}
+	public String getMulgeonAddressDetail() {
+		return mulgeonAddressDetail;
+	}
+	public void setMulgeonAddressDetail(String mulgeonAddressDetail) {
+		this.mulgeonAddressDetail = mulgeonAddressDetail;
 	}
 }
