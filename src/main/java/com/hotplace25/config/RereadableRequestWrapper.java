@@ -69,7 +69,8 @@ public class RereadableRequestWrapper extends HttpServletRequestWrapper {
 
         if (!("application/x-www-form-urlencoded".equalsIgnoreCase(super.getContentType()))) {
             // Store parameters to this wrapper instance for URL parameters .
-            @SuppressWarnings("unchecked") Enumeration<String> parameterNames = super.getRequest().getParameterNames();
+            Enumeration<String> parameterNames = super.getRequest().getParameterNames();
+            
             if (parameterNames.hasMoreElements()) {
                 parametersParsed = true;
                 while (parameterNames.hasMoreElements()) {
@@ -290,6 +291,7 @@ public class RereadableRequestWrapper extends HttpServletRequestWrapper {
             parseParameters();
         }
 		
+		if(this.parameters == null) System.err.println("===========null");
         ArrayList<String> values = this.parameters.get(name);
         String[] arr = values.toArray(new String[values.size()]);
         
