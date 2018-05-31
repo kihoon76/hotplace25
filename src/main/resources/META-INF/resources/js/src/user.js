@@ -271,6 +271,7 @@ $(document).ready(function() {
 						_doCheckJoinID = true;
 						_checkedJoinID = id;
 						hotplace.validation.ctrlValidMsg($(_joinStep02_TXT_UserId), false, '.DUP');
+						hotplace.dom.showAlertMsg(null, '사용가능한 아이디입니다.', {width:'30%'});
 					}
 				}
 				console.log(data);
