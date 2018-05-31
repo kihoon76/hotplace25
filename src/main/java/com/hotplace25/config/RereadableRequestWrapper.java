@@ -293,8 +293,13 @@ public class RereadableRequestWrapper extends HttpServletRequestWrapper {
 		
 		System.err.println(name);
         ArrayList<String> values = this.parameters.get(name);
-        String[] arr = values.toArray(new String[values.size()]);
         
+        String[] arr = null;
+        //@RequestParam required=false일 경우
+        if(values != null) {
+        	 arr = values.toArray(new String[values.size()]);
+        }
+       
         if (arr == null) {
             return null;
         }
