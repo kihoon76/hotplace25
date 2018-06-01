@@ -603,6 +603,9 @@
 				else if(e == '404' || e.toLowerCase() == 'not found') {
 					jqXHR.errCode = _err.PAGE_NOT_FOUND;
 				}
+				else if(e == '400'/* || e.toLowerCase() == 'not found'*/) {
+					jqXHR.errCode = _err.SERVER_PARAM_ERR;
+				}
 				else {
 					jqXHR.errCode = ($.parseJSON(jqXHR.responseText)).errCode;
 				}
@@ -647,6 +650,7 @@
 		LOGIN:'100',
 		FORBIDDEN: '403',
 		PAGE_NOT_FOUND: '404',
+		SERVER_PARAM_ERR: '400',
 		SERVER_ERR: '500',
 		DUP_LOGIN: '202', //중복 로그인
 		WRONG_ACCOUNT: '102', //아이디 및 비밀번호
@@ -695,6 +699,9 @@
 			break;
 		case _err.SERVER_ERR: 
 			hotplace.dom.showAlertMsg(null, msg || '서버오류가 발생했습니다.');
+			break;
+		case _err.SERVER_PARAM_ERR:
+			hotplace.dom.showAlertMsg(null, msg || '서버 파라미터 오류가 발생했습니다.');
 			break;
 		case _err.WRONG_ACCOUNT :
 			hotplace.dom.showAlertMsg(function() {console.log('ooooo')}, msg || '아이디 또는 비밀번호가 틀립니다.', {width:'30%'});
