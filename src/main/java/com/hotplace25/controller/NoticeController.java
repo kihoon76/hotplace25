@@ -25,7 +25,7 @@ public class NoticeController {
 	@GetMapping(value="page/{pageNum}", produces="application/text; charset=utf8")
 	@ResponseBody
 	public String getPage(@PathVariable(name="pageNum") int pageNum,
-						  @RequestParam(name="type", required=true) String type,
+						  @RequestParam(name="type", required=false) String type,
 						  @RequestParam(name="text", required=false) String text) {
 		
 		Map map = new HashMap();
