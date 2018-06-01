@@ -1648,11 +1648,6 @@
 		return false;
 	});
 	
-	//disable F11 key
-	$('body').on('keydown', function(e) {
-		console.log(e)
-	});
-	
 }(
 	hotplace.dom = hotplace.dom || {},
 	jQuery
