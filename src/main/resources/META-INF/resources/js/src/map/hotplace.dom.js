@@ -61,6 +61,12 @@
 		_$btnStreetView.trigger('click', true);
 	}
 	
+	/**
+	 * @memberof hotplace.dom
+	 * @function toggleFullScreen
+	 * @desc 전체화면 (F11 key can exit programmatic-fullscreen, but programmatic-exitFullscreen cannot exit F11-fullscreen.)
+	 * @desc Esc key cannot exit F11-fullscreen, but does exit programmatic-fullscreen.
+	 */
 	dom.toggleFullScreen = function() {
 		if(!document.fullscreenElement &&    // alternative standard method
 		    !document.mozFullScreenElement &&
@@ -1640,6 +1646,11 @@
 	
 	$(window).contextmenu(function(e) {
 		return false;
+	});
+	
+	//disable F11 key
+	$('body').on('keydown', function(e) {
+		console.log(e)
 	});
 	
 }(
