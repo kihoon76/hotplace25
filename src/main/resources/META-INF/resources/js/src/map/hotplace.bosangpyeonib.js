@@ -48,7 +48,7 @@
 			method: 'POST',
 			dataType: 'text',
 			contentType: 'application/json; charset=UTF-8',
-			data: {gunu: list},
+			data: JSON.stringify({gunu: list}),
 			//loadEl: '#dvBosangPyeonib',
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
