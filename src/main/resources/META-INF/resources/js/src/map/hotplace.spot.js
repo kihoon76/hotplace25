@@ -387,9 +387,21 @@
 	}
 	
 	function _viewTojiDefaultInfo() {
-		hotplace.dom.showSpotTojiDefaultForm(null, function() {
-			
-		}, {address: _address, pnu:_pnu});
+		
+		hotplace.ajax({
+			url: 'spot/tojiDefaultInfo',
+			method: 'GET',
+			dataType: 'json',
+			data: {pnu: _pnu},
+			success: function(data, textStatus, jqXHR) {
+				console.log(data)
+				hotplace.dom.showSpotTojiDefaultForm(null, function() {
+					
+				}, {address: _address, pnu:_pnu});
+			}
+		});
+		
+		
 	}
 	
 	function _getTojiUseLimitTabHtml($target, tabNum) {

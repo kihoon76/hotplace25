@@ -36,6 +36,17 @@ public class SpotController {
 	@Resource(name="spotService")
 	SpotService spotService;
 	
+	
+	@GetMapping("/tojiDefaultInfo")
+	@ResponseBody
+	public AjaxVO getTojiDefaultInfo(@RequestParam("pnu") String pnu) {
+		AjaxVO vo = new AjaxVO();
+		
+		vo.setSuccess(true);
+		return vo;
+	}
+	
+	
 	@PostMapping("/reg/maemulNoPic")
 	@ResponseBody
 	public AjaxVO uploadRegMaemulNoPic(@RequestBody Maemul maemul) throws JsonGenerationException, JsonMappingException, IOException {
