@@ -294,16 +294,8 @@ public class RereadableRequestWrapper extends HttpServletRequestWrapper {
             parseParameters();
         }
 		
-		System.err.println(name);
         ArrayList<String> values = this.parameters.get(name);
         
-        ObjectMapper m = new ObjectMapper();
-        try {
-			System.err.println(m.writeValueAsString(values));
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
         String[] arr = null;
         //@RequestParam required=false일 경우
         if(values != null) {
