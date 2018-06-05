@@ -24,6 +24,9 @@ import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class RereadableRequestWrapper extends HttpServletRequestWrapper {
 	private boolean parametersParsed = false;
 	private final Charset encoding;
@@ -294,6 +297,13 @@ public class RereadableRequestWrapper extends HttpServletRequestWrapper {
 		System.err.println(name);
         ArrayList<String> values = this.parameters.get(name);
         
+        ObjectMapper m = new ObjectMapper();
+        try {
+			System.err.println(m.writeValueAsString(values));
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         String[] arr = null;
         //@RequestParam required=false일 경우
         if(values != null) {
