@@ -470,6 +470,7 @@
 			tDaechulIja: $(_txtDaechulIja).val(),
 			sDaechulIja: $(_stepDaechulIja).val(),
 			wDaechulIja: $(_WDaechulIja).val(),
+			oDaechulIja: $(_txtDaechulIjaOwnTerm).val(),
 			rDaechulIja: $(_ratioDaechulIja).text(),
 			
 			tChwideugse: $(_txtChwideugse).val(),

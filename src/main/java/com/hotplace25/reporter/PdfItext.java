@@ -296,6 +296,11 @@ public class PdfItext {
 							doc.select("span#tAlterSanrim").first().text("-");
 						}
 					}
+					else if("DaechulIja".equals(items[i])) {
+						doc.select("span#tDaechulIja").first().text(jo.get("tDaechulIja").getAsString());
+						doc.select("span#sDaechulIja").first().text(jo.get("sDaechulIja").getAsString());
+						doc.select("span#oDaechulIja").first().text(jo.get("oDaechulIja").getAsString());
+					}
 					else {
 						doc.select("span#t" + items[i]).first().text(jo.get("t" + items[i]).getAsString());
 						doc.select("span#s" + items[i]).first().text(jo.get("s" + items[i]).getAsString());
