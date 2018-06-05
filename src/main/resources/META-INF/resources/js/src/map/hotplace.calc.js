@@ -677,7 +677,7 @@
 					var _$$2 = $(suji.getStepOtherAssetRatioId()).data('value');
 					var _$$3 = $(suji.getStepOwnTermId()).data('value');
 					
-					var _$$r = Math.round(parseFloat(_$$1) * (0.01 * parseFloat(_$$2)) * parseFloat(_$$3));
+					var _$$r = Math.round(parseFloat(_$$1) * (0.01 * parseFloat(_$$2)));
 					
 					$txtDaechulIja.data('value', _$$r);
 					$txtDaechulIja.val(_$$r.toString().money());
