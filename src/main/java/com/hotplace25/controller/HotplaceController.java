@@ -356,8 +356,8 @@ public class HotplaceController {
 	
 	@PostMapping(value="bosangpyeonib/group", produces="application/text; charset=utf8")
 	@ResponseBody
-	public String getBosangPyeonibGroupList(@RequestParam("gunu") String gunu) {
-		return DataUtil.makeReturn(hotplaceService.getBosangPyeonibGroupList(gunu), true);
+	public String getBosangPyeonibGroupList(/*@RequestParam("gunu") String gunu*/ @RequestBody Map<String, String> param) {
+		return DataUtil.makeReturn(hotplaceService.getBosangPyeonibGroupList(param.get("gunu")), true);
 	}
 	
 	@GetMapping("celldetail")

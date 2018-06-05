@@ -43,11 +43,11 @@
 	}
 	
 	function _getGroupMulgeonsojaeji(list, cbSucc) {
-		list = list.replace(/,/ig, '|');
 		hotplace.ajax({
 			url: 'bosangpyeonib/group',
 			method: 'POST',
 			dataType: 'text',
+			contentType: 'application/json; charset=UTF-8',
 			data: {gunu: list},
 			//loadEl: '#dvBosangPyeonib',
 			success: function(data, textStatus, jqXHR) {
