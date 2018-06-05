@@ -100,6 +100,18 @@
 									{{/each}}
 								</td>
 							</tr>
+							
+							<tr id="itemGyeonggongBosangPyeonib">
+                            	<th>보상편입여부 </th>
+                                <td>
+                                   	{{#each codes.bosangPyeonib as |bosangPyeonib|}}
+                                    <span class="rdchBox">
+                                    	<input type="checkbox" id="chkGyeonggongBosangPyeonib{{@index}}" value="{{bosangPyeonib.value}}">
+                                        <label for="chkGyeonggongBosangPyeonib{{@index}}" class="labelCh"><em class="text">{{bosangPyeonib.name}}</em></label>
+                                    </span>
+                                    {{/each}}
+                                </td>   
+                        	</tr>
 						</tbody>
 					</table>
 					
