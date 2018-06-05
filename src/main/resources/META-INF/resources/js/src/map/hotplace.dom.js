@@ -983,7 +983,7 @@
 	dom.showSpotTojiDefaultForm = function(closeFn, openFn, param) {
 		var ok = _appendModalPopup('spotTojiDefaultInfoForm', null, param);
 		if(ok) {
-			dom.openModal('', {width: '400'}, closeFn, openFn);
+			dom.openModal('', {width: '700'}, closeFn, openFn);
 		}
 		else {
 			_showLoginMsg();

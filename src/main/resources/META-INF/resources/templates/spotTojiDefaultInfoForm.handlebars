@@ -17,7 +17,7 @@
 				<div class="rowBox">
 
 					<!-- 좌측 -->
-					<div class="g_column w_3_2">
+					<div class="g_column w_3_1">
 						
 						<!-- 토지개요 -->
 						<div class="unit">							
@@ -28,25 +28,20 @@
 								<table class="tableStyle borderStyle topBold left">
 									<colgroup>
 										<col style="width:25%;">
-										<col style="width:25%;">
-										<col style="width:15%;">
-										<col style="width:35%;">
+										<col style="width:75%;">
 									</colgroup>
 									<tbody>
 										<tr>
 											<th>소재지(지번)</th>
-											<td colspan="3">{{address}}</td>
+											<td>{{address}}</td>
 										</tr>
 										<tr>
 											<th>지목</th>
 											<td>{{jimok}}</td>
-
-											<th>면적</th>
-											<td>{{area}} ㎡</td>
 										</tr>
 										<tr>
 											<th>개별공시지가(㎡당)</th>
-											<td colspan="3">												
+											<td>												
 												
 											</td>
 										</tr>
@@ -55,47 +50,12 @@
 							</div>
 						</div>
 						<!-- //토지개요 -->
-						
-						<!-- 토지이용규제 현황 -->
-						<div class="unit">							
-							<div class="unit_tit">
-								<span class="sTit color_black noBullt">토지이용규제 현황</span>
-							</div>
-							<div class="unit_cont bgWhite">
-								
-								<table class="tableStyle borderStyle topBold left">
-									<colgroup>
-										<col style="width:25%;">
-										<col style="">
-									</colgroup>
-									<tbody>
-										<tr>
-											<th>국토계획법상 지역,지구 등</th>
-											<td>{{gugtolaw}}</td>
-										</tr>
-										<tr>								
-											<th>다른 법령에 따른 지역·지구 등</th>
-											<td>{{etclaw}}</td>
-										</tr>
-										<tr>
-											<th>기타</th>
-											<td>{{boochickadd}}</td>
-										</tr>
-										<tr>
-											<th>도입가능 용도(개략 검토)</th>
-											<td>{{tojiuse}}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>							
-						</div>
-						<!-- //토지이용규제 현황 -->
 					</div>
 
 					<!-- //좌측 -->
 
 					<!-- 우측 -->
-					<div class="g_column w_3_1">
+					<div class="g_column w_3_2">
 						<!-- Luris 도면 -->
 						<div id="dvSujiLurisDrawing" class="unit">							
 							<div class="unit_tit">
