@@ -58,7 +58,7 @@
 			otherAssetRatio:70,
 			myeongdobi:0,
 			acceptLandUse:0,
-			daechulIja:'5.0',
+			daechulIja:'3.5',
 			chwideugse:4.6,
 			jaesanse:0.07,
 		}
