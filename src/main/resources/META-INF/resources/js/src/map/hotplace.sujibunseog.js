@@ -32,6 +32,7 @@
 		_WTojibi = '#WTojibi',
 		_ratioTojibi = '#ratioTojibi',
 		_txtDaechulIja = '#txtDaechulIja',
+		_txtDaechulIjaOwnTerm = '#txtDaechulIjaOwnTerm',	//보유기간
 		_stepDaechulIja = '#stepDaechulIja',
 		_WDaechulIja = '#WDaechulIja',
 		_ratioDaechulIja = '#ratioDaechulIja',
@@ -193,6 +194,7 @@
 	sujibunseog.getWTojibiId = function() { return _WTojibi; }
 	sujibunseog.getRatioTojibiId = function() { return _ratioTojibi; }
 	sujibunseog.getTxtDaechulIjaId = function() { return _txtDaechulIja; }
+	sujibunseog.getTxtDaechulIjaOwnTermId = function() { return _txtDaechulIjaOwnTerm; }
 	sujibunseog.getStepDaechulIjaId = function() { return _stepDaechulIja; }
 	sujibunseog.getWDaechulIjaId = function() { return _WDaechulIja; }
 	sujibunseog.getRatioDaechulIjaId = function() { return _ratioDaechulIja; }

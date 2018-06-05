@@ -572,7 +572,7 @@
 				_initYangdose();
 				hotplace.calc.sujibunseog.calcJaesanse(true);
 				hotplace.calc.sujibunseog.calcJaesanse2(true);
-				//hotplace.calc.sujibunseog.calcYangdose();
+				hotplace.calc.sujibunseog.calcDaechulIja(true);
 			},
 			calcOtherAssetRatio: function() {
 				_initYangdose();
@@ -596,7 +596,7 @@
 				hotplace.calc.sujibunseog.calcMyeongdobi(true);
 				//토지승낙비 : 매입금액 * 비율
 				hotplace.calc.sujibunseog.calcAcceptLandUse(true);
-				//대출이자 : 매입가 * 타인자본비율
+				//대출이자 : 매입가 * 타인자본비율 * 보유기간
 				hotplace.calc.sujibunseog.calcDaechulIja(true);
 				//취득세 : 매입가 * 비율
 				hotplace.calc.sujibunseog.calcChwideugse(true);
@@ -666,7 +666,7 @@
 			},
 			calcDaechulIja: function(isSet) {
 				_initYangdose();
-				console.log('대출이자(매입가 X 타인자본 비율)');
+				console.log('대출이자(매입가 X 타인자본 비율 X 보유기간)');
 				var suji = hotplace.sujibunseog;
 				var $txtDaechulIja = $(suji.getTxtDaechulIjaId());
 				
@@ -684,10 +684,13 @@
 				}
 				
 				var $stepDaechulIja = $(suji.getStepDaechulIjaId());
+				var $txtDaechulIjaOwnTermId = $(suji.getTxtDaechulIjaOwnTermId());
 				
 				var $$1 = $txtDaechulIja.data('value');
 				var $$2 = $stepDaechulIja.data('value');
-				var $$r = Math.round(parseFloat($$1) * (0.01 * parseFloat($$2)));
+				var $$3 = $txtDaechulIjaOwnTermId.data('value');
+				
+				var $$r = Math.round(parseFloat($$1) * (0.01 * parseFloat($$2)) * parseFloat($$3));
 				
 				var $WDaechulIja = $(suji.getWDaechulIjaId());
 				$WDaechulIja.data('value', $$r);
