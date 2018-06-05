@@ -81,7 +81,7 @@ public class SearchController {
 				gyeongGongIn.setParamCityPlanStateJeob(cityPlanState[1]);
 			}
 			
-			gyeongGongIn.setParamBosangPyeonib(/*DataUtil.convertArrayToString(gyeongGongIn.getBosangPyeonib())*/null);
+			gyeongGongIn.setParamBosangPyeonib(DataUtil.convertArrayToString(gyeongGongIn.getBosangPyeonib()));
 			
 //			ObjectMapper o = new ObjectMapper();
 //			System.err.println(o.writeValueAsString(gyeongGongIn));

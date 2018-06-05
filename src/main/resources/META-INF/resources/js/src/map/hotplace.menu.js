@@ -103,12 +103,12 @@
 			    }
 		    },
 			{title:'HP등급', field:'hpgrade', align:'center', width:80},
-//			{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter: true, 
-//		    	editor:_makeTabulatorFilterFromCode(_getBosangPyeonibCode()), editable:hotplace.dom.createTabulatorNoEdit,
-//		    	formatter:function(cell) {
-//			    	return hotplace.util.getBosangPyeonibGubunStr(cell.getValue());
-//			    }
-//		    },
+			{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter: true, 
+		    	editor:_makeTabulatorFilterFromCode(_getBosangPyeonibCode()), editable:hotplace.dom.createTabulatorNoEdit,
+		    	formatter:function(cell) {
+			    	return hotplace.util.getBosangPyeonibGubunStr(cell.getValue());
+			    }
+		    },
 			{ title:'주소', field:'address',   headerFilter:'input', headerFilterPlaceholder:'주소검색' },
 			{ title:'위도', field:'lat', visible: false },
 			{ title:'경도', field:'lng', visible: false },
@@ -1055,7 +1055,7 @@
 				'etcChamgo':_getCheckboxesData('itemGyeonggongEtcChamgo'),
 				'cityPlan':_getCheckboxesData('itemGyeonggongCityPlan'),
 				'cityPlanState':_convertToYN(_getCheckboxesData('itemGyeonggongCityPlanState')),
-				'bosangPyeonib': null, //_convertToYN(_getCheckboxesData('itemGyeonggongBosangPyeonib')),
+				'bosangPyeonib': _convertToYN(_getCheckboxesData('itemGyeonggongBosangPyeonib')),
 				'hpGrade': null, //_getReverseMinMax(hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongHpGrade.substring(1))),
 				'envGrade': null, //_getReverseMinMax(hotplace.dom.getSliderValues(_gyeonggongSearchMenu, _gyeonggongEnvGrade.substring(1))),
 				'tojiUseLimitCancel': null, //_getCheckboxesData('itemGyeonggongTojiUseLimitCancel')
