@@ -669,22 +669,28 @@
 				console.log('대출이자(매입가 X 타인자본 비율 X 보유기간)');
 				var suji = hotplace.sujibunseog;
 				var $txtDaechulIja = $(suji.getTxtDaechulIjaId());
+				var $txtDaechulIjaOwnTermId = $(suji.getTxtDaechulIjaOwnTermId());
 				
 				if(isSet) {
 					//매입가
 					var _$$1 = $(suji.getWPurchaseId()).data('value');
 					var _$$2 = $(suji.getStepOtherAssetRatioId()).data('value');
-					var _$$r = Math.round(parseFloat(_$$1) * (0.01 * parseFloat(_$$2)));
+					var _$$3 = $(suji.getStepOwnTermId()).data('value');
+					
+					var _$$r = Math.round(parseFloat(_$$1) * (0.01 * parseFloat(_$$2)) * parseFloat(_$$3));
 					
 					$txtDaechulIja.data('value', _$$r);
 					$txtDaechulIja.val(_$$r.toString().money());
+					$txtDaechulIjaOwnTermId.data('value', _$$3);
+					$txtDaechulIjaOwnTermId.val(_$$3 + '년');
+					
 					
 					//근저당비 : 대출금 X 130%
 					hotplace.calc.sujibunseog.calcSetGeunjeodang(true);
 				}
 				
 				var $stepDaechulIja = $(suji.getStepDaechulIjaId());
-				var $txtDaechulIjaOwnTermId = $(suji.getTxtDaechulIjaOwnTermId());
+				
 				
 				var $$1 = $txtDaechulIja.data('value');
 				var $$2 = $stepDaechulIja.data('value');
