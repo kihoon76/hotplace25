@@ -43,6 +43,7 @@
 	}
 	
 	function _getGroupMulgeonsojaeji(list, cbSucc) {
+		list = list.replace(',', '|');
 		hotplace.ajax({
 			url: 'bosangpyeonib/group',
 			method: 'POST',
