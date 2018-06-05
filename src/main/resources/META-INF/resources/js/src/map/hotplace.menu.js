@@ -43,12 +43,12 @@
 			    }
 		    },
 		    {title:'HP등급', field:'hpgrade', align:'center', width:100},
-		    /*{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter: true, 
+		    {title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter: true, 
 		    	editor:_makeTabulatorFilterFromCode(_getBosangPyeonibCode()), editable:hotplace.dom.createTabulatorNoEdit,
 		    	formatter:function(cell) {
 			    	return hotplace.util.getBosangPyeonibGubunStr(cell.getValue());
 			    }
-		    },*/
+		    },
 		    {title:'주소', field:'address', align:'left', width:370, headerFilter:'input', headerFilterPlaceholder:'주소검색'},
 			{title:'위도', field:'lat', visible:false},
 			{title:'경도', field:'lng', visible: false}
@@ -354,7 +354,7 @@
 			param = {
 				'cityPlan':_getCheckboxesData('itemCityPlanTab01'),
 				'cityPlanState':_convertToYN(_getCheckboxesData('itemCityPlanStateTab01')),
-				'bosangPyeonib': null, //_convertToYN(_getCheckboxesData('itemBosangPyeonibTab01')),
+				'bosangPyeonib': _convertToYN(_getCheckboxesData('itemBosangPyeonibTab01')),
 				'jiyeog':_getCheckboxesData('itemJiyeogTab01'),
 				'jimok':_getCheckboxesData('itemJimokTab01'),
 				'gongsi':_getCheckboxesData('itemGongsiTab01'),

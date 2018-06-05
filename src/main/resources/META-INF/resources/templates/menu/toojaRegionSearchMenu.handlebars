@@ -51,6 +51,17 @@
                                         {{/each}}
                                     </td>
                                 </tr>
+                                <tr id="itemBosangPyeonibTab01">
+                                    <th>보상편입여부 </th>
+                                    <td>
+                                    {{#each codes.bosangPyeonib as |bosangPyeonib|}}
+                                        <span class="rdchBox">
+                                            <input type="checkbox" id="chkJangMiBosangPyeonib{{@index}}" value="{{bosangPyeonib.value}}">
+                                            <label for="chkJangMiBosangPyeonib{{@index}}" class="labelCh"><em class="text">{{bosangPyeonib.name}}</em></label>
+                                        </span>
+                                    {{/each}}
+                                    </td>   
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
