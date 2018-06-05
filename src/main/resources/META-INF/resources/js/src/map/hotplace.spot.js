@@ -43,8 +43,9 @@
 			//_viewConsulting();
 			break;
 		case 'TOJI_USE_LIMT' :
-			hotplace.dom.showServiceReady();
-			//_viewTojiUseLimit();
+			//hotplace.dom.showServiceReady();
+			//_viewTojiUseLimit();//-원래 토지이용규제 현황보기에서 토지기본정보로 변경됨
+			_viewTojiDefaultInfo();
 			break;
 		}
 	} 
@@ -381,6 +382,14 @@
 			
 			_getTojiUseLimitTabHtml($tabContentDv, $(this).data('tabNum'));
 		});
+		
+		
+	}
+	
+	function _viewTojiDefaultInfo() {
+		hotplace.dom.showSpotTojiDefaultForm(null, function() {
+			
+		}, {address: _address, pnu:_pnu});
 	}
 	
 	function _getTojiUseLimitTabHtml($target, tabNum) {

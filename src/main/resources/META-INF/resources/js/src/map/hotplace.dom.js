@@ -980,6 +980,16 @@
 		}
 	}
 	
+	dom.showSpotTojiDefaultForm = function(closeFn, openFn, param) {
+		var ok = _appendModalPopup('spotTojiDefaultInfoForm', null, param);
+		if(ok) {
+			dom.openModal('', {width: '400'}, closeFn, openFn);
+		}
+		else {
+			_showLoginMsg();
+		}
+	}
+	
 	dom.showMulgeonPanoramaForm = function(closeFn, openFn, param) {
 		_appendModalPopup('mulgeonPanoForm', null, {address:param.address});
 		
