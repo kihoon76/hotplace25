@@ -100,7 +100,7 @@
 	
 	<select id="selectTojiDefaultInfo" parameterType="string" resultType="map">
 		select PNU, 지목 jimok, 면적 area, 공시지가_기준년월 gongsiYm, 공시지가 gongsi
-		  from [웹].[dbo].[토지기본정보PNU]
+		  from [서비스].[dbo].[토지기본정보PNU]
 		 where PNU = #{pnu}
 	</select>
 </mapper>
