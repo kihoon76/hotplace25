@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -26,6 +27,7 @@ import com.hotplace25.domain.Consulting;
 import com.hotplace25.domain.FileBucket;
 import com.hotplace25.domain.GwansimMulgeon;
 import com.hotplace25.domain.Maemul;
+import com.hotplace25.service.SearchService;
 import com.hotplace25.service.SpotService;
 import com.hotplace25.util.SessionUtil;
 
@@ -36,13 +38,30 @@ public class SpotController {
 	@Resource(name="spotService")
 	SpotService spotService;
 	
+	@Resource(name="searchService")
+	SearchService searchService;
+	
 	
 	@GetMapping("/tojiDefaultInfo")
 	@ResponseBody
-	public AjaxVO getTojiDefaultInfo(@RequestParam("pnu") String pnu) {
-		AjaxVO vo = new AjaxVO();
+	public AjaxVO<Map<String, String>> getTojiDefaultInfo(@RequestParam("pnu") String pnu) {
+		AjaxVO<Map<String, String>> vo = new AjaxVO<Map<String, String>>();
 		
-		vo.setSuccess(true);
+		try {
+			Map<String, String> info = spotService.getTojiDefaultInfo(pnu);
+			Map<String, String> luris = searchService.getLurisDrawing(pnu);
+			vo.setSuccess(true);
+			
+			if(luris != null) {
+				info.put("image", luris.get("image"));
+			}
+			vo.addObject(info);
+		}
+		catch(Exception e) {
+			vo.setSuccess(false);
+			vo.setErrMsg(e.getMessage());
+		}
+		
 		return vo;
 	}
 	

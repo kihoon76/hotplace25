@@ -97,6 +97,10 @@
 		 where 계정아이디 = #{accountId}
 		   and 관심물건번호 = #{gwansimMulgeonNum}
 	</update>
+	
+	<select id="selectTojiDefaultInfo" parameterType="string" resultType="map">
+	
+	</select>
 </mapper>
 <!-- 
 

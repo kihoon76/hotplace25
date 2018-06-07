@@ -1,6 +1,7 @@
 package com.hotplace25.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -74,5 +75,9 @@ public class SpotService {
 
 	public boolean modifyMyGwansimMulgeon(GwansimMulgeon gm) {
 		return 1 == spotDao.updateMyGwansimMulgeon(gm);
+	}
+
+	public Map<String, String> getTojiDefaultInfo(String pnu) {
+		return spotDao.selectTojiDefaultInfo(pnu);
 	}
 }

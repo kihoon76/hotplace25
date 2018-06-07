@@ -1,6 +1,7 @@
 package com.hotplace25.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -77,5 +78,10 @@ public class SpotDaoImpl implements SpotDao {
 	@Override
 	public int updateMyGwansimMulgeon(GwansimMulgeon gm) {
 		return msSqlSession.update(namespace + ".updateMyGwansimMulgeon", gm);
+	}
+
+	@Override
+	public Map<String, String> selectTojiDefaultInfo(String pnu) {
+		return msSqlSession.selectOne(namespace + ".selectTojiDefaultInfo", pnu);
 	}
 }

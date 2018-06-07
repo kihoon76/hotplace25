@@ -1,6 +1,7 @@
 package com.hotplace25.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.hotplace25.domain.Consulting;
 import com.hotplace25.domain.GwansimMulgeon;
@@ -31,5 +32,7 @@ public interface SpotDao {
 	public GwansimMulgeon selectMyGwansim(GwansimMulgeon gm);
 
 	public int updateMyGwansimMulgeon(GwansimMulgeon gm);
+
+	public Map<String, String> selectTojiDefaultInfo(String pnu);
 
 }
