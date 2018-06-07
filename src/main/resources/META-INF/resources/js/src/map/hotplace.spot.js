@@ -405,6 +405,7 @@
 					param.gongsi = (datas.gongsi != null) ? datas.gongsi.toString().money() : '-';
 					param.gongsiYm = (datas.gongsiYm != null) ? datas.gongsiYm : '-';
 					param.jimok = (datas.jimok != null) ? datas.jimok : '-';
+					param.image = datas.image;
 				}
 				
 				hotplace.dom.showSpotTojiDefaultForm(null, function() {
