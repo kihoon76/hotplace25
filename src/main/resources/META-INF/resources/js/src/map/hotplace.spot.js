@@ -395,9 +395,21 @@
 			data: {pnu: _pnu},
 			success: function(data, textStatus, jqXHR) {
 				console.log(data)
+				
+				var param = {address: _address, pnu:_pnu};
+				var datas = data.datas;
+				
+				if(datas && datas.length > 0) {
+					datas = datas[0];
+					param.area = (datas.area != null) ? datas.area : '-';
+					param.gongsi = (datas.gongsi != null) ? datas.gongsi.toString().money() : '-';
+					param.gongsiYm = (datas.gongsiYm != null) ? datas.gongsiYm : '-';
+					param.jimok = (datas.jimok != null) ? datas.jimok : '-';
+				}
+				
 				hotplace.dom.showSpotTojiDefaultForm(null, function() {
 					
-				}, {address: _address, pnu:_pnu});
+				}, param);
 			}
 		});
 		
