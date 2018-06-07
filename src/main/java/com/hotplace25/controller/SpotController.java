@@ -49,12 +49,15 @@ public class SpotController {
 		
 		try {
 			Map<String, String> info = spotService.getTojiDefaultInfo(pnu);
-			Map<String, String> luris = searchService.getLurisDrawing(pnu);
-			vo.setSuccess(true);
-			
-			if(luris != null) {
-				info.put("image", luris.get("image"));
+			if(info != null) {
+				Map<String, String> luris = searchService.getLurisDrawing(pnu);
+				
+				if(luris != null) {
+					info.put("image", luris.get("image"));
+				}
 			}
+			
+			vo.setSuccess(true);
 			vo.addObject(info);
 		}
 		catch(Exception e) {
