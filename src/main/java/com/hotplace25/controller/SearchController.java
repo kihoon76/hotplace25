@@ -279,4 +279,12 @@ public class SearchController {
 		
 		return vo;
 	}
+	
+	@PostMapping(value="addrToPnu", produces="application/text; charset=utf8")
+	@ResponseBody
+	public String getAddrToPnu(@RequestBody Map<String, String> param) {
+		String addr = param.get("address");
+		System.err.println(addr);
+		return "4234234234";
+	}
 }

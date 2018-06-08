@@ -1609,6 +1609,20 @@
 	            htmlAddresses.push(/*(i+1) +'. '+ */addrType +' '+ item.address);
 	        }
 
+	        
+	        //검색된 주소로 PNU가져오기
+	        hotplace.ajax({
+	        	url: 'search/addrToPnu',
+				method: 'POST',
+				contentType: 'application/json; charset=UTF-8',
+				data: JSON.stringify({address: htmlAddresses[0]}),
+				dataType: 'text',
+				activeMask: true,
+				success: function(data, textStatus, jqXHR) {
+					console.log(data);
+				}
+	        });
+	        
 	        _infoWinCoordAddr.setContent([
 	            '<div class="mapInnerBox onlyText">',
 	            '   <div class="mibBody">',
