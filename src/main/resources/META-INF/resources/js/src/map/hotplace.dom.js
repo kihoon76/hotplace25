@@ -1640,6 +1640,19 @@
 					
 					if(data) {
 						//PNU 존재
+						hotplace.maps.destroyMarkerType(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
+						hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.ADDRESS_SEARCH);
+						
+						var lng = coord.x;
+						var lat = coord.y;
+						
+						if(!lng || !lat) {
+							hotplace.processAjaxError(hotplace.error.MISS_LATLNG);
+							return;
+						}
+						
+						
+						hotplace.maps.panToLikeAddressSearch(lat, lng, null, {address:address[0], pnu:data, lng:lng, lat:lat});
 					}
 					else {
 						 /*_infoWinCoordAddr.setContent([
