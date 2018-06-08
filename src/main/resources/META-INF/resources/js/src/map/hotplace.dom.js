@@ -1598,6 +1598,7 @@
 	        }
 
 	        var items = response.result.items,
+	        	address = [],
 	            htmlAddresses = [];
 
 	        for (var i=0, ii=items.length, item, addrType; i<ii; i++) {
@@ -1606,6 +1607,7 @@
 
 	            if(item.isRoadAddress) continue;
 	            
+	            address.push(item.address);
 	            htmlAddresses.push(/*(i+1) +'. '+ */addrType +' '+ item.address);
 	        }
 
@@ -1615,7 +1617,7 @@
 	        	url: 'search/addrToPnu',
 				method: 'POST',
 				contentType: 'application/json; charset=UTF-8',
-				data: JSON.stringify({address: htmlAddresses[0]}),
+				data: JSON.stringify({address: address[0]}),
 				dataType: 'text',
 				activeMask: true,
 				success: function(data, textStatus, jqXHR) {
