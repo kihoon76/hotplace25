@@ -20,4 +20,6 @@ public interface SearchDao {
 
 	List<Map<String, String>> selectSujiboonseogGongsiHistory(String pnu);
 
+	String selectPnuFromAddress(String addr);
+
 }

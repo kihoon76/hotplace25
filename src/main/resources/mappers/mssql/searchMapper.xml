@@ -109,4 +109,11 @@
 		#{pnu, mode=IN, jdbcType=NVARCHAR, javaType=string}
 	)}
 	</select>
+	
+	<select id="selectPnuFromAddress" statementType="CALLABLE" resultType="string">
+	{ call [서비스].[dbo].[SEL_풀주소검색] (
+		#{address, mode=IN, jdbcType=NVARCHAR, javaType=string}
+	)}
+	</select>
+
 </mapper>

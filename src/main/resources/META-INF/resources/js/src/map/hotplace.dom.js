@@ -1612,6 +1612,7 @@
 	        }
 
 	        
+	        
 	        //검색된 주소로 PNU가져오기
 	        hotplace.ajax({
 	        	url: 'search/addrToPnu',

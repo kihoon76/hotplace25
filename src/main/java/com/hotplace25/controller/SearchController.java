@@ -285,6 +285,8 @@ public class SearchController {
 	public String getAddrToPnu(@RequestBody Map<String, String> param) {
 		String addr = param.get("address");
 		System.err.println(addr);
-		return "4234234234";
+		
+		String pnu = searchService.getAddrToPnu(addr);
+		return pnu;
 	}
 }

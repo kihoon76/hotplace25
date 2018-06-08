@@ -122,4 +122,8 @@ public class SearchService {
 	public List<Map<String, String>> getSujiboonseogGongsiHistory(String pnu) {
 		return searchDao.selectSujiboonseogGongsiHistory(pnu);
 	}
+
+	public String getAddrToPnu(String addr) {
+		return searchDao.selectPnuFromAddress(addr);
+	}
 }
