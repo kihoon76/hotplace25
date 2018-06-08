@@ -1834,10 +1834,10 @@
 	 * @param {number} lng - 위도
 	 * @param {function} moveAfterFn - 지도 위치이동 후 실행할 함수
 	 */
-	maps.panToBounds = function(lat, lng, moveAfterFn) {
+	maps.panToBounds = function(lat, lng, moveAfterFn, zoomLevel) {
 		_panningStart = true;
 		if(_venderStr == 'naver') {
-			_venderMap.morph(new _vender.LatLng(lat, lng), hotplace.config.addrSearchPanLevel, {duration: 100});
+			_venderMap.morph(new _vender.LatLng(lat, lng), zoomLevel || hotplace.config.addrSearchPanLevel, {duration: 100});
 		}
 		else if(_venderStr == 'daum') {
 			/*_venderMap.panTo(new _vender.LatLngBounds(
@@ -2366,7 +2366,7 @@
 		btn.setAttribute('data-active', true);//jquery가 동작안함
 	}
 	
-	maps.panToLikeAddressSearch = function(lat, lng, menuName, winDatas, closeFn, options) {
+	maps.panToLikeAddressSearch = function(lat, lng, menuName, winDatas, closeFn, options, zoomLevel) {
 		maps.panToBounds(lat, lng, function() {
 			if(menuName) hotplace.dom.hideLnbContent($('#' + menuName + ' .close'));
 		     
@@ -2428,7 +2428,7 @@
 				},
 				zIndex: 1000
 			})
-		});
+		}, zoomLevel);
 	}
 }(
 	hotplace.maps = hotplace.maps || {},

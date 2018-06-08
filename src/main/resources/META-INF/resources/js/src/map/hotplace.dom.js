@@ -1652,7 +1652,7 @@
 						}
 						
 						
-						hotplace.maps.panToLikeAddressSearch(lat, lng, null, {address:address[0], pnu:data, lng:lng, lat:lat});
+						hotplace.maps.panToLikeAddressSearch(lat, lng, null, {address:address[0], pnu:data, lng:lng, lat:lat}, null, null, hotplace.maps.getCurrentLevel());
 					}
 					else {
 						 /*_infoWinCoordAddr.setContent([
