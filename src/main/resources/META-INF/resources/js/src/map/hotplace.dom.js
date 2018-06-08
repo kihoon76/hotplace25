@@ -1593,6 +1593,20 @@
 	        location: tm128,
 	        coordType: naver.maps.Service.CoordType.TM128
 	    }, function(status, response) {
+	    	
+	    	function __show(addr) {
+	    		_infoWinCoordAddr.setContent([
+     	            '<div class="mapInnerBox onlyText">',
+     	            '   <div class="mibBody">',
+     	            		addr,
+     	            ' 		<button class="closeBtn" onclick="hotplace.dom.closeCoordWindow()"><span class="hidden">닫기</span></button>',
+     	            '   </div>',
+     	            '</div>'
+     	            ].join(''));
+
+     	        _infoWinCoordAddr.open(hotplace.maps.getMap(), coord);
+	    	}
+	    	
 	        if (status === naver.maps.Service.Status.ERROR) {
 	            return hotplace.processAjaxError(hotplace.error.COORD);
 	        }
@@ -1611,7 +1625,7 @@
 	            htmlAddresses.push(/*(i+1) +'. '+ */addrType +' '+ item.address);
 	        }
 
-	        
+	        if(address.length == 0) return;
 	        
 	        //검색된 주소로 PNU가져오기
 	        hotplace.ajax({
@@ -1623,19 +1637,28 @@
 				activeMask: true,
 				success: function(data, textStatus, jqXHR) {
 					console.log(data);
+					
+					if(data) {
+						//PNU 존재
+					}
+					else {
+						 /*_infoWinCoordAddr.setContent([
+               	            '<div class="mapInnerBox onlyText">',
+               	            '   <div class="mibBody">',
+               	            		htmlAddresses[0],
+               	            ' 		<button class="closeBtn" onclick="hotplace.dom.closeCoordWindow()"><span class="hidden">닫기</span></button>',
+               	            '   </div>',
+               	            '</div>'
+               	            ].join(''));
+
+               	        _infoWinCoordAddr.open(hotplace.maps.getMap(), coord);*/
+						__show(htmlAddresses[0]);
+					}
+				},
+				error: function() {
+					__show(htmlAddresses[0]);
 				}
 	        });
-	        
-	        _infoWinCoordAddr.setContent([
-	            '<div class="mapInnerBox onlyText">',
-	            '   <div class="mibBody">',
-	            		htmlAddresses[0],
-	            ' 		<button class="closeBtn" onclick="hotplace.dom.closeCoordWindow()"><span class="hidden">닫기</span></button>',
-	            '   </div>',
-	            '</div>'
-	            ].join(''));
-
-	        _infoWinCoordAddr.open(hotplace.maps.getMap(), coord);
 	    });
 	}
 	
