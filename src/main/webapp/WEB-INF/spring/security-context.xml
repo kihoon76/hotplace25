@@ -64,6 +64,8 @@
 		<sec:intercept-url pattern="/mulgeon/search" access="permitAll"/> 
 		<!-- 패스워드 찾기 -->
 		<sec:intercept-url pattern="/search/password" access="permitAll"/>
+		<!-- 마우스 우클릭 주소찾기 -->
+		<sec:intercept-url pattern="/search/addrToPnu" access="permitAll"/>
 		<!-- 상담신청 -->
 		<sec:intercept-url pattern="/question" access="permitAll"/>
 		
