@@ -17,7 +17,8 @@
 		
 		if(hasMarker) {
 			_marker = new naver.maps.Marker({
-			    position: new naver.maps.LatLng(x, y)
+			    position: new naver.maps.LatLng(x, y),
+			    zIndex: 1000
 			});
 		}
 		
