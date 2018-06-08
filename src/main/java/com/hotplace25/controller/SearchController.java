@@ -286,7 +286,7 @@ public class SearchController {
 		String addr = param.get("address");
 		System.err.println(addr);
 		
-		String pnu = searchService.getAddrToPnu(/*addr*/"서울특별시 종로구 통의동55 25-7");
+		String pnu = searchService.getAddrToPnu(addr);
 		return pnu;
 	}
 }

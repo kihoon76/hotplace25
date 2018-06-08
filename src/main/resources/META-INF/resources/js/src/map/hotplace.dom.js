@@ -1636,7 +1636,7 @@
 				dataType: 'text',
 				activeMask: true,
 				success: function(data, textStatus, jqXHR) {
-					console.log(data);
+					console.log(coord);
 					
 					if(data) {
 						//PNU 존재
