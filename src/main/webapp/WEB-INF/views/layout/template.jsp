@@ -161,7 +161,7 @@
 		
 		<div id="dvContextMenu" class="context-menu">
 			<div class="context-menu-body">
-				<button id="btnContextLocAddress" class="context-btn"><span class="text">위치 주소보기</span></button>
+				<button id="btnContextLocAddress" class="context-btn"><span class="text">위치 정보보기</span></button>
 			</div>
 		</div>
 	</div>
