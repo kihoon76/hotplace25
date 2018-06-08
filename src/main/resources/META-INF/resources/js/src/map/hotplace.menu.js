@@ -187,7 +187,8 @@
 			},
 			error: function(jqXHR, textStatus, e) {
 				if(cbErr) cbErr();
-			} 
+			},
+			timeout: 5000
        });
 	}
 	
