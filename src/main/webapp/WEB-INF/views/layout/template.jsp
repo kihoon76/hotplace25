@@ -6,7 +6,7 @@
 <%
 	response.setHeader("Cache-Control", "no-cache"); //html 1.1
 	response.setHeader("Pragma", "no-cache"); //html 1.0
-	response.setDateHeader("Expires", "0"); //prevents caching at the proxy server
+	response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 <c:set var="req" value="${pageContext.request}" />
 <c:set var="url">${req.requestURL}</c:set>
