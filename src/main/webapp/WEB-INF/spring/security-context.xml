@@ -45,6 +45,9 @@
 		<sec:intercept-url pattern="/spot/reg/maemulNoPic" access="hasRole('ROLE_ADMIN')"/> 
 		<!-- 토지이용 규제 현황보기 -->
 		<sec:intercept-url pattern="/resources/templates/spotTojiUseLimitForm.handlebars" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/resources/templates/spotTojiDefaultInfoForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
+		<sec:intercept-url pattern="/spot/tojiDefaultInfo" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
+		
 		<!-- 토지이용 규제 현황보기 탭-->
 		<sec:intercept-url pattern="/handlebar/tab/tojiuselimit/**" access="hasRole('ROLE_ADMIN')"/>
 		<!-- 수지분석 pdf -->
