@@ -17,7 +17,7 @@
 		<sec:intercept-url pattern="/resources/templates/gyeongmaeDetailForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
 		<sec:intercept-url pattern="/resources/templates/gongmaeForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
 		<sec:intercept-url pattern="/resources/templates/gongmaeDetailForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
-		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
 		<sec:intercept-url pattern="/resources/templates/silgeolaeForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
 		<sec:intercept-url pattern="/resources/templates/acceptbuildingForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
 		
@@ -87,9 +87,9 @@
 		<sec:intercept-url pattern="/errors/**" access="permitAll"/> 
 		<sec:intercept-url pattern="/gyeongmaemarker" access="permitAll"/>
 		<sec:intercept-url pattern="/gongmaemarker" access="permitAll"/>
-		<sec:intercept-url pattern="/bosangmarker" access="hasRole('ROLE_ADMIN')"/>
-		<sec:intercept-url pattern="/pyeonibmarker" access="hasRole('ROLE_ADMIN')"/>
-		<sec:intercept-url pattern="/bosangpyeonib/**" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/bosangmarker" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/pyeonibmarker" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/bosangpyeonib/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
 		<sec:intercept-url pattern="/silgeolaemarker" access="permitAll"/>
 		<sec:intercept-url pattern="/acceptbuildingmarker" access="permitAll"/>
 		

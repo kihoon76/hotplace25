@@ -30,7 +30,7 @@
 <content tag="script">
 <script type="text/javascript" src="/resources/vendors/jQRangeSlider-5.7.2/jQAllRangeSliders-min.js"></script>
 <script type="text/javascript" src="/resources/vendors/tabulator/js/tabulator.min.js"></script>
-<script type="text/javascript" src="/resources/vendors/dom-to-image/dom-to-image.js"></script>
+<script type="text/javascript" src="/resources/vendors/dom-to-image/dom-to-image.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/jquery-zoom/jquery.zoom-min.js"></script>
 
 <c:if test="${debug eq 'on'}">
