@@ -45,7 +45,7 @@
 <script type="text/javascript" src="/resources/js/src/user.js"></script>
 </c:if>
 <c:if test="${debug eq 'off'}">
-<script type="text/javascript" src="/resources/js/dist/opensources.js"></script>
+<script type="text/javascript" src="/resources/js/dist/opensources.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/main.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/user.min.js"></script>
 </c:if>
