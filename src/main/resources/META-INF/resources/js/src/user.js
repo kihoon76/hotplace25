@@ -339,10 +339,11 @@ $(document).ready(function() {
 			hotplace.ajax({
 				url: 'search/password',
 				method: 'POST',
-				data: {
+				dataType: 'json',
+				data: JSON.stringify({
 					accountId: $(_search_TXT_RegId).val(),
 					email:$(_search_TXT_RegEmail).val()
-				},
+				}),
 				//contentType: 'application/json; charset=UTF-8',
 				success: function(data, textStatus, jqXHR) {
 					//var jo = $.parseJSON(data);

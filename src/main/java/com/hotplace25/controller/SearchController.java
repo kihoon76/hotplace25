@@ -185,11 +185,15 @@ public class SearchController {
 	@PostMapping("password")
 	@ResponseBody
 	public AjaxVO searchPassword(
-			@RequestParam("accountId") String accountId, 
-			@RequestParam("email") String emailStr,
+			/*@RequestParam("accountId") String accountId, 
+			@RequestParam("email") String emailStr,*/
+			@RequestBody Map<String, String> param,
 			HttpServletRequest request) {
 		
 		AjaxVO vo = new AjaxVO();
+		
+		String accountId = param.get("accountId");
+		String emailStr = param.get("email");
 		
 		if(ValidationUtil.isNotEmpty(accountId) && ValidationUtil.isValidEmail(emailStr)) {
 			Account account = userService.getUserInfo(accountId);

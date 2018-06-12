@@ -15,7 +15,8 @@ var gulp = require('gulp'),
 var resourceDir   = 'src/main/resources/META-INF/resources';
 var srcJsDir	  = resourceDir + '/js/src';
 var distJsDir	  = resourceDir + '/js/dist';
-var exVendorsDir  = '!' + resourceDir + '/vendors/**';
+var vendorsDir 	  = resourceDir + '/vendors'
+var exVendorsDir  = '!' + vendorsDir + '/**';
 
 /*gulp.task('sass', function() {
 	return gulp.src([resourceDir + '/sass/*.scss'])
@@ -100,6 +101,19 @@ gulp.task('map_concat_min', function() {
 	       .pipe(gulp.dest(distJsDir));
 });
 
+gulp.task('opensource_concat_min', function() {
+	return gulp.src([
+           vendorsDir + '/jQRangeSlider-5.7.2/jQAllRangeSliders-min.js',
+           vendorsDir + '/tabulator/js/tabulator.min.js',
+           vendorsDir + '/dom-to-image/dom-to-image.min.js',
+           vendorsDir + '/jquery-zoom/jquery.zoom-min.js',
+           vendorsDir + '/echarts/echarts.min.js',
+           vendorsDir + '/jQuery-Upload-File/4.0.11/jquery.uploadfile.min.js',
+           vendorsDir + '/touchSlider/jquery.touchSlider.min.js'])
+	       .pipe(concat('opensources.min.js'))
+	       .pipe(gulp.dest(distJsDir));
+});
+
 gulp.task('css_min', function() {
 	return gulp.src([resourceDir + '/**/*.css', exVendorsDir])
 		   .pipe(cssmin())
@@ -115,7 +129,7 @@ gulp.task('img_min', function() {
 });
 
 gulp.task('clean-all', function() {
-	return del.sync([resourceDir + '/**/*.min.js', resourceDir + '/**/*.min.css', resourceDir + '/img/**/*.m.*', exVendorsDir]);
+	return del.sync([resourceDir + '/**/*.min.js', distJsDir + '/opensources.js', resourceDir + '/**/*.min.css', resourceDir + '/img/**/*.m.*', exVendorsDir]);
 });
 
 gulp.task('clean-js', function() {
@@ -154,6 +168,6 @@ gulp.task('reload', function() {
 
 //gulp.task('default', ['clean', 'js_min', 'css_min', 'img_min', 'watch', 'reload']);
 gulp.task('default', function() {
-	runSequence('clean-all', ['map_min', 'js_min'], 'map_concat_min', 'clean-js');
+	runSequence('clean-all', ['map_min', 'js_min'], 'map_concat_min', 'opensource_concat_min', 'clean-js');
 });
 
