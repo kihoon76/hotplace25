@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.hotplace25.util.HttpHeaderUtil;
+
 public class SSLInterceptor extends HandlerInterceptorAdapter {
 	//private static final Logger logger = LoggerFactory.getLogger(SSLInterceptor.class);
 	@Override
@@ -20,6 +22,16 @@ public class SSLInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		//logger.debug("url ===> " + url);
+		
+		
+		//개발계 접근은 내부에서만
+		if(url.startsWith("https://hotplace.ddns.net")) {
+			String ip = HttpHeaderUtil.getClientIP(request);
+			if(!ip.startsWith("192.")) {
+				return false;
+			}
+		}
+		
 		if(url.startsWith("https://hotplace25.com")) {
 			url = url.replace("https://hotplace25.com", "https://www.hotplace25.com");
 			response.sendRedirect(url);
