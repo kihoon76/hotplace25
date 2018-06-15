@@ -643,7 +643,11 @@
 			$('#tutorTabs')
 			.tabs()
 			.addClass('ui-tabs-vertical ui-helper-clearfix');
-			//$('#tuto1').attr('src', 'https://www.youtube.com/embed/oUtl1kchbgw');
+			
+			$('#tuto1').attr('src', 'https://www.youtube.com/embed/7RdSsO-AMmc');
+			$('#tuto2').attr('src', 'https://www.youtube.com/embed/Vop21AvrMP0');
+			$('#tuto3').attr('src', 'https://www.youtube.com/embed/cLFH1UOo4z0');
+			$('#tuto4').attr('src', 'https://www.youtube.com/embed/NEq9V8rU2_4');
 		});
 	}
 	
