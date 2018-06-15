@@ -640,7 +640,10 @@
 			//$("#tutoV").load();
 			//load한 동영상을 재생
 			//document.getElementById("tutoV").play();
-			$('#tuto1').attr('src', 'https://www.youtube.com/embed/oUtl1kchbgw');
+			$('#tutorTabs')
+			.tabs()
+			.addClass('ui-tabs-vertical ui-helper-clearfix');
+			//$('#tuto1').attr('src', 'https://www.youtube.com/embed/oUtl1kchbgw');
 		});
 	}
 	

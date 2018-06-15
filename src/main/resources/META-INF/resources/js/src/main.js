@@ -199,6 +199,7 @@ $(document).ready(function() {
 		})
 	});
 	
+	/***************** 사용법소개 버튼 ************************/
 	$('#modalTutorial').on('click', function() {
 		hotplace.dom.showTutorial();
 		//hotplace.dom.showServiceReady();
