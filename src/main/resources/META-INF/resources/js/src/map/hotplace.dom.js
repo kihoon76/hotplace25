@@ -646,9 +646,9 @@
 			
 			//https://developers.google.com/youtube/player_parameters?hl=ko
 			$('#tuto1').attr('src', 'https://www.youtube.com/embed/7RdSsO-AMmc?vq=hd1080&rel=0');
-			$('#tuto2').attr('src', 'https://www.youtube.com/embed/Vop21AvrMP0?vq=hd1080');
-			$('#tuto3').attr('src', 'https://www.youtube.com/embed/cLFH1UOo4z0?vq=hd1080');
-			$('#tuto4').attr('src', 'https://www.youtube.com/embed/NEq9V8rU2_4?vq=hd1080');
+			$('#tuto2').attr('src', 'https://www.youtube.com/embed/Vop21AvrMP0?vq=hd1080&rel=0');
+			$('#tuto3').attr('src', 'https://www.youtube.com/embed/cLFH1UOo4z0?vq=hd1080&rel=0');
+			$('#tuto4').attr('src', 'https://www.youtube.com/embed/NEq9V8rU2_4?vq=hd1080&rel=0');
 		});
 	}
 	
