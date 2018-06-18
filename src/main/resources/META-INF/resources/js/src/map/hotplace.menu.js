@@ -943,7 +943,8 @@
 				    },
 				}, data);
 				if($.isFunction(fn)) fn();
-			}
+			},
+			timeout: 1000
 		});
 	}
 	
