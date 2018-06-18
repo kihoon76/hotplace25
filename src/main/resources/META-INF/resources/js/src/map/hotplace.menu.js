@@ -925,7 +925,7 @@
 			    movableColumns:true,
 			    resizableRows:true,
 			    rowClick: function(e, row) {
-			    	_rowClickHandler('T', row, data);
+			    	_rowClickHandler('T', row, d);
 			    },
 			}, d);
 		}
