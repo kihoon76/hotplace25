@@ -998,9 +998,11 @@
 		_gyeonggongEnvGrade = '#gyeonggongEnvGrade',
 		_btnGyeonggongSearch = '#btnGyeonggongSearch',
 		_btnGyeonggongSearchPrev = '#btnGyeonggongSearchPrev',
+		_btnGyeonggongSearchInit = '#btnGyeonggongSearchInit',
 		_dvGyeongGongLuris = '#dvGyeongGongLuris',
 		_spGyeongGongLurisTitle = '#spGyeongGongLurisTitle',
-		_dvGyeonggongResult = '#dvGyeonggongResult';
+		_dvGyeonggongResult = '#dvGyeonggongResult',
+		_dvGyeonggongSearch = '#dvGyeonggongSearch';
 	
 	function _closeGyeongGongLurisDv() {
 		$(_dvGyeongGongLuris).hide();
@@ -1063,6 +1065,12 @@
 			//반드시 있어야 함, 이벤트가 전달되면서 GyeongGongLuris에 영향을 줌
 			e.stopPropagation();
 			_closeGyeongGongLurisDv();
+		});
+		
+		$(_btnGyeonggongSearchInit)
+		.off('click')
+		.on('click', function() {
+			_initCheckbox(_dvGyeonggongSearch);
 		});
 	}
 	
