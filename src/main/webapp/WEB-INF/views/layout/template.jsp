@@ -167,7 +167,7 @@
 
 	<div id="footer" class="footer">
 		<span class="text">
-			(주)동림피앤디 도시계획부 대표자 : 이석우
+			(주)동림피앤디 대표자 : 이석우
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			사업자등록번호 : 215-86-29302 
 			&nbsp;&nbsp;&nbsp;&nbsp;
