@@ -429,6 +429,15 @@
 		return r;
 	}
 	
+	function _initCheckbox(activeTab) {
+		$('#tab' + activeTab + ' input[type="checkbox"]:not(:disabled)').each(function() {
+			var $this = $(this);
+			if($this.is(':checked')) {
+				$this.prop('checked', false);
+			}
+		});
+	}
+	
 	/*****************************************************************************
 	 * 주소검색
 	 ****************************************************************************/
@@ -754,6 +763,7 @@
 		_dvToojaTab03Result = '#dvToojaTab03Result', //tabulator로 결과 테이블 영역 div
 		_dvToojaLuris = '#dvToojaLuris',
 		_spToojaLurisTitle = '#spToojaLurisTitle',
+		_btnToojaSearchInit = '#btnToojaSearchInit', //체크박스 초기화
 		_toojaTab = {
 			JangmiCityPlan: '#tabJangmiCityPlan',
 			TojiUseLimitCancel: '#tabTojiUseLimitCancel',
@@ -859,6 +869,12 @@
 			_closeLurisDv();
 		});
 		
+		$(_btnToojaSearchInit)
+		.off('click')
+		.on('click', function() {
+			_initCheckbox(_activeToojaTab);
+		});
+		
 		return function() {
 			//반드시 메뉴 content가 show된후에 호출되어져야 함
 			hotplace.dom.resizeSliderGrp(_toojaRegionSearchMenu);
@@ -877,14 +893,17 @@
 		var $searchArea = $(_activeToojaTab  + ' .searchArea'),
 			$searchResultArea = $(_activeToojaTab  + ' .searchResultArea'),
 			$btnToojaSearch = $(_btnToojaSearch),
-			$btnToojaSearchPrev = $(_btnToojaSearchPrev);
+			$btnToojaSearchPrev = $(_btnToojaSearchPrev),
+			$btnToojaSearchInit = $(_btnToojaSearchInit);
 		
 		if($btnToojaSearch.is(':visible')) {
 			$btnToojaSearch.hide();
+			$btnToojaSearchInit.hide();
 			$btnToojaSearchPrev.show();
 		}
 		else {
 			$btnToojaSearch.show();
+			$btnToojaSearchInit.show();
 			$btnToojaSearchPrev.hide();
 		}
 		
@@ -908,10 +927,12 @@
 		var isVisibleSearch = _toojaBtnStateObj[_activeToojaTab];
 		if(isVisibleSearch) {
 			$(_btnToojaSearch).show();
+			$(_btnToojaSearchInit).show();
 			$(_btnToojaSearchPrev).hide();
 		}
 		else {
 			$(_btnToojaSearch).hide();
+			$(_btnToojaSearchInit).hide();
 			$(_btnToojaSearchPrev).show();
 		}
 	}
