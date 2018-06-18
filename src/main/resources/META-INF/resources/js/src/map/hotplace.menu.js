@@ -1101,7 +1101,10 @@
 		
 		hotplace.ajax({
 			url: 'search/gyeonggong',
-			loadMsg: '검색시간이 다소 걸리는 요청입니다.잠시만 기다려 주세요',
+			loadMsg: '검색시간이 다소 걸리는 요청입니다.<br/>잠시만 기다려 주세요<div id="dvLoadingTimer2"></div>',
+			beforeSend: function() {
+				hotplace.dom.timerStart(90, $('#dvLoadingTimer2'));
+			},
 			data: JSON.stringify({
 				'jiyeog':_getCheckboxesData('itemGyeonggongJiyeog'),
 				'mulgeonKind':_getCheckboxesData('itemGyeonggongMulgeonKind'),
@@ -1151,6 +1154,10 @@
 				fn: function() {
 					hotplace.dom.showAlertMsg(null, '검색결과가 없습니다.', {width:400});
 				}
+			},
+			completeBeforeFn: function() {
+				//timer 중지
+				hotplace.dom.timerStop();
 			}
 		});
 	}
