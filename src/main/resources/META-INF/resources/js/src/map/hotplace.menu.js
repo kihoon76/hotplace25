@@ -944,7 +944,12 @@
 				}, data);
 				if($.isFunction(fn)) fn();
 			},
-			timeout: 1000
+			timeout: 1000,
+			timeoutOpt: {
+				fn: function() {
+					console.log('uuu');
+				}
+			}
 		});
 	}
 	

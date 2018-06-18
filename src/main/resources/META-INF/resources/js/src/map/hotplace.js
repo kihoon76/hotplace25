@@ -596,6 +596,7 @@
 				//리턴이 html인 요청에서 오류가 발생한 경우
 				if(textStatus == 'timeout') {
 					jqXHR.errCode = _err.TIMEOUT;
+					jqXHR.errMsg = 'timeout';
 				}
 				else if(e == '403' || e.toLowerCase() == 'forbidden') {
 					jqXHR.errCode = _err.FORBIDDEN;
@@ -638,7 +639,7 @@
 						params.completeBeforeFn();
 					}
 					
-					hotplace.processAjaxError(jqXHR.errCode, jqXHR.errMsg);
+					hotplace.processAjaxError(jqXHR.errCode, jqXHR.errMsg, params.timeoutOpt);
 					
 				}
 			},
@@ -678,7 +679,7 @@
 	
 	hotplace.error = _err;
 	
-	hotplace.processAjaxError = function(errCode, msg) {
+	hotplace.processAjaxError = function(errCode, msg, timeoutOpt) {
 		switch(errCode) {
 		case _err.LOGIN :
 			hotplace.dom.showAlertMsg(hotplace.dom.showLoginForm, msg || '로그인후 사용하세요.', {width:'400px'});
@@ -768,7 +769,17 @@
 			hotplace.dom.showAlertMsg(null, msg || '히트맵 캡쳐도중 오류가 발생했습니다.', {width:'50%'});
 			break;
 		case _err.TIMEOUT:
-			hotplace.dom.showAlertMsg(null, msg || '요청이 타임아웃 되었습니다.', {width:'50%'});
+			if(timeoutOpt) {
+				if(timeoutOpt.showMsg) {
+					hotplace.dom.showAlertMsg(timeoutOpt.fn, msg || '요청이 타임아웃 되었습니다.', {width:'50%'});
+				}
+				else {
+					timeoutOpt.fn();
+				}
+			}
+			else {
+				hotplace.dom.showAlertMsg(null, msg || '요청이 타임아웃 되었습니다.', {width:'50%'});
+			}
 			break;
 		case _err.FORMAT :
 			hotplace.dom.showAlertMsg(null, msg || '입력폼 형식이 맞지 않습니다.', {width:'50%'});
