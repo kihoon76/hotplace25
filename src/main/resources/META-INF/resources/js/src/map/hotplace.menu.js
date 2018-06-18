@@ -430,7 +430,7 @@
 	}
 	
 	function _initCheckbox(activeTab) {
-		$('#tab' + activeTab + ' input[type="checkbox"]:not(:disabled)').each(function() {
+		$(activeTab + ' input[type="checkbox"]:not(:disabled)').each(function() {
 			var $this = $(this);
 			if($this.is(':checked')) {
 				$this.prop('checked', false);
