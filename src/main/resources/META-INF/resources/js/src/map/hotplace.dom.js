@@ -634,7 +634,17 @@
 	
 	dom.showTutorial = function() {
 		_appendModalPopup('tutorialForm');
-		dom.openModal('', {width: 1000}, null, function() {
+		var $tuto1 = $('#tuto1'),
+			$tuto2 = $('#tuto2'),
+			$tuto3 = $('#tuto3'),
+			$tuto4 = $('#tuto4');
+		
+		dom.openModal('', {width: 1000}, function() {
+			$tuto1.attr('src', '');
+			$tuto2.attr('src', '');
+			$tuto3.attr('src', '');
+			$tuto4.attr('src', '');
+		}, function() {
 			//$("#s1").attr("src", 'http://hotplace.ddns.net/resources/video/use1.mp4');
 			//동영상을 다시 load 함
 			//$("#tutoV").load();
@@ -642,10 +652,10 @@
 			//document.getElementById("tutoV").play();
 			
 			//https://developers.google.com/youtube/player_parameters?hl=ko
-			$('#tuto1').attr('src', 'https://www.youtube.com/embed/7RdSsO-AMmc?vq=hd1080&rel=0');
-			$('#tuto2').attr('src', 'https://www.youtube.com/embed/Vop21AvrMP0?vq=hd1080&rel=0');
-			$('#tuto3').attr('src', 'https://www.youtube.com/embed/cLFH1UOo4z0?vq=hd1080&rel=0');
-			$('#tuto4').attr('src', 'https://www.youtube.com/embed/NEq9V8rU2_4?vq=hd1080&rel=0');
+			$tuto1.attr('src', 'https://www.youtube.com/embed/7RdSsO-AMmc?vq=hd1080&rel=0');
+			$tuto2.attr('src', 'https://www.youtube.com/embed/Vop21AvrMP0?vq=hd1080&rel=0');
+			$tuto3.attr('src', 'https://www.youtube.com/embed/cLFH1UOo4z0?vq=hd1080&rel=0');
+			$tuto4.attr('src', 'https://www.youtube.com/embed/NEq9V8rU2_4?vq=hd1080&rel=0');
 		});
 	}
 	

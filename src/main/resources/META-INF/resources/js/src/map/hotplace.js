@@ -643,7 +643,7 @@
 					
 				}
 			},
-			timeout: params.timeout || 2000000
+			timeout: params.timeout || 90000
 		});
 	}
 	
