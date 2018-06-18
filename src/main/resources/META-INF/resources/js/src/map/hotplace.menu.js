@@ -960,7 +960,7 @@
 				__createTabulator(data);
 				if($.isFunction(fn)) fn();
 			},
-			timeout: 3000,
+			timeout: 90000,
 			timeoutOpt: {
 				fn: function() {
 					hotplace.dom.showAlertMsg(null, '검색결과가 없습니다.', {width:400});
@@ -1065,6 +1065,7 @@
 		
 		hotplace.ajax({
 			url: 'search/gyeonggong',
+			loadMsg: '검색시간이 다소 걸리는 요청입니다.잠시만 기다려 주세요',
 			data: JSON.stringify({
 				'jiyeog':_getCheckboxesData('itemGyeonggongJiyeog'),
 				'mulgeonKind':_getCheckboxesData('itemGyeonggongMulgeonKind'),
@@ -1107,6 +1108,12 @@
 					    	_rowClickHandler('G', row, data);
 					    },
 					}, data.datas);
+				}
+			},
+			timeout: 90000,
+			timeoutOpt: {
+				fn: function() {
+					hotplace.dom.showAlertMsg(null, '검색결과가 없습니다.', {width:400});
 				}
 			}
 		});
