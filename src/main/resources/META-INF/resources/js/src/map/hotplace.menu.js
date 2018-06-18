@@ -956,7 +956,7 @@
 			url: param.url, //'search/jangmi',
 			data: JSON.stringify(param.data/*_getToojaParam(_toojaTab.JangmiCityPlan)*/),
 			contentType: 'application/json; charset=UTF-8',
-			loadMsg: '검색시간이 다소 걸리는 요청입니다.<br/>잠시만 기다려 주세요<div id="dvLoadingTimer">90초</div>',
+			loadMsg: '검색시간이 걸리는 요청입니다.<br/>잠시만 기다려 주세요<div id="dvLoadingTimer">90초</div>',
 			beforeSend: function() {
 				hotplace.dom.timerStart(90, $('#dvLoadingTimer'));
 			},
@@ -1104,7 +1104,7 @@
 		
 		hotplace.ajax({
 			url: 'search/gyeonggong',
-			loadMsg: '검색시간이 다소 걸리는 요청입니다.<br/>잠시만 기다려 주세요<div id="dvLoadingTimer2">90초</div>',
+			loadMsg: '검색시간이 걸리는 요청입니다.<br/>잠시만 기다려 주세요<div id="dvLoadingTimer2">90초</div>',
 			beforeSend: function() {
 				hotplace.dom.timerStart(90, $('#dvLoadingTimer2'));
 			},
