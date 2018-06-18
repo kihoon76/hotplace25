@@ -917,6 +917,20 @@
 	}
 	
 	function _searchTooja(tableId, param, fn) {
+		function __createTabulator(d) {
+			hotplace.dom.createTabulator(tableId, {
+			    //height:700, // set height of table
+			    fitColumns:false, //fit columns to width of table (optional)
+			    columns:param.columns,/*_tabulatorColumns.jangmi,*/
+			    movableColumns:true,
+			    resizableRows:true,
+			    rowClick: function(e, row) {
+			    	_rowClickHandler('T', row, data);
+			    },
+			}, d);
+		}
+		
+		
 		hotplace.ajax({
 			url: param.url, //'search/jangmi',
 			data: JSON.stringify(param.data/*_getToojaParam(_toojaTab.JangmiCityPlan)*/),
@@ -932,22 +946,23 @@
 				_toojaDvToogle();
 				_saveBtnInfo(false);
 				
-				hotplace.dom.createTabulator(tableId, {
+				/*hotplace.dom.createTabulator(tableId, {
 				    //height:700, // set height of table
 				    fitColumns:false, //fit columns to width of table (optional)
-				    columns:param.columns,/*_tabulatorColumns.jangmi,*/
+				    columns:param.columns, //_tabulatorColumns.jangmi,
 				    movableColumns:true,
 				    resizableRows:true,
 				    rowClick: function(e, row) {
 				    	_rowClickHandler('T', row, data);
 				    },
-				}, data);
+				}, data);*/
+				__createTabulator(data);
 				if($.isFunction(fn)) fn();
 			},
 			timeout: 1000,
 			timeoutOpt: {
 				fn: function() {
-					console.log('uuu');
+					__createTabulator();
 				}
 			}
 		});
