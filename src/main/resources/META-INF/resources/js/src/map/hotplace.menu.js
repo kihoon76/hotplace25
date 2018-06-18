@@ -962,6 +962,8 @@
 			timeout: 1000,
 			timeoutOpt: {
 				fn: function() {
+					_toojaDvToogle();
+					_saveBtnInfo(false);
 					__createTabulator();
 				}
 			}
