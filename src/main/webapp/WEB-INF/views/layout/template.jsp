@@ -204,7 +204,7 @@
 <script type="text/javascript" src="/resources/vendors/bootstrap/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=SgnlyXnzstmDsYDhele7&submodules=panorama,geocoder"></script>
-<c:if test="${debug eq 'on' or env eq 'development'}">
+<c:if test="${(debug eq 'on') || (env eq 'development')}">
 <script type="text/javascript" src="/resources/js/src/map/hotplace.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.maps.js"></script>
 <script type="text/javascript" src="/resources/js/src/map/hotplace.minimaps.js"></script>
@@ -230,7 +230,7 @@
 <script type="text/javascript" src="/resources/js/src/map/hotplace.mypage.js"></script>  
 <script type="text/javascript" src="/resources/js/src/map/hotplace.payment.js"></script> 
 </c:if>
-<c:if test="${env eq 'production' and debug eq 'off'}">
+<c:if test="${(env eq 'production') && (debug eq 'off')}">
 <script type="text/javascript" src="/resources/js/dist/hotplace-all.min.js"></script>
 </c:if>
 <sitemesh:write property="page.script" />

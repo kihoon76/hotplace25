@@ -30,7 +30,7 @@
 <content tag="script">
 
 
-<c:if test="${debug eq 'on'}">
+<c:if test="${(debug eq 'on') || (env eq 'development')}">
 <script type="text/javascript" src="/resources/vendors/jQRangeSlider-5.7.2/jQAllRangeSliders-min.js"></script>
 <script type="text/javascript" src="/resources/vendors/tabulator/js/tabulator.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/dom-to-image/dom-to-image.min.js"></script>
@@ -44,7 +44,7 @@
 <script type="text/javascript" src="/resources/js/src/main.js"></script>
 <script type="text/javascript" src="/resources/js/src/user.js"></script>
 </c:if>
-<c:if test="${debug eq 'off'}">
+<c:if test="${(env eq 'production') && (debug eq 'off')}">
 <script type="text/javascript" src="/resources/js/dist/opensources.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/main.min.js"></script>
 <script type="text/javascript" src="/resources/js/dist/user.min.js"></script>
