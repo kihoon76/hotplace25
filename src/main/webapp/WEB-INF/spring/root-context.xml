@@ -17,4 +17,5 @@
 	</context:component-scan>
 	
 	<util:properties id="pathCfg" location="classpath:/config/path.properties" />
+	<util:properties id="varCfg" location="classpath:/config/variable.properties" />
 </beans>

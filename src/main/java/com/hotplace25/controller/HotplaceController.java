@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,6 +60,9 @@ public class HotplaceController {
 	@Resource(name="applicationConfig")
 	ApplicationConfig applicationConfig;
 	
+	@Value("#{varCfg['env']}")
+	private String env;
+	
 	@GetMapping("main")
 	public String layout(HttpServletRequest request) {
 		//List<Notice> notices = noticeService.getNoticeList();
@@ -67,6 +71,7 @@ public class HotplaceController {
 		
 		request.setAttribute("jangeagongji", applicationConfig.getValue("C1"));
 		request.setAttribute("debug", applicationConfig.getValue("C2"));
+		request.setAttribute("env", env);
 		String currentYear = "";
 		
 		try {
