@@ -1023,14 +1023,17 @@
 		var $searchArea = $(_gyeonggongSearchMenu  + ' .searchArea'),
 			$searchResultArea = $(_gyeonggongSearchMenu  + ' .searchResultArea'),
 			$btnGyeonggongSearch = $(_btnGyeonggongSearch),
+			$btnGyeonggongSearchInit = $(_btnGyeonggongSearchInit),
 			$btnGyeonggongSearchPrev = $(_btnGyeonggongSearchPrev);
 		
 		if($btnGyeonggongSearch.is(':visible')) {
 			$btnGyeonggongSearch.hide();
+			$btnGyeonggongSearchInit.hide();
 			$btnGyeonggongSearchPrev.show();
 		}
 		else {
 			$btnGyeonggongSearch.show();
+			$btnGyeonggongSearchInit.show();
 			$btnGyeonggongSearchPrev.hide();
 		}
 		
