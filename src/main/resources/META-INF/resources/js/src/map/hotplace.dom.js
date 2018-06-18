@@ -1724,6 +1724,30 @@
 		return false;
 	});
 	
+	var _timer;
+	
+	dom.timerStart = function(start, $container) {
+		var _start = start || 60; 
+		_timer = setTimeout(function() {
+			_start--;
+			$container.html(_start + '초');
+			if(_start <= 0) {
+				clearTimeout(_timer);
+			}
+			else {
+				dom.timerStart(_start, $container);
+			}
+			
+		}, 1000);
+	}
+	
+	dom.timerStop = function() {
+		if(_timer) {
+			clearTimeout(_timer);
+			_timer = null;
+		}
+	}
+	
 }(
 	hotplace.dom = hotplace.dom || {},
 	jQuery

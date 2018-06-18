@@ -956,7 +956,10 @@
 			url: param.url, //'search/jangmi',
 			data: JSON.stringify(param.data/*_getToojaParam(_toojaTab.JangmiCityPlan)*/),
 			contentType: 'application/json; charset=UTF-8',
-			loadMsg: '검색시간이 다소 걸리는 요청입니다.<br/>잠시만 기다려 주세요<div id="">test</div>',
+			loadMsg: '검색시간이 다소 걸리는 요청입니다.<br/>잠시만 기다려 주세요<div id="dvLoadingTimer"></div>',
+			beforeSend: function() {
+				hotplace.dom.timerStart(90, $('#dvLoadingTimer'));
+			},
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
 				
@@ -986,6 +989,10 @@
 				fn: function() {
 					hotplace.dom.showAlertMsg(null, '검색결과가 없습니다.', {width:400});
 				}
+			},
+			completeBeforeFn: function() {
+				//timer 중지
+				hotplace.dom.timerStop();
 			}
 		});
 	}
