@@ -34,7 +34,7 @@ public class PaymentController {
 	public AjaxVO doPayment(@RequestBody Payment payment) {
 		
 		String accountId = SecurityContextHolder.getContext().getAuthentication().getName();
-		
+		System.err.println(accountId);
 		AjaxVO vo = new AjaxVO();
 		
 		try {
