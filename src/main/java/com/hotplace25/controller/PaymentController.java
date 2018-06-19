@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hotplace25.domain.Account;
 import com.hotplace25.domain.AjaxVO;
 import com.hotplace25.domain.Payment;
 import com.hotplace25.security.UserDetailsImpl;
@@ -66,7 +67,7 @@ public class PaymentController {
 		
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			UserDetailsImpl user = (UserDetailsImpl)auth.getPrincipal();
+			Account user = (Account)auth.getPrincipal();
 			vo.setSuccess(true);
 			
 			ObjectMapper m = new ObjectMapper();

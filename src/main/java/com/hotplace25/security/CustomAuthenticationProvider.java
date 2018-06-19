@@ -60,9 +60,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 		}
 		
 		//return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
-		Account account = user.getAccount();
-		account.setId(username);
-		return new UsernamePasswordAuthenticationToken(account, password, user.getAuthorities());
+		return new UsernamePasswordAuthenticationToken(user.getAccount(), password, user.getAuthorities());
 		
 	}
 
