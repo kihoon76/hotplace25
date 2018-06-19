@@ -11,6 +11,8 @@
 		_chkPaymentMulgeon = '#chkPaymentMulgeon',
 		_chkPaymentHeatmap = '#chkPaymentHeatmap',
 		_btnPayment = '#btnPayment',
+		_txtCoupon = '#txtCoupon',
+		_btnCoupon = '#btnCoupon',
 		_$rdoPayment = null,
 		_$rdoPaymentAll = null,
 		_$txtPaymentSum = null,
@@ -96,6 +98,8 @@
 		_$chkPaymentGG = $(_chkPaymentGG),
 		_$chkPaymentMulgeon = $(_chkPaymentMulgeon),
 		_$chkPaymentHeatmap = $(_chkPaymentHeatmap),
+		_$btnCoupon = $(_btnCoupon),
+		_$txtCoupon = $(_txtCoupon),
 		_$btnPayment = $(_btnPayment);
 		
 		_$rdoPayment
@@ -145,6 +149,21 @@
 			else {
 				_payment();
 			}
+		});
+		
+		_$btnCoupon
+		.off('click')
+		.on('click', function() {
+			var coupon = _$txtCoupon.val();
+			
+			hotplace.ajax({
+				url: 'payment/checkCoupon',
+				data: {coupon: coupon},
+				//contentType: 'application/json; charset=UTF-8',
+				success: function(data, textStatus, jqXHR) {
+					console.log(data)
+				}
+			});
 		});
 	}
 }(

@@ -2,16 +2,20 @@ package com.hotplace25.controller;
 
 import javax.annotation.Resource;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hotplace25.domain.AjaxVO;
 import com.hotplace25.domain.Payment;
+import com.hotplace25.security.UserDetailsImpl;
 import com.hotplace25.service.PaymentService;
 import com.hotplace25.util.ValidationUtil;
 
@@ -49,5 +53,28 @@ public class PaymentController {
 		}
 		
 		return vo;
+	}
+	
+	@PostMapping("/checkCoupon")
+	@ResponseBody
+	public AjaxVO checkCoupon(@RequestParam String coupon) {
+		AjaxVO vo = new AjaxVO();
+		
+		try {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetailsImpl user = (UserDetailsImpl)auth.getPrincipal();
+			vo.setSuccess(true);
+			
+			ObjectMapper m = new ObjectMapper();
+			System.err.println(m.writeValueAsString(user));
+		}
+		catch(Exception e) {
+			vo.setSuccess(false);
+			vo.setErrMsg(e.getMessage());
+		}
+		
+		
+		return vo;
+		
 	}
 }
