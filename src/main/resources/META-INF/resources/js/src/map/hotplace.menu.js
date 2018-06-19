@@ -1145,6 +1145,10 @@
 				}
 				
 				if(data.success) {
+					if(data.datas.length == 0) {
+						hotplace.dom.showAlertMsg(null, '검색결과가 없습니다.', {width:400});
+						return;
+					}
 					_gyeonggongDvToogle();
 					
 					hotplace.dom.createTabulator(_dvGyeonggongResult, {
