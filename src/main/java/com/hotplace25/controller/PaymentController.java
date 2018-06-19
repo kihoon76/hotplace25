@@ -33,14 +33,16 @@ public class PaymentController {
 	@ResponseBody
 	public AjaxVO doPayment(@RequestBody Payment payment) {
 		
-		String accountId = SecurityContextHolder.getContext().getAuthentication().getName();
-		System.err.println("==============" + accountId);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Account user = (Account)auth.getPrincipal();
+		
+		System.err.println("==============" + user.getId());
 		AjaxVO vo = new AjaxVO();
 		
 		try {
 			boolean r = ValidationUtil.isValidPayment(payment);
 			if(r) {
-				//payment.setAccountId(accountId);
+				//payment.setAccountId(user.getId());
 				//paymentService.setServices(payment);
 				vo.setSuccess(true);
 			}
