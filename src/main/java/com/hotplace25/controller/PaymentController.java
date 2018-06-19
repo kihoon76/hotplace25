@@ -1,5 +1,7 @@
 package com.hotplace25.controller;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -57,8 +59,10 @@ public class PaymentController {
 	
 	@PostMapping("/checkCoupon")
 	@ResponseBody
-	public AjaxVO checkCoupon(@RequestParam String coupon) {
+	public AjaxVO checkCoupon(@RequestBody Map<String, String> param) {
 		AjaxVO vo = new AjaxVO();
+		
+		System.err.println(param.get("coupon"));
 		
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();

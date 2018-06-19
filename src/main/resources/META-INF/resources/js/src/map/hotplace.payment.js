@@ -158,8 +158,8 @@
 			
 			hotplace.ajax({
 				url: 'payment/checkCoupon',
-				data: {coupon: coupon},
-				//contentType: 'application/json; charset=UTF-8',
+				data: JSON.stringify({coupon: coupon}),
+				contentType: 'application/json; charset=UTF-8',
 				success: function(data, textStatus, jqXHR) {
 					console.log(data)
 				}
