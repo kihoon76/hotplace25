@@ -167,17 +167,17 @@
 
 	<div id="footer" class="footer">
 		<span class="text">
-			(주)동림피앤디 대표자 : 이석우
+			(주)동림피엔디 대표자 : 이석우
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			사업자등록번호 : 215-86-29302 
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			주소 : 서울 송파구 법원로 127 문정대명벨리온 1108호 
+			주소 : 서울 송파구 법원로 127, 1108호 (문정동, 대명벨리온 )
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			대표전화 : 070-7117-6868
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<strong>본 정보를 이용한 결과의 책임은 투자자에게 귀속됩니다.</strong> 
+			<strong>본 정보를 이용한 투자의 책임은 투자자에게 있습니다.</strong> 
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			Copyright (주)동림피앤디 All Rights Reserved.
+			Copyright (주)동림피엔디 All Rights Reserved.
 		</span>
 	</div>
 	

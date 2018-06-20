@@ -36,7 +36,6 @@ public class PaymentController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Account user = (Account)auth.getPrincipal();
 		
-		System.err.println("==============" + user.getId());
 		AjaxVO vo = new AjaxVO();
 		
 		try {
