@@ -27,7 +27,7 @@ public class SSLInterceptor extends HandlerInterceptorAdapter {
 		//개발계 접근은 내부에서만
 		if(url.startsWith("https://hotplace.ddns.net")) {
 			String ip = HttpHeaderUtil.getClientIP(request);
-			if(!ip.startsWith("192.") || !ip.startsWith("106.253.61")) {
+			if(!(ip.startsWith("192.") || ip.startsWith("106.253.61"))) {
 				return false;
 			}
 		}
