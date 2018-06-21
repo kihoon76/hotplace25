@@ -14,6 +14,7 @@
 		_btnPayment = '#btnPayment',
 		_txtCoupon = '#txtCoupon',
 		_btnCoupon = '#btnCoupon',
+		_btnPaymentInfo = '#btnPaymentInfo',
 		_chkCoupon = '#chkCoupon',
 		_$rdoPayment = null,
 		_$rdoPaymentAll = null,
@@ -137,6 +138,8 @@
 		
 		_$txtPaymentSum.data('couponValue', sum);
 		_$txtPaymentSum.val(sum.toString().money() + '원');
+		
+		hotplace.dom.changeTooltipText(_$btnPaymentInfo, '<span class="innerTooltip">test</span>');
 	}
 	
 	payment.init = function() {
@@ -150,6 +153,7 @@
 		_$chkCoupon = $(_chkCoupon),
 		_$btnCoupon = $(_btnCoupon),
 		_$txtCoupon = $(_txtCoupon),
+		_$btnPaymentInfo = $(_btnPaymentInfo),
 		_$btnPayment = $(_btnPayment);
 		
 				
@@ -158,6 +162,7 @@
 			events: {
 				'show.bs.tooltip': function() {
 					console.log($('#uuu').text())
+					
 				}
 			}
 		});
