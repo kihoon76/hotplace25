@@ -231,6 +231,9 @@
 			else {
 				_$txtCoupon.prop('disabled', true);
 				_$btnCoupon.prop('disabled', true);
+				_$txtCoupon.val('');
+				_couponInfo = {};
+				_sumCoupon(_$txtPaymentSum.data('value'));
 			}
 		});
 	}
