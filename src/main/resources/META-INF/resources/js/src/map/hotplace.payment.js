@@ -236,6 +236,8 @@
 				_sumCoupon(_$txtPaymentSum.data('value'));
 			}
 		});
+		
+		$('#btnPaymentInfo').on('click', function() { console.log('pppp');});
 	}
 }(
 	hotplace.payment = hotplace.payment || {},
