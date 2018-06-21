@@ -154,7 +154,13 @@
 		
 				
 		//툴팁 초기화
-		hotplace.dom.initTooltip(_dvPayment);
+		hotplace.dom.initTooltip(_dvPayment, {
+			events: {
+				'shown.bs.tooltip': function() {
+					console.log('uuuuuuu')
+				}
+			}
+		});
 		
 		_$rdoPayment
 		.off('change')

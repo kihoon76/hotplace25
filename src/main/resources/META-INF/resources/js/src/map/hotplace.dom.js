@@ -1695,10 +1695,18 @@
 		_$mapArea.css('z-index', z || '0');
 	}
 	
-	dom.initTooltip = function(containerId) {
+	dom.initTooltip = function(containerId, options) {
 		$(containerId + ' .TOOLTIP').tooltip({
 			html:true
 		});
+		
+		if(options && options.events) {
+			for(eventName in options.events) {
+				$(containerId + ' .TOOLTIP')
+				.off(eventName)
+				.on(eventName, options.events[eventName]);
+			}
+		}
 	}
 	
 	dom.changeTooltipText = function($el, tooltipStr) {
