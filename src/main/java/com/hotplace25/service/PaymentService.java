@@ -1,12 +1,11 @@
 package com.hotplace25.service;
 
-import java.util.Map;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.hotplace25.dao.PaymentDao;
+import com.hotplace25.domain.Coupon;
 import com.hotplace25.domain.Payment;
 
 @Service("paymentService")
@@ -19,7 +18,7 @@ public class PaymentService {
 		paymentDao.insertHotplaceServices(payment);
 	}
 
-	public Map<String, String> validateCoupon(String coupon) {
+	public Coupon validateCoupon(String coupon) {
 		return paymentDao.selectCoupon(coupon);
 	}
 	

@@ -10,8 +10,8 @@
 		)}
 	</insert>
 	
-	<select id="selectCoupon" parameterType="string" resultType="map">
-		select 쿠폰번호 as couponNum, 사용여부 as used
+	<select id="selectCoupon" parameterType="string" resultType="Coupon">
+		select 쿠폰번호 couponNum, 할인단위 discountUnit, 할인값 discountValue, 사용여부 used
 		  from [웹].[dbo].[발행쿠폰]
 		 where 쿠폰번호 = #{couponNum}
 	</select>

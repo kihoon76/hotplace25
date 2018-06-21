@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hotplace25.domain.Account;
 import com.hotplace25.domain.AjaxVO;
+import com.hotplace25.domain.Coupon;
 import com.hotplace25.domain.Payment;
 import com.hotplace25.security.UserDetailsImpl;
 import com.hotplace25.service.PaymentService;
@@ -70,19 +71,20 @@ public class PaymentController {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			Account user = (Account)auth.getPrincipal();
 			
-			Map<String, String> r = paymentService.validateCoupon(coupon);
+			Coupon cp = paymentService.validateCoupon(coupon);
 			
-			if(r == null) {
+			if(cp == null) {
 				vo.setSuccess(false);
 				vo.setErrCode("700");
 			}
 			else {
-				if("Y".equals(r.get("used"))) {
+				if("Y".equals(cp.getUsed())) {
 					vo.setSuccess(false);
 					vo.setErrCode("701");
 				}
 				else {
 					vo.setSuccess(true);
+					vo.addObject(cp);
 				}
 			}
 		}
