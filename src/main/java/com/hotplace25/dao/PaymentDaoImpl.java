@@ -1,5 +1,7 @@
 package com.hotplace25.dao;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
@@ -19,6 +21,11 @@ public class PaymentDaoImpl implements PaymentDao {
 	public void insertHotplaceServices(Payment payment) {
 		// TODO Auto-generated method stub
 		msSqlSession.insert(namespace + ".insertHotplaceServices", payment);
+	}
+
+	@Override
+	public Map<String, String> selectCoupon(String coupon) {
+		return msSqlSession.selectOne(namespace + ".selectCoupon", coupon);
 	}
 
 }

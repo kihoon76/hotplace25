@@ -161,7 +161,13 @@
 				data: JSON.stringify({coupon: coupon}),
 				contentType: 'application/json; charset=UTF-8',
 				success: function(data, textStatus, jqXHR) {
-					console.log(data)
+					console.log(data);
+					if(data.success) {
+						
+					}
+					else {
+						jqXHR.errCode = data.errCode;
+					}
 				}
 			});
 		});

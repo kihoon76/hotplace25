@@ -672,6 +672,8 @@
 		TIMEOUT:'611', //타임아웃
 		GWANSIM_DEL:'612', //관심물건 삭제오류
 		USER_MOD:'613', //회원계정정보 수정오류
+		COUPON_VAL: '700', //쿠폰유효성 오류
+		COUPON_USED: '701', //사용된 쿠폰오류
 		PAYMENT: '777',  //결제오류
 		SERVICE_READY: '888', //서비스 준비중
 		FORMAT: '999'   //입력폼 포멧오류
@@ -788,6 +790,12 @@
 			break;
 		case _err.PAYMENT :
 			hotplace.dom.showAlertMsg(null, msg || '결제오류입니다', defaultWidth);
+			break;
+		case _err.COUPON_VAL: 
+			hotplace.dom.showAlertMsg(null, msg || '발행되지않은 쿠폰입니다.', defaultWidth);
+			break;
+		case _err.COUPON_USED: 
+			hotplace.dom.showAlertMsg(null, msg || '이미 사용된 쿠폰입니다.', defaultWidth);
 			break;
 		}
 	}

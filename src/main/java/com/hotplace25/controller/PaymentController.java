@@ -64,15 +64,27 @@ public class PaymentController {
 	public AjaxVO checkCoupon(@RequestBody Map<String, String> param) {
 		AjaxVO vo = new AjaxVO();
 		
-		System.err.println(param.get("coupon"));
+		String coupon = param.get("coupon");
 		
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			Account user = (Account)auth.getPrincipal();
-			vo.setSuccess(true);
 			
-			ObjectMapper m = new ObjectMapper();
-			System.err.println(m.writeValueAsString(user));
+			Map<String, String> r = paymentService.validateCoupon(coupon);
+			
+			if(r == null) {
+				vo.setSuccess(false);
+				vo.setErrCode("700");
+			}
+			else {
+				if("Y".equals(r.get("used"))) {
+					vo.setSuccess(false);
+					vo.setErrCode("701");
+				}
+				else {
+					vo.setSuccess(true);
+				}
+			}
 		}
 		catch(Exception e) {
 			vo.setSuccess(false);

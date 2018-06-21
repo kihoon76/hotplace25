@@ -1,5 +1,7 @@
 package com.hotplace25.service;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -15,6 +17,10 @@ public class PaymentService {
 
 	public void setServices(Payment payment) {
 		paymentDao.insertHotplaceServices(payment);
+	}
+
+	public Map<String, String> validateCoupon(String coupon) {
+		return paymentDao.selectCoupon(coupon);
 	}
 	
 	
