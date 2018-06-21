@@ -119,6 +119,8 @@
 	function _sumCoupon(sum) {
 		//쿠폰적용전 값 저장
 		_$txtPaymentSum.data('value', sum);
+		var tooltipHtml = '<span class="innerTooltip">';
+		var couponHtml = '';
 		
 		//쿠폰적용여부 결정 couponNum 존재하면 적용
 		if(_couponInfo.couponNum) {
@@ -126,20 +128,31 @@
 			var discountValue = _couponInfo.discountValue;
 			discountValue = parseInt(discountValue, 10);
 			
+			couponHtml += '쿠폰사용: ';
 			//%
 			if(discountUnit == '1') {
 				sum = sum - (sum * (0.01 * discountValue));
 				sum = Math.round(sum);
+				couponHtml += discountValue + '% 할인<br/>';
 			}
 			else {
 				sum = sum - discountValue;
+				couponHtml += discountValue + '원 할인<br/>';
 			}
+		}
+		else {
+			couponHtml = '쿠폰사용: 사용안함<br/>';
 		}
 		
 		_$txtPaymentSum.data('couponValue', sum);
 		_$txtPaymentSum.val(sum.toString().money() + '원');
+
+		tooltipHtml += '정가: ' + _$txtPaymentSum.data('value').toString().money() + '원<br/>';
+		tooltipHtml += couponHtml;
+		tooltipHtml += '총 결제금액 : ' + _$txtPaymentSum.val() + '</span>';
+
 		
-		hotplace.dom.changeTooltipText(_$btnPaymentInfo, '<span class="innerTooltip">test</span>');
+		hotplace.dom.changeTooltipText(_$btnPaymentInfo, tooltipHtml);
 	}
 	
 	payment.init = function() {
@@ -161,9 +174,11 @@
 		hotplace.dom.initTooltip(_dvPayment, {
 			events: {
 				'show.bs.tooltip': function() {
-					console.log($('#uuu').text())
 					
 				}
+			},
+			config: {
+				placement: 'top'
 			}
 		});
 		

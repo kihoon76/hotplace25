@@ -1696,11 +1696,14 @@
 	}
 	
 	dom.initTooltip = function(containerId, options) {
-		$(containerId + ' .TOOLTIP').tooltip({
-			html:true
-		});
+		var defaultOpt = {html:true};
+		options = options || {};
 		
-		if(options && options.events) {
+		$(containerId + ' .TOOLTIP').tooltip($.extend({
+			html:true
+		}, options.config || {}));
+		
+		if(options.events) {
 			for(eventName in options.events) {
 				$(containerId + ' .TOOLTIP')
 				.off(eventName)

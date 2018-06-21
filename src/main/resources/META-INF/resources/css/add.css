@@ -54,5 +54,7 @@ textarea {resize:none;}
     left: -1px;
 }
 
+#dvPayment .tooltip-inner {min-width:200px; width:200px;}
+
 
 
