@@ -80,7 +80,7 @@
 						hotplace.dom.logout(function() {
 							window.location.reload();
 						});
-					}, '결제가 완료되었습니다. 다시로그인해 주세요', {width:550});
+					}, '결제가 완료되었습니다. 다시로그인해 주세요', hotplace.ALERT_SIZE);
 					//hotplace.dom.showServiceReady();
 				}
 				else {
@@ -88,6 +88,16 @@
 				}
 			}
 		});
+	}
+	
+	function _addCoupon(couponObj) {
+		
+		var discountUnit = couponObj.discountUnit;
+		var discountValue = couponObj.discountValue;
+		
+		if(!discountUnit || !discountValue) {
+			hotplace.dom.showAlertMsg(null, '쿠폰정보에 오류가 있습니다. <br/> 070-7117-6868로 문의해 주세요', hotplace.ALERT_SIZE);
+		}
 	}
 	
 	payment.init = function() {
@@ -163,7 +173,7 @@
 				success: function(data, textStatus, jqXHR) {
 					console.log(data);
 					if(data.success) {
-						
+						_addCoupon({});
 					}
 					else {
 						jqXHR.errCode = data.errCode;
