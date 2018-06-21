@@ -13,8 +13,10 @@
 		_btnPayment = '#btnPayment',
 		_txtCoupon = '#txtCoupon',
 		_btnCoupon = '#btnCoupon',
+		_chkCoupon = '#chkCoupon',
 		_$rdoPayment = null,
 		_$rdoPaymentAll = null,
+		_$chkCoupon = null,
 		_$txtPaymentSum = null,
 		_$chkPaymentTooja = null,
 		_$chkPaymentGG = null,
@@ -144,6 +146,7 @@
 		_$chkPaymentGG = $(_chkPaymentGG),
 		_$chkPaymentMulgeon = $(_chkPaymentMulgeon),
 		_$chkPaymentHeatmap = $(_chkPaymentHeatmap),
+		_$chkCoupon = $(_chkCoupon),
 		_$btnCoupon = $(_btnCoupon),
 		_$txtCoupon = $(_txtCoupon),
 		_$btnPayment = $(_btnPayment);
@@ -216,6 +219,19 @@
 					}
 				}
 			});
+		});
+		
+		_$chkCoupon
+		.off('click')
+		.on('click', function() {
+			if($(this).is(':checked')) {
+				_$txtCoupon.prop('disabled', false);
+				_$btnCoupon.prop('disabled', false);
+			}
+			else {
+				_$txtCoupon.prop('disabled', true);
+				_$btnCoupon.prop('disabled', true);
+			}
 		});
 	}
 }(
