@@ -156,8 +156,8 @@
 		//툴팁 초기화
 		hotplace.dom.initTooltip(_dvPayment, {
 			events: {
-				'shown.bs.tooltip': function() {
-					console.log('uuuuuuu')
+				'show.bs.tooltip': function() {
+					console.log($('#uuu').text())
 				}
 			}
 		});
@@ -247,8 +247,6 @@
 				_sumCoupon(_$txtPaymentSum.data('value'));
 			}
 		});
-		
-		$('#btnPaymentInfo').on('click', function() { console.log('pppp');});
 	}
 }(
 	hotplace.payment = hotplace.payment || {},
