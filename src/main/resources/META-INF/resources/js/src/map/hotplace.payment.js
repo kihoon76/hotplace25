@@ -3,8 +3,9 @@
  */
 (function(payment, $) {
 	
-	var _rdoPayment = '#dvPayment input[name=payment]:radio',
-		_rdoPaymentAll = '#dvPayment input[name=paymentAll]:radio',
+	var _dvPayment = '#dvPayment',
+		_rdoPayment = _dvPayment + ' input[name=payment]:radio',
+		_rdoPaymentAll = _dvPayment + ' input[name=paymentAll]:radio',
 		_txtPaymentSum = '#txtPaymentSum',
 		_chkPaymentTooja = '#chkPaymentTooja',
 		_chkPaymentGG = '#chkPaymentGG',
@@ -150,6 +151,10 @@
 		_$btnCoupon = $(_btnCoupon),
 		_$txtCoupon = $(_txtCoupon),
 		_$btnPayment = $(_btnPayment);
+		
+				
+		//툴팁 초기화
+		hotplace.dom.initTooltip(_dvPayment);
 		
 		_$rdoPayment
 		.off('change')
