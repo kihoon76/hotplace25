@@ -32,8 +32,10 @@
 			sum = 0;
 		}
 		
-		_$txtPaymentSum.data('value', sum);
-		_$txtPaymentSum.val(sum.toString().money() + '원');
+		//_$txtPaymentSum.data('value', sum);
+		//_$txtPaymentSum.val(sum.toString().money() + '원');
+		
+		_sumCoupon(sum);
 	}
 	
 	function _checkedSum($chk, val) {
@@ -46,8 +48,10 @@
 			sum -= parseInt(val, 10);
 		}
 		
-		_$txtPaymentSum.data('value', sum);
-		_$txtPaymentSum.val(sum.toString().money() + '원');
+		//_$txtPaymentSum.data('value', sum);
+		//_$txtPaymentSum.val(sum.toString().money() + '원');
+		
+		_sumCoupon(sum);
 	}
 	
 	function _payment() {
@@ -66,7 +70,7 @@
 		}
 		
 		param.serviceSubTypes = serviceSubType.join(',');
-		param.sum = _$txtPaymentSum.data('value');
+		param.sum = _$txtPaymentSum.data('couponValue');
 		
 		console.log(param);
 		
@@ -90,14 +94,43 @@
 		});
 	}
 	
+	var _couponInfo = {};
+	
 	function _addCoupon(couponObj) {
 		
-		var discountUnit = couponObj.discountUnit;
-		var discountValue = couponObj.discountValue;
-		
-		if(!discountUnit || !discountValue) {
+		if(!couponObj.discountUnit || !couponObj.discountValue) {
 			hotplace.dom.showAlertMsg(null, '쿠폰정보에 오류가 있습니다. <br/> 070-7117-6868로 문의해 주세요', hotplace.ALERT_SIZE);
 		}
+		else {
+			_couponInfo.discountUnit = couponObj.discountUnit;
+			_couponInfo.discountValue = couponObj.discountValue;
+			_couponInfo.couponNum = couponObj.couponNum;
+		}
+		
+	}
+	
+	function _sumCoupon(sum) {
+		//쿠폰적용전 값 저장
+		_$txtPaymentSum.data('value', sum);
+		
+		//쿠폰적용여부 결정 couponNum 존재하면 적용
+		if(_couponInfo.couponNum) {
+			var discountUnit = _couponInfo.discountUnit;
+			var discountValue = _couponInfo.discountValue;
+			discountValue = parseInt(discountValue, 10);
+			
+			//%
+			if(discountUnit == '1') {
+				sum = sum - (sum * (0.01 * discountValue));
+				sum = Math.round(sum);
+			}
+			else {
+				sum = sum - discountValue;
+			}
+		}
+		
+		_$txtPaymentSum.data('couponValue', sum);
+		_$txtPaymentSum.val(sum.toString().money() + '원');
 	}
 	
 	payment.init = function() {
@@ -173,7 +206,7 @@
 				success: function(data, textStatus, jqXHR) {
 					console.log(data);
 					if(data.success) {
-						_addCoupon({});
+						_addCoupon(data.datas[0]);
 					}
 					else {
 						jqXHR.errCode = data.errCode;
