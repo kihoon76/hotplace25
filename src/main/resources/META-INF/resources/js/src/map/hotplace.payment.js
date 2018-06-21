@@ -105,6 +105,9 @@
 			_couponInfo.discountUnit = couponObj.discountUnit;
 			_couponInfo.discountValue = couponObj.discountValue;
 			_couponInfo.couponNum = couponObj.couponNum;
+			
+			var sum = _$txtPaymentSum.data('value');
+			_sumCoupon(sum);
 		}
 		
 	}
