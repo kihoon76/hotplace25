@@ -1,5 +1,6 @@
 package com.hotplace25.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -37,6 +38,11 @@ public class PaymentDaoImpl implements PaymentDao {
 	@Override
 	public void updateCoupon(String couponNum) {
 		msSqlSession.update(namespace + ".updateCoupon", couponNum);
+	}
+
+	@Override
+	public List<Payment> selectPaymentList(String accountId) {
+		return msSqlSession.selectList(namespace + ".selectPaymentList", accountId);
 	}
 
 }

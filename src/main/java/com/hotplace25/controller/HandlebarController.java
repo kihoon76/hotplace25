@@ -1,5 +1,7 @@
 package com.hotplace25.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hotplace25.domain.Account;
+import com.hotplace25.domain.Payment;
 import com.hotplace25.service.HotplaceService;
+import com.hotplace25.service.PaymentService;
 import com.hotplace25.service.SpotService;
 import com.hotplace25.service.UserService;
 import com.hotplace25.util.SessionUtil;
@@ -27,6 +31,9 @@ public class HandlebarController {
 	
 	@Resource(name="userService")
 	private UserService userService;
+	
+	@Resource(name="paymentService")
+	private PaymentService paymentService;
 	
 	@GetMapping("join")
 	public String getJoinTos(ModelMap m) {
@@ -68,6 +75,8 @@ public class HandlebarController {
 		String accountId = SessionUtil.getSessionUserId();
 		
 		Account account = userService.getUserInfo(accountId);
+		List<Payment> paymentHistory = paymentService.getPaymentHistories(accountId); 
+		
 		String[] email = account.getEmail().split("@");
 		String[] phone = account.getPhone().split("-");
 		account.setEmail1(email[0]);
@@ -78,6 +87,7 @@ public class HandlebarController {
 		
 		m.addAttribute("gwansim", spotService.getMyGwansimList(accountId));
 		m.addAttribute("account", account);
+		m.addAttribute("paymentHistory", paymentHistory);
 		
 		return "mypage/mypageForm";
 	}

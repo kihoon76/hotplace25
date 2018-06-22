@@ -27,4 +27,20 @@
 		 where 쿠폰번호 = #{couponNum}
 	</update>
 	
+	<resultMap id="RM_selectPaymentList" type="Payment" >
+		<result column="결제신청일자" property="applyDate" javaType="string"/>
+		<result column="결제금액" property="sum" javaType="int"/>
+		<result column="쿠폰사용여부" property="useCoupon" javaType="string"/>
+		<result column="쿠폰번호" property="couponNum" javaType="string"/>
+		<result column="서비스타입" property="serviceType" javaType="string"/>
+		<result column="서비스서브타입" property="serviceSubTypes" javaType="string"/>
+		<result column="결제내용" property="applyComment" javaType="string"/>
+	</resultMap>
+	
+	<select id="selectPaymentList" parameterType="string" resultMap="RM_selectPaymentList">
+		select 결제신청일자, 결제금액, 쿠폰사용여부, 쿠폰번호, 서비스타입, 서비스서브타입, 서비스타입 as 결제내용
+		  from [웹].[dbo].[결제내역]
+		 where 사용자계정 = #{accountId}
+		 order by 결제신청일자 desc
+	</select>
 </mapper>

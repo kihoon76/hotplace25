@@ -5,11 +5,13 @@ import org.apache.ibatis.type.Alias;
 @Alias("Payment")
 public class Payment {
 
-	private String accountId;
-	private String serviceType;
-	private String serviceSubTypes;
-	private String couponNum;
-	private String useCoupon;
+	private String accountId;					//사용자계정
+	private String serviceType;					//서비스타입
+	private String serviceSubTypes;				//서비스서브타입
+	private String couponNum;					//쿠폰번호
+	private String useCoupon;					//쿠폰사용여부('N' | 'Y')
+	private String applyDate;					//결제신청일자
+	private String applyComment;				//결제내용
 	private int sum;
 	
 	public String getAccountId() {
@@ -47,5 +49,17 @@ public class Payment {
 	}
 	public void setUseCoupon(String useCoupon) {
 		this.useCoupon = useCoupon;
+	}
+	public String getApplyDate() {
+		return applyDate;
+	}
+	public void setApplyDate(String applyDate) {
+		this.applyDate = applyDate;
+	}
+	public String getApplyComment() {
+		return applyComment;
+	}
+	public void setApplyComment(String applyComment) {
+		this.applyComment = applyComment;
 	}
 }

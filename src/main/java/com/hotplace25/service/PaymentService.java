@@ -1,5 +1,7 @@
 package com.hotplace25.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -33,7 +35,11 @@ public class PaymentService {
 		paymentDao.insertPayment(payment);
 		paymentDao.updateCoupon(payment.getCouponNum());
 	}
-	
+
+
+	public List<Payment> getPaymentHistories(String accountId) {
+		return paymentDao.selectPaymentList(accountId);
+	}
 	
 
 }

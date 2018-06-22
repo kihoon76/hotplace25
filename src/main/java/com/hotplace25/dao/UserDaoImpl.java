@@ -1,5 +1,6 @@
 package com.hotplace25.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.hotplace25.domain.Account;
+import com.hotplace25.domain.Payment;
 
 @Repository("userDao")
 public class UserDaoImpl implements UserDao {

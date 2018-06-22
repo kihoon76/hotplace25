@@ -21,6 +21,9 @@
 								<button href="#tabMypageAccount" data-toggle="tab"><span class="text">계정정보</span></button>
 							</li>
 							<li class="tabLink">
+								<button href="#tabMypagePayment" data-toggle="tab"><span class="text">결제내역</span></button>
+							</li>
+							<li class="tabLink">
 								<button href="#tabMypageGwansimMulgeon" data-toggle="tab"><span class="text">관심물건</span></button>
 							</li>
 							<li class="tabLink">
@@ -348,6 +351,46 @@
 							<div class="btnArea right mgT10">
 								<button type="button" class="btnstyle middle blue" id="btnAccModifyAccount" style="margin-right:10px; width:80px;">수정</button>
 							</div>
+						</div>
+						<div id="tabMypagePayment" class="tab-pane">
+							<table class="tableStyle gridStyle bgWhite">
+								<colgroup>
+									<col style="width:20%;">
+									<col style="width:10%;">
+									<col style="width:5%;">
+									<col style="width:15%;">
+									<col style="width:50%;">
+								</colgroup>
+								<thead>
+									<tr>
+										<th>신청일자</th>
+										<th>결제금액</th>
+										<th>쿠폰사용여부</th>
+										<th>쿠폰번호</th>
+										<th>결제내용</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:choose>
+									<c:when test="${fn:length(paymentHistory) == 0}">
+									<tr class="NO-DATA">
+										<td colspan="4">결제내역이 존재하지 않습니다.</td>
+									</tr>
+									</c:when>
+									<c:otherwise>
+									<c:forEach var="payment" items="${paymentHistory}" varStatus="status">
+									<tr>
+										<td class="left ellipsis">${payment.applyDate}</td>
+										<td class="left ellipsis">${payment.sum}</td>
+										<td class="left ellipsis">${payment.useCoupon}</td>
+										<td class="left ellipsis">${payment.couponNum}</td>
+										<td class="left ellipsis">${payment.applyComment}</td>
+									</tr>
+									</c:forEach>
+									</c:otherwise>
+								</c:choose>
+								</tbody>
+							</table>
 						</div>
 						<div id="tabMypageGwansimMulgeon" class="tab-pane">
 							<table class="tableStyle gridStyle dvGwansimMulgeon bgWhite">

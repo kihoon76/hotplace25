@@ -1,6 +1,7 @@
 package com.hotplace25.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.hotplace25.dao.UserDao;
 import com.hotplace25.domain.Account;
+import com.hotplace25.domain.Payment;
 
 @Service("userService")
 public class UserService {
