@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import com.hotplace25.domain.Account;
+import com.hotplace25.domain.Coupon;
 import com.hotplace25.domain.Payment;
 import com.hotplace25.types.PaymentServiceSubtype;
 import com.hotplace25.types.PaymentServiceType;
@@ -67,8 +68,11 @@ public class ValidationUtil {
 		}
 	}
 	
-	public static boolean isValidPayment(Payment payment) {
+	public static boolean isValidPayment(Payment payment, Coupon cp) {
+		
 		if(payment == null) new IllegalArgumentException("파라미터가  존재하지 않습니다.");
+		
+		boolean isUseCoupon = cp != null;
 		
 		PaymentServiceType serviceType = PaymentServiceType.getType(payment.getServiceType());
 		List<PaymentServiceSubtype> serviceSubtypes = new ArrayList<PaymentServiceSubtype>();
@@ -91,10 +95,20 @@ public class ValidationUtil {
 			&& serviceSubtypes.get(0) != PaymentServiceSubtype.YEAR) throw new IllegalArgumentException("serviceSubtype 값이  유효하지 않습니다.");
 			
 			if(serviceSubtypes.get(0) == PaymentServiceSubtype.MONTH) {
-				payment.setSum(100000);
+				if(isUseCoupon) {
+					payment.setSum(discount(100000, cp));
+				}
+				else {
+					payment.setSum(100000);
+				}
 			}
 			else {
-				payment.setSum(990000);
+				if(isUseCoupon) {
+					payment.setSum(discount(990000, cp));
+				}
+				else {
+					payment.setSum(990000);
+				}
 			}
 		}
 		else {
@@ -117,9 +131,27 @@ public class ValidationUtil {
 				}
 			}
 			
-			payment.setSum(sum);
+			if(isUseCoupon) {
+				payment.setSum(discount(sum, cp));
+			}
+			else {
+				payment.setSum(sum);
+			}
 		}
 
 		return true;
+	}
+	
+	private static int  discount(int seed, Coupon cp) {
+		String discountUnit = cp.getDiscountUnit();
+		String discountValue = cp.getDiscountValue();
+		int discountValueInt = Integer.parseInt(discountValue);
+		
+		if("1".equals(discountUnit)) {
+			return seed - (int)Math.round(100000 * (0.01 * discountValueInt));
+		}
+		else {
+			return seed - discountValueInt;
+		}
 	}
 }

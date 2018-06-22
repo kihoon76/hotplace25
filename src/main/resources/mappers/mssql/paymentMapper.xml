@@ -16,4 +16,15 @@
 		 where 쿠폰번호 = #{couponNum}
 	</select>
 	
+	<insert id="insertPayment" parameterType="Payment">
+		insert into [웹].[dbo].[결제내역](사용자계정, 결제금액, 쿠폰사용여부, 쿠폰번호, 서비스타입, 서비스서브타입)
+		values (#{accountId}, #{sum}, #{useCoupon}, #{couponNum}, #{serviceType}, #{serviceSubTypes})
+	</insert>
+	
+	<update id="updateCoupon" parameterType="string">
+		update [웹].[dbo].[발행쿠폰]
+		   set 사용여부 = 'Y'
+		 where 쿠폰번호 = #{couponNum}
+	</update>
+	
 </mapper>

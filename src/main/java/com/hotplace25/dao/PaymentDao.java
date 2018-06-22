@@ -9,4 +9,8 @@ public interface PaymentDao {
 
 	Coupon selectCoupon(String coupon);
 
+	void insertPayment(Payment payment);
+
+	void updateCoupon(String couponNum);
+
 }

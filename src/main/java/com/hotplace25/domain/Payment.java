@@ -8,6 +8,8 @@ public class Payment {
 	private String accountId;
 	private String serviceType;
 	private String serviceSubTypes;
+	private String couponNum;
+	private String useCoupon;
 	private int sum;
 	
 	public String getAccountId() {
@@ -33,5 +35,17 @@ public class Payment {
 	}
 	public void setSum(int sum) {
 		this.sum = sum;
+	}
+	public String getCouponNum() {
+		return couponNum;
+	}
+	public void setCouponNum(String couponNum) {
+		this.couponNum = couponNum;
+	}
+	public String getUseCoupon() {
+		return useCoupon;
+	}
+	public void setUseCoupon(String useCoupon) {
+		this.useCoupon = useCoupon;
 	}
 }

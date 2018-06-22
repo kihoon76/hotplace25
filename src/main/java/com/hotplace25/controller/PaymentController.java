@@ -40,10 +40,40 @@ public class PaymentController {
 		AjaxVO vo = new AjaxVO();
 		
 		try {
-			boolean r = ValidationUtil.isValidPayment(payment);
+			//쿠폰검증
+			String couponNum = payment.getCouponNum();
+			Coupon cp = null;
+			
+			//쿠폰사용함 
+			if(!"0".equals(couponNum)) {
+				cp = paymentService.validateCoupon(couponNum);
+				if(cp == null) {
+					vo.setSuccess(false);
+					vo.setErrCode("700");
+					return vo;
+				}
+				else {
+					if("Y".equals(cp.getUsed())) {
+						vo.setSuccess(false);
+						vo.setErrCode("701");
+						
+						return vo;
+					}
+				}
+				
+				payment.setUseCoupon("Y");
+			}
+			else {
+				payment.setUseCoupon("N");
+			}
+			
+			boolean r = ValidationUtil.isValidPayment(payment, cp);
 			if(r) {
-				//payment.setAccountId(user.getId());
 				//paymentService.setServices(payment);
+				
+				payment.setAccountId(user.getId());
+				paymentService.applyPayment(payment);
+				
 				vo.setSuccess(true);
 			}
 			else {

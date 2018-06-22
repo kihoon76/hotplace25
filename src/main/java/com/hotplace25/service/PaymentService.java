@@ -3,6 +3,9 @@ package com.hotplace25.service;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hotplace25.dao.PaymentDao;
 import com.hotplace25.domain.Coupon;
@@ -20,6 +23,15 @@ public class PaymentService {
 
 	public Coupon validateCoupon(String coupon) {
 		return paymentDao.selectCoupon(coupon);
+	}
+
+	@Transactional(isolation=Isolation.DEFAULT, 
+			   propagation=Propagation.REQUIRED, 
+			   rollbackFor=Exception.class,
+			   timeout=10)//timeout 초단위
+	public void applyPayment(Payment payment) {
+		paymentDao.insertPayment(payment);
+		paymentDao.updateCoupon(payment.getCouponNum());
 	}
 	
 	

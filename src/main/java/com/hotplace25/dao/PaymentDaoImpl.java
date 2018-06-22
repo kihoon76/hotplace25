@@ -29,4 +29,14 @@ public class PaymentDaoImpl implements PaymentDao {
 		return msSqlSession.selectOne(namespace + ".selectCoupon", coupon);
 	}
 
+	@Override
+	public void insertPayment(Payment payment) {
+		msSqlSession.insert(namespace + ".insertPayment", payment);
+	}
+
+	@Override
+	public void updateCoupon(String couponNum) {
+		msSqlSession.update(namespace + ".updateCoupon", couponNum);
+	}
+
 }

@@ -75,6 +75,7 @@
 		
 		param.serviceSubTypes = serviceSubType.join(',');
 		param.sum = _$txtPaymentSum.data('couponValue');
+		param.couponNum = _couponInfo.couponNum || '0';
 		
 		console.log(param);
 		
@@ -106,12 +107,14 @@
 			hotplace.dom.showAlertMsg(null, '쿠폰정보에 오류가 있습니다. <br/> 070-7117-6868로 문의해 주세요', hotplace.ALERT_SIZE);
 		}
 		else {
-			_couponInfo.discountUnit = couponObj.discountUnit;
-			_couponInfo.discountValue = couponObj.discountValue;
-			_couponInfo.couponNum = couponObj.couponNum;
-			
-			var sum = _$txtPaymentSum.data('value');
-			_sumCoupon(sum);
+			hotplace.dom.showAlertMsg(function() {
+				_couponInfo.discountUnit = couponObj.discountUnit;
+				_couponInfo.discountValue = couponObj.discountValue;
+				_couponInfo.couponNum = couponObj.couponNum;
+				
+				var sum = _$txtPaymentSum.data('value');
+				_sumCoupon(sum);
+			}, '쿠폰인증 되었습니다.', hotplace.ALERT_SIZE);
 		}
 		
 	}
@@ -224,9 +227,16 @@
 			
 			var sum = _$txtPaymentSum.data('value');
 			if(sum == 0) {
-				hotplace.dom.showAlertMsg(null, '구매하실 서비스를 선택하세요', {width:550});
+				hotplace.dom.showAlertMsg(null, '구매하실 서비스를 선택하세요', hotplace.ALERT_SIZE);
 			}
 			else {
+				if(_$chkCoupon.is(':checked')) {
+					if(!_couponInfo.couponNum) {
+						hotplace.dom.showAlertMsg(null, '쿠폰번호입력후 인증해 주세요.', hotplace.ALERT_SIZE);
+						return;
+					}
+				}
+				
 				_payment();
 			}
 		});
