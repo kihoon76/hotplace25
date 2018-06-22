@@ -357,15 +357,15 @@
 								<colgroup>
 									<col style="width:20%;">
 									<col style="width:10%;">
-									<col style="width:5%;">
+									<col style="width:10%;">
 									<col style="width:15%;">
-									<col style="width:50%;">
+									<col style="width:45%;">
 								</colgroup>
 								<thead>
 									<tr>
 										<th>신청일자</th>
 										<th>결제금액</th>
-										<th>쿠폰사용여부</th>
+										<th>쿠폰<br/>사용</th>
 										<th>쿠폰번호</th>
 										<th>결제내용</th>
 									</tr>
