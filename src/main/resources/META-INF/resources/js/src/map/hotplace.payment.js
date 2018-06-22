@@ -87,7 +87,7 @@
 				if(data.success) {
 					hotplace.dom.showAlertMsg(function() {
 						hotplace.dom.closeModal();
-					}, '결제신청이 완료되었습니다<br/>입금완료후 사용가능합니다.', hotplace.ALERT_SIZE);
+					}, '결제신청이 완료되었습니다.<br/>입금완료후 사용가능합니다.<br/>신청내역은 My Page에서 확인가능 합니다.', hotplace.ALERT_SIZE);
 //					hotplace.dom.showAlertMsg(function() {
 //						hotplace.dom.logout(function() {
 //							window.location.reload();
