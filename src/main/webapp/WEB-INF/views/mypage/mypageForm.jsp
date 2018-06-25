@@ -386,7 +386,7 @@
 									<tr>
 										<td class="left ellipsis">${payment.applyDate}</td>
 										<td class="left ellipsis">${payment.sum}</td>
-										<td class="left ellipsis">
+										<td class="center ellipsis">
 										<c:if test="${payment.status eq 'N'}">
 										<span style="color:#0000ff;">처리중</span>
 										</c:if>
@@ -394,7 +394,14 @@
 										<span style="color:#ff0000;">처리완료</span>
 										</c:if>
 										</td>
-										<td class="left ellipsis">${payment.useCoupon}</td>
+										<td class="center ellipsis">
+										<c:if test="${payment.useCoupon eq 'N'}">
+											사용안함
+										</c:if>
+										<c:if test="${payment.useCoupon eq 'Y'}">
+											사용함
+										</c:if>
+										</td>
 										<td class="left ellipsis">${payment.couponNum}</td>
 										<td class="left ellipsis">${payment.applyComment}</td>
 										<td class="PAYMENT_DETAIL" 
