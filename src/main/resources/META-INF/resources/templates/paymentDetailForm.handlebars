@@ -19,31 +19,37 @@
 						<tbody>
 							<tr>
 								<th>결제신청일자</th>
-								<td>${applyDate}</td>
+								<td>{{applyDate}}</td>
 							</tr>
 							<tr>
 								<th>결제금액</th>
-								<td>${paymentValue}</td>
+								<td>{{paymentValue}}</td>
 							</tr>
 							<tr>
 								<th>쿠폰사용여부</th>
-								<td>${useCoupon}</td>
+								<td>{{useCoupon}}</td>
 							</tr>
 							<tr>
 								<th>쿠폰번호</th>
-								<td>${couponNum}</td>
+								<td>{{couponNum}}</td>
 							</tr>
 							<tr>
 								<th>쿠폰내용</th>
-								<td>${couponContent}</td>
+								<td>{{couponContent}}</td>
 							</tr>
 							<tr>
 								<th>결제내용</th>
-								<td>${applyComment}</td>
+								<td>{{applyComment}}</td>
 							</tr>							
 							<tr>
 								<th>처리상태</th>
-								<td>${status}</td>
+								<td>
+								{{#xif " status == 'N' " }}
+								<span style="color:#0000ff">처리중</span>
+								{{else}}
+								<span style="color:#ff0000">처리완료</span>
+								{{/xif}}
+								</td>
 							</tr>
 						</tbody>
     				</table>

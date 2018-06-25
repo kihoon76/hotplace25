@@ -399,7 +399,7 @@
 											data-coupon-value="${payment.couponValue}"
 											data-coupon-unit="${payment.couponUnit}"
 											data-apply-comment="${payment.applyComment}">
-											<span class="iconRBtnDel"><i class="ambicon-023_trash"></i></span>
+											<span class="iconRBtnDetail"><i class="ambicon-024_view_big"></i></span>
 										</td>
 									</tr>
 									</c:forEach>

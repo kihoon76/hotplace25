@@ -170,7 +170,7 @@
 				paymentValue: $this.data('paymentValue'),
 				useCoupon: (couponNum ? '쿠폰사용' : '쿠폰사용하지 않음'),
 				couponNum: 	couponNum,
-				couponContent: $this.data('couponValue') + ($this.data('couponUnit') == '1' ? '%' : '원') + ' 할인쿠폰' ,
+				couponContent: (couponNum ? ($this.data('couponValue') + ($this.data('couponUnit') == '1' ? '%' : '원') + ' 할인쿠폰') : '') ,
 				applyComment: $this.data('applyComment'),
 				status: $this.data('status')
 			});
