@@ -390,7 +390,13 @@
 										<td class="left ellipsis">${payment.useCoupon}</td>
 										<td class="left ellipsis">${payment.couponNum}</td>
 										<td class="left ellipsis">${payment.applyComment}</td>
-										<td data-key="${payment.key}">
+										<td class="PAYMENT_DETAIL" 
+											data-key="${payment.key}" 
+											data-apply-date="${payment.applyDate}"
+											data-status="${payment.status}"
+											data-coupon-num="${payment.couponNum}"
+											data-coupon-value="${payment.couponValue}"
+											data-coupon-unit="${payment.couponUnit}">
 											<span class="iconRBtnDel"><i class="ambicon-023_trash"></i></span>
 										</td>
 									</tr>

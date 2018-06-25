@@ -3,6 +3,7 @@
  */
 (function(mypage, $) {
 	var _tabMypageAccount = '#tabMypageAccount',
+		_tabMypagePayment = 'tabMypagePayment',
 		_tabMypageGwansimMulgeon = '#tabMypageGwansimMulgeon';
 	
 	var _$selectedGwansimTr = null;
@@ -36,6 +37,7 @@
 	
 	mypage.init = function() {
 		_initAccount();
+		_initPayment();
 		_initGwansimMulgeon();
 	}
 	
@@ -151,6 +153,19 @@
 		}
 		return false;
 	}
+	
+	/************************************************
+	 * 결제내역
+	 ***********************************************/
+	function _initPayment() {
+		
+		$(_tabMypagePayment + ' .PAYMENT_DETAIL')
+		.off('click')
+		.on('click', function() {
+			
+		});
+	}
+	
 	
 	/************************************************
 	 * 관심물건
