@@ -1099,8 +1099,8 @@
 		});
 	}
 	
-	dom.showPaymentDetailForm = function() {
-		_appendModalPopup('paymentDetailForm', _$momPopup, {});
+	dom.showPaymentDetailForm = function(param) {
+		_appendModalPopup('paymentDetailForm', _$momPopup, param);
 		dom.openModalOnModal('', {width:'700px'});
 	}
 	

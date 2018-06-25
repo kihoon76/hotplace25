@@ -392,11 +392,13 @@
 										<td class="left ellipsis">${payment.applyComment}</td>
 										<td class="PAYMENT_DETAIL" 
 											data-key="${payment.key}" 
+											data-payment-value="${payment.sum}"
 											data-apply-date="${payment.applyDate}"
 											data-status="${payment.status}"
 											data-coupon-num="${payment.couponNum}"
 											data-coupon-value="${payment.couponValue}"
-											data-coupon-unit="${payment.couponUnit}">
+											data-coupon-unit="${payment.couponUnit}"
+											data-apply-comment="${payment.applyComment}">
 											<span class="iconRBtnDel"><i class="ambicon-023_trash"></i></span>
 										</td>
 									</tr>
