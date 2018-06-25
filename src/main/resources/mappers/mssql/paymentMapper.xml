@@ -45,9 +45,16 @@
 	</resultMap>
 	
 	<select id="selectPaymentList" parameterType="string" resultMap="RM_selectPaymentList">
-		select 결제신청일자, 결제금액, 쿠폰사용여부, 쿠폰번호, 서비스타입, 서비스서브타입, 서비스타입 as 결제내용
-		  from [웹].[dbo].[결제내역]
-		 where 사용자계정 = #{accountId}
-		 order by 결제신청일자 desc
+		  select 결제신청일자, 결제금액, 쿠폰사용여부, 쿠폰번호, 
+			case when 서비스타입 = 'ALL' then 
+					case when 서비스서브타입 = 'YEAR' then '전체서비스(연간결제)' 
+					 	 else '전체서비스(월간결제)'
+					end
+				else
+					'개별서비스(' + replace(replace(replace(replace(서비스서브타입, 'ROLE_TOOJA', '투자유망검색'), 'ROLE_GYEONGGONG', '경공매검색'), 'ROLE_MULGEON', '물건보기검색'), 'ROLE_HEATMAP', '히트맵보기') + ')'
+			end 결제내용
+		   from [웹].[dbo].[결제내역]
+		  where 사용자계정 = #{accountId}
+		  order by 결제신청일자 desc
 	</select>
 </mapper>
