@@ -355,26 +355,30 @@
 						<div id="tabMypagePayment" class="tab-pane">
 							<table class="tableStyle gridStyle bgWhite">
 								<colgroup>
-									<col style="width:20%;">
-									<col style="width:10%;">
-									<col style="width:10%;">
 									<col style="width:15%;">
-									<col style="width:45%;">
+									<col style="width:10%;">
+									<col style="width:10%;">
+									<col style="width:10%;">
+									<col style="width:10%;">
+									<col style="width:35%;">
+									<col style="width:10%;">
 								</colgroup>
 								<thead>
 									<tr>
 										<th>신청일자</th>
 										<th>결제금액</th>
+										<th>진행상태</th>
 										<th>쿠폰사용</th>
 										<th>쿠폰번호</th>
 										<th>결제내용</th>
+										<th>상세</th>
 									</tr>
 								</thead>
 								<tbody>
 								<c:choose>
 									<c:when test="${fn:length(paymentHistory) == 0}">
 									<tr class="NO-DATA">
-										<td colspan="4">결제내역이 존재하지 않습니다.</td>
+										<td colspan="6">결제내역이 존재하지 않습니다.</td>
 									</tr>
 									</c:when>
 									<c:otherwise>
@@ -382,9 +386,13 @@
 									<tr>
 										<td class="left ellipsis">${payment.applyDate}</td>
 										<td class="left ellipsis">${payment.sum}</td>
+										<td class="left ellipsis">${payment.status}</td>
 										<td class="left ellipsis">${payment.useCoupon}</td>
 										<td class="left ellipsis">${payment.couponNum}</td>
 										<td class="left ellipsis">${payment.applyComment}</td>
+										<td data-key="${payment.key}">
+											<span class="iconRBtnDel"><i class="ambicon-023_trash"></i></span>
+										</td>
 									</tr>
 									</c:forEach>
 									</c:otherwise>

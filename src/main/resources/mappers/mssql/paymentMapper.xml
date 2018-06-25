@@ -35,17 +35,21 @@
 	</update>
 	
 	<resultMap id="RM_selectPaymentList" type="Payment" >
+		<result column="일련번호" property="key" javaType="string"/>
 		<result column="결제신청일자" property="applyDate" javaType="string"/>
 		<result column="결제금액" property="sum" javaType="int"/>
 		<result column="쿠폰사용여부" property="useCoupon" javaType="string"/>
 		<result column="쿠폰번호" property="couponNum" javaType="string"/>
+		<result column="할인단위" property="couponUnit" javaType="string"/>
+		<result column="할인값" property="couponValue" javaType="string"/>
 		<result column="서비스타입" property="serviceType" javaType="string"/>
 		<result column="서비스서브타입" property="serviceSubTypes" javaType="string"/>
 		<result column="결제내용" property="applyComment" javaType="string"/>
+		<result column="결제완료여부" property="status" javaType="string"/>
 	</resultMap>
 	
 	<select id="selectPaymentList" parameterType="string" resultMap="RM_selectPaymentList">
-		  select 결제신청일자, 결제금액, 쿠폰사용여부, 쿠폰번호, 
+		  select 일련번호, 결제신청일자, 결제금액, 쿠폰사용여부, T1.쿠폰번호, 결제완료여부, T2.할인단위, T2.할인값, 
 			case when 서비스타입 = 'ALL' then 
 					case when 서비스서브타입 = 'YEAR' then '전체서비스(연간결제)' 
 					 	 else '전체서비스(월간결제)'
@@ -53,7 +57,8 @@
 				else
 					'개별서비스(' + replace(replace(replace(replace(서비스서브타입, 'ROLE_TOOJA', '투자유망검색'), 'ROLE_GYEONGGONG', '경공매검색'), 'ROLE_MULGEON', '물건보기검색'), 'ROLE_HEATMAP', '히트맵보기') + ')'
 			end 결제내용
-		   from [웹].[dbo].[결제내역]
+		   from [웹].[dbo].[결제내역] T1
+		   left outer join [웹].[dbo].[발행쿠폰] T2 on T1.[쿠폰번호] = T2.[쿠폰번호]
 		  where 사용자계정 = #{accountId}
 		  order by 결제신청일자 desc
 	</select>
