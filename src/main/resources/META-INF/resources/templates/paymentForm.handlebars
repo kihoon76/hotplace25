@@ -69,7 +69,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<textarea style="width:100%; height:130px;" readOnly>(1) 월정액 서비스 환불 요청시 이용하신 기간의 이용 요금(결제금액의 일할 계산)을 제외한 잔여분을 환불함을 원칙으로 하며, 해당 계산식은 다음과 같습니다.&#10;환불액 = 결제금액 - (1일 이용요금 x 이용일수)&#10;(2)환불금에 대한 반환은 일반적으로 결제수단과 동일한 방법으로 처리됩니다. 현금 환불의 경우 회원 본인 명의의 통장으로만 환불금이 입금됩니다. 지급 방법에 따른 특이사항이 발생될 경우 회사와 회원 협의하에 처리 될 수 있습니다.</textarea>
+									<textarea style="width:100%; height:100px;" readOnly>(1) 월정액 서비스 환불 요청시 이용하신 기간의 이용 요금(결제금액의 일할 계산)을 제외한 잔여분을 환불함을 원칙으로 하며, 해당 계산식은 다음과 같습니다.&#10;환불액 = 결제금액 - (1일 이용요금 x 이용일수)&#10;(2)환불금에 대한 반환은 일반적으로 결제수단과 동일한 방법으로 처리됩니다. 현금 환불의 경우 회원 본인 명의의 통장으로만 환불금이 입금됩니다. 지급 방법에 따른 특이사항이 발생될 경우 회사와 회원 협의하에 처리 될 수 있습니다.</textarea>
 								</td>
 							</tr>
 						</tbody>
@@ -89,6 +89,12 @@
 							<col style="width:40%;">
 						</colgroup>
 						<tbody>
+							<tr>
+								<th colspan="3" class="center">
+									입금계좌 (<span class="payment_info">111-111-111-111</span>) 입금은행(<span class="payment_info">신한은행</span>) 예금주(<span class="payment_info">(주)동림피엔디</span>)</span>
+								</th>
+							
+							</tr>
 							<tr>
 								<th rowspan="2" class="center">
 									<span class="rdchBox">
@@ -168,10 +174,15 @@
 								</td>
 							</tr>
 							<tr>
+								<th class="center">입금자명</th>
+								<td class="right" colspan="2">
+									<input type="text" id="txtDepositor" style="width: 425px; height:30px; font-size: 1.2em; font-weight:bold;"/>
+								</td>
+							</tr>
+							<tr>
 								<td class="right" colspan="3">
 									<button type="button" id="btnPaymentInfo" class="btnstyle middle black TOOLTIP"  title="<span class='innerTooltip'>정가: 990,000원<br/>쿠폰: 사용안함<br/>총 결제금액 : 990,000원<span>">?</button>
 									총 결제하실 금액: <input type="text" id="txtPaymentSum" style="width: 150px; height:30px; font-size: 1.2em; color:#ff0000; font-weight:bold;"  readonly value="990,000원" data-value="990000" data-coupon-value="990000"/>
-									
 								</td>
 							</tr>
 						</tbody>

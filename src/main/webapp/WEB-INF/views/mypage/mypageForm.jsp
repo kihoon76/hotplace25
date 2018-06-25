@@ -378,7 +378,7 @@
 								<c:choose>
 									<c:when test="${fn:length(paymentHistory) == 0}">
 									<tr class="NO-DATA">
-										<td colspan="6">결제내역이 존재하지 않습니다.</td>
+										<td colspan="7">결제내역이 존재하지 않습니다.</td>
 									</tr>
 									</c:when>
 									<c:otherwise>

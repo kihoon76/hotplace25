@@ -250,6 +250,11 @@
 		.on('click', function() {
 			var coupon = _$txtCoupon.val();
 			
+			if($.trim(coupon) == '') {
+				hotplace.dom.showAlertMsg(null, '쿠폰번호를 입력해 주세요.', hotplace.ALERT_SIZE);
+				return;
+			}
+			
 			hotplace.ajax({
 				url: 'payment/checkCoupon',
 				data: JSON.stringify({coupon: coupon}),

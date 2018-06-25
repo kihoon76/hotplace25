@@ -55,6 +55,7 @@ textarea {resize:none;}
 }
 
 #dvPayment .tooltip-inner {min-width:200px; width:200px;}
+.payment_info {color:#0000ff; font-weight:bold; font-size:1.2em;}
 
 
 
