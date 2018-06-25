@@ -386,7 +386,14 @@
 									<tr>
 										<td class="left ellipsis">${payment.applyDate}</td>
 										<td class="left ellipsis">${payment.sum}</td>
-										<td class="left ellipsis">${payment.status}</td>
+										<td class="left ellipsis">
+										<c:if test="${payment.status eq 'N'}">
+										<span style="color:#0000ff;">처리중</span>
+										</c:if>
+										<c:if test="${payment.status eq 'Y'}">
+										<span style="color:#ff0000;">처리완료</span>
+										</c:if>
+										</td>
 										<td class="left ellipsis">${payment.useCoupon}</td>
 										<td class="left ellipsis">${payment.couponNum}</td>
 										<td class="left ellipsis">${payment.applyComment}</td>
@@ -400,7 +407,12 @@
 											data-coupon-unit="${payment.couponUnit}"
 											data-apply-comment="${payment.applyComment}"
 											data-depositor="${payment.depositor}">
-											<span class="iconRBtnDetail"><i class="ambicon-024_view_big"></i></span>
+											<c:if test="${payment.status eq 'N'}">
+											<span class="iconRBtnDetailN"><i class="ambicon-024_view_big"></i></span>
+											</c:if>
+											<c:if test="${payment.status eq 'Y'}">
+											<span class="iconRBtnDetailY"><i class="ambicon-024_view_big"></i></span>
+											</c:if>
 										</td>
 									</tr>
 									</c:forEach>

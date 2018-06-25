@@ -1376,7 +1376,8 @@ div.serviceReady .iconBlock:after  {display:block; content:''; width:4px; height
 div.serviceReady span.text {display:block; text-align:center; font-weight:500; font-size:18px; margin-top:20px;}
 
 .iconRBtnDel {display:inline-block; width:24px; height:24px; line-height:26px; border-radius:50%; background:#e71e1e; color:#fff; font-size:14px;}
-.iconRBtnDetail {display:inline-block; width:24px; height:24px; line-height:26px; border-radius:50%; background:#0000ff; color:#fff; font-size:14px;}
+.iconRBtnDetailN {display:inline-block; width:24px; height:24px; line-height:26px; border-radius:50%; background:#0000ff; color:#fff; font-size:14px;}
+.iconRBtnDetailY {display:inline-block; width:24px; height:24px; line-height:26px; border-radius:50%; background:#ff0000; color:#fff; font-size:14px;}
 textarea {resize: none;}
 
 /* errorPage */
