@@ -1099,6 +1099,11 @@
 		});
 	}
 	
+	dom.showPaymentDetailForm = function() {
+		_appendModalPopup('paymentDetailForm', _$momPopup, {});
+		dom.openModalOnModal('', {width:'700px'});
+	}
+	
 	dom.toggleLogin = function() {
 		if(_$gnbLogin.is(':visible')) {
 			_$gnbLogin.hide();

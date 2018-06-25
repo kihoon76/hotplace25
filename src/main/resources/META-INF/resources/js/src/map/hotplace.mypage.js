@@ -162,7 +162,7 @@
 		$(_tabMypagePayment + ' .PAYMENT_DETAIL')
 		.off('click')
 		.on('click', function() {
-			
+			hotplace.dom.dom.showPaymentDetailForm();
 		});
 	}
 	
