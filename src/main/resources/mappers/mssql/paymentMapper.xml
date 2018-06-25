@@ -17,13 +17,13 @@
 	</select>
 	
 	<insert id="insertPayment" parameterType="Payment">
-		insert into [웹].[dbo].[결제내역](사용자계정, 결제금액, 쿠폰사용여부, 쿠폰번호, 서비스타입, 서비스서브타입)
+		insert into [웹].[dbo].[결제내역](사용자계정, 결제금액, 쿠폰사용여부, 쿠폰번호, 서비스타입, 서비스서브타입, 입금자명)
 		<choose>
 			<when test="couponNum = '0'.toString()">
-		values (#{accountId}, #{sum}, #{useCoupon}, null, #{serviceType}, #{serviceSubTypes})
+		values (#{accountId}, #{sum}, #{useCoupon}, null, #{serviceType}, #{serviceSubTypes}, #{depositor})
 		  	</when>
 			<otherwise>
-		values (#{accountId}, #{sum}, #{useCoupon}, #{couponNum}, #{serviceType}, #{serviceSubTypes})  	
+		values (#{accountId}, #{sum}, #{useCoupon}, #{couponNum}, #{serviceType}, #{serviceSubTypes}, #{depositor})  	
 			</otherwise>
 		</choose>
 	</insert>
@@ -46,10 +46,11 @@
 		<result column="서비스서브타입" property="serviceSubTypes" javaType="string"/>
 		<result column="결제내용" property="applyComment" javaType="string"/>
 		<result column="결제완료여부" property="status" javaType="string"/>
+		<result column="입금자명" property="depositor" javaType="string"/>
 	</resultMap>
 	
 	<select id="selectPaymentList" parameterType="string" resultMap="RM_selectPaymentList">
-		  select 일련번호, 결제신청일자, 결제금액, 쿠폰사용여부, T1.쿠폰번호, 결제완료여부, T2.할인단위, T2.할인값, 
+		  select 일련번호, 결제신청일자, 결제금액, 쿠폰사용여부, T1.쿠폰번호, 결제완료여부, T2.할인단위, T2.할인값, 입금자명, 
 			case when 서비스타입 = 'ALL' then 
 					case when 서비스서브타입 = 'YEAR' then '전체서비스(연간결제)' 
 					 	 else '전체서비스(월간결제)'

@@ -17,6 +17,7 @@ public class Payment {
 	private String applyComment;				//결제내용
 	private int sum;							//결제금액
 	private String status;						//결제완료여부('N', 'Y')
+	private String depositor;					//입금자명
 	
 	public String getAccountId() {
 		return accountId;
@@ -89,5 +90,11 @@ public class Payment {
 	}
 	public void setCouponUnit(String couponUnit) {
 		this.couponUnit = couponUnit;
+	}
+	public String getDepositor() {
+		return depositor;
+	}
+	public void setDepositor(String depositor) {
+		this.depositor = depositor;
 	}
 }

@@ -7,6 +7,7 @@
 		_rdoPayment = _dvPayment + ' input[name=payment]:radio',
 		_rdoPaymentAll = _dvPayment + ' input[name=paymentAll]:radio',
 		_txtPaymentSum = '#txtPaymentSum',
+		_txtDepositor = '#txtDepositor',
 		_chkPaymentTooja = '#chkPaymentTooja',
 		_chkPaymentGG = '#chkPaymentGG',
 		_chkPaymentMulgeon = '#chkPaymentMulgeon',
@@ -76,6 +77,7 @@
 		param.serviceSubTypes = serviceSubType.join(',');
 		param.sum = _$txtPaymentSum.data('couponValue');
 		param.couponNum = _couponInfo.couponNum || '0';
+		param.depositor = $(_txtDepositor).val()
 		
 		console.log(param);
 		
@@ -230,6 +232,8 @@
 		.on('click', function() {
 			
 			var sum = _$txtPaymentSum.data('value');
+			var depositor = $.trim($(_txtDepositor).val());
+			
 			if(sum == 0) {
 				hotplace.dom.showAlertMsg(null, '구매하실 서비스를 선택하세요', hotplace.ALERT_SIZE);
 			}
@@ -239,6 +243,11 @@
 						hotplace.dom.showAlertMsg(null, '쿠폰번호입력후 인증해 주세요.', hotplace.ALERT_SIZE);
 						return;
 					}
+				}
+				
+				if(!depositor) {
+					hotplace.dom.showAlertMsg(null, '입금자명을 입력해 주세요.', hotplace.ALERT_SIZE);
+					return;
 				}
 				
 				_payment();

@@ -398,7 +398,8 @@
 											data-coupon-num="${payment.couponNum}"
 											data-coupon-value="${payment.couponValue}"
 											data-coupon-unit="${payment.couponUnit}"
-											data-apply-comment="${payment.applyComment}">
+											data-apply-comment="${payment.applyComment}"
+											data-depositor="${payment.depositor}">
 											<span class="iconRBtnDetail"><i class="ambicon-024_view_big"></i></span>
 										</td>
 									</tr>

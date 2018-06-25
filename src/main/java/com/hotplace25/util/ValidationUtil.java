@@ -72,6 +72,10 @@ public class ValidationUtil {
 		
 		if(payment == null) new IllegalArgumentException("파라미터가  존재하지 않습니다.");
 		
+		if(payment.getDepositor() == null || "".equals(payment.getDepositor())) {
+			new IllegalArgumentException("입금자명이 없습니다.");
+		}
+		
 		boolean isUseCoupon = cp != null;
 		
 		PaymentServiceType serviceType = PaymentServiceType.getType(payment.getServiceType());
