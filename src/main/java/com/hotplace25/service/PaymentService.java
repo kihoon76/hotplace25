@@ -40,6 +40,10 @@ public class PaymentService {
 	public List<Payment> getPaymentHistories(String accountId) {
 		return paymentDao.selectPaymentList(accountId);
 	}
+
+	public List<String> checkPayment(String accountId) {
+		return paymentDao.selectCheckPaymentList(accountId);
+	}
 	
 
 }

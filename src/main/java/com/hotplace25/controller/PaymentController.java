@@ -1,5 +1,6 @@
 package com.hotplace25.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -9,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import com.hotplace25.domain.Coupon;
 import com.hotplace25.domain.Payment;
 import com.hotplace25.security.UserDetailsImpl;
 import com.hotplace25.service.PaymentService;
+import com.hotplace25.util.SessionUtil;
 import com.hotplace25.util.ValidationUtil;
 
 @RequestMapping("/payment")
@@ -126,5 +129,28 @@ public class PaymentController {
 		
 		return vo;
 		
+	}
+	
+	//현재 결제진행건이 있는지 확인
+	@GetMapping("checkPayment")
+	@ResponseBody
+	public AjaxVO checkPayment() {
+		
+		String accountId = SessionUtil.getSessionUserId();
+		
+		AjaxVO vo = new AjaxVO();
+		
+		try {
+			List<String> paymentCount = paymentService.checkPayment(accountId);
+			
+			vo.setSuccess(true);
+			vo.setDatas(paymentCount);
+		}
+		catch(Exception e) {
+			vo.setSuccess(false);
+			vo.setErrCode("778");
+		}
+		
+		return vo;
 	}
 }

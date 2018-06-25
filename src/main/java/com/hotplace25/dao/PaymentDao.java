@@ -17,4 +17,6 @@ public interface PaymentDao {
 
 	List<Payment> selectPaymentList(String accountId);
 
+	List<String> selectCheckPaymentList(String accountId);
+
 }

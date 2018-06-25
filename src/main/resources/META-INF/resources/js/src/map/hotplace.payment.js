@@ -164,6 +164,29 @@
 		hotplace.dom.changeTooltipText(_$btnPaymentInfo, tooltipHtml);
 	}
 	
+	//결제진행건이 있는지 검사
+	payment.addPayment = function() {
+		hotplace.ajax({
+			url: 'payment/checkPayment',
+			contentType: 'application/json; charset=UTF-8',
+			success: function(data, textStatus, jqXHR) {
+				console.log(data);
+				if(data.success) {
+					var cnt = data.datas.length;
+					if(cnt > 0) {
+						hotplace.dom.showConfirmBox(function() {
+							hotplace.dom.closeMom(); 
+						}, '현재 결제진행건이 ' + cnt + '건 있습니다. <br/>추가 결제를 하지 않으시겠습니까?', hotplace.ALERT_SIZE);
+					}
+				}
+				else {
+					jqXHR.errCode = data.errCode;
+				}
+			}
+		});
+	}
+	
+	
 	payment.init = function() {
 		_$rdoPayment = $(_rdoPayment),
 		_$rdoPaymentAll = $(_rdoPaymentAll),

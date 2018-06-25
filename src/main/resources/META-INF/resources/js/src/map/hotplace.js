@@ -675,6 +675,7 @@
 		COUPON_VAL: '700', //쿠폰유효성 오류
 		COUPON_USED: '701', //사용된 쿠폰오류
 		PAYMENT: '777',  //결제오류
+		CHECK_PAYMENT: '778',	//결제진행건 확인오류
 		SERVICE_READY: '888', //서비스 준비중
 		FORMAT: '999'   //입력폼 포멧오류
 	};
@@ -798,6 +799,9 @@
 			break;
 		case _err.COUPON_USED: 
 			hotplace.dom.showAlertMsg(null, msg || '이미 사용된 쿠폰입니다.', _alertDefaultSize);
+			break;
+		case _err.CHECK_PAYMENT:
+			hotplace.dom.showAlertMsg(null, msg || '결제진행건 확인중 오류가 발생했습니다.', _alertDefaultSize);
 			break;
 		}
 	}

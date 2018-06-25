@@ -63,4 +63,11 @@
 		  where 사용자계정 = #{accountId}
 		  order by 결제신청일자 desc
 	</select>
+	
+	<select id="selectCheckPaymentList" parameterType="string" resultType="string">
+		select 일련번호
+		  from [웹].[dbo].[결제내역]
+		 where 사용자계정 = #{accountId}
+		   and 결제완료여부 = 'N'
+	</select>
 </mapper>

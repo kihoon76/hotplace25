@@ -172,7 +172,8 @@
 				couponNum: 	couponNum,
 				couponContent: (couponNum ? ($this.data('couponValue') + ($this.data('couponUnit') == '1' ? '%' : '원') + ' 할인쿠폰') : '') ,
 				applyComment: $this.data('applyComment'),
-				status: $this.data('status')
+				status: $this.data('status'),
+				depositor: $this.data('depositor')
 			});
 		});
 	}

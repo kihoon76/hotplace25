@@ -45,4 +45,9 @@ public class PaymentDaoImpl implements PaymentDao {
 		return msSqlSession.selectList(namespace + ".selectPaymentList", accountId);
 	}
 
+	@Override
+	public List<String> selectCheckPaymentList(String accountId) {
+		return msSqlSession.selectList(namespace + ".selectCheckPaymentList", accountId);
+	}
+
 }

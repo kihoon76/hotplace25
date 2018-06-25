@@ -1096,6 +1096,7 @@
 		_appendModalPopup('paymentForm', null, {});
 		dom.openModal('', {width:'700px'}, null, function() {
 			hotplace.payment.init();
+			hotplace.payment.addPayment();
 		});
 	}
 	
