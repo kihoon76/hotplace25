@@ -169,6 +169,7 @@
 		hotplace.ajax({
 			url: 'payment/checkPayment',
 			contentType: 'application/json; charset=UTF-8',
+			method: 'GET',
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
 				if(data.success) {
