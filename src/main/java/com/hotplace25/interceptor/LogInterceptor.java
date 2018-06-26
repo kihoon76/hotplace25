@@ -73,6 +73,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		if(auth == null) {
+			//로그인 하지 않음
 			return "";
 		}
 		else {
