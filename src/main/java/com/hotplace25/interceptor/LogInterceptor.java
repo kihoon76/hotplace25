@@ -71,8 +71,18 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 	
 	private String getId() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Account user = (Account)auth.getPrincipal();
-		return user.getId();
+		
+		if(auth == null) {
+			return "";
+		}
+		else {
+			Object principal = auth.getPrincipal();
+			if(principal != null && principal instanceof  Account) {
+				return ((Account)auth).getId();
+			}
+			
+			return "";
+		}
 	}
 
 }
