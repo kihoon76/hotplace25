@@ -13,6 +13,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.google.gson.Gson;
 import com.hotplace25.amqp.Producer;
+import com.hotplace25.domain.Account;
 import com.hotplace25.domain.LogVO;
 import com.hotplace25.util.HttpHeaderUtil;
 
@@ -70,7 +71,8 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
 	
 	private String getId() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		return auth.getName();
+		Account user = (Account)auth.getPrincipal();
+		return user.getId();
 	}
 
 }
