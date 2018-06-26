@@ -10,6 +10,8 @@
 		_modalPopup = '#modalPopup',
 		_$yearRange = $('#dvYearRange'),
 		_$btnAutoYear = $('#btnAutoYear'),
+		_$gnbLogin = $('#gnbLogin'),
+		_$gnbLogout = $('#gnbLogout'),
 		_$modalPopup = $(_modalPopup),
 		_$momPopup = $('#momPopup'), //모달 위 모달
 		_$alrtPopup = $('#alrtPopup'),
@@ -924,6 +926,16 @@
 	function _showLoginMsg() {
 		if(!hotplace.dom.isOpenedAlrtModal())
 		hotplace.processAjaxError(hotplace.error.LOGIN);
+		
+		//로그인후 세션 만료로 로그인창이 나타났을때 메인 페이지 로그인/아웃 변경
+		_changeLogout();
+	}
+	
+	function _changeLogout() {
+		if(_$gnbLogout.css('display') !== 'none') {
+			_$gnbLogin.show();
+			_$gnbLogout.hide();
+		}
 	}
 	
 	dom.showLoginMsg = _showLoginMsg;
