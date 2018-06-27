@@ -25,7 +25,8 @@
 		  from [웹].[dbo].[계정_권한] a
 		 inner join [웹].[dbo].[권한] b
 		    on a.[권한번호] = b.[권한번호]
-		 where a.[계정_아이디] = #{id}  
+		 where a.[계정_아이디] = #{id}
+		   and datediff(DD, a.만기일, getDate()) <![CDATA[<= 0]]>
 	</select>
 	
 	<select id="selectIdCount" parameterType="string" resultType="int">
