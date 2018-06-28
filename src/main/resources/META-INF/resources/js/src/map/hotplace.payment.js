@@ -324,8 +324,8 @@
 		});
 		
 		_$txtDepositor
-		.off('blur')
-		.on('blur', function() {
+		.off('keypress')
+		.on('keypress', function() {
 			$('#spPayDepositor').text(_$txtDepositor.val());
 		});
 	}
