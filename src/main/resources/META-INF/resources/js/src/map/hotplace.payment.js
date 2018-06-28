@@ -326,6 +326,7 @@
 		_$txtDepositor
 		.off('keydown')
 		.on('keydown', function() {
+			alert('ff')
 			$('#spPayDepositor').text(_$txtDepositor.val());
 		});
 	}
