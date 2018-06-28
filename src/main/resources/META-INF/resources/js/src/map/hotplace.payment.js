@@ -137,6 +137,7 @@
 			var discountValue = _couponInfo.discountValue;
 			discountValue = parseInt(discountValue, 10);
 			
+			couponHtml += '쿠폰번호: ' + _couponInfo.couponNum + '<br/>'
 			couponHtml += '쿠폰사용: ';
 			//%
 			if(discountUnit == '1') {
@@ -158,6 +159,7 @@
 
 		tooltipHtml += '정가: ' + _$txtPaymentSum.data('value').toString().money() + '원<br/>';
 		tooltipHtml += couponHtml;
+		tooltipHtml += '입금자명: ' + _$txtDepositor.val() + '<br/>'
 		tooltipHtml += '총 결제금액 : ' + _$txtPaymentSum.val() + '</span>';
 
 		
@@ -192,6 +194,7 @@
 		_$rdoPayment = $(_rdoPayment),
 		_$rdoPaymentAll = $(_rdoPaymentAll),
 		_$txtPaymentSum = $(_txtPaymentSum),
+		_$txtDepositor = $(_txtDepositor),
 		_$chkPaymentTooja = $(_chkPaymentTooja),
 		_$chkPaymentGG = $(_chkPaymentGG),
 		_$chkPaymentMulgeon = $(_chkPaymentMulgeon),
