@@ -366,31 +366,31 @@
 										<c:choose>
 											<c:when test="${authority.authName == 'ROLE_ALL'}">
 											<tr>
-												<th>전체서비스 (만기일: authority.expire)</th>
+												<th>전체서비스 (만기일: <c:out value="${authority.expire}" />)</th>
 											</tr>
 											<c:set var="sum" value="${sum + 1}" />
 											</c:when>
 											<c:when test="${authority.authName == 'ROLE_TOOJA'}">
 											<tr>
-												<th>투자유망지역 검색서비스 (만기일: authority.expire)</th>
+												<th>투자유망지역 검색서비스 (만기일: <c:out value="${authority.expire}" />)</th>
 											</tr>
 											<c:set var="sum" value="${sum + 1}" />
 											</c:when>
 											<c:when test="${authority.authName == 'ROLE_GYEONGGONG'}">
 											<tr>
-												<th>경공매 검색서비스 (만기일: authority.expire)</th>
+												<th>경공매 검색서비스 (만기일: <c:out value="${authority.expire}" />)</th>
 											</tr>
 											<c:set var="sum" value="${sum + 1}" />
 											</c:when>
 											<c:when test="${authority.authName == 'ROLE_MULGEON'}">
 											<tr>
-												<th>물건보기 서비스 (만기일: authority.expire)</th>
+												<th>물건보기 서비스 (만기일: <c:out value="${authority.expire}" />)</th>
 											</tr>
 											<c:set var="sum" value="${sum + 1}" />
 											</c:when>
 											<c:when test="${authority.authName == 'ROLE_HEATMAP'}">
 											<tr>
-												<th>히트맵보기 서비스 (만기일: authority.expire)</th>
+												<th>히트맵보기 서비스 (만기일: <c:out value="${authority.expire}" />)</th>
 											</tr>
 											<c:set var="sum" value="${sum + 1}" />
 											</c:when>
