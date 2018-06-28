@@ -20,7 +20,7 @@
 		_$gnbLogout = $('#gnbLogout'),
 		_btnAlrt = '#btnAlrt',//alert 창버튼
 		_btnConfirmOK = '#btnConfirmOK', //confirm 창 OK 버튼
-		_btnConfitmCancel = '#btnConfitmCancel', //confirm 창 취소버튼
+		_btnConfirmCancel = '#btnConfirmCancel', //confirm 창 취소버튼
 		_dvContextMenu = '#dvContextMenu',
 		_infoWinCoordAddr = null, //context address infowin
 		_markerCoord = null,
@@ -909,11 +909,11 @@
 		$(_btnConfirmOK)
 		.off('click')
 		.on('click', function() {
-			okFn();
+			if(okFn) okFn();
 			_$alrtPopup.modal('hide');
 		});
 		
-		$(_btnConfitmCancel)
+		$(_btnConfirmCancel)
 		.off('click')
 		.on('click', function() {
 			if(cancelFn) cancelFn();
