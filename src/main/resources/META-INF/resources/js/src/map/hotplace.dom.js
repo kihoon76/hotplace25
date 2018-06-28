@@ -928,7 +928,7 @@
 		hotplace.processAjaxError(hotplace.error.LOGIN);
 		
 		//로그인후 세션 만료로 로그인창이 나타났을때 메인 페이지 로그인/아웃 변경
-		_changeLogout();
+		//_changeLogout();
 	}
 	
 	function _changeLogout() {

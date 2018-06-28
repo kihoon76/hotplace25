@@ -158,7 +158,8 @@
     		TOOJA_SEARCH: 'toojaRegionSearchMenu',
     		GYEONGGONG_SEARCH: 'gyeonggongSearchMenu',
     		MULGEON_VIEW: 'mulgeonViewMenu',
-    		HEATMAP_VIEW: 'heatmapViewMenu'
+    		HEATMAP_VIEW: 'heatmapViewMenu',
+    		HP_VIEW: 'hpExplainMenu'
     	},
     	codes: {
     		cityPlan: {

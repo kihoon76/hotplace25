@@ -598,6 +598,7 @@ body	 {min-height:600px;}
 .lnbArea .memuList li > a.menu03 > i {background-position:0 -120px;}
 .lnbArea .memuList li > a.menu04 > i {background-position:0 -150px;}
 .lnbArea .memuList li > a.menu05 > i {background-position:0 -180px;}
+.lnbArea .memuList li > a.menu06 > i {background-position:0 -210px;}
 
 .lnbArea .memuList li.active > a {background-color:#2a7cdd;}
 .lnbArea .memuList li.active > a > i,
