@@ -439,6 +439,8 @@
 			docName: '수지분석',
 			address: _address,
 			jimok: _baseData.jimok,
+			hpGrade: '10',
+			hpIndex: '2.3567',
 			//valPerPyeung:'21,000',
 			area: _baseData.area,
 			gongsi: _baseData.gongsi.money(),

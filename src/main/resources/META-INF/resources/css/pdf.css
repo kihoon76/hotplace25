@@ -278,7 +278,7 @@ table thead.colgroup tr th {height:0; padding:0; background:#aaa; line-height:0;
 
 .break-before {page-break-before:always; line-height:0; height:0.5cm; width:100%; clear:both;}/* 새페이지 시작시 */
 
-.indexPage {position:relative; height:100%; overflow:auto; text-align:left; background:url('../img/pdfImg_bg.png') no-repeat 0 0; background-size:100%;  background-color:#f9f9f9; padding:0;}
+.indexPage {position:relative; height:100%; overflow:auto; text-align:left; background-image:url('../img/pdfImg_bg.png'); background-repeat:no-repeat; background-position:0 0; background-size:100%;  background-color:#f9f9f9; padding:0;}
 .indexPage div {background:transparent !important;}
 .indexPage .indexUnit {width:100%; margin:0 auto;}
 .indexPage .indexTit{font-size:13px; color:#ddd;}
@@ -315,6 +315,18 @@ table thead.colgroup tr th {height:0; padding:0; background:#aaa; line-height:0;
 .profitMainCont .pdfImg03 div.icon {background:url('../img/pdfImg_03.png') no-repeat 20px center; font-size:16px; height:60px; width:60px; display:inline-block;}
 .profitMainCont .tit {width:100%; font-size:14px; font-weight:500; color:#999; padding:15px 5px 5px;}
 .profitMainCont .cont {width:100%; font-size:16px; font-weight:500; padding:2px 5px 15px;}
+
+.hpIndexCont {clear:both; overflow:auto; border:1px solid #ccc; background:#f9f9f9;}
+.hpIndexCont td {padding:0 0px; text-align:left;}
+.hpIndexCont .textArea {padding:25px 30px;}
+.hpIndexCont .indexArea {padding:25px 35px 25px 0; text-align:right;}
+.hpIndexCont .text  {width:100%; font-size:12px; font-weight:500; color:#3336; padding:0 0 10px 0; line-height:1.6em;}
+.hpIndexCont .sText {width:100%; font-size:11px; font-weight:500; color:#666; padding:0;}
+
+.hpIndexCont .indexArea .text        {font-size:15px;}
+.hpIndexCont .indexArea .text .bFont {font-size:36px; color:#3192e7; font-weight:bold;}
+.hpIndexCont .indexArea .sText {display:block; border-top:1px solid #ccc; padding:5px 0 0 0;}
+
 
 .reportPdf table.pdfDetailTable thead th {border-bottom-color:#ccc;}
 

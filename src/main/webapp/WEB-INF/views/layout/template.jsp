@@ -116,9 +116,9 @@
 			<li>
 				<a href="#" class="menu05" data-name="heatmapViewMenu" data-new="false"><i class="icon"></i><span>히트맵보기</span></a>
 			</li>
-<!-- 			<li> -->
-<!-- 				<a href="#" class="menu06" data-name="hpExplainMenu" data-new="false"><i class="icon"></i><span>HP지수</span></a> -->
-<!-- 			</li> -->
+			<li>
+				<a href="#" class="menu06" data-name="hpExplainMenu" data-new="false"><i class="icon"></i><span>HP지수</span></a>
+			</li>
 		</ul>
 	</div>
 
