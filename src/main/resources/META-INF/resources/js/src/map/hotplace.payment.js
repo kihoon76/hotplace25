@@ -77,7 +77,7 @@
 		param.serviceSubTypes = serviceSubType.join(',');
 		param.sum = _$txtPaymentSum.data('couponValue');
 		param.couponNum = _couponInfo.couponNum || '0';
-		param.depositor = $(_txtDepositor).val()
+		param.depositor = _$txtDepositor.val()
 		
 		console.log(param);
 		
