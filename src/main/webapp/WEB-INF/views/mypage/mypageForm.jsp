@@ -351,6 +351,25 @@
 							<div class="btnArea right mgT10">
 								<button type="button" class="btnstyle middle blue" id="btnAccModifyAccount" style="margin-right:10px; width:80px;">수정</button>
 							</div>
+							
+							<div class="unit_cont bgWhite lineBox" style="border-top:0; border-bottom:0;">
+								<table class="tableStyle formStyle left">
+								<colgroup>
+									<col style="width:30%;">
+									<col style="width:70%;">
+								</colgroup>
+								<tbody>
+									<tr>
+										<th colspan="3">사용가능서비스</th>
+									</tr>
+									<tr>
+										<th>전체서비스</th>
+										<td>2018-02-02</td>
+									</tr>
+								</tbody>
+								</table>
+							</div>
+							
 						</div>
 						<div id="tabMypagePayment" class="tab-pane">
 							<table class="tableStyle gridStyle bgWhite">
