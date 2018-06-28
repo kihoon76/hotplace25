@@ -20,6 +20,7 @@
 		_$gnbLogout = $('#gnbLogout'),
 		_btnAlrt = '#btnAlrt',//alert 창버튼
 		_btnConfirmOK = '#btnConfirmOK', //confirm 창 OK 버튼
+		_btnConfitmCancel = '#btnConfitmCancel', //confirm 창 취소버튼
 		_dvContextMenu = '#dvContextMenu',
 		_infoWinCoordAddr = null, //context address infowin
 		_markerCoord = null,
@@ -901,7 +902,7 @@
 		dom.openAlrtModal(modalSize, fn);
 	}
 	
-	dom.showConfirmBox = function(okFn, msg, modalSize) {
+	dom.showConfirmBox = function(okFn, msg, modalSize, cancelFn) {
 		_appendModalPopup('confirmForm', _$alrtPopup);
 		_$alrtPopup.find('p.alertText').html(msg || '');
 		
@@ -909,6 +910,13 @@
 		.off('click')
 		.on('click', function() {
 			okFn();
+			_$alrtPopup.modal('hide');
+		});
+		
+		$(_btnConfitmCancel)
+		.off('click')
+		.on('click', function() {
+			if(cancelFn) cancelFn();
 			_$alrtPopup.modal('hide');
 		});
 		

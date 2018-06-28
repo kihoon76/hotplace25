@@ -175,9 +175,9 @@
 				if(data.success) {
 					var cnt = data.datas.length;
 					if(cnt > 0) {
-						hotplace.dom.showConfirmBox(function() {
+						hotplace.dom.showConfirmBox(null, '현재 결제진행건이 ' + cnt + '건 있습니다. <br/>추가 결제를 하시겠습니까?', hotplace.ALERT_SIZE, function() {
 							hotplace.dom.closeModal(); 
-						}, '현재 결제진행건이 ' + cnt + '건 있습니다. <br/>추가 결제를 하지 않으시겠습니까?', hotplace.ALERT_SIZE);
+						});
 					}
 				}
 				else {
