@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hotplace25.domain.Account;
+import com.hotplace25.domain.Authority;
 import com.hotplace25.domain.Payment;
 import com.hotplace25.service.HotplaceService;
 import com.hotplace25.service.PaymentService;
@@ -88,6 +89,8 @@ public class HandlebarController {
 		m.addAttribute("gwansim", spotService.getMyGwansimList(accountId));
 		m.addAttribute("account", account);
 		m.addAttribute("paymentHistory", paymentHistory);
+		m.addAttribute("authorities", account.getAuthorities());
+		m.addAttribute("currentDate", hotplaceService.getCurrentDate());
 		
 		return "mypage/mypageForm";
 	}

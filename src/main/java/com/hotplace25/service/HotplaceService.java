@@ -164,8 +164,12 @@ public class HotplaceService {
 		return g;
 	}
 	
-	public String getCurrentTear() {
+	public String getCurrentYear() {
 		return hotplaceDao.selectCurrentYear();
+	}
+	
+	public String getCurrentDate() {
+		return hotplaceDao.selectCurrentDate();
 	}
 
 	public void registQuestion(QnA qna) {

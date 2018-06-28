@@ -13,4 +13,11 @@ public class SessionUtil {
 		Account user = (Account)auth.getPrincipal();
 		return user.getId();
 	}
+	
+	public static Account getSessionAccount() {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Account user = (Account)auth.getPrincipal();
+		return user;
+	}
 }

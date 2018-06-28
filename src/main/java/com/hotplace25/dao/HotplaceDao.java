@@ -55,6 +55,8 @@ public interface HotplaceDao {
 	public GongmaeDetail selectGongmaeDetail(String goyubeonho);
 
 	public String selectCurrentYear();
+	
+	public String selectCurrentDate();
 
 	public void insertQuestion(QnA qna);
 }

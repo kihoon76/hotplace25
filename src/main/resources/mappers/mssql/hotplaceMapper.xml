@@ -5,6 +5,10 @@
 		select year(getDate()) - 1
 	</select>
 	
+	<select id="selectCurrentDate" resultType="string">
+		select convert(char(20), getdate(), 120)
+	</select>
+	
 	<select id="selectGuGun" resultType="string" parameterType="string">
 		select concat(code, ',"', name, '"') 
 		  from (

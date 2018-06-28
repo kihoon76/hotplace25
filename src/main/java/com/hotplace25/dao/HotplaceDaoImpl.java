@@ -140,4 +140,9 @@ public class HotplaceDaoImpl implements HotplaceDao {
 	public void insertQuestion(QnA qna) {
 		msSqlSession.insert(namespace + ".insertQuestion", qna);
 	}
+
+	@Override
+	public String selectCurrentDate() {
+		return msSqlSession.selectOne(namespace + ".selectCurrentDate");
+	}
 }

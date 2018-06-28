@@ -355,17 +355,53 @@
 							<div class="unit_cont bgWhite lineBox" style="border-top:0; border-bottom:0;">
 								<table class="tableStyle formStyle left">
 								<colgroup>
-									<col style="width:30%;">
-									<col style="width:70%;">
+									<col style="width:100%;">
 								</colgroup>
 								<tbody>
 									<tr>
-										<th colspan="3">사용가능서비스</th>
+										<th>사용가능서비스 (현재시간 <c:out value="${currentDate}"/>)</th>
 									</tr>
+									<c:set var="sum" value="0" />
+									<c:forEach items="${authorities}" var="authority">
+										<c:choose>
+											<c:when test="${authority.authName == 'ROLE_ALL'}">
+											<tr>
+												<th>전체서비스 (만기일: authority.expire)</th>
+											</tr>
+											<c:set var="sum" value="${sum + 1}" />
+											</c:when>
+											<c:when test="${authority.authName == 'ROLE_TOOJA'}">
+											<tr>
+												<th>투자유망지역 검색서비스 (만기일: authority.expire)</th>
+											</tr>
+											<c:set var="sum" value="${sum + 1}" />
+											</c:when>
+											<c:when test="${authority.authName == 'ROLE_GYEONGGONG'}">
+											<tr>
+												<th>경공매 검색서비스 (만기일: authority.expire)</th>
+											</tr>
+											<c:set var="sum" value="${sum + 1}" />
+											</c:when>
+											<c:when test="${authority.authName == 'ROLE_MULGEON'}">
+											<tr>
+												<th>물건보기 서비스 (만기일: authority.expire)</th>
+											</tr>
+											<c:set var="sum" value="${sum + 1}" />
+											</c:when>
+											<c:when test="${authority.authName == 'ROLE_HEATMAP'}">
+											<tr>
+												<th>히트맵보기 서비스 (만기일: authority.expire)</th>
+											</tr>
+											<c:set var="sum" value="${sum + 1}" />
+											</c:when>
+											<c:otherwise></c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${sum == 0}">
 									<tr>
-										<th>전체서비스</th>
-										<td>2018-02-02</td>
+										<th>사용가능서비스가 없습니다.</th>
 									</tr>
+									</c:if>
 								</tbody>
 								</table>
 							</div>

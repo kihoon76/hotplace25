@@ -75,7 +75,7 @@ public class HotplaceController {
 		String currentYear = "";
 		
 		try {
-			currentYear = hotplaceService.getCurrentTear();
+			currentYear = hotplaceService.getCurrentYear();
 		}
 		catch(Exception e) {
 			Date date = new Date(); 

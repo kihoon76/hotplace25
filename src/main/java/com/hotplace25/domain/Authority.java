@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 public class Authority implements GrantedAuthority {
 
 	private String authName;
+	private String expire;
 	private String description;
 	
 	public String getAuthName() {
@@ -25,5 +26,11 @@ public class Authority implements GrantedAuthority {
 	@Override
 	public String getAuthority() {
 		return authName;
+	}
+	public String getExpire() {
+		return expire;
+	}
+	public void setExpire(String expire) {
+		this.expire = expire;
 	}
 }
