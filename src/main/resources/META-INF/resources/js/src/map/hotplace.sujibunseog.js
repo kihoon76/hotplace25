@@ -440,7 +440,7 @@
 			address: _address,
 			jimok: _baseData.jimok,
 			hpGrade: '9',
-			hpIndex: '2.3567',
+			hpIndex: '-2.3567',
 			//valPerPyeung:'21,000',
 			area: _baseData.area,
 			gongsi: _baseData.gongsi.money(),
