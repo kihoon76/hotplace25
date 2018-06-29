@@ -1,37 +1,12 @@
 <div class="headArea">
-	<h2>주소검색</h2>
+	<h2>HP지수</h2>
 	<button type="button" class="close">
 		<i class="ambicon-015_mark_times"></i><span class="hidden">닫기</span>
 	</button>
 </div>
 <div class="bodyArea">
-	<div class="adressType">
-		<span class="rdchBox inline">
-			<input type="radio" id="rdoJibeonSearch" name="addressType" value="N" checked />
-			<label for="rdoJibeonSearch" class="labelCh"><em class="text">지번검색</em></label>
-		</span>
-		<span class="rdchBox inline">
-			<input type="radio" id="rdoDoroSearch" name="addressType" value="R"/>
-			<label for="rdoDoroSearch" class="labelCh"><em class="text">도로명검색</em></label>
-		</span>
-	</div>
-	<div class="adressSArea">
-		<input type="text" class="inp searchInp"  placeholder="주소를 입력해주세요" id="txtAddressSearch"/>
-		<button type="button" class="searchBtn" id="btnAddressSearch"></button>
-		
-		<div id="addressSearchHistory" class="adressAutoSearch">
-			<ul></ul>
 
-			<div class="btnArea right">
-				<button type="button" class="btnstyle small white" id="btnRemoveAllSearchHistory" >전체삭제</button>
-				<button type="button" class="btnstyle small white" id="btnCloseSearchHistory" >닫기</button>
-			</div>
-		</div>
-	</div>
-	
-	<div class="adressSAreaResult overflow"></div>
 </div>
 <div class="footArea">
-	<button type="button" class="btnstyle middle blue" id="btnMoveAddressToMap" disabled>지도이동</button>
 	<button type="button" class="btnstyle middle gray MENU_CLOSE" data-menu="{{menuName}}">닫기</button>
 </div>
