@@ -19,7 +19,7 @@
 	<insert id="insertPayment" parameterType="Payment">
 		insert into [웹].[dbo].[결제내역](사용자계정, 결제금액, 쿠폰사용여부, 쿠폰번호, 서비스타입, 서비스서브타입, 입금자명)
 		<choose>
-			<when test="couponNum = '0'.toString()">
+			<when test="couponNum.equals('0')">
 		values (#{accountId}, #{sum}, #{useCoupon}, null, #{serviceType}, #{serviceSubTypes}, #{depositor})
 		  	</when>
 			<otherwise>
