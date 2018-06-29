@@ -1096,6 +1096,10 @@ input.searchInp {display:block; width:100%; border:2px solid #ddd; height:50px; 
 .heatmapList li:hover .rdchBox {animation:ani_down 0.2s ease-out 0s 1 alternate;}
 
 /*************************************/
+/* LNB  lnbCont  - hp지수 보기 */
+.hpArea {margin:10px 20px 10px; position:relative; overflow:; z-index:1; }
+
+/*************************************/
 /*************************************/
 /* modal 상세보기 영역 */
 
