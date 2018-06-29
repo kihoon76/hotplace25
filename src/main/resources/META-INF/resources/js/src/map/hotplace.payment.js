@@ -17,6 +17,7 @@
 		_btnCoupon = '#btnCoupon',
 		_btnPaymentInfo = '#btnPaymentInfo',
 		_chkCoupon = '#chkCoupon',
+		_tooltipHtml = '',
 		_$rdoPayment = null,
 		_$rdoPaymentAll = null,
 		_$chkCoupon = null,
@@ -163,7 +164,12 @@
 		tooltipHtml += '총 결제금액 : ' + _$txtPaymentSum.val() + '</span>';
 
 		
-		hotplace.dom.changeTooltipText(_$btnPaymentInfo, tooltipHtml);
+		//hotplace.dom.changeTooltipText(_$btnPaymentInfo, tooltipHtml);
+		_changeTooltipText(_tooltipHtml = tooltipHtml);
+	}
+	
+	function _changeTooltipText(htmlStr) {
+		hotplace.dom.changeTooltipText(_$btnPaymentInfo, htmlStr);
 	}
 	
 	//결제진행건이 있는지 검사
@@ -205,7 +211,9 @@
 		_$btnPaymentInfo = $(_btnPaymentInfo),
 		_$btnPayment = $(_btnPayment);
 		
-				
+		
+		_tooltipHtml = _$btnPaymentInfo.prop('title');
+		
 		//툴팁 초기화
 		hotplace.dom.initTooltip(_dvPayment, {
 			events: {
@@ -217,6 +225,8 @@
 				placement: 'top'
 			}
 		});
+		
+		
 		
 		_$rdoPayment
 		.off('change')
@@ -324,10 +334,16 @@
 		});
 		
 		_$txtDepositor
-		.off('keydown')
-		.on('keydown', function() {
-			alert('ff')
-			$('#spPayDepositor').text(_$txtDepositor.val());
+		.off('keyup')
+		.on('keyup', function() {
+			var txt = $(this).val();
+			
+			_tooltipHtml = _tooltipHtml.replace(
+					/<span id='spPayDepositor'>\s*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*[a-zA-Z]*\s*<\/span>/gm,
+					'<span id="spPayDepositor">' + $(this).val() + '</span>'
+			);
+			_changeTooltipText(_tooltipHtml);
+			
 		});
 	}
 }(
