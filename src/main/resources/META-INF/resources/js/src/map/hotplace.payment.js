@@ -28,35 +28,6 @@
 		_$chkPaymentHeatmap = null,
 		_$btnPayment = null;
 	
-	function _Round(n, pos) { 
-		var digits = Math.pow(10, pos);
-		var sign = 1;
-		if (n < 0) {
-			sign = -1;
-		} 
-		// 음수이면 양수처리후 반올림 한 후 다시 음수처리 
-		n = n * sign; 
-		var num = Math.round(n * digits) / digits; 
-		num = num * sign; 
-		return num.toFixed(pos); 
-	} 
-	
-	// 지정자리 버림 (값, 자릿수) 
-	function _Floor(n, pos) { 
-		var digits = Math.pow(10, pos); 
-		var num = Math.floor(n * digits) / digits; 
-		return num.toFixed(pos); 
-	} 
-	
-	// 지정자리 올림 (값, 자릿수) 
-	function Ceiling(n, pos) { 
-		var digits = Math.pow(10, pos); 
-		var num = Math.ceil(n * digits) / digits; 
-		return num.toFixed(pos); 
-	}
-
-	
-	
 	function _sum(type, value) {
 		var sum;
 		
@@ -87,11 +58,6 @@
 		//_$txtPaymentSum.val(sum.toString().money() + '원');
 		
 		_sumCoupon(sum);
-	}
-	
-	//부가가치세 추가(만단위에서 버림)
-	function _vatSum() {
-		
 	}
 	
 	function _payment() {
@@ -173,7 +139,7 @@
 			var discountValue = _couponInfo.discountValue;
 			discountValue = parseInt(discountValue, 10);
 			
-			couponHtml += '쿠폰번호: <span class="coupon">' + _couponInfo.couponNum.substring(0, 5) + '...' + '</span><br/>'
+			couponHtml += '쿠폰번호: <span class="coupon">' + _couponInfo.couponNum + '</span><br/>'
 			couponHtml += '쿠폰사용: ';
 			//%
 			if(discountUnit == '1') {

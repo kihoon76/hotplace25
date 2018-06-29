@@ -54,10 +54,9 @@ textarea {resize:none;}
     left: -1px;
 }
 
-#dvPayment .tooltip-inner {min-width:200px; width:200px;}
+#dvPayment .tooltip-inner {min-width:400px; width:400px; text-align:left; padding:10px 20px 10px 20px;}
 .payment_info {color:#0000ff; font-weight:bold; font-size:1.2em;}
 
-.coupon {font-size:.4em;}
-
+.coupon {font-size:1em;}
 
 
