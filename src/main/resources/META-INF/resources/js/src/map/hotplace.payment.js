@@ -28,6 +28,35 @@
 		_$chkPaymentHeatmap = null,
 		_$btnPayment = null;
 	
+	function _Round(n, pos) { 
+		var digits = Math.pow(10, pos);
+		var sign = 1;
+		if (n < 0) {
+			sign = -1;
+		} 
+		// 음수이면 양수처리후 반올림 한 후 다시 음수처리 
+		n = n * sign; 
+		var num = Math.round(n * digits) / digits; 
+		num = num * sign; 
+		return num.toFixed(pos); 
+	} 
+	
+	// 지정자리 버림 (값, 자릿수) 
+	function _Floor(n, pos) { 
+		var digits = Math.pow(10, pos); 
+		var num = Math.floor(n * digits) / digits; 
+		return num.toFixed(pos); 
+	} 
+	
+	// 지정자리 올림 (값, 자릿수) 
+	function Ceiling(n, pos) { 
+		var digits = Math.pow(10, pos); 
+		var num = Math.ceil(n * digits) / digits; 
+		return num.toFixed(pos); 
+	}
+
+	
+	
 	function _sum(type, value) {
 		var sum;
 		
@@ -60,6 +89,11 @@
 		_sumCoupon(sum);
 	}
 	
+	//부가가치세 추가(만단위에서 버림)
+	function _vatSum() {
+		
+	}
+	
 	function _payment() {
 		var param = {};
 		var serviceSubType = [];
@@ -76,7 +110,7 @@
 		}
 		
 		param.serviceSubTypes = serviceSubType.join(',');
-		param.sum = _$txtPaymentSum.data('couponValue');
+		param.sum = _$txtPaymentSum.data('totalValue');
 		param.couponNum = _couponInfo.couponNum || '0';
 		param.depositor = _$txtDepositor.val()
 		
@@ -128,9 +162,10 @@
 	
 	function _sumCoupon(sum) {
 		//쿠폰적용전 값 저장
-		_$txtPaymentSum.data('value', sum);
+		_$txtPaymentSum.data('value', sum); //정가
 		var tooltipHtml = '<span class="innerTooltip">';
 		var couponHtml = '';
+		var vatHtml = '';
 		
 		//쿠폰적용여부 결정 couponNum 존재하면 적용
 		if(_couponInfo.couponNum) {
@@ -138,7 +173,7 @@
 			var discountValue = _couponInfo.discountValue;
 			discountValue = parseInt(discountValue, 10);
 			
-			couponHtml += '쿠폰번호: <span class="coupon">' + _couponInfo.couponNum + '</span><br/>'
+			couponHtml += '쿠폰번호: <span class="coupon">' + _couponInfo.couponNum.substring(0, 5) + '...' + '</span><br/>'
 			couponHtml += '쿠폰사용: ';
 			//%
 			if(discountUnit == '1') {
@@ -155,16 +190,21 @@
 			couponHtml = '쿠폰사용: 사용안함<br/>';
 		}
 		
-		_$txtPaymentSum.data('couponValue', sum);
+		//VAT 적용(원단위의 경우 10, 십원단위의 경우 100, 백원단위의 경우 1000, ... 을 이용하면 원단위 절사
+		/*var vatValue = Math.floor((sum*0.1)/10000) * 10000;
+		sum = sum + vatValue;
+		sum = Math.floor(sum/10000) * 10000; */
+		
+		_$txtPaymentSum.data('totalValue', sum);
 		_$txtPaymentSum.val(sum.toString().money() + '원');
 
 		tooltipHtml += '정가: ' + _$txtPaymentSum.data('value').toString().money() + '원<br/>';
+		//tooltipHtml += '부가가치세: ' + vatValue.toString().money() + ' 원<br/>';
 		tooltipHtml += couponHtml;
-		tooltipHtml += '입금자명: <span id="spPayDepositor">' + _$txtDepositor.val() + '</span><br/>'
+		tooltipHtml += '입금자명: <span id=\'spPayDepositor\'>' + _$txtDepositor.val() + '</span><br/>'
 		tooltipHtml += '총 결제금액 : ' + _$txtPaymentSum.val() + '</span>';
 
 		
-		//hotplace.dom.changeTooltipText(_$btnPaymentInfo, tooltipHtml);
 		_changeTooltipText(_tooltipHtml = tooltipHtml);
 	}
 	
@@ -333,14 +373,17 @@
 			}
 		});
 		
+		
 		_$txtDepositor
 		.off('keyup')
 		.on('keyup', function() {
 			var txt = $(this).val();
-			
+			txt = txt.replace(/[\{\}\[\]\/?.,;:|*~`!^\-_+<>@\#$%&\\\=\'\"]/gi, '');
+			$(this).val(txt);
+
 			_tooltipHtml = _tooltipHtml.replace(
-					/<span id='spPayDepositor'>\s*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*[a-zA-Z]*\s*<\/span>/gm,
-					'<span id="spPayDepositor">' + $(this).val() + '</span>'
+					/<span id='spPayDepositor'>(\s|[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]|[a-zA-Z]|\d|\(|\))*<\/span>/gm,
+					'<span id=\'spPayDepositor\'>' + txt + '</span>'
 			);
 			_changeTooltipText(_tooltipHtml);
 			
