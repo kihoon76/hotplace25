@@ -8,7 +8,7 @@
 	<div class="hpArea">
 		<div class="unit">				
 			<div class="unit_tit">
-				<span class="sTit color_black noBullt">제목</span>
+				<span class="sTit color_black noBullt">정의</span>
 			</div>
 			<div class="unit_cont bgWhite">
 				<table class="tableStyle gridStyle  topBold center">
@@ -18,10 +18,13 @@
 					<tbody>
 						<tr>
 							<td class="left">
-								<div>테스트</div>
 								<div>
-									<img src="http://via.placeholder.com/350x150">
-
+									<span style="font-weight:900;">HP지수</span>는 기준시점 개별공시지가(원/㎡)대비 개별공시지가 예측가격(+3년)증감율을 전국 개별공시지가 평균증감율과 상대비교한 값(Z-Score)으로서, <br>이 수치가 0보다 클 경우 기준시점으로부터 최근 5년간 개별공시지가 증감율이 전국평균보다 높다는 것을 의미합니다. 
+									<br>
+									<span style="color:darkgray;font-size:0.85em;">개별공시지가 예측방법 : 지수평활법(Exponential Smoothing Method)</span>
+									<br><br>
+									<span style="font-weight:900;">HP등급</span>은 HP지수를 1부터 10까지 두 자리 정수로 환산한 핫플레이스(HotPlace)등급으로서, 이 수치가 1등급에 가까워질수록 기준시점으로부터 최근 5년간 해당 토지의 개별공시지가 증감율이 전국평균보다 상대적으로 높다는 것을 의미하고, 반대로 10등급에 가까워질수록 상대적으로 낮다는 것을 의미합니다.
+									<br><span style="color:darkgray;font-size:0.85em;">HP등급 산출방법 : HP지수 영점(Z-Score 0, 개별공시지가 전국평균증감율)을 기준으로 <br> 등간격(Z-Score 간격 0.3)으로 환산함. (HP지수 0 = HP등급 5.5) </span>
 								</div>
 							</td>
 						</tr>
@@ -29,7 +32,51 @@
 				</table>
 			</div>
 		</div>
-	</div>
+	<div class="unit">				
+			<div class="unit_tit">
+				<span class="sTit color_black noBullt">산식</span>
+			</div>
+			<div class="unit_cont bgWhite">
+				<table class="tableStyle gridStyle  topBold center">
+					<colgroup>
+						<col style="width:100%;">
+					</colgroup>
+					<tbody>
+						<tr>
+							<td class="left">
+								<div></div>
+								<div>
+									<img src="resources/img/hp_equations_AA01.jpg">
+
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div><div class="unit">				
+			<div class="unit_tit">
+				<span class="sTit color_black noBullt">예시</span>
+			</div>
+			<div class="unit_cont bgWhite">
+				<table class="tableStyle gridStyle  topBold center">
+					<colgroup>
+						<col style="width:100%;">
+					</colgroup>
+					<tbody>
+						<tr>
+							<td class="left">
+								<div></div>
+								<div>
+									<img src="resources/img/hp_example_AA01.jpg">
+
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div></div>
 </div>
 <div class="footArea">
 	<button type="button" class="btnstyle middle gray MENU_CLOSE" data-menu="{{menuName}}">닫기</button>
