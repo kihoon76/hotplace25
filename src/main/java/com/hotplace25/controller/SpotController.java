@@ -270,7 +270,7 @@ public class SpotController {
 	
 	@PostMapping("mod/gwansim")
 	@ResponseBody
-	public AjaxVO modifyMyGwansimMulgeon(@RequestParam("gwansimNum") String gwansimNum, @RequestParam("memo") String memo) {
+	public AjaxVO modifyMyGwansimMulgeon(@RequestBody Map<String, String> param) {
 		
 		AjaxVO vo = new AjaxVO();
 		vo.setSuccess(false);
@@ -279,8 +279,8 @@ public class SpotController {
 		
 		GwansimMulgeon gm = new GwansimMulgeon();
 		gm.setAccountId(currentId);
-		gm.setGwansimMulgeonNum(gwansimNum);
-		gm.setMemo(memo);
+		gm.setGwansimMulgeonNum(param.get("gwansimNum"));
+		gm.setMemo(param.get("memo"));
 		
 		try {
 			boolean r = spotService.modifyMyGwansimMulgeon(gm);

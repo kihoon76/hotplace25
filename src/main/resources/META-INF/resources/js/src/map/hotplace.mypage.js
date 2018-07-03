@@ -206,10 +206,12 @@
 					if(_checkGwansimEmpty()) {
 						hotplace.ajax({
 							url: 'spot/mod/gwansim',
-							data: {
+							method: 'POST',
+							data: JSON.stringify({
 								gwansimNum: $tr.data('key'),
 								memo: $(_txtMypageGwansimMemo).val().trimTS()
-							},
+							}),
+							contentType: 'application/json',
 							success: function(data, textStatus, jqXHR) {
 								if(data.success) {
 									hotplace.dom.showAlertMsg(null, '관심물건이 수정되었습니다.', {width:'40%'});
