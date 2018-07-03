@@ -1780,7 +1780,7 @@
 			        },*/
 			        minZoom: mapOptions.minZoom || 3,
 			        logoControl: true, //false,
-			        mapDataControl: false,
+			        mapDataControl: true,
 			        disableDoubleClickZoom: true
 			        //maxZoom: mapOptions.maxZoom || 13
 				});
