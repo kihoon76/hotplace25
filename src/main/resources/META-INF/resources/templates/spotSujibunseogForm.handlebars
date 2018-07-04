@@ -130,6 +130,29 @@
 
 
 				<!-- ----------------------- -->
+				
+				<div class="unit">							
+					<div class="unit_tit">
+						<span class="sTit color_black noBullt">HP등급</span>
+					</div>
+					<div class="unit_cont bgWhite">
+						<table class="hpIndexCont">
+							<tbody>
+								<tr>
+									<td class="textArea" style="width:70%;">
+										<div class="text">HP등급은 기준시점 개별공시지가와 과거 지가변동을 고려하여 향후 지가를<br/>예측하고, 지가변동폭을 1부터 10까지 등급형태로 환산한 값을 말합니다<br/></div>
+										<div class="sText">예측방법 : 지수평활법(Exponential Smoothing Method)</div>
+									</td>
+									<td class="indexArea" style="width:30%;">
+										<div class="text"><span class="bFont"><span id="spHpGrade">{{hpGrade}}</span></span><span>등급<span></div>
+										<div class="sText">HP지수 {{hpIndex}}</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+							
 				{{#defaultValue}}
 				<!-- 수지분석 -->
 				<div class="unit">							

@@ -85,7 +85,10 @@
 							gugtolaw: datas.gugtolaw,
 							etclaw: datas.etclaw,
 							boochickadd: datas.boochickadd,
-							tojiuse: datas.tojiuse
+							tojiuse: datas.tojiuse,
+							hpSuji: datas.hpSuji,
+							hpIndex: datas.hpIndex,
+							hpGrade: datas.hpGrade
 							
 					});
 					
