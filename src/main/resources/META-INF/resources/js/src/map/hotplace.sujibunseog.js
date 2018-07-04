@@ -832,8 +832,24 @@
 		});*/
 		
 		// 매각 > 토지
-		hotplace.validation.numberOnly(_stepIncomeSellLand, function() {
-			console.log('oo');
+		hotplace.validation.numberOnly(_stepIncomeSellLand, function($this) {
+			//min값 처리
+			var min = $this.data('min');
+			var v = $this.data('value');
+			var defaultV = $this.data('default');
+			
+			try {
+				if(min != undefined) {
+					if(min > v) {
+						$this.data('value', defaultV);
+						$this.val(defaultV + ($this.data('suffix') || ''));
+					}
+				}
+			}
+			catch(e) {
+				console.log(e);
+			}
+			
 		});
 		
 		hotplace.validation.numberOnly(_stepGeonchugGongsa, function($this) {
