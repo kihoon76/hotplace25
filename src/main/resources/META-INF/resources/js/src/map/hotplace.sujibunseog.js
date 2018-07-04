@@ -821,7 +821,6 @@
 		});
 		
 		
-		
 		hotplace.validation.numberOnly('#txtJaesanseH1', function() {
 			hotplace.calc.sujibunseog.calcJaesanse2();
 		});
@@ -831,6 +830,11 @@
 			$this.data('step', step);
 			hotplace.calc.sujibunseog.calcYangdose();
 		});*/
+		
+		// 매각 > 토지
+		hotplace.validation.numberOnly(_stepIncomeSellLand, function() {
+			console.log('oo');
+		});
 		
 		hotplace.validation.numberOnly(_stepGeonchugGongsa, function($this) {
 			hotplace.calc.sujibunseog.calcGeonchugGongsa();
