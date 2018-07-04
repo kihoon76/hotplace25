@@ -75,7 +75,34 @@
 				
 				if(data.success) {
 					var datas = data.datas[0];
-					var param = $.extend({address:_address, pnu:_pnu, lng:_lng, lat:_lat}, {defaultValue:hotplace.calc.sujibunseog.defaultValue}, {
+					var defaultValueObj = {defaultValue:hotplace.calc.sujibunseog.defaultValue};
+					var hpDefault = 0;
+					
+					//토지매각 HP지수 적용된 default값
+					try {
+						//(hpSuji + 1)^(보유기간/3)*100
+						// hpSuji < -1 default 50%
+						var hpSujiFloat = parseFloat(datas.hpSuji);
+						
+						if(hpSujiFloat < -1) {
+							hpDefault = 50;
+						}
+						else {
+							hpDefault = Math.pow((hpSujiFloat + 1), (defaultValueObj.defaultValue.ownTerm)/3) * 100;
+							hpDefault = Math.floor(hpDefault);
+							
+							//200보다 크면 200
+							if(hpDefault > 200) hpDefault = 200;
+						}
+					}
+					catch(e) {
+						console.log(e);
+						hpDefault = 116;
+					}
+				
+					defaultValueObj.defaultValue.hpDefault = hpDefault; 
+					
+					var param = $.extend({address:_address, pnu:_pnu, lng:_lng, lat:_lat}, defaultValueObj, {
 							jimok: datas.jimok,
 							valPerPyeung:21000000,
 							area: datas.area,
