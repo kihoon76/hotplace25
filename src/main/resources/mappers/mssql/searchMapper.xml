@@ -81,6 +81,9 @@
 		<result column="지목" 	property="jimok"/>
 		<result column="면적" 	property="area"/>
 		<result column="공시지가"  property="gongsi"/>
+		<result column="hp지수"  property="hpIndex"/>
+		<result column="hp등급"  property="hpGrade"/>
+		<result column="hp수지분석"  property="hpSuji"/>
 	</resultMap>
 	<resultMap id="RM_selectSujiboonseogBase2" type="string"></resultMap>
 	<resultMap id="RM_selectSujiboonseogBase3" type="string"></resultMap>
@@ -92,7 +95,7 @@
 					   RM_selectSujiboonseogBase2,
 					   RM_selectSujiboonseogBase3,
 					   RM_selectSujiboonseogBase4,
-					   RM_selectSujiboonseogBase1">
+					   RM_selectSujiboonseogBase5">
 	{ call [서비스].[dbo].[SEL_수지분석_01](
 		#{pnu, mode=IN, jdbcType=NVARCHAR, javaType=string}
 	)}

@@ -64,6 +64,9 @@ public class SearchService {
 			result.put("pnu", "");
 			result.put("jimok", "");
 			result.put("area", "");
+			result.put("hpIndex", "");
+			result.put("hpGrade", "");
+			result.put("hpSuji", "");
 			result.put("gongsi", "0");
 			result.put("gugtolaw", "");
 			result.put("etclaw", "");
@@ -88,6 +91,9 @@ public class SearchService {
 				result.put("jimok", StringUtil.getStringNullValue(m.get("jimok")));
 				result.put("area", StringUtil.getStringNullValue(m.get("area")));
 				result.put("gongsi", gongsi);
+				result.put("hpIndex", StringUtil.getStringNullValue(m.get("hpIndex")));
+				result.put("hpGrade", StringUtil.getStringNullValue(m.get("hpGrade")));
+				result.put("hpSuji", StringUtil.getStringNullValue(m.get("hpSuji")));
 			}
 			
 			//국토법지역지구
