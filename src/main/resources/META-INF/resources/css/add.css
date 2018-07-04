@@ -66,4 +66,16 @@ HP지수 메뉴
 .hpdefinition {line-height: 1.8em;}
 .hpsub {color:darkgray;font-size:0.85em;}
 
+/*수지분석 hp*/
+.hpIndexCont {clear:both; overflow:auto; border:1px solid #ccc; background:#f9f9f9;}
+.hpIndexCont td {padding:0 0px; text-align:left;}
+.hpIndexCont .textArea {padding:25px 30px;}
+.hpIndexCont .indexArea {padding:25px 35px 25px 0; text-align:right;}
+.hpIndexCont .text  {width:100%; font-size:13px; font-weight:500; padding:0 0 10px 0; line-height:1.6em;}
+.hpIndexCont .sText {width:100%; font-size:11px; font-weight:500; color:#666; padding:0;}
+
+.hpIndexCont .indexArea .text        {font-size:15px;}
+.hpIndexCont .indexArea .text .bFont {font-size:36px; color:#3192e7; font-weight:bold;}
+.hpIndexCont .indexArea .sText {display:block; padding:5px 0 0 0;}
+
 
