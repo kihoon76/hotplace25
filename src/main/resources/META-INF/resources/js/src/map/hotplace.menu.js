@@ -886,7 +886,7 @@
 	}
 	
 	function _openLurisDv() {
-		$(_dvToojaLuris).fadeIn();
+		$(_dvToojaLuris).show();
 	}
 	
 	function _toojaDvToogle() {
