@@ -148,5 +148,5 @@
 	</sec:authentication-manager>
 	
 	<!-- http://zgundam.tistory.com/54 -->
-	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> 
 </beans>
