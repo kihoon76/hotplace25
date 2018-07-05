@@ -106,7 +106,7 @@
 			calc.sujibunseog.calcIncomeSellLand();			//매각 > 토지
 			calc.sujibunseog.calcManagement();				//사업경비 > 운영비
 			calc.sujibunseog.calcIncomeSellSeolbi();		//매각 > 설비
-			calc.sujibunseog.calcIncomeSellLand();			//매각 > 토지
+			calc.sujibunseog.calcIncomeSellLand(true);			//매각 > 토지 
 			calc.sujibunseog.calcIncomeManageImdae();		//운영 > 임대
 			
 
