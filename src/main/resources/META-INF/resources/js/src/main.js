@@ -235,7 +235,7 @@ $(document).ready(function() {
 	if ('geolocation' in navigator) {
 		  /* 지오로케이션 사용 가능 */
 		navigator.geolocation.getCurrentPosition(function(position) {
-			_doInit(position.coords.latitude, position.coords.longitude);
+			_doInit(position.coords.longitude, position.coords.latitude);
 		});
 	}
 	else {
