@@ -3,6 +3,8 @@ $(document).ready(function() {
 		_prevLevel = _currLevel,
 		_menusThreshold = {},//menu 특정레벨에서 비활성화
 		_contextCoord = null, //마우스 우클릭시 coord
+		_currentX = $('body').data('currentX'),
+		_currentY = $('body').data('currentY'),
 		$_lnbMulgeon = $('#lnbArea .MULGEON');   
 	
 	function _enableMenu(level, standardLevel, $targetLi, $btnClose) {
@@ -248,6 +250,9 @@ $(document).ready(function() {
 			// 지오로케이션 사용 가능 
 			navigator.geolocation.getCurrentPosition(function(position) {
 				window.location.href = $(body).data('url') + 'main?currentX=' + position.coords.longitude + '&currentY=' + position.coords.latitude;
+			}, function(err) {
+				hotplace.dom.showAlertMsg(null, '위치차단 되었습니다.', hotplace.ALERT_SIZE);
+				console.log(err);
 			});
 		}
 		else {
@@ -257,8 +262,8 @@ $(document).ready(function() {
 	
 	
 	hotplace.maps.init('naver', {
-		X: hotplace.config.mapDefaultX,
-		Y: hotplace.config.mapDefaultY, 
+		X: _currentX || hotplace.config.mapDefaultX,
+		Y: _currentY || hotplace.config.mapDefaultY, 
 		level: hotplace.config.minZoomLevel
 	}, {
 		'zoom_changed' : function(map, level) {
