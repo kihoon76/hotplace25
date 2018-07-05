@@ -1381,11 +1381,13 @@
 				var $WPurchase = $(suji.getWPurchaseId());
 				var $txtIncomeSellLand = $(suji.getTxtIncomeSellLandId());
 				var $stepIncomeSellLand = $(suji.getStepIncomeSellLandId());
+				var $stepOwnTerm = $(suji.getStepOwnTermId());
 				
 				//HP계산
 				if(isCalcHP) {
 					var hpDefault = 0;
 					var hpSuji = $stepIncomeSellLand.data('suji');
+					var ownTerm = $stepOwnTerm.data('value');
 					
 					//토지매각 HP지수 적용된 default값
 					try {
@@ -1397,7 +1399,7 @@
 							hpDefault = 50;
 						}
 						else {
-							hpDefault = Math.pow((hpSujiFloat + 1), (defaultValueObj.defaultValue.ownTerm)/3) * 100;
+							hpDefault = Math.pow((hpSujiFloat + 1), (ownTerm)/3) * 100;
 							hpDefault = Math.floor(hpDefault);
 							
 							//200보다 크면 200
@@ -1406,7 +1408,10 @@
 					}
 					catch(e) {
 						console.log(e);
-						hpDefault = 116;
+						
+						//평균 
+						hpDefault = Math.pow((0.16 + 1), (ownTerm)/3) * 100;
+						hpDefault = Math.floor(hpDefault);
 					}
 					
 					$stepIncomeSellLand.data('value', hpDefault);
