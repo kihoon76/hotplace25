@@ -67,7 +67,7 @@
 						<li><a href="#" class="link" id="modalNotice">공지사항</a></li>
 						<li><a href="#" class="link" id="modalSite">서비스소개</a></li>
 						<li><a href="#" class="link" id="modalTutorial">사용법</a></li>
-						<li><a href="#" class="link" id="myCurrentPosition">현재위치보기</a></li>
+						<li><a href="#" class="link" id="myCurrentPosition">현재위치이동</a></li>
 					</ul>
 				</div>
 			</span>
