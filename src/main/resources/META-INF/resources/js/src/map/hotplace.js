@@ -162,6 +162,18 @@
     		HP_VIEW: 'hpExplainMenu'
     	},
     	codes: {
+    		hpGrade: {
+    			'1': {name:'1등급', value:'1'},
+    			'2': {name:'2등급', value:'2'},
+    			'3': {name:'3등급', value:'3'},
+    			'4': {name:'4등급', value:'4'},
+    			'5': {name:'5등급', value:'5'},
+    			'6': {name:'6등급', value:'6'},
+    			'7': {name:'7등급', value:'7'},
+    			'8': {name:'8등급', value:'8'},
+    			'9': {name:'9등급', value:'9'},
+    			'10': {name:'10등급', value:'10'}
+    		},
     		cityPlan: {
     			'doro':{name:'도로', value:'05'},
     			'cheoldo':{name:'철도', value:'09'},

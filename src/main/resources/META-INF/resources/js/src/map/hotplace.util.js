@@ -127,6 +127,10 @@
 		return _getCodeStr(hotplace.config.codes.jimok, val);
 	}
 	
+	util.getHpGradeStr = function(val) {
+		return _getCodeStr(hotplace.config.codes.hpGrade, val);
+	}
+	
 	util.getMaegakGubunStr = function(val) {
 		if(val) {
 			switch(val) {
