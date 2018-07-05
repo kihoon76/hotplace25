@@ -243,6 +243,18 @@ $(document).ready(function() {
 		_doInit(hotplace.config.mapDefaultX, hotplace.config.mapDefaultY);
 	}*/
 	
+	$('#myCurrentPosition').on('click', function() {
+		if('geolocation' in navigator) {
+			// 지오로케이션 사용 가능 
+			navigator.geolocation.getCurrentPosition(function(position) {
+				window.location.href = $(body).data('url') + 'main?currentX=' + position.coords.longitude + '&currentY=' + position.coords.latitude;
+			});
+		}
+		else {
+			
+		}
+	});
+	
 	
 	hotplace.maps.init('naver', {
 		X: hotplace.config.mapDefaultX,

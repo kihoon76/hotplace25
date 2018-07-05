@@ -19,7 +19,10 @@
 
 	<sitemesh:write property="head" />
 </head>
-<body data-url="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" data-year="${currYear}">
+<body data-url="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" 
+	  data-year="${currYear}" 
+	  data-current-x="${currentX}"
+	  data-current-y="${currentY}">
 	<!-- top GNB영역 -->
 	<div id="gnbArea" class="gnbArea">
 		<h1><a href="" class="logo"><span class="hidden">HotPlace25</span></a></h1>
@@ -64,6 +67,7 @@
 						<li><a href="#" class="link" id="modalNotice">공지사항</a></li>
 						<li><a href="#" class="link" id="modalSite">서비스소개</a></li>
 						<li><a href="#" class="link" id="modalTutorial">사용법</a></li>
+						<li><a href="#" class="link" id="myCurrentPosition">현재위치</a></li>
 					</ul>
 				</div>
 			</span>

@@ -64,7 +64,10 @@ public class HotplaceController {
 	private String env;
 	
 	@GetMapping("main")
-	public String layout(HttpServletRequest request) {
+	public String layout(
+			@RequestParam(name="currentX", required=false) String currentX,
+			@RequestParam(name="currentY", required=false) String currentY,
+			HttpServletRequest request) {
 		//List<Notice> notices = noticeService.getNoticeList();
 		
 		//request.setAttribute("notices", notices);
@@ -72,6 +75,8 @@ public class HotplaceController {
 		request.setAttribute("jangeagongji", applicationConfig.getValue("C1"));
 		request.setAttribute("debug", applicationConfig.getValue("C2"));
 		request.setAttribute("env", env);
+		request.setAttribute("currentX", currentX);
+		request.setAttribute("currentY", currentY);
 		String currentYear = "";
 		
 		try {
