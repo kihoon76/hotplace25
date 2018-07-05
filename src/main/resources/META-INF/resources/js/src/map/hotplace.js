@@ -172,7 +172,8 @@
     			'7': {name:'7등급', value:'7'},
     			'8': {name:'8등급', value:'8'},
     			'9': {name:'9등급', value:'9'},
-    			'10': {name:'10등급', value:'10'}
+    			'10': {name:'10등급', value:'10'},
+    			'11': {name:'-', value:'11'}
     		},
     		cityPlan: {
     			'doro':{name:'도로', value:'05'},
