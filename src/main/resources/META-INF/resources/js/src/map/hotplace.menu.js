@@ -45,7 +45,7 @@
 		    {title:'HP등급', field:'hpgrade', align:'center', width:100, headerFilter:true, 
 		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.hpGrade), editable:hotplace.dom.createTabulatorNoEdit,
 		    	formatter:function(cell) {
-			    	return hotplace.util.getHpGradeStr((cell.getValue() == '') ? '10' :cell.getValue());
+			    	return hotplace.util.getHpGradeStr(cell.getValue() || '10');
 			    }
 		    },
 		    {title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter: true, 
