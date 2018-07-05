@@ -75,6 +75,10 @@
 				
 				if(data.success) {
 					var datas = data.datas[0];
+					if(datas.gongsi == '0') {
+						hotplace.dom.showAlertMsg(null, '수지분석을 할수 없습니다(공시지가 값이 없음)', hotplace.ALERT_SIZE);
+						return;
+					}
 					var defaultValueObj = {defaultValue:hotplace.calc.sujibunseog.defaultValue};
 					/*var hpDefault = 0;
 					
