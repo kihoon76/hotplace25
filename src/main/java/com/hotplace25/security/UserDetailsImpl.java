@@ -55,4 +55,22 @@ public class UserDetailsImpl implements UserDetails {
 	public List<Authority> getAuthorities() {
 		return account.getAuthorities();
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		// TODO Auto-generated method stub
+		if(o instanceof UserDetailsImpl) {
+			 return account.equals(((UserDetailsImpl) o).account);
+		}
+		
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return account.hashCode();
+	}
+	
+	
 }
