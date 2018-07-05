@@ -1312,13 +1312,15 @@
 
 											<span class="inline center" style="width:5%;">x</span>
 
-											<input type="text" class="inp" id="stepIncomeSellLand"  style="width:45%"
-													value="{{hpDefault}}%" 
-													data-value="{{hpDefault}}" 
+											<input type="text" class="inp TOOLTIP" id="stepIncomeSellLand"  style="width:45%"
+													value="" 
+													data-value="" 
 													data-min="50" 
 													data-max="200"
-													data-default="{{hpDefault}}" 
-													data-suffix="%" />
+													data-suji="{{hpSuji}}"
+													data-default="" 
+													data-suffix="%" 
+													title="<span class='innerTooltip'>범위: 50%~200% <br/>최대값을 초과한 경우 이전 값으로 <br/>최소값보다 작으면 기본값으로 <br/>돌아갑니다</span>" />
 													
 											<!--<div class="spinner" style="width:45%;">
 												<input type="text" class="inp readonly" id="stepIncomeSellLand" 

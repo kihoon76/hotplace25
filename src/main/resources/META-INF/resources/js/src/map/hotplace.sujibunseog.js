@@ -845,6 +845,8 @@
 						$this.val(defaultV + ($this.data('suffix') || ''));
 					}
 				}
+				
+				hotplace.calc.sujibunseog.calcIncomeSellLand();
 			}
 			catch(e) {
 				console.log(e);

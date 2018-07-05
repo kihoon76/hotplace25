@@ -76,7 +76,7 @@
 				if(data.success) {
 					var datas = data.datas[0];
 					var defaultValueObj = {defaultValue:hotplace.calc.sujibunseog.defaultValue};
-					var hpDefault = 0;
+					/*var hpDefault = 0;
 					
 					//토지매각 HP지수 적용된 default값
 					try {
@@ -98,9 +98,9 @@
 					catch(e) {
 						console.log(e);
 						hpDefault = 116;
-					}
+					}*/
 				
-					defaultValueObj.defaultValue.hpDefault = hpDefault; 
+					defaultValueObj.defaultValue.hpSuji = datas.hpSuji; 
 					
 					var param = $.extend({address:_address, pnu:_pnu, lng:_lng, lat:_lat}, defaultValueObj, {
 							jimok: datas.jimok,

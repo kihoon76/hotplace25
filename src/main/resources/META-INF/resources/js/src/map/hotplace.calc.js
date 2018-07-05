@@ -573,6 +573,7 @@
 				hotplace.calc.sujibunseog.calcJaesanse(true);
 				hotplace.calc.sujibunseog.calcJaesanse2(true);
 				hotplace.calc.sujibunseog.calcDaechulIja(true);
+				hotplace.calc.sujibunseog.calcIncomeSellLand(true);
 			},
 			calcOtherAssetRatio: function() {
 				_initYangdose();
@@ -1372,7 +1373,7 @@
 				
 				calcIncomeSell();
 			},
-			calcIncomeSellLand: function() {
+			calcIncomeSellLand: function(isCalcHP) {
 				_initYangdose();
 				console.log('수입>매각>토지');
 				var suji = hotplace.sujibunseog;
@@ -1380,6 +1381,39 @@
 				var $WPurchase = $(suji.getWPurchaseId());
 				var $txtIncomeSellLand = $(suji.getTxtIncomeSellLandId());
 				var $stepIncomeSellLand = $(suji.getStepIncomeSellLandId());
+				
+				//HP계산
+				if(isCalcHP) {
+					var hpDefault = 0;
+					var hpSuji = $stepIncomeSellLand.data('suji');
+					
+					//토지매각 HP지수 적용된 default값
+					try {
+						//(hpSuji + 1)^(보유기간/3)*100
+						// hpSuji < -1 default 50%
+						var hpSujiFloat = parseFloat(hpSuji);
+						
+						if(hpSujiFloat < -1) {
+							hpDefault = 50;
+						}
+						else {
+							hpDefault = Math.pow((hpSujiFloat + 1), (defaultValueObj.defaultValue.ownTerm)/3) * 100;
+							hpDefault = Math.floor(hpDefault);
+							
+							//200보다 크면 200
+							if(hpDefault > 200) hpDefault = 200;
+						}
+					}
+					catch(e) {
+						console.log(e);
+						hpDefault = 116;
+					}
+					
+					$stepIncomeSellLand.data('value', hpDefault);
+					$stepIncomeSellLand.data('default', hpDefault);
+					$stepIncomeSellLand.val(hpDefault + ($stepIncomeSellLand.data('suffix') || ''));
+				}
+				
 				
 				$txtIncomeSellLand.data('value', $WPurchase.data('value'));
 				$txtIncomeSellLand.val($WPurchase.val());
