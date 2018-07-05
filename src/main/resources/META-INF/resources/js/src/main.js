@@ -249,7 +249,7 @@ $(document).ready(function() {
 		if('geolocation' in navigator) {
 			// 지오로케이션 사용 가능 
 			navigator.geolocation.getCurrentPosition(function(position) {
-				window.location.href = $(body).data('url') + 'main?currentX=' + position.coords.longitude + '&currentY=' + position.coords.latitude;
+				window.location.href = $('body').data('url') + 'main?currentX=' + position.coords.longitude + '&currentY=' + position.coords.latitude;
 			}, function(err) {
 				hotplace.dom.showAlertMsg(null, '위치차단 되었습니다.', hotplace.ALERT_SIZE);
 				console.log(err);
