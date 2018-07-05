@@ -59,17 +59,20 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public boolean equals(Object o) {
 		// TODO Auto-generated method stub
+		System.err.println("=======================================0000000");
 		if(o instanceof UserDetailsImpl) {
-			 return account.equals(((UserDetailsImpl) o).account);
+			 System.err.println("=======================================");
+			 return account.getId().equals(((UserDetailsImpl) o).getAccount().getId());
 		}
 		
+		System.err.println("=======================================11111111");
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
-		return account.hashCode();
+		return account.getId().hashCode();
 	}
 	
 	
