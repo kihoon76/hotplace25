@@ -232,129 +232,145 @@ $(document).ready(function() {
 		}
 	}
 	
-	hotplace.maps.init('naver', {
-		X: hotplace.config.mapDefaultX,
-		Y: hotplace.config.mapDefaultY, 
-		level: hotplace.config.minZoomLevel
-	}, {
-		'zoom_changed' : function(map, level) {
-			_currLevel = level;
-			hotplace.dom.addBodyAllMask();
-			
-			_showMsgChangedState();
-			
-			setTimeout(function() {
+	if ('geolocation' in navigator) {
+		  /* 지오로케이션 사용 가능 */
+		navigator.geolocation.getCurrentPosition(function(position) {
+			_doInit(position.coords.latitude, position.coords.longitude);
+		});
+	}
+	else {
+		  /* 지오로케이션 사용 불가능 */
+		_doInit(hotplace.config.mapDefaultX, hotplace.config.mapDefaultY);
+	}
+	
+	
+	function _doInit(X, Y) {
+		hotplace.maps.init('naver', {
+			X: hotplace.config.mapDefaultX,
+			Y: hotplace.config.mapDefaultY, 
+			level: hotplace.config.minZoomLevel
+		}, {
+			'zoom_changed' : function(map, level) {
+				_currLevel = level;
+				hotplace.dom.addBodyAllMask();
 				
+				_showMsgChangedState();
+				
+				setTimeout(function() {
+					
+					if(!hotplace.maps.isOffCell()) {
+						hotplace.dom.showMaskTransaction((hotplace.maps.isActiveMulgeonView()) ? (1 + hotplace.maps.getActiveMarkers().length) : 1);
+						hotplace.maps.showCellLayer(null, true);
+						hotplace.maps.showMarkers(null, true);
+					}
+					else {//marker만 켜져 있을 경우
+						if(hotplace.maps.isActiveMulgeonView()) {
+							var len = hotplace.maps.getActiveMarkers().length;
+							if(len > 0) {
+								hotplace.dom.showMaskTransaction(len);
+								hotplace.maps.showMarkers(null, true);
+							}
+							else {
+								//건축허가, 실거래가 활성, 비활성 체크(뷰만 변경)
+								hotplace.maps.checkMarkerLevelLimit(false, true);
+							}
+						}
+					}
+					
+					hotplace.dom.removeBodyAllMask();
+					_enableMenu(level, hotplace.config.mulgeonViewLevel, $_lnbMulgeon, $('#' + hotplace.config.menus.MULGEON_VIEW + ' .close'));
+					
+				},500);
+			},
+			'zoom_start' : function(map, level) {
+				_prevLevel = level;
+				hotplace.maps.destroyMarkers(true);
+				//hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.RADIUS_SEARCH);
+				hotplace.maps.destroyAllMarkerWindow();
+				hotplace.database.initLevel(level);
+				hotplace.dom.hideContextMenu();
+				
+				
+			},
+			'dragend' : function(map, bnds) {
+				//cell과 marker가 동시에 켜져있을 경우 
 				if(!hotplace.maps.isOffCell()) {
-					hotplace.dom.showMaskTransaction((hotplace.maps.isActiveMulgeonView()) ? (1 + hotplace.maps.getActiveMarkers().length) : 1);
-					hotplace.maps.showCellLayer(null, true);
-					hotplace.maps.showMarkers(null, true);
+					if(hotplace.maps.isInLocationBounds(bnds)) {
+						hotplace.maps.appendCell();
+						hotplace.maps.appendMarker();
+					}
+					else {
+						hotplace.dom.showMaskTransaction((hotplace.maps.isActiveMulgeonView()) ? (1 + hotplace.maps.getActiveMarkers().length) : 1);
+						hotplace.maps.showCellLayer(null, true);
+						hotplace.maps.showMarkers(null, true);
+					}
 				}
 				else {//marker만 켜져 있을 경우
-					if(hotplace.maps.isActiveMulgeonView()) {
+					if(hotplace.maps.isInLocationBounds(bnds)) {
+						hotplace.maps.appendMarker();
+					}
+					else {
 						var len = hotplace.maps.getActiveMarkers().length;
 						if(len > 0) {
 							hotplace.dom.showMaskTransaction(len);
 							hotplace.maps.showMarkers(null, true);
 						}
-						else {
-							//건축허가, 실거래가 활성, 비활성 체크(뷰만 변경)
-							hotplace.maps.checkMarkerLevelLimit(false, true);
-						}
+						
 					}
 				}
 				
-				hotplace.dom.removeBodyAllMask();
-				_enableMenu(level, hotplace.config.mulgeonViewLevel, $_lnbMulgeon, $('#' + hotplace.config.menus.MULGEON_VIEW + ' .close'));
+			},
+			'click' : function(map, latlng) {
+				console.log(latlng)
+				//hotplace.maps.getClickedCell(latlng);
+				if($('#btnStreetView').data('switch') == 'on') {
+					hotplace.streetview.startPanorama(map, latlng);
+				}
 				
-			},500);
-		},
-		'zoom_start' : function(map, level) {
-			_prevLevel = level;
-			hotplace.maps.destroyMarkers(true);
-			//hotplace.maps.destroyMarkerWindow(hotplace.maps.MarkerTypes.RADIUS_SEARCH);
-			hotplace.maps.destroyAllMarkerWindow();
-			hotplace.database.initLevel(level);
-			hotplace.dom.hideContextMenu();
-			
-			
-		},
-		'dragend' : function(map, bnds) {
-			//cell과 marker가 동시에 켜져있을 경우 
-			if(!hotplace.maps.isOffCell()) {
-				if(hotplace.maps.isInLocationBounds(bnds)) {
-					hotplace.maps.appendCell();
-					hotplace.maps.appendMarker();
+				
+			},
+			'mousedown': function() {
+				hotplace.dom.hideContextMenu();
+			},
+			'rightclick': function(map, pe) {
+				//거리재기, 면적재기가 활성화되어 있으면 context 동작안함
+				if(hotplace.dom.isActiveCalcArea() || hotplace.dom.isActiveCalcDistance()) return;
+				
+				_contextCoord = pe.coord;
+				map.getPanes().overlayLayer.appendChild($('#dvContextMenu')[0]);
+				
+				$('#dvContextMenu')
+				.css('left', pe.offset.x)
+				.css('top', pe.offset.y)
+				.show();
+			},
+			'mouseover' : function(map, pe) {
+				if($('#btnStreetView').data('switch') == 'on') {
+					hotplace.streetview.start(map, pe.coord);
 				}
-				else {
-					hotplace.dom.showMaskTransaction((hotplace.maps.isActiveMulgeonView()) ? (1 + hotplace.maps.getActiveMarkers().length) : 1);
-					hotplace.maps.showCellLayer(null, true);
-					hotplace.maps.showMarkers(null, true);
+			},
+			'mousemove' : function(map, pe) {
+				if($('#btnStreetView').data('switch') == 'on') {
+					hotplace.streetview.moveMarker(pe.coord);
 				}
-			}
-			else {//marker만 켜져 있을 경우
-				if(hotplace.maps.isInLocationBounds(bnds)) {
-					hotplace.maps.appendMarker();
-				}
-				else {
-					var len = hotplace.maps.getActiveMarkers().length;
-					if(len > 0) {
-						hotplace.dom.showMaskTransaction(len);
-						hotplace.maps.showMarkers(null, true);
-					}
-					
+			},
+			'idle': function() {
+				if(hotplace.maps.isPanningStart()) {
+					hotplace.maps.trigger(null, 'zoom_changed');
+					hotplace.maps.disablePanningStart();
 				}
 			}
-			
-		},
-		'click' : function(map, latlng) {
-			console.log(latlng)
-			//hotplace.maps.getClickedCell(latlng);
-			if($('#btnStreetView').data('switch') == 'on') {
-				hotplace.streetview.startPanorama(map, latlng);
-			}
-			
-			
-		},
-		'mousedown': function() {
-			hotplace.dom.hideContextMenu();
-		},
-		'rightclick': function(map, pe) {
-			//거리재기, 면적재기가 활성화되어 있으면 context 동작안함
-			if(hotplace.dom.isActiveCalcArea() || hotplace.dom.isActiveCalcDistance()) return;
-			
-			_contextCoord = pe.coord;
-			map.getPanes().overlayLayer.appendChild($('#dvContextMenu')[0]);
-			
-			$('#dvContextMenu')
-			.css('left', pe.offset.x)
-			.css('top', pe.offset.y)
-			.show();
-		},
-		'mouseover' : function(map, pe) {
-			if($('#btnStreetView').data('switch') == 'on') {
-				hotplace.streetview.start(map, pe.coord);
-			}
-		},
-		'mousemove' : function(map, pe) {
-			if($('#btnStreetView').data('switch') == 'on') {
-				hotplace.streetview.moveMarker(pe.coord);
-			}
-		},
-		'idle': function() {
-			if(hotplace.maps.isPanningStart()) {
-				hotplace.maps.trigger(null, 'zoom_changed');
-				hotplace.maps.disablePanningStart();
-			}
-		}
-	}, function(map) {
-		//hotplace.maps.showCellLayer();
-		hotplace.dom.showYearRangeDiv();
-		hotplace.dom.showAutoYearRangeDiv();
-		hotplace.dom.enableYearRangeDiv(false);
-		_initFirstScreen();
-		checkBrowser(_showIntro);
-	});
+		}, function(map) {
+			//hotplace.maps.showCellLayer();
+			hotplace.dom.showYearRangeDiv();
+			hotplace.dom.showAutoYearRangeDiv();
+			hotplace.dom.enableYearRangeDiv(false);
+			_initFirstScreen();
+			checkBrowser(_showIntro);
+		});
+	}
+	
+	
 	
 	function _initFirstScreen() {
 		//서울시청 400M 물건보기 경매
