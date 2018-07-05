@@ -1393,6 +1393,8 @@
 					try {
 						//(hpSuji + 1)^(보유기간/3)*100
 						// hpSuji < -1 default 50%
+						if(hpSuji == '') throw new Error('hpSuji is empty');
+						
 						var hpSujiFloat = parseFloat(hpSuji);
 						
 						if(hpSujiFloat < -1) {
