@@ -45,7 +45,7 @@
 		    {title:'HP등급', field:'hpgrade', align:'center', width:100, headerFilter:true, 
 		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.hpGrade), editable:hotplace.dom.createTabulatorNoEdit,
 		    	formatter:function(cell) {
-			    	return hotplace.util.getJimokStr(cell.getValue());
+			    	return hotplace.util.getHpGradeStr(cell.getValue());
 			    }
 		    },
 		    {title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter: true, 
@@ -110,7 +110,7 @@
 			{title:'HP등급', field:'hpgrade', align:'center', width:80, headerFilter:true, 
 		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.hpGrade), editable:hotplace.dom.createTabulatorNoEdit,
 		    	formatter:function(cell) {
-			    	return hotplace.util.getJimokStr(cell.getValue());
+			    	return hotplace.util.getHpGradeStr(cell.getValue());
 			    }
 		    },
 			{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter: true, 
