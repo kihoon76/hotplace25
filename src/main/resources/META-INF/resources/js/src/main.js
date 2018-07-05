@@ -246,8 +246,8 @@ $(document).ready(function() {
 	
 	function _doInit(X, Y) {
 		hotplace.maps.init('naver', {
-			X: hotplace.config.mapDefaultX,
-			Y: hotplace.config.mapDefaultY, 
+			X: X, //hotplace.config.mapDefaultX,
+			Y: Y, //hotplace.config.mapDefaultY, 
 			level: hotplace.config.minZoomLevel
 		}, {
 			'zoom_changed' : function(map, level) {
