@@ -25,12 +25,12 @@ public class SSLInterceptor extends HandlerInterceptorAdapter {
 		
 		
 		//개발계 접근은 내부에서만
-		/*if(url.startsWith("https://hotplace.ddns.net")) {
+		if(url.startsWith("https://hotplace.ddns.net")) {
 			String ip = HttpHeaderUtil.getClientIP(request);
 			if(!(ip.startsWith("192.") || ip.startsWith("106.253.61"))) {
 				return false;
 			}
-		}*/
+		}
 		
 		if(url.startsWith("https://hotplace25.com")) {
 			url = url.replace("https://hotplace25.com", "https://www.hotplace25.com");
