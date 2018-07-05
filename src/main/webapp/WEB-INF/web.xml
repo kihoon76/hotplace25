@@ -101,10 +101,10 @@
 	</filter-mapping>
 	
 	<!-- http://meetup.toast.com/posts/44 -->
-	<!-- <filter-mapping>
+	<filter-mapping>
 		<filter-name>rereadableRequestFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>-->
+	</filter-mapping>
 
 	<!-- Processes application requests -->
 	<servlet>
