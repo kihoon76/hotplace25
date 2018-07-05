@@ -93,4 +93,20 @@ public class Account {
 	public void setOut(String out) {
 		this.out = out;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		 if (o instanceof Account) {
+            return id.equals(((Account) o).getId());
+        }
+		 
+        return false;
+	}
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return id.hashCode();
+	}
+	
+	
 }
