@@ -23,7 +23,7 @@
 		return {
     		'bosang': {name: '보상', value: 'B'},
     		'pyeonib': {name: '편입', value: 'P'},
-    		'all': {name: '보상+편입', value: 'A'}
+    		'none': {name: '해당없음', value: 'N'}
     	};
 	}
 	

@@ -158,8 +158,8 @@
 			case 'P':
 				val = '편입';
 				break;
-			case 'A':
-				val = '보상,편입';
+			case 'N':
+				val = '해당없음';
 				break;
 			}
 		}
