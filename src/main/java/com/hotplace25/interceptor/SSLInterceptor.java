@@ -25,11 +25,10 @@ public class SSLInterceptor extends HandlerInterceptorAdapter {
 		
 		
 		//개발계 접근은 내부에서만
-		if(url.startsWith("https://hotplace.ddns.net") && url.indexOf("/noAccess") < 0) {
-			System.err.println("------------------------");
+		if(url.startsWith("https://hotplace.ddns.net")/* && url.indexOf("/noAccess") < 0*/) {
 			String ip = HttpHeaderUtil.getClientIP(request);
 			if(!(ip.startsWith("192.") || ip.startsWith("106.253.61"))) {
-				response.sendRedirect("https://hotplace.ddns.net/noAccess");
+				//response.sendRedirect("https://hotplace.ddns.net/noAccess");
 				return false;
 			}
 		}
