@@ -250,7 +250,7 @@ public class PdfItext {
 		if(items != null) {
 			cnt = items.length;
 			for(int i=0; i<cnt; i++) {
-				System.err.println(items[i]);
+				//System.err.println(items[i]);
 				if(!"Tojibi".equals(items[i]) && !"Jesegeum".equals(items[i])
 				   && !"Gongsabi".equals(items[i]) && !"Inheogabi".equals(items[i])
 				   && !"Budamgeum".equals(items[i]) && !"Saeobgyeongbi".equals(items[i])
