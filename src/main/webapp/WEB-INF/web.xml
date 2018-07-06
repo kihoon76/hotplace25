@@ -127,7 +127,7 @@
 		<mime-type>text/cache-manifest</mime-type>
 	</mime-mapping>
 	
-<!-- 	<session-config> -->
-<!-- 		<session-timeout>60</session-timeout> -->
-<!-- 	</session-config> -->
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
 </web-app>
