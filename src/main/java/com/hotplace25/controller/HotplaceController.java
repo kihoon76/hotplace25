@@ -419,6 +419,13 @@ public class HotplaceController {
 		return vo;
 	}
 	
+	//개발계 접근금지
+	@GetMapping("noAccess")
+	public String noAccessInDev() {
+		
+		return "accessError";
+	}
+	
 	private Map<String, String> getBoundsParam(String nex, String swx, String swy, String ney, String stopGrouping) {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("nex", nex);

@@ -9,4 +9,5 @@
 	<mapping path="/system/notice" exclude="true" />
 	<mapping path="/errors/*" exclude="true" />
 	<mapping path="/spot/*" exclude="true" /> 
+	<mapping path="/noAccess" exclude="true" />
 </sitemesh>

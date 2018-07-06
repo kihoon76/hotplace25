@@ -74,6 +74,9 @@
 		<!-- 상담신청 -->
 		<sec:intercept-url pattern="/question" access="permitAll"/>
 		
+		<!-- 개발계 접근금지 에시지 -->
+		<sec:intercept-url pattern="/noAccess" access="permitAll" /> 
+		
 		<sec:intercept-url pattern="/index.jsp" access="permitAll" />
 		<sec:intercept-url pattern="/resources/**" access="permitAll" />
 		<sec:intercept-url pattern="/main" access="permitAll" />

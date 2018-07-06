@@ -28,6 +28,7 @@ public class SSLInterceptor extends HandlerInterceptorAdapter {
 		if(url.startsWith("https://hotplace.ddns.net")) {
 			String ip = HttpHeaderUtil.getClientIP(request);
 			if(!(ip.startsWith("192.") || ip.startsWith("106.253.61"))) {
+				response.sendRedirect("https://hotplace.ddns.net/noAccess");
 				return false;
 			}
 		}
