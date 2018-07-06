@@ -234,32 +234,19 @@ $(document).ready(function() {
 		}
 	}
 	
-	/*if('geolocation' in navigator) {
-		// 지오로케이션 사용 가능 
-		navigator.geolocation.getCurrentPosition(function(position) {
-			_doInit(position.coords.longitude, position.coords.latitude);
-		});
-	}
-	else {
-		// 지오로케이션 사용 불가능 
-		_doInit(hotplace.config.mapDefaultX, hotplace.config.mapDefaultY);
-	}*/
-	
 	$('#myCurrentPosition').on('click', function() {
 		if('geolocation' in navigator) {
 			// 지오로케이션 사용 가능 
-			
-			
 			navigator.geolocation.getCurrentPosition(function(position) {
 				hotplace.dom.showMask();
 				window.location.href = $('body').data('url') + 'main?currentX=' + position.coords.longitude + '&currentY=' + position.coords.latitude;
 			}, function(err) {
-				hotplace.dom.showAlertMsg(null, '위치차단 되었습니다.', hotplace.ALERT_SIZE);
+				hotplace.dom.showAlertMsg(null, '브라우져가 위치정보를 차단하였습니다.<br/> 위치정보설정을 허용하신 후 이용해 주세요.', hotplace.ALERT_SIZE);
 				console.log(err);
 			});
 		}
 		else {
-			
+			hotplace.dom.showAlertMsg(null, '사용하시는 브라우져가 위치기반 서비스를 제공하지 않습니다.', hotplace.ALERT_SIZE);
 		}
 	});
 	

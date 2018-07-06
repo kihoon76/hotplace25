@@ -1097,7 +1097,7 @@
 			.off('click')
 			.on('click', function() {
 				if($('#chkIntroCookie').is(':checked')) {
-					$.cookie('intro', 'N', {expires:1, path: '/'});
+					$.cookie('intro', 'N', {expires:36500, path: '/'});
 				}
 				
 				dom.closeModal();
