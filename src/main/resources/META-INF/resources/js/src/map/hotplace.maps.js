@@ -1779,7 +1779,7 @@
 			        	position: _vender.Position.TOP_RIGHT
 			        },*/
 			        minZoom: mapOptions.minZoom || 3,
-			        logoControl: true, //false,
+			        logoControl: false,
 			        mapDataControl: true,
 			        disableDoubleClickZoom: true
 			        //maxZoom: mapOptions.maxZoom || 13
