@@ -1,11 +1,15 @@
 package com.hotplace25.util;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.hotplace25.domain.Account;
 import com.hotplace25.domain.Coupon;
@@ -150,6 +154,21 @@ public class ValidationUtil {
 	}
 	
 	private static int  discount(int seed, Coupon cp) {
+		
+		ObjectMapper om = new ObjectMapper();
+		try {
+			System.err.println(om.writeValueAsString(cp));
+		} catch (JsonGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		String discountUnit = cp.getDiscountUnit();
 		String discountValue = cp.getDiscountValue();
 		int discountValueInt = Integer.parseInt(discountValue);
