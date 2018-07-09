@@ -174,7 +174,9 @@ public class ValidationUtil {
 		int discountValueInt = Integer.parseInt(discountValue);
 		
 		if("1".equals(discountUnit)) {
-			return seed - (int)Math.round(100000 * (0.01 * discountValueInt));
+			int s = seed - (int)Math.round(100000 * (0.01 * discountValueInt));
+			System.err.println(s);
+			return s;
 		}
 		else {
 			return seed - discountValueInt;
