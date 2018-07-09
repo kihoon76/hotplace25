@@ -3,15 +3,22 @@ package com.hotplace25.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.hotplace25.util.HttpHeaderUtil;
 
 public class SSLInterceptor extends HandlerInterceptorAdapter {
 	//private static final Logger logger = LoggerFactory.getLogger(SSLInterceptor.class);
+	
+	@Value("#{varCfg['env']}")
+	String env;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		
+		if("local".equals(env)) return true;
 		
 		String url = request.getRequestURL().toString();
 		

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="modal-dialog" role="document">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -349,7 +350,13 @@
 							</div>
 						
 							<div class="btnArea right mgT10">
+								<button type="button" class="btnstyle middle blue" id="btnAccModifyAccount" style="margin-right:10px; width:80px;">관리자페이지이동</button>
 								<button type="button" class="btnstyle middle blue" id="btnAccModifyAccount" style="margin-right:10px; width:80px;">수정</button>
+														<sec:authorize access="hasAnyRole('ROLE_QA_ADMIN', 'ROLE_ADMIN')">
+						<li><a href="http://hotplaceadm.ddns.net:28080" class="link" target="_blank">관리자페이지</a></li>
+						</sec:authorize>
+						
+						
 							</div>
 							
 							<div class="unit_cont bgWhite lineBox" style="border-top:0; border-bottom:0;">

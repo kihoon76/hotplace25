@@ -107,10 +107,13 @@ public class ValidationUtil {
 				}
 			}
 			else {
+				System.err.println("============================1");
 				if(isUseCoupon) {
+					System.err.println("============================2");
 					payment.setSum(discount(990000, cp));
 				}
 				else {
+					System.err.println("============================3");
 					payment.setSum(990000);
 				}
 			}
