@@ -1032,7 +1032,7 @@
 	}
 	
 	function _openGyeongGongLurisDv() {
-		$(_dvGyeongGongLuris).fadeIn();
+		$(_dvGyeongGongLuris).show();
 	}
 	
 	function _gyeonggongDvToogle() {
