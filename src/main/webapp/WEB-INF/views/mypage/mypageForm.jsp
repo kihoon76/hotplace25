@@ -350,7 +350,6 @@
 							</div>
 						
 							<div class="btnArea right mgT10">
-								<button type="button" class="btnstyle middle blue" id="btnAccModifyAccount" style="margin-right:10px; width:80px;">관리자페이지이동</button>
 								<button type="button" class="btnstyle middle blue" id="btnAccModifyAccount" style="margin-right:10px; width:80px;">수정</button>
 							</div>
 							
