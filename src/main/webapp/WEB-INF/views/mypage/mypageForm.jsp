@@ -352,11 +352,6 @@
 							<div class="btnArea right mgT10">
 								<button type="button" class="btnstyle middle blue" id="btnAccModifyAccount" style="margin-right:10px; width:80px;">관리자페이지이동</button>
 								<button type="button" class="btnstyle middle blue" id="btnAccModifyAccount" style="margin-right:10px; width:80px;">수정</button>
-														<sec:authorize access="hasAnyRole('ROLE_QA_ADMIN', 'ROLE_ADMIN')">
-						<li><a href="http://hotplaceadm.ddns.net:28080" class="link" target="_blank">관리자페이지</a></li>
-						</sec:authorize>
-						
-						
 							</div>
 							
 							<div class="unit_cont bgWhite lineBox" style="border-top:0; border-bottom:0;">
