@@ -67,9 +67,6 @@
 						<li><a href="#" class="link" id="modalSite">서비스소개</a></li>
 						<li><a href="#" class="link" id="modalTutorial">사용법</a></li>
 						<li><a href="#" class="link" id="myCurrentPosition">현재위치이동</a></li>
-						<sec:authorize access="hasAnyRole('ROLE_QA_ADMIN', 'ROLE_ADMIN')">
-						<li><a href="http://hotplaceadm.ddns.net:28080" class="link" target="_blank">관리자페이지</a></li>
-						</sec:authorize>
 					</ul>
 				</div>
 			</span>
