@@ -63,7 +63,8 @@
 		
 		if(!tForm) {
 			//security로 인해 권한 없음
-			hotplace.dom.showAlertMsg(null, '건축허가정보를 보실수 있는 권한이 없습니다.', {width:'40%'});
+			//hotplace.dom.showAlertMsg(null, '건축허가정보를 보실수 있는 권한이 없습니다.', {width:'40%'});
+			hotplace.dom.showLoginMsg();
 		}
 		else if(tForm == hotplace.error.DUP_LOGIN) {
 			return;

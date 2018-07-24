@@ -20,16 +20,24 @@
 		console.log(data);
 		var tForm = hotplace.dom.getTemplate('silgeolaeForm');
 		
-		win.open(map, marker);
-		win.setOptions('content', tForm(data.info || {}));
-		
-		$(_btnSilgeolaeThumbClose)
-		.off('click')
-		.on('click', function() {
-			win.close();
-		});
-		
-		_bindGeoClickHandler(data.location[1], data.location[0]);
+		if(!tForm) {
+			hotplace.dom.showLoginMsg();
+		}
+		else if(tForm == hotplace.error.DUP_LOGIN) {
+			return;
+		}
+		else {
+			win.open(map, marker);
+			win.setOptions('content', tForm(data.info || {}));
+			
+			$(_btnSilgeolaeThumbClose)
+			.off('click')
+			.on('click', function() {
+				win.close();
+			});
+			
+			_bindGeoClickHandler(data.location[1], data.location[0]);
+		}
 	}
 	
 	function _bindGeoClickHandler(x, y) {
