@@ -201,7 +201,7 @@ public class PdfItext {
 			String hpIndex = jo.get("hpIndex").getAsString();
 			
 			if("11".equals(hpGrade)) {
-				hpGrade = "&nbsp;";
+				hpGrade = "";
 				hpIndex = ": 등급없음";
 			}
 			
