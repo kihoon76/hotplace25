@@ -142,10 +142,18 @@
 										<div class="text">HP등급은 HP지수를 1부터 10까지 두 자리 정수로 환산한 핫플레이스(HotPlace)등급으로서, 이 수치가 1등급에 가까워질수록<br/>기준시점으로부터 최근 5년간 해당 토지의 개별공시지가 증감율이 전국평균보다 상대적으로 높다는 것을 의미합니다.<br/></div>
 										<div class="sText">개별공시지가 예측방법 : 지수평활법(Exponential Smoothing Method)</div>
 									</td>
+									{{#xif " hpGrade == '11' " }}
+									<td class="indexArea" style="width:25%;">
+										<div class="text"><span class="bFont"><span id="spHpGrade">-</span></span></div>
+										<div class="sText">HP지수: 등급없음</div>
+									</td>
+									{{else}}
 									<td class="indexArea" style="width:25%;">
 										<div class="text"><span class="bFont"><span id="spHpGrade">{{hpGrade}}</span></span><span>등급<span></div>
 										<div class="sText">HP지수 {{hpIndex}}</div>
 									</td>
+									{{/xif}}
+									
 								</tr>
 							</tbody>
 						</table>
