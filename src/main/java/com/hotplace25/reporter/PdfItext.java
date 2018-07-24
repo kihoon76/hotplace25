@@ -198,11 +198,11 @@ public class PdfItext {
 			}
 			
 			String hpGrade = jo.get("hpGrade").getAsString();
-			System.err.println("hpGrade======>" + hpGrade);
+			String hpIndex = jo.get("hpIndex").getAsString();
+			
 			if("11".equals(hpGrade)) {
-				hpGrade = "-";
-				System.err.println("hpGrade2======>" + hpGrade);
-				doc.select("span#spHpGradeSuffix").attr("style", "display:none;");
+				hpGrade = "&nbsp;";
+				hpIndex = ": 등급없음";
 			}
 			
 			doc.outputSettings().syntax(org.jsoup.nodes.Document.OutputSettings.Syntax.xml);
@@ -225,7 +225,7 @@ public class PdfItext {
 			doc.select("span#ownTerm").first().text(jo.get("ownTerm").getAsString());
 			doc.select("span#otherAssetRatio").first().text(jo.get("otherAssetRatio").getAsString());
 			doc.select("span#spHpGrade").first().text(hpGrade);
-			doc.select("span#spHpIndex").first().text(jo.get("hpIndex").getAsString());
+			doc.select("span#spHpIndex").first().text(hpIndex);
 			
 			/*doc.select("span#byeolCheom1Year").first().text("2017");
 			doc.select("span#byeolCheom2Year").first().text("2016");
