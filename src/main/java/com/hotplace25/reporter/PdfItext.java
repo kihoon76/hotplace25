@@ -202,7 +202,7 @@ public class PdfItext {
 			if("11".equals(hpGrade)) {
 				hpGrade = "-";
 				System.err.println("hpGrade2======>" + hpGrade);
-				doc.select("span#spHpGradeSuffix") .attr("style", "display:none;");
+				doc.select("span#spHpGradeSuffix").attr("style", "display:none;");
 			}
 			
 			doc.outputSettings().syntax(org.jsoup.nodes.Document.OutputSettings.Syntax.xml);
@@ -224,7 +224,7 @@ public class PdfItext {
 			//doc.select("span#limitChange").first().text("Y".equals(jo.get("limitChange").getAsString()) ? "유" : "무"); 
 			doc.select("span#ownTerm").first().text(jo.get("ownTerm").getAsString());
 			doc.select("span#otherAssetRatio").first().text(jo.get("otherAssetRatio").getAsString());
-			doc.select("span#spHpGrade").first().text(jo.get("hpGrade").getAsString());
+			doc.select("span#spHpGrade").first().text(hpGrade);
 			doc.select("span#spHpIndex").first().text(jo.get("hpIndex").getAsString());
 			
 			/*doc.select("span#byeolCheom1Year").first().text("2017");
