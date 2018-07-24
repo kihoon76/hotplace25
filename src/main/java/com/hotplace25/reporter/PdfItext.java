@@ -198,8 +198,10 @@ public class PdfItext {
 			}
 			
 			String hpGrade = jo.get("hpGrade").getAsString();
+			System.err.println("hpGrade======>" + hpGrade);
 			if("11".equals(hpGrade)) {
 				hpGrade = "-";
+				System.err.println("hpGrade2======>" + hpGrade);
 				doc.select("span#spHpGradeSuffix") .attr("style", "display:none;");
 			}
 			
