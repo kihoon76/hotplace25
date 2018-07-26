@@ -174,7 +174,7 @@
 
 	<div id="footer" class="footer">
 		<span class="text">
-			(주)핫플레이스25경영컨설팅
+			핫플레이스25경영컨설팅(주)
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			사업자등록번호 : 486-87-01091 
 			&nbsp;&nbsp;&nbsp;&nbsp;
