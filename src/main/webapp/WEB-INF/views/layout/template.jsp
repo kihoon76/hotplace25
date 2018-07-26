@@ -186,7 +186,7 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<strong>본 정보를 이용한 투자의 책임은 투자자에게 있습니다.</strong> 
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			Copyright (주)동림피엔디 All Rights Reserved.
+			Copyright (주)핫플레이스25경영컨설팅  All Rights Reserved.
 		</span>
 	</div>
 	
