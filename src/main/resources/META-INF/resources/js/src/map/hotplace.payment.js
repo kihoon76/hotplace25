@@ -17,6 +17,7 @@
 		_btnCoupon = '#btnCoupon',
 		_btnPaymentInfo = '#btnPaymentInfo',
 		_chkCoupon = '#chkCoupon',
+		_chksYaggwan = '.YAGGWAN_AGREE_PAYMENT',
 		_tooltipHtml = '',
 		_$rdoPayment = null,
 		_$rdoPaymentAll = null,
@@ -178,6 +179,22 @@
 		hotplace.dom.changeTooltipText(_$btnPaymentInfo, htmlStr);
 	}
 	
+	function _checkYaggwanAgree(fn) {
+		var v = true;
+		
+		_$chksYaggwan.each(function() {
+			var required = $(this).data('required');
+			if(required == 'Y' && !$(this).is(':checked')) {
+				v = false;
+				return false;
+			}
+		})
+		.promise()
+		.done(function() {
+			if(fn) fn(v);
+		});
+	}
+	
 	//결제진행건이 있는지 검사
 	payment.addPayment = function() {
 		hotplace.ajax({
@@ -212,6 +229,7 @@
 		_$chkPaymentMulgeon = $(_chkPaymentMulgeon),
 		_$chkPaymentHeatmap = $(_chkPaymentHeatmap),
 		_$chkCoupon = $(_chkCoupon),
+		_$chksYaggwan = $(_chksYaggwan),
 		_$btnCoupon = $(_btnCoupon),
 		_$txtCoupon = $(_txtCoupon),
 		_$btnPaymentInfo = $(_btnPaymentInfo),
@@ -353,6 +371,22 @@
 			);
 			_changeTooltipText(_tooltipHtml);
 			
+		});
+		
+		//약관 동의체크
+		_$chksYaggwan
+		.off('change')
+		.on('change', function() {
+			_checkYaggwanAgree(function(result) {
+				if(result) {
+					if(_$btnPayment.is(':disabled')) {
+						_$btnPayment.removeAttr('disabled');
+					}
+				}
+				else {
+					_$btnPayment.prop('disabled', true);
+				}
+			});
 		});
 	}
 }(

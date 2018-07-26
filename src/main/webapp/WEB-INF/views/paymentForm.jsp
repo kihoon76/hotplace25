@@ -68,10 +68,10 @@
 				<div class="unit mgT5">
 				</c:if>
 					<div class="unit_tit">
-						<span class="sTit">${item.categoryName}</span>
+						<span class="sTit color_black noBullt">${item.categoryName}</span>
 						<div class="etcText fr mgT5">
 							<span class="rdchBox">
-								<input type="checkbox"  id="checkbox0${status.index}" name="" data-required="${item.required}" class="YAGGWAN_AGREE"/>
+								<input type="checkbox"  id="checkbox0${status.index}" name="" data-required="${item.required}" class="YAGGWAN_AGREE_PAYMENT"/>
 								<label for="checkbox0${status.index}" class="labelCh"><em class="text">동의합니다</em></label>
 							</span>
 						</div>
@@ -197,7 +197,7 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="button" id="btnPayment" class="btnstyle middle black">결제신청</button>
+			<button type="button" id="btnPayment" class="btnstyle middle black" disabled>결제신청</button>
 		</div>
 	</div>
 </div>
