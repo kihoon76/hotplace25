@@ -44,6 +44,14 @@ public class HandlebarController {
 		return "joinForm";
 	}
 	
+	@GetMapping("payment")
+	public String getPayment(ModelMap m) {
+		
+		//m.addAttribute("yaggwan", hotplaceService.getYaggwanList());
+		
+		return "paymentForm";
+	}
+	
 	@GetMapping("tab/tojiuselimit/{tabName}")
 	public String getTojiUseLimitTabHtml(@PathVariable("tabName") String tabName) {
 		
