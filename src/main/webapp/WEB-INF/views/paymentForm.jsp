@@ -59,26 +59,29 @@
 					</table>
 				</div>
 			</div>
-
-			<div class="unit">				
-				<div class="unit_tit">
-					<span class="sTit color_black noBullt">환불안내</span>
+			<c:set var="required" value="" />
+			<c:forEach var="item" items="${yaggwan}" varStatus="status">
+				<c:if test="${status.index == 0}">
+				<div class="unit">
+				</c:if>
+				<c:if test="${status.index > 0}">
+				<div class="unit mgT5">
+				</c:if>
+					<div class="unit_tit">
+						<span class="sTit">${item.categoryName}</span>
+						<div class="etcText fr mgT5">
+							<span class="rdchBox">
+								<input type="checkbox"  id="checkbox0${status.index}" name="" data-required="${item.required}" class="YAGGWAN_AGREE"/>
+								<label for="checkbox0${status.index}" class="labelCh"><em class="text">동의합니다</em></label>
+							</span>
+						</div>
+					</div>
+					<div class="unit_cont">
+						<div class="termBox">${item.content}</div>
+					</div>
 				</div>
-				<div class="unit_cont">
-					<table class="tableStyle gridStyle  topBold center">
-						<colgroup>
-							<col style="width:100%;">
-						</colgroup>
-						<tbody>
-							<tr>
-								<td>
-									<textarea style="width:100%; height:100px;" readOnly>(1) 월정액 서비스 환불 요청시 이용하신 기간의 이용 요금(결제금액의 일할 계산)을 제외한 잔여분을 환불함을 원칙으로 하며, 해당 계산식은 다음과 같습니다.&#10;환불액 = 결제금액 - (1일 이용요금 x 이용일수)&#10;(2)환불금에 대한 반환은 일반적으로 결제수단과 동일한 방법으로 처리됩니다. 현금 환불의 경우 회원 본인 명의의 통장으로만 환불금이 입금됩니다. 지급 방법에 따른 특이사항이 발생될 경우 회사와 회원 협의하에 처리 될 수 있습니다.</textarea>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
+				<c:set var="required" value="${required}${item.required}" />
+			</c:forEach>
 
 			<div class="unit">				
 				<div class="unit_tit">

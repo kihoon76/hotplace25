@@ -47,7 +47,7 @@ public class HandlebarController {
 	@GetMapping("payment")
 	public String getPayment(ModelMap m) {
 		
-		//m.addAttribute("yaggwan", hotplaceService.getYaggwanList());
+		m.addAttribute("yaggwan", hotplaceService.getYaggwanList());
 		
 		return "paymentForm";
 	}
