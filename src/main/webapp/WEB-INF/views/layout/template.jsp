@@ -174,11 +174,13 @@
 
 	<div id="footer" class="footer">
 		<span class="text">
-			(주)동림피엔디 도시계획부 E-Biz팀
+			(주)핫플레이스25경영컨설팅
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			사업자등록번호 : 215-86-29302 
+			사업자등록번호 : 486-87-01091 
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			주소 : 서울 송파구 법원로 127, 1108호 (문정동, 대명벨리온 )
+			대표자명 : 이효돈
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			주소 : 서울특별시 송파구 법원로 9길 26, C동 613호 (문정동, 현대비즈니스파크)
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			대표전화 : 070-7117-6868
 			&nbsp;&nbsp;&nbsp;&nbsp;
