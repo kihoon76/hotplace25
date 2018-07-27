@@ -1122,7 +1122,12 @@
 				method : 'GET',
 				activeMask : false,
 				success : function(data, textStatus, jqXHR) {
-					if(data.success) _templates['paymentForm'] = Handlebars.compile(data);
+					if(data.success) {
+						_templates['paymentForm'] = Handlebars.compile(data);
+					}
+					else {
+						jqXHR.errCode = data.errCode;
+					}
 				},
 				error: function() {
 					throw new Error('html template error')
