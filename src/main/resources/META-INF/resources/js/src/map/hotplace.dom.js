@@ -1114,7 +1114,7 @@
 	
 	dom.showPaymentForm = function() {
 		//_appendModalPopup('paymentForm', null, {});
-		if(_templates['paymentForm'] == undefined) {
+		//if(_templates['paymentForm'] == undefined) {
 			hotplace.ajax({
 				async: false,
 				url: 'handlebar/payment',
@@ -1128,7 +1128,7 @@
 					throw new Error('html template error')
 				}
 			});
-		}
+		//}
 		
 		_appendModalPopup('paymentForm', null, {});
 		

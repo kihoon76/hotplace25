@@ -57,6 +57,7 @@
 		<sec:intercept-url pattern="/locationbounds" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_HEATMAP')"/>
 				
 		<sec:intercept-url pattern="/handlebar/mypage" access="hasRole('ROLE_JOINED')"/>
+		<sec:intercept-url pattern="/handlebar/payment" access="hasRole('ROLE_JOINED')"/>
 		
 		<!-- 결제하기 -->
 		<sec:intercept-url pattern="/payment/**" access="hasRole('ROLE_JOINED')"/>
