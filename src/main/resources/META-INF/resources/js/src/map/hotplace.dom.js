@@ -1113,30 +1113,32 @@
 	}
 	
 	dom.showPaymentForm = function() {
-		//_appendModalPopup('paymentForm', null, {});
-		//if(_templates['paymentForm'] == undefined) {
 		_templates['paymentForm'] = null;
-		hotplace.ajax({
-			async: false,
-			url: 'handlebar/payment',
-			dataType : 'html',
-			method : 'GET',
-			activeMask : false,
-			success : function(data, textStatus, jqXHR) {
-				_templates['paymentForm'] = Handlebars.compile(data);
-			},
-			error: function() {
-				throw new Error('html template error')
-			}
-		});
-		//}
+		if(_templates['paymentForm'] == undefined) {
+			hotplace.ajax({
+				async: false,
+				url: 'handlebar/payment',
+				dataType : 'html',
+				method : 'GET',
+				activeMask : false,
+				success : function(data, textStatus, jqXHR) {
+					_templates['paymentForm'] = Handlebars.compile(data);
+				},
+				error: function() {
+					throw new Error('html template error')
+				}
+			});
+		}
 		
-		_appendModalPopup('paymentForm', null, {});
-		
-		dom.openModal('', {width:'700px'}, null, function() {
-			hotplace.payment.init();
-			hotplace.payment.addPayment();
-		});
+		if(_templates['paymentForm']) {
+			_appendModalPopup('paymentForm', null, {});
+			
+			dom.openModal('', {width:'700px'}, null, function() {
+				hotplace.payment.init();
+				hotplace.payment.addPayment();
+			});
+		}
+	
 	}
 	
 	dom.showPaymentDetailForm = function(param) {
