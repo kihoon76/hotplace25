@@ -140,6 +140,11 @@ $(document).ready(function() {
 		});
 	});
 	
+	/***************** 결제하기 버튼 ************************/
+	$('#modalPayment').on('click', function() {
+		hotplace.dom.showPaymentForm();
+	});
+	
 	$('.contactUsLayer dl dd textarea').on('blur', function(e) {
 		var relatedTarget;
 		if(hotplace.browser.msie) {

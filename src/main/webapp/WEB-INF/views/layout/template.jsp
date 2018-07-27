@@ -11,6 +11,19 @@
 <!--[if gt IE 9]><!--><html lang="ko"><!--<![endif]-->
 <head>
 	<meta charset="UTF-8">
+	<meta name="description" content="부동산 빅데이터 기반 가치 분석 시스템">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="핫플레이스25">
+	<meta property="og:description" content="부동산 빅데이터 기반 가치 분석 시스템">
+	<meta property="og:site_name" content="핫플레이스25"> 
+	<meta property="og:image" content="https://www.hotplace25.com/resources/img/gnb_logo.png">
+	<meta property="og:url" content="https://www.hotplace25.com">
+	
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="핫플레이스25">
+	<meta name="twitter:description" content="부동산 빅데이터 기반 가치 분석 시스템">
+	<meta name="twitter:image" content="https://www.hotplace25.com/resources/img/gnb_logo.png">
+
     <title><sitemesh:write property="title" /></title>
     <link rel="icon" href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/resources/img/favicon.png" type="image/png" />
     <!-- bootstrap -->
@@ -67,6 +80,7 @@
 						<li><a href="#" class="link" id="modalSite">서비스소개</a></li>
 						<li><a href="#" class="link" id="modalTutorial">사용법</a></li>
 						<li><a href="#" class="link" id="myCurrentPosition">현재위치이동</a></li>
+						<li><a href="#" class="link" id="modalPayment">결제하기</a></li>
 					</ul>
 				</div>
 			</span>
