@@ -1122,11 +1122,15 @@
 				method : 'GET',
 				activeMask : false,
 				success : function(data, textStatus, jqXHR) {
-					if(data.success) {
-						_templates['paymentForm'] = Handlebars.compile(data);
+					//security check
+					if(data.indexOf('{') == 0) {
+						var jo = $.parseJSON(data);
+						if(!jo.success) {
+							jqXHR.errCode = jo.errCode;
+						}
 					}
 					else {
-						jqXHR.errCode = data.errCode;
+						_templates['paymentForm'] = Handlebars.compile(data);
 					}
 				},
 				error: function() {
