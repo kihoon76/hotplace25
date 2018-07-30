@@ -395,6 +395,10 @@ $(document).ready(function() {
 			$(_login_BTN).trigger('click'); 
 	    }
 	});
+	
+//	$(document)
+//	.off('click')
+//	.on('')
 
 	hotplace.validation.phone('#joinStep02 .NUMBER_ONLY');
 });

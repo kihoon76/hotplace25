@@ -81,14 +81,6 @@ public class SigninSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 				}
 			}
 			
-			
-			Map<String, String> m = new HashMap<>();
-			m.put("authName", "ROLE_TOOJA");
-			m.put("expire","2018-07-31");
-			m.put("remain", String.valueOf(1));
-			
-			list.add(m);
-			
 			AjaxVO<Map<String, String>> data = new AjaxVO<Map<String, String>>();
 			data.setSuccess(true);
 			data.setDatas(list);
