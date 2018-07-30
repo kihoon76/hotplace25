@@ -13,27 +13,27 @@
 <!-- 		</sec:headers> -->
 
 		<!-- 물건보기 infowin 및 상세보기 -->
-		<sec:intercept-url pattern="/resources/templates/gyeongmaeForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>	
-		<sec:intercept-url pattern="/resources/templates/gyeongmaeDetailForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
-		<sec:intercept-url pattern="/resources/templates/gongmaeForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
-		<sec:intercept-url pattern="/resources/templates/gongmaeDetailForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
-		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
-		<sec:intercept-url pattern="/resources/templates/silgeolaeForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
-		<sec:intercept-url pattern="/resources/templates/acceptbuildingForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/resources/templates/gyeongmaeForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>	
+		<sec:intercept-url pattern="/resources/templates/gyeongmaeDetailForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/resources/templates/gongmaeForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/resources/templates/gongmaeDetailForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/resources/templates/silgeolaeForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/resources/templates/acceptbuildingForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
 		
 		<!-- 검색후 luris 도면보기  -->
-		<sec:intercept-url pattern="/search/luris/drawing" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_TOOJA', 'ROLE_GYEONGGONG')"/>
+		<sec:intercept-url pattern="/search/luris/drawing" access="hasAnyRole('ROLE_ALL', 'ROLE_TOOJA', 'ROLE_GYEONGGONG')"/>
 		
 		<!-- 경,공매 물건검색 -->
-		<sec:intercept-url pattern="/search/gyeonggong" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_GYEONGGONG')"/>
+		<sec:intercept-url pattern="/search/gyeonggong" access="hasAnyRole('ROLE_ALL', 'ROLE_GYEONGGONG')"/>
 		
 		<!-- 투자유망 검색 -->
-		<sec:intercept-url pattern="/search/jangmi" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_TOOJA')"/>
+		<sec:intercept-url pattern="/search/jangmi" access="hasAnyRole('ROLE_ALL', 'ROLE_TOOJA')"/>
 		
 		<!-- 매물등록, 관심물건, 컨설팅, 수지분석, 토지이용규제현황보기 -->
 		<!-- 수지분석 -->
-		<sec:intercept-url pattern="/search/sujiboonseog/base" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
-		<sec:intercept-url pattern="/resources/templates/spotSujibunseogForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
+		<sec:intercept-url pattern="/search/sujiboonseog/base" access="hasAnyRole('ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
+		<sec:intercept-url pattern="/resources/templates/spotSujibunseogForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
 		<!-- 관심물건 등록 -->
 		<sec:intercept-url pattern="/resources/templates/spotGwansimRegForm.handlebars" access="hasRole('ROLE_JOINED')"/>
 		<!-- 컨설팅 -->
@@ -45,16 +45,16 @@
 		<sec:intercept-url pattern="/spot/reg/maemulNoPic" access="hasRole('ROLE_ADMIN')"/> 
 		<!-- 토지이용 규제 현황보기 -->
 		<sec:intercept-url pattern="/resources/templates/spotTojiUseLimitForm.handlebars" access="hasRole('ROLE_ADMIN')"/>
-		<sec:intercept-url pattern="/resources/templates/spotTojiDefaultInfoForm.handlebars" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
-		<sec:intercept-url pattern="/spot/tojiDefaultInfo" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
+		<sec:intercept-url pattern="/resources/templates/spotTojiDefaultInfoForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
+		<sec:intercept-url pattern="/spot/tojiDefaultInfo" access="hasAnyRole('ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
 		
 		<!-- 토지이용 규제 현황보기 탭-->
 		<sec:intercept-url pattern="/handlebar/tab/tojiuselimit/**" access="hasRole('ROLE_ADMIN')"/>
 		<!-- 수지분석 pdf -->
-		<sec:intercept-url pattern="/download/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
+		<sec:intercept-url pattern="/download/**" access="hasAnyRole('ROLE_ALL', 'ROLE_GYEONGGONG', 'ROLE_TOOJA', 'ROLE_MULGEON', 'ROLE_HEATMAP')"/>
 		<!-- heatmap -->
-		<sec:intercept-url pattern="/auth/heatmap" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_HEATMAP')"/>
-		<sec:intercept-url pattern="/locationbounds" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_HEATMAP')"/>
+		<sec:intercept-url pattern="/auth/heatmap" access="hasAnyRole('ROLE_ALL', 'ROLE_HEATMAP')"/>
+		<sec:intercept-url pattern="/locationbounds" access="hasAnyRole('ROLE_ALL', 'ROLE_HEATMAP')"/>
 				
 		<sec:intercept-url pattern="/handlebar/mypage" access="hasRole('ROLE_JOINED')"/>
 		<sec:intercept-url pattern="/handlebar/payment" access="hasRole('ROLE_JOINED')"/>
@@ -93,9 +93,9 @@
 		<sec:intercept-url pattern="/errors/**" access="permitAll"/> 
 		<sec:intercept-url pattern="/gyeongmaemarker" access="permitAll"/>
 		<sec:intercept-url pattern="/gongmaemarker" access="permitAll"/>
-		<sec:intercept-url pattern="/bosangmarker" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
-		<sec:intercept-url pattern="/pyeonibmarker" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
-		<sec:intercept-url pattern="/bosangpyeonib/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/bosangmarker" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/pyeonibmarker" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/bosangpyeonib/**" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
 		<sec:intercept-url pattern="/silgeolaemarker" access="permitAll"/>
 		<sec:intercept-url pattern="/acceptbuildingmarker" access="permitAll"/>
 		
