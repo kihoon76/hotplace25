@@ -952,20 +952,17 @@
 		var ok = _appendModalPopup('remainingDurationForm', null, param);
 		
 		if(ok) {
-			//dom.openModal('', {width: '610'}, fn);
-			
 			dom.openModal('', {width:'610'}, fn, function() {
 				$('#btnRemainingClose')
 				.off('click')
 				.on('click', function() {
 					if($('#chkViewRemainingCookie').is(':checked')) {
-						$.cookie('remain', 'N', {expires:7, path: '/'});
+						$.cookie('remain', 'N', {expires:1, path: '/'});
 					}
 					
 					dom.closeModal();
 				});
 			});
-			
 		}
 		else {
 			_showLoginMsg();
