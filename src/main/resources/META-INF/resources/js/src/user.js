@@ -302,8 +302,18 @@ $(document).ready(function() {
 			success: function(data, textStatus, jqXHR) {
 				var jo = $.parseJSON(data);
 				if(jo.success) {
-					hotplace.dom.closeModal();
-					hotplace.dom.toggleLogin();
+					
+					//만기일 일주일전이면 팝업공지
+					if(jo.datas.length > 0) {
+						hotplace.dom.closeModal();
+						hotplace.dom.showExpireMsgForm(function() {
+							hotplace.dom.toggleLogin();
+						}, {list: jo.datas});
+					}
+					else {
+						hotplace.dom.closeModal();
+						hotplace.dom.toggleLogin();
+					}
 				}
 				else {
 					jqXHR.errCode = jo.errCode;

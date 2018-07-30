@@ -948,6 +948,18 @@
 	
 	dom.showLoginMsg = _showLoginMsg;
 	
+	dom.showExpireMsgForm = function(fn, param) {
+		var ok = _appendModalPopup('remainingDurationForm', null, param);
+		
+		if(ok) {
+			dom.openModal('', {width: '410'}, fn);
+		}
+		else {
+			_showLoginMsg();
+		}
+	}
+	
+	
 	dom.showLoginForm = function(fn) {
 		_appendModalPopup('loginForm');
 		dom.openModal('', {width: '410'}, fn);
