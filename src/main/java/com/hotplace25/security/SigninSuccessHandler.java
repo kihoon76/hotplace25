@@ -41,8 +41,7 @@ public class SigninSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 			//response.setContentType("application/json");
 			//response.setContentType("utf-8");
 		
-			response.setContentType("text/plain");
-			response.setContentType("utf-8");
+			response.setContentType("text/plain;charset=utf-8");
 			//Cookie 처리
 			//String idSave = request.getParameter("idsave");
 			//String id = request.getParameter("id");

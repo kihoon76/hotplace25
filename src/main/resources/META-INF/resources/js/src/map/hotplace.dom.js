@@ -952,7 +952,7 @@
 		var ok = _appendModalPopup('remainingDurationForm', null, param);
 		
 		if(ok) {
-			dom.openModal('', {width: '410'}, fn);
+			dom.openModal('', {width: '610'}, fn);
 		}
 		else {
 			_showLoginMsg();
