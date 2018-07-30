@@ -42,6 +42,7 @@ public class SigninSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 			//response.setContentType("utf-8");
 		
 			response.setContentType("text/plain");
+			response.setContentType("utf-8");
 			//Cookie 처리
 			//String idSave = request.getParameter("idsave");
 			//String id = request.getParameter("id");
@@ -84,8 +85,8 @@ public class SigninSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 			AjaxVO<Map<String, String>> data = new AjaxVO<Map<String, String>>();
 			data.setSuccess(true);
 			data.setDatas(list);
-			//PrintWriter out = response.getWriter();
-			PrintWriter out = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), StandardCharsets.UTF_8), true);
+			PrintWriter out = response.getWriter();
+			//PrintWriter out = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), StandardCharsets.UTF_8), true);
 			out.print(new Gson().toJson(data));
 			out.flush();
 			out.close();
