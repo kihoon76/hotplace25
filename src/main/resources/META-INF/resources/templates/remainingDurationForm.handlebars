@@ -17,14 +17,19 @@
 						<colgroup>
 							<col style="width:30%;">
 							<col style="width:20%;">
-							<col style="width:40%;">
+							<col style="width:50%;">
 						</colgroup>
 						<tbody>
+							<tr>
+								<th class="center">이용서비스</th>
+								<th class="center">만기일</th>
+								<th class="center">남은일수</th>
+							</tr>
 							{{#each list}}
 							<tr>
 								<th class="center">{{authName}}</th>
-								<td>{{expire}}</td>
-								<td>만기 {{remain}} 일 전입니다</td>
+								<th>{{expire}}</th>
+								<th>만기 <strong class="color_red">{{remain}}</strong>일 전입니다</th>
 							</tr>
 							{{/each}}
 						</tbody>
