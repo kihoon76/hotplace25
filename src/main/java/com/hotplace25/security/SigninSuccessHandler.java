@@ -1,7 +1,9 @@
 package com.hotplace25.security;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,7 +84,8 @@ public class SigninSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 			AjaxVO<Map<String, String>> data = new AjaxVO<Map<String, String>>();
 			data.setSuccess(true);
 			data.setDatas(list);
-			PrintWriter out = response.getWriter();
+			//PrintWriter out = response.getWriter();
+			PrintWriter out = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), StandardCharsets.UTF_8), true);
 			out.print(new Gson().toJson(data));
 			out.flush();
 			out.close();
