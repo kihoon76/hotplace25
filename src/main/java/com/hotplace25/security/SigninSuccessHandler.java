@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
+import com.hotplace25.domain.Account;
 import com.hotplace25.domain.AjaxVO;
 
 @Component
@@ -32,11 +34,18 @@ public class SigninSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 			response.setContentType("text/plain");
 			//Cookie 처리
 			//String idSave = request.getParameter("idsave");
-			String id = request.getParameter("id");
+			//String id = request.getParameter("id");
 			
 			/*Cookie cookie = new Cookie("id", id);
 			cookie.setMaxAge((idSave != null) ? 1000 : 0);
 			response.addCookie(cookie);*/
+			
+			Account user = (Account)authentication.getPrincipal();
+			
+			ObjectMapper om = new ObjectMapper();
+			System.err.println(om.writeValueAsString(user.getAuthorities()));
+			
+			
 			
 			AjaxVO data = new AjaxVO();
 			data.setSuccess(true);
