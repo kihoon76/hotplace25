@@ -2,6 +2,11 @@ package com.hotplace25.security;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -17,6 +22,9 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.hotplace25.domain.Account;
 import com.hotplace25.domain.AjaxVO;
+import com.hotplace25.domain.Authority;
+import com.hotplace25.util.DateUtil;
+import com.hotplace25.util.StringUtil;
 
 @Component
 public class SigninSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler{
@@ -41,14 +49,39 @@ public class SigninSuccessHandler extends SavedRequestAwareAuthenticationSuccess
 			response.addCookie(cookie);*/
 			
 			Account user = (Account)authentication.getPrincipal();
+//			
+//			ObjectMapper om = new ObjectMapper();
+//			System.err.println(om.writeValueAsString(user.getAuthorities()));
 			
-			ObjectMapper om = new ObjectMapper();
-			System.err.println(om.writeValueAsString(user.getAuthorities()));
+			//만기일 1주일전 체크
+			List<Map<String, String>> list = new ArrayList<>();
 			
+			for(Authority auth : user.getAuthorities()) {
+				if(!"ROLE_JOINED".equals(auth.getAuthName()) && 
+				   !"ROLE_ADMIN".equals(auth.getAuthName()) &&
+				   !"ROLE_QA_ADMIN".equals(auth.getAuthName())) {
+					
+					long remainDate = 0;
+					
+					try {
+						if((remainDate = DateUtil.diffOfDate(auth.getExpire())) <= 7) {
+							Map<String, String> m = new HashMap<>();
+							m.put("authName", StringUtil.getAuthNameKor(auth.getAuthName()));
+							m.put("expire", auth.getExpire());
+							m.put("remain", String.valueOf(remainDate));
+							
+							list.add(m);
+						}
+					} 
+					catch (ParseException e) {
+						
+					}
+				}
+			}
 			
-			
-			AjaxVO data = new AjaxVO();
+			AjaxVO<Map<String, String>> data = new AjaxVO<Map<String, String>>();
 			data.setSuccess(true);
+			data.setDatas(list);
 			PrintWriter out = response.getWriter();
 			out.print(new Gson().toJson(data));
 			out.flush();

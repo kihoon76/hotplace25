@@ -1,5 +1,6 @@
 package com.hotplace25.test;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hotplace25.dao.SearchDao;
+import com.hotplace25.util.DateUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={
@@ -60,5 +62,9 @@ public class MultiDatasetTest {
 		System.out.println(arr[0]);
 	}
 	
-	
+	@Test
+	public void test03_date() throws ParseException {
+		long i = DateUtil.diffOfDate("2018-08-10");
+		System.err.println(i);
+	}
 }
