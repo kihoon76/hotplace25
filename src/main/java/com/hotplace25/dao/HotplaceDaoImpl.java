@@ -91,7 +91,7 @@ public class HotplaceDaoImpl implements HotplaceDao {
 
 	@Override
 	public BosangPyeonib selectBosangPyeonibThumb(String unu) {
-		return msSqlSession.selectOne(namespace + ".selectBosangPyeonibThumb", unu);
+		return msSqlSessionAgent2.selectOne(namespace + ".selectBosangPyeonibThumb", unu);
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class HotplaceDaoImpl implements HotplaceDao {
 	@Override
 	public List<String> selectBosangPyeonibGroupList(HashMap gunus) {
 		
-		return msSqlSession.selectList(namespace + ".selectBosangPyeonibGroupList", gunus);
+		return msSqlSessionAgent2.selectList(namespace + ".selectBosangPyeonibGroupList", gunus);
 	}
 
 	@Override
