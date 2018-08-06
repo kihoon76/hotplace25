@@ -493,7 +493,7 @@
 									<col style="width:7%;">
 								</colgroup>
 								<thead>
-									<tr>
+									<tr class="NO-DATA">
 										<th>등록일</th>
 										<th>물건주소</th>
 										<th>메모내용</th>
