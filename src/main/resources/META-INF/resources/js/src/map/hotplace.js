@@ -953,7 +953,7 @@
 				
 				if(!isDup) {
 					//max 10개 제한
-					if(len == 10) {
+					if(len == 30) {
 						obj.data.shift();
 					}
 					
