@@ -47,13 +47,18 @@
 								<td>공시지가/보상물건/실거래가 등</td>
 							</tr>
 							<tr>
-								<th rowspan="2" colspan="2" class="center">전체서비스</th>
+								<th rowspan="2" class="center">전체서비스</th>
 								<th class="center">월간</th>
+								<td>10만원 / 월</td>
 								<td>정가: 20만원 /월  &nbsp;&nbsp; <span style="font-weight:bold; color:#ff0000;">할인가: 10만원 / 월</span></td>
 							</tr>
 							<tr>
 								<th class="center">년간</th>
-								<td>정가: 240만원 / 년  &nbsp;&nbsp; <span style="font-weight:bold; color:#ff0000;">할인가: 99만원 / 년</span></td>
+								<td>99만원 / 년</td>
+								<td>정가: 240만원 / 년  &nbsp;&nbsp; 
+									<span style="font-weight:bold; color:#ff0000;">할인가: 99만원 / 년</span><br/>
+									<span style="font-weight:bold; color:#ff0000;">연간결제는 계좌입금만 가능</span>
+								</td>
 							</tr>
 						</tbody>
 					</table>
