@@ -44,7 +44,7 @@ public class MailUtil {
 		
 		String host = values[0].trim(); //"smtp.naver.com";
 		String userName = values[2].trim(); //"upmc2013";
-		String password = values[3].trim(); //"up##2080";
+		String password = values[3].trim(); //"----------";
 		int port = Integer.parseInt(values[4].trim()); //587(naver) 465(gmail);
 		
 		if(email.getAccount() == null) {
