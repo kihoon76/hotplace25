@@ -42,10 +42,10 @@ public class MailUtil {
 			throw new MessagingException("메일설정이 잘못되었습니다.");
 		}
 		
-		String host = values[0].trim(); //"smtp.naver.com";
-		String userName = values[2].trim(); //"upmc2013";
-		String password = values[3].trim(); //"----------";
-		int port = Integer.parseInt(values[4].trim()); //587(naver) 465(gmail);
+		String host = values[0].trim(); 
+		String userName = values[2].trim(); 
+		String password = values[3].trim(); 
+		int port = Integer.parseInt(values[4].trim()); 
 		
 		if(email.getAccount() == null) {
 			email.setAccount(userService.getUserInfo(email.getAccountId()));
@@ -81,7 +81,7 @@ public class MailUtil {
 		session.setDebug(true);
 		
 		Message mimeMessage = new MimeMessage(session);
-		mimeMessage.setFrom(new InternetAddress(values[1].trim())); //"upmc2013@naver.com"
+		mimeMessage.setFrom(new InternetAddress(values[1].trim())); 
 		
 		mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
 		
