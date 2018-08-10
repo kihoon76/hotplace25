@@ -146,7 +146,7 @@
      */
     hotplace.config = {
     	mulgeonViewLevel: 8,
-    	minZoomLevel: 9,
+    	minZoomLevel: 4,
     	mapDefaultX: 126.9784147,//127.9204629,
     	mapDefaultY: 37.5666805,//36.0207091,
     	addrSearchPanLevel: 10,
