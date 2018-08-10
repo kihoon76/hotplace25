@@ -67,4 +67,12 @@ public class MultiDatasetTest {
 		long i = DateUtil.diffOfDate("2018-08-10");
 		System.err.println(i);
 	}
+	
+	@Test
+	public void test04_bool() throws ParseException {
+		boolean b = false;
+		b = b || true;
+		b = b || false;
+		System.err.println(b);
+	}
 }
