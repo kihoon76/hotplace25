@@ -229,6 +229,7 @@ $(document).ready(function() {
 		else if(_isZoomIn() && !_checkedEnableMulgeon && _currLevel > hotplace.config.mulgeonViewLevel) {
 			_checkedDisableMulgeon = false;
 			_checkedEnableMulgeon = true;
+			hotplace.menu.initMulgeonView();
 			//hotplace.dom.showAlertMsg(null, '물건보기가 활성화 되었습니다', {width:'40%'});
 		}
 	}
