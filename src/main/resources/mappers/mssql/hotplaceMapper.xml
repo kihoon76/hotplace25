@@ -276,6 +276,7 @@
 	
 	<resultMap id="RM_selectGyeongmaeThumb"  type="Gyeongmae">
 		<result column="고유번호" property="goyubeonho" javaType="string" />
+		<result column="사건번호" property="sageonbeonho" javaType="string" />
 		<result column="등록번호" property="deunglogbeonho" javaType="string" />
 		<result column="PNU" property="pnu" javaType="string" />
 		<result column="소재지" property="sojaeji" javaType="string" />
@@ -342,7 +343,7 @@
 	</resultMap>
 	
 	<select id="selectGyeongmaeThumb" parameterType="string" resultMap="RM_selectGyeongmaeThumb">
-		select  top 1 a.고유번호, a.등록번호, a.PNU, a.소재지, a.용도, a.감정평가액, a.유찰회수, CONVERT(char(19), a.매각기일, 120) as 매각기일, CONVERT(varchar(max), c.이미지 ,2) as imgThumb, isnull(c.확장자, 'zzz')  as imgThumbExt
+		select  top 1 a.고유번호, a.사건번호, a.등록번호, a.PNU, a.소재지, a.용도, a.감정평가액, a.유찰회수, CONVERT(char(19), a.매각기일, 120) as 매각기일, CONVERT(varchar(max), c.이미지 ,2) as imgThumb, isnull(c.확장자, 'zzz')  as imgThumbExt
   		  from [경매].[dbo].[경매_목록] a
   		  left outer join [경매].[dbo].[경매_이미지_목록] b
   		    on a.고유번호 = b.경매_목록_고유번호
