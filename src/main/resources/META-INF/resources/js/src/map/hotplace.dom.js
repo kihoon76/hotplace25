@@ -667,7 +667,7 @@
 	
 	dom.showAcceptBuildingDetail = function(fn, param) {
 		var ok = _appendModalPopup('acceptbuildingDetailForm', null ,param);
-		if(ok) dom.openModal('', {width: '500'}, null, fn);
+		if(ok) dom.openModal('', {width: '800'}, null, fn);
 		
 		return ok;
 	}
