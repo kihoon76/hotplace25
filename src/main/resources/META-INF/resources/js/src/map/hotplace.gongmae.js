@@ -32,18 +32,6 @@
 		});
 	}
 	
-	//집행기관에 날짜가 나옴
-	//DB 정리 이전까지 집행기관에 날짜 나오면 -로 표시
-	function _isValidJibhaengGigwan(jgStr) {
-		if(jqStr) {
-			var regEx = /^\d{4}-\d{2}-\d{2}$/;
-			if(!jgStr.match(regEx)) return true;
-		}
-		
-		return false;
-	}
-	
-	
 	function _bindDetailClickHandler(d) {
 		
 		$(_btnGongmaeDetail)
@@ -69,7 +57,6 @@
 							jqXHR.errCode = data.errCode;
 						}
 						else {
-							var jibhaengGigwan = data.jibhaengGigwan;
 							$('#gongDcheoboonJasan').text(data.cheoboonJasan);
 							$('#gongDyongdo').text(data.yongdo);
 							$('#gongDarea').text(data.area);
@@ -77,7 +64,7 @@
 							$('#gongDibchalMethod').text(data.ibchalMethod);
 							$('#gongDibchalPeriodNumber').text(data.ibchalPeriodNumber);
 							$('#gongDyuchal').text(data.yuchal);
-							$('#gongDjibhaengGigwan').text(_isValidJibhaengGigwan(jibhaengGigwan) ? jibhaengGigwan : '-');
+							$('#gongDjibhaengGigwan').text(data.jibhaengGigwan);
 							
 							if(data.minIbchalga != null) {
 								data.minIbchalga = data.minIbchalga.money();
