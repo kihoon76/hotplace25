@@ -20,6 +20,7 @@
 		<sec:intercept-url pattern="/resources/templates/bosangpyeonibForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
 		<sec:intercept-url pattern="/resources/templates/silgeolaeForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
 		<sec:intercept-url pattern="/resources/templates/acceptbuildingForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
+		<sec:intercept-url pattern="/resources/templates/acceptbuildingDetailForm.handlebars" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
 		
 		<!-- 검색후 luris 도면보기  -->
 		<sec:intercept-url pattern="/search/luris/drawing" access="hasAnyRole('ROLE_ALL', 'ROLE_TOOJA', 'ROLE_GYEONGGONG')"/>
