@@ -629,7 +629,7 @@
 	</select>-->
 	
 	<select id="selectSilgeolaeMarker" statementType="CALLABLE" parameterType="hashmap" resultType="string">
-		{call [데이터수집].[dbo].[SEL_실거래가_범위_TMP]( 
+		{call [데이터수집].[dbo].[SEL_실거래가_범위]( 
 			#{swx, mode=IN, jdbcType=DECIMAL, javaType=string},
 			#{nex, mode=IN, jdbcType=DECIMAL, javaType=string},
 			#{swy, mode=IN, jdbcType=DECIMAL, javaType=string},
