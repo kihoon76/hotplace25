@@ -8,6 +8,27 @@
 		_address = null;;
 	
 	
+	function _getThumb(cbSucc) {
+		hotplace.ajax({
+			url: 'silgeolae/thumb',
+			method: 'GET',
+			dataType: 'json',
+			//loadEl: _dvGyeongmaeInfoWin,
+			success: function(data, textStatus, jqXHR) {
+				//hotplace.dom.createChart('canvas');
+				console.log(data);
+				if(data.success === false && data.errCode) {
+					jqXHR.errCode = data.errCode;
+				}
+				else {
+					cbSucc(data);
+				}
+			},
+			error:function() {
+				
+			}
+		});
+	}
 	/** 
 	 * @memberof hotplace.silgeolae 
 	 * @function markerClick 
@@ -27,16 +48,18 @@
 			return;
 		}
 		else {
-			win.open(map, marker);
-			win.setOptions('content', tForm(data.info || {}));
-			
-			$(_btnSilgeolaeThumbClose)
-			.off('click')
-			.on('click', function() {
-				win.close();
+			_getThumb(function() {
+				win.open(map, marker);
+				win.setOptions('content', tForm(data.info || {}));
+				
+				$(_btnSilgeolaeThumbClose)
+				.off('click')
+				.on('click', function() {
+					win.close();
+				});
+				
+				_bindGeoClickHandler(data.location[1], data.location[0]);
 			});
-			
-			_bindGeoClickHandler(data.location[1], data.location[0]);
 		}
 	}
 	

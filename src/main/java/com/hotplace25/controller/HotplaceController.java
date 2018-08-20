@@ -271,9 +271,11 @@ public class HotplaceController {
 	
 	@GetMapping("silgeolae/thumb")
 	@ResponseBody
-	public Silgeolae getSilgeolaeThumb(@RequestParam("pnu") String pnu) {
+	public AjaxVO getSilgeolaeThumb(/*@RequestParam("pnu") String pnu*/) {
+		AjaxVO vo = new AjaxVO<>();
 		
-		return hotplaceService.getSilgeolaeThumb(pnu);
+		vo.setSuccess(true);
+		return vo; //hotplaceService.getSilgeolaeThumb(pnu);
 	}
 	
 	@GetMapping("acceptbuilding/thumb")

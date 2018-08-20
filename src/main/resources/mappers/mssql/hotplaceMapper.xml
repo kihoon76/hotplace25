@@ -637,21 +637,22 @@
 		)}
 	</select>
 	
-	<resultMap id="RM_selectSilgeolaeThumb" type="Silgeolae">
-		<result column="PNU" property="pnu" javaType="string" />
-		<result column="계약년월" property="gyeyagnyeonwol" javaType="string" />
-		<result column="계약일" property="gyeyagil" javaType="string" />
-		<result column="계약면적" property="gyeyagarea" javaType="string" />
-		<result column="거래금액" property="geolaegeumaeg" javaType="string" />
-		<result column="용도" property="yongdo" javaType="string" />
-		<result column="지목" property="jimok" javaType="string" />
-	</resultMap>
+<!-- 	<resultMap id="RM_selectSilgeolaeThumb" type="Silgeolae"> -->
+<!-- 		<result column="PNU" property="pnu" javaType="string" /> -->
+<!-- 		<result column="계약년월" property="gyeyagnyeonwol" javaType="string" /> -->
+<!-- 		<result column="계약일" property="gyeyagil" javaType="string" /> -->
+<!-- 		<result column="계약면적" property="gyeyagarea" javaType="string" /> -->
+<!-- 		<result column="거래금액" property="geolaegeumaeg" javaType="string" /> -->
+<!-- 		<result column="용도" property="yongdo" javaType="string" /> -->
+<!-- 		<result column="지목" property="jimok" javaType="string" /> -->
+<!-- 	</resultMap> -->
 	
-	<select id="selectSilgeolaeThumb" parameterType="string" resultMap="RM_selectSilgeolaeThumb">
-		select PNU, 계약년월, 계약일, 계약면적, 거래금액, 용도, 지목
-		  from [데이터수집].[dbo].[실거래가]
-		 where PNU = #{pnu}
-	</select>
+	<!-- 실거래가 -->
+<!-- 	<select id="selectSilgeolaeThumb" parameterType="string" resultMap="RM_selectSilgeolaeThumb"> -->
+<!-- 		select PNU, 계약년월, 계약일, 계약면적, 거래금액, 용도, 지목 -->
+<!-- 		  from [데이터수집].[dbo].[실거래가] -->
+<!-- 		 where PNU = #{pnu} -->
+<!-- 	</select> -->
 	
 	<!-- 건축허가 -->
 	<select id="selectAcceptBuildingMarker" statementType="CALLABLE" parameterType="hashmap" resultType="string">
