@@ -240,7 +240,16 @@ public class DataUtil {
 					sb.append("\"gyeyagil\":\"" + s[2] + "\",");
 					sb.append("\"gyeyagarea\":\"" + s[3] + "\",");
 					sb.append("\"geolaegeumaeg\":\"" + s[4] + "\",");
-					sb.append("\"jimok\":\"" + s[5] + "\"");
+					sb.append("\"jimok\":\"" + s[5] + "\",");
+					sb.append("\"jibeon\":\"" + s[8] + "\",");
+					sb.append("\"yongdo\":\"" + s[9] + "\",");
+					sb.append("\"jiboon\":\"\",");
+					sb.append("\"dorojogeon\":\"\",");
+					sb.append("\"danji\":\"" + s[12] + "\",");
+					sb.append("\"jeonyongarea\":\"" + s[13] + "\",");
+					sb.append("\"cheung\":\"" + s[14] + "\",");
+					sb.append("\"buildingyear\":\"" + s[15] + "\",");
+					sb.append("\"doroname\":\"" + s[16] + "\"");
 					sb.append("}");
 					sb.append(",");
 					sb.append("\"location\":[");
