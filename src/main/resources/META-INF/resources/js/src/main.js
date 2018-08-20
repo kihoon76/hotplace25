@@ -232,9 +232,9 @@ $(document).ready(function() {
 			//hotplace.menu.initMulgeonView();
 			//hotplace.dom.showAlertMsg(null, '물건보기가 활성화 되었습니다', {width:'40%'});
 		}
-//		else if(!_isZoomIn() && _currLevel < hotplace.config.mulgeonViewLevel) {
-//			
-//		}
+		else if(!hotplace.maps.isActiveMulgeonView() && hotplace.maps.getActiveMarkers().length() > 0) {
+			hotplace.menu.initMulgeonView();
+		}
 	}
 	
 	$('#myCurrentPosition').on('click', function() {
