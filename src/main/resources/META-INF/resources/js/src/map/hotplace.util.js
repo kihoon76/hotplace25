@@ -166,6 +166,17 @@
 		
 		return val;
 	}
+	
+	util.dateYmdFormat = function(dateStr) {
+		if(dateStr && dateStr.length >= 8)  {
+			var yyyy = dateStr.substring(0, 4);
+	    	var mm = dateStr.substring(4, 6);
+	    	var dd = dateStr.substring(6);
+	    	dateStr = yyyy + '-' + mm + '-' + dd;
+		} 
+		
+		return dateStr;
+	}
 }(
 	hotplace.util = hotplace.util || {},
 	jQuery

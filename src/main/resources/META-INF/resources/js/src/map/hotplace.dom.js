@@ -665,6 +665,13 @@
 		});
 	}
 	
+	dom.showAcceptBuildingDetail = function(fn, param) {
+		var ok = _appendModalPopup('acceptbuildingDetailForm', null ,param);
+		if(ok) dom.openModal('', null, null, fn);
+		
+		return ok;
+	}
+	
 	dom.showGyeongmaeDetail = function(fn, param) {
 		var ok = _appendModalPopup('gyeongmaeDetailForm', null ,param);
 		if(ok) dom.openModal('', null, null, fn);

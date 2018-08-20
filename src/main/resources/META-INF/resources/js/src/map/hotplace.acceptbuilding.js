@@ -22,12 +22,14 @@
 				else {
 					$('#aDaejiwichi').text(_address = data.daejiwichi);
 					$('#aAcceptgubun').text(data.acceptgubun);
-					$('#aAcceptsingoil').text(data.acceptsingoil);
+					$('#aAcceptsingoil').text(hotplace.util.dateYmdFormat(data.acceptsingoil));
 					$('#aBuildingGubun').text(data.buildinggubun);
 					$('#aDaejiArea').text(data.daejiarea);
 					$('#aGrossFloorArea').text(data.grossfloorarea); 
 					$('#aYongjeoglyul').text(data.yongjeoglyul);
 					$('#aMainYongdo').text(data.mainyongdo);
+					
+					_bindDetailClickHandler(data);
 				}
 			},
 			error:function() {
@@ -36,12 +38,36 @@
 		});
 	}
 	
-	function _bindDetailClickHandler() {
+	function _bindDetailClickHandler(data) {
 		
 		$(_btnAcceptBuildingDetail)
 		.off('click')
 		.on('click', function() {
+				
+			var hasForm = hotplace.dom.showAcceptBuildingDetail(null, data);
 			
+			if(hasForm) {
+				hotplace.ajax({
+					url: 'acceptbuilding/detail',
+					method: 'GET',
+					success: function(data, textStatus, jqXHR) {
+						console.log(data)
+						if(data.success === false && data.errCode) {
+							jqXHR.errCode = data.errCode;
+						}
+						else {
+							
+
+						}
+					},
+					error:function() {
+						
+					}
+				});
+			}
+			else {
+				hotplace.dom.showAlertMsg(null, '경매상세정보를 보실수 있는 권한이 없습니다.', {width:'40%'});
+			}
 		});
 	}
 	

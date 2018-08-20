@@ -285,6 +285,16 @@ public class HotplaceController {
 		return hotplaceService.getAcceptbuildingThumb(unu);
 	}
 	
+	@GetMapping("acceptbuilding/detail")
+	@ResponseBody
+	public AjaxVO getAcceptbuildingDetail() {
+		
+		AjaxVO vo = new AjaxVO<>();
+		
+		vo.setSuccess(true);
+		return vo; 
+	}
+	
 	@PostMapping("hpgrade/search")
 	@ResponseBody
 	public HpSearch getHpgradeSearch(@RequestBody HpSearch hpSearch) throws InterruptedException {
