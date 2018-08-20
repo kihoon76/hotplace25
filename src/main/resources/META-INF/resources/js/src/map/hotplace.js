@@ -467,6 +467,8 @@
     	}
     	catch(e) {}
     	
+    	if(!yyyyMMdd.toString()) return '';
+    	
     	var yyyy = yyyyMMdd.toString().substring(0, 4);
     	var mm = yyyyMMdd.toString().substring(4, 6);
     	var dd = yyyyMMdd.toString().substring(6);
