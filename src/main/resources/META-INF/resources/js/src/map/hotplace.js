@@ -145,10 +145,10 @@
      * @property {number} config.addrSearchPanLevel 주소검색 후 panto 이동시 레벨설정
      */
     hotplace.config = {
-    	mulgeonViewLevel: 8,
-    	minZoomLevel: 9,
-    	mapDefaultX: 126.9784147,//127.9204629,
-    	mapDefaultY: 37.5666805,//36.0207091,
+    	mulgeonViewLevel: 4,//8,
+    	minZoomLevel: 4,//9,
+    	mapDefaultX: 127.9204629, //126.9784147,//127.9204629,
+    	mapDefaultY: 36.0207091,//37.5666805,//36.0207091,
     	addrSearchPanLevel: 10,
     	yangdoseStepPercent: 5,
     	gyeongmaeDetailImgInterval: 2000,

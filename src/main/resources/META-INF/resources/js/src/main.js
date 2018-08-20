@@ -229,15 +229,12 @@ $(document).ready(function() {
 		else if(_isZoomIn() && !_checkedEnableMulgeon && _currLevel > hotplace.config.mulgeonViewLevel) {
 			_checkedDisableMulgeon = false;
 			_checkedEnableMulgeon = true;
-			hotplace.menu.initMulgeonView();
+			//hotplace.menu.initMulgeonView();
 			//hotplace.dom.showAlertMsg(null, '물건보기가 활성화 되었습니다', {width:'40%'});
 		}
-	}
-	
-	function _enableAcceptBuilding() {
-		if(hotplace.maps.isActiveMulgeonView()) {
-			
-		}
+//		else if(!_isZoomIn() && _currLevel < hotplace.config.mulgeonViewLevel) {
+//			
+//		}
 	}
 	
 	$('#myCurrentPosition').on('click', function() {
