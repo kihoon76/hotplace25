@@ -23,6 +23,11 @@
 					$('#aDaejiwichi').text(_address = data.daejiwichi);
 					$('#aAcceptgubun').text(data.acceptgubun);
 					$('#aAcceptsingoil').text(data.acceptsingoil);
+					$('#aBuildingGubun').text(data.buildinggubun);
+					$('#aDaejiArea').text(data.daejiarea);
+					$('#aGrossFloorArea').text(data.grossfloorarea); 
+					$('#aYongjeoglyul').text(data.yongjeoglyul);
+					$('#aMainYongdo').text(data.mainyongdo);
 				}
 			},
 			error:function() {
