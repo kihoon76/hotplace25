@@ -65,9 +65,6 @@
 					}
 				});
 			}
-			else {
-				hotplace.dom.showAlertMsg(null, '경매상세정보를 보실수 있는 권한이 없습니다.', {width:'40%'});
-			}
 		});
 	}
 	
