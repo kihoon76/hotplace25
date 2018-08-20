@@ -453,10 +453,24 @@
     	catch(e) {}
     	
     	var yyyy = yyyyMM.toString().substring(0, 4);
-    	var d = '-';
     	var mm = yyyyMM.toString().substring(4);
     	
-    	return yyyy + d + mm;
+    	return yyyy + '-' + mm;
+    });
+    
+    /**
+     * @desc 년월일 분리 20170108 => 2017-01-08
+     */
+    Handlebars.registerHelper('ymdString', function(yyyyMMdd, options) {
+    	try {
+    		if (typeof(yyyyMMdd) === 'string') { yyyyMMdd = options.contexts[0].get(yyyyMMdd); }
+    	}
+    	catch(e) {}
+    	
+    	var yyyy = yyyyMMdd.toString().substring(0, 4);
+    	var mm = yyyyMMdd.toString().substring(4, 6);
+    	var dd = yyyyMMdd.toString().substring(6);
+    	return yyyy + '-' + mm + '-' + dd;
     });
     
     /**
