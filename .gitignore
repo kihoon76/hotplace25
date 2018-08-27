@@ -99,7 +99,7 @@ src/main/resources-local/config
 src/main/resources-development/config
 src/main/resources-production/config
 
-src/main/webapp/WEB-INF/key
+src/main/webapp/WEB-INF/key/
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
