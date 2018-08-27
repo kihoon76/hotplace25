@@ -520,6 +520,19 @@
     	var theString = passedString.substring(startString, endString);
     	return Handlebars.SafeString(theString);
     });
+    
+    Handlebars.registerHelper('switch', function(value, options) {
+    	this._switch_value_ = value;
+    	var html = options.fn(this); // Process the body of the switch block
+    	delete this._switch_value_;
+    	return html;
+    });
+
+    Handlebars.registerHelper("case", function(value, options) {
+    	if(value == this._switch_value_) {
+    		return options.fn(this);
+    	}
+    });
 
     /**
      * @private
@@ -704,6 +717,7 @@
 		USER_MOD:'613', //회원계정정보 수정오류
 		COUPON_VAL: '700', //쿠폰유효성 오류
 		COUPON_USED: '701', //사용된 쿠폰오류
+		INICIS_SIG: '702',  //inicis signature오류
 		PAYMENT: '777',  //결제오류
 		CHECK_PAYMENT: '778',	//결제진행건 확인오류
 		SERVICE_READY: '888', //서비스 준비중
@@ -832,6 +846,9 @@
 			break;
 		case _err.CHECK_PAYMENT:
 			hotplace.dom.showAlertMsg(null, msg || '결제진행건 확인중 오류가 발생했습니다.', _alertDefaultSize);
+			break;
+		case _err.INICIS_SIG:
+			hotplace.dom.showAlertMsg(null, msg || '결제정보 오류', _alertDefaultSize);
 			break;
 		}
 	}

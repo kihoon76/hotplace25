@@ -50,4 +50,21 @@ public class PaymentDaoImpl implements PaymentDao {
 		return msSqlSession.selectList(namespace + ".selectCheckPaymentList", accountId);
 	}
 
+	@Override
+	public void insertCardPaymentLog(Map<String, String> m) {
+		msSqlSession.insert(namespace + ".insertCardPaymentLog", m);
+		
+	}
+
+	//카드결제 자동승인
+	@Override
+	public void updatePayment(Map<String, String> map) {
+		msSqlSession.update(namespace + ".updatePayment", map);
+	}
+
+	@Override
+	public void insertCardPaymentError(Map<String, String> errLog) {
+		msSqlSession.insert(namespace + ".insertCardPaymentError", errLog);
+	}
+
 }

@@ -18,6 +18,9 @@ public class Payment {
 	private int sum;							//결제금액
 	private String status;						//결제완료여부('N', 'Y')
 	private String depositor;					//입금자명
+	private String method;						//결제방법('CARD', 'BANK' 기본값(BANK))
+	private String orderNum;					//주문번호
+	private String log;							//카드결제시 로그
 	
 	public String getAccountId() {
 		return accountId;
@@ -96,5 +99,23 @@ public class Payment {
 	}
 	public void setDepositor(String depositor) {
 		this.depositor = depositor;
+	}
+	public String getMethod() {
+		return method;
+	}
+	public void setMethod(String method) {
+		this.method = method;
+	}
+	public String getOrderNum() {
+		return orderNum;
+	}
+	public void setOrderNum(String orderNum) {
+		this.orderNum = orderNum;
+	}
+	public String getLog() {
+		return log;
+	}
+	public void setLog(String log) {
+		this.log = log;
 	}
 }

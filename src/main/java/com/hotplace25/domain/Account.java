@@ -18,6 +18,7 @@ public class Account {
 	private String email1;
 	private String email2;
 	private String out;
+	private Payment payment;
 	
 	private List<Authority> authorities;
 	
@@ -94,6 +95,12 @@ public class Account {
 		this.out = out;
 	}
 	
+	public Payment getPayment() {
+		return payment;
+	}
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
 	@Override
 	public boolean equals(Object o) {
 		 if (o instanceof Account) {

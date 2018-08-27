@@ -21,6 +21,9 @@ public class DateUtil {
 		return diffDays;
 	}
 	
+	public static String getPgTimestamp() {
+		return String.valueOf(System.nanoTime());
+	}
 	
 	private static String getCurrentDateString() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -28,4 +31,5 @@ public class DateUtil {
 		
 		return dateFormat.format(cal.getTime());
 	}
+	
 }

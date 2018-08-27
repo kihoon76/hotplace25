@@ -14,7 +14,7 @@
 			/WEB-INF/spring/root-context.xml,
 			/WEB-INF/spring/ds-context.xml,
 			/WEB-INF/spring/security-context.xml,
-			/WEB-INF/spring/amqp-context.xml
+<!-- 			/WEB-INF/spring/amqp-context.xml -->
 		</param-value>
 	</context-param>
 	
@@ -84,7 +84,6 @@
 		<filter-class>com.hotplace25.config.RereadableRequestFilter</filter-class>
 	</filter>
 	
-	
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -105,7 +104,7 @@
 		<filter-name>rereadableRequestFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
+	
 	<!-- Processes application requests -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>

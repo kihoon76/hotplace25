@@ -14,6 +14,9 @@
     <!-- uploadify -->
 	<link rel="stylesheet" href="/resources/vendors/jQuery-Upload-File/4.0.11/uploadfile.css">
 	
+	<!-- skippr -->
+	<link rel="stylesheet" href="/resources/vendors/skippr/skippr.css">
+	
     <!-- 모든 디자인을 재선언하는 css -->
 	<link rel="stylesheet" href="/resources/css/style.css" />
 	
@@ -35,6 +38,8 @@
 <script type="text/javascript" src="/resources/vendors/tabulator/js/tabulator.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/dom-to-image/dom-to-image.min.js"></script>
 <script type="text/javascript" src="/resources/vendors/jquery-zoom/jquery.zoom-min.js"></script>
+<!-- https://github.com/austenpayan/skippr -->
+<script type="text/javascript" src="/resources/vendors/skippr/skippr.min.js"></script>
 <!-- ECharts -->
 <script type="text/javascript" src="/resources/vendors/echarts/echarts.min.js"></script>
 <!-- uploadify -->

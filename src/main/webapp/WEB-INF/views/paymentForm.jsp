@@ -183,10 +183,25 @@
 									<button type="button" class="btnstyle blue" id="btnCoupon" disabled>쿠폰인증</button>
 								</td>
 							</tr>
-							<tr>
+							<tr id="trDepositorInPayment">
 								<th class="center">입금자명</th>
 								<td class="right" colspan="2">
 									<input type="text" id="txtDepositor" style="width: 425px; height:30px; font-size: 1.2em; font-weight:bold;"/>
+								</td>
+							</tr>
+							<tr id="trPaymentMethod" style="display:none;">
+								<th class="center">결제방법</th>
+								<td class="left" colspan="2">
+									<div class="paymentType">
+										<span class="rdchBox inline">
+											<input type="radio" id="rdoCardPayment" name="paymentType" value="C" checked />
+											<label for="rdoCardPayment" class="labelCh"><em class="text">카드결제</em></label>
+										</span>
+										<span class="rdchBox inline">
+											<input type="radio" id="rdoBankPayment" name="paymentType" value="B"/>
+											<label for="rdoBankPayment" class="labelCh"><em class="text">무통장입금</em></label>
+										</span>
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -203,5 +218,31 @@
 		<div class="modal-footer">
 			<button type="button" id="btnPayment" class="btnstyle middle black" disabled>결제신청</button>
 		</div>
+		<form id="sendPayForm" name="sendPayForm" method="post">
+			<input type="hidden" name="version" value="1.0" >
+			<input id="mid" type="hidden" name="mid" value="" >
+			<input id="goodname" type="hidden" name="goodname" value="" >
+			<input id="oid" type="hidden" name="oid" value="" >
+			<input id="price" type="hidden" name="price" value="" >
+			<input type="hidden" name="currency" value="WON" >
+			<input id="buyername" type="hidden" name="buyername" value="" >
+			<input id="buyertel" type="hidden" name="buyertel" value="" >
+			<input id="buyeremail" type="hidden" name="buyeremail" value="" >
+			<input id="timestamp" type="hidden" name="timestamp" value="" >
+			<input id="signature" type="hidden" name="signature" value="" >
+			<input id="returnUrl" type="hidden" name="returnUrl" value="" >
+			<input id="closeUrl" type="hidden" name="closeUrl" value="" >
+			<input id="popupUrl" type="hidden" name="popupUrl" value="" >
+			<input id="mKey" type="hidden" name="mKey" value="" >
+			<input type="hidden" name="gopaymethod" value="Card" >
+			<!-- 		<input type="hidden" name="acceptmethod" value="CARDPOINT:HPP(1):no_receipt:va_receipt:vbanknoreg(0):below1000" > -->
+			<input type="hidden" name="languageView" value="ko" >
+			<input type="hidden" name="charset" value="UTF-8" >
+			<input type="hidden" name="payViewType" value="popup" >
+			<!-- 		<input type="hidden" name="quotabase" value="" > -->
+			<!-- 		<input type="hidden" name="ini_onlycardcode" value="" > -->
+			<!-- 		<input type="hidden" name="ini_cardcode" value="" > -->
+			<!-- 		<input type="hidden" name="ansim_quota" value="" > -->
+		</form>
 	</div>
 </div>

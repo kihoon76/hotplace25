@@ -10,4 +10,7 @@
 	<mapping path="/errors/*" exclude="true" />
 	<mapping path="/spot/*" exclude="true" /> 
 	<mapping path="/noAccess" exclude="true" />
+	<mapping path="/payment/afterPay" exclude="true" />
+	<mapping path="/payment/close" exclude="true" />
+	<mapping path="/payment/popup" exclude="true" />
 </sitemesh>

@@ -171,6 +171,20 @@
 	
 	/**
 	 * @private
+	 * @type {function}
+	 * @desc 모달 위 모달 창이 열린후 실행되는 함수 
+	 */
+	var _modalOnModalOpenAfterFn = function() {};
+	
+	/**
+	 * @private
+	 * @type {function}
+	 * @desc 모달 위 모달 창이 닫힌후 실행되는 함수 
+	 */
+	var _modalOnModalCloseAfterFn = function() {};
+	
+	/**
+	 * @private
 	 * @function _runWaitMe
 	 * @param {object} loadEl loadmask를 적용할 jquery 객체
 	 * @param {number} num loadmask style 선택(1|2|3)
@@ -287,6 +301,17 @@
 		_imageModalOpenAfterFn = openFn;
 	}
 	
+	
+	function _bindModalOnModalOpenEvent(openFn) {
+		_modalOnModalOpenAfterFn = openFn;
+	}
+	
+	function _bindModalOnModalCloseEvent(closeFn) {
+		_modalOnModalCloseAfterFn = closeFn;
+	}
+	
+	
+	
 	/**
 	 * @memberof hotplace.dom
 	 * @function getCurrentFnAfterModalClose
@@ -352,7 +377,9 @@
 	}
 	
 	dom.openModalOnModal = function(title, modalSize, closeFn, openFn) {
-		_commonModal(_$momPopup, modalSize, closeFn, openFn);
+		_bindModalOnModalOpenEvent(openFn || function() {});
+		_bindModalOnModalCloseEvent(closeFn || function() {});
+		_commonModal(_$momPopup, modalSize);
 	}
 	
 	dom.openImageModalOnModal = function(modalSize, closeFn, openFn) {
@@ -623,7 +650,12 @@
 		
 	}
 	
-	
+	dom.showPopupAlarmForm = function(param, closeFn) {
+		_appendModalPopup('popupAlarmForm', _$momPopup, param);
+		dom.openModalOnModal('', {width: 900}, closeFn, function() {
+			hotplace.payment.popupNotice();
+		});
+	}
 	
 	dom.showSite = function() {
 		_appendModalPopup('introSiteForm');
@@ -1184,6 +1216,11 @@
 		dom.openModalOnModal('', {width:'700px'});
 	}
 	
+	dom.showInicisForm = function(param, closeFn, openFn) {
+		_appendModalPopup('inicisPaymentForm', _$momPopup, param);
+		dom.openModalOnModal('', {width:'842px'}, closeFn, openFn);
+	}
+	
 	dom.toggleLogin = function() {
 		if(_$gnbLogin.is(':visible')) {
 			_$gnbLogin.hide();
@@ -1322,6 +1359,11 @@
 	_$momPopup.on('shown.bs.modal', function(e) {
 		_initModalSize($(this));
 		$('.modal-backdrop').remove();
+		_modalOnModalOpenAfterFn();
+	});
+	
+	_$momPopup.on('hidden.bs.modal', function(e) {
+		_modalOnModalCloseAfterFn();
 	});
 	
 	/*************************************************************

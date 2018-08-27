@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.hotplace25.domain.LogVO;
 
 
-@Component
+//@Component
 public class Consumer {
 	
 	private final static Logger logger = LoggerFactory.getLogger(Consumer.class);

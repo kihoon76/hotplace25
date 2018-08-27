@@ -1392,3 +1392,6 @@ textarea {resize: none;}
 .errorBox .textArea {margin:20px auto; font-size:22px; color:#eee;}
 .errorBox .textArea .detailText {margin:20px 50px; font-size:14px;}
 .errorBox .copyright {font-size:11px; margin:30px 0 60px; color:#999;}
+
+/* 결제방법 선택*/
+.paymentType {position:relative; overflow:auto; z-index:1;}

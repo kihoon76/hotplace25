@@ -18,4 +18,5 @@
 	
 	<util:properties id="pathCfg" location="classpath:/config/path.properties" />
 	<util:properties id="varCfg" location="classpath:/config/variable.properties" />
+	<util:properties id="pgCfg" location="classpath:/config/pg.properties" />
 </beans>

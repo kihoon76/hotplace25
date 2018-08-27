@@ -108,6 +108,7 @@ gulp.task('opensource_concat_min', function() {
            vendorsDir + '/dom-to-image/dom-to-image.min.js',
            vendorsDir + '/jquery-zoom/jquery.zoom-min.js',
            vendorsDir + '/echarts/echarts.min.js',
+           vendorsDir + '/skippr/4.0.11/skippr.min.js',
            vendorsDir + '/jQuery-Upload-File/4.0.11/jquery.uploadfile.min.js',
            vendorsDir + '/touchSlider/jquery.touchSlider.min.js'])
 	       .pipe(concat('opensources.min.js'))

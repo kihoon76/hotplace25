@@ -3,6 +3,7 @@ package com.hotplace25.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hotplace25.domain.Account;
-import com.hotplace25.domain.Authority;
 import com.hotplace25.domain.Payment;
 import com.hotplace25.service.HotplaceService;
 import com.hotplace25.service.PaymentService;
@@ -45,8 +45,7 @@ public class HandlebarController {
 	}
 	
 	@GetMapping("payment")
-	public String getPayment(ModelMap m) {
-		
+	public String getPayment(HttpServletRequest request, ModelMap m) throws Exception {
 		m.addAttribute("yaggwan", hotplaceService.getYaggwanList());
 		
 		return "paymentForm";

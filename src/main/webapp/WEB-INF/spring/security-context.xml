@@ -76,7 +76,7 @@
 		<!-- 상담신청 -->
 		<sec:intercept-url pattern="/question" access="permitAll"/>
 		
-		<!-- 개발계 접근금지 에시지 -->
+		<!-- 개발계 접근금지 메시지 -->
 		<sec:intercept-url pattern="/noAccess" access="permitAll" /> 
 		
 		<sec:intercept-url pattern="/index.jsp" access="permitAll" />
@@ -99,6 +99,8 @@
 		<sec:intercept-url pattern="/bosangpyeonib/**" access="hasAnyRole('ROLE_ALL', 'ROLE_MULGEON')"/>
 		<sec:intercept-url pattern="/silgeolaemarker" access="permitAll"/>
 		<sec:intercept-url pattern="/acceptbuildingmarker" access="permitAll"/>
+		<!-- inicis 결제결과 -->
+		<sec:intercept-url pattern="/payment/afterPay" access="permitAll"/>
 		
 <!-- 		<sec:intercept-url pattern="/**" access="permitAll"/>  -->
 		<sec:intercept-url pattern="/**" access="hasRole('ROLE_JOINED')"/>

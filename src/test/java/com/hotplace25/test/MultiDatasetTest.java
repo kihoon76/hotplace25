@@ -1,7 +1,10 @@
 package com.hotplace25.test;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -62,17 +65,25 @@ public class MultiDatasetTest {
 		System.out.println(arr[0]);
 	}
 	
-	@Test
+	@Ignore @Test
 	public void test03_date() throws ParseException {
 		long i = DateUtil.diffOfDate("2018-08-10");
 		System.err.println(i);
 	}
 	
-	@Test
+	@Ignore @Test
 	public void test04_bool() throws ParseException {
 		boolean b = false;
 		b = b || true;
 		b = b || false;
 		System.err.println(b);
+	}
+	
+	@Test
+	public void test05_timestamp() throws ParseException {
+		DateFormat dateFormat = new SimpleDateFormat("ddHHmmssSSS");
+		Calendar cal = Calendar.getInstance();
+		
+		System.err.println( System.nanoTime());//408383547218758
 	}
 }

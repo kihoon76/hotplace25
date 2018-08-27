@@ -6,6 +6,7 @@
 	var _dvPayment = '#dvPayment',
 		_rdoPayment = _dvPayment + ' input[name=payment]:radio',
 		_rdoPaymentAll = _dvPayment + ' input[name=paymentAll]:radio',
+		_rdoPaymentType = _dvPayment + ' input[name=paymentType]:radio',
 		_txtPaymentSum = '#txtPaymentSum',
 		_txtDepositor = '#txtDepositor',
 		_chkPaymentTooja = '#chkPaymentTooja',
@@ -18,15 +19,25 @@
 		_btnPaymentInfo = '#btnPaymentInfo',
 		_chkCoupon = '#chkCoupon',
 		_chksYaggwan = '.YAGGWAN_AGREE_PAYMENT',
+		_ifmInicis = '#ifmInicis',
+		_trDepositorInPayment = '#trDepositorInPayment',
+		_trPaymentMethod = '#trPaymentMethod',
 		_tooltipHtml = '',
+		_rdoPaymentAllYear = '#rdoPaymentAllYear',  //전체서비스 연간결제 라디오버튼
+		_rdoCardPayment = '#rdoCardPayment',	    //결제방법 카드
 		_$rdoPayment = null,
 		_$rdoPaymentAll = null,
+		_$rdoPaymentType = null,
 		_$chkCoupon = null,
 		_$txtPaymentSum = null,
 		_$chkPaymentTooja = null,
 		_$chkPaymentGG = null,
 		_$chkPaymentMulgeon = null,
 		_$chkPaymentHeatmap = null,
+		_$trDepositorInPayment = null,
+		_$trPaymentMethod = null,
+		_$rdoPaymentAllYear = null,
+		_$rdoCardPayment = null,
 		_$btnPayment = null;
 	
 	function _sum(type, value) {
@@ -61,7 +72,7 @@
 		_sumCoupon(sum);
 	}
 	
-	function _payment() {
+	function _getPaymentParam() {
 		var param = {};
 		var serviceSubType = [];
 		
@@ -77,15 +88,60 @@
 		}
 		
 		param.serviceSubTypes = serviceSubType.join(',');
-		param.sum = _$txtPaymentSum.data('totalValue');
+		param.sum = _$txtPaymentSum.data('totalValue'); //1000
 		param.couponNum = _couponInfo.couponNum || '0';
-		param.depositor = _$txtDepositor.val()
+		param.depositor = _$txtDepositor.val();
 		
-		console.log(param);
+		return param;
+	}
+	
+	function _checkPopupCard() {
+		var param = {};
+		if(hotplace.browser.chrome) {
+			param.browser = 'chrome';
+		}
+		else if(hotplace.browser.msedge) {
+			param.browser = 'edge';
+		}
+		else if(hotplace.browser.msie) {
+			param.browser = 'msie';
+		}
+		else {
+			param.browser = 'other';
+		}
+		
+		hotplace.dom.showPopupAlarmForm(param, _inicisCardPayment);
+	}
+	
+	payment.popupNotice = function(fn) {
+		$('#noticePopup').skippr();
+	}
+	
+	function _payment() {
+//		var param = {};
+//		var serviceSubType = [];
+//		
+//		param.serviceType = $(_rdoPayment + ':checked').val();
+//		if(param.serviceType == 'ALL') {
+//			serviceSubType.push($(_rdoPaymentAll + ':checked').data('type'));
+//		}
+//		else {
+//			if(_$chkPaymentTooja.is(':checked')) serviceSubType.push(_$chkPaymentTooja.data('type'));
+//			if(_$chkPaymentGG.is(':checked')) serviceSubType.push(_$chkPaymentGG.data('type'));
+//			if(_$chkPaymentMulgeon.is(':checked')) serviceSubType.push(_$chkPaymentMulgeon.data('type'));
+//			if(_$chkPaymentHeatmap.is(':checked')) serviceSubType.push(_$chkPaymentHeatmap.data('type'));
+//		}
+//		
+//		param.serviceSubTypes = serviceSubType.join(',');
+//		param.sum = _$txtPaymentSum.data('totalValue');
+//		param.couponNum = _couponInfo.couponNum || '0';
+//		param.depositor = _$txtDepositor.val()
+//		
+//		console.log(param);
 		
 		hotplace.ajax({
 			url: 'payment/do',
-			data: JSON.stringify(param),
+			data: JSON.stringify(_getPaymentParam()),
 			contentType: 'application/json; charset=UTF-8',
 			success: function(data, textStatus, jqXHR) {
 				if(data.success) {
@@ -99,6 +155,44 @@
 //						});
 //					}, '결제가 완료되었습니다. 다시로그인해 주세요', hotplace.ALERT_SIZE);
 					//hotplace.dom.showServiceReady();
+				}
+				else {
+					jqXHR.errCode = data.errCode;
+				}
+			}
+		});
+	}
+	
+	function _inicisCardPayment() {
+		var param = _getPaymentParam();
+		console.log(param)
+		hotplace.ajax({
+			url: 'payment/getPayInfo',
+			data: JSON.stringify(param),
+			contentType: 'application/json; charset=UTF-8',
+			//data: { price: 1000/*_$txtPaymentSum.data('totalValue')*/},
+			success: function(data, textStatus, jqXHR) {
+				console.log(data);
+				
+				var goodname = (param.serviceType == 'ALL') ? '전체서비스(월간)' : '개별서비스';
+				
+				if(data.success) {
+					data = data.datas[0];
+					$('#mid').val(data.mid);
+					$('#goodname').val(goodname);
+					$('#oid').val(data.oid);
+					$('#price').val(data.price); //1000
+					$('#buyername').val(data.buyername);
+					$('#buyertel').val(data.buyertel);
+					$('#buyeremail').val(data.buyeremail);
+					$('#timestamp').val(data.timestamp);
+					$('#signature').val(data.signature);
+					$('#returnUrl').val(hotplace.getContextUrl() + 'payment/afterPay');
+					$('#popupUrl').val(hotplace.getContextUrl() + 'payment/popup');
+					$('#mKey').val(data.mKey);
+					$('#closeUrl').val(hotplace.getContextUrl() + 'payment/close');
+			
+					INIStdPay.pay('sendPayForm');
 				}
 				else {
 					jqXHR.errCode = data.errCode;
@@ -218,10 +312,21 @@
 		});
 	}
 	
+	function _initCardBank() {
+		if(_$rdoCardPayment.is(':checked')) {
+			_$trDepositorInPayment.hide();
+		}
+		else {
+			_$trDepositorInPayment.show();
+		}
+		
+		_$trPaymentMethod.show();
+	}
 	
 	payment.init = function() {
 		_$rdoPayment = $(_rdoPayment),
 		_$rdoPaymentAll = $(_rdoPaymentAll),
+		_$rdoPaymentType = $(_rdoPaymentType),
 		_$txtPaymentSum = $(_txtPaymentSum),
 		_$txtDepositor = $(_txtDepositor),
 		_$chkPaymentTooja = $(_chkPaymentTooja),
@@ -232,7 +337,11 @@
 		_$chksYaggwan = $(_chksYaggwan),
 		_$btnCoupon = $(_btnCoupon),
 		_$txtCoupon = $(_txtCoupon),
+		_$trDepositorInPayment = $(_trDepositorInPayment),
+		_$trPaymentMethod = $(trPaymentMethod),
 		_$btnPaymentInfo = $(_btnPaymentInfo),
+		_$rdoPaymentAllYear = $(_rdoPaymentAllYear),
+		_$rdoCardPayment = $(_rdoCardPayment),
 		_$btnPayment = $(_btnPayment);
 		
 		
@@ -250,8 +359,6 @@
 			}
 		});
 		
-		
-		
 		_$rdoPayment
 		.off('change')
 		.on('change', function() {
@@ -263,6 +370,15 @@
 				_$chkPaymentMulgeon.prop('checked', false).prop('disabled', true);
 				_$chkPaymentHeatmap.prop('checked', false).prop('disabled', true);
 				_$rdoPaymentAll.prop('disabled', false);
+				
+				//전체서비스 년간구매일 경우는 결제선택 화면을 숨긴다.
+				if(_$rdoPaymentAllYear.is(':checked')) {
+					_$trDepositorInPayment.show();
+					_$trPaymentMethod.hide();
+				}
+				else {
+					_initCardBank();
+				}
 			}
 			else {
 				_$chkPaymentTooja.prop('disabled', false);
@@ -270,6 +386,9 @@
 				_$chkPaymentMulgeon.prop('disabled', false);
 				_$chkPaymentHeatmap.prop('disabled', false);
 				_$rdoPaymentAll.prop('disabled', true);
+				
+				_initCardBank();
+				
 			}
 			
 			_sum(type);
@@ -279,6 +398,16 @@
 		.off('change')
 		.on('change', function() {
 			var value = $(this).val();
+			var type = $(this).data('type');
+			
+			if(type == 'YEAR') {
+				_$trDepositorInPayment.show();
+				_$trPaymentMethod.hide();
+			}
+			else {
+				_initCardBank();
+			}
+			
 			_sum('ALL', value);
 		});
 		
@@ -286,6 +415,19 @@
 		.off('click')
 		.on('click', function() {
 			_checkedSum($(this), $(this).val());
+		});
+		
+		
+		_$rdoPaymentType
+		.off('change')
+		.on('change', function() {
+			var value = $(this).val();
+			if(value == 'B') {//무통장입금
+				_$trDepositorInPayment.show();
+			}
+			else {
+				_$trDepositorInPayment.hide();
+			}
 		});
 		
 		_$btnPayment
@@ -306,12 +448,17 @@
 					}
 				}
 				
-				if(!depositor) {
-					hotplace.dom.showAlertMsg(null, '입금자명을 입력해 주세요.', hotplace.ALERT_SIZE);
-					return;
+				//연간구매는 무조건 무통장
+				if(_$rdoPaymentAllYear.is(':checked') || !_$rdoCardPayment.is(':checked')) {
+					if(!depositor) {
+						hotplace.dom.showAlertMsg(null, '입금자명을 입력해 주세요.', hotplace.ALERT_SIZE);
+						return;
+					}
+					_payment();
 				}
-				
-				_payment();
+				else {
+					_checkPopupCard();
+				}
 			}
 		});
 		
@@ -388,6 +535,7 @@
 				}
 			});
 		});
+		
 	}
 }(
 	hotplace.payment = hotplace.payment || {},
