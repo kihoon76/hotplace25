@@ -231,7 +231,7 @@ public class PaymentController {
 					user.setPayment(payment);
 					
 					//
-					Map<String, String> m = inicis.makeRequestInfo(String.valueOf(1000/*payment.getSum()/*1000*/));
+					Map<String, String> m = inicis.makeRequestInfo(String.valueOf(payment.getSum()/*1000*/));
 					m.put("buyername", user.getUserName());
 					m.put("buyertel", user.getPhone());
 					m.put("buyeremail", user.getEmail());
