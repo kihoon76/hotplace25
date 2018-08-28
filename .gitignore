@@ -99,7 +99,7 @@ src/main/resources-local/config
 src/main/resources-development/config
 src/main/resources-production/config
 
-src/main/webapp/WEB-INF/key/INIpayTest
+src/main/webapp/WEB-INF/key/hotplace01
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar

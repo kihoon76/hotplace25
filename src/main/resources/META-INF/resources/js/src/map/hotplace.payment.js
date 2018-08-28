@@ -88,7 +88,7 @@
 		}
 		
 		param.serviceSubTypes = serviceSubType.join(',');
-		param.sum = _$txtPaymentSum.data('totalValue'); 
+		param.sum = 1000;//_$txtPaymentSum.data('totalValue'); 
 		param.couponNum = _couponInfo.couponNum || '0';
 		param.depositor = _$txtDepositor.val();
 		
@@ -180,7 +180,7 @@
 					$('#mid').val(data.mid);
 					$('#goodname').val(goodname);
 					$('#oid').val(data.oid);
-					$('#price').val(data.price); //1000
+					$('#price').val(1000/*data.price*/); //1000
 					$('#buyername').val(data.buyername);
 					$('#buyertel').val(data.buyertel);
 					$('#buyeremail').val(data.buyeremail);
