@@ -88,7 +88,7 @@
 		}
 		
 		param.serviceSubTypes = serviceSubType.join(',');
-		param.sum = 1000;//_$txtPaymentSum.data('totalValue'); //1000
+		param.sum = _$txtPaymentSum.data('totalValue'); 
 		param.couponNum = _couponInfo.couponNum || '0';
 		param.depositor = _$txtDepositor.val();
 		
@@ -170,7 +170,6 @@
 			url: 'payment/getPayInfo',
 			data: JSON.stringify(param),
 			contentType: 'application/json; charset=UTF-8',
-			//data: { price: 1000/*_$txtPaymentSum.data('totalValue')*/},
 			success: function(data, textStatus, jqXHR) {
 				console.log(data);
 				
@@ -181,7 +180,7 @@
 					$('#mid').val(data.mid);
 					$('#goodname').val(goodname);
 					$('#oid').val(data.oid);
-					$('#price').val(1000/*data.price*/); //1000
+					$('#price').val(data.price); //1000
 					$('#buyername').val(data.buyername);
 					$('#buyertel').val(data.buyertel);
 					$('#buyeremail').val(data.buyeremail);
