@@ -27,9 +27,32 @@
 							<tr>
 								<th>메모</th>
 								<td>
-									<textarea class="inp" style="width:100%; height:200px;" placeholder="남기실 메모를 입력해 주세요" id="txtMypageGwansimMemo">${gwansim.memo}</textarea>
+									<textarea class="inp" style="width:100%; height:100px;" placeholder="남기실 메모를 입력해 주세요" id="txtMypageGwansimMemo">${gwansim.memo}</textarea>
 									<span class="helpCont EMPTY">메모를  입력해 주세요</span>
 								</td>
+							</tr>
+							<tr>
+								<th>물건종류</th>
+								<c:choose>
+								<c:when test="${gwansim.mulgeonType eq 'K'}">
+								<td><i class="icon"><img src="resources/img/marker/gyeongmae.png"></i></td>
+								</c:when>
+								<c:when test="${gwansim.mulgeonType eq 'G'}">
+								<td><i class="icon"><img src="resources/img/marker/gongmae.png"></i></td>
+								</c:when>
+								<c:when test="${gwansim.mulgeonType eq 'B'}">
+								<td><i class="icon"><img src="resources/img/marker/bosang.png"></i></td>
+								</c:when>
+								<c:when test="${gwansim.mulgeonType eq 'P'}">
+								<td><i class="icon"><img src="resources/img/marker/pyeonib.png"></i></td>
+								</c:when>
+								<c:when test="${gwansim.mulgeonType eq 'S'}">
+								<td><i class="icon"><img src="resources/img/marker/silgeolae.png"></i></td>
+								</c:when>
+								<c:otherwise>
+								<td>&nbsp;</td>
+								</c:otherwise>
+								</c:choose>
 							</tr>
 							<tr>
 								<td colspan="2" class="center">
