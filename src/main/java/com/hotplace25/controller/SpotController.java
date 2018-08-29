@@ -29,6 +29,7 @@ import com.hotplace25.domain.GwansimMulgeon;
 import com.hotplace25.domain.Maemul;
 import com.hotplace25.service.SearchService;
 import com.hotplace25.service.SpotService;
+import com.hotplace25.types.MulgeonType;
 import com.hotplace25.util.SessionUtil;
 
 @RequestMapping("/spot")
@@ -228,6 +229,13 @@ public class SpotController {
 		if(!doRegisted) {
 			vo.setSuccess(true);
 			try {
+				
+				String mulgeonType = gwansimMulgeon.getMulgeonType();
+				if(!"".equals(mulgeonType)) {
+					//물건타입이 유효하지 않으면 exception 발생
+					MulgeonType.getType(mulgeonType);
+				}
+				
 				spotService.regGwansimMulgeon(gwansimMulgeon);
 			}
 			catch(Exception e) {

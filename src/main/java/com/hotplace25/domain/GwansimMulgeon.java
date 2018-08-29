@@ -12,6 +12,7 @@ public class GwansimMulgeon {
 	private float lng;//경도
 	private float lat;//위도
 	private String accountId;
+	private String mulgeonType;	//물건타입(경매:K, 공매:G, 보상:B, 편입:P, 실거래:S, 건축허가:U)
 	
 	public String getPnu() {
 		return pnu;
@@ -60,5 +61,11 @@ public class GwansimMulgeon {
 	}
 	public void setGwansimMulgeonNum(String gwansimMulgeonNum) {
 		this.gwansimMulgeonNum = gwansimMulgeonNum;
+	}
+	public String getMulgeonType() {
+		return mulgeonType;
+	}
+	public void setMulgeonType(String mulgeonType) {
+		this.mulgeonType = mulgeonType;
 	}
 }

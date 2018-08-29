@@ -24,7 +24,7 @@
 	var _pnu, _address, _lng, _lat;
 	
 	//주소검색후 해당지점에 대한 정보선택
-	spot.selectCategory = function(el) {
+	spot.selectCategory = function(el, mulgeonType) {
 		_spotInfo(el);
 		var category = $(el).data('category');
 		switch(category) {
@@ -32,7 +32,7 @@
 			_viewSujibunseog();
 			break;
 		case 'GWANSIM_MULGEON' :
-			_viewGwansimReg();
+			_viewGwansimReg(mulgeonType);
 			break;
 		case 'MAEMUL' :
 			hotplace.dom.showServiceReady();
@@ -152,12 +152,16 @@
 		return isNotEmpty;
 	}
 	
-	function _viewGwansimReg() {
+	function _viewGwansimReg(mulgeonType) {
+		var m = mulgeonType || '';
+		
 		hotplace.dom.showSpotGwansimRegForm({address:_address});
 		
 		$(_btnRegGwansimMulgeon)
 		.off('click')
 		.on('click', function() {
+			var type = $(this).data('mulgeonType');
+			
 			if(_validateGwansimMulgeon()) {
 				hotplace.ajax({
 		    		url: 'spot/reg/gwansim',
@@ -167,7 +171,8 @@
 		            	address:_address,
 		            	lng: _lng,
 		    			lat: _lat,
-		    			memo:$(_txtGwansimMemo).val().trimTS()
+		    			memo:$(_txtGwansimMemo).val().trimTS(),
+		    			mulgeonType:m
 		            }),
 		            success: function(data, textStatus, jqXHR) {
 		                if(!data.success) {

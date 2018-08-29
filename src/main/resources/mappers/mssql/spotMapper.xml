@@ -54,8 +54,15 @@
 	</select>
 	
 	<insert id="insertGwansimMulgeon" parameterType="GwansimMulgeon">
-		insert into [웹].[dbo].[관심물건](PNU, 등록물건지번주소, 메모, 계정아이디, 위도, 경도)
-		values (#{pnu}, #{address}, #{memo}, #{accountId}, #{lat}, #{lng})
+		insert into [웹].[dbo].[관심물건](PNU, 등록물건지번주소, 메모, 계정아이디, 위도, 경도, 물건종류)
+		<choose>
+		<when test="mulgeonType == ''">
+		values (#{pnu}, #{address}, #{memo}, #{accountId}, #{lat}, #{lng}, null)
+		</when>
+		<otherwise>
+		values (#{pnu}, #{address}, #{memo}, #{accountId}, #{lat}, #{lng}, #{mulgeonType})
+		</otherwise>
+		</choose>
 	</insert>
 	
 	<select id="selectMyGwansimList" parameterType="string" resultType="GwansimMulgeon">

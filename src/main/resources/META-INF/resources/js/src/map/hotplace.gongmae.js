@@ -17,13 +17,15 @@
 			dataType: 'json',
 			data: {unu: data.info.unu},
 			//loadEl: _dvGongmaeInfoWin,
-			success: function(data, textStatus, jqXHR) {
-				console.log(data);
-				if(data.success === false && data.errCode) {
-					jqXHR.errCode = data.errCode;
+			success: function(d, textStatus, jqXHR) {
+				console.log(d);
+				if(d.success === false && d.errCode) {
+					jqXHR.errCode = d.errCode;
 				}
 				else {
-					cbSucc(data);
+					d.lng = (data.location) ? data.location[0] : '';
+					d.lat = (data.location) ? data.location[1] : '';
+					cbSucc(d);
 				}
 			},
 			error:function() {
@@ -331,7 +333,7 @@
 	 */
 	gongmae.markerClick = function(map, marker, win) {
 		var data = marker._data;
-		
+		console.log(data);
 		var tForm = hotplace.dom.getTemplate('gongmaeForm');
 		
 		if(!tForm) {

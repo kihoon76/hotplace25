@@ -6,8 +6,13 @@
 		_btnBosangPyeonibPano = '#btnBosangPyeonibPano',
 		_btnBosangPyeonibThumbClose = '#btnBosangPyeonibThumbClose',
 		_btnBosangPyeonibList = '#btnBosangPyeonibList',
+		_dvMib = '#dvMib',
 		_dvBosangPyeonibList = '#dvBosangPyeonibList',
 		_dvBosangPyeonibTable = '#dvBosangPyeonibTable';
+	
+	function _onOffDvSubInfo(disabled) {
+		$(_dvMib).find('span button').prop('disabled', disabled);
+	}
 	
 	function _getThumb(unu, cbSucc) {
 		hotplace.ajax({
@@ -24,6 +29,13 @@
 				}
 				else {
 					cbSucc(data);
+					//
+					var _$dvMunuType = $(_dvBosangPyeonibInfoWin + ' .munuType');
+					
+					_$dvMunuType.data('address', data.mulgeonsojaeji || '');
+					_$dvMunuType.data('pnu', data.pnu || '');
+					_$dvMunuType.data('lng', data.lng || '');
+					_$dvMunuType.data('lat', data.lat || '');
 				}
 				
 				/*$('#bpMulgeonsojaeji').text(data.mulgeonsojaeji);
@@ -68,6 +80,8 @@
 	}
 	
 	bosangpyeonib.markerClick = function(map, marker, win, kind) {
+		var kindCode = (kind == '보상') ? 'B' : 'P';
+		
 		var data = marker._data;
 		var grpCnt = parseInt(data.info.xgc);
 		var isGrouped = grpCnt >= hotplace.config.markerGrpCount;
@@ -88,9 +102,11 @@
 					if(!list) return;
 					
 					win.open(map, marker);
-					win.setOptions('content', tForm({kind:kind}));
+					win.setOptions('content', tForm({kind:kind, kindCode:kindCode}));
 					_setView('list');
 					
+					
+					_onOffDvSubInfo(true);
 					var len = list.length;
 					var $list = $(_dvBosangPyeonibList);
 					var lis = ['<ul class="listBox">'];
@@ -118,6 +134,7 @@
 							$('#bpSiseolkind').text(d.siseolkind);
 							$('#bpSaeobsihaengja').text(d.saeobsihaengja);
 							
+							_onOffDvSubInfo(false);
 							_viewItem();
 							_bindGeoClickHandler(d.lat, d.lng);
 						});
@@ -140,7 +157,7 @@
 				_getThumb(data.info.unu, function(d) {
 					_address = d.mulgeonsojaeji;
 					win.open(map, marker);
-					win.setOptions('content', tForm($.extend({kind:kind}, d)));
+					win.setOptions('content', tForm($.extend({kind:kind, kindCode:kindCode}, d)));
 					
 					$(_btnBosangPyeonibThumbClose)
 					.off('click')
@@ -148,6 +165,7 @@
 						win.close();
 					});
 					
+					_onOffDvSubInfo(false);
 					_setView();
 					_bindGeoClickHandler(d.lat, d.lng);
 				});
@@ -171,6 +189,7 @@
 		
 		$dvList.show();
 		$dvTable.hide();
+		_onOffDvSubInfo(true);
 		$(_btnBosangPyeonibPano).hide();
 	}
 	
@@ -188,12 +207,14 @@
 		if(type == 'list') {
 			$dvList.show();
 			$dvTable.hide();
+			
 			$(_btnBosangPyeonibList).show();
 			$(_btnBosangPyeonibPano).hide();
 		}
 		else {
 			$dvList.hide();
 			$dvTable.show();
+			
 			$(_btnBosangPyeonibList).hide();
 			$(_btnBosangPyeonibPano).show();
 		}
