@@ -8,20 +8,22 @@
 		_address = null;;
 	
 	
-	function _getThumb(cbSucc) {
+	function _getThumb(data, cbSucc) {
 		hotplace.ajax({
 			url: 'silgeolae/thumb',
 			method: 'GET',
 			dataType: 'json',
 			//loadEl: _dvGyeongmaeInfoWin,
-			success: function(data, textStatus, jqXHR) {
+			success: function(d, textStatus, jqXHR) {
 				//hotplace.dom.createChart('canvas');
-				console.log(data);
-				if(data.success === false && data.errCode) {
-					jqXHR.errCode = data.errCode;
+				console.log(d);
+				if(d.success === false && d.errCode) {
+					jqXHR.errCode = d.errCode;
 				}
 				else {
-					cbSucc(data);
+					d.lng = (data.location) ? data.location[0] : '';
+					d.lat = (data.location) ? data.location[1] : '';
+					cbSucc(d);
 				}
 			},
 			error:function() {
@@ -48,7 +50,7 @@
 			return;
 		}
 		else {
-			_getThumb(function() {
+			_getThumb(data, function() {
 				win.open(map, marker);
 				win.setOptions('content', tForm(data.info || {}));
 				
