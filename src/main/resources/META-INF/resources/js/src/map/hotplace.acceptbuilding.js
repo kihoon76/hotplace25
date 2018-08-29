@@ -7,7 +7,25 @@
 		_btnAcceptBuildingPano = '#btnAcceptBuildingPano',
 		_btnAcceptBuildingDetail = '#btnAcceptBuildingDetail',
 		_address = null;
+	
+	function _makePointCut(d) {
+		if(!d) return '';
 		
+		if(typeof d !== 'string') {
+			d = d.toString();
+		}
+		
+		if(d.indexOf('.') > -1) {
+			var arr = d.split('.');
+			var s = arr[0];
+			s = s + '.' + arr[1].substring(0, 1);
+			
+			return s;
+		}
+		
+		return d;
+	}
+	
 	function _getThumb(data) {
 		hotplace.ajax({
 			url: 'acceptbuilding/thumb',
@@ -24,10 +42,13 @@
 					$('#aAcceptgubun').text(data.acceptgubun);
 					$('#aAcceptsingoil').text(hotplace.util.dateYmdFormat(data.acceptsingoil));
 					$('#aBuildingGubun').text(data.buildinggubun);
-					$('#aDaejiArea').text(data.daejiarea);
-					$('#aGrossFloorArea').text(data.grossfloorarea); 
-					$('#aYongjeoglyul').text(data.yongjeoglyul);
+					$('#aDaejiArea').text(data.daejiarea = _makePointCut(data.daejiarea));
+					$('#aGrossFloorArea').text(data.grossfloorarea = _makePointCut(data.grossfloorarea)); 
+					$('#aYongjeoglyul').text(data.yongjeoglyul = _makePointCut(data.yongjeoglyul));
 					$('#aMainYongdo').text(data.mainyongdo);
+					
+					data.buildingarea = _makePointCut(data.buildingarea);
+					data.geonpyeyul = _makePointCut(data.geonpyeyul);
 					
 					_bindDetailClickHandler(data);
 				}

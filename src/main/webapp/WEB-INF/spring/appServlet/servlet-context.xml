@@ -15,10 +15,10 @@
 	<mvc:annotation-driven />
 	
 	<mvc:interceptors> 
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<beans:bean class="com.hotplace25.interceptor.SSLInterceptor" />
-		</mvc:interceptor>
+<!-- 		<mvc:interceptor> -->
+<!-- 			<mvc:mapping path="/**"/> -->
+<!-- 			<beans:bean class="com.hotplace25.interceptor.SSLInterceptor" /> -->
+<!-- 		</mvc:interceptor> -->
 <!-- 		<mvc:interceptor> -->
 <!-- 			<mvc:mapping path="/**"/> -->
 <!-- 			<mvc:exclude-mapping path="/resources/**"/> -->
