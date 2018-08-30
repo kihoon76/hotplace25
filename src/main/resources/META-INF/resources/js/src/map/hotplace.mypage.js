@@ -33,6 +33,16 @@
 		    clickable:false,
 		    map: map
 		});
+		
+		/*marker.setOptions('icon', {
+	        content: '<img src="'+ hotplace.getContextUrl() +'resources/img/marker/' + options.icon + '" alt="" ' +
+			  		 'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; ' +
+			  		 '-webkit-user-select: none; position: absolute; width: ' + x + 'px; height: ' + y + 'px; left: 0px; top: 0px;">',
+            size: new _vender.Size(x, y),
+            scaledSize: new _vender.Size(x, y),
+            anchor: new _vender.Point(x/2, y),
+            origin: new _vender.Point(0,0)
+		});*/
 	}
 	
 	mypage.init = function() {
