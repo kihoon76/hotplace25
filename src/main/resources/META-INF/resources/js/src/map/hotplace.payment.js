@@ -38,7 +38,8 @@
 		_$trPaymentMethod = null,
 		_$rdoPaymentAllYear = null,
 		_$rdoCardPayment = null,
-		_$btnPayment = null;
+		_$btnPayment = null,
+		_isAll = true;
 	
 	function _sum(type, value) {
 		var sum;
@@ -369,6 +370,7 @@
 				_$chkPaymentMulgeon.prop('checked', false).prop('disabled', true);
 				_$chkPaymentHeatmap.prop('checked', false).prop('disabled', true);
 				_$rdoPaymentAll.prop('disabled', false);
+				_isAll = true;
 				
 				//전체서비스 년간구매일 경우는 결제선택 화면을 숨긴다.
 				if(_$rdoPaymentAllYear.is(':checked')) {
@@ -385,7 +387,7 @@
 				_$chkPaymentMulgeon.prop('disabled', false);
 				_$chkPaymentHeatmap.prop('disabled', false);
 				_$rdoPaymentAll.prop('disabled', true);
-				
+				_isAll = false;
 				_initCardBank();
 				
 			}
@@ -447,9 +449,9 @@
 					}
 				}
 				
-				
+				//console.log(_$rdoPayment.val())
 				//연간구매는 무조건 무통장
-				if(_$rdoPaymentAllYear.is(':checked') || !_$rdoCardPayment.prop('checked')) {
+				if((_isAll && _$rdoPaymentAllYear.is(':checked')) || !_$rdoCardPayment.is(':checked')) {
 					if(!depositor) {
 						hotplace.dom.showAlertMsg(null, '입금자명을 입력해 주세요.', hotplace.ALERT_SIZE);
 						return;
