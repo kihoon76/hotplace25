@@ -39,7 +39,7 @@
 		_$rdoPaymentAllYear = null,
 		_$rdoCardPayment = null,
 		_$btnPayment = null,
-		_isAll = true;
+		_isAll = null;
 	
 	function _sum(type, value) {
 		var sum;
@@ -343,7 +343,7 @@
 		_$rdoPaymentAllYear = $(_rdoPaymentAllYear),
 		_$rdoCardPayment = $(_rdoCardPayment),
 		_$btnPayment = $(_btnPayment);
-		
+		_isAll = true;
 		
 		_tooltipHtml = _$btnPaymentInfo.prop('title');
 		
