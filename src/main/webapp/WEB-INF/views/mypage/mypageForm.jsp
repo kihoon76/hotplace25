@@ -27,12 +27,12 @@
 							<li class="tabLink">
 								<button href="#tabMypageGwansimMulgeon" data-toggle="tab"><span class="text">관심물건</span></button>
 							</li>
-							<li class="tabLink">
-								<button href="#tabMypageConsulting" data-toggle="tab"><span class="text">&nbsp;컨설팅&nbsp;</span></button>
-							</li>
-							<li class="tabLink">
-								<button href="#tabMaemul" data-toggle="tab"><span class="text">&nbsp;&nbsp;매물&nbsp;&nbsp;</span></button>
-							</li>
+<!-- 							<li class="tabLink"> -->
+<!-- 								<button href="#tabMypageConsulting" data-toggle="tab"><span class="text">&nbsp;컨설팅&nbsp;</span></button> -->
+<!-- 							</li> -->
+<!-- 							<li class="tabLink"> -->
+<!-- 								<button href="#tabMaemul" data-toggle="tab"><span class="text">&nbsp;&nbsp;매물&nbsp;&nbsp;</span></button> -->
+<!-- 							</li> -->
 						</ul>
 					</div>
 					<div class="tab-content" style="min-height:680px;">
@@ -489,7 +489,8 @@
 								<colgroup>
 									<col style="width:15%;">
 									<col style="width:25%;">
-									<col style="width:53%;">
+									<col style="width:46%;">
+									<col style="width:7%;">
 									<col style="width:7%;">
 								</colgroup>
 								<thead>
@@ -497,6 +498,7 @@
 										<th>등록일</th>
 										<th>물건주소</th>
 										<th>메모내용</th>
+										<th>종류</th>
 										<th>삭제</th>
 									</tr>
 								</thead>
@@ -504,15 +506,38 @@
 								<c:choose>
 									<c:when test="${fn:length(gwansim) == 0}">
 									<tr class="NO-DATA">
-										<td colspan="4">등록된 관심물건이 없습니다.</td>
+										<td colspan="5">등록된 관심물건이 없습니다.</td>
 									</tr>
 									</c:when>
 									<c:otherwise>
 									<c:forEach var="item" items="${gwansim}" varStatus="status">
-									<tr data-lat="${item.lat}" data-lng="${item.lng}" data-pnu="${item.pnu}" data-address="${item.address}" data-key="${item.gwansimMulgeonNum}">
+									<tr data-lat="${item.lat}" data-lng="${item.lng}" data-pnu="${item.pnu}" data-address="${item.address}" data-key="${item.gwansimMulgeonNum}" data-mulgeon-type="${item.mulgeonType}">
 										<td>${item.regDate}</td>
 										<td class="left ellipsis">${item.address}</td>
 										<td class="left ellipsis">${item.memo}</td>
+										<c:choose>
+										<c:when test="${item.mulgeonType eq 'K'}">
+										<td><i class="icon"><img src="resources/img/marker/gyeongmae.png"></i></td>
+										</c:when>
+										<c:when test="${item.mulgeonType eq 'G'}">
+										<td><i class="icon"><img src="resources/img/marker/gongmae.png"></i></td>
+										</c:when>
+										<c:when test="${item.mulgeonType eq 'B'}">
+										<td><i class="icon"><img src="resources/img/marker/bosang.png"></i></td>
+										</c:when>
+										<c:when test="${item.mulgeonType eq 'P'}">
+										<td><i class="icon"><img src="resources/img/marker/pyeonib.png"></i></td>
+										</c:when>
+										<c:when test="${item.mulgeonType eq 'S'}">
+										<td><i class="icon"><img src="resources/img/marker/silgeolae.png"></i></td>
+										</c:when>
+										<c:when test="${item.mulgeonType eq 'U'}">
+										<td><i class="icon"><img src="resources/img/marker/acceptbuilding.png"></i></td>
+										</c:when>
+										<c:otherwise>
+										<td>&nbsp;</td>
+										</c:otherwise>
+										</c:choose>
 										<td class="DEL" data-address="${item.address}" data-key="${item.gwansimMulgeonNum}">
 											<span class="iconRBtnDel"><i class="ambicon-023_trash"></i></span>
 										</td>	
@@ -523,18 +548,18 @@
 								</tbody>
 							</table>
 						</div>
-						<div id="tabMypageConsulting" class="tab-pane">
-							<div class="serviceReady" style="margin-top:160px;">
-								<span class="iconBlock"></span>
-								<span class="text">서비스 준비중입니다</span>	
-							</div>
-						</div>
-						<div id="tabMaemul" class="tab-pane">
-							<div class="serviceReady" style="margin-top:160px;">
-								<span class="iconBlock"></span>
-								<span class="text">서비스 준비중입니다</span>	
-							</div>
-						</div>
+<!-- 						<div id="tabMypageConsulting" class="tab-pane"> -->
+<!-- 							<div class="serviceReady" style="margin-top:160px;"> -->
+<!-- 								<span class="iconBlock"></span> -->
+<!-- 								<span class="text">서비스 준비중입니다</span>	 -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div id="tabMaemul" class="tab-pane"> -->
+<!-- 							<div class="serviceReady" style="margin-top:160px;"> -->
+<!-- 								<span class="iconBlock"></span> -->
+<!-- 								<span class="text">서비스 준비중입니다</span>	 -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</div>
 				</div>
 			</div>

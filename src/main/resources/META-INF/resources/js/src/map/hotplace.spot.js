@@ -155,42 +155,117 @@
 	function _viewGwansimReg(mulgeonType) {
 		var m = mulgeonType || '';
 		
-		hotplace.dom.showSpotGwansimRegForm({address:_address});
+		hotplace.ajax({
+    		url: 'spot/check/gwansim',
+    		contentType: 'application/json',
+            data: JSON.stringify({
+            	pnu:_pnu
+            }),
+            activeMask: false,
+            success: function(data, textStatus, jqXHR) {
+                if(!data.success) {
+                	if(data.errCode == 'DUP') {
+                		//jqXHR.errCode = hotplace.error.GWANSIM_DUP;
+                		var gwansin = data.datas[0];
+                		hotplace.mypage.triggerGwansimPop({
+                			key: gwansin.gwansimMulgeonNum,
+                			lat: gwansin.lat,
+            				lng: gwansin.lng,
+            				mulgeonType: gwansin.mulgeonType
+                		});
+                	}
+                	else {
+                		jqXHR.errCode = hotplace.error.GWANSIM_REG;
+                	}
+                }
+                else {
+                	hotplace.dom.showSpotGwansimRegForm({address:_address}, null, function() {
+                		$(_btnRegGwansimMulgeon)
+                		.off('click')
+                		.on('click', function() {
+                			var type = $(this).data('mulgeonType');
+                			
+                			if(_validateGwansimMulgeon()) {
+                				hotplace.ajax({
+                		    		url: 'spot/reg/gwansim',
+                		    		contentType: 'application/json',
+                		            data: JSON.stringify({
+                		            	pnu:_pnu,
+                		            	address:_address,
+                		            	lng: _lng,
+                		    			lat: _lat,
+                		    			memo:$(_txtGwansimMemo).val().trimTS(),
+                		    			mulgeonType:m
+                		            }),
+                		            success: function(data, textStatus, jqXHR) {
+                		                if(!data.success) {
+                		                	if(data.errCode == 'DUP') {
+                		                		jqXHR.errCode = hotplace.error.GWANSIM_DUP;
+                		                	}
+                		                	else {
+                		                		jqXHR.errCode = hotplace.error.GWANSIM_REG;
+                		                	}
+                		                }
+                		                else {
+                		                	_saveGwansimSuccess();
+                		                }
+                		                
+                		            }
+                		    	});
+                			}
+                		});
+                		
+                		
+                	});
+                }
+                
+            }
+    	});
 		
-		$(_btnRegGwansimMulgeon)
-		.off('click')
-		.on('click', function() {
-			var type = $(this).data('mulgeonType');
-			
-			if(_validateGwansimMulgeon()) {
-				hotplace.ajax({
-		    		url: 'spot/reg/gwansim',
-		    		contentType: 'application/json',
-		            data: JSON.stringify({
-		            	pnu:_pnu,
-		            	address:_address,
-		            	lng: _lng,
-		    			lat: _lat,
-		    			memo:$(_txtGwansimMemo).val().trimTS(),
-		    			mulgeonType:m
-		            }),
-		            success: function(data, textStatus, jqXHR) {
-		                if(!data.success) {
-		                	if(data.errCode == 'DUP') {
-		                		jqXHR.errCode = hotplace.error.GWANSIM_DUP;
-		                	}
-		                	else {
-		                		jqXHR.errCode = hotplace.error.GWANSIM_REG;
-		                	}
-		                }
-		                else {
-		                	_saveGwansimSuccess();
-		                }
-		                
-		            }
-		    	});
-			}
-		});
+		
+		
+		
+		
+		
+		//수정 해당 PNU가 이미 등록 되어 있으면 
+//		hotplace.dom.showSpotGwansimRegForm({address:_address});
+//		
+//		
+//		
+//		$(_btnRegGwansimMulgeon)
+//		.off('click')
+//		.on('click', function() {
+//			var type = $(this).data('mulgeonType');
+//			
+//			if(_validateGwansimMulgeon()) {
+//				hotplace.ajax({
+//		    		url: 'spot/reg/gwansim',
+//		    		contentType: 'application/json',
+//		            data: JSON.stringify({
+//		            	pnu:_pnu,
+//		            	address:_address,
+//		            	lng: _lng,
+//		    			lat: _lat,
+//		    			memo:$(_txtGwansimMemo).val().trimTS(),
+//		    			mulgeonType:m
+//		            }),
+//		            success: function(data, textStatus, jqXHR) {
+//		                if(!data.success) {
+//		                	if(data.errCode == 'DUP') {
+//		                		jqXHR.errCode = hotplace.error.GWANSIM_DUP;
+//		                	}
+//		                	else {
+//		                		jqXHR.errCode = hotplace.error.GWANSIM_REG;
+//		                	}
+//		                }
+//		                else {
+//		                	_saveGwansimSuccess();
+//		                }
+//		                
+//		            }
+//		    	});
+//			}
+//		});
 	}
 	
 	function _saveGwansimSuccess() {

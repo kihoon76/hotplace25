@@ -1,10 +1,14 @@
 package com.hotplace25.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -55,8 +59,8 @@ public class SpotService {
 		return spotDao.selectMyGwansimList(accountId);
 	}
 
-	public boolean doRegistedGwansimMulgeon(GwansimMulgeon gwansimMulgeon) {
-		return 1 <= spotDao.selectRegistedGwansimMulgeon(gwansimMulgeon);
+	public GwansimMulgeon doRegistedGwansimMulgeon(GwansimMulgeon gwansimMulgeon) {
+		return spotDao.selectRegistedGwansimMulgeon(gwansimMulgeon);
 	}
 
 	public boolean regGwansimMulgeon(GwansimMulgeon gwansimMulgeon) {

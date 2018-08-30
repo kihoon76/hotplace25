@@ -449,7 +449,6 @@
 					}
 				}
 				
-				//console.log(_$rdoPayment.val())
 				//연간구매는 무조건 무통장
 				if((_isAll && _$rdoPaymentAllYear.is(':checked')) || !_$rdoCardPayment.is(':checked')) {
 					if(!depositor) {

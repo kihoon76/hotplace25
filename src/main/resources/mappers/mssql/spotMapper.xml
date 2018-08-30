@@ -46,8 +46,11 @@
 		values (#{accountId}, #{pnu}, #{name}, #{phone}, #{email}, #{question}, #{lat}, #{lng}, #{address})
 	</insert>
 	
-	<select id="selectRegistedGwansimMulgeon" parameterType="GwansimMulgeon" resultType="int">
-		select count(관심물건번호)
+	<select id="selectRegistedGwansimMulgeon" parameterType="GwansimMulgeon" resultType="GwansimMulgeon">
+		select 관심물건번호 gwansimMulgeonNum, 
+			      위도 lat,
+			      경도 lng,
+			      물건종류 mulgeonType
 		  from [웹].[dbo].[관심물건]
 		 where 계정아이디 = #{accountId}
 		   and PNU = #{pnu}

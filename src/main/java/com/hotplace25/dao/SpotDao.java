@@ -21,7 +21,7 @@ public interface SpotDao {
 
 	public void insertConsulting(Consulting consulting);
 
-	public int selectRegistedGwansimMulgeon(GwansimMulgeon gwansimMulgeon);
+	public GwansimMulgeon selectRegistedGwansimMulgeon(GwansimMulgeon gwansimMulgeon);
 
 	public int insertGwansimMulgeon(GwansimMulgeon gwansimMulgeon);
 

@@ -51,7 +51,7 @@ public class SpotDaoImpl implements SpotDao {
 	}
 
 	@Override
-	public int selectRegistedGwansimMulgeon(GwansimMulgeon gwansimMulgeon) {
+	public GwansimMulgeon selectRegistedGwansimMulgeon(GwansimMulgeon gwansimMulgeon) {
 		return msSqlSession.selectOne(namespace + ".selectRegistedGwansimMulgeon", gwansimMulgeon);
 	}
 

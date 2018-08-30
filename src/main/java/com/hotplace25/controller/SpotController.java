@@ -205,28 +205,57 @@ public class SpotController {
 		return vo;
 	}
 	
-	@PostMapping("/reg/gwansim")
+	@PostMapping("/check/gwansim")
 	@ResponseBody
-	public AjaxVO regGwansimMulgeon(@RequestBody GwansimMulgeon gwansimMulgeon) {
-		boolean doRegisted = false;
-		AjaxVO vo = new AjaxVO();
+	public AjaxVO<GwansimMulgeon> checkGwansimMulgeon(@RequestBody GwansimMulgeon gwansimMulgeon) {
+		GwansimMulgeon rGwansimMulgeon = null;
+		AjaxVO<GwansimMulgeon> vo = new AjaxVO<GwansimMulgeon>();
 		
 		gwansimMulgeon.setAccountId(SessionUtil.getSessionUserId());
+		
 		try {
-			doRegisted = spotService.doRegistedGwansimMulgeon(gwansimMulgeon);
-			if(doRegisted) {
+			rGwansimMulgeon = spotService.doRegistedGwansimMulgeon(gwansimMulgeon);
+			if(rGwansimMulgeon != null) {
 				vo.setSuccess(false);
+				vo.addObject(rGwansimMulgeon);
 				vo.setErrCode("DUP");
+			}
+			else {
+				vo.setSuccess(true);
 			}
 		}
 		catch(Exception e) {
 			vo.setSuccess(false);
 			vo.setErrMsg(e.getMessage());
-			
-			return vo;
 		}
 		
-		if(!doRegisted) {
+		return vo;
+	}
+	
+	
+	@PostMapping("/reg/gwansim")
+	@ResponseBody
+	public AjaxVO regGwansimMulgeon(@RequestBody GwansimMulgeon gwansimMulgeon) {
+//		GwansimMulgeon rGwansimMulgeon = null;
+		AjaxVO vo = new AjaxVO();
+		gwansimMulgeon.setAccountId(SessionUtil.getSessionUserId());
+//		
+//		gwansimMulgeon.setAccountId(SessionUtil.getSessionUserId());
+//		try {
+//			rGwansimMulgeon = spotService.doRegistedGwansimMulgeon(gwansimMulgeon);
+//			if(rGwansimMulgeon != null) {
+//				vo.setSuccess(false);
+//				vo.setErrCode("DUP");
+//			}
+//		}
+//		catch(Exception e) {
+//			vo.setSuccess(false);
+//			vo.setErrMsg(e.getMessage());
+//			
+//			return vo;
+//		}
+		
+		//if(rGwansimMulgeon == null) {
 			vo.setSuccess(true);
 			try {
 				
@@ -242,7 +271,7 @@ public class SpotController {
 				vo.setSuccess(false);
 				vo.setErrMsg(e.getMessage());
 			}
-		}
+		//}
 		
 		return vo;
 	}

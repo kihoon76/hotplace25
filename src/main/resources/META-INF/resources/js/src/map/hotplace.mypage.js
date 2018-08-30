@@ -17,32 +17,58 @@
 		_$selectedGwansimTr = $tr;
 	}
 	
-	function _createMap(id, lat, lng) {
+	function _createMap(id, lat, lng, mulgeonType) {
 		var mapOptions = {
 		    center: new naver.maps.LatLng(lat, lng),
 		    zoom: 10
 		};
 
 		var map = new naver.maps.Map(id, mapOptions);
-		_createMarker(map, lat, lng);
+		_createMarker(map, lat, lng, mulgeonType);
 	}
 	
-	function _createMarker(map, lat, lng) {
+	function _createMarker(map, lat, lng, mulgeonType) {
 		var marker = new naver.maps.Marker({
 		    position: new naver.maps.LatLng(lat, lng),
 		    clickable:false,
 		    map: map
 		});
 		
-		/*marker.setOptions('icon', {
-	        content: '<img src="'+ hotplace.getContextUrl() +'resources/img/marker/' + options.icon + '" alt="" ' +
-			  		 'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; ' +
-			  		 '-webkit-user-select: none; position: absolute; width: ' + x + 'px; height: ' + y + 'px; left: 0px; top: 0px;">',
-            size: new _vender.Size(x, y),
-            scaledSize: new _vender.Size(x, y),
-            anchor: new _vender.Point(x/2, y),
-            origin: new _vender.Point(0,0)
-		});*/
+		if(mulgeonType) {
+			var icon = '';
+			switch(mulgeonType) {
+			case 'K':
+				icon = 'gyeongmae.png';
+				break;
+			case 'G':
+				icon = 'gongmae.png';
+				break;
+			case 'B':
+				icon = 'bosang.png';
+				break;
+			case 'P':
+				icon = 'pyeonib.png';
+				break;
+			case 'S':
+				icon = 'silgeolae.png';
+				break;
+			case 'U':
+				icon = 'acceptbuilding.png';
+				break;
+			}
+			
+			if(icon) {
+				marker.setOptions('icon', {
+			        content: '<img src="'+ hotplace.getContextUrl() +'resources/img/marker/' + icon + '" alt="" ' +
+					  		 'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; ' +
+					  		 '-webkit-user-select: none; position: absolute; width: 22px; height: 33px; left: 0px; top: 0px;">',
+		            size: new hotplace.maps.getVender().Size(22, 33),
+		            scaledSize: new hotplace.maps.getVender().Size(22, 33),
+		            anchor: new hotplace.maps.getVender().Point(11, 33),
+		            origin: new hotplace.maps.getVender().Point(0,0)
+				});
+			}
+		}
 	}
 	
 	mypage.init = function() {
@@ -192,8 +218,42 @@
 	/************************************************
 	 * 관심물건
 	 ***********************************************/
+	
 	var _btnGwansimModify = '#btnGwansimModify',
 		_txtMypageGwansimMemo = '#txtMypageGwansimMemo';
+	
+	mypage.triggerGwansimPop = function(param) {
+		hotplace.dom.showMypageGwansimPop(param.key, function() {
+			_createMap('dvGwansimMap', param.lat, param.lng, param.mulgeonType);
+			$(_btnGwansimModify)
+			.off('click')
+			.on('click', function() {
+				if(_checkGwansimEmpty()) {
+					hotplace.ajax({
+						url: 'spot/mod/gwansim',
+						method: 'POST',
+						data: JSON.stringify({
+							gwansimNum: param.key,
+							memo: $(_txtMypageGwansimMemo).val().trimTS()
+						}),
+						contentType: 'application/json',
+						success: function(data, textStatus, jqXHR) {
+							if(data.success) {
+								hotplace.dom.showAlertMsg(null, '관심물건이 수정되었습니다.', {width:'40%'});
+							}
+							else {
+								jqXHR.errCode = hotplace.error.GWANSIM_MOD;
+							}
+						},
+						error: function(jqXHR, textStatus, e) {
+							jqXHR.errCode = hotplace.error.GWANSIM_MOD;
+						}
+					})
+				}
+			})
+			
+		});
+	}
 	
 	function _checkGwansimEmpty() {
 		return hotplace.validation.isFormNotEmpty([_txtMypageGwansimMemo]);
@@ -205,11 +265,18 @@
 		.off('click')
 		.on('click', function(e) {
 			var $tr = $(this);
+			var mulgeonType = $tr.data('mulgeonType');
 			_setConfigSelectTr($tr);
 			console.log(e);
 			
-			hotplace.dom.showMypageGwansimPop($tr.data('key'), function() {
-				_createMap('dvGwansimMap', $tr.data('lat'), $tr.data('lng'));
+			mypage.triggerGwansimPop({
+				key: $tr.data('key'),
+				lat: $tr.data('lat'),
+				lng: $tr.data('lng'),
+				mulgeonType: mulgeonType
+			});
+			/*hotplace.dom.showMypageGwansimPop($tr.data('key'), function() {
+				_createMap('dvGwansimMap', $tr.data('lat'), $tr.data('lng'), mulgeonType);
 				$(_btnGwansimModify)
 				.off('click')
 				.on('click', function() {
@@ -237,7 +304,7 @@
 					}
 				})
 				
-			});
+			});*/
 		});
 		
 		$(_tabMypageGwansimMulgeon + ' .DEL')

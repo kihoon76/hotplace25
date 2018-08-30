@@ -1036,10 +1036,10 @@
 		}
 	}
 	
-	dom.showSpotGwansimRegForm = function(param, fn) {
+	dom.showSpotGwansimRegForm = function(param, closefn, openFn) {
 		var ok = _appendModalPopup('spotGwansimRegForm', null, param);
 		if(ok) {
-			dom.openModal('', {width: '500'}, fn);
+			dom.openModal('', {width: '500'}, closefn, openFn);
 		}
 		else {
 			_showLoginMsg();
