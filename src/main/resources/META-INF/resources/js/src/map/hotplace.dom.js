@@ -1612,9 +1612,13 @@
 		 return data.pseudo !== undefined; 
 	}
 	
-	dom.createTabulator = function(tableId, param, tbData) {
+	dom.createTabulator = function(tableId, param, tbData, initialSort) {
 		var $table = $(tableId);
 		param = param || {};
+		
+		if(initialSort) {
+			param.initialSort = initialSort; 
+		}
 		
 		$table.tabulator($.extend({
 		    height:'826',//826, // set height of table (높이가 설정되지 않으면 virtual dom 동작안함)

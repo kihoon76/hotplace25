@@ -45,8 +45,9 @@
 		    {title:'HP등급', field:'hpgrade', align:'center', width:100, headerFilter:true, 
 		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.hpGrade), editable:hotplace.dom.createTabulatorNoEdit,
 		    	formatter:function(cell) {
-			    	return hotplace.util.getHpGradeStr(cell.getValue());
-			    }
+		    		return hotplace.util.getHpGradeStr(cell.getValue());
+			    },
+			    sorter:'number'
 		    },
 		    {title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter: true, 
 		    	editor:_makeTabulatorFilterFromCode(_getBosangPyeonibCode()), editable:hotplace.dom.createTabulatorNoEdit,
@@ -111,7 +112,8 @@
 		    	editor:_makeTabulatorFilterFromCode(hotplace.config.codes.hpGrade), editable:hotplace.dom.createTabulatorNoEdit,
 		    	formatter:function(cell) {
 			    	return hotplace.util.getHpGradeStr(cell.getValue());
-			    }
+			    },
+			    sorter:'number'
 		    },
 			{title:'보상편입여부', field:'bosangPyeonib', align:'center', width:100, headerFilter: true, 
 		    	editor:_makeTabulatorFilterFromCode(_getBosangPyeonibCode()), editable:hotplace.dom.createTabulatorNoEdit,
@@ -959,9 +961,8 @@
 			    rowClick: function(e, row) {
 			    	_rowClickHandler('T', row, d);
 			    },
-			}, d);
+			}, d, [{column: 'hpgrade', dir:'asc'}]);
 		}
-		
 		
 		hotplace.ajax({
 			url: param.url, //'search/jangmi',
@@ -1171,7 +1172,7 @@
 					    rowClick: function(e,row) {
 					    	_rowClickHandler('G', row, data);
 					    },
-					}, data.datas);
+					}, data.datas, [{column: 'hpgrade', dir:'asc'}]);
 				}
 			},
 			timeout: 90000,
