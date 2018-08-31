@@ -952,6 +952,7 @@
 			hotplace.dom.createTabulator(tableId, {
 			    //height:700, // set height of table
 			    fitColumns:false, //fit columns to width of table (optional)
+			    selectable:1,
 			    columns:param.columns,/*_tabulatorColumns.jangmi,*/
 			    movableColumns:true,
 			    resizableRows:true,
@@ -1163,6 +1164,7 @@
 					
 					hotplace.dom.createTabulator(_dvGyeonggongResult, {
 					    fitColumns:true, //fit columns to width of table (optional)
+					    selectable:1,
 					    columns:_tabulatorColumns.gyeonggong,/*_tabulatorColumns.jangmi,*/
 					    movableColumns:true,
 					    resizableRows:true,
