@@ -4,7 +4,8 @@
 (function(mypage, $) {
 	var _tabMypageAccount = '#tabMypageAccount',
 		_tabMypagePayment = '#tabMypagePayment',
-		_tabMypageGwansimMulgeon = '#tabMypageGwansimMulgeon';
+		_tabMypageGwansimMulgeon = '#tabMypageGwansimMulgeon',
+		_dvMypageGwansimMulgeon = '#dvMypageGwansimMulgeon';
 	
 	var _$selectedGwansimTr = null;
 	
@@ -72,9 +73,22 @@
 	}
 	
 	mypage.init = function() {
+		_initMypage();
 		_initAccount();
 		_initPayment();
 		_initGwansimMulgeon();
+	}
+	
+	function _initMypage() {
+		$('.dvMypage button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		  var target = $(e.target).attr('href'); // activated tab
+		  
+		  //
+		  if(target == '#tabMypageGwansimMulgeon') {
+			  $('#dvMypageGwansimMulgeon').tabulator('redraw'); 
+		  }
+		  
+		});
 	}
 	
 	/************************************************
@@ -259,85 +273,192 @@
 		return hotplace.validation.isFormNotEmpty([_txtMypageGwansimMemo]);
 	}
 	
-	function _initGwansimMulgeon() {
-		$(_tabMypageGwansimMulgeon + ' table tr')
-		.not('.NO-DATA')
-		.off('click')
-		.on('click', function(e) {
-			var $tr = $(this);
-			var mulgeonType = $tr.data('mulgeonType');
-			_setConfigSelectTr($tr);
-			console.log(e);
+	function _makeTabulatorFilterFromCode(code) {
+		if(code) {
+			var a = [];
+			for(var k in code) {
+				a.push(code[k]);
+			}
 			
-			mypage.triggerGwansimPop({
-				key: $tr.data('key'),
-				lat: $tr.data('lat'),
-				lng: $tr.data('lng'),
-				mulgeonType: mulgeonType
-			});
-			/*hotplace.dom.showMypageGwansimPop($tr.data('key'), function() {
-				_createMap('dvGwansimMap', $tr.data('lat'), $tr.data('lng'), mulgeonType);
-				$(_btnGwansimModify)
-				.off('click')
-				.on('click', function() {
-					if(_checkGwansimEmpty()) {
+			return hotplace.dom.getTabulatorSelectFilter(a);
+		}
+		
+		return null;
+	}
+	
+	function _initGwansimMulgeon() {
+		
+		var data = $('#dvMypageGwansimMulgeon').data('tab');
+		
+		hotplace.dom.createTabulator('#dvMypageGwansimMulgeon', {
+			height: '600',
+			selectable:1,
+		    fitColumns:true, //fit columns to width of table (optional)
+		    columns:[
+		        {title:'등록일', field:'regDate', width:100, headerFilter:'input', headerFilterPlaceholder:'2018-01-01'},
+		        {title:'물건주소', field:'address', width:308, headerFilter:'input', headerFilterPlaceholder:'물건주소검색'},
+		        {title:'메모내용', field:'memo', width:200, headerFilter:'input', headerFilterPlaceholder:'메모내용검색', headerSort:false},
+		        {title:'물건종류', field:'mulgeonType', headerFilter:true, width:100, align:'center', formatter: function(cell) {
+		        	var v = '';
+		        	switch(cell.getValue()) {
+		        	case 'K':
+		        		v = '<div style="position:relative; top: 3px;"><img src="' + hotplace.getContextUrl() + 'resources/img/marker/gyeongmae.png" style="width:22px; height:22px;"/></div>';
+		        		break;
+		        	case 'G':
+		        		v = '<div style="position:relative; top: 3px;"><img src="' + hotplace.getContextUrl() + 'resources/img/marker/gongmae.png" style="width:22px; height:22px;"/></div>';
+		        		break;
+		        	case 'B':
+		        		v = '<div style="position:relative; top: 3px;"><img src="' + hotplace.getContextUrl() + 'resources/img/marker/bosang.png" style="width:22px; height:22px;"/></div>';
+		        		break;
+		        	case 'P':
+		        		v = '<div style="position:relative; top: 3px;"><img src="' + hotplace.getContextUrl() + 'resources/img/marker/pyeonib.png" style="width:22px; height:22px;"/></div>';
+		        		break;
+		        	case 'S':
+		        		v = '<div style="position:relative; top: 3px;"><img src="' + hotplace.getContextUrl() + 'resources/img/marker/silgeolae.png" style="width:22px; height:22px;"/></div>';
+		        		break;
+		        	case 'U':
+		        		v = '<div style="position:relative; top: 3px;"><img src="' + hotplace.getContextUrl() + 'resources/img/marker/acceptbuilding.png" style="width:22px; height:22px;"/></div>';
+		        		break;
+		        	}
+		        	
+		        	return v;
+		        }, editor:_makeTabulatorFilterFromCode({
+	    			'K': {name:'경매', value:'K'},
+	    			'G': {name:'공매', value:'G'},
+	    			'B': {name:'보상', value:'B'},
+	    			'P': {name:'편입', value:'P'},
+	    			'S': {name:'실거래', value:'S'},
+	    			'U': {name:'건축허가', value:'U'},
+	    			'X': {name:'해당없음', value:'X'}
+	    		}), editable:hotplace.dom.createTabulatorNoEdit},
+		        {title:'삭제', field:'gwansimMulgeonNum', width:50, formatter: function(cell) {
+		        	return '<span class="iconRBtnDel" style="padding-left: 5px;"><i class="ambicon-023_trash"></i></span>'
+		        }, headerFilter:'input', headerFilterPlaceholder:'', headerSort:false,
+		        headerFilterFunc: function() { return true;},
+		        cellClick: function(e, cell) {
+		        	e.stopPropagation();
+		        	var rowData = cell.getData();
+		        	var row = cell.getRow();
+		        	
+		        	var gwansimNum = rowData.gwansimMulgeonNum;
+					var msg = '주소지 [ ' + rowData.address + ' ]를 삭제하시겠습니까?';
+					
+					hotplace.dom.showConfirmBox(function() {
 						hotplace.ajax({
-							url: 'spot/mod/gwansim',
-							method: 'POST',
-							data: JSON.stringify({
-								gwansimNum: $tr.data('key'),
-								memo: $(_txtMypageGwansimMemo).val().trimTS()
-							}),
-							contentType: 'application/json',
-							success: function(data, textStatus, jqXHR) {
+							url: 'spot/del/gwansim?gwansimNum=' + gwansimNum,
+							method : 'GET',
+							success : function(data, textStatus, jqXHR) {
+								console.log(data);
 								if(data.success) {
-									hotplace.dom.showAlertMsg(null, '관심물건이 수정되었습니다.', {width:'40%'});
+									var gwansimNum = data.datas[0];
+									$('#dvMypageGwansimMulgeon').tabulator("deleteRow", row);
 								}
 								else {
-									jqXHR.errCode = hotplace.error.GWANSIM_MOD;
+									jqXHR.errCode = hotplace.error.GWANSIM_DEL;
 								}
 							},
-							error: function(jqXHR, textStatus, e) {
-								jqXHR.errCode = hotplace.error.GWANSIM_MOD;
+							error: function() {
+								
 							}
-						})
-					}
-				})
-				
-			});*/
-		});
-		
-		$(_tabMypageGwansimMulgeon + ' .DEL')
-		.off('click')
-		.on('click', function(e) {
-			e.stopPropagation();
-			var $tr = $(this).parent();
-			_setConfigSelectTr($tr);
-			
-			var gwansimNum = $(this).data('key');
-			var msg = '주소지 [ ' + $(this).parent().data('address') + ' ]를 삭제하시겠습니까?';
-			
-			hotplace.dom.showConfirmBox(function() {
-				hotplace.ajax({
-					url: 'spot/del/gwansim?gwansimNum=' + gwansimNum,
-					method : 'GET',
-					success : function(data, textStatus, jqXHR) {
-						console.log(data);
-						if(data.success) {
-							var gwansimNum = data.datas[0];
-							$tr.remove();
-							_$selectedGwansimTr = null;
-						}
-						else {
-							jqXHR.errCode = hotplace.error.GWANSIM_DEL;
-						}
-					},
-					error: function() {
-						
-					}
+						});
+					}, msg, {width:'40%'});
+		        }}
+		    ],
+		    movableColumns:true,
+		    resizableRows:true,
+		    rowClick: function(e,row) {
+		    	var data = row.getData();
+		    	console.log(data);
+		    	mypage.triggerGwansimPop({
+					key: data.gwansimMulgeonNum,
+					lat: data.lat,
+					lng: data.lng,
+					mulgeonType: data.mulgeonType
 				});
-			}, msg, {width:'40%'});
-		})
+		    },
+		}, data);
+		
+		
+		
+		
+//		$(_tabMypageGwansimMulgeon + ' table tr')
+//		.not('.NO-DATA')
+//		.off('click')
+//		.on('click', function(e) {
+//			var $tr = $(this);
+//			var mulgeonType = $tr.data('mulgeonType');
+//			_setConfigSelectTr($tr);
+//			console.log(e);
+//			
+//			mypage.triggerGwansimPop({
+//				key: $tr.data('key'),
+//				lat: $tr.data('lat'),
+//				lng: $tr.data('lng'),
+//				mulgeonType: mulgeonType
+//			});
+//			/*hotplace.dom.showMypageGwansimPop($tr.data('key'), function() {
+//				_createMap('dvGwansimMap', $tr.data('lat'), $tr.data('lng'), mulgeonType);
+//				$(_btnGwansimModify)
+//				.off('click')
+//				.on('click', function() {
+//					if(_checkGwansimEmpty()) {
+//						hotplace.ajax({
+//							url: 'spot/mod/gwansim',
+//							method: 'POST',
+//							data: JSON.stringify({
+//								gwansimNum: $tr.data('key'),
+//								memo: $(_txtMypageGwansimMemo).val().trimTS()
+//							}),
+//							contentType: 'application/json',
+//							success: function(data, textStatus, jqXHR) {
+//								if(data.success) {
+//									hotplace.dom.showAlertMsg(null, '관심물건이 수정되었습니다.', {width:'40%'});
+//								}
+//								else {
+//									jqXHR.errCode = hotplace.error.GWANSIM_MOD;
+//								}
+//							},
+//							error: function(jqXHR, textStatus, e) {
+//								jqXHR.errCode = hotplace.error.GWANSIM_MOD;
+//							}
+//						})
+//					}
+//				})
+//				
+//			});*/
+//		});
+//		
+//		$(_tabMypageGwansimMulgeon + ' .DEL')
+//		.off('click')
+//		.on('click', function(e) {
+//			e.stopPropagation();
+//			var $tr = $(this).parent();
+//			_setConfigSelectTr($tr);
+//			
+//			var gwansimNum = $(this).data('key');
+//			var msg = '주소지 [ ' + $(this).parent().data('address') + ' ]를 삭제하시겠습니까?';
+//			
+//			hotplace.dom.showConfirmBox(function() {
+//				hotplace.ajax({
+//					url: 'spot/del/gwansim?gwansimNum=' + gwansimNum,
+//					method : 'GET',
+//					success : function(data, textStatus, jqXHR) {
+//						console.log(data);
+//						if(data.success) {
+//							var gwansimNum = data.datas[0];
+//							$tr.remove();
+//							_$selectedGwansimTr = null;
+//						}
+//						else {
+//							jqXHR.errCode = hotplace.error.GWANSIM_DEL;
+//						}
+//					},
+//					error: function() {
+//						
+//					}
+//				});
+//			}, msg, {width:'40%'});
+//		})
 	}
 	
 	hotplace.validation.phone(_tabMypageAccount + ' .NUMBER_ONLY')

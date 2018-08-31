@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.Gson;
 import com.hotplace25.domain.Account;
+import com.hotplace25.domain.GwansimMulgeon;
 import com.hotplace25.domain.Payment;
 import com.hotplace25.service.HotplaceService;
 import com.hotplace25.service.PaymentService;
@@ -93,12 +95,15 @@ public class HandlebarController {
 		account.setPhone2(phone[1]);
 		account.setPhone3(phone[2]);
 		
-		m.addAttribute("gwansim", spotService.getMyGwansimList(accountId));
+		
+		List<GwansimMulgeon> r = spotService.getMyGwansimList(accountId);
+		m.addAttribute("gwansim", r);
+		m.addAttribute("gwansimStr", new Gson().toJson(r));
 		m.addAttribute("account", account);
 		m.addAttribute("paymentHistory", paymentHistory);
 		m.addAttribute("authorities", account.getAuthorities());
 		m.addAttribute("currentDate", hotplaceService.getCurrentDate());
 		
-		return "mypage/mypageForm";
+		return "mypage/mypageForm2";
 	}
 }

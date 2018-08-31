@@ -75,7 +75,7 @@
 			      메모 memo,
 			      위도 lat,
 			      경도 lng,
-			      물건종류 mulgeonType,
+			   isnull(물건종류, 'X') mulgeonType,
 			   CONVERT(char(10), 등록일, 23) regDate
 		  from [웹].[dbo].[관심물건]
 		 where 계정아이디 = #{accountId} 
